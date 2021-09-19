@@ -1,0 +1,22 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": { "name": "chainlink-api" },
+  "spec": {
+    "replicas": 3,
+    "selector": { "matchLabels": { "app": "chainlink-api" } },
+    "template": {
+      "metadata": { "labels": { "app": "chainlink-api" } },
+      "spec": {
+        "terminationGracePeriodSeconds": 30,
+        "containers": [
+          {
+            "name": "chainlink-api",
+            "image": "registry.digitalocean.com/chainlink-api",
+            "imagePullPolicy": "Always"
+          }
+        ]
+      }
+    }
+  }
+}
