@@ -10,6 +10,7 @@ export const HeaderStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background: green;
 `
 
 export const HeaderLogo = styled.img`

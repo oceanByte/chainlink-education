@@ -17,9 +17,10 @@ type HeaderViewProps = {
 export const HeaderView = ({user, removeAuthUserCallback}: HeaderViewProps) => {
     return (
         <HeaderStyled>
-            <HamburgerLeft/>
+            
+                <HamburgerLeft/>
             <Link to="/">
-                <HeaderLogo alt="logo" width="300px" src="/logo.svg"/>
+                <HeaderLogo alt="logo" width="100px" src="/logo.svg"/>
             </Link>
             {user ? loggedInHeader({user, removeAuthUserCallback}) : loggedOutHeader()}
         </HeaderStyled>
@@ -29,9 +30,9 @@ export const HeaderView = ({user, removeAuthUserCallback}: HeaderViewProps) => {
 function loggedOutHeader() {
   return (
     <HeaderLoggedOut>
-        <Link className={'get-started'} to="/chainlinkIntroduction/chapter-1">
+        {/* <Link className={'get-started'} to="/chainlinkIntroduction/chapter-1">
             <Button text="GET STARTED" color="secondary"/>
-        </Link>
+        </Link> */}
       {/*<Link to="/terms">*/}
       {/*  <HeaderMenuItem>TERMS</HeaderMenuItem>*/}
       {/*</Link>*/}
