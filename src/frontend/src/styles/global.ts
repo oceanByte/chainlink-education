@@ -8,6 +8,8 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
+
+
 body {
   font-family: 'Inter', sans-serif;;
   font-display: optional;
@@ -234,4 +236,14 @@ select:-webkit-autofill:focus {
 .rc-slider-mark-text {
   display: none !important;
 }
+
+
+
+
 `
+export function fluidType (minScreen: any, maxScreen: any, minFont: any, maxFont: any) {
+  return `
+    font-size: calc(${minFont} + (${parseInt(maxFont) - parseInt(minFont)}) * (100vw - ${minScreen})/(${parseInt(maxScreen) - parseInt(minScreen)}));
+  `
+}
+

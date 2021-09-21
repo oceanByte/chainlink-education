@@ -15,6 +15,8 @@ import { GlobalStyle } from './styles'
 
 import './styles/fonts.css'
 
+import './styles/main.scss'
+
 export const store = configureStore({})
 
 ReactGA.initialize('UA-XXXXXXXX-1')
