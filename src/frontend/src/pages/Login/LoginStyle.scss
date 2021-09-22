@@ -1,0 +1,18 @@
+
+ .iIMWTD .qVoCi{
+    max-width: 620px;
+    width: 100%;
+}
+.hOwelw  form{
+    // @include fluid-size('padding-top', 375px, 1920px, 40px, 60px);
+    // @include fluid-size('padding-bottom', 375px, 1920px, 40px, 60px);
+    // @include fluid-size('padding-left', 375px, 1920px, 26px, 110px);
+    // @include fluid-size('padding-right', 375px, 1920px, 26px, 110px);
+    background: coral;
+    padding: 60px 110px;
+
+
+    @media (max-width: 375px) {
+        padding-top: 10px;
+    }
+}

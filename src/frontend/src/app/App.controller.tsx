@@ -15,9 +15,9 @@ import { AppView } from './App.view'
 export const App = () => (
   <ConnectedRouter history={history}>
     <AppBg>
-      <Header />
+      {/* <Header /> */}
       <ChapterDrawer />
-      <HamburgerLeft />
+      {/* <HamburgerLeft /> */}
       <LoginDrawer />
       <HamburgerRight />
       <AppView />
