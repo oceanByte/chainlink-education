@@ -42,9 +42,27 @@
 	}
 }
 
-
-@mixin name() {
-	@include response(max, 385px){
-		@content;
+@mixin response($prefix, $media) {
+	@media only screen and ($prefix+-width: $media+px) {
+	  @content;
 	}
+  }
+
+  @mixin xs{
+    @media (max-width: 375px){
+        @content;
+    }
 }
+
+@mixin sm{
+    @media (max-width: 768px){
+        @content;
+    }
+}
+
+@mixin md{
+    @media (max-width: 1024px){
+        @content;
+    }
+}
+

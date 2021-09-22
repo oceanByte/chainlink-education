@@ -19,7 +19,7 @@ export const App = () => (
       <ChapterDrawer />
       {/* <HamburgerLeft /> */}
       <LoginDrawer />
-      <HamburgerRight />
+      {/* <HamburgerRight /> */}
       <AppView />
       <Toaster />
       <ProgressBar />

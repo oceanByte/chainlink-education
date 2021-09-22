@@ -8,6 +8,7 @@ import { HamburgerLeft } from '../Hamburger/Hamburger.controller'
 // prettier-ignore
 import { HeaderLoggedIn, HeaderLoggedOut, HeaderLogo, HeaderMenuItem, HeaderStyled } from "./HeaderAuth.style";
 
+
 type HeaderViewProps = {
     user?: PublicUser
     removeAuthUserCallback: () => void
@@ -16,13 +17,20 @@ type HeaderViewProps = {
 // Overall Navbar
 export const HeaderView = ({user, removeAuthUserCallback}: HeaderViewProps) => {
     return (
-        <HeaderStyled> 
-                <HamburgerLeft/>
-            <Link to="/">
-                <HeaderLogo alt="logo" width="100px" src="/logo.svg"/>
-            </Link>
-            {user ? loggedInHeader({user, removeAuthUserCallback}) : loggedOutHeader()}
-        </HeaderStyled>
+        // <HeaderStyled> 
+        //         <HamburgerLeft/>
+        //     <Link to="/">
+        //         <HeaderLogo alt="logo" width="100px" src="/logo.svg"/>
+        //     </Link>
+        //     {user ? loggedInHeader({user, removeAuthUserCallback}) : loggedOutHeader()}
+        // </HeaderStyled>
+        <div className = 'header-auth'>
+            <div className="header-auth-button">
+                <button>&#x2190;</button>
+            </div>
+            <div className="header-auth-logo"></div>
+            <div className="header-auth-"></div>
+        </div>
     )
 }
 

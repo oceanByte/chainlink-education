@@ -45,7 +45,7 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
 
   return (
     <>
-      <form>
+      {/* <form>
         <div>
           <svg></svg>
           <input
@@ -56,7 +56,8 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
           />
           <div>{getErrorMessage(form.usernameOrEmail)}</div>
         </div>
-      </form>
+      </form> */}
+      <div>Petro</div>
       {/* <LoginStyled>
         <LoginTitle>
           <h1>Login</h1>
