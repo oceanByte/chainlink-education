@@ -1,0 +1,88 @@
+.header {
+  max-width: 1920px;
+  height: 100px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #375BD2;
+
+  &__link {
+    height: 27px;
+    width: 231px;
+    background: url("../../../assets/logo.svg") no-repeat;
+    background-size: contain;
+  }
+
+  &-menu {
+    display: flex;
+    align-items: center;
+
+    &-list {
+      display: flex;
+
+      &__item {
+        color: #fff;
+        font-size: 18px;
+        background: none;
+
+        & > span {
+          font-size: 10px;
+        }
+      }
+    }
+
+    &-log {
+      display: flex;
+
+      &__link {
+        font-size: 16px;
+        border-radius: 3px;
+        padding: 15px 25px;
+        transition: all .3s;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      .link__signin{
+        color: #FFF;
+        border: 1px solid #FFF;
+
+        &:hover {
+          color: #0C162C;
+          background: #FFF;
+        }
+      }
+      .link__signup {
+        color: #0C162C;
+        background: #FFF;
+
+        &:hover {
+          color: #FFF;
+          background: #05C46B;
+        }
+      }
+    }
+  }
+}
+
+.btn {
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.ml {
+  &-10 {
+    margin-left: 10px;
+  }
+  &-30 {
+    margin-left: 30px;
+  }
+  &-50 {
+    margin-left: 50px;
+  }
+}
