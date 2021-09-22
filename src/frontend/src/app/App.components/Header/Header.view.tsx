@@ -3,73 +3,43 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 
-import { Button } from "../Button/Button.controller";
-import { HamburgerLeft } from '../Hamburger/Hamburger.controller'
-// prettier-ignore
-import { HeaderLoggedIn, HeaderLoggedOut, HeaderLogo, HeaderMenuItem, HeaderStyled } from "./Header.style";
-
 type HeaderViewProps = {
-    user?: PublicUser
-    removeAuthUserCallback: () => void
+  user?: PublicUser
+  removeAuthUserCallback: () => void
 }
 
-// Overall Navbar
-export const HeaderView = ({user, removeAuthUserCallback}: HeaderViewProps) => {
-    return (
-        <HeaderStyled>
-            
-                <HamburgerLeft/>
-            <Link to="/">
-                <HeaderLogo alt="logo" width="100px" src="/logo.svg"/>
-            </Link>
-            {user ? loggedInHeader({user, removeAuthUserCallback}) : loggedOutHeader()}
-        </HeaderStyled>
-    )
+export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) => {
+  return (
+    <div className='header'>
+      <Link to='/' className='header__link' />
+      <div className='header-menu'>
+        <div className='header-menu-list'>
+          <button className='header-menu-list__item btn'>Academy <span>&#9660;</span></button>
+          <button className='header-menu-list__item ml-30 btn'>Ecosystem</button>
+          <button className='header-menu-list__item ml-30 btn'>Contact</button>
+        </div>
+        {loggedOutHeader()}
+      </div>
+    </div>
+  )
 }
 
 function loggedOutHeader() {
   return (
-    <HeaderLoggedOut>
-        {/* <Link className={'get-started'} to="/chainlinkIntroduction/chapter-1">
-            <Button text="GET STARTED" color="secondary"/>
-        </Link> */}
-      {/*<Link to="/terms">*/}
-      {/*  <HeaderMenuItem>TERMS</HeaderMenuItem>*/}
-      {/*</Link>*/}
-      <Link to="/sign-up">
-        <HeaderMenuItem>SIGN UP</HeaderMenuItem>
+    <div className='header-menu-log ml-50'>
+      <Link to='/login' className='header-menu-log__link link__signin'>
+        Sign in
       </Link>
-      <Link to="/login">
-        <HeaderMenuItem>LOGIN</HeaderMenuItem>
+      <Link to='/sign-up' className='header-menu-log__link link__signup ml-10'>
+        Sign up
       </Link>
-    </HeaderLoggedOut>
+    </div>
   )
 }
 
-function loggedInHeader({user, removeAuthUserCallback}: HeaderViewProps) {
-    return (
-        <HeaderLoggedIn>
-            {/*<Link to="/terms">*/}
-            {/*    <HeaderMenuItem>TERMS</HeaderMenuItem>*/}
-            {/*</Link>*/}
-            <Link to={`/user/${user?.username}`}>
-                <HeaderMenuItem>{user?.username}</HeaderMenuItem>
-            </Link>
-            <Link
-                to="/"
-                onClick={() => {
-                    removeAuthUserCallback()
-                }}
-            >
-                <HeaderMenuItem>LOGOUT</HeaderMenuItem>
-            </Link>
-        </HeaderLoggedIn>
-    )
-}
-
 HeaderView.propTypes = {
-    user: PropTypes.object,
-    removeAuthUserCallback: PropTypes.func.isRequired,
+  user: PropTypes.object,
+  removeAuthUserCallback: PropTypes.func.isRequired,
 }
 
 HeaderView.defaultProps = {}
