@@ -44,43 +44,69 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
   }
 
   return (
-    <LoginStyled>
-      <LoginTitle>
-        <h1>Login</h1>
-      </LoginTitle>
-      <LoginCard>
-        <form onSubmit={handleSubmit}>
-          <Input
-            icon="user"
-            name="usernameOrEmail"
-            placeholder="Username or Email"
-            type="text"
+    <>
+      <form>
+        <div>
+          <svg></svg>
+          <input
             onChange={handleChange}
             value={form.usernameOrEmail.value}
             onBlur={handleBlur}
-            inputStatus={getInputStatus(form.usernameOrEmail)}
-            errorMessage={getErrorMessage(form.usernameOrEmail)}
+            name="usernameOrEmail"
           />
-          <Input
-            icon="password"
-            name="password"
-            placeholder="Password"
-            type="password"
-            onChange={handleChange}
-            value={form.password.value}
-            onBlur={handleBlur}
-            inputStatus={getInputStatus(form.password)}
-            errorMessage={getErrorMessage(form.password)}
-          />
-          <InputSpacer />
-          <Button type="submit" text="Login" icon="login" loading={loading} />
-        </form>
-      </LoginCard>
-      <LoginSignUp>
-        <Link to="/sign-up">Or sign up now!</Link>
-        <Link to="/forgot-password">Forgot Password?</Link>
-      </LoginSignUp>
-    </LoginStyled>
+          <div>{getErrorMessage(form.usernameOrEmail)}</div>
+        </div>
+      </form>
+      {/* <LoginStyled>
+        <LoginTitle>
+          <h1>Login</h1>
+        </LoginTitle>
+        <LoginCard>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <svg></svg>
+              <input
+                onChange={handleChange}
+                value={form.usernameOrEmail.value}
+                onBlur={handleBlur}
+                name="usernameOrEmail"
+              />
+              <div>{getErrorMessage(form.usernameOrEmail)}</div>
+            </div>
+
+            <Input
+              icon="user"
+              name="usernameOrEmail"
+              placeholder="Username or Email"
+              type="text"
+              onChange={handleChange}
+              value={form.usernameOrEmail.value}
+              onBlur={handleBlur}
+              inputStatus={getInputStatus(form.usernameOrEmail)}
+              errorMessage={getErrorMessage(form.usernameOrEmail)}
+            />
+            <Input
+              icon="password"
+              name="password"
+              placeholder="Password"
+              type="password"
+              onChange={handleChange}
+              value={form.password.value}
+              onBlur={handleBlur}
+              inputStatus={getInputStatus(form.password)}
+              errorMessage={getErrorMessage(form.password)}
+            />
+            <InputSpacer />
+            <Button type="submit" text="Login" icon="login" loading={loading} />
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </form>
+        </LoginCard>
+        <LoginSignUp>
+          <Link to="/sign-up">Or sign up now!</Link>
+          <Link to="/forgot-password">Forgot Password?</Link>
+        </LoginSignUp>
+      </LoginStyled> */}
+    </>
   )
 }
 

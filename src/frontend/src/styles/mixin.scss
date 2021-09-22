@@ -41,3 +41,10 @@
 		}
 	}
 }
+
+
+@mixin name() {
+	@include response(max, 385px){
+		@content;
+	}
+}
