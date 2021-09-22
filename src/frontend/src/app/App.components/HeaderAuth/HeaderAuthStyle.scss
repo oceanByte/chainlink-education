@@ -1,1 +1,22 @@
+.header-auth {
+  color: red;
+  max-width: 1920px;
+  width: 100%;
+  background: none;
+  height: 197px;
+  background: url('./../../../assets/Ellipse.png') no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin: 0 auto;
+  background: green;
 
+  @include xs {
+    background: red;
+  }
+  @include sm {
+    background: coral;
+  }
+  @include md {
+    background: yellow;
+  }
+}
