@@ -32,3 +32,13 @@
   font-weight: 700;
   font-style: normal;
 }
+
+@font-face {
+  font-family: Circular Std Book;
+  src: url('../assets/fonts/CircularStd-Book.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Circular Std Black;
+  src: url('../assets/fonts/CircularStd-Black.woff2') format('woff2');
+}

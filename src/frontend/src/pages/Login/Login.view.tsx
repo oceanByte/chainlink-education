@@ -8,6 +8,7 @@ import * as React from 'react'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { LoginInputs } from 'shared/user/Login'
+import Wave from '../../assets/wave.png'
 
 import { LoginCard, LoginSignUp, LoginStyled, LoginTitle } from './Login.style'
 
@@ -57,7 +58,28 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
           <div>{getErrorMessage(form.usernameOrEmail)}</div>
         </div>
       </form> */}
-      <div>Petro</div>
+      {/* <div>Petro</div> */}
+      <form className="login-form">
+        <p className="login-form-title">Sign in</p>
+        <button className="login-form-google">
+          Continue with <span>Google</span>
+        </button>
+        <button className="login-form-facebook">
+          Continue with <span>Facebook</span>
+        </button>
+        <div className="login-form-wave">
+          <div className="login-form-wave-or">or</div>
+          <img src={Wave} alt="wave" />
+        </div>
+        <div className="login-form-email">
+          <label htmlFor="login-form-email">Email address</label>
+          <input type="text" id="login-form-email" />
+        </div>
+        <div className="login-form-password">
+          <label htmlFor="login-form-password">Password</label>
+          <input type="text" id="login-form-password" />
+        </div>
+      </form>
       {/* <LoginStyled>
         <LoginTitle>
           <h1>Login</h1>
