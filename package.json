@@ -44,5 +44,8 @@
       "eslint --fix",
       "git add"
     ]
+  },
+  "dependencies": {
+    "classnames": "^2.3.1"
   }
 }
