@@ -1,65 +1,144 @@
 .home {
   max-width: 1920px;
-  padding: 0 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
 }
 
-.home-intro {
+.home-wrapper-intro {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  color: #FFF;
+  background: $primary;
+  @include fluid-size("padding-top", 1024px, 1600px, 86px, 96px);
 
-  &-content {
-    max-width: 730px;
+  .home-intro {
+    @include fluid-size("max-width", 1024px, 1600px, 984px, 1280px);
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    justify-content: space-between;
+    color: #FFF;
+    margin: 0 auto;
 
-    &__header {
-      font-size: 80px;
-      line-height: 96px;
-      font-weight: 900;
-      max-width: 100%;
+    @include md {
+      width: 728px;
+      flex-direction: column-reverse;
+    }
+    @include sm {
+      width: 335px;
     }
 
-    &__paragraph {
-      font-size: 22px;
-      line-height: 33px;
-      max-width: 90%;
-    }
+    &-content {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
 
-    &__button {
-      background: #05C46B;
-      padding: 20px 25px;
-      color: #FFF;
-      transition: all .3s;
-
-      &:hover {
-        background: #00AA5B;
+      @include md {
+        width: auto;
+        max-width: 600px;
       }
-      &:disabled {
-        cursor: default;
-        background: #B4EDD3;
+
+      &__header {
+        @include fluid-size("font-size", 375px, 1600px, 32px, 80px);
+        @include fluid-size("line-height", 375px, 1600px, 39px, 96px);
+        font-weight: 900;
+        max-width: 100%;
+
+        @include md {
+          font-size: 50px;
+          line-height: 60px;
+        }
+        @include sm {
+          font-size: 32px;
+          line-height: 38px;
+        }
+      }
+
+      &__paragraph {
+        font-size: 22px;
+        line-height: 33px;
+        @include fluid-size("max-width", 1024px, 1600px, 557px, 620px);
+
+        @include md {
+          font-size: 18px;
+          line-height: 27px;
+        }
+        @include sm {
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+
+      &__button {
+        background: #05C46B;
+        padding: 20px 50px 20px 30px;
+        color: #FFF;
+        transition: all .3s;
+        display: flex;
+        position: relative;
+        justify-content: flex-start;
+
+        @include sm {
+          font-size: 14px;
+          line-height: 18px;
+          padding: 17px 43px 17px 25px;
+        }
+
+        & > .arrow-upright {
+          height: 13px;
+          width: 13px;
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          background: url("../../assets/arrow-upright-white.svg") no-repeat;
+          background-size: contain;
+
+          @include sm {
+            height: 9px;
+            width: 9px;
+          }
+        }
+        &:hover {
+          background: #00AA5B;
+        }
+        &:disabled {
+          cursor: default;
+          background: #B4EDD3;
+        }
       }
     }
-  }
 
-  &__image {
-    background: url('../../assets/homepage-guy.svg') no-repeat;
-    width: 562px;
-    height: 562px;
+    &__image {
+      background: url('../../assets/homepage-guy.svg') no-repeat;
+      background-size: contain;
+      @include fluid-size("width", 1024px, 1600px, 418px, 562px);
+      @include fluid-size("height", 1024px, 1600px, 418px, 562px);
+
+      @include md {
+        width: 406px;
+        height: 406px;
+        align-self: center;
+      }
+      @include sm {
+        width: 260px;
+        height: 260px;
+        align-self: center;
+      }
+    }
   }
 }
 
 .home-ellipse {
   max-width: 1920px;
   width: 100%;
-  height: 197px;
-  background: url("../../assets/Ellipse.png") no-repeat;
+  height: 140px;
+  background: url("../../assets/Ellipse.png") no-repeat bottom;
   background-size: cover;
+  margin-bottom: 180px;
+
+  @include sm {
+    background: url("../../assets/ellipse-xs.png") no-repeat bottom;
+    background-size: cover;
+  }
 }
 
 .btn {
@@ -71,9 +150,6 @@
 }
 
 .mt {
-  &-96 {
-    margin-top: 96px;
-  }
   &-40 {
     margin-top: 40px;
   }
