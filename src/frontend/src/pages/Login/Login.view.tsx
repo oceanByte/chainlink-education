@@ -9,6 +9,9 @@ import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { LoginInputs } from 'shared/user/Login'
 import Wave from '../../assets/wave.png'
+import Eye from '../../assets/eye.png'
+import EyeHide from '../../assets/eyeHide.png'
+import ArrowRight from '../../assets/arrowRight.png'
 
 import { LoginCard, LoginSignUp, LoginStyled, LoginTitle } from './Login.style'
 
@@ -22,6 +25,13 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
     usernameOrEmail: { value: '' },
     password: { value: '' },
   })
+
+  const [showPassword, setShowPassword] = useState(false)
+  console.log(showPassword)
+
+  const eyeForPassword = showPassword ? EyeHide : Eye
+
+  const typeOfInputPassword = showPassword ? 'text' : 'password'
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const updatedForm = updateFormFromChange(e, form, LoginInputs)
@@ -59,7 +69,7 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
         </div>
       </form> */}
       {/* <div>Petro</div> */}
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         <p className="login-form-title">Sign in</p>
         <button className="login-form-google">
           Continue with <span>Google</span>
@@ -73,12 +83,29 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
         </div>
         <div className="login-form-email">
           <label htmlFor="login-form-email">Email address</label>
-          <input type="text" id="login-form-email" />
+          <input
+            type="text"
+            id="login-form-email"
+            name="usernameOrEmail"
+            onChange={handleChange}
+            value={form.usernameOrEmail.value}
+            onBlur={handleBlur}
+            // inputStatus={getInputStatus(form.usernameOrEmail)}
+            // errorMessage={getErrorMessage(form.usernameOrEmail)}
+          />
         </div>
         <div className="login-form-password">
+          <img src={eyeForPassword} alt="eye" onClick={() => setShowPassword((prev) => !prev)} />
           <label htmlFor="login-form-password">Password</label>
-          <input type="text" id="login-form-password" />
+          <input type={typeOfInputPassword} id="login-form-password" />
         </div>
+        <button className="login-form-sign" type="submit">
+          <img src={ArrowRight} alt="arrow" />
+          Sign In
+        </button>
+        <Link to="/forgot-password">
+          <div className="login-form-forgot">Forgot your password?</div>
+        </Link>
       </form>
       {/* <LoginStyled>
         <LoginTitle>
