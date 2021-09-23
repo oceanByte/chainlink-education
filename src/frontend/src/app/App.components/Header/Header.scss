@@ -1,15 +1,25 @@
 .header {
   max-width: 1920px;
   height: 100px;
-  padding: 0 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+  @include fluid-size("padding-left", 1024px, 1600px, 20px, 40px);
+  @include fluid-size("padding-right", 1024px, 1600px, 20px, 40px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #375BD2;
+  background: $primary;
+  margin: 0 auto;
+
+  @include md {
+    height: 80px;
+  }
 
   &__link {
     height: 27px;
     width: 231px;
+    @include fluid-size("width", 375px, 1600px, 190px, 231px);
+    @include fluid-size("height", 375px, 1600px, 22px, 27px);
     background: url("../../../assets/logo.svg") no-repeat;
     background-size: contain;
   }
@@ -20,6 +30,10 @@
 
     &-list {
       display: flex;
+
+      @include md {
+        display: none;
+      }
 
       &__item {
         color: #fff;
@@ -34,6 +48,10 @@
 
     &-log {
       display: flex;
+
+      @include sm {
+        display: none;
+      }
 
       &__link {
         font-size: 16px;
@@ -51,17 +69,17 @@
         border: 1px solid #FFF;
 
         &:hover {
-          color: #0C162C;
+          color: $grayscale1;
           background: #FFF;
         }
       }
       .link__signup {
-        color: #0C162C;
+        color: $grayscale1;
         background: #FFF;
 
         &:hover {
           color: #FFF;
-          background: #05C46B;
+          background: $secondary3;
         }
       }
     }
