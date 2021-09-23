@@ -35,7 +35,12 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
       <div className="header-auth-logo">
         <img src={Logo} alt="" />
       </div>
-      <div className="header-auth-sign">some text</div>
+      <div className="header-auth-sign">
+        <div className="header-auth-sign-text">Don't have an account yet?</div>
+        <div className="header-auth-sign-button">
+          <button>Sign up</button>
+        </div>
+      </div>
     </div>
   )
 }

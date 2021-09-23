@@ -21,6 +21,7 @@
         margin-left: 16px;
         font-family: Circular Std Book;
         color: $white;
+        font-weight: 900;
 
         @include xs {
           display: none;
@@ -45,6 +46,41 @@
     }
   }
 
+  &-sign {
+    display: flex;
+    align-items: center;
+    margin-top: -80px;
+    font-family: Circular Std Book;
+    color: $white;
+
+    @include md {
+      margin-top: -50px;
+    }
+
+    &-text {
+      margin-right: 20px;
+      font-size: 18px;
+
+      @include md {
+        display: none;
+      }
+    }
+
+    &-button {
+      button {
+        border: 1px solid $buttonBorder;
+        box-sizing: border-box;
+        border-radius: 3px;
+        background: none;
+        padding: 15px 25px;
+        color: $white;
+      }
+      @media (max-width: 485px) {
+        display: none;
+      }
+    }
+  }
+
   @include md {
     height: 150px;
   }
@@ -54,6 +90,6 @@
   }
   @include xs {
     height: 100px;
-    background-size: cover;
+    padding: 28px 25px;
   }
 }
