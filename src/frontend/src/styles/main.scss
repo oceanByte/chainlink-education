@@ -1,7 +1,8 @@
 @import './mixin.scss';
-@import './variables';
+@import './variables.scss';
 @import '../app/App.components/Header/HeaderStyle.scss';
 @import '../pages/Login/LoginStyle.scss';
 @import '../app/App.components/HeaderAuth/HeaderAuthStyle.scss';
+
 @import '../app/App.components/Header/Header.scss';
 @import '../pages/Home/Home.scss';
