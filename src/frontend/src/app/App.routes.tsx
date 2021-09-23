@@ -15,7 +15,7 @@ import { SignUp } from 'pages/SignUp/SignUp.controller'
 import { Terms } from 'pages/Terms/Terms.controller'
 import { User } from 'pages/User/User.controller'
 import { Header } from './App.components/Header/Header.controller'
-import { HeaderAuth } from './App.components/HeaderAuth/HeaderAuth.controller';
+import { HeaderAuth } from './App.components/HeaderAuth/HeaderAuth.controller'
 /**
  * React Dependency
  * **/
@@ -23,24 +23,22 @@ import { HeaderAuth } from './App.components/HeaderAuth/HeaderAuth.controller';
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import { ThankYou } from "../pages/ThankYou/ThankYou.controller";
+import { ThankYou } from '../pages/ThankYou/ThankYou.controller'
 
 // import { About } from 'pages/About/About.controller'
-
 
 export const AppRoutes = ({ location }: any) => (
   <Switch location={location}>
     <Route exact path="/">
-    <Header />
+      <Header />
       <Home />
     </Route>
     <Route exact path="/sign-up">
       <SignUp />
     </Route>
     <Route exact path="/login">
-      <HeaderAuth/>
+      <HeaderAuth />
       <Login />
-      
     </Route>
     <Route exact path="/forgot-password">
       <ForgotPassword />
