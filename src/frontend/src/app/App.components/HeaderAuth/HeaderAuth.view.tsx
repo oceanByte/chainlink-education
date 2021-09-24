@@ -1,5 +1,6 @@
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
+import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 
@@ -17,6 +18,8 @@ type HeaderViewProps = {
 
 // Overall Navbar
 export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) => {
+  const history = useHistory()
+
   return (
     // <HeaderStyled>
     //         <HamburgerLeft/>
@@ -27,20 +30,26 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
     // </HeaderStyled>
     <div className="header-auth">
       <div className="header-auth-button">
-        <button>
+        <button onClick={() => history.goBack()}>
           <img src={Arrow} alt="arrow" width="12" height="12" />
           <span>Back</span>
         </button>
       </div>
       <div className="header-auth-logo">
-        <img src={Logo} alt="" />
+        <Link to="/">
+          <img src={Logo} alt="" />
+        </Link>
       </div>
       <div className="header-auth-sign">
         <div className="header-auth-sign-text">Don't have an account yet?</div>
         <div className="header-auth-sign-button">
-          <button>Sign up</button>
+          <Link to="/sign-up">
+            <button>Sign up</button>
+          </Link>
         </div>
       </div>
+      {/* {user ? loggedInHeader({ user, removeAuthUserCallback }) : loggedOutHeader()} */}
+      {/* loggedInHeader({(user, removeAuthUserCallback)}) */}
     </div>
   )
 }
