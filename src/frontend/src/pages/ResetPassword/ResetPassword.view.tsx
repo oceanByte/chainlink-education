@@ -25,6 +25,8 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const updatedForm = updateFormFromChange(e, form, ResetPasswordInputs)
     setForm(updatedForm)
+
+    console.log('form.solution', form.solution)
   }
 
   const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,39 +46,42 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
   }
 
   return (
-    <ResetPasswordStyled>
-      <ResetPasswordTitle>
-        <h1>Reset Password</h1>
-      </ResetPasswordTitle>
-      <ResetPasswordCard>
-        <form onSubmit={handleSubmit}>
-          <Input
-            icon="check-shield"
-            name="solution"
-            placeholder="Captcha from email"
-            type="text"
-            onChange={handleChange}
-            value={form.solution.value}
-            onBlur={handleBlur}
-            inputStatus={getInputStatus(form.solution)}
-            errorMessage={getErrorMessage(form.solution)}
-          />
-          <Input
-            icon="password"
-            name="newPassword"
-            placeholder="New password"
-            type="password"
-            onChange={handleChange}
-            value={form.newPassword.value}
-            onBlur={handleBlur}
-            inputStatus={getInputStatus(form.newPassword)}
-            errorMessage={getErrorMessage(form.newPassword)}
-          />
-          <InputSpacer />
-          <Button type="submit" text="Submit" icon="login" loading={loading} />
-        </form>
-      </ResetPasswordCard>
-    </ResetPasswordStyled>
+    <>
+      <form onSubmit={handleSubmit}>офівофів</form>
+      {/* <ResetPasswordStyled>
+        <ResetPasswordTitle>
+          <h1>Reset Password</h1>
+        </ResetPasswordTitle>
+        <ResetPasswordCard>
+          <form onSubmit={handleSubmit}>
+            <Input
+              icon="check-shield"
+              name="solution"
+              placeholder="Captcha from email"
+              type="text"
+              onChange={handleChange}
+              value={form.solution.value}
+              onBlur={handleBlur}
+              inputStatus={getInputStatus(form.solution)}
+              errorMessage={getErrorMessage(form.solution)}
+            />
+            <Input
+              icon="password"
+              name="newPassword"
+              placeholder="New password"
+              type="password"
+              onChange={handleChange}
+              value={form.newPassword.value}
+              onBlur={handleBlur}
+              inputStatus={getInputStatus(form.newPassword)}
+              errorMessage={getErrorMessage(form.newPassword)}
+            />
+            <InputSpacer />
+            <Button type="submit" text="Submit" icon="login" loading={loading} />
+          </form>
+        </ResetPasswordCard>
+      </ResetPasswordStyled> */}
+    </>
   )
 }
 
