@@ -13,17 +13,14 @@
 
   .home-intro {
     @include fluid-size("max-width", 1024px, 1600px, 984px, 1280px);
+    @include fluid-size("width", 375px, 768px, 335px, 728px);
     display: flex;
     justify-content: space-between;
     color: #FFF;
     margin: 0 auto;
 
     @include md {
-      width: 728px;
       flex-direction: column-reverse;
-    }
-    @include sm {
-      width: 335px;
     }
 
     &-content {
@@ -112,15 +109,13 @@
       background-size: contain;
       @include fluid-size("width", 1024px, 1600px, 418px, 562px);
       @include fluid-size("height", 1024px, 1600px, 418px, 562px);
+      @include fluid-size("width", 335px, 768px, 260px, 406px);
+      @include fluid-size("height", 335px, 768px, 260px, 406px);
 
       @include md {
-        width: 406px;
-        height: 406px;
         align-self: center;
       }
       @include sm {
-        width: 260px;
-        height: 260px;
         align-self: center;
       }
     }
@@ -139,6 +134,10 @@
     background: url("../../assets/ellipse-xs.png") no-repeat bottom;
     background-size: cover;
   }
+}
+
+.home-nft {
+
 }
 
 .btn {
