@@ -7,6 +7,8 @@ import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { ForgotPasswordInputs } from 'shared/user/ForgotPassword'
+import ArrowRight from '../../assets/arrowRight.png'
+import { Link } from 'react-router-dom'
 
 //prettier-ignore
 import { ForgotPasswordCard, ForgotPasswordStyled, ForgotPasswordTitle } from './ForgotPassword.style'
@@ -42,28 +44,64 @@ export const ForgotPasswordView = ({ forgotPasswordCallback, loading }: ForgotPa
   }
 
   return (
-    <ForgotPasswordStyled>
-      <ForgotPasswordTitle>
-        <h1>Forgot Password</h1>
-      </ForgotPasswordTitle>
-      <ForgotPasswordCard>
-        <form onSubmit={handleSubmit}>
-          <Input
-            icon="user"
+    <>
+      <form className="forgot-password" onSubmit={handleSubmit}>
+        <div className="forgot-password-title">Forgot password?</div>
+        <div className="forgot-password-subtitle">
+          Enter your email address and you will receive an email the with password reset link
+        </div>
+        <div className="forgot-password-email">
+          <label htmlFor="forgot-password-email">Email address</label>
+          <input
+            type="email"
+            id="forgot-password-email"
             name="usernameOrEmail"
-            placeholder="Username or Email"
-            type="text"
             onChange={handleChange}
             value={form.usernameOrEmail.value}
             onBlur={handleBlur}
-            inputStatus={getInputStatus(form.usernameOrEmail)}
-            errorMessage={getErrorMessage(form.usernameOrEmail)}
+            required
+            // inputStatus={getInputStatus(form.usernameOrEmail)}
+            // errorMessage={getErrorMessage(form.usernameOrEmail)}
           />
-          <InputSpacer />
-          <Button type="submit" text="Submit" icon="forgotPassword" loading={loading} />
-        </form>
-      </ForgotPasswordCard>
-    </ForgotPasswordStyled>
+        </div>
+        <button className="forgot-password-sign" type="submit">
+          <img src={ArrowRight} alt="arrow" />
+          Get a new password
+        </button>
+        <Link to="/login">
+          <div className="forgot-password-forgot">Return to Sign In</div>
+        </Link>
+
+        <div className="forgot-password-bottom-sign">
+          <div className="forgot-password-bottom-sign-text">Don't have an account yet?</div>
+          <Link to="/">
+            <button className="forgot-password-bottom-sign-button">Sign up</button>
+          </Link>
+        </div>
+      </form>
+      {/* <ForgotPasswordStyled>
+        <ForgotPasswordTitle>
+          <h1>Forgot Password</h1>
+        </ForgotPasswordTitle>
+        <ForgotPasswordCard>
+          <form onSubmit={handleSubmit}>
+            <Input
+              icon="user"
+              name="usernameOrEmail"
+              placeholder="Username or Email"
+              type="text"
+              onChange={handleChange}
+              value={form.usernameOrEmail.value}
+              onBlur={handleBlur}
+              inputStatus={getInputStatus(form.usernameOrEmail)}
+              errorMessage={getErrorMessage(form.usernameOrEmail)}
+            />
+            <InputSpacer />
+            <Button type="submit" text="Submit" icon="forgotPassword" loading={loading} />
+          </form>
+        </ForgotPasswordCard>
+      </ForgotPasswordStyled> */}
+    </>
   )
 }
 
