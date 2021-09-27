@@ -1,7 +1,38 @@
 import * as React from 'react'
-import { Footer } from '../../app/App.components/Footer/Footer.controller'
+import { ChangeEvent, SyntheticEvent, useState } from 'react'
+import { FormInputs, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from '../../helpers/form'
+import { ContactUsInputs } from '../../shared/user/ContactUs'
 
-export const HomeView = () => {
+type HomeViewProps = {
+  contactUsCallback: (values: any) => void
+}
+
+export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
+  const [form, setForm] = useState<FormInputs>({
+    firstName: { value: '', error: '' },
+    lastName: { value: '', error: '' },
+    email: { value: '', error: '' },
+    subject: { value: '', error: '' },
+    question: { value: '', error: '' },
+  })
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const updatedForm = updateFormFromChange(e, form, ContactUsInputs)
+    setForm(updatedForm)
+  }
+
+  const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
+    const updatedForm = updateFormFromBlur(e, form)
+    setForm(updatedForm)
+  }
+
+  const handleSubmit = (event: SyntheticEvent) => {
+    const updatedForm = updateFormFromSubmit(event, form, ContactUsInputs)
+    setForm(updatedForm)
+    return
+    contactUsCallback(form)
+  }
+
   return (
     <div className='home'>
       <div className='home-wrapper intro'>
@@ -126,32 +157,51 @@ export const HomeView = () => {
       <div className='home-content home-contact-us'>
         <form className='home-contact-us-form' onSubmit={(e) => {
           e.preventDefault()
+          handleSubmit(e)
         }}>
           <div className='home-contact-us-form__header h-font'>Get in touch with us</div>
           <div className='home-contact-us-form-fields fields-row'>
             <label className='home-input home-input-fn'>
               <span className='home-input__label h-font'>first name</span>
-              <input className={`home-input__input p-font`} placeholder='' type='text' />
+              <input className={`home-input__input p-font`}
+                     name='firstName'
+                     onChange={handleChange} placeholder=''
+                     type='text' />
             </label>
             <label className='home-input home-input-ln input-ml-20'>
               <span className='home-input__label h-font'>last name</span>
-              <input className={`home-input__input p-font`} placeholder='' type='text' />
+              <input className={`home-input__input p-font`}
+                     name='lastName'
+                     onChange={handleChange}
+                     placeholder=''
+                     type='text' />
             </label>
           </div>
           <div className='home-contact-us-form-fields fields-row'>
             <label className='home-input home-input-email'>
               <span className='home-input__label h-font'>email address</span>
-              <input className={`home-input__input p-font`} placeholder='' type='text' />
+              <input className={`home-input__input p-font`}
+                     name='email'
+                     onChange={handleChange}
+                     placeholder=''
+                     type='text' />
             </label>
             <label className='home-input home-input-subject input-ml-20'>
               <span className='home-input__label h-font'>subject</span>
-              <input className={`home-input__input p-font`} placeholder='' type='text' />
+              <input className={`home-input__input p-font`}
+                     name='subject'
+                     onChange={handleChange}
+                     placeholder=''
+                     type='text' />
             </label>
           </div>
           <div className='home-contact-us-form-fields'>
             <label className='home-input home-input-q'>
               <span className='home-input__label h-font'>question</span>
-              <textarea className={`home-input__input p-font w-100`} placeholder='' />
+              <input className={`home-input__input p-font w-100`}
+                     name='question'
+                     onChange={handleChange}
+                     placeholder='' />
             </label>
           </div>
           <button type='submit' className='home-contact-us-form__button btn btn-green mt-40 h-font'>
@@ -175,7 +225,6 @@ export const HomeView = () => {
         <div className='home-contact-us__square square-1' />
         <div className='home-contact-us__square square-2' />
       </div>
-      <Footer />
     </div>
   )
 }

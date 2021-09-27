@@ -24,6 +24,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import { ThankYou } from '../pages/ThankYou/ThankYou.controller'
+import { Footer } from './App.components/Footer/Footer.controller'
 
 // import { About } from 'pages/About/About.controller'
 
@@ -32,6 +33,7 @@ export const AppRoutes = ({ location }: any) => (
     <Route exact path="/">
       <Header />
       <Home />
+      <Footer />
     </Route>
     <Route exact path="/sign-up">
       <SignUp />
