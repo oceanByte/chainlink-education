@@ -540,7 +540,7 @@
   background: $primary;
   border-radius: 20px;
   position: absolute;
-  bottom: 180px;
+  bottom: 80px;
   height: 714px;
   display: flex;
   align-items: center;
@@ -548,10 +548,10 @@
   color: #FFF;
   overflow: hidden;
   @include md {
-    bottom: 270px;
+    bottom: 70px;
   }
   @include sm {
-    bottom: 310px;
+    bottom: 30px;
     flex-direction: column;
     height: 1050px;
     justify-content: center;
