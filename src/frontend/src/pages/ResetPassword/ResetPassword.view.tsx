@@ -8,8 +8,11 @@ import * as React from 'react'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { ResetPasswordInputs } from 'shared/user/ResetPassword'
 
-//prettier-ignore
 import { ResetPasswordCard, ResetPasswordStyled, ResetPasswordTitle } from './ResetPassword.style'
+import Eye from '../../assets/eye.png'
+import EyeHide from '../../assets/eyeHide.png'
+import Confirm from '../../assets/confirm.png'
+import UnConfirm from '../../assets/unconfirm.png'
 
 type ResetPasswordViewProps = {
   resetPasswordCallback: (values: any) => void
@@ -22,15 +25,58 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
     newPassword: { value: '' },
   })
 
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+  const [uppercase, setUppercase] = useState(false)
+  const [lowercase, setLowercase] = useState(false)
+  const [numbers, setNumbers] = useState(false)
+  const [special, setSpecial] = useState(false)
+  const [minLength, setMinLength] = useState(false)
+
+  const regUppercase = /^(?=.*[A-ZÄÖÜА-ЯІЄЇГҐ]).+$/gm
+  const regLowercase = /^(?=.*[a-zäöüßа-яієїґ]).+$/gm
+  const regNumbers = /^(?=.*\d).+$/gm
+  const regSpecial = /^(?=.*[@&%*!?]).+$/gm
+  const regMinLength = /^.{8,}$/gm
+
+  const uppercaseImage = uppercase ? Confirm : UnConfirm
+  const lowercaseImage = lowercase ? Confirm : UnConfirm
+  const numbersImage = numbers ? Confirm : UnConfirm
+  const specialImage = special ? Confirm : UnConfirm
+  const minLengthImage = minLength ? Confirm : UnConfirm
+
+  // console.log('regUppercase', regUppercase.test('Asgsd'))
+  // console.log('regLowercase', regLowercase.test('a'))
+  // console.log('regNumbers', regNumbers.test('3'))
+  // console.log('regSpecial', regSpecial.test('@'))
+  // console.log('regMinLength', regMinLength.test('aaajsbcahsbch'))
+
+  const eyeForPassword = showPassword ? EyeHide : Eye
+  const eyeForConfirmPassword = showConfirmPassword ? EyeHide : Eye
+
+  const typeOfInputPassword = showPassword ? 'text' : 'password'
+  const typeOfInputConfirmPassword = showConfirmPassword ? 'text' : 'password'
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = e
+
+    setUppercase(regUppercase.test(value))
+    setLowercase(regLowercase.test(value))
+    setNumbers(regNumbers.test(value))
+    setSpecial(regSpecial.test(value))
+    setMinLength(regMinLength.test(value))
+
     const updatedForm = updateFormFromChange(e, form, ResetPasswordInputs)
     setForm(updatedForm)
-
-    console.log('form.solution', form.solution)
   }
 
   const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
     const updatedForm = updateFormFromBlur(e, form)
+
+    console.log('updateForm', updatedForm)
     setForm(updatedForm)
   }
 
@@ -47,7 +93,55 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
 
   return (
     <>
-      <form onSubmit={handleSubmit}>офівофів</form>
+      <form onSubmit={handleSubmit} className="reset-password">
+        <div className="reset-password-title">Reset your password</div>
+        <div className="reset-password-subtitle">
+          Pick and set a new password for your account, and you’re good to go!
+        </div>
+        <div className="reset-password__pass">
+          <img src={eyeForPassword} alt="eye" onClick={() => setShowPassword((prev) => !prev)} />
+          <label htmlFor="reset-password-pass">Choose new password</label>
+          <input
+            type={typeOfInputPassword}
+            id="reset-password-pass"
+            name="solution"
+            onChange={handleChange}
+            value={form.solution.value}
+            onBlur={handleBlur}
+          />
+        </div>
+        <div className="reset-password__validation">
+          <div className="reset-password__validation-left">
+            <div className="reset-password__validation-left-uppercase-letter">
+              <img src={uppercaseImage} alt="confirm" />
+              Min 1 uppercase letter
+            </div>
+            <div className="reset-password__validation-left-lowercase-letter">
+              <img src={lowercaseImage} alt="confirm" />
+              Min 1 lowercase letter
+            </div>
+            <div className="reset-password__validation-left-number">
+              <img src={numbersImage} alt="confirm" />
+              Min 1 numbers
+            </div>
+          </div>
+          <div className="reset-password__validation-right">
+            <div className="reset-password__validation-right-special-characters" title="@, &, %, *, !, ?">
+              <img src={specialImage} alt="confirm" />
+              Min 1 special characters
+            </div>
+            <div className="reset-password__validation-right-min-length">
+              <img src={minLengthImage} alt="confirm" />
+              Min length = 8
+            </div>
+          </div>
+        </div>
+        <div className="reset-password__confirm-pass">
+          <img src={eyeForConfirmPassword} alt="eye" onClick={() => setShowConfirmPassword((prev) => !prev)} />
+          <label htmlFor="reset-password__confirm-pass">Confirm Password</label>
+          <input type={typeOfInputConfirmPassword} id="reset-password__confirm-pass" />
+        </div>
+      </form>
       {/* <ResetPasswordStyled>
         <ResetPasswordTitle>
           <h1>Reset Password</h1>
