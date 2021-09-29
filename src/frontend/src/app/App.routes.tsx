@@ -62,6 +62,7 @@ export const AppRoutes = ({ location }: any) => (
       <Course />
     </Route>
     <Route path="/*/chapter-*">
+        <Header/>
       <Chapter />
     </Route>
     <Route exact path="/user/:username">
