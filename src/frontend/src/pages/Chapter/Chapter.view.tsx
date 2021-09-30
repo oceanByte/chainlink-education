@@ -24,6 +24,10 @@ import { Question } from './Chapter.controller'
 //prettier-ignore
 import { ButtonBorder, ButtonStyle, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterH4, ChapterItalic, ChapterMonaco, ChapterQuestions, ChapterStyled, ChapterTab, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorTitle, FormWrapper, narrativeText, Spacer, TextWrapper, VerticalAlign } from './Chapter.style'
 import { AnimatedCode, BackgroundContainer, Difficulty, ImageContainer, SpecialCode } from './Chapter.style'
+import ArrowRight from '../../assets/arrow-upright-white.svg'
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import testMd from '!raw-loader!./test.md';
 
 monaco
   .init()
@@ -68,9 +72,6 @@ const MonacoReadOnly = ({ children }: any) => {
           fontSize: 14,
           fontFamily: 'Proxima Nova',
           wordWrap: true,
-          padding: {
-              top: 200
-          }
         }}
       />
     </div>
@@ -95,9 +96,6 @@ const MonacoEditorSupport = ({ support, height }: any) => {
           fontSize: 14,
           fontFamily: 'Proxima Nova',
           wordWrap: true,
-            padding: {
-                top: 200
-            }
         }}
       />
     </div>
@@ -105,15 +103,16 @@ const MonacoEditorSupport = ({ support, height }: any) => {
 }
 
 const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, height }: any) => {
-  return (
+    return (
     <div>
-      <ControlledEditor
+      <Editor
         height={height ? height : '600px'}
         width={width}
         value={proposedSolution}
         language="rust"
         theme="vs-dark"
-        onChange={(_, val) => proposedSolutionCallback(val)}
+        // @ts-ignos
+        // onChange={(_, val) => proposedSolutionCallback(val)}
         options={{
           lineNumbers: true,
           scrollBeyondLastLine: false,
@@ -154,9 +153,6 @@ const MonacoDiff = ({ solution, proposedSolution, height }: any) => {
           fontFamily: 'Proxima Nova',
           renderSideBySide: false,
           wordWrap: true,
-            padding: {
-                top: 200
-            }
         }}
       />
     </div>
@@ -173,13 +169,17 @@ let triggerAnim = function () {
 
 const Validator = ({ validatorState, validateCallback }: any) => (
   <ChapterValidator className={validatorState === RIGHT ? 'ok' : 'no'}>
+    <div className='step'>
+      <p className='step-text'>Step 3</p>
+    </div>
     {validatorState === PENDING && (
       <ChapterValidatorContentWrapper>
-        <ChapterValidatorTitle>CHAPTER VALIDATION</ChapterValidatorTitle>
-        <ChapterValidatorContent>Provide your answer above and validate chapter</ChapterValidatorContent>
+        <ChapterValidatorTitle>Awaiting validation</ChapterValidatorTitle>
+        <ChapterValidatorContent>Type your solution above and validate your answer</ChapterValidatorContent>
         <ButtonStyle>
-          <ButtonBorder />
-          <ButtonText onClick={() => validateCallback()}>SUBMIT ANSWER</ButtonText>
+          {/*<ButtonBorder />*/}
+          <img src={ArrowRight} />
+          <ButtonText onClick={() => validateCallback()}>Validate mission</ButtonText>
         </ButtonStyle>
       </ChapterValidatorContentWrapper>
     )}
@@ -192,7 +192,7 @@ const Validator = ({ validatorState, validateCallback }: any) => (
     {validatorState === WRONG && (
       <ChapterValidatorContentWrapper>
         <ChapterValidatorTitle id={'try'} className={'tryagain'}>
-          EXPLORATION FAILED
+          Exploration Failed
         </ChapterValidatorTitle>
         <ChapterValidatorContent>Correct your answer and try again</ChapterValidatorContent>
         <ButtonStyle>
@@ -203,7 +203,7 @@ const Validator = ({ validatorState, validateCallback }: any) => (
               triggerAnim()
             }}
           >
-            TRY AGAIN
+            Try Again
           </ButtonText>
         </ButtonStyle>
       </ChapterValidatorContentWrapper>
@@ -395,7 +395,7 @@ export const ChapterView = ({
             <div className='step'>
                 <p className='step-text'>Step 1</p>
             </div>
-          <Content course={course || ''} />
+          <Content course={testMd || ''} />
         </div>
         <ChapterGrid hasTabs={Object.keys(supports).length > 0}>
           {Object.keys(supports).length > 0 && (
