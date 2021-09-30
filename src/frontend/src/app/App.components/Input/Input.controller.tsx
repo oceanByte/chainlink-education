@@ -27,7 +27,7 @@ export const Input = ({
   errorMessage,
 }: InputProps) => {
   return (
-    <InputView  
+    <InputView
       type={type}
       icon={icon}
       name={name}
