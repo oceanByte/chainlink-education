@@ -129,7 +129,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
     <>
       <HeaderAuth />
       <form className="sign-up">
-        <p className="sign-up-title">Sign in</p>
+        <p className="sign-up-title">Sign up</p>
         <button className="sign-up-google">
           Continue with <span>Google</span>
         </button>
