@@ -162,26 +162,26 @@ export const Chapter = () => {
 
   return (
     <>
-     (
+      {
         data.course && (
           <ChapterView
-            validatorState={validatorState}
-            validateCallback={validateCallback}
-            solution={data.solution}
-            proposedSolution={data.exercise}
-            proposedSolutionCallback={proposedSolutionCallback}
-            showDiff={showDiff}
-            isPopup={isPopup}
-            course={data.course}
-            closeIsPopup={() => setIsPopup(false)}
-            user={user}
-            supports={data.supports}
-            questions={data.questions}
-            nextChapter={nextChapter}
-            proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
+              validatorState={validatorState}
+              validateCallback={validateCallback}
+              solution={data.solution}
+              proposedSolution={data.exercise}
+              proposedSolutionCallback={proposedSolutionCallback}
+              showDiff={showDiff}
+              isPopup={isPopup}
+              course={data.course}
+              closeIsPopup={() => setIsPopup(false)}
+              user={user}
+              supports={data.supports}
+              questions={data.questions}
+              nextChapter={nextChapter}
+              proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
           />
         )
-      )
+      }
       <Footer percent={percent} nextChapter={nextChapter} previousChapter={previousChapter} />
     </>
   )

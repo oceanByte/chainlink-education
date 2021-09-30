@@ -53,19 +53,25 @@
 }
 
 @mixin xs {
-  @media (max-width: 375px) {
+  @media (max-width: 374px) {
     @content;
   }
 }
 
 @mixin sm {
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     @content;
   }
 }
 
 @mixin md {
-  @media (max-width: 1024px) {
+  @media (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: 1024px) {
     @content;
   }
 }

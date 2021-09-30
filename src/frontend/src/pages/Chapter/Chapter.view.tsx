@@ -51,8 +51,8 @@ monaco
 
 const MonacoReadOnly = ({ children }: any) => {
   const height = children.split('\n').length * 22
-  return (
-    <div style={{ marginTop: '10px' }}>
+    return (
+    <div style={{ marginTop: '10px', borderRadius: '20px' }}>
       <Editor
         height={height}
         value={children}
@@ -68,6 +68,9 @@ const MonacoReadOnly = ({ children }: any) => {
           fontSize: 14,
           fontFamily: 'Proxima Nova',
           wordWrap: true,
+          padding: {
+              top: 200
+          }
         }}
       />
     </div>
@@ -92,6 +95,9 @@ const MonacoEditorSupport = ({ support, height }: any) => {
           fontSize: 14,
           fontFamily: 'Proxima Nova',
           wordWrap: true,
+            padding: {
+                top: 200
+            }
         }}
       />
     </div>
@@ -118,6 +124,9 @@ const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, heigh
           fontSize: 14,
           fontFamily: 'Proxima Nova',
           wordWrap: true,
+          padding: {
+            top: 200
+          }
         }}
       />
     </div>
@@ -145,6 +154,9 @@ const MonacoDiff = ({ solution, proposedSolution, height }: any) => {
           fontFamily: 'Proxima Nova',
           renderSideBySide: false,
           wordWrap: true,
+            padding: {
+                top: 200
+            }
         }}
       />
     </div>
@@ -324,7 +336,7 @@ export const ChapterView = ({
       setEditorHeight(
         wrapperRef.current!.parentElement!.offsetHeight -
           (wrapperRef.current!.nextElementSibling as HTMLElement).offsetHeight -
-          20,
+          300,
       )
       window.addEventListener('resize', () => {
         if (isMounted.current) {
@@ -333,7 +345,7 @@ export const ChapterView = ({
           setEditorHeight(
             wrapperRef.current!.parentElement!.offsetHeight -
               (wrapperRef.current!.nextElementSibling as HTMLElement).offsetHeight -
-              20,
+              300,
           )
         }
       })
@@ -364,7 +376,7 @@ export const ChapterView = ({
   )
 
   return (
-    <div>
+    <div className='chapter-info-wrapper'>
       {nextChapter === '/chainlinkIntroduction/chapter-2' && !user && isSaveConfirmPopup ? PopupPortal : null}
       {isPopup ? (
         <Popup
@@ -378,10 +390,13 @@ export const ChapterView = ({
           text={'Congratulations'}
         />
       ) : null}
-      <ChapterStyled>
-        <ChapterCourse>
+      <div className='chapter-info-container'>
+        <div className='chapter-block'>
+            <div className='step'>
+                <p className='step-text'>Step 1</p>
+            </div>
           <Content course={course || ''} />
-        </ChapterCourse>
+        </div>
         <ChapterGrid hasTabs={Object.keys(supports).length > 0}>
           {Object.keys(supports).length > 0 && (
             <div>
@@ -412,9 +427,9 @@ export const ChapterView = ({
               ))}
             </ChapterQuestions>
           ) : (
-            <div ref={wrapperRef}>
+            <div className='editor-container' ref={wrapperRef}>
               {display === 'solution' ? (
-                <ChapterMonaco>
+                <div>
                   {showDiff ? (
                     <MonacoDiff
                       height={editorHeight}
@@ -430,17 +445,17 @@ export const ChapterView = ({
                       proposedSolutionCallback={proposedSolutionCallback}
                     />
                   )}
-                </ChapterMonaco>
+                </div>
               ) : (
-                <ChapterMonaco>
+                <div>
                   <MonacoEditorSupport height={editorHeight} support={supports[display]} />
-                </ChapterMonaco>
+                </div>
               )}
             </div>
           )}
           <Validator validatorState={validatorState} validateCallback={validateCallback} />
         </ChapterGrid>
-      </ChapterStyled>
+      </div>
     </div>
   )
 }
