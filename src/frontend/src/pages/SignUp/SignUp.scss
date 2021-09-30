@@ -120,6 +120,11 @@
     }
   }
 
+  &-email,
+  &__pass {
+    margin-top: 30px;
+  }
+
   &__pass,
   &__confirm-pass {
     display: flex;
