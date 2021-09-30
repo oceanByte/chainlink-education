@@ -1,6 +1,7 @@
 import { Button } from 'app/App.components/Button/Button.controller'
 import { Input } from 'app/App.components/Input/Input.controller'
 import { InputSpacer } from 'app/App.components/Input/Input.style'
+import classnames from 'classnames'
 //prettier-ignore
 import { FormInputs, getErrorMessage, getInputStatus, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from 'helpers/form'
 import * as PropTypes from 'prop-types'
@@ -65,6 +66,10 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
   const typeOfInputPassword = showPassword ? 'text' : 'password'
   const typeOfInputConfirmPassword = showConfirmPassword ? 'text' : 'password'
 
+  const [checkedInput, setCheckedInput] = useState(false)
+  const classNameInputChecked = classnames('sign-up__checkbox-label', { 'sign-up__checkbox-checked': checkedInput })
+
+  console.log('CHECKED', checkedInput)
   const setReferalLink = (url: string) => {
     setForm((prev) => ({ ...prev, referral: { value: url } }))
   }
@@ -120,8 +125,6 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
     else setForm(updatedForm)
   }
 
-  console.log(form)
-
   return (
     <>
       <HeaderAuth />
@@ -145,50 +148,50 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
           <label htmlFor="sign-up-email">EMAIL ADDRESS</label>
           <input type="text" id="sign-up-email" name="usernameOrEmail" />
         </div>
-        <div className="reset-password__pass">
+        <div className="sign-up__pass">
           <img src={eyeForPassword} alt="eye" onClick={() => setShowPassword((prev) => !prev)} />
-          <label htmlFor="reset-password-pass">Choose new password</label>
+          <label htmlFor="sign-up-pass">Choose new password</label>
           <input
             type={typeOfInputPassword}
-            id="reset-password-pass"
+            id="sign-up-pass"
             name="solution"
             onChange={handleChangePassword}
             value={password}
             onBlur={handleBlur}
           />
         </div>
-        <div className="reset-password__validation">
-          <div className="reset-password__validation-left">
-            <div className="reset-password__validation-left-uppercase-letter">
+        <div className="sign-up__validation">
+          <div className="sign-up__validation-left">
+            <div className="sign-up__validation-left-uppercase-letter">
               <img src={uppercaseImage} alt="confirm" />
               Min 1 uppercase letter
             </div>
-            <div className="reset-password__validation-left-lowercase-letter">
+            <div className="sign-up__validation-left-lowercase-letter">
               <img src={lowercaseImage} alt="confirm" />
               Min 1 lowercase letter
             </div>
-            <div className="reset-password__validation-left-number">
+            <div className="sign-up__validation-left-number">
               <img src={numbersImage} alt="confirm" />
               Min 1 numbers
             </div>
           </div>
-          <div className="reset-password__validation-right">
-            <div className="reset-password__validation-right-special-characters" title="@, &, %, *, !, ?">
+          <div className="sign-up__validation-right">
+            <div className="sign-up__validation-right-special-characters" title="@, &, %, *, !, ?">
               <img src={specialImage} alt="confirm" />
               Min 1 special characters
             </div>
-            <div className="reset-password__validation-right-min-length">
+            <div className="sign-up__validation-right-min-length">
               <img src={minLengthImage} alt="confirm" />
               Min length = 8
             </div>
           </div>
         </div>
-        <div className="reset-password__confirm-pass">
+        <div className="sign-up__confirm-pass">
           <img src={eyeForConfirmPassword} alt="eye" onClick={() => setShowConfirmPassword((prev) => !prev)} />
-          <label htmlFor="reset-password__confirm-pass">Confirm Password</label>
+          <label htmlFor="sign-up__confirm-pass">Confirm Password</label>
           <input
             type={typeOfInputConfirmPassword}
-            id="reset-password__confirm-pass"
+            id="sign-up__confirm-pass"
             // onChange={handleChange}
             // value={form.newPassword.value}
             // onBlur={passwordMatching}
@@ -196,12 +199,25 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
             value={confirmPass}
           />
         </div>
-        <div className="reset-password__checkbox">
-          <label>
-            <input type="checkbox" id="reset-password__checkbox" />
+        <div className="sign-up__checkbox" onClick={() => setCheckedInput((prev) => !prev)}>
+          <label
+            htmlFor="sign-up__checkbox"
+            className={classNameInputChecked}
+            onChange={() => setCheckedInput((prev) => !prev)}
+          >
+            <input type="checkbox" id="sign-up__checkbox" className="sign-up__checkbox-input" />
           </label>
-          <span>Some text</span>
+          <span className="sign-up__checkbox-text">
+            By signing up, you confirm that you've read and accepted our Privacy Policy and you've read Terms of Use
+          </span>
         </div>
+        <button className="reset-password__sign" type="submit">
+          <img src={ArrowRight} alt="arrow" />
+          Create your free account
+        </button>
+        <Link to="forgot-password">
+          <div className="reset-password__forgot">Forgot your password?</div>
+        </Link>
       </form>
     </>
     // <SignUpStyled>
