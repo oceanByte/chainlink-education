@@ -2,7 +2,16 @@ import { Button } from 'app/App.components/Button/Button.controller'
 import { Input } from 'app/App.components/Input/Input.controller'
 import { InputSpacer } from 'app/App.components/Input/Input.style'
 //prettier-ignore
-import { FormInputs, getErrorMessage, getInputStatus, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from 'helpers/form'
+import { Link } from 'react-router-dom'
+
+import {
+  FormInputs,
+  getErrorMessage,
+  getInputStatus,
+  updateFormFromBlur,
+  updateFormFromChange,
+  updateFormFromSubmit,
+} from 'helpers/form'
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
@@ -13,6 +22,7 @@ import Eye from '../../assets/eye.png'
 import EyeHide from '../../assets/eyeHide.png'
 import Confirm from '../../assets/confirm.png'
 import UnConfirm from '../../assets/unconfirm.png'
+import ArrowRight from '../../assets/arrowRight.png'
 
 type ResetPasswordViewProps = {
   resetPasswordCallback: (values: any) => void
@@ -24,9 +34,12 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
     solution: { value: '' },
     newPassword: { value: '' },
   })
+  const [password, setPassword] = useState('')
+  const [confirmPass, setConfirmPass] = useState('')
 
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [showErrorMachPassword, setShowErrorMachPassword] = useState(2)
 
   const [uppercase, setUppercase] = useState(false)
   const [lowercase, setLowercase] = useState(false)
@@ -46,19 +59,29 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
   const specialImage = special ? Confirm : UnConfirm
   const minLengthImage = minLength ? Confirm : UnConfirm
 
-  // console.log('regUppercase', regUppercase.test('Asgsd'))
-  // console.log('regLowercase', regLowercase.test('a'))
-  // console.log('regNumbers', regNumbers.test('3'))
-  // console.log('regSpecial', regSpecial.test('@'))
-  // console.log('regMinLength', regMinLength.test('aaajsbcahsbch'))
-
   const eyeForPassword = showPassword ? EyeHide : Eye
   const eyeForConfirmPassword = showConfirmPassword ? EyeHide : Eye
 
   const typeOfInputPassword = showPassword ? 'text' : 'password'
   const typeOfInputConfirmPassword = showConfirmPassword ? 'text' : 'password'
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const {
+  //     target: { value },
+  //   } = e
+
+  //   setUppercase(regUppercase.test(value))
+  //   setLowercase(regLowercase.test(value))
+  //   setNumbers(regNumbers.test(value))
+  //   setSpecial(regSpecial.test(value))
+  //   setMinLength(regMinLength.test(value))
+
+  //   const updatedForm = updateFormFromChange(e, form, ResetPasswordInputs)
+
+  //   setForm(updatedForm)
+  // }
+
+  const handleChangePassword = (e: any) => {
     const {
       target: { value },
     } = e
@@ -69,14 +92,12 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
     setSpecial(regSpecial.test(value))
     setMinLength(regMinLength.test(value))
 
-    const updatedForm = updateFormFromChange(e, form, ResetPasswordInputs)
-    setForm(updatedForm)
+    setPassword(value)
   }
 
   const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
     const updatedForm = updateFormFromBlur(e, form)
 
-    console.log('updateForm', updatedForm)
     setForm(updatedForm)
   }
 
@@ -89,6 +110,23 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
         solution: updatedForm.solution.value,
       })
     else setForm(updatedForm)
+  }
+
+  const passwordMatching = () => {
+    const errorDiv = document.querySelector('.reset-password__error')
+    console.log(errorDiv)
+
+    if (form.solution.value === confirmPass) {
+      // setShowErrorMachPassword(33)
+      // errorDiv.style.display = 'none'
+      console.log('if')
+    } else {
+      setShowErrorMachPassword(77)
+      console.log('else')
+    }
+    setTimeout(() => console.log(showErrorMachPassword), 2000)
+
+    // console.dir(errorDiv)
   }
 
   return (
@@ -105,8 +143,8 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
             type={typeOfInputPassword}
             id="reset-password-pass"
             name="solution"
-            onChange={handleChange}
-            value={form.solution.value}
+            onChange={handleChangePassword}
+            value={password}
             onBlur={handleBlur}
           />
         </div>
@@ -139,8 +177,23 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
         <div className="reset-password__confirm-pass">
           <img src={eyeForConfirmPassword} alt="eye" onClick={() => setShowConfirmPassword((prev) => !prev)} />
           <label htmlFor="reset-password__confirm-pass">Confirm Password</label>
-          <input type={typeOfInputConfirmPassword} id="reset-password__confirm-pass" />
+          <input
+            type={typeOfInputConfirmPassword}
+            id="reset-password__confirm-pass"
+            // onChange={handleChange}
+            // value={form.newPassword.value}
+            onChange={(e) => setConfirmPass(e.target.value)}
+            onBlur={passwordMatching}
+            value={confirmPass}
+          />
         </div>
+        <button className="reset-password__sign" type="submit">
+          <img src={ArrowRight} alt="arrow" />
+          Sign In
+        </button>
+        <Link to="/login">
+          <div className="reset-password__forgot">Return to Sign In</div>
+        </Link>
       </form>
       {/* <ResetPasswordStyled>
         <ResetPasswordTitle>

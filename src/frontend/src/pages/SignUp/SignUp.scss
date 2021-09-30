@@ -1,0 +1,140 @@
+.sign-up {
+  max-width: 620px;
+  width: 100%;
+  background: $white;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 60px 110px;
+  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
+  z-index: 3;
+
+  &-title {
+    margin: 0;
+    font-family: Circular Std Book;
+    color: $grayscale1;
+    font-weight: 900;
+    font-size: 40px;
+
+    @include md {
+      font-size: 32px;
+    }
+
+    @include sm {
+      font-size: 26px;
+    }
+
+    @include xs {
+      font-size: 24px;
+    }
+  }
+
+  &-google,
+  &-facebook {
+    width: 100%;
+    background: none;
+    padding: 15px 0;
+    border: 1px solid $grayscale3;
+    border-radius: 3px;
+    font-family: Circular Std Black;
+    font-size: 16px;
+    color: $grayscale1;
+  }
+
+  &-google {
+    margin-top: 40px;
+    span {
+      color: $google;
+    }
+
+    @include sm {
+      margin-top: 30px;
+    }
+
+    @include xs {
+      margin-top: 20px;
+    }
+  }
+
+  &-facebook {
+    margin-top: 10px;
+    span {
+      color: $facebook;
+    }
+  }
+
+  &-wave {
+    height: 8px;
+    width: 100%;
+    margin-top: 44px;
+    position: relative;
+    margin-bottom: 50px;
+
+    &-or {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      background: $white;
+      text-align: center;
+      font-family: Circular Std Book;
+      color: $grayscale2;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-email,
+  &-name {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: $grayscale1;
+    font-family: Circular Std Black;
+
+    label {
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid $grayscale3;
+      background: none;
+      margin-top: 8px;
+      font-size: 16px;
+      padding-bottom: 15px;
+      color: $grayscale1;
+      font-family: Circular Std Book;
+    }
+  }
+
+  @include md {
+    max-width: 427px;
+    background: coral;
+    padding: 60px 36px;
+  }
+
+  @include sm {
+    max-width: 478px;
+    background: yellow;
+    padding: 40px;
+  }
+
+  @include xs {
+    max-width: 355px;
+    background: silver;
+    padding: 40px 26px;
+  }
+}
