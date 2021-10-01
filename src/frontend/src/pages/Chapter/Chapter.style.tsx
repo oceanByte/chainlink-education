@@ -165,12 +165,12 @@ export const ChapterCourse = styled.div`
 `
 
 export const ChapterH1 = styled.div`
-  font-size: 50px;
-  margin-top: 25px;
-  color: #1174cb;
-  line-height: 38px;
-  font-weight: 600;
-  text-align: center;
+  margin-top: 10px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 28px;
+  line-height: 120%;
+  color: #0C162C;
 
   @media (max-width: 615px) {
     font-size: 35px;
@@ -178,11 +178,11 @@ export const ChapterH1 = styled.div`
 `
 
 export const ChapterH2 = styled.div`
-  color: #0072ce;
-  padding: 20px 40px 10px 40px;
+  font-style: normal;
   font-weight: 900;
-  font-size: 28px;
-  text-align: left;
+  font-size: 20px;
+  line-height: 120%;
+  color: #0C162C;
 
   @media (max-width: 615px) {
     font-size: 26px;
@@ -198,6 +198,15 @@ export const ChapterH3 = styled.div`
 export const ChapterH4 = styled.div`
   font-size: 15px;
   line-height: 28px;
+  margin: 0;
+`
+
+export const ChapterH5 = styled.div`
+  font-style: normal;
+  font-weight: 450;
+  font-size: 15px;
+  line-height: 19px;
+  color: #1A2B6B;
   margin: 0;
 `
 
@@ -363,8 +372,33 @@ export const ButtonText = styled.div`
 
 export const ChapterMonaco = styled.div``
 
-export const ChapterItalic = styled.em`
-  font-style: italic;
+export const ChapterBig = styled.em`
+  font-style: normal;
+  font-weight: 450;
+  font-size: 22px;
+  line-height: 150%;
+  color: #0C162C;
+  margin-bottom: 10px;
+`
+export const RegularP = styled.p`
+  font-style: normal;
+  font-weight: 450;
+  font-size: 18px;
+  line-height: 150%;
+  color: #3D4556;
+  margin-top: 20px;
+  
+  img {
+    width: 100%;
+  }
+`
+
+export const BlueParagraph = styled.p`
+    color: #0EA6E8;
+    font-style: normal;
+    font-weight: 450;
+    font-size: 22px;
+    line-height: 150%;
 `
 
 export const ChapterTab = styled.div<{ isSelected?: boolean }>`

@@ -9,7 +9,6 @@
     display: grid;
     grid-template-columns: 5fr 5fr;
     grid-gap: 40px;
-    height: calc(100vh - 170px);
     margin: 80px 20px 0;
   }
 }
@@ -59,6 +58,39 @@
   }
 }
 
-.validator-container {
+.mission-container {
+  background: #1A2B6B;
+  box-shadow: 0 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: 20px;
 
+  .title {
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 120%;
+    color: #FFFFFF;
+    margin: 0 0 20px 0;
+  }
+
+  .mission-goals {
+    padding-left: 20px;
+    margin: 0;
+
+    li {
+      font-style: normal;
+      font-weight: 450;
+      font-size: 18px;
+      line-height: 150%;
+      color: #FFFFFF;
+
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+
+      .major-info {
+        color: #eb4133;
+      }
+    }
+  }
 }
