@@ -22,7 +22,34 @@ import { Input } from '../../app/App.components/Input/Input.controller'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
 import { Question } from './Chapter.controller'
 //prettier-ignore
-import { ButtonBorder, ButtonStyle, ButtonText, ChapterCourse, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterH4, ChapterItalic, ChapterMonaco, ChapterQuestions, ChapterStyled, ChapterTab, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentWrapper, ChapterValidatorTitle, FormWrapper, narrativeText, Spacer, TextWrapper, VerticalAlign } from './Chapter.style'
+import {
+    ButtonBorder,
+    ButtonStyle,
+    ButtonText,
+    RegularP,
+    ChapterCourse,
+    ChapterGrid,
+    ChapterH1,
+    ChapterH2,
+    ChapterH3,
+    ChapterH4,
+    ChapterH5,
+    ChapterBig,
+    ChapterMonaco,
+    ChapterQuestions,
+    ChapterStyled,
+    ChapterTab,
+    ChapterValidator,
+    ChapterValidatorContent,
+    ChapterValidatorContentWrapper,
+    ChapterValidatorTitle,
+    FormWrapper,
+    narrativeText,
+    Spacer,
+    TextWrapper,
+    VerticalAlign,
+    BlueParagraph
+} from './Chapter.style'
 import { AnimatedCode, BackgroundContainer, Difficulty, ImageContainer, SpecialCode } from './Chapter.style'
 import ArrowRight from '../../assets/arrow-upright-white.svg'
 // @ts-ignore
@@ -217,6 +244,9 @@ const Content = ({ course }: any) => (
     options={{
       // disableParsingRawHTML: true,
       overrides: {
+        p: {
+          component: RegularP
+        },
         h1: {
           component: ChapterH1,
         },
@@ -229,11 +259,14 @@ const Content = ({ course }: any) => (
         h4: {
           component: ChapterH4,
         },
+        h5: {
+          component: ChapterH5,
+        },
         code: {
           component: MonacoReadOnly,
         },
         em: {
-          component: ChapterItalic,
+          component: ChapterBig,
         },
         AnimatedCode: {
           component: AnimatedCode,
@@ -277,6 +310,9 @@ const Content = ({ course }: any) => (
         VerticalAlign: {
           component: VerticalAlign,
         },
+        BlueParagraph: {
+            component: BlueParagraph
+        }
         // FormSevenChapter: {
         //   component: FormSevenChapter
         // }
@@ -391,11 +427,22 @@ export const ChapterView = ({
         />
       ) : null}
       <div className='chapter-info-container'>
-        <div className='chapter-block'>
-            <div className='step'>
-                <p className='step-text'>Step 1</p>
+        <div>
+            <div className='chapter-block'>
+                <div className='step'>
+                    <p className='step-text'>Step 1</p>
+                </div>
+                <Content course={testMd || ''} />
             </div>
-          <Content course={testMd || ''} />
+            <div className='mission-container'>
+                <h1 className='title'>Your mission</h1>
+                <ul className='mission-goals'>
+                  <li>There is an online editor in the top right corner of this page.
+                      In the editor, define <span className='major-info'>ship_code</span> as a string type.</li>
+                    <li>Then define the constant <span className='major-info'>my_ship</span> as a <span className='major-info'>ship_code</span> of value <span className='major-info'>"020433"</span>.</li>
+                  <li>Then go ahead and validate your mission for a comparative view with the solution.</li>
+                </ul>
+            </div>
         </div>
         <ChapterGrid hasTabs={Object.keys(supports).length > 0}>
           {Object.keys(supports).length > 0 && (
@@ -432,7 +479,7 @@ export const ChapterView = ({
                 <div>
                   {showDiff ? (
                     <MonacoDiff
-                      height={editorHeight}
+                      height={350}
                       width={editorWidth}
                       solution={solution}
                       proposedSolution={proposedSolution}
@@ -440,7 +487,7 @@ export const ChapterView = ({
                   ) : (
                     <MonacoEditor
                       width={editorWidth}
-                      height={editorHeight}
+                      height={350}
                       proposedSolution={proposedSolution}
                       proposedSolutionCallback={proposedSolutionCallback}
                     />
@@ -448,7 +495,7 @@ export const ChapterView = ({
                 </div>
               ) : (
                 <div>
-                  <MonacoEditorSupport height={editorHeight} support={supports[display]} />
+                  <MonacoEditorSupport height={350} support={supports[display]} />
                 </div>
               )}
             </div>
