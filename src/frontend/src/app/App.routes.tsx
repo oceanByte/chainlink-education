@@ -18,6 +18,7 @@ import { Header } from './App.components/Header/Header.controller'
 import { HeaderAuth } from './App.components/HeaderAuth/HeaderAuth.controller'
 import { ConfirmYouPassword } from './App.components/ConfirmYouPassword/ConfirmYouPassword'
 import { DeleteAccount } from './App.components/DeleteAccount/DeleteAccount'
+import { UpdatePassword } from './App.components/UpdatePassword/UpdatePassword'
 /**
  * React Dependency
  * **/
@@ -91,6 +92,9 @@ export const AppRoutes = ({ location }: any) => (
     </Route>
     <Route exact path="/delete-account">
       <DeleteAccount />
+    </Route>
+    <Route exact path="/update-password">
+      <UpdatePassword />
     </Route>
     <Route>
       <Error404 />
