@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 
 type HeaderViewProps = {
-  user?: PublicUser
+  user?: PublicUser,
   removeAuthUserCallback: () => void
 }
 
@@ -18,7 +18,7 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
           <button className='header-menu-list__item ml-30 btn'>Ecosystem</button>
           <button className='header-menu-list__item ml-30 btn'>Contact</button>
         </div>
-        {loggedOutHeader()}
+        {user ? loggedInHeader() : loggedOutHeader()}
       </div>
     </div>
   )
@@ -33,6 +33,15 @@ function loggedOutHeader() {
       <Link to='/sign-up' className='header-menu-log__link link__signup ml-10'>
         Sign up
       </Link>
+    </div>
+  )
+}
+
+function loggedInHeader() {
+  return (
+    <div className='header-menu-user'>
+      <div className='header-menu-user__circle'>JD</div>
+      <div className='header-menu-user__name'>John Doe <span>&#9660;</span></div>
     </div>
   )
 }
