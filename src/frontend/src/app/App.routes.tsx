@@ -25,6 +25,7 @@ import { Route, Switch } from 'react-router-dom'
 
 import { ThankYou } from '../pages/ThankYou/ThankYou.controller'
 import { Footer } from './App.components/Footer/Footer.controller'
+import { Profile } from '../pages/Profile/Profile.controller'
 
 // import { About } from 'pages/About/About.controller'
 
@@ -60,6 +61,9 @@ export const AppRoutes = ({ location }: any) => (
     </Route>
     <Route path="/*/info">
       <Course />
+    </Route>
+    <Route path="/profile">
+      <Profile />
     </Route>
     <Route path="/*/chapter-*">
       <Chapter />
