@@ -17,7 +17,7 @@ export const App = () => (
     <AppBg>
       {/* <Header /> */}
       <ChapterDrawer />
-      <HamburgerLeft />
+      {/*<HamburgerLeft />*/}
       <LoginDrawer />
       {/* <HamburgerRight /> */}
       <AppView />
