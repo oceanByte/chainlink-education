@@ -439,7 +439,7 @@ export const ChapterView = ({
                 <ul className='mission-goals'>
                   <li>There is an online editor in the top right corner of this page.
                       In the editor, define <span className='major-info'>ship_code</span> as a string type.</li>
-                    <li>Then define the constant <span className='major-info'>my_ship</span> as a <span className='major-info'>ship_code</span> of value <span className='major-info'>"020433"</span>.</li>
+                  <li>Then define the constant <span className='major-info'>my_ship</span> as a <span className='major-info'>ship_code</span> of value <span className='major-info'>"020433"</span>.</li>
                   <li>Then go ahead and validate your mission for a comparative view with the solution.</li>
                 </ul>
             </div>
@@ -495,7 +495,7 @@ export const ChapterView = ({
                 </div>
               ) : (
                 <div>
-                  <MonacoEditorSupport height={350} support={supports[display]} />
+                  <MonacoEditorSupport height={editorHeight} support={supports[display]} />
                 </div>
               )}
             </div>

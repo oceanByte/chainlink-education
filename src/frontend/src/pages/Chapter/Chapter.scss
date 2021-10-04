@@ -1,8 +1,8 @@
 .chapter-info {
   &-wrapper {
     max-width: 1600px;
-    padding: 0 160px;
     margin: 0 auto;
+    font-family: Circular Std, sans-serif;
   }
 
   &-container {
@@ -92,5 +92,35 @@
         color: #eb4133;
       }
     }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .chapter-info {
+    &-container {
+      display: block;
+    }
+  }
+
+  .chapter-block {
+    padding: 60px 30px;
+  }
+
+  .mission-container {
+    padding: 60px 30px;
+
+    .title {
+      font-size: 28px;
+    }
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .mission-container {
+    padding: 40px 15px;
+  }
+
+  .chapter-block {
+    padding: 40px 16px;
   }
 }
