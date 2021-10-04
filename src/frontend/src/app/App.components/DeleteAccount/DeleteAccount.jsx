@@ -6,11 +6,11 @@ import ArrowRight from '../../../assets/arrowRight.png'
 import CloseIcon from '../../../assets/closeicon.png'
 import classnames from 'classnames'
 
-export const ConfirmYouPassword = () => {
+export const DeleteAccount = () => {
   const [showModal, setShowModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 
-  const classForModal = classnames('confirm-you-password', { 'confirm-you-password-hide': showModal })
+  const classForModal = classnames('delete-account', { 'delete-account-hide': showModal })
 
   const eyeForPassword = showPassword ? EyeHide : Eye
 
@@ -25,29 +25,25 @@ export const ConfirmYouPassword = () => {
     e.preventDefault()
     setShowModal((prev) => !prev)
   }
-
   return (
     <div className={classForModal}>
-      <form className="confirm-you-password__modal">
-        <button className="confirm-you-password__modal-close" onClick={handleCloseModal}>
+      <form className="delete-account__modal">
+        <button className="delete-account__modal-close" onClick={handleCloseModal}>
           <img src={CloseIcon} alt="close" />
         </button>
-        <p className="confirm-you-password__modal-title">Confirm password</p>
-        <p className="confirm-you-password__modal-subtitle">
-          To update your email address you'll need to confirm your password
+        <p className="delete-account__modal-title">Delete your account</p>
+        <p className="delete-account__modal-subtitle">
+          You will lose access to all projects that you own. Are you sure you want to continue?
         </p>
-        <div className="confirm-you-password__modal-pass">
+        <div className="delete-account__modal-pass">
           <img src={eyeForPassword} alt="eye" onClick={() => setShowPassword((prev) => !prev)} />
-          <label htmlFor="confirm-you-password">Enter Password</label>
-          <input type={typeOfInputPassword} id="confirm-you-password" />
+          <label htmlFor="delete-account">Enter Password</label>
+          <input type={typeOfInputPassword} id="delete-account" />
         </div>
-        <button onClick={handleSubmit} className="confirm-you-password__modal-sign" type="submit">
+        <button onClick={handleSubmit} className="delete-account__modal-sign" type="submit">
           <img src={ArrowRight} alt="arrow" />
-          Confirm password
+          Delete account
         </button>
-        <Link to="/forgot-password">
-          <div className="confirm-you-password__modal-forgot">Forgot your password?</div>
-        </Link>
       </form>
     </div>
   )
