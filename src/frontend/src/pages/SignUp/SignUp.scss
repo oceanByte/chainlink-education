@@ -1,4 +1,4 @@
-.reset-password {
+.sign-up {
   max-width: 620px;
   width: 100%;
   background: $white;
@@ -34,24 +34,95 @@
     }
   }
 
-  &-subtitle {
-    font-family: Circular Std Book;
-    color: $grayscale2;
-    font-size: 18px;
-    text-align: center;
-    margin-top: 15px;
+  &-google,
+  &-facebook {
+    width: 100%;
+    background: none;
+    padding: 15px 0;
+    border: 1px solid $grayscale3;
+    border-radius: 3px;
+    font-family: Circular Std Black;
+    font-size: 16px;
+    color: $grayscale1;
+  }
+
+  &-google {
+    margin-top: 40px;
+    span {
+      color: $google;
+    }
 
     @include sm {
-      font-size: 16px;
+      margin-top: 30px;
     }
 
     @include xs {
-      font-size: 14px;
+      margin-top: 20px;
     }
   }
 
+  &-facebook {
+    margin-top: 10px;
+    span {
+      color: $facebook;
+    }
+  }
+
+  &-wave {
+    height: 8px;
+    width: 100%;
+    margin-top: 44px;
+    position: relative;
+    margin-bottom: 50px;
+
+    &-or {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      background: $white;
+      text-align: center;
+      font-family: Circular Std Book;
+      color: $grayscale2;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-email,
+  &-name {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: $grayscale1;
+    font-family: Circular Std Black;
+
+    label {
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid $grayscale3;
+      background: none;
+      margin-top: 8px;
+      font-size: 16px;
+      padding-bottom: 15px;
+      color: $grayscale1;
+      font-family: Circular Std Book;
+    }
+  }
+
+  &-email,
   &__pass {
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   &__pass,
@@ -91,6 +162,10 @@
     }
   }
 
+  &__confirm-pass {
+    margin-top: 31px;
+  }
+
   &__validation {
     width: 100%;
     display: flex;
@@ -112,73 +187,50 @@
     }
   }
 
-  &__confirm-pass {
-    margin-top: 31px;
-  }
-
-  &__sign {
-    color: $white;
-    width: 100%;
-    padding: 20px 0;
-    color: #fff;
-    border: none;
-    background: $secondary3;
-    margin-top: 40px;
+  &__checkbox {
+    align-self: flex-start;
+    display: flex;
+    margin-top: 20px;
     cursor: pointer;
-    font-family: Circular Std Black;
-    font-size: 16px;
-    position: relative;
-    transition: all 0.3s;
+    user-select: none;
 
-    img {
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      top: 16px;
-      right: 16px;
+    input {
+      display: none;
     }
 
-    &:hover {
-      background: $secondary3hover;
+    &-label {
+      display: block;
+      width: 37px;
+      height: 20px;
+      border: 1px solid black;
+      box-sizing: border-box;
     }
 
-    @include xs {
-      font-size: 14px;
-    }
-  }
-
-  &__forgot {
-    margin-top: 30px;
-    font-family: Circular Std Book;
-    font-size: 18px;
-    color: $grayscale1;
-    padding-bottom: 3px;
-    border-bottom: 1px solid $grayscale3;
-
-    @include sm {
-      font-size: 16px;
+    &-checked {
+      border: 6px solid #05c46b;
+      width: 30px;
     }
 
-    @include xs {
+    &-text {
+      margin-left: 10px;
+      font-family: Circular Std Book;
+      color: $grayscale2;
       font-size: 14px;
     }
   }
 
   @include md {
     max-width: 427px;
-    background: coral;
     padding: 60px 36px;
   }
 
   @include sm {
     max-width: 478px;
-    background: yellow;
     padding: 40px;
   }
 
   @include xs {
     max-width: 355px;
-    background: silver;
     padding: 40px 26px;
   }
 }

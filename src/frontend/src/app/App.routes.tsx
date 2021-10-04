@@ -16,6 +16,8 @@ import { Terms } from 'pages/Terms/Terms.controller'
 import { User } from 'pages/User/User.controller'
 import { Header } from './App.components/Header/Header.controller'
 import { HeaderAuth } from './App.components/HeaderAuth/HeaderAuth.controller'
+import { ConfirmYouPassword } from './App.components/ConfirmYouPassword/ConfirmYouPassword'
+import { DeleteAccount } from './App.components/DeleteAccount/DeleteAccount'
 /**
  * React Dependency
  * **/
@@ -62,7 +64,7 @@ export const AppRoutes = ({ location }: any) => (
       <Course />
     </Route>
     <Route path="/*/chapter-*">
-        <Header/>
+      <Header />
       <Chapter />
     </Route>
     <Route exact path="/user/:username">
@@ -79,6 +81,12 @@ export const AppRoutes = ({ location }: any) => (
     </Route>
     <Route exact path="/thank-you">
       <ThankYou />
+    </Route>
+    <Route exact path="/confirm-pass">
+      <ConfirmYouPassword />
+    </Route>
+    <Route exact path="/delete-account">
+      <DeleteAccount />
     </Route>
     <Route>
       <Error404 />

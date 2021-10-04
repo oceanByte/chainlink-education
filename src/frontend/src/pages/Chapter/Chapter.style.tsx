@@ -211,45 +211,16 @@ export const ChapterH5 = styled.div`
 `
 
 export const ChapterValidator = styled.div`
-  font-family: Circular Std, sans-serif;
   background: white;
+  border: 1px solid white;
   position: relative;
   margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   text-align: center;
-  padding: 40px;
+  padding: 0 10px;
   min-height: 180px;
-  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
-  border-radius: 20px;
-  
-  .step {
-    background: #05C46B;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    height: 25px;
-    left: 40px;
-    position: absolute;
-    top: 0;
-    display: block;
-    align-items: center;
-    justify-content: center;
-
-    &-text {
-      font-family: Circular Std, sans-serif;
-      font-style: normal;
-      font-weight: 450;
-      font-size: 15px;
-      line-height: 19px;
-      color: #FFFFFF;
-      text-transform: uppercase;
-      margin: 0 auto;
-      padding: 3px 10px;
-      display: flex;
-    }
-
-  }
 
   @media (max-width: 900px) {
     padding: 45px 10px;
@@ -275,42 +246,32 @@ export const ChapterValidator = styled.div`
 `
 
 export const ChapterValidatorTitle = styled.div`
-  font-style: normal;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 120%;
-  text-align: center;
-  color: #0C162C;
+  font-size: 32px;
+  color: #0072ce;
+  font-weight: 600;
 `
 
 export const ChapterValidatorContent = styled.div`
-  font-style: normal;
-  font-weight: 450;
-  font-size: 18px;
-  line-height: 150%;
-  text-align: center;
-  color: #3D4556;
-  margin: 15px 0 30px;
+  font-size: 12px;
+  color: #000;
 `
 
 export const ChapterValidatorContentWrapper = styled.div``
 
 export const ButtonStyle = styled.div`
-  background: #05C46B;
-  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
   font-size: 14px;
-  width: 200px;
-  height: 60px;
+  width: 220px;
+  height: 40px;
+  // border: 1px solid white;
   position: relative;
   display: inline-block;
   cursor: pointer;
+  margin: 20px auto 10px auto;
 
   img {
     display: inline-block;
-    position: absolute;
-    top: 16px;
-    right: 16px;
+    margin: 10px 20px 10px -10px;
+    vertical-align: bottom;
   }
 `
 
@@ -347,15 +308,13 @@ export const ButtonText = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 16px;
-  line-height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFFFFF;
-  
+  line-height: 40px;
+  z-index: 1;
+  color: ${textColor};
+  text-align: center;
+  background-color: #f2f2f2;
+  border-radius: 55px;
+  font-weight: 600;
   &:hover {
     transform: scale(1.05);
     color: #0072ce;
