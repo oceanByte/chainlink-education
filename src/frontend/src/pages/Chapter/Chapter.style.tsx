@@ -260,7 +260,6 @@ export const ChapterValidator = styled.div`
       padding: 3px 10px;
       display: flex;
     }
-
   }
 
   @media (max-width: 1024px) {
