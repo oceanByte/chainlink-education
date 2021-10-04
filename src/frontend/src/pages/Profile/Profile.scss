@@ -3,6 +3,12 @@
   height: auto;
   font-family: $p-font;
   color: $grayscale1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 100px;
+  background: url("../../assets/profile-page-ellipse.png") no-repeat top -150px left 50%;
+  background-size: contain;
 }
 
 .profile-page-sections {
@@ -11,6 +17,7 @@
   border-radius: 20px;
   width: 320px;
   padding: 40px;
+  margin-right: 40px;
 
   &-content {
     display: flex;
@@ -20,10 +27,26 @@
     line-height: 23px;
 
     &__item {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
 
+      &.profile-item-selected {
+        color: $primary;
+        //& > .profile-icon {
+        //  @mixin element-color($color) {
+        //    background-image: url('data:image/svg+xml;utf8,<svg ...><path fill="#{$color}" ... /></path></svg>') no-repeat;
+        //    background-size: contain;
+        //  }
+        //
+        //  @include element-color($primary);
+        //}
+      }
 
       & > .profile-icon {
-
+        width: 24px;
+        height: 24px;
+        margin-right: 16px;
       }
 
       & > .profile-text {
@@ -39,14 +62,159 @@
 
     & > .profile-item {
       &-info {
+        & > .profile-icon {
+          background: url("../../assets/profile-info.svg") no-repeat;
+          background-size: contain;
 
+        }
       }
+
       &-progress {
-
+        & > .profile-icon {
+          background: url("../../assets/profile-progress.svg") no-repeat;
+          background-size: contain;
+        }
       }
+
       &-reset {
+        & > .profile-icon {
+          background: url("../../assets/profile-reset.svg") no-repeat;
+          background-size: contain;
+        }
+      }
+    }
+  }
+}
+
+.profile-page-progress {
+  width: 840px;
+  display: none;
+  padding: 60px;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #FFF;
+  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+  position: relative;
+  &.profile-page-visible {
+    display: flex;
+  }
+
+  &__header {
+    font-size: 32px;
+    line-height: 38px;
+    font-weight: 900;
+  }
+
+  &__bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+
+    &__line {
+      width: 90%;
+      border-bottom: 5px solid $secondary3;
+    }
+
+    &__number {
+
+    }
+  }
+
+  &-chapters {
+    margin-top: 10px;
+    width: 100%;
+
+    &__item {
+      padding: 10px 0;
+      border-bottom: 1px solid $grayscale3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &.no-bb {
+        border-bottom: none;
+      }
+
+      & > .profile-page__chapter-name {
+        font-size: 18px;
+        line-height: 27px;
+      }
+      & > .profile-page__chapter-completion {
+        font-size: 11px;
+        line-height: 14px;
+        color: #FFF;
+        border-radius: 5px;
+        width: 78px;
+        height: 19px;
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.completed {
+          background: $secondary3;
+        }
+        &.continue {
+          background: $primary;
+        }
+      }
+    }
+  }
+
+  &__certificate-header {
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 38px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  &__warning {
+    font-size: 18px;
+    line-height: 27px;
+    color: #FFA451;
+    width: 430px;
+    margin-bottom: 30px;
+  }
+
+  &-footer-box {
+    display: flex;
+    align-items: center;
+
+    &__button {
+      margin-right: 30px;
+
+      &.btn-green-disabled {
+        cursor: default;
+        opacity: 0.5;
+        &:hover {
+          background: $secondary3;
+        }
+      }
+
+      &__text {
 
       }
     }
+
+    &__copy-link {
+      cursor: pointer;
+      opacity: 0.5;
+      padding-bottom: 4px;
+      border-bottom: 1px solid $grayscale3;
+    }
+  }
+
+  &__image {
+    background: url("../../assets/profile-certification.svg") no-repeat;
+    background-size: contain;
+    width: 243px;
+    height: 183px;
+    position: absolute;
+    right: 50px;
+    bottom: 60px;
   }
 }
