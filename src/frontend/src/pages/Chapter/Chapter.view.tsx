@@ -83,7 +83,10 @@ monaco
 const MonacoReadOnly = ({ children }: any) => {
   const height = children.split('\n').length * 22
     return (
-    <div style={{ marginTop: '10px', borderRadius: '20px' }}>
+    <div className='editor-wrapper' style={{ marginTop: '10px', borderRadius: '20px' }}>
+      <div className='step'>
+        <p className='step-text'>Step 3</p>
+      </div>
       <Editor
         height={height}
         value={children}
@@ -107,7 +110,10 @@ const MonacoReadOnly = ({ children }: any) => {
 
 const MonacoEditorSupport = ({ support, height }: any) => {
   return (
-    <div>
+    <div className='editor-wrapper'>
+      <div className='step'>
+        <p className='step-text'>Step 2</p>
+      </div>
       <Editor
         height={height}
         value={support}
@@ -131,7 +137,10 @@ const MonacoEditorSupport = ({ support, height }: any) => {
 
 const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, height }: any) => {
     return (
-    <div>
+    <div className='editor-wrapper'>
+      <div className='step'>
+        <p className='step-text'>Step 2</p>
+      </div>
       <Editor
         height={height ? height : '600px'}
         width={width}
@@ -162,6 +171,9 @@ const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, heigh
 const MonacoDiff = ({ solution, proposedSolution, height }: any) => {
   return (
     <div>
+      <div className='step'>
+        <p className='step-text'>Step 2</p>
+      </div>
       <DiffEditor
         height={height ? height : '600px'}
         original={proposedSolution}
@@ -368,7 +380,7 @@ export const ChapterView = ({
     } else setIsSaveConfirmPopup(true)
 
     if (wrapperRef.current) {
-      setEditorWidth(wrapperRef.current ? wrapperRef.current.offsetWidth : 0)
+      setEditorWidth(wrapperRef.current ? wrapperRef.current.offsetWidth - 30 : 0)
       setEditorHeight(
         wrapperRef.current!.parentElement!.offsetHeight -
           (wrapperRef.current!.nextElementSibling as HTMLElement).offsetHeight -
@@ -377,7 +389,7 @@ export const ChapterView = ({
       window.addEventListener('resize', () => {
         if (isMounted.current) {
           setEditorWidth(0)
-          setEditorWidth(wrapperRef.current ? wrapperRef.current.offsetWidth : 0)
+          setEditorWidth(wrapperRef.current ? wrapperRef.current.offsetWidth - 30 : 0)
           setEditorHeight(
             wrapperRef.current!.parentElement!.offsetHeight -
               (wrapperRef.current!.nextElementSibling as HTMLElement).offsetHeight -
@@ -439,7 +451,7 @@ export const ChapterView = ({
                 <ul className='mission-goals'>
                   <li>There is an online editor in the top right corner of this page.
                       In the editor, define <span className='major-info'>ship_code</span> as a string type.</li>
-                    <li>Then define the constant <span className='major-info'>my_ship</span> as a <span className='major-info'>ship_code</span> of value <span className='major-info'>"020433"</span>.</li>
+                  <li>Then define the constant <span className='major-info'>my_ship</span> as a <span className='major-info'>ship_code</span> of value <span className='major-info'>"020433"</span>.</li>
                   <li>Then go ahead and validate your mission for a comparative view with the solution.</li>
                 </ul>
             </div>
@@ -495,7 +507,7 @@ export const ChapterView = ({
                 </div>
               ) : (
                 <div>
-                  <MonacoEditorSupport height={350} support={supports[display]} />
+                  <MonacoEditorSupport height={editorHeight} support={supports[display]} />
                 </div>
               )}
             </div>
