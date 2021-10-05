@@ -1,31 +1,34 @@
 import * as React from 'react'
-import { ProgressBar } from '../../app/App.components/ProgressBar/ProgressBar.controller'
+import { useState } from 'react'
+import { ResetPassword } from '../ResetPassword/ResetPassword.controller'
 
 type ProfileViewProps = {}
 
 export const ProfileView = () => {
+  const [section, setSection] = useState(1);
+
   return (
     <div className='profile-page'>
       <div className='profile-page-sections'>
         <div className='profile-page-sections-content'>
-          <div className='profile-page-sections-content__item profile-item-progress profile-item-selected'>
+          <div onClick={() => setSection(1)} className={`profile-page-sections-content__item profile-item-progress ${section === 1 ? "profile-item-selected" : ""}`}>
             <div className='profile-icon' />
             <div className='profile-text'>Progress & Certificate</div>
           </div>
           <div className='profile-page-sections-content__line' />
-          <div className='profile-page-sections-content__item profile-item-info'>
+          <div onClick={() => setSection(2)} className={`profile-page-sections-content__item profile-item-info ${section === 2 ? "profile-item-selected" : ""}`}>
             <div className='profile-icon' />
             <div className='profile-text'>Account Info</div>
           </div>
           <div className='profile-page-sections-content__line' />
-          <div className='profile-page-sections-content__item profile-item-reset'>
+          <div onClick={() => setSection(3)} className={`profile-page-sections-content__item profile-item-reset ${section === 3 ? "profile-item-selected" : ""}`}>
             <div className='profile-icon' />
             <div className='profile-text'>Reset Password</div>
           </div>
         </div>
       </div>
-      <div className='profile-page-progress profile-page-visible'>
-        <div className='profile-page-progress__header h-font'>Progress</div>
+      <div className={`profile-page-progress profile-page-section ${section === 1 ? "profile-page-visible" : ""}`}>
+        <div className='profile-page-section__header h-font'>Progress</div>
         <div className='profile-page-progress__bar'>
           <div className='profile-page-progress__bar__line' />
           <div className='profile-page-progress__bar__number'>100%</div>
@@ -80,6 +83,13 @@ export const ProfileView = () => {
           </div>
         </div>
         <div className='profile-page-progress__image' />
+      </div>
+      <div className={`profile-page-account-info profile-page-section ${section === 2 ? "profile-page-visible" : ""}`}>
+        <div className='profile-page-section__header h-font'>Account info</div>
+
+      </div>
+      <div className={`profile-page-reset-password profile-page-section ${section === 3 ? "profile-page-visible" : ""}`}>
+        <ResetPassword />
       </div>
     </div>
   )
