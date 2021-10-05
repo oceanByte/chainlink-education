@@ -86,7 +86,7 @@
   }
 }
 
-.profile-page-progress {
+.profile-page-section {
   width: 840px;
   display: none;
   padding: 60px;
@@ -105,7 +105,9 @@
     line-height: 38px;
     font-weight: 900;
   }
+}
 
+.profile-page-progress {
   &__bar {
     width: 100%;
     display: flex;
