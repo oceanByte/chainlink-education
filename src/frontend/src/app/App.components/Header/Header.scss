@@ -110,6 +110,19 @@
         }
       }
     }
+
+    &__burger-icon {
+      cursor: pointer;
+      background: url("../../../assets/burger-menu.svg") no-repeat;
+      background-size: contain;
+      height: 24px;
+      width: 24px;
+      margin-left: 40px;
+      display: none;
+      @include md {
+        display: block;
+      }
+    }
   }
 }
 

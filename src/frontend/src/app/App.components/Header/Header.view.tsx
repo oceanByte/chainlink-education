@@ -19,6 +19,7 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
           <button className='header-menu-list__item ml-30 btn'>Contact</button>
         </div>
         {user ? loggedInHeader() : loggedOutHeader()}
+        <div className='header-menu__burger-icon' />
       </div>
     </div>
   )

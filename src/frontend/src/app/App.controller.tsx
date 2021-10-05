@@ -18,6 +18,7 @@ export const App = () => (
       {/* <Header /> */}
       <ChapterDrawer />
       {/*<HamburgerLeft />*/}
+      {/* chainlinkIntroduction/chapter-1 */}
       <LoginDrawer />
       {/* <HamburgerRight /> */}
       <AppView />
