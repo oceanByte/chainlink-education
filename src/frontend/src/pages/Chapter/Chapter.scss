@@ -7,9 +7,13 @@
 
   &-container {
     display: grid;
-    grid-template-columns: 5fr 5fr;
+    grid-template-columns: 7fr 3fr;
     grid-gap: 40px;
     margin: 80px 20px 0;
+
+    &.isStarted {
+      grid-template-columns: 5fr 5fr;
+    }
 
     .step {
       background: #05C46B;

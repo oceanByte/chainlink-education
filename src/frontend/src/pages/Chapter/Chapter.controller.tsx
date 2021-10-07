@@ -43,6 +43,7 @@ export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING)
   const [showDiff, setShowDiff] = useState(false)
   const [isPopup, setIsPopup] = useState(false)
+  const [isStarted, setIsStarted] = useState(false)
   const { pathname } = useLocation()
   const [data, setData] = useState<Data>({
     course: undefined,
@@ -150,6 +151,10 @@ export const Chapter = () => {
     }
   }
 
+  const startTaskHandler = () => {
+    setIsStarted(true);
+  }
+
   const proposedSolutionCallback = (e: string) => {
     // @ts-ignore
     setData({ ...data, exercise: e })
@@ -178,6 +183,8 @@ export const Chapter = () => {
               supports={data.supports}
               questions={data.questions}
               nextChapter={nextChapter}
+              isStarted={isStarted}
+              startedHandler={startTaskHandler}
               proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
           />
         )

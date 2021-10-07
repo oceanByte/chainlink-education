@@ -225,7 +225,7 @@ export const ChapterValidator = styled.div`
   align-items: center;
   justify-content: space-around;
   text-align: center;
-  padding: 40px 30px;
+  padding: 10px;
   min-height: 180px;
   
   .step {
@@ -287,7 +287,63 @@ export const ChapterValidator = styled.div`
       color: ${textColor};
     }
   }
-`
+`;
+
+export const LetsStart = styled.div`
+  background: #FFFFFF;
+  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+  border: 1px solid white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  padding: 40px 30px;
+  min-height: 180px;
+  
+  .step {
+    background: #05C46B;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    left: 40px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    
+    @media (max-width: 1024px) {
+      left: 20px;
+    }
+    
+    @media (max-width: 760px) {
+      left: 15px;
+    }
+
+    &-text {
+      font-family: Circular Std, sans-serif;
+      font-style: normal;
+      font-weight: 450;
+      font-size: 15px;
+      line-height: 19px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin: 0 auto;
+      padding: 3px 10px;
+      display: flex;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    padding: 40px 20px;
+  }
+  
+  @media (max-width: 760px) {
+    padding: 40px 15px;
+  }
+`;
 
 export const ChapterValidatorTitle = styled.div`
   font-style: normal;
@@ -325,7 +381,27 @@ export const ChapterValidatorContent = styled.div`
   
 `
 
-export const ChapterValidatorContentWrapper = styled.div``
+export const ChapterValidatorContentWrapper = styled.div`
+    padding: 20px 30px;
+    border-radius: 20px;
+    width: 100%;
+`
+
+export const ChapterValidatorContentSuccess = styled.div`
+    padding: 20px 30px;
+    border-radius: 20px;
+    background: rgba(5, 196, 107, 0.2);
+    border: 2px solid rgba(5, 196, 107, 0.2);
+    width: 100%;
+`
+
+export const ChapterValidatorContentFailed = styled.div`
+    padding: 20px 30px;
+    border-radius: 20px;
+    background: rgba(255, 94, 87, 0.2);
+    border: 2px solid rgba(255, 94, 87, 0.2);
+    width: 100%;
+`
 
 export const ButtonStyle = styled.div`
   display: flex;
