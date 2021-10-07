@@ -1,8 +1,10 @@
 .delete-account {
+  z-index: 50;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: rgba(0, 0, 0, 0.4);
   position: fixed;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
