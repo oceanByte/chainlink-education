@@ -186,19 +186,16 @@
 
   @include md {
     max-width: 427px;
-    background: coral;
     padding: 60px 36px;
   }
 
   @include sm {
     max-width: 478px;
-    background: yellow;
     padding: 40px;
   }
 
   @include xs {
     max-width: 355px;
-    background: silver;
     padding: 40px 26px;
   }
 }
