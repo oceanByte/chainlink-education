@@ -87,15 +87,6 @@ export const AppRoutes = ({ location }: any) => (
     <Route exact path="/thank-you">
       <ThankYou />
     </Route>
-    <Route exact path="/confirm-pass">
-      <ConfirmYouPassword />
-    </Route>
-    <Route exact path="/delete-account">
-      <DeleteAccount />
-    </Route>
-    <Route exact path="/update-password">
-      <UpdatePassword />
-    </Route>
     <Route>
       <Error404 />
     </Route>

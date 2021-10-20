@@ -52,6 +52,11 @@ export const ChapterGrid = styled.div<{ hasTabs?: boolean }>`
     overflow-y: initial;
     margin-bottom: 20px;
   }
+  
+  @media (max-width: 1024px) {
+    margin-top: 20px;
+  }
+}
 `
 
 export const ChapterQuestions = styled.div`
@@ -172,8 +177,8 @@ export const ChapterH1 = styled.div`
   line-height: 120%;
   color: #0C162C;
 
-  @media (max-width: 615px) {
-    font-size: 35px;
+  @media (max-width: 760px) {
+    font-size: 20px;
   }
 `
 
@@ -184,9 +189,8 @@ export const ChapterH2 = styled.div`
   line-height: 120%;
   color: #0C162C;
 
-  @media (max-width: 615px) {
-    font-size: 26px;
-    padding: 10px;
+  @media (max-width: 760px) {
+    font-size: 16px;
   }
 `
 
@@ -211,7 +215,9 @@ export const ChapterH5 = styled.div`
 `
 
 export const ChapterValidator = styled.div`
-  background: white;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
   border: 1px solid white;
   position: relative;
   margin-top: 20px;
@@ -219,11 +225,49 @@ export const ChapterValidator = styled.div`
   align-items: center;
   justify-content: space-around;
   text-align: center;
-  padding: 0 10px;
+  padding: 10px;
   min-height: 180px;
+  
+  .step {
+    background: #05C46B;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    left: 40px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    
+    @media (max-width: 1024px) {
+      left: 20px;
+    }
+    
+    @media (max-width: 760px) {
+      left: 15px;
+    }
 
-  @media (max-width: 900px) {
-    padding: 45px 10px;
+    &-text {
+      font-family: Circular Std, sans-serif;
+      font-style: normal;
+      font-weight: 450;
+      font-size: 15px;
+      line-height: 19px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin: 0 auto;
+      padding: 3px 10px;
+      display: flex;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    padding: 40px 20px;
+  }
+  
+  @media (max-width: 760px) {
+    padding: 40px 15px;
   }
 
   &.ok {
@@ -243,35 +287,150 @@ export const ChapterValidator = styled.div`
       color: ${textColor};
     }
   }
-`
+`;
+
+export const LetsStart = styled.div`
+  background: #FFFFFF;
+  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+  border: 1px solid white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  padding: 40px 30px;
+  min-height: 180px;
+  
+  .step {
+    background: #05C46B;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    left: 40px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    
+    @media (max-width: 1024px) {
+      left: 20px;
+    }
+    
+    @media (max-width: 760px) {
+      left: 15px;
+    }
+
+    &-text {
+      font-family: Circular Std, sans-serif;
+      font-style: normal;
+      font-weight: 450;
+      font-size: 15px;
+      line-height: 19px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin: 0 auto;
+      padding: 3px 10px;
+      display: flex;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    padding: 40px 20px;
+  }
+  
+  @media (max-width: 760px) {
+    padding: 40px 15px;
+  }
+`;
 
 export const ChapterValidatorTitle = styled.div`
-  font-size: 32px;
-  color: #0072ce;
-  font-weight: 600;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 120%;
+  text-align: center;
+  color: #0C162C;
+  margin-bottom: 15px;
+  
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
+  
+  @media (max-width: 760px) {
+    font-size: 16px;
+  }
 `
 
 export const ChapterValidatorContent = styled.div`
-  font-size: 12px;
-  color: #000;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 18px;
+  line-height: 150%;
+  text-align: center;
+  color: #3D4556;
+  
+   @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+  
+  @media (max-width: 760px) {
+    font-size: 14px;
+  }
+  
 `
 
-export const ChapterValidatorContentWrapper = styled.div``
+export const ChapterValidatorContentWrapper = styled.div`
+    padding: 20px 30px;
+    border-radius: 20px;
+    width: 100%;
+`
+
+export const ChapterValidatorContentSuccess = styled.div`
+    padding: 20px 30px;
+    border-radius: 20px;
+    background: rgba(5, 196, 107, 0.2);
+    border: 2px solid rgba(5, 196, 107, 0.2);
+    width: 100%;
+`
+
+export const ChapterValidatorContentFailed = styled.div`
+    padding: 20px 30px;
+    border-radius: 20px;
+    background: rgba(255, 94, 87, 0.2);
+    border: 2px solid rgba(255, 94, 87, 0.2);
+    width: 100%;
+`
 
 export const ButtonStyle = styled.div`
+  display: flex;
   font-size: 14px;
   width: 220px;
-  height: 40px;
-  // border: 1px solid white;
+  height: 60px;
+  background: #05C46B;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
   position: relative;
-  display: inline-block;
   cursor: pointer;
-  margin: 20px auto 10px auto;
+  margin: 30px auto 10px auto;
 
   img {
-    display: inline-block;
-    margin: 10px 20px 10px -10px;
-    vertical-align: bottom;
+    position: absolute;  
+    top: 16px;
+    right: 16px;
+    
+    @media (max-width: 760px) {
+      top: 10px;
+      right: 8px;
+      
+      height: 10px;
+    }
+  }
+  
+  @media (max-width: 760px) {
+    margin: 30px auto 10px 0;
+    width: 170px;
   }
 `
 
@@ -308,16 +467,19 @@ export const ButtonText = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
   line-height: 40px;
   z-index: 1;
-  color: ${textColor};
-  text-align: center;
-  background-color: #f2f2f2;
-  border-radius: 55px;
-  font-weight: 600;
-  &:hover {
-    transform: scale(1.05);
-    color: #0072ce;
+  
+  @media(max-width: 760px) {
+    font-size: 16px;
+    line-height: 18px;
   }
 
   > svg {
@@ -327,6 +489,7 @@ export const ButtonText = styled.div`
     margin-right: 17px;
     vertical-align: text-bottom;
   }
+  
 `
 
 export const ChapterMonaco = styled.div``
@@ -338,6 +501,10 @@ export const ChapterBig = styled.em`
   line-height: 150%;
   color: #0C162C;
   margin-bottom: 10px;
+  
+  @media (max-width: 760px) {
+    font-size: 16px;
+  }
 `
 export const RegularP = styled.p`
   font-style: normal;
@@ -346,6 +513,10 @@ export const RegularP = styled.p`
   line-height: 150%;
   color: #3D4556;
   margin-top: 20px;
+  
+  @media (max-width: 760px) {
+    font-size: 14px;
+  }
   
   img {
     width: 100%;
@@ -358,6 +529,10 @@ export const BlueParagraph = styled.p`
     font-weight: 450;
     font-size: 22px;
     line-height: 150%;
+    
+    @media (max-width: 760px) {
+      font-size: 16px;
+    }
 `
 
 export const ChapterTab = styled.div<{ isSelected?: boolean }>`

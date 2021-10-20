@@ -7,7 +7,7 @@ import UnConfirm from '../../../assets/unconfirm.png'
 import ArrowRight from '../../../assets/arrowRight.png'
 import { Link } from 'react-router-dom'
 
-export const UpdatePassword = () => {
+export const UpdatePassword = ({ setShowModal }) => {
   const [currentPassword, setCurrentPassword] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPass, setConfirmPass] = useState('')
@@ -62,10 +62,7 @@ export const UpdatePassword = () => {
 
   return (
     <form onSubmit={handleSubmit} className="update-password">
-      <div className="update-password-title">Reset your password</div>
-      <div className="update-password-subtitle">
-        Pick and set a new password for your account, and you’re good to go!
-      </div>
+      <div className="update-password-title">Reset password</div>
       <div className="update-password__confirm-pass">
         <img src={eyeForCurrentPassword} alt="eye" onClick={() => setShowCurrentPassword((prev) => !prev)} />
         <label htmlFor="update-password__confirm-pass">Current Password</label>
@@ -123,9 +120,9 @@ export const UpdatePassword = () => {
           value={confirmPass}
         />
       </div>
-      <button className="update-password__sign" type="submit">
-        <img src={ArrowRight} alt="arrow" />
-        Upgrade password
+      <button onClick={() => setShowModal(false)} className="btn btn-green update-password-btn" type="submit">
+        <span> Update password </span>
+        <span className='arrow-upright' />
       </button>
     </form>
   )
