@@ -1,7 +1,10 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { FormInputs, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from '../../helpers/form'
+
 import { ContactUsInputs } from '../../shared/user/ContactUs'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 type HomeViewProps = {
   contactUsCallback: (values: any) => void
@@ -15,6 +18,12 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
     subject: { value: '', error: '' },
     question: { value: '', error: '' },
   })
+
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
+    })
+  }, [])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const updatedForm = updateFormFromChange(e, form, ContactUsInputs)
@@ -56,7 +65,9 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
         <div className="home-num-item__image nft" />
         <div className="home-num-item-content">
           <div className="home-num-item-content__header">
-            <div className="home-num-item-content__header__number h-font">01</div>
+            <div className="home-num-item-content__header__number h-font" data-aos="fade-up" data-aos-delay="100">
+              01
+            </div>
             <div className="home-num-item-content__header__line" />
           </div>
           <div className="home-num-item-content__text">
@@ -71,7 +82,9 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
         <div className="home-num-item__image etl" />
         <div className="home-num-item-content">
           <div className="home-num-item-content__header half-hidden">
-            <div className="home-num-item-content__header__number h-font">02</div>
+            <div className="home-num-item-content__header__number h-font" data-aos="fade-up" data-aos-delay="100">
+              02
+            </div>
             <div className="home-num-item-content__header__line" />
           </div>
           <div className="home-num-item-content__text">
@@ -86,7 +99,9 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
         <div className="home-num-item__image cnt" />
         <div className="home-num-item-content">
           <div className="home-num-item-content__header half-hidden">
-            <div className="home-num-item-content__header__number h-font">03</div>
+            <div className="home-num-item-content__header__number h-font" data-aos="fade-up" data-aos-delay="100">
+              03
+            </div>
             <div className="home-num-item-content__header__line" />
           </div>
           <div className="home-num-item-content__text">

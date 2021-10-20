@@ -15,7 +15,7 @@
 
   &.intro {
     background: $primary;
-    @include fluid-size("padding-top", 1024px, 1600px, 86px, 96px);
+    @include fluid-size('padding-top', 1024px, 1600px, 86px, 96px);
   }
 
   &.get-started {
@@ -29,20 +29,20 @@
 
 .home-content {
   @include lg {
-    @include fluid-size("width", 1024px, 1600px, 984px, 1280px);
+    @include fluid-size('width', 1024px, 1600px, 984px, 1280px);
   }
   @include md {
     width: 728px;
   }
   @include sm {
-    @include fluid-size("width", 375px, 768px, 335px, 728px);
+    @include fluid-size('width', 375px, 768px, 335px, 728px);
   }
 }
 
 .home-intro {
   display: flex;
   justify-content: space-between;
-  color: #FFF;
+  color: #fff;
   margin: 0 auto;
 
   @include md {
@@ -61,8 +61,8 @@
     }
 
     &__header {
-      @include fluid-size("font-size", 375px, 1600px, 32px, 80px);
-      @include fluid-size("line-height", 375px, 1600px, 39px, 96px);
+      @include fluid-size('font-size', 375px, 1600px, 32px, 80px);
+      @include fluid-size('line-height', 375px, 1600px, 39px, 96px);
       font-weight: 900;
       max-width: 100%;
       @include md {
@@ -78,7 +78,7 @@
     &__paragraph {
       font-size: 22px;
       line-height: 33px;
-      @include fluid-size("max-width", 1024px, 1600px, 557px, 620px);
+      @include fluid-size('max-width', 1024px, 1600px, 557px, 620px);
       @include md {
         font-size: 18px;
         line-height: 27px;
@@ -93,8 +93,8 @@
   &__image {
     background: url('../../assets/homepage-guy.svg') no-repeat;
     background-size: contain;
-    @include fluid-size("width", 335px, 1600px, 260px, 562px);
-    @include fluid-size("height", 335px, 1600px, 260px, 562px);
+    @include fluid-size('width', 335px, 1600px, 260px, 562px);
+    @include fluid-size('height', 335px, 1600px, 260px, 562px);
 
     @include md {
       align-self: center;
@@ -111,22 +111,22 @@
   height: 140px;
 
   &-1 {
-    background: url("../../assets/Ellipse.png") no-repeat bottom;
+    background: url('../../assets/Ellipse.png') no-repeat bottom;
     background-size: cover;
-    @include fluid-size("margin-bottom", 375px, 1600px, 80px, 180px);
+    @include fluid-size('margin-bottom', 375px, 1600px, 80px, 180px);
 
     @include sm {
-      background: url("../../assets/ellipse-xs.png") no-repeat bottom;
+      background: url('../../assets/ellipse-xs.png') no-repeat bottom;
       background-size: cover;
     }
   }
 
   &-2 {
-    background: url("../../assets/ellipse-2.png") no-repeat top;
+    background: url('../../assets/ellipse-2.png') no-repeat top;
     background-size: cover;
 
     @include sm {
-      background: url("../../assets/ellipse-xs-2.png") no-repeat top;
+      background: url('../../assets/ellipse-xs-2.png') no-repeat top;
       background-size: cover;
     }
   }
@@ -137,7 +137,7 @@
   align-items: flex-start;
   justify-content: space-between;
   @include lg {
-    @include fluid-size("margin-bottom", 1024px, 1600px, 100px, 150px);
+    @include fluid-size('margin-bottom', 1024px, 1600px, 100px, 150px);
   }
   @include md {
     margin-bottom: 80px;
@@ -157,29 +157,29 @@
 
   &__image {
     &.nft {
-      background: url("../../assets/nft-certificate.svg") no-repeat;
+      background: url('../../assets/nft-certificate.svg') no-repeat;
       background-size: contain;
     }
 
     &.etl {
-      background: url("../../assets/easytolearn.svg") no-repeat;
+      background: url('../../assets/easytolearn.svg') no-repeat;
       background-size: contain;
     }
 
     &.cnt {
-      background: url("../../assets/contribute.svg") no-repeat;
+      background: url('../../assets/contribute.svg') no-repeat;
       background-size: contain;
     }
 
-    @include fluid-size("width", 1024px, 1600px, 471px, 620px);
-    @include fluid-size("height", 1024px, 1600px, 380px, 500px);
+    @include fluid-size('width', 1024px, 1600px, 471px, 620px);
+    @include fluid-size('height', 1024px, 1600px, 380px, 500px);
     @include md {
       width: 354px;
       height: 286px;
     }
     @include sm {
-      @include fluid-size("width", 375px, 767px, 335px, 727px);
-      @include fluid-size("height", 375px, 767px, 270px, 586px);
+      @include fluid-size('width', 375px, 767px, 335px, 727px);
+      @include fluid-size('height', 375px, 767px, 270px, 586px);
       margin-bottom: 30px;
     }
   }
@@ -188,7 +188,7 @@
     display: flex;
     flex-direction: column;
     @include lg {
-      @include fluid-size("width", 1024px, 1600px, 387px, 510px);
+      @include fluid-size('width', 1024px, 1600px, 387px, 510px);
     }
     @include md {
       width: 334px;
@@ -209,10 +209,11 @@
       &.half-hidden {
         .home-num-item-content__header__number {
           @include lg {
-            @include fluid-size("top", 1024px, 1600px, 54px, 34px);
+            @include fluid-size('top', 1024px, 1600px, 20px, 13px);
           }
+
           @include md {
-            @include fluid-size("top", 1024px, 1024px, 32px, 46px);
+            @include fluid-size('top', 1024px, 1024px, 15px, 15px);
           }
         }
       }
@@ -220,22 +221,22 @@
       &__number {
         position: absolute;
         top: 0;
-        color: #375BD2;
+        color: #375bd2;
         font-weight: 900;
-        @include fluid-size("font-size", 1024px, 1600px, 40px, 60px);
-        @include fluid-size("line-height", 1024px, 1600px, 48px, 72px);
+        @include fluid-size('font-size', 1024px, 1600px, 40px, 60px);
+        @include fluid-size('line-height', 1024px, 1600px, 48px, 72px);
         @include lg {
-          @include fluid-size("top", 1024px, 1600px, 34px, 14px);
+          @include fluid-size('top', 1024px, 1600px, 34px, 14px);
         }
         @include md {
-          @include fluid-size("top", 1024px, 1024px, 12px, 26px);
+          @include fluid-size('top', 1024px, 1024px, 12px, 26px);
         }
       }
 
       &__line {
         margin-top: 80px;
         width: 100%;
-        border-bottom: 1px solid #D4DBEA;
+        border-bottom: 1px solid #d4dbea;
         @include md {
           margin-top: 60px;
         }
@@ -257,9 +258,9 @@
 
       &__header {
         font-weight: 900;
-        @include fluid-size("font-size", 1024px, 1600px, 40px, 50px);
-        @include fluid-size("line-height", 1024px, 1600px, 48px, 60px);
-        @include fluid-size("margin-bottom", 375px, 1600px, 10px, 20px);
+        @include fluid-size('font-size', 1024px, 1600px, 40px, 50px);
+        @include fluid-size('line-height', 1024px, 1600px, 48px, 60px);
+        @include fluid-size('margin-bottom', 375px, 1600px, 10px, 20px);
         @include md {
           font-size: 32px;
           line-height: 38px;
@@ -290,16 +291,16 @@
 .home-join {
   display: flex;
   flex-direction: column;
-  @include fluid-size("margin-bottom", 375px, 1600px, 80px, 180px);
+  @include fluid-size('margin-bottom', 375px, 1600px, 80px, 180px);
 
   &__header {
-    background: linear-gradient(55.74deg, #0EA6E8 1.98%, #0F3BCC 86.84%);
+    background: linear-gradient(55.74deg, #0ea6e8 1.98%, #0f3bcc 86.84%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 900;
     @include lg {
-      @include fluid-size("font-size", 1024px, 1600px, 70px, 80px);
-      @include fluid-size("line-height", 1024px, 1600px, 84px, 96px);
+      @include fluid-size('font-size', 1024px, 1600px, 70px, 80px);
+      @include fluid-size('line-height', 1024px, 1600px, 84px, 96px);
     }
     @include md {
       font-size: 60px;
@@ -313,9 +314,9 @@
 
   &__line {
     width: 100%;
-    border-bottom: 1px solid #D4DBEA;
+    border-bottom: 1px solid #d4dbea;
     margin-top: 15px;
-    @include fluid-size("margin-bottom", 375px, 1600px, 40px, 60px);
+    @include fluid-size('margin-bottom', 375px, 1600px, 40px, 60px);
   }
 
   &-content {
@@ -331,8 +332,8 @@
       color: $grayscale1;
       font-weight: 900;
       @include lg {
-        @include fluid-size("font-size", 1024px, 1600px, 32px, 40px);
-        @include fluid-size("line-height", 1024px, 1600px, 38px, 48px);
+        @include fluid-size('font-size', 1024px, 1600px, 32px, 40px);
+        @include fluid-size('line-height', 1024px, 1600px, 38px, 48px);
       }
       @include md {
         font-size: 26px;
@@ -381,7 +382,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #FFF;
+  color: #fff;
   margin-bottom: 220px;
   @include md {
     margin-bottom: 190px;
@@ -401,8 +402,8 @@
     &__header {
       font-weight: 900;
       @include lg {
-        @include fluid-size("font-size", 1024px, 1600px, 40px, 50px);
-        @include fluid-size("line-height", 1024px, 1600px, 48px, 60px);
+        @include fluid-size('font-size', 1024px, 1600px, 40px, 50px);
+        @include fluid-size('line-height', 1024px, 1600px, 48px, 60px);
       }
       @include md {
         font-size: 32px;
@@ -455,7 +456,7 @@
         border-radius: 20px;
         @include lg {
           height: 332px;
-          @include fluid-size("width", 1024px, 1600px, 473px, 550px);
+          @include fluid-size('width', 1024px, 1600px, 473px, 550px);
         }
         @include md {
           height: 332px;
@@ -478,7 +479,7 @@
         justify-content: center;
         @include lg {
           height: 332px;
-          @include fluid-size("width", 1024px, 1600px, 473px, 550px);
+          @include fluid-size('width', 1024px, 1600px, 473px, 550px);
         }
         @include md {
           font-size: 20px;
@@ -497,8 +498,8 @@
           margin-left: 50px;
           margin-right: 50px;
           @include lg {
-            @include fluid-size("margin-right", 1024px, 1600px, 45px, 50px);
-            @include fluid-size("margin-left", 1024px, 1600px, 45px, 50px);
+            @include fluid-size('margin-right', 1024px, 1600px, 45px, 50px);
+            @include fluid-size('margin-left', 1024px, 1600px, 45px, 50px);
           }
           @include md {
             margin-left: 50px;
@@ -513,7 +514,7 @@
     }
 
     &__speaker {
-      background: url("../../assets/speaker.svg") no-repeat;
+      background: url('../../assets/speaker.svg') no-repeat;
       background-size: contain;
       position: absolute;
       right: 0;
@@ -545,7 +546,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #FFF;
+  color: #fff;
   overflow: hidden;
   @include md {
     bottom: 70px;
@@ -560,7 +561,7 @@
   &-form {
     font-weight: 900;
     @include lg {
-      @include fluid-size("margin-left", 1024px, 1600px, 85px, 110px);
+      @include fluid-size('margin-left', 1024px, 1600px, 85px, 110px);
     }
     @include md {
       margin-left: 60px;
@@ -571,18 +572,18 @@
 
     &__header {
       @include lg {
-        @include fluid-size("font-size", 1024px, 1600px, 40px, 50px);
-        @include fluid-size("line-height", 1024px, 1600px, 48px, 60px);
+        @include fluid-size('font-size', 1024px, 1600px, 40px, 50px);
+        @include fluid-size('line-height', 1024px, 1600px, 48px, 60px);
         margin-bottom: 60px;
       }
       @include md {
-        @include fluid-size("font-size", 768px, 1024px, 32px, 40px);
-        @include fluid-size("line-height", 768px, 1024px, 38px, 48px);
+        @include fluid-size('font-size', 768px, 1024px, 32px, 40px);
+        @include fluid-size('line-height', 768px, 1024px, 38px, 48px);
         margin-bottom: 50px;
       }
       @include sm {
-        @include fluid-size("font-size", 375px, 768px, 26px, 32px);
-        @include fluid-size("line-height", 375px, 768px, 31px, 38px);
+        @include fluid-size('font-size', 375px, 768px, 26px, 32px);
+        @include fluid-size('line-height', 375px, 768px, 31px, 38px);
         margin-bottom: 30px;
       }
     }
@@ -598,7 +599,8 @@
           flex-direction: column;
         }
 
-        & > .home-input-fn, & > .home-input-email {
+        & > .home-input-fn,
+        & > .home-input-email {
           @include md {
             margin-bottom: 30px;
           }
@@ -612,7 +614,7 @@
     flex-direction: column;
     margin-top: 80px;
     @include lg {
-      @include fluid-size("margin-right", 1024px, 1600px, 45px, 144px);
+      @include fluid-size('margin-right', 1024px, 1600px, 45px, 144px);
     }
     @include md {
       margin-right: 74px;
@@ -621,14 +623,16 @@
       margin-top: 215px;
     }
 
-    &__header, &__office-hours {
+    &__header,
+    &__office-hours {
       font-weight: 400;
       font-size: 12px;
       line-height: 18px;
       margin-bottom: 8px;
     }
 
-    &__mail, &__days {
+    &__mail,
+    &__days {
       font-weight: 400;
       font-size: 18px;
       line-height: 27px;
@@ -659,14 +663,14 @@
         height: 40px;
         width: 40px;
         border-radius: 50%;
-        background: #FFF;
+        background: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
 
         &.item-discord-2 {
           & > span {
-            background: url("../../assets/discord.svg") no-repeat;
+            background: url('../../assets/discord.svg') no-repeat;
             background-size: contain;
             width: 18px;
             height: 20px;
@@ -675,7 +679,7 @@
 
         &.item-telegram-2 {
           & > span {
-            background: url("../../assets/telegram.svg") no-repeat;
+            background: url('../../assets/telegram.svg') no-repeat;
             background-size: contain;
             width: 18px;
             height: 17px;
@@ -684,7 +688,7 @@
 
         &.item-twitter-2 {
           & > span {
-            background: url("../../assets/twitter.svg") no-repeat;
+            background: url('../../assets/twitter.svg') no-repeat;
             background-size: contain;
             width: 18px;
             height: 16px;
@@ -695,14 +699,14 @@
   }
 
   &__mail-line {
-    background: url("../../assets/mail-line.svg") no-repeat;
+    background: url('../../assets/mail-line.svg') no-repeat;
     background-size: contain;
     position: absolute;
     height: 213px;
     width: 184px;
     top: 0;
     @include lg {
-      @include fluid-size("right", 1024px, 1600px, 45px, 144px);
+      @include fluid-size('right', 1024px, 1600px, 45px, 144px);
     }
     @include md {
       right: 50px;
@@ -713,14 +717,14 @@
   }
 
   &__mail {
-    background: url("../../assets/mail.svg") no-repeat;
+    background: url('../../assets/mail.svg') no-repeat;
     background-size: contain;
     position: absolute;
     height: 123px;
     width: 120px;
     top: 127px;
     @include lg {
-      @include fluid-size("right", 1024px, 1600px, 180px, 280px);
+      @include fluid-size('right', 1024px, 1600px, 180px, 280px);
     }
     @include md {
       width: 100px;
@@ -732,7 +736,7 @@
       top: auto;
       right: auto;
       bottom: 270px;
-      @include fluid-size("left", 375px, 768px, 22px, 212px);
+      @include fluid-size('left', 375px, 768px, 22px, 212px);
     }
   }
 
@@ -751,7 +755,7 @@
       right: -50px;
       transform: rotate(-8.92deg);
       @include lg {
-        @include fluid-size("bottom", 1024px, 1600px, -120px, -100px);
+        @include fluid-size('bottom', 1024px, 1600px, -120px, -100px);
       }
       @include md {
         bottom: -120px;
@@ -767,8 +771,8 @@
     &.square-2 {
       transform: rotate(12.57deg);
       @include lg {
-        @include fluid-size("right", 1024px, 1600px, 140px, 93px);
-        @include fluid-size("bottom", 1024px, 1600px, -170px, -150px);
+        @include fluid-size('right', 1024px, 1600px, 140px, 93px);
+        @include fluid-size('bottom', 1024px, 1600px, -170px, -150px);
       }
       @include md {
         bottom: -170px;
@@ -804,12 +808,12 @@
   &__input {
     padding-left: 0;
     height: 35px;
-    color: #FFF;
+    color: #fff;
     background: none;
     border: none;
-    border-bottom: 1px solid #FFF;
+    border-bottom: 1px solid #fff;
     @include lg {
-      @include fluid-size("width", 1024px, 1600px, 226px, 300px);
+      @include fluid-size('width', 1024px, 1600px, 226px, 300px);
     }
     @include md {
       width: 294px;
@@ -843,8 +847,8 @@
   &-green {
     background: $secondary3;
     padding: 20px 50px 20px 30px;
-    color: #FFF;
-    transition: all .3s;
+    color: #fff;
+    transition: all 0.3s;
     display: flex;
     position: relative;
     justify-content: flex-start;
@@ -862,7 +866,7 @@
       position: absolute;
       top: 16px;
       right: 16px;
-      background: url("../../assets/arrow-upright-white.svg") no-repeat;
+      background: url('../../assets/arrow-upright-white.svg') no-repeat;
       background-size: contain;
 
       @include sm {
@@ -877,7 +881,7 @@
 
     &:disabled {
       cursor: default;
-      background: #B4EDD3;
+      background: #b4edd3;
     }
   }
 }
