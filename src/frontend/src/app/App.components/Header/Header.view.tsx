@@ -1,8 +1,9 @@
 import * as PropTypes from 'prop-types'
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 import { useState } from 'react'
+import { isConstructorDeclaration } from 'typescript'
 
 type HeaderViewProps = {
   user?: PublicUser
@@ -12,6 +13,13 @@ type HeaderViewProps = {
 export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
+
+  console.log('isDropdownOpen', isDropdownOpen)
+  console.log('isBurgerMenuOpen', isBurgerMenuOpen)
+
+  useEffect(() => {
+    console.log(window)
+  }, [])
 
   return (
     <>
@@ -23,7 +31,9 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
               Academy <span>&#9660;</span>
             </button>
             <button className="header-menu-list__item ml-30 btn">Ecosystem</button>
-            <button className="header-menu-list__item ml-30 btn">Contact</button>
+            <button className="header-menu-list__item ml-30 btn">
+              <a href="#contactus">Contact</a>
+            </button>
           </div>
           <div className="header-menu-cred">{!user ? loggedInHeader() : loggedOutHeader()}</div>
           <div
@@ -94,7 +104,9 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
           <div className="header__item-border" />
           <button className="header-list__item btn">Ecosystem</button>
           <div className="header__item-border" />
-          <button className="header-list__item btn">Contact</button>
+          <button className="header-list__item btn" onClick={() => setIsBurgerMenuOpen(false)}>
+            <a href="#contactus">Contact</a>
+          </button>
           <div className="header__item-border" />
           <div className="header-dropdown-user-menu">{!user ? loggedInHeader() : loggedOutHeader()}</div>
         </div>

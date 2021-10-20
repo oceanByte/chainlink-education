@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .header {
   z-index: 5;
   font-family: $p-font;
@@ -5,8 +9,8 @@
   height: 100px;
   padding-left: 40px;
   padding-right: 40px;
-  @include fluid-size("padding-left", 1024px, 1600px, 20px, 40px);
-  @include fluid-size("padding-right", 1024px, 1600px, 20px, 40px);
+  @include fluid-size('padding-left', 1024px, 1600px, 20px, 40px);
+  @include fluid-size('padding-right', 1024px, 1600px, 20px, 40px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,9 +24,9 @@
   &__link {
     height: 27px;
     width: 231px;
-    @include fluid-size("width", 375px, 1600px, 190px, 231px);
-    @include fluid-size("height", 375px, 1600px, 22px, 27px);
-    background: url("../../../assets/logo.svg") no-repeat;
+    @include fluid-size('width', 375px, 1600px, 190px, 231px);
+    @include fluid-size('height', 375px, 1600px, 22px, 27px);
+    background: url('../../../assets/logo.svg') no-repeat;
     background-size: contain;
   }
 
@@ -33,16 +37,26 @@
     &-user {
       display: flex;
       align-items: center;
-      color: #FFF;
+      color: #fff;
+      cursor: pointer;
+      position: relative;
 
       &__circle {
-        background: #FFF;
+        background: #fff;
         color: #000;
         padding: 10px;
         border-radius: 50%;
         font-size: 15px;
         line-height: 19px;
         margin-left: 50px;
+
+        @include md {
+          margin-left: 0;
+        }
+
+        @include lg {
+          margin-left: 0;
+        }
       }
 
       &__name {
@@ -88,28 +102,28 @@
         font-size: 16px;
         border-radius: 3px;
         padding: 15px 25px;
-        transition: all .3s;
+        transition: all 0.3s;
 
         &:hover {
           opacity: 1;
         }
       }
 
-      .link__signin{
-        color: #FFF;
-        border: 1px solid #FFF;
+      .link__signin {
+        color: #fff;
+        border: 1px solid #fff;
 
         &:hover {
           color: $grayscale1;
-          background: #FFF;
+          background: #fff;
         }
       }
       .link__signup {
         color: $grayscale1;
-        background: #FFF;
+        background: #fff;
 
         &:hover {
-          color: #FFF;
+          color: #fff;
           background: $secondary3;
         }
       }
@@ -117,7 +131,7 @@
 
     &__burger-icon {
       cursor: pointer;
-      background: url("../../../assets/burger-menu.svg") no-repeat;
+      background: url('../../../assets/burger-menu.svg') no-repeat;
       background-size: contain;
       height: 24px;
       width: 24px;
@@ -128,7 +142,7 @@
       }
     }
     &__exit-icon {
-      background: url("../../../assets/exit-white.svg") no-repeat;
+      background: url('../../../assets/exit-white.svg') no-repeat;
       background-size: contain;
       height: 15px;
       width: 15px;
@@ -139,7 +153,7 @@
 .header-chapters {
   z-index: 15;
   position: absolute;
-  background: #FFF;
+  background: #fff;
   top: 80px;
   right: 150px;
   padding: 20px 30px;
@@ -173,14 +187,14 @@
 
     &__name {
       max-width: 320px;
-      @include fluid-size("font-size", 375px, 1600px, 13px, 15px);
+      @include fluid-size('font-size', 375px, 1600px, 13px, 15px);
       line-height: 19px;
     }
 
     &__completion {
-      @include fluid-size("font-size", 375px, 1600px, 8px, 11px);
-      @include fluid-size("line-height", 375px, 1600px, 10px, 14px);
-      color: #FFF;
+      @include fluid-size('font-size', 375px, 1600px, 8px, 11px);
+      @include fluid-size('line-height', 375px, 1600px, 10px, 14px);
+      color: #fff;
       border-radius: 5px;
       width: 78px;
       height: 19px;
@@ -207,7 +221,7 @@
   }
 }
 
-.header-dropdown-user-menu{
+.header-dropdown-user-menu {
   @include sm {
     display: block;
   }
@@ -221,7 +235,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: url("../../../assets/navbar-ellipse-xs.svg") no-repeat bottom;
+  background: url('../../../assets/navbar-ellipse-xs.svg') no-repeat bottom;
   background-size: cover;
   padding: 0 20px 70px;
   align-items: flex-start;
@@ -229,7 +243,7 @@
   &__item {
     width: 100%;
     background: none;
-    color: #FFF;
+    color: #fff;
     padding: 14px 0;
     display: flex;
     align-items: center;
@@ -253,7 +267,6 @@
     }
 
     & > .header-menu-user__name {
-
     }
   }
 }
@@ -267,7 +280,7 @@
 
   &__item {
     cursor: pointer;
-    color: #FFF;
+    color: #fff;
     font-size: 18px;
     line-height: 23px;
     padding: 14px 0;
@@ -283,7 +296,7 @@
 .bright-background {
   display: block;
   opacity: 0.7;
-  background: #FFF;
+  background: #fff;
   position: fixed;
   top: 100px;
   left: 0;
@@ -301,7 +314,6 @@
 }
 
 .with-bt {
-
 }
 
 .btn {
