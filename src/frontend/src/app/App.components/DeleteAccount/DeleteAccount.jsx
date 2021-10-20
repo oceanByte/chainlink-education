@@ -6,8 +6,7 @@ import ArrowRight from '../../../assets/arrowRight.png'
 import CloseIcon from '../../../assets/closeicon.png'
 import classnames from 'classnames'
 
-export const DeleteAccount = () => {
-  const [showModal, setShowModal] = useState(false)
+export const DeleteAccount = ({ showModal, setShowModal }) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const classForModal = classnames('delete-account', { 'delete-account-hide': showModal })
