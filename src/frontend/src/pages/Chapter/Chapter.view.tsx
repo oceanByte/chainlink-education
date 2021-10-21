@@ -56,7 +56,7 @@ import { AnimatedCode, BackgroundContainer, Difficulty, ImageContainer, SpecialC
 import ArrowRight from '../../assets/arrow-upright-white.svg'
 // @ts-ignore
 // eslint-disable-next-line import/no-webpack-loader-syntax
-import testMd from '!raw-loader!./test.md';
+import testMd from '!raw-loader!./test.md'
 
 monaco
   .init()
@@ -84,10 +84,10 @@ monaco
 
 const MonacoReadOnly = ({ children }: any) => {
   const height = children.split('\n').length * 22
-    return (
-    <div className='editor-wrapper' style={{ marginTop: '10px', borderRadius: '20px' }}>
-      <div className='step'>
-        <p className='step-text'>Step 3</p>
+  return (
+    <div className="editor-wrapper" style={{ marginTop: '10px', borderRadius: '20px' }}>
+      <div className="step">
+        <p className="step-text">Step 3</p>
       </div>
       <Editor
         height={height}
@@ -112,9 +112,9 @@ const MonacoReadOnly = ({ children }: any) => {
 
 const MonacoEditorSupport = ({ support, height }: any) => {
   return (
-    <div className='editor-wrapper'>
-      <div className='step'>
-        <p className='step-text'>Step 2</p>
+    <div className="editor-wrapper">
+      <div className="step">
+        <p className="step-text">Step 2</p>
       </div>
       <Editor
         height={height}
@@ -138,10 +138,10 @@ const MonacoEditorSupport = ({ support, height }: any) => {
 }
 
 const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, height }: any) => {
-    return (
-    <div className='editor-wrapper'>
-      <div className='step'>
-        <p className='step-text'>Step 2</p>
+  return (
+    <div className="editor-wrapper">
+      <div className="step">
+        <p className="step-text">Step 2</p>
       </div>
       <Editor
         height={height ? height : '600px'}
@@ -162,8 +162,8 @@ const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, heigh
           fontFamily: 'Proxima Nova',
           wordWrap: true,
           padding: {
-            top: 200
-          }
+            top: 200,
+          },
         }}
       />
     </div>
@@ -173,8 +173,8 @@ const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, heigh
 const MonacoDiff = ({ solution, proposedSolution, height }: any) => {
   return (
     <div>
-      <div className='step'>
-        <p className='step-text'>Step 2</p>
+      <div className="step">
+        <p className="step-text">Step 2</p>
       </div>
       <DiffEditor
         height={height ? height : '600px'}
@@ -210,8 +210,8 @@ let triggerAnim = function () {
 
 const Validator = ({ validatorState, validateCallback }: any) => (
   <ChapterValidator className={validatorState === RIGHT ? 'ok' : 'no'}>
-    <div className='step'>
-      <p className='step-text'>Step 3</p>
+    <div className="step">
+      <p className="step-text">Step 3</p>
     </div>
     {validatorState === PENDING && (
       <ChapterValidatorContentWrapper>
@@ -259,7 +259,7 @@ const Content = ({ course }: any) => (
       // disableParsingRawHTML: true,
       overrides: {
         p: {
-          component: RegularP
+          component: RegularP,
         },
         h1: {
           component: ChapterH1,
@@ -325,8 +325,8 @@ const Content = ({ course }: any) => (
           component: VerticalAlign,
         },
         BlueParagraph: {
-            component: BlueParagraph
-        }
+          component: BlueParagraph,
+        },
         // FormSevenChapter: {
         //   component: FormSevenChapter
         // }
@@ -349,8 +349,8 @@ type ChapterViewProps = {
   user?: PublicUser
   supports: Record<string, string | undefined>
   questions: Question[]
-  proposedQuestionAnswerCallback: (e: Question[]) => void,
-  isStarted: boolean,
+  proposedQuestionAnswerCallback: (e: Question[]) => void
+  isStarted: boolean
   startedHandler: () => void
 }
 
@@ -430,7 +430,7 @@ export const ChapterView = ({
   )
 
   return (
-    <div className='chapter-info-wrapper'>
+    <div className="chapter-info-wrapper">
       {nextChapter === '/chainlinkIntroduction/chapter-2' && !user && isSaveConfirmPopup ? PopupPortal : null}
       {isPopup ? (
         <Popup
@@ -446,21 +446,26 @@ export const ChapterView = ({
       ) : null}
       <div className={`chapter-info-container ${!isStarted ? '' : 'isStarted'}`}>
         <div>
-            <div className='chapter-block'>
-                <div className='step'>
-                    <p className='step-text'>Step 1</p>
-                </div>
-                <Content course={testMd || ''} />
+          <div className="chapter-block">
+            <div className="step">
+              <p className="step-text">Step 1</p>
             </div>
-            <div className='mission-container'>
-                <h1 className='title'>Your mission</h1>
-                <ul className='mission-goals'>
-                  <li>There is an online editor in the top right corner of this page.
-                      In the editor, define <span className='major-info'>ship_code</span> as a string type.</li>
-                  <li>Then define the constant <span className='major-info'>my_ship</span> as a <span className='major-info'>ship_code</span> of value <span className='major-info'>"020433"</span>.</li>
-                  <li>Then go ahead and validate your mission for a comparative view with the solution.</li>
-                </ul>
-            </div>
+            <Content course={testMd || ''} />
+          </div>
+          <div className="mission-container">
+            <h1 className="title">Your mission</h1>
+            <ul className="mission-goals">
+              <li>
+                There is an online editor in the top right corner of this page. In the editor, define{' '}
+                <span className="major-info">ship_code</span> as a string type.
+              </li>
+              <li>
+                Then define the constant <span className="major-info">my_ship</span> as a{' '}
+                <span className="major-info">ship_code</span> of value <span className="major-info">"020433"</span>.
+              </li>
+              <li>Then go ahead and validate your mission for a comparative view with the solution.</li>
+            </ul>
+          </div>
         </div>
         <ChapterGrid hasTabs={Object.keys(supports).length > 0}>
           {Object.keys(supports).length > 0 && (
@@ -475,62 +480,70 @@ export const ChapterView = ({
               ))}
             </div>
           )}
-          {!isStarted ? <LetsStart>
-              <div className='step'>
-                  <p className='step-text'>Step 2</p>
+          {isStarted ? (
+            <LetsStart>
+              <div className="step">
+                <p className="step-text">Step 2</p>
               </div>
               <ChapterValidatorContentWrapper>
-                  <ChapterValidatorTitle>Lorem Ipsum</ChapterValidatorTitle>
-                  <ChapterValidatorContent>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries</ChapterValidatorContent>
-                  <ButtonStyle>
-                      <img src={ArrowRight} />
-                      <ButtonText onClick={() => startedHandler()}>Let’s start!</ButtonText>
-                  </ButtonStyle>
+                <ChapterValidatorTitle>Lorem Ipsum</ChapterValidatorTitle>
+                <ChapterValidatorContent>
+                  Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries
+                </ChapterValidatorContent>
+                <ButtonStyle>
+                  <img src={ArrowRight} />
+                  <ButtonText onClick={() => startedHandler()}>Let’s start!</ButtonText>
+                </ButtonStyle>
               </ChapterValidatorContentWrapper>
-          </LetsStart> : <>{questions.length > 0 && nextChapter !== '/chainlinkIntroduction/chapter-8' ? (
-              <ChapterQuestions>
-                  {questions.map((question, i) => (
-                      <div key={question.question}>
-                          <h2>{question.question}</h2>
-                          <Checkboxes
-                              items={question.answers}
-                              onUpdate={(selected) => {
-                                  const proposedQuestions = questions
-                                  proposedQuestions[i].proposedResponses = selected
-                                  proposedQuestionAnswerCallback(proposedQuestions)
-                              }}
-                          />
-                      </div>
-                  ))}
-              </ChapterQuestions>
+            </LetsStart>
           ) : (
-              <div className='editor-container' ref={wrapperRef}>
+            <>
+              {questions.length > 0 && nextChapter !== '/chainlinkIntroduction/chapter-8' ? (
+                <ChapterQuestions>
+                  {questions.map((question, i) => (
+                    <div key={question.question}>
+                      <h2>{question.question}</h2>
+                      <Checkboxes
+                        items={question.answers}
+                        onUpdate={(selected) => {
+                          const proposedQuestions = questions
+                          proposedQuestions[i].proposedResponses = selected
+                          proposedQuestionAnswerCallback(proposedQuestions)
+                        }}
+                      />
+                    </div>
+                  ))}
+                </ChapterQuestions>
+              ) : (
+                <div className="editor-container" ref={wrapperRef}>
                   {display === 'solution' ? (
-                      <div>
-                          {showDiff ? (
-                              <MonacoDiff
-                                  height={350}
-                                  width={editorWidth}
-                                  solution={solution}
-                                  proposedSolution={proposedSolution}
-                              />
-                          ) : (
-                              <MonacoEditor
-                                  width={editorWidth}
-                                  height={350}
-                                  proposedSolution={proposedSolution}
-                                  proposedSolutionCallback={proposedSolutionCallback}
-                              />
-                          )}
-                      </div>
+                    <div>
+                      {showDiff ? (
+                        <MonacoDiff
+                          height={350}
+                          width={editorWidth}
+                          solution={solution}
+                          proposedSolution={proposedSolution}
+                        />
+                      ) : (
+                        <MonacoEditor
+                          width={editorWidth}
+                          height={350}
+                          proposedSolution={proposedSolution}
+                          proposedSolutionCallback={proposedSolutionCallback}
+                        />
+                      )}
+                    </div>
                   ) : (
-                      <div>
-                          <MonacoEditorSupport height={editorHeight} support={supports[display]} />
-                      </div>
+                    <div>
+                      <MonacoEditorSupport height={editorHeight} support={supports[display]} />
+                    </div>
                   )}
-              </div>
+                </div>
+              )}
+              <Validator validatorState={validatorState} validateCallback={validateCallback} />
+            </>
           )}
-              <Validator validatorState={validatorState} validateCallback={validateCallback} /></> }
         </ChapterGrid>
       </div>
     </div>
