@@ -152,7 +152,7 @@ export const Chapter = () => {
   }
 
   const startTaskHandler = () => {
-    setIsStarted(true);
+    setIsStarted(true)
   }
 
   const proposedSolutionCallback = (e: string) => {
@@ -162,33 +162,32 @@ export const Chapter = () => {
 
   const proposedQuestionAnswerCallback = (e: Question[]) => {
     // @ts-ignore
+
     setData({ ...data, questions: e })
   }
 
   return (
     <>
-      {
-        data.course && (
-          <ChapterView
-              validatorState={validatorState}
-              validateCallback={validateCallback}
-              solution={data.solution}
-              proposedSolution={data.exercise}
-              proposedSolutionCallback={proposedSolutionCallback}
-              showDiff={showDiff}
-              isPopup={isPopup}
-              course={data.course}
-              closeIsPopup={() => setIsPopup(false)}
-              user={user}
-              supports={data.supports}
-              questions={data.questions}
-              nextChapter={nextChapter}
-              isStarted={isStarted}
-              startedHandler={startTaskHandler}
-              proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
-          />
-        )
-      }
+      {data.course && (
+        <ChapterView
+          validatorState={validatorState}
+          validateCallback={validateCallback}
+          solution={data.solution}
+          proposedSolution={data.exercise}
+          proposedSolutionCallback={proposedSolutionCallback}
+          showDiff={showDiff}
+          isPopup={isPopup}
+          course={data.course}
+          closeIsPopup={() => setIsPopup(false)}
+          user={user}
+          supports={data.supports}
+          questions={data.questions}
+          nextChapter={nextChapter}
+          isStarted={isStarted}
+          startedHandler={startTaskHandler}
+          proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
+        />
+      )}
       <Footer percent={percent} nextChapter={nextChapter} previousChapter={previousChapter} />
     </>
   )
