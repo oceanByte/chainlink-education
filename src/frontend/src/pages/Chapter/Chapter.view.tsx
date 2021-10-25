@@ -143,14 +143,14 @@ const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, heigh
       <div className="step">
         <p className="step-text">Step 2</p>
       </div>
-      <Editor
+      <ControlledEditor
         height={height ? height : '600px'}
         width={width}
         value={proposedSolution}
         language="rust"
         theme="vs-dark"
         // @ts-ignos
-        // onChange={(_, val) => proposedSolutionCallback(val)}
+        onChange={(_, val) => proposedSolutionCallback(val)}
         options={{
           lineNumbers: true,
           scrollBeyondLastLine: false,
