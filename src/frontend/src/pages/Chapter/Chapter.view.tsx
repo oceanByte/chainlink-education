@@ -415,6 +415,7 @@ export const ChapterView = ({
 
   const rootElement = document.getElementById('root') as HTMLElement
 
+  console.log('closeIsPopup', closeIsPopup)
   const PopupPortal = ReactDOM.createPortal(
     <Popup
       closePopup={closePopupSaveProcess}

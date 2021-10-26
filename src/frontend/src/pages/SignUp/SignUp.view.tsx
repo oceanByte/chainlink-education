@@ -51,7 +51,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
   const regUppercase = /^(?=.*[A-ZÄÖÜА-ЯІЄЇГҐ]).+$/gm
   const regLowercase = /^(?=.*[a-zäöüßа-яієїґ]).+$/gm
   const regNumbers = /^(?=.*\d).+$/gm
-  const regSpecial = /^(?=.*[@&%*!?]).+$/gm
+  const regSpecial = /^(?=.*[!]).+$/gm
   const regMinLength = /^.{8,}$/gm
 
   const uppercaseImage = uppercase ? Confirm : UnConfirm
@@ -176,7 +176,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
             </div>
           </div>
           <div className="sign-up__validation-right">
-            <div className="sign-up__validation-right-special-characters" title="@, &, %, *, !, ?">
+            <div className="sign-up__validation-right-special-characters" title='Only "!"'>
               <img src={specialImage} alt="confirm" />
               Min 1 special characters
             </div>

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FormInputs, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from '../../helpers/form'
 
 import { ContactUsInputs } from '../../shared/user/ContactUs'
@@ -52,10 +53,12 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
               Chainlink's decentralized oracle network provides reliable, tamper&#8209;proof inputs and outputs for
               complex smart contracts on any blockchain
             </div>
-            <button className="home-intro-content__button btn btn-green mt-40 h-font">
-              <span className="home-intro-content__button__text"> Get started for FREE </span>
-              <span className="arrow-upright" />
-            </button>
+            <Link to="/chainlinkIntroduction/chapter-1">
+              <button className="home-intro-content__button btn btn-green mt-40 h-font">
+                <span className="home-intro-content__button__text"> Get started for FREE </span>
+                <span className="arrow-upright" />
+              </button>
+            </Link>
           </div>
           <div className="home-intro__image" />
         </div>
@@ -71,8 +74,10 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
             <div className="home-num-item-content__header__line" />
           </div>
           <div className="home-num-item-content__text">
-            <div className="home-num-item-content__text__header h-font">NFT Certificate</div>
-            <div className="home-num-item-content__text__paragraph p-font">
+            <div className="home-num-item-content__text__header h-font" data-aos="fade-up" data-aos-delay="150">
+              NFT Certificate
+            </div>
+            <div className="home-num-item-content__text__paragraph p-font" data-aos="fade-up" data-aos-delay="200">
               Complete the course and receive your certificate as a Non-Fungible Token
             </div>
           </div>
@@ -88,8 +93,10 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
             <div className="home-num-item-content__header__line" />
           </div>
           <div className="home-num-item-content__text">
-            <div className="home-num-item-content__text__header h-font">Earn To Learn</div>
-            <div className="home-num-item-content__text__paragraph p-font">
+            <div className="home-num-item-content__text__header h-font" data-aos="fade-up" data-aos-delay="150">
+              Earn To Learn
+            </div>
+            <div className="home-num-item-content__text__paragraph p-font" data-aos="fade-up" data-aos-delay="200">
               Get your Chainlink Academy mainnet account created for free on course completion
             </div>
           </div>
@@ -105,8 +112,10 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
             <div className="home-num-item-content__header__line" />
           </div>
           <div className="home-num-item-content__text">
-            <div className="home-num-item-content__text__header h-font">Contribute to Chainlink Academy</div>
-            <div className="home-num-item-content__text__paragraph p-font">
+            <div className="home-num-item-content__text__header h-font" data-aos="fade-up" data-aos-delay="150">
+              Contribute to Chainlink Academy
+            </div>
+            <div className="home-num-item-content__text__paragraph p-font" data-aos="fade-up" data-aos-delay="200">
               Join the builders of Chainlink Academy on Github. Earn Chainlink Academy if your PR is accepted
             </div>
           </div>
@@ -129,10 +138,12 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
               development for years to come. Importantly, the infrastructure has matured and makes it easy to create
               dApps, the decentralized equivalent to Apps.
             </div>
-            <button className="home-join-content-column__button btn btn-green mt-40 h-font">
-              <span className="home-join-content-column__button__text">Join now</span>
-              <span className="arrow-upright" />
-            </button>
+            <Link to="/chainlinkIntroduction/chapter-1">
+              <button className="home-join-content-column__button btn btn-green mt-40 h-font">
+                <span className="home-join-content-column__button__text">Join now</span>
+                <span className="arrow-upright" />
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -149,10 +160,12 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
               80% digital now. Innovations that seemed like breakthroughs in the early 2020s are now widely adopted.
               Chainlink Protocol is the leading blockchain platform.
             </div>
-            <button className="home-get-started-content__button btn btn-green mt-40 h-font">
-              <span className="home-get-started-content__button__text">Get started for FREE</span>
-              <span className="arrow-upright" />
-            </button>
+            <Link to="/chainlinkIntroduction/chapter-1">
+              <button className="home-get-started-content__button btn btn-green mt-40 h-font">
+                <span className="home-get-started-content__button__text">Get started for FREE</span>
+                <span className="arrow-upright" />
+              </button>
+            </Link>
           </div>
           <div className="home-get-started-drawings">
             <div className="home-get-started-drawings-boxes">

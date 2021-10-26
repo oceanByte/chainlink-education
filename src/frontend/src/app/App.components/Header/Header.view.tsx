@@ -21,6 +21,10 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
     console.log(window)
   }, [])
 
+  const deleteAnchorLink = () => {
+    document.querySelector(window.location.hash)
+  }
+
   return (
     <>
       <div className="header">
@@ -133,9 +137,9 @@ function loggedInHeader() {
   return (
     <>
       <div className="header-menu-user">
-        <div className="header-menu-user__circle">JD</div>
+        <div className="header-menu-user__circle">JS</div>
         <div className="header-menu-user__name">
-          John Doe <span>&#9660;</span>
+          John Smith <span>&#9660;</span>
         </div>
       </div>
       <div className="header-menu-user-menu">
