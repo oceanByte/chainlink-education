@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FormInputs, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from '../../helpers/form'
@@ -181,7 +181,7 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
           </div>
         </div>
       </div>
-      <div className="home-content home-contact-us" id="contactus">
+      <div className="home-content home-contact-us scrollTo">
         <form
           className="home-contact-us-form"
           onSubmit={(e) => {
