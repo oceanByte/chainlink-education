@@ -16,7 +16,7 @@
     }
 
     .step {
-      background: #05C46B;
+      background: #05c46b;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       height: 25px;
@@ -41,7 +41,7 @@
         font-weight: 450;
         font-size: 15px;
         line-height: 19px;
-        color: #FFFFFF;
+        color: #ffffff;
         text-transform: uppercase;
         margin: 0 auto;
         padding: 3px 10px;
@@ -69,7 +69,7 @@
 }
 
 .mission-container {
-  background: #1A2B6B;
+  background: #1a2b6b;
   box-shadow: 0 4px 15px rgba(12, 22, 44, 0.1);
   border-radius: 20px;
   padding: 40px;
@@ -79,7 +79,7 @@
     font-weight: 900;
     font-size: 32px;
     line-height: 120%;
-    color: #FFFFFF;
+    color: #ffffff;
     margin: 0 0 20px 0;
   }
 
@@ -92,7 +92,7 @@
       font-weight: 450;
       font-size: 18px;
       line-height: 150%;
-      color: #FFFFFF;
+      color: #ffffff;
 
       &:not(:last-child) {
         margin-bottom: 15px;
@@ -104,7 +104,6 @@
     }
   }
 }
-
 
 @media screen and (max-width: 1024px) {
   .chapter-info {

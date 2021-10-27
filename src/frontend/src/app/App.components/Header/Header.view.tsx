@@ -62,50 +62,64 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
             </span>
             <div className="header-chapters__item__completion completed">COMPLETED</div>
           </Link>
-          <div className="header-chapters__item">
-            <span className="header-chapters__item__name">
-              Chapter 2: <span className="h-font">What are Contracts?</span>
-            </span>
-            <div className="header-chapters__item__completion completed">COMPLETED</div>
-          </div>
-          <div className="header-chapters__item">
-            <span className="header-chapters__item__name">
-              Chapter 3:
-              <span className="h-font">Digital Agreements - What we have today</span>
-            </span>
-            <div className="header-chapters__item__completion continue">CONTINUE</div>
-          </div>
-          <div className="header-chapters__item">
-            <span className="header-chapters__item__name">
-              Chapter 4: <span className="h-font">Blockchain Introduction</span>
-            </span>
-            <div className="header-chapters__item__completion"></div>
-          </div>
-          <div className="header-chapters__item">
-            <span className="header-chapters__item__name">
-              Chapter 5: <span className="h-font">How Blockchains Work Intro</span>
-            </span>
-            <div className="header-chapters__item__completion"></div>
-          </div>
-          <div className="header-chapters__item">
-            <span className="header-chapters__item__name">
-              Chapter 6: <span className="h-font">Smart Contracts - The Future</span>
-            </span>
-            <div className="header-chapters__item__completion "></div>
-          </div>
-          <div className="header-chapters__item">
-            <span className="header-chapters__item__name">
-              Chapter 7:
-              <span className="h-font">The Smart Contract Connectivity Problem</span>
-            </span>
-            <div className="header-chapters__item__completion"></div>
-          </div>
-          <div className="header-chapters__item no-bb">
-            <span className="header-chapters__item__name">
-              Chapter 8: <span className="h-font">Centralized Oracles</span>
-            </span>
-            <div className="header-chapters__item__completion"></div>
-          </div>
+          <Link to="/chainlinkIntroduction/chapter-2" className="header-chapters__item">
+            <div className="header-chapters__item">
+              <span className="header-chapters__item__name">
+                Chapter 2: <span className="h-font">What are Contracts?</span>
+              </span>
+              <div className="header-chapters__item__completion completed">COMPLETED</div>
+            </div>
+          </Link>
+          <Link to="/chainlinkIntroduction/chapter-3" className="header-chapters__item">
+            <div className="header-chapters__item">
+              <span className="header-chapters__item__name">
+                Chapter 3:
+                <span className="h-font">Digital Agreements - What we have today</span>
+              </span>
+              <div className="header-chapters__item__completion continue">CONTINUE</div>
+            </div>
+          </Link>
+          <Link to="/chainlinkIntroduction/chapter-4" className="header-chapters__item">
+            <div className="header-chapters__item">
+              <span className="header-chapters__item__name">
+                Chapter 4: <span className="h-font">Blockchain Introduction</span>
+              </span>
+              <div className="header-chapters__item__completion"></div>
+            </div>
+          </Link>
+          <Link to="/chainlinkIntroduction/chapter-5" className="header-chapters__item">
+            <div className="header-chapters__item">
+              <span className="header-chapters__item__name">
+                Chapter 5: <span className="h-font">How Blockchains Work Intro</span>
+              </span>
+              <div className="header-chapters__item__completion"></div>
+            </div>
+          </Link>
+          <Link to="/chainlinkIntroduction/chapter-6" className="header-chapters__item">
+            <div className="header-chapters__item">
+              <span className="header-chapters__item__name">
+                Chapter 6: <span className="h-font">Smart Contracts - The Future</span>
+              </span>
+              <div className="header-chapters__item__completion "></div>
+            </div>
+          </Link>
+          <Link to="/chainlinkIntroduction/chapter-7" className="header-chapters__item">
+            <div className="header-chapters__item">
+              <span className="header-chapters__item__name">
+                Chapter 7:
+                <span className="h-font">The Smart Contract Connectivity Problem</span>
+              </span>
+              <div className="header-chapters__item__completion"></div>
+            </div>
+          </Link>
+          <Link to="/chainlinkIntroduction/chapter-8" className="header-chapters__item">
+            <div className="header-chapters__item no-bb">
+              <span className="header-chapters__item__name">
+                Chapter 8: <span className="h-font">Centralized Oracles</span>
+              </span>
+              <div className="header-chapters__item__completion"></div>
+            </div>
+          </Link>
         </div>
         <div className={`header-list ${isBurgerMenuOpen ? '' : 'hidden'}`}>
           <div className="header__item-border" />

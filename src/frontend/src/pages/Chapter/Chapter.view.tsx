@@ -158,7 +158,7 @@ const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, heigh
           scrollbar: { vertical: 'hidden', verticalScrollbarSize: 0 },
           folding: true,
           readOnly: false,
-          fontSize: 14,
+          fontSize: 18,
           fontFamily: 'Proxima Nova',
           wordWrap: true,
           padding: {
@@ -190,7 +190,7 @@ const MonacoDiff = ({ solution, proposedSolution, height }: any) => {
           scrollbar: { vertical: 'hidden', verticalScrollbarSize: 0 },
           folding: true,
           readOnly: false,
-          fontSize: 14,
+          fontSize: 18,
           fontFamily: 'Proxima Nova',
           renderSideBySide: false,
           wordWrap: true,
@@ -433,7 +433,7 @@ export const ChapterView = ({
   return (
     <div className="chapter-info-wrapper">
       {nextChapter === '/chainlinkIntroduction/chapter-2' && !user && isSaveConfirmPopup ? PopupPortal : null}
-      {isPopup ? (
+      {/* {isPopup ? (
         <Popup
           closePopup={closeIsPopup}
           buttonText={nextChapter !== '/sign-up' ? 'Next Chapter' : 'Get certificate'}
@@ -444,7 +444,7 @@ export const ChapterView = ({
           title={'Success'}
           text={'Congratulations'}
         />
-      ) : null}
+      ) : null} */}
       <div className={`chapter-info-container ${!isStarted ? '' : 'isStarted'}`}>
         <div>
           <div className="chapter-block">
