@@ -21,6 +21,7 @@ import { FormSevenChapter } from '../../app/App.components/FormSevenChapter/Form
 import { Input } from '../../app/App.components/Input/Input.controller'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
 import { Question } from './Chapter.controller'
+import { Footer } from './Footer/Footer.controller'
 //prettier-ignore
 import {
     ButtonBorder,
@@ -340,6 +341,8 @@ type ChapterViewProps = {
   validateCallback: () => void
   solution: string
   nextChapter: string
+  previousChapter: string
+  percent: number
   proposedSolution: string
   proposedSolutionCallback: (e: string) => void
   showDiff: boolean
@@ -369,6 +372,8 @@ export const ChapterView = ({
   questions,
   isStarted,
   nextChapter,
+  previousChapter,
+  percent,
   startedHandler,
   proposedQuestionAnswerCallback,
 }: ChapterViewProps) => {
@@ -415,7 +420,6 @@ export const ChapterView = ({
 
   const rootElement = document.getElementById('root') as HTMLElement
 
-  console.log('closeIsPopup', closeIsPopup)
   const PopupPortal = ReactDOM.createPortal(
     <Popup
       closePopup={closePopupSaveProcess}
@@ -545,6 +549,7 @@ export const ChapterView = ({
               <Validator validatorState={validatorState} validateCallback={validateCallback} />
             </>
           )}
+          <Footer percent={percent} nextChapter={nextChapter} previousChapter={previousChapter} />
         </ChapterGrid>
       </div>
     </div>
@@ -555,6 +560,7 @@ ChapterView.propTypes = {
   validatorState: PropTypes.string,
   validateCallback: PropTypes.func.isRequired,
   solution: PropTypes.string,
+  percent: PropTypes.number,
   nextChapter: PropTypes.string,
   proposedSolution: PropTypes.string,
   showDiff: PropTypes.bool.isRequired,

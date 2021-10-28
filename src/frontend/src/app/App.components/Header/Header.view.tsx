@@ -20,9 +20,6 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
     'header-menu-user-menu-show': showUserMenu,
   })
 
-  console.log('isDropdownOpen', isDropdownOpen)
-  console.log('isBurgerMenuOpen', isBurgerMenuOpen)
-
   useEffect(() => {
     window.addEventListener('resize', (e) => {
       if (window.innerWidth > 1024) {

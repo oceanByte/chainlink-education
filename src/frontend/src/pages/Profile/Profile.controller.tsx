@@ -5,9 +5,11 @@ import { MainFooter } from '../../app/App.components/MainFooter/MainFooter.contr
 import { FooterView } from '../../app/App.components/Footer/Footer.view'
 
 export const Profile = () => {
-  return <>
-    <Header />
-    <ProfileView />
-    <FooterView />
-  </>
+  return (
+    <>
+      <Header />
+      <ProfileView />
+      <FooterView />
+    </>
+  )
 }

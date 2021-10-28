@@ -166,6 +166,13 @@ export const Chapter = () => {
     setData({ ...data, questions: e })
   }
 
+  console.log(`%c percent ${percent}`, 'padding: 20px; color: orange; background: lightgreen; border-radius: 20px')
+  console.log(`%c nextChapter ${nextChapter}`, 'padding: 20px; color: red; background: coral; border-radius: 20px')
+  console.log(
+    `%c previousChapter ${previousChapter}`,
+    'padding: 20px; color: aqua; background: black; border-radius: 20px',
+  )
+
   return (
     <>
       {data.course && (
@@ -183,12 +190,14 @@ export const Chapter = () => {
           supports={data.supports}
           questions={data.questions}
           nextChapter={nextChapter}
+          previousChapter={previousChapter}
           isStarted={isStarted}
+          percent={percent}
           startedHandler={startTaskHandler}
           proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
         />
       )}
-      <Footer percent={percent} nextChapter={nextChapter} previousChapter={previousChapter} />
+      {/* <Footer percent={percent} nextChapter={nextChapter} previousChapter={previousChapter} /> */}
     </>
   )
 }
