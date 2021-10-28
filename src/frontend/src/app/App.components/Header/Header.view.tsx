@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 import { useState } from 'react'
 import { isConstructorDeclaration } from 'typescript'
+import classnames from 'classnames'
 
 type HeaderViewProps = {
   user?: PublicUser
@@ -13,24 +14,76 @@ type HeaderViewProps = {
 export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
+  const [showUserMenu, setShowUserMenu] = useState(true)
+
+  const additionalUserMenu = classnames('header-menu-user-menu', {
+    'header-menu-user-menu-show': showUserMenu,
+  })
 
   console.log('isDropdownOpen', isDropdownOpen)
   console.log('isBurgerMenuOpen', isBurgerMenuOpen)
 
   useEffect(() => {
-    console.log(window)
+    window.addEventListener('resize', (e) => {
+      if (window.innerWidth > 1024) {
+        setIsBurgerMenuOpen(false)
+      }
+    })
   }, [])
 
-  const deleteAnchorLink = () => {
-    document.querySelector(window.location.hash)
-  }
-
   const scrollTo = () => {
+    setIsBurgerMenuOpen(false)
     const element: any = document.querySelector('.scrollTo')
     if (element != null) {
       window.scrollTo({ top: element.offsetTop })
     }
   }
+
+  const loggedOutHeader = (
+    <div className="header-menu-log ml-50">
+      <Link to="/login" className="header-menu-log__link link__signin">
+        Sign in
+      </Link>
+      <Link to="/sign-up" className="header-menu-log__link link__signup ml-10">
+        Sign up
+      </Link>
+    </div>
+  )
+
+  const loggedInHeader = (
+    <>
+      <div className="header-menu-user" onClick={() => setShowUserMenu((st) => !st)}>
+        <div className="header-menu-user__circle">JS</div>
+        <div className="header-menu-user__name">
+          John Smith <span>&#9660;</span>
+        </div>
+        <div className={additionalUserMenu}>
+          <div className="header-menu-user-menu__item">
+            <Link to="/profile">Progress & Certificate</Link>
+          </div>
+          <div className="header-menu-user-menu__item">
+            <Link to="/profile">Account info</Link>
+          </div>
+          <div className="header-menu-user-menu__item">
+            <Link to="/reset-password">Reset password</Link>
+          </div>
+          <div className="header-menu-user-menu__item">
+            <Link to="/login">Log out</Link>
+          </div>
+        </div>
+      </div>
+      {/* <div className={additionalUserMenu}>
+        <div className="header__item-border" />
+        <div className="header-menu-user-menu__item">Progress & Certificate</div>
+        <div className="header__item-border" />
+        <div className="header-menu-user-menu__item">Account info</div>
+        <div className="header__item-border" />
+        <div className="header-menu-user-menu__item">Reset password</div>
+        <div className="header__item-border" />
+        <div className="header-menu-user-menu__item">Log out</div>
+      </div> */}
+    </>
+  )
 
   return (
     <>
@@ -46,7 +99,7 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
               Contact
             </button>
           </div>
-          <div className="header-menu-cred">{!user ? loggedInHeader() : loggedOutHeader()}</div>
+          <div className="header-menu-cred">{!user ? loggedInHeader : loggedOutHeader}</div>
           <div
             className={`header-menu__burger-icon ${isBurgerMenuOpen ? 'header-menu__exit-icon' : ''}`}
             onClick={() => {
@@ -129,11 +182,11 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
           <div className="header__item-border" />
           <button className="header-list__item btn">Ecosystem</button>
           <div className="header__item-border" />
-          <button className="header-list__item btn" onClick={() => setIsBurgerMenuOpen(false)}>
-            <a href="#contactus">Contact</a>
+          <button className="header-list__item btn" onClick={scrollTo}>
+            Contact
           </button>
           <div className="header__item-border" />
-          <div className="header-dropdown-user-menu">{!user ? loggedInHeader() : loggedOutHeader()}</div>
+          <div className="header-dropdown-user-menu">{!user ? loggedInHeader : loggedOutHeader}</div>
         </div>
       </div>
       <div className={`bright-background ${isBurgerMenuOpen ? '' : 'opacity-0'}`} />
@@ -141,41 +194,41 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
   )
 }
 
-function loggedOutHeader() {
-  return (
-    <div className="header-menu-log ml-50">
-      <Link to="/login" className="header-menu-log__link link__signin">
-        Sign in
-      </Link>
-      <Link to="/sign-up" className="header-menu-log__link link__signup ml-10">
-        Sign up
-      </Link>
-    </div>
-  )
-}
+// function loggedOutHeader() {
+//   return (
+//     <div className="header-menu-log ml-50">
+//       <Link to="/login" className="header-menu-log__link link__signin">
+//         Sign in
+//       </Link>
+//       <Link to="/sign-up" className="header-menu-log__link link__signup ml-10">
+//         Sign up
+//       </Link>
+//     </div>
+//   )
+// }
 
-function loggedInHeader() {
-  return (
-    <>
-      <div className="header-menu-user">
-        <div className="header-menu-user__circle">JS</div>
-        <div className="header-menu-user__name">
-          John Smith <span>&#9660;</span>
-        </div>
-      </div>
-      <div className="header-menu-user-menu">
-        <div className="header__item-border" />
-        <div className="header-menu-user-menu__item">Progress & Certificate</div>
-        <div className="header__item-border" />
-        <div className="header-menu-user-menu__item">Account info</div>
-        <div className="header__item-border" />
-        <div className="header-menu-user-menu__item">Reset password</div>
-        <div className="header__item-border" />
-        <div className="header-menu-user-menu__item">Log out</div>
-      </div>
-    </>
-  )
-}
+// function loggedInHeader() {
+//   return (
+//     <>
+//       <div className="header-menu-user">
+//         <div className="header-menu-user__circle">JS</div>
+//         <div className="header-menu-user__name">
+//           John Smith <span>&#9660;</span>
+//         </div>
+//       </div>
+//       <div className="header-menu-user-menu">
+//         <div className="header__item-border" />
+//         <div className="header-menu-user-menu__item">Progress & Certificate</div>
+//         <div className="header__item-border" />
+//         <div className="header-menu-user-menu__item">Account info</div>
+//         <div className="header__item-border" />
+//         <div className="header-menu-user-menu__item">Reset password</div>
+//         <div className="header__item-border" />
+//         <div className="header-menu-user-menu__item">Log out</div>
+//       </div>
+//     </>
+//   )
+// }
 
 HeaderView.propTypes = {
   user: PropTypes.object,
