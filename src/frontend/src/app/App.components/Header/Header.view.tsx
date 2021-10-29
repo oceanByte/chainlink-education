@@ -94,7 +94,7 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
             </button>
             <button className="header-menu-list__item ml-30 btn">Ecosystem</button>
           </div>
-          <div className="header-menu-cred lg">{!user ? loggedInHeader : loggedOutHeader}</div>
+          <div className="header-menu-cred lg">{user ? loggedInHeader : loggedOutHeader}</div>
           <div
             className={`header-menu__burger-icon ${isBurgerMenuOpen ? 'header-menu__exit-icon' : ''}`}
             onClick={() => {
