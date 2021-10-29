@@ -7,9 +7,9 @@
 
   &-container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 5fr 3fr;
     grid-gap: 40px;
-    margin: 80px 20px 0;
+    margin: 80px 20px;
 
     &.isStarted {
       grid-template-columns: 5fr 5fr;

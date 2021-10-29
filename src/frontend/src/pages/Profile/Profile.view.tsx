@@ -84,7 +84,7 @@ export const ProfileView = () => {
         </div>
         <div className='profile-page-progress-footer-box p-font'>
           <button className='profile-page-progress-footer-box__button btn btn-green btn-green-disabled'>
-            <span className='profile-page-progress-footer-box__button__text'> Get started for FREE </span>
+            <span className='profile-page-progress-footer-box__button__text'> Download certificate </span>
             <span className='arrow-upright' />
           </button>
           <div className='profile-page-progress-footer-box__copy-link'>

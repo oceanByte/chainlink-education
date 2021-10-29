@@ -92,9 +92,6 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
               Academy <span>&#9660;</span>
             </button>
             <button className="header-menu-list__item ml-30 btn">Ecosystem</button>
-            <button className="header-menu-list__item ml-30 btn" onClick={scrollTo}>
-              Contact
-            </button>
           </div>
           <div className="header-menu-cred">{!user ? loggedInHeader : loggedOutHeader}</div>
           <div

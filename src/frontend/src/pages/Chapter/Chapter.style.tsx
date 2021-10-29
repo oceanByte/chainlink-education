@@ -385,6 +385,7 @@ export const ChapterValidatorContentWrapper = styled.div`
     padding: 20px 30px;
     border-radius: 20px;
     width: 100%;
+    min-height: 210px;
 `
 
 export const ChapterValidatorContentSuccess = styled.div`
@@ -393,6 +394,7 @@ export const ChapterValidatorContentSuccess = styled.div`
     background: rgba(5, 196, 107, 0.2);
     border: 2px solid rgba(5, 196, 107, 0.2);
     width: 100%;
+    min-height: 210px;
 `
 
 export const ChapterValidatorContentFailed = styled.div`
@@ -401,6 +403,7 @@ export const ChapterValidatorContentFailed = styled.div`
     background: rgba(255, 94, 87, 0.2);
     border: 2px solid rgba(255, 94, 87, 0.2);
     width: 100%;
+    min-height: 210px;
 `
 
 export const ButtonStyle = styled.div`
