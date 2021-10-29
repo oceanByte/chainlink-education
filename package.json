@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "lerna exec -- yarn run --parallel start",
+    "start-windows": "lerna exec -- yarn run --parallel start-windows",
     "build": "lerna exec -- yarn run --parallel build",
     "lint": "eslint '**/*.{js,jsx}'",
     "lint:fix": "npm run lint -- --fix",
