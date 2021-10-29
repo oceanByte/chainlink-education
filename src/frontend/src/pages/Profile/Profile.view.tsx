@@ -1,16 +1,24 @@
 import * as React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePassword'
 import { ConfirmYouPassword } from '../../app/App.components/ConfirmYouPassword/ConfirmYouPassword'
 import { DeleteAccount } from '../../app/App.components/DeleteAccount/DeleteAccount'
 
+
 type ProfileViewProps = {}
 
 export const ProfileView = () => {
+  const { search } = useLocation()
   const [section, setSection] = useState(1)
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
   const [isDeleteAccVisible, setIsDeleteAccVisible] = useState(true)
 
+  useEffect(() => {
+    if (search) {
+      setSection(() => +search[search.length-1])
+    }
+  }, [search])
   return (
     <div className='profile-page'>
       <div className='profile-page-sections'>
