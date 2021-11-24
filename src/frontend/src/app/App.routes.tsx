@@ -29,6 +29,8 @@ import { Route, Switch } from 'react-router-dom'
 import { ThankYou } from '../pages/ThankYou/ThankYou.controller'
 import { Footer } from './App.components/Footer/Footer.controller'
 import { Profile } from '../pages/Profile/Profile.controller'
+import { SiteMapView } from 'pages/SiteMap/SiteMap.view'
+import { SiteMapContainer } from 'pages/SiteMap/SiteMap.style'
 
 // import { About } from 'pages/About/About.controller'
 
@@ -83,6 +85,12 @@ export const AppRoutes = ({ location }: any) => (
     </Route> */}
     <Route exact path="/terms">
       <Terms />
+    </Route>
+    <Route exact path="/site-map">
+      <SiteMapContainer>
+        <Header />
+        <SiteMapView />
+      </SiteMapContainer>
     </Route>
     <Route exact path="/thank-you">
       <ThankYou />

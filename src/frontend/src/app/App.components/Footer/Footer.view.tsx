@@ -5,29 +5,29 @@ export const FooterView: any = () => (
   <div className="footer">
     <div className="footer-menu footer-content">
       <div className="footer-menu-list p-font">
-        <Link to="/" className="footer-menu-list__item">
+        <a href="https://elastic-johnson-1b0374.netlify.app/" className="footer-menu-list__item">
           Academy
-        </Link>
-        <Link to="/" className="footer-menu-list__item">
+        </a>
+        <a href="https://chain.link/" className="footer-menu-list__item">
           Ecosystem
-        </Link>
-        <Link to="/" className="footer-menu-list__item">
+        </a>
+        <a href="mailto:chainlink@academy.io" className="footer-menu-list__item">
           Contact
-        </Link>
-        <Link to="/" className="footer-menu-list__item">
+        </a>
+        <a href="https://github.com/oceanByte/chainlink-eduction/tree/dev" className="footer-menu-list__item">
           GitHub
-        </Link>
-        <Link to="/" className="footer-menu-list__item">
+        </a>
+        <a href="https://docs.chain.link/" className="footer-menu-list__item">
           Documentation
-        </Link>
-        <Link to="/" className="footer-menu-list__item mr-0">
+        </a>
+        <a href="https://chain.link/community/events" className="footer-menu-list__item mr-0">
           Upcoming events
-        </Link>
+        </a>
       </div>
       <div className="footer-menu-social-media">
-        <a href="#" className="footer-menu-social-media__item item-discord" />
-        <a href="#" className="footer-menu-social-media__item item-telegram" />
-        <a href="#" className="footer-menu-social-media__item item-twitter mr-0" />
+        <a href="https://discord.com/invite/aSK4zew" className="footer-menu-social-media__item item-discord" />
+        <a href="https://t.me/chainlinkofficial" className="footer-menu-social-media__item item-telegram" />
+        <a href="https://twitter.com/chainlink" className="footer-menu-social-media__item item-twitter mr-0" />
       </div>
     </div>
     <div className="footer-separator">
@@ -46,17 +46,17 @@ export const FooterView: any = () => (
         <Link to="/" className="footer-credentials-menu__item">
           Privacy Policy
         </Link>
-        <Link to="/" className="footer-credentials-menu__item">
+        <Link to="/terms" className="footer-credentials-menu__item">
           Terms of Use
         </Link>
-        <Link to="/" className="footer-credentials-menu__item mr-0">
+        <Link to="/site-map" className="footer-credentials-menu__item mr-0">
           Site Map
         </Link>
       </div>
       <div className="footer-credentials-social-media">
-        <a href="#" className="footer-credentials-social-media__item item-discord" />
-        <a href="#" className="footer-credentials-social-media__item item-telegram" />
-        <a href="#" className="footer-credentials-social-media__item item-twitter mr-0" />
+        <a href="https://discord.com/invite/aSK4zew" className="footer-credentials-social-media__item item-discord" />
+        <a href="https://t.me/chainlinkofficial" className="footer-credentials-social-media__item item-telegram" />
+        <a href="https://twitter.com/chainlink" className="footer-credentials-social-media__item item-twitter mr-0" />
       </div>
     </div>
   </div>

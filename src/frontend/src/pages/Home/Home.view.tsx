@@ -181,7 +181,7 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
           </div>
         </div>
       </div>
-      <div className="home-content home-contact-us scrollTo">
+      {/* <div className="home-content home-contact-us scrollTo">
         <form
           className="home-contact-us-form"
           onSubmit={(e) => {
@@ -271,7 +271,7 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
         <div className="home-contact-us__mail" />
         <div className="home-contact-us__square square-1" />
         <div className="home-contact-us__square square-2" />
-      </div>
+      </div> */}
     </div>
   )
 }

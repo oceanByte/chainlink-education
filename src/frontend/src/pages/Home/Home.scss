@@ -20,10 +20,11 @@
 
   &.get-started {
     background: $secondary1;
-    margin-bottom: 740px;
-    @include sm {
+    /* margin-bottom: 740px; */
+    margin-bottom: 60px;
+    /* @include sm {
       margin-bottom: 1032px;
-    }
+    } */
   }
 }
 
@@ -670,10 +671,10 @@
 
         &.item-discord-2 {
           & > span {
-            background: url('../../assets/discord.svg') no-repeat;
+            background: url('../../assets/discord-brands.svg') no-repeat;
             background-size: contain;
             width: 18px;
-            height: 20px;
+            height: 14px;
           }
         }
 

@@ -51,7 +51,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
   const regUppercase = /^(?=.*[A-ZÄÖÜА-ЯІЄЇГҐ]).+$/gm
   const regLowercase = /^(?=.*[a-zäöüßа-яієїґ]).+$/gm
   const regNumbers = /^(?=.*\d).+$/gm
-  const regSpecial = /^(?=.*[!]).+$/gm
+  const regSpecial = /[!@#$%^&*(),.?":{}|<>]/gm
   const regMinLength = /^.{8,}$/gm
 
   const uppercaseImage = uppercase ? Confirm : UnConfirm
@@ -69,7 +69,6 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
   const [checkedInput, setCheckedInput] = useState(false)
   const classNameInputChecked = classnames('sign-up__checkbox-label', { 'sign-up__checkbox-checked': checkedInput })
 
-  console.log('CHECKED', checkedInput)
   const setReferalLink = (url: string) => {
     setForm((prev) => ({ ...prev, referral: { value: url } }))
   }
@@ -130,16 +129,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
       <HeaderAuth />
       <form className="sign-up">
         <p className="sign-up-title">Sign up</p>
-        <button className="sign-up-google">
-          Continue with <span>Google</span>
-        </button>
-        <button className="sign-up-facebook">
-          Continue with <span>Facebook</span>
-        </button>
-        <div className="sign-up-wave">
-          <div className="sign-up-wave-or">or</div>
-          <img src={Wave} alt="wave" />
-        </div>
+
         <div className="sign-up-name">
           <label htmlFor="sign-up-user">USERNAME</label>
           <input type="text" id="sign-up-user" name="usernameOrEmail" />

@@ -82,7 +82,7 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
       </div> */}
     </>
   )
-  console.log(pathname)
+
   return (
     <>
       <div className="header">
@@ -92,7 +92,11 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
             <button className="header-menu-list__item btn" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
               Academy <span>&#9660;</span>
             </button>
-            <button className="header-menu-list__item ml-30 btn">Ecosystem</button>
+            <button
+              className="header-menu-list__item ml-30 btn"
+              onClick={() => window.open('https://chain.link/','_blank')}>
+                Ecosystem
+              </button>
           </div>
           <div className="header-menu-cred lg">{user ? loggedInHeader : loggedOutHeader}</div>
           <div
