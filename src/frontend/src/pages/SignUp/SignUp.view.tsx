@@ -187,6 +187,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
             // onBlur={passwordMatching}
             onChange={(e) => setConfirmPass(e.target.value)}
             value={confirmPass}
+            autoComplete="new-password"
           />
         </div>
         <div className="sign-up__checkbox" onClick={() => setCheckedInput((prev) => !prev)}>

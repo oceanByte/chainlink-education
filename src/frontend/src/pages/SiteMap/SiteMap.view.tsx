@@ -10,7 +10,6 @@ export const arrayFromLength = (c: number) => {
 }
 
 export const SiteMapView = () => {
-  console.log(arrayFromLength(CHAPTERS));
   return (
     <SiteMapWrapp>
       <Title>
@@ -37,7 +36,7 @@ export const SiteMapView = () => {
 
             <ul>
               {arrayFromLength(CHAPTERS).map((item) => (
-                <li><Link to={`/chainlinkIntroduction/chapter-${item}`}>chapter-{item}</Link></li>
+                <li key={item}><Link to={`/chainlinkIntroduction/chapter-${item}`}>chapter-{item}</Link></li>
               ))}
             </ul>
           </li>

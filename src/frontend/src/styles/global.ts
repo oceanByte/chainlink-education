@@ -63,7 +63,7 @@ input {
 }
 
 a {
-  color: #42edf8;
+  color: #3d4556;
   text-decoration: none !important;
   opacity: 1;
   transition: opacity 0.15s ease-in-out-out;
@@ -71,7 +71,7 @@ a {
 }
 
 a:visited {
-  color: inherit;
+  color: #1a2b6b;
 }
 
 a:hover {
