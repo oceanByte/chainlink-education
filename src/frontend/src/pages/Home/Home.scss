@@ -213,7 +213,7 @@
           }
 
           @include md {
-            @include fluid-size('top', 1024px, 1024px, 15px, 15px);
+            @include fluid-size('top', 0px, 1024px, 15px, 15px);
           }
         }
       }
@@ -229,7 +229,7 @@
           @include fluid-size('top', 1024px, 1600px, 34px, 14px);
         }
         @include md {
-          @include fluid-size('top', 1024px, 1024px, 12px, 26px);
+          @include fluid-size('top', 0px, 1024px, 12px, 26px);
         }
       }
 
