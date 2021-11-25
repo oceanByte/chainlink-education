@@ -134,8 +134,7 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
           >
             <div className={`header-chapters__item ${pathname === '/chainlinkIntroduction/chapter-3' ? 'current': 'other'}`}>
               <span className="header-chapters__item__name">
-                Chapter 3:
-                <span className="h-font">Digital Agreements - What we have today</span>
+                Chapter 3: <span className="h-font">Smart Contracts - The Future</span>
               </span>
               <div className="header-chapters__item__completion continue">CONTINUE</div>
             </div>
@@ -146,7 +145,7 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
           >
             <div className={`header-chapters__item ${pathname === '/chainlinkIntroduction/chapter-4' ? 'current': 'other'}`}>
               <span className="header-chapters__item__name">
-                Chapter 4: <span className="h-font">Blockchain Introduction</span>
+                Chapter 4: <span className="h-font">The Smart Contract Connectivity Problem</span>
               </span>
               <div className="header-chapters__item__completion"></div>
             </div>
@@ -157,7 +156,7 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
           >
             <div className={`header-chapters__item ${pathname === '/chainlinkIntroduction/chapter-5' ? 'current': 'other'}`}>
               <span className="header-chapters__item__name">
-                Chapter 5: <span className="h-font">How Blockchains Work Intro</span>
+                Chapter 5: <span className="h-font">Chainlink Data Feeds</span>
               </span>
               <div className="header-chapters__item__completion"></div>
             </div>
@@ -168,7 +167,7 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
           >
             <div className={`header-chapters__item ${pathname === '/chainlinkIntroduction/chapter-6' ? 'current': 'other'}`}>
               <span className="header-chapters__item__name">
-                Chapter 6: <span className="h-font">Smart Contracts - The Future</span>
+                Chapter 6: <span className="h-font">Conclusion</span>
               </span>
               <div className="header-chapters__item__completion "></div>
             </div>

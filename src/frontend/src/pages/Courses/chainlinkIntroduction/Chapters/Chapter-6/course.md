@@ -1,79 +1,39 @@
-The Meme and Museum Contracts
-Difficulty: 5/5 | Estimated reading time: 15 min
+#####Chapter 6:
 
-story_image_6_0
-Every day is different, so you’re already onto the next feature to be implemented for the museum with Ethan: an app for visitors to create their own memes and add to the museum. We’re all artists, after all! git clone https://github.com/oceanByte/near-academy-contracts
-Now that you are more familiar with NEAR infrastructure and contracts, you are ready to learn how contracts may be used to orchestrate a meme museum.
+Conclusion
+=============================
 
-Technically two contracts are used: the museum contract and the meme contract. The museum contract gives an overview of all available memes, and takes care of curation and governance.
+<ContentWrapp>
+  <div class="imgContainer">
+    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
+  </div>
 
-The Museum Contract
-Everyone can register to the museum as a contributor. Registration ensures that all the memes deployed have the same properties and behave the same because they use the same meme code from the museum contract. If everyone could register their own meme contract to the museum, it would be impossible to know if a given contract does what it is intended to do.
+  <div class="itemsContainer">
+    <div class="item-text">
+     Connect your artwork to the price of gold or ETH or overall Market Cap. Mention the concept of “Hybrid Smart Contracts”. 
+    </div>
+  </div>
+</ContentWrapp>
 
-The museum contract offers a function to deploy a new meme contract to those who have registered at the museum.
+As discussed in the previous lesson, Chainlink gives developers the ability to create extremely powerful DON’s that provide smart contracts with the highest quality data from outside the blockchain. As a smart contract developer, how can you take advantage of these DONs in your own smart contracts? Chainlink is open source so there’s always the option of making your own DON, but creating a DON is a complex and nuanced process. Instead, in the spirit of old developer adage “Never build something twice”, lets make use of existing DONs if possible.
 
-export function add_meme(meme: AccountId, title: string, data: string, category: Category): void
-The first argument, AccountId, is simply a string that is used to create a new address for the new meme. If you provide the string “alice” it will deploy the contract to alice.museum.testnet. This also means that whitespace and “.” are not allowed for a valid name.
+Luckily, many of the largest and highest quality node operators in the blockchain industry have already combined their knowledge and prowress to create DONs that serve the most in-demand data for smart contract developers to take advantage of. These data serving DONs are called <ColorWord>Chainlink Data Feeds</ColorWord>. Currently most of the data feeds provide data on various currency and cryptocurrency pairs, as that was initially what smart contract developers needed, but data feeds can be used to retrieve any type of data. 
 
-The second argument sets the title of the meme. It’s just an ordinary string.
+You can see these data feeds updating in real time at data.chain.link. There you can select different blockchains Chainlink DONs are posting data to, as well view the details of each DON that compose a particular data feed. For instance if you click on the ETH/USD data feed you will see all the nodes involved in the DON, what price each individual node posted, and the final aggregated price of the asset. Some important terms you may notice are:
 
-Since the meme museum is cooperating with 9gag the data field must be a URL pointing to 9gag. 9gag is a centralized service that was chosen as a partner for storage because it does not allow offensive and inappropriate content. The meme museum could quickly expand to other services and enable different URLs.
+<MissionContainer>
+  <div className="title">Quizzes:</div>
+  <ol className="mission-goals">
+    <li>
+      What is the heartbeat for the ETH/USD data feed on Ethereum mainnet?
+    </li>
+    <li>
+      What is the deviation threshold for the BTC/USD data feed on Binance Smart Chain mainnet?
+    </li>
+  </ol>
+</MissionContainer>
 
-The category parameter allows a value from 1 to 4 (inclusive). The meme museum uses these categories to rate the meme quality. 1 is very low quality while 4 might go viral.
+## Programming with Chainlink Data Feeds
 
-With that, you are ready to create your first meme. It is done in just three simple steps.
+Now that we  understand how Chainlink data feeds work, lets use them within a smart contract. To use a chainlink data feed within a smart contract you only have to complete three simple steps:
 
-1. Prepare your account. You need to make sure your NEAR CLI has access to the account supposed to interact with the contract. Simply use the NEAR CLI and type near login and follow the instructions.
-
-2. Register yourself as a contributor to the museum contract. Make sure to use the accountId that you used when you called near login:
-
-near call museum.testnet add_myself_as_contributor --accountId YOUR_ACCOUNT_NAME.testnet
-
-3. Register your meme. Make sure to use a custom name for the meme. Contracts that already exist cannot be overwritten. Deploying your meme will cost you at least 3 NEAR. You may send more NEAR as a signal of the quality of your meme, of course.
-
-near call museum.testnet add_meme \ '{"meme" : "bob", "title" : "god", "data" : "https://9gag.com/gag/ad8K0vj", "category" : 4}' \ --accountId YOUR_ACCOUNT_NAME.testnet --amount 3
-Once the meme contract is deployed, you can verify that it was created by returning the list of all available memes: near view museum.testnet get_meme_list. You may now also find it on the blockchain explorer, it is in the public domain now.
-
-The Meme Contract
-As we just learned each meme contract lives on a newly created account that was created through the museum.testnet account. In fact, the only way to get a museum.testnet id is through interacting with the museum contract.
-
-The meme contract contains 12 functions:
-
-export function init(title: string, data: string, category: Category): void
-export function get_meme(): Meme
-
-export function vote(value: i8): void
-
-export function batch_vote(value: i8, is_batch: bool = true): void
-
-export function get_recent_votes(): Array
-
-export function get_vote_score(): i32
-
-export function add_comment(text: string): void
-
-export function get_recent_comments(): Array
-
-export function donate(): void
-
-export function get_donations_total(): u128
-
-export function get_recent_donations(): Array
-
-export function release_donations(account: AccountId): void
-
-The given functions are written in AssemblyScript. But they could also have been written in Rust or any other language that compiles to Wasm. But it is easier to understand and saves some compiling time than Rust, which is excellent for prototyping and simple contracts.
-
-You can see that all functions are exported so that they can be called from other accounts. Every function has a name and optional arguments that must be of a specific type (custom types included). Every function needs to return something: void or another data type.
-
-We can classify these functions into two different kinds of functions: view functions and call functions.
-
-View functions do NOT alter contract state. As we’ve seen before the execution of these functions do not cost any gas. They just read a value from a variable and return it. In this example the vote_score is returned, which represents the total vote score for this specific meme:
-
-export function get_vote_score(): i32 { assert_contract_is_initialized() return Meme.get().vote_score } Call functions are the ones that alter a contract state. This means that something is saved on the blockchain. These operations have a gas cost attached to them that is proportional to the complexity of the computation. Remember validators are working for you behind the scene, and they must be rewarded for their validation work. export function add_comment(text: string): void { assert_contract_is_initialized() assert(context.sender == context.predecessor, 'Users must comment directly') assert_reasonable_comment_length(text) Meme.add_comment(text) } This function add_comment takes a string and saves it in the contract. When done, it does not return anything. First, it makes sure the contract is actually initialized to provide necessary fields and functions. It also enforces the user to use their account to write a comment, so you can not call another contract to write a comment.
-The contract checks if the comment has a short enough length (a maximum length of 500 chars was chosen). The final line adds the comment to the Meme.
-
-story_image_6_1
-_“I really like what you’re doing!”_ _“Now that I think about it, we could even add comment capability to the contract. Can you imagine? This could transform the Meme museum into a social platform, and the community into a social network... How awesome!”_
-Exercise
-Check out the add_comment function in the code snippet of the exercise code box, there are 3 bugs in lines 11 and 12 that need to be fixed.

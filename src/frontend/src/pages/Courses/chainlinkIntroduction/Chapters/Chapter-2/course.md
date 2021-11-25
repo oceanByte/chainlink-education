@@ -1,48 +1,44 @@
-Why Should You Care?
-Difficulty: 1/5 | Estimated reading time: 4 min
+#####Chapter 2:
 
-story_image_1_0
+What are Contracts?
+=============================
 
-The year is 2029. The new internet is running on top of public interoperable blockchains. It seems crazy to think how the perception towards these technologies has drastically changed. The Internet of Value is more tangible than ever. Knowing how blockchain works is not considered a competitive advantage nowadays. It is a must-have. This chain of thoughts makes you remember when you originally discovered you could add a payment gateway with a 1-liner of code to your app via the NEAR blockchain. This was such a game-changer back then...
-Adding a payment gateway with NEAR is seamless:
+<ContentWrapp>
+  <div class="imgContainer">
+    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
+  </div>
 
-await sender.sendMoney(receiver, amount);
-The rise of the first blockchain application started in 2009 with Bitcoin, an independent network powering a global digital currency. Since then, blockchain technology has been used across many new applications forming a new open internet called Web3. In 2021, over 7,000 companies are building the internet infrastructure of Web3.
+  <div class="itemsContainer">
+    <div class="item-text">
+     Explain art contracts and compare them to digital contracts. 
+    </div>
+  </div>
+</ContentWrapp>
 
-The boom of blockchain and Web3 projects has fueled tremendous demand for web developers, software engineers, testers, UX and web designers, project and community managers. Opportunities are everywhere.
+Agreements, deals, promises: these are concepts that humans universally have an intuition for across cultures. Maybe as a child you agreed to trade three of your toys for one friend’s rare toy. Perhaps you’ve agreed to lend your car to a friend as long as they don’t put more than 100 miles on it and return it with a full tank. You may have even made an agreement with your health coach not to eat more than 2,500 calories per day. 
 
-Blockchain isn’t just about financial transactions. Social and community tokens power new types of blockchain applications centered around human networks and the growth of these networks. They can be designed to create shared value for communities with their own rules around adoption, viral marketing, and ownership.
+These are all examples of agreements. Agreements can be spoken orally, written down on paper, or even typed in digital documents. The enforcement of such agreements is oftentimes informal and “wishy washy.” Disagreement is handled outside of courts or other formal institutions: a friend who brings back your car with 600 miles on it and an almost empty tank of gas loses your trust. Your health coach will be very disappointed in you if you’ve eaten 5,000 calories a day for the past week. Though factors such as reputation, magnitude, and parties within an agreement can affect its enforcement, there is no guarantee that an agreement will be fulfilled. 
 
-Creators and influencers can launch their own social tokens. These tokens may or may not carry monetary value; they are simply used within the creator’s community. Fans can get, transfer, donate, transact or hold these tokens. In this emerging space, we see tokens being used to drive various forms of engagement with fans, from personal reputation to active governance of the community.
+Contracts are agreements that are enforceable in a court of law.  You may have signed a leasing contract to rent an apartment or house. Restaurateurs typically  sign contracts with food suppliers to obtain necessary ingredients at a specific price and time no matter what happens in different food markets. You may sign an employment agreement with a company to establish your pay rate and employee benefits. In any form, once these contractual agreements have been made, they are enforced by a court of law. Any clause that is not fulfilled within a contract can be disputed and discussed within the court.
 
-Unlike Bitcoin, the “value” managed by blockchain networks is not necessarily “money”; in fact most Web3 projects provide a more human-centric definition of “value” called “utility.”
+<MissionContainer>
+  <div className="title">Quizzes/Activities</div>
+  <ul className="mission-goals">
+    <li>
+      Multiple choice quiz: “What factors can help enforce a non-contractual agreement”.
+    </li>
+    <li>
+      Multiple choice quiz: “What entities can ultimately enforce a third party contractual agreement?”
+    </li>
+    <li>Activity: Maybe have a cool little animation of how hard it is to enforce contracts (i.e. a kid not returning a toy,  years passing by in a court of law before something is passed, a “he said she said case”.</li>
+  </ul>
+</MissionContainer>
 
-Welcome to the Internet of Value.
-These social tokens are just one of the multiple new primitives from Web3, shifting the internet away from an attention economy to engagement and shared value one.
+## Digital Agreements - What we have today
 
-Before Web3, the internet was a native mechanism to transfer what computer science refers to as state – the status of who is who, who owns what, and who has the right to do what.
+Digital agreements have been the most common format of agreements in the past decade. From bank agreements to social media, to Netflix, and crypto exchanges,  companies who provide services on the internet typically use digital agreements to detail the exact conditions of the service to be provided. These are called SLAs, or Service Level Agreements.  
 
-State is a key property for enabling human ecosystems. The ability to quickly and efficiently transfer value independently has been at the heart of exchanges between humans for centuries. When Alice gives 1 shell to Bob, their states change.
+What makes a digital agreement different from a regular agreement or contractual agreement? Well they’re like regular agreements….but  in a digital format. These agreements can be enforced in a court of law under certain circumstances. However, this doesn’t happen often due to costs of going to court coupled with the low value these contracts represent for individual consumers.
 
-Without a native mechanism to save states on the internet, exchanges could be recorded only through institutions acting as clearing entities that require our unconditional trust.
+Customers also tend not to read these agreements due to lengthy, complex legalese. Oftentimes these <ColorWord>agreements give consumers very little recourse at all</ColorWord>! Due to these reasons, the power of digital agreements are heavily skewed towards the institutions who create them rather than being a fair, equitable agreement between institutions and their consumers. A prime example of this is the <ColorWord>Robinhood Gamestop downtime incident</ColorWord>.
 
-Blockchain technology has introduced a decentralized method to store changes to the state of the network in an irrefutable way, without the need for intermediaries. Each participant in these networks is able to keep track, hold and transfer value independently. The network stores the history of all preceding events or user interactions, its successive states.
-
-Who benefits from this?
-While cloud services enable businesses to focus more on their business logic and care less about infrastructure, it did not solve another fundamental problem of web2: siloed data controlled by platforms. It is not in platforms’ interest to give unrestricted access to their network to anyone; rather they focus on increasing adoption and loyalty, even if that means creating a dependency for users. User identity, created value, and history are only available in the platforms’ walled-gardens.
-
-In contrast, Web3 networking protocols treat Identity and Monetary Assets as native primitives that can be transferred over the network.
-
-There are many advantages that a typical centralized architecture cannot provide:
-
-Trust Value transfers are operated in a peer-to-peer fashion, without trusted third-parties. That way, users are not dependent on a central entity or platform.
-
-Censorship resistance Because a central entity does not operate the network, it cannot be shut down by one particular entity. Reaching a Consensus is required to change the state of the network.
-
-Availability A decentralized system is more robust as there is no central point of failure.
-
-Transparency All interactions and states are stored immutably on the blockchain and publicly available for anyone to review.
-
-In Web3, middlemen are removed from the equation. Users are no longer tied to a specific platform, but can change platforms while maintaining their identity and history. Web developers can compose new applications by using existing code or creating their own. There is no gatekeeper to prevent someone from creating a new application on top of another.
-Exercise
-Here is your easy win to get started: integrate the payment gateway in line 20 of the app code in the exercise code box.

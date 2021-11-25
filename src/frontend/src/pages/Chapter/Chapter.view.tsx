@@ -51,7 +51,12 @@ import {
     Spacer,
     TextWrapper,
     VerticalAlign,
-    BlueParagraph, LetsStart
+    BlueParagraph,
+    LetsStart,
+    ContentWrapp,
+    MissionContainer,
+    ColorWord,
+    ListItemsContainer
 } from './Chapter.style'
 import { AnimatedCode, BackgroundContainer, Difficulty, ImageContainer, SpecialCode } from './Chapter.style'
 import ArrowRight from '../../assets/arrow-upright-white.svg'
@@ -328,6 +333,18 @@ const Content = ({ course }: any) => (
         BlueParagraph: {
           component: BlueParagraph,
         },
+        ContentWrapp: {
+          component: ContentWrapp,
+        },
+        MissionContainer: {
+          component: MissionContainer,
+        },
+        ColorWord: {
+          component: ColorWord,
+        },
+        ListItemsContainer: {
+          component: ListItemsContainer,
+        },
         // FormSevenChapter: {
         //   component: FormSevenChapter
         // }
@@ -455,21 +472,7 @@ export const ChapterView = ({
             <div className="step">
               <p className="step-text">Step 1</p>
             </div>
-            <Content course={testMd || ''} />
-          </div>
-          <div className="mission-container">
-            <h1 className="title">Your mission</h1>
-            <ul className="mission-goals">
-              <li>
-                There is an online editor in the top right corner of this page. In the editor, define{' '}
-                <span className="major-info">ship_code</span> as a string type.
-              </li>
-              <li>
-                Then define the constant <span className="major-info">my_ship</span> as a{' '}
-                <span className="major-info">ship_code</span> of value <span className="major-info">"020433"</span>.
-              </li>
-              <li>Then go ahead and validate your mission for a comparative view with the solution.</li>
-            </ul>
+            <Content course={course || ''} />
           </div>
         </div>
         <ChapterGrid hasTabs={Object.keys(supports).length > 0}>

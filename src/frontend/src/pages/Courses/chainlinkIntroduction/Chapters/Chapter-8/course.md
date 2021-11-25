@@ -1,35 +1,38 @@
-What Next
-Difficulty: 1/5 | Estimated reading time: 4 min
+#####Chapter 8:
 
-story_image_8_0
-_“Oh it’s great i bump into you now”_ _“I meant to tell you, everyone at the museum is delighted with your work. We’re so lucky to have you onboard!”_ _“I’d like you to meet everyone you haven’t met yet. Join us for afterwork, that’s where everyone hangs out at this time!”_
-You’ve now been exposed to how dApps are built with NEAR. It’s not that much, but it’s already sufficient for you to create your first dApps!
+Conclusion
+=============================
 
-The network is production-ready, enabling the development of high-quality dApps and services in record time.
+<ContentWrapp>
+  <div class="imgContainer">
+    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
+  </div>
 
-And the NEAR community is here to help. It is a vibrant community, including hundreds of experienced blockchain engineers working on usability improvements every day. The NEAR Collective, in particular, provides education and outreach efforts to show that this technology is not as complex as many think.
+  <div class="itemsContainer">
+    <div class="item-text">
+     Connect your artwork to the price of gold or ETH or overall Market Cap. Mention the concept of “Hybrid Smart Contracts”. 
+    </div>
+  </div>
+</ContentWrapp>
 
-As more developers consider joining NEAR, why shouldn’t you?
+As discussed in the previous lesson, Chainlink gives developers the ability to create extremely powerful DON’s that provide smart contracts with the highest quality data from outside the blockchain. As a smart contract developer, how can you take advantage of these DONs in your own smart contracts? Chainlink is open source so there’s always the option of making your own DON, but creating a DON is a complex and nuanced process. Instead, in the spirit of old developer adage “Never build something twice”, lets make use of existing DONs if possible.
 
-Here are a few ways to get involved, regardless of your skills or the time you have at hand. It’s worth it!
+Luckily, many of the largest and highest quality node operators in the blockchain industry have already combined their knowledge and prowress to create DONs that serve the most in-demand data for smart contract developers to take advantage of. These data serving DONs are called <ColorWord>Chainlink Data Feeds</ColorWord>. Currently most of the data feeds provide data on various currency and cryptocurrency pairs, as that was initially what smart contract developers needed, but data feeds can be used to retrieve any type of data. 
 
-Become a Contributor. Contribute to NEAR technical content and libraries. The benefits are several such as having a global impact into Web3 development and monetary reward from NEAR Foundation.
-Join a Guild. Building a community and earn engagement-based rewards for it. NEAR Guilds are a new way for a decentralized community to organize in an agile way. Participate in Events.
-Participate in events across the globe and online.
-Stay in Touch with NEAR. Get connected to where conversations are happening.
-Build on NEAR. Do you have any business ideas related to Web3 application? Start to build it on NEAR protocols.
-Do you have a good idea? The NEAR Grants Program is generous and will help you take your project to the next level. Grants support projects that share NEAR’s mission to accelerate the transition to open technologies by growing and enabling a community of developers and creators.
+You can see these data feeds updating in real time at data.chain.link. There you can select different blockchains Chainlink DONs are posting data to, as well view the details of each DON that compose a particular data feed. For instance if you click on the ETH/USD data feed you will see all the nodes involved in the DON, what price each individual node posted, and the final aggregated price of the asset. Some important terms you may notice are:
 
-Grants are available for a multitude of contributions, like extending the NEAR infrastructure, developer tooling and documentation, validator and staking resources, open source libraries, public goods projects, research & development, decentralized applications with open source components, educational materials for developers, social impact, and interoperability solutions.
+<MissionContainer>
+  <div className="title">Quizzes:</div>
+  <ol className="mission-goals">
+    <li>
+      What is the heartbeat for the ETH/USD data feed on Ethereum mainnet?
+    </li>
+    <li>
+      What is the deviation threshold for the BTC/USD data feed on Binance Smart Chain mainnet?
+    </li>
+  </ol>
+</MissionContainer>
 
-Previous grants have already seen amazing innovation comes to light:
+## Programming with Chainlink Data Feeds
 
-Liquality (cross-chain atomic swaps)
-WalletConnect (wallet interoperability)
-Abridged/Collab.Land (token-permissioned communities)
-Narwallets (browser wallet)
-NEAR-Staking.com (validator resources)
-If you liked the meme museum theme, you might like some real projects happening in that space, the main ones at time of writing are:
-
-Paras. All-in-one social Digital Art Cards (DAC) marketplace for creators and collectors.
-Mintbase. Global platform that allows anyone, including those with less technical backgrounds, to create their own digital assets verified on multiple blockchains. Mintbase provides creators (minters) with various creative allocation and redemption mechanisms for their customers.
+Now that we  understand how Chainlink data feeds work, lets use them within a smart contract. To use a chainlink data feed within a smart contract you only have to complete three simple steps:

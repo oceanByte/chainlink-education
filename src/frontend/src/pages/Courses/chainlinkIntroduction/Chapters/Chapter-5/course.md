@@ -1,55 +1,55 @@
-NEAR Contracts
-Difficulty: 4/5 | Estimated reading time: 6 min
+#####Chapter 5:
 
-story_image_5_0
-_"When you checked the meme collection status, you actually interacted with a contract on the NEAR Network. As a matter of fact, the museum is orchestrated mostly automatically via a multitude of codes deployed on NEAR that interact with each other."_ _"I’m so glad to be back at work, digital detox was a bad idea! Imagine living without the internet for a week?! My god, I’m so much better with my smart contracts code. I see the beauty in their rules, like an invisible chaos behind the face of order."_
-Contracts
-Contracts are a set of functions that can read or alter the state of the NEAR Network. They are executed on the NEAR Virtual Machine (VM). A minimal “Hello, World!” code written in AssemblyScript looks like this:
+Chainlink Data Feeds
+=============================
 
-export function hello(): string { return 'Hello, World!' }
-After it was compiled to Wasm, the contract can be deployed to the NEAR blockchain. Deploying a contract means that it is uploaded and stored in the NEAR blockchain.
+<ContentWrapp>
+  <div class="imgContainer">
+    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
+  </div>
 
-Once deployed, the contract can be called in the NEAR VM like a script, served by Nodes on the NEAR blockchain. Anyone connected to the network can see and interact with the code. If a user provides a valid input, the contract will deterministically produce its expected output. In this case “Hello, World!”.
+  <div class="itemsContainer">
+    <div class="item-text">
+     Connect your artwork to the price of gold or ETH or overall Market Cap. Mention the concept of “Hybrid Smart Contracts”. 
+    </div>
+  </div>
+</ContentWrapp>
 
-The contract can be called using the NEAR CLI: near view hello-world-contract.testnet hello
+As discussed in the previous lesson, Chainlink gives developers the ability to create extremely powerful DON’s that provide smart contracts with the highest quality data from outside the blockchain. As a smart contract developer, how can you take advantage of these DONs in your own smart contracts? Chainlink is open source so there’s always the option of making your own DON, but creating a DON is a complex and nuanced process. Instead, in the spirit of old developer adage “Never build something twice”, lets make use of existing DONs if possible.
 
-Functions
-The hello-world contract is the most basic type of contract as no state alteration is required by the NEAR Network when the contract is called. It simply displays a static string stored on the blockchain. Calling such contracts does not involve gas cost in NEAR; gas is incurred only when a computation is required. Let’s look at hello_you() now. This contract invokes more than just a simple “view” function on something that was stored on the blockchain. It requires a call of context.
+Luckily, many of the largest and highest quality node operators in the blockchain industry have already combined their knowledge and prowress to create DONs that serve the most in-demand data for smart contract developers to take advantage of. These data serving DONs are called <ColorWord>Chainlink Data Feeds</ColorWord>. Currently most of the data feeds provide data on various currency and cryptocurrency pairs, as that was initially what smart contract developers needed, but data feeds can be used to retrieve any type of data. 
 
-export function hello_you(): string { return 'Hello, ' + context.sender + '!' } Contract hello_you() does not alter the blockchain state. Still, it requires a call of context, an operation that validator nodes have to carry, and therefore gas to be paid.
-Other "call" functions may alter the state of the blockchain. Gas must be paid to the network when invoking these functions.
+You can see these data feeds updating in real time at data.chain.link. There you can select different blockchains Chainlink DONs are posting data to, as well view the details of each DON that compose a particular data feed. For instance if you click on the ETH/USD data feed you will see all the nodes involved in the DON, what price each individual node posted, and the final aggregated price of the asset. Some important terms you may notice are:
+<p><ColorWord>Rounds</ColorWord>: DONs update data feeds in rounds. When a new round is initiated the nodes in a DON retrieve the latest data point from data providers, aggregate the data at the individual node level and finally aggregate the between the nodes. Once the final aggregated data point, along with each individual nodes observation, is posted on-chain the round is considered complete.</p>
+<p><ColorWord>Heartbeat</ColorWord>: The maximum amount of time that is allowed to pass before the DON automically starts a new round and updates the data.</p>
+<p><ColorWord>Deviation Threshold</ColorWord>: If a node within the DON senses the data fluctuates by a certain percentage, they will automatically start a new round forcing the DON to update the data feed regardless of how much time has elapsed.</p>
 
-Consider the function register_me(). It takes a name and stores it on the blockchain, altering its state, and requiring an action.
+<MissionContainer>
+  <div className="title">Quizzes:</div>
+  <ol className="mission-goals">
+    <li>
+      What is the heartbeat for the ETH/USD data feed on Ethereum mainnet?
+    </li>
+    <li>
+      What is the deviation threshold for the BTC/USD data feed on Binance Smart Chain mainnet?
+    </li>
+  </ol>
+</MissionContainer>
 
-export function register_me(): void { logging.log('saveMyName() was called') storage.setString('sender', context.sender) } Note that this time, the function does not return anything to view. This is what is indicated by “void”. The null output must be specified in the functions run on NEAR.
-Action
-An action is a composable unit of operation that, together with zero or more other actions, defines a transaction. You can think of an action as a valid message to be executed at the destination (receiver).
+## Programming with Chainlink Data Feeds
 
-There are currently 8 supported action types:
+Now that we  understand how Chainlink data feeds work, lets use them within a smart contract. To use a chainlink data feed within a smart contract you only have to complete three simple steps:
 
-1. CreateAccount to make a new account (for a person, contract, refrigerator, etc)
-
-2. DeleteAccount to delete an account (and transfer balance to a beneficiary account)
-
-3. AddKey to add a key to an account (either FullAccess or FunctionCall access)
-
-4. DeleteKey to delete an existing key from an account
-
-5. Transfer to move tokens from one account to another
-
-6. Stake to express interest in becoming a validator at the next available opportunity
-
-7. DeployContract to deploy a contract on the NEAR blockchain
-
-8. FunctionCall to invoke a method on a contract (including the budget for computing and storage)
-
-Deployment
-Deployment of a contract typically follows just four steps.
-
-Step 1: Compile contract bytecode The given Rust or AssemblyScript code is compiled into wasm bytecode.
-
-Step 2: Compose transaction using DeployContract with attached bytecode. A transaction is constructed that contains all the necessary values for NEAR to deploy a smart contract. A transaction alters the VM state and can include more than one action like CreateAccount, AddKey, Transfer as well.
-
-Step 3: Sign and send a transaction to deploy your code Everyone can create a transaction. But only a signed transaction (with valid keys) is correct. The signed transaction is broadcasted to NEAR, validated by the validators and eventually the code gets deployed on the network.
-
-Step 4: Redeployment and trustless operation As long as FullAccess private keys are available, you can redeploy. Remove these keys for trustless operation. Congratulations.
+<div>
+  <ul>
+    <li>
+      <p>Import the AggregatorV3Interface into your smart contract</p>
+    </li>
+    <li>
+      <p>Point the interface to the desired data feed</p>
+    </li>
+    <li>
+      <p>Access the latest data!</p>
+    </li>
+  </ul>
+</div>

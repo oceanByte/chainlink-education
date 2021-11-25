@@ -1,65 +1,120 @@
-NEAR Environment
-Difficulty: 2/5 | Estimated reading time: 6 min
+#####Chapter 4:
 
-story_image_4_0
-It’s always something to start in a new environment. And you’ve decided to make the best of it. _"You’re all set now. Let’s get to work!"_ _"You’ve got your first opportunity to show you know your stuff. Ethan is on vacation, and he deals with the meme inventory. Could you cover for him? Start by getting familiar with the registry… "_
-You can think of NEAR as an additional truth service that you add to your web application. The benefits of adding such a truth service to an App include handling money, ownership and global user identity without banks, lawyers or any other traditional intermediaries.
+The Smart Contract Connectivity Problem
+=============================
 
-Backend development usually happens on a local machine and is deployed on a controlled server. Access to others is given through APIs and the code and access are completely controlled by the server owner.
+<ContentWrapp>
+  <div class="imgContainer">
+    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
+  </div>
 
-story_image_4_1
+  <div class="itemsContainer">
+    <div class="item-text">
+     Now you want to connect your artwork to the physical (off-chain) world. Tell your artwork how to behave. 
+    </div>
+  </div>
+</ContentWrapp>
 
-Layer 3 — App Layer (Your App BackEnd + FrontEnd)
-This is effectively the services and the UI that people interact with.
+Blockchains and smart contracts are unaware of any conditions or logic that occur outside of the blockchain itself; they are unable to connect to outside resources.The reason for this is due to the distributed and deterministic nature of blockchains. All of the distributed nodes (nodes are computers running the blockchain software) in the blockchain must come to a consensus on what the blockchain is and any changes to it. If the blockchain just connected to a data source, the nodes could query the data at different times and get different answers, breaking the ability for the nodes to reach consensus. Even worse, if that data source changed locations or is down, the whole blockchain would break.
 
-Front end and Back End include all the high-level libraries to interact with NEAR. The components enable communication with the NEAR Virtual Machine to execute code.
+This means developers can program smart contracts as long as their logic doesn’t require any outside data. This may sound  extremely limiting, but there is a system in place that sits in between blockchains and the outside world (a concept aptly called “middleware”).This middleware system is called an Oracle. The name <ColorWord>Oracle</ColorWord> comes from the Greek concept of an Oracle since it needs to determine what is <i>true</i> in outside systems.
 
-The App layer interacts with the protocol in a standardized way, which we will cover in the next chapter. Communication between the App layer and the protocol layer is channeled through an RPC interface in NEAR.
+<Spacer>
 
-Layer 2 — Protocol Layer (P2P Network Components)
-Transactions and data storage are validated here via the NEAR consensus mechanism and added to the public ledger. This is done by the validator nodes in this layer. NEAR sits in between the app layer and the runtime layer and communicates with both other layers.
+## Centralized Oracles
 
-Layer 1 - Runtime Layer (VM, Storage )
-Layer 1 can be considered at the same level as the protocol layer. Every time a NEAR Validator Node validates a transaction they read and write in the State Storage and on the VM. Layer 1 is often referred to as the resource layer because the "real computations" occur here.
+<ContentWrapp>
+  <div class="imgContainer">
+    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
+  </div>
 
-The NEAR VM
-NEAR VM is a modified WebAssembly Virtual Machine to execute Wasm bytecode instructions. All code running on NEAR must be compiled to WebAssembly, or simply Wasm.
+  <div class="itemsContainer">
+    <div class="item-text">
+     Manipulate the artwork to show what they want. Dangerous.
+    </div>
+  </div>
+</ContentWrapp>
 
-Currently, two languages are supported with custom SDKs to compile code into Wasm: AssemblyScript and Rust. Any language that can be compiled into Wasm could be used here as long it meets specific requirements that can be added through an SDK. AssemblyScript is excellent for prototyping and quick results, while Rust is better suited for applications that might secure a lot of value.
+To create functional smart contracts we need a middleware system called an <ColorWord>oracle</ColorWord>, but how will we actually make this oracle? Well we are trying to get price data into our smart contract for NFT’s. Well my friend Jim (trust me, he is good!) is an expert in cryptocurrency prices, and he even has a server set up that we can access for price data. Awesome, we'll make Jim our oracle and he will provide price data to our NFT smart contract. 
 
-Transactions Processing
-Validator nodes run the VM and execute the operations. They take incoming transactions or storage requests and validate if they meet the requirements to be executed (access control). If an account wants to call a function in a contract it will send a request, the validator will check if the contract and the function exist, if they can be called, and if the account owner signed the transaction. If these requirements are met it will spin up a VM and execute the called function and return the results. After the computation occurs, the VM is quit.
+But wait….didn’t all the great properties of smart contracts and blockchains come from their decentralized nature? What if Jim wanted to maliciously send our smart contract bad price data so he could manipulate it in his favor? What if his server goes offline when the NFT needs to update and thus can’t? What if Jim isn’t even malicious but gets hacked by a malicious actor? This single oracle solution isn’t really solving much of the oracle problem because it isn’t <i>decentralized</i>, and thus provides a weak link that ruins all of those awesome smart contract properties. You really just need to trust that Jim, and my word on Jim, that he is a great person and will act in the best interest of everyone. But what if we had a decentralized middleware solution, one where Jim doesn’t control everything (sorry Jim) so we didn’t have to trust him? 
 
-Validators also store each processed transaction in the network. Validators are selected by the network for a certain time period, and are required to be online for that period to process operations on the network. This ensures continuous operation for the protocol.
+Finally we are here…...enter Chainlink!
 
-Validator nodes rewards are adjusted based on the amount of stake and participation (uptime). The rewards of the validator nodes come from programmed new token emission (currently capped at 5%) and transaction fees from network users, referred to as ‘gas’.
+<Spacer>
 
-Validator nodes are pseudonymous, and game theory is used to ensure that they run the code with good behavior with a staking process called "Proof of Stake". In this process, they make a guarantee deposit, a stake in NEAR, which they will forfeit if they have operated improperly.
+## Chainlink and Decentralized Oracles
 
-Transaction Gas
-Each transaction takes some amount of bandwidth to be included in the network ledger and some computation to be executed. These operations have a cost paid in gas, a small fee in NEAR paid to the validator nodes. It is no different from a user perspective to paying a cloud subscription or AWS Lambda for each execution.
+<ContentWrapp>
+  <div class="imgContainer">
+    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
+  </div>
 
-The goal for gas is to represent a unified measure of resources spent to receive, execute, and propagate a transaction on default hardware. Computation (CPU) is a momentary resource spent on executing a transaction.
+  <div class="itemsContainer">
+    <div class="item-text">
+     Artworks will follow pre-defined rules.
+    </div>
+  </div>
+</ContentWrapp>
 
-The cost of each instruction is denominated in "gas" units. Bandwidth is usually measured in bytes, but in the NEAR platform it is converted into gas units using a simple coefficient of overhead which has been estimated on reference hardware.
+Smart contracts have special properties and need decentralized oracles to carry out functions. This is where Chainlink comes in. <ColorWord>Chainlink is a platform for creating decentralized oracle networks that provide various smart contract services</ColorWord>.  So using Chainlink we can create a price oracle that isn’t just Jim, but Jim and 30 other of the most trusted and expert crypto price data aggregators out there and make them come to agreement. 
 
-story_image_4_2
-_"Alrighty, I see you’ve still got a hang of it! Awesome, we can start running some code through the near-cli now"_ _"Interacting with the network via a terminal is simple and effective."_
-Interact with the Network from your Command Line
-If we take this one step further, we can see some advantages emerging from this new service type. Since everyone can deploy scripts on NEAR services that everyone can use, there is no need to register anywhere or ask for awkward API keys to get connected. You pay as you go or if your users wish to let them directly interact with the codes and pay the execution costs. Let us call the Meme Museum Contract and see how many memes there are registered for exhibition.
+Chainlink allows developers to create and customize any type of <ColorWord>Decentralized Oracle Network</ColorWord>, or DONs, a smart contract might need. Developers can choose which nodes are a part of a network, what type of data they each node is looking for,  how nodes come to agreement, when nodes should post updates, and any other computation nodes should perform. Finally, with Chainlink developers can build smart contracts that can interact with the outside world in a way that preserves the decentralized nature of smart contracts.
 
-Since we are interested in calling a simple function and getting a quick answer, there is no need to build any interface. We use the nodejs based NEAR CLI that provides a set of command-line tools to easily create, test, deploy scripts on the NEAR Network.
+<Spacer>
 
-1. Install NEAR CLI: npm install -g near-cli 2. Typing near prints a list of all available commands. We are interested in near login (to login with our account) and near view to make call our code and get the amount of memes in the museum 3. Type near login this will open your browser and ask you to login into your account 4. Now the contract name is "museum.testnet" and the method is called get_meme_count. So type: near view museum.testnet get_meme_count. This will return you the amount of memes that are registered in the museum. 5. Congratulations. You just called a contract on NEAR.
+## How Chainlink Works
 
-story_image_4_3
+<ContentWrapp>
+  <div class="imgContainer">
+    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
+  </div>
 
-Now, what happens when someone interacts with your contract on the blockchain?
-Invoking a contract method from your dApp will trigger a sequence of actions locally as well as on the NEAR protocol:
+  <div class="itemsContainer">
+    <div class="item-text">
+     Understand the possibilities before programming your artwork to react to the environment.
+    </div>
+  </div>
+</ContentWrapp>
 
-1. Your dApp uses near-cli to compose and sign the transaction that represents a Function Call transaction. 2. The transaction is sent to the NEAR platform through the RPC interface, which validates and verifies the transaction before routing it (based on the contract account) to the correct validator for processing. 3. The runtime layer launches a Wasm virtual machine. 4. The VM loads the contract code to invoke the function identified in the transaction, reading and writing to state storage as needed and returning the result of the function call. 5. The blockchain layer routes the result back through the RPC interface to your dApp.
+Chainlink allows developers  to build and customize DONs . Chainlink allows DONs to work and assures that node operators  are incentivized to not collude or act maliciously.  
 
-At the museum, each meme is created by a contributor and can receive comments, votes and donations. The contributor can call a release function to release the donations to any given address. The meme museum has an expert team that curates the most interesting memes and presents them in their museum. Yes, this is part of the job!
+<p><ColorWord>How does Chainlink Work?</ColorWord></p>
 
-Exercise
-Now that you have installed it, get familiar with the NEAR CLI and check out the Museum contract to see how many memes have been added to it so far.
+<div>
+  <p>Developers can customize several main areas of Chainlink DONs. These include:</p>
+  <ul>
+    <li>
+      <p>Specifying what data DONs need to provide</p>
+    </li>
+    <li>
+      <p>How DONs retrieve data </p>
+    </li>
+    <li>
+      <p>When DONs provide data</p>
+    </li>
+    <li>
+      <p>How agreement (also known as consensus) is achieved among the nodes to achieve a single source of truth for the specified data.</p>
+    </li>
+  </ul>
+</div>
+
+Each step is outlined in more detail below:
+ 
+Specifying what data DONs need to provide:
+
+Due to the proliferation of Decentralized Finance (DeFi), a popular use case of Chainlink DONs is relating them with price data. However, any type of data that is available in a digital format can be accessed. This includes but is not limited to weather data, YouTube views, sensor data, or even data from other blockchains. For the NFT we’re just going to stick to price data for now, specifically the ETH/USD price, but you can imagine all the possibilities of cool smart contracts we can make with all of the digital data available today!
+
+When DONS provide data:
+
+Some applications require a DON that updates the data once a day. Others need updates once every five minutes or only when the data itself changes by a certain amount. The term <ColorWord>heartbeat</ColorWord> is used to desribe a DON that needs to post an update after a certain amount of time.hen the DON is updated after the data changes by a specified amount it is called a <ColorWord>deviation threshold</ColorWord>.  
+
+How DONs provide data:
+
+Ideally, nodes should retrieve data from multiple sources and <i>aggregate</i>, or combine, the data to return the most accurate price they can. Developers can use external adapters to customize the sources  that nodes use to aggregate data. <ColorWord>External adapters</ColorWord> are custom built software packages that can be added to the nodes. These can be built in any programming language and perform any operations developers may find useful. These operations can be as simple as basic arithmetic but can span to being complex machine learning algorithms.
+
+How Consensus is Reached Among Nodes:
+
+All of the different nodes in the DON have their own version of the price. Using this information, developers customize the aggregation method of Chainlink DONs to determine one value for the true price.  This is another level of aggregation beyond the aggregation completed at the individual node level. Having multiple levels of aggregation ensures the highest level of data quality. This <i>aggregation method</i> can consist of any type of operation including median, mean, weighted mean, mode, or other calculations. In our dynamic NFT will make use of a data feed that takes the median of all the node’s price data, since the median is more resistant to outliers than the mean.
+
+<p><ColorWord>Chainlink Incentives<ColorWord></p>

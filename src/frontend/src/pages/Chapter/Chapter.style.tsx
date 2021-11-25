@@ -56,7 +56,6 @@ export const ChapterGrid = styled.div<{ hasTabs?: boolean }>`
   @media (max-width: 1024px) {
     margin-top: 20px;
   }
-}
 `
 
 export const ChapterQuestions = styled.div`
@@ -492,7 +491,113 @@ export const ButtonText = styled.div`
     margin-right: 17px;
     vertical-align: text-bottom;
   }
-  
+`
+
+export const ContentWrapp = styled.div`
+  margin: 40px 0;
+  display: flex;
+  /* align-items: center; */
+
+  .imgContainer {
+    margin-right: 21px;
+  }
+  .itemsContainer {
+    max-width: 550px;
+    .item-text {
+      position: relative;
+      font-style: normal;
+      font-weight: 450;
+      font-size: 16px;
+      line-height: 150%;
+      color: #3D4556;
+      background-color: #DFE7FB;
+      border-radius: 10px;
+      padding: 20px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 30px;
+        left: -25px;
+        width: 0;
+        height: 0;
+        border-right: 35px solid #DFE7FB;
+        border-top: 20px solid transparent;
+        transform: rotate(-30.56deg);
+      }
+
+      & + .item-text {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
+`
+export const ListItemsContainer = styled.div`
+  .list__items {
+    .list__item {
+      font-size: inherit;
+      color: inherit;
+      line-height: inherit;
+    }
+  }
+`
+
+export const MissionContainer = styled.div`
+  background-color: #1a2b6b;
+  box-shadow: 0 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+
+  .title {
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 120%;
+    color: #ffffff;
+    margin: 0 0 20px 0;
+  }
+
+  .mission-goals {
+    padding-left: 20px;
+    margin: 0;
+
+    & + .title {
+      margin-top: 20px;
+    }
+
+    li {
+      font-style: normal;
+      font-weight: 450;
+      font-size: 18px;
+      line-height: 150%;
+      color: #ffffff;
+
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+
+      .major-info {
+        color: #eb4133;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 60px 30px;
+
+    .title {
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+    padding: 40px 15px;
+  }
 `
 
 export const ChapterMonaco = styled.div``
@@ -516,6 +621,14 @@ export const RegularP = styled.p`
   line-height: 150%;
   color: #3D4556;
   margin-top: 20px;
+
+  > p {
+    margin-bottom: 0;
+  }
+
+  p + p {
+    margin: 0;
+  }
   
   @media (max-width: 760px) {
     font-size: 14px;
@@ -536,6 +649,10 @@ export const BlueParagraph = styled.p`
     @media (max-width: 760px) {
       font-size: 16px;
     }
+`
+
+export const ColorWord = styled.span`
+  color: #0EA6E8;
 `
 
 export const ChapterTab = styled.div<{ isSelected?: boolean }>`

@@ -2,14 +2,14 @@
   &-wrapper {
     max-width: 1600px;
     margin: 0 auto;
-    font-family: Circular Std, sans-serif;
+    font-family: "Circular Std", sans-serif;
   }
 
   &-container {
     display: grid;
     grid-template-columns: 5fr 3fr;
     grid-gap: 40px;
-    margin: 80px 20px;
+    margin: 80px 20px 0;
 
     &.isStarted {
       grid-template-columns: 5fr 5fr;
@@ -68,43 +68,6 @@
   border-radius: 20px;
 }
 
-.mission-container {
-  background: #1a2b6b;
-  box-shadow: 0 4px 15px rgba(12, 22, 44, 0.1);
-  border-radius: 20px;
-  padding: 40px;
-  margin-top: 20px;
-
-  .title {
-    font-weight: 900;
-    font-size: 32px;
-    line-height: 120%;
-    color: #ffffff;
-    margin: 0 0 20px 0;
-  }
-
-  .mission-goals {
-    padding-left: 20px;
-    margin: 0;
-
-    li {
-      font-style: normal;
-      font-weight: 450;
-      font-size: 18px;
-      line-height: 150%;
-      color: #ffffff;
-
-      &:not(:last-child) {
-        margin-bottom: 15px;
-      }
-
-      .major-info {
-        color: #eb4133;
-      }
-    }
-  }
-}
-
 @media screen and (max-width: 1024px) {
   .chapter-info {
     &-container {
@@ -115,20 +78,9 @@
   .chapter-block {
     padding: 60px 30px;
   }
-
-  .mission-container {
-    padding: 60px 30px;
-
-    .title {
-      font-size: 28px;
-    }
-  }
 }
 
 @media screen and (max-width: 760px) {
-  .mission-container {
-    padding: 40px 15px;
-  }
 
   .chapter-block {
     padding: 40px 16px;
