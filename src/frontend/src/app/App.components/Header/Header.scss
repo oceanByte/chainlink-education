@@ -44,11 +44,16 @@ html {
       &__circle {
         background: #fff;
         color: #000;
-        padding: 10px;
         border-radius: 50%;
         font-size: 15px;
         line-height: 19px;
         margin-left: 50px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         @include md {
           margin-left: 0;

@@ -1,17 +1,11 @@
-import { Button } from 'app/App.components/Button/Button.controller'
-import { Input } from 'app/App.components/Input/Input.controller'
-import { InputSpacer } from 'app/App.components/Input/Input.style'
-import classnames from 'classnames'
-//prettier-ignore
-import { FormInputs, getErrorMessage, getInputStatus, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from 'helpers/form'
-import * as PropTypes from 'prop-types'
 import * as React from 'react'
-import { ChangeEvent, SyntheticEvent, useState, useEffect } from 'react'
+import * as PropTypes from 'prop-types'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { SignUpInputs } from 'shared/user/SignUp'
-import Wave from '../../assets/wave.png'
 
-import { SignUpCard, SignUpLogin, SignUpStyled, SignUpTitle } from './SignUp.style'
+import classnames from 'classnames'
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 import { HeaderAuth } from '../../app/App.components/HeaderAuth/HeaderAuth.controller'
 
@@ -21,23 +15,50 @@ import Confirm from '../../assets/confirm.png'
 import UnConfirm from '../../assets/unconfirm.png'
 import ArrowRight from '../../assets/arrowRight.png'
 
+export const ValidationSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(2, 'Username must be longer than or equal to 2 characters')
+    .max(50, 'Username must be shorter than or equal to 50 characters')
+    .required('This field is required!'),
+  email: Yup.string()
+    .email('Invalid email')
+    .required('This field is required!'),
+  password: Yup.string()
+    .min(8, 'Password must be longer than or equal to 8 characters')
+    .max(50, 'Password must be shorter than or equal to 50 characters')
+    .required('This field is required!'),
+  confirmPassword: Yup.string()
+    .required('Please confirm your password')
+    .oneOf([Yup.ref('password'), null], 'Password mismatch'),
+  agree: Yup.bool().oneOf(
+      [true],
+      "You can't continue without agreeing to terms of use"
+    ),
+});
+
 type SignUpViewProps = {
   signUpCallback: (values: any) => void
   loading: boolean
 }
 
+interface IFormInputs {
+  username: string,
+  email: string,
+  password: string,
+  confirmPassword: string,
+  agree: boolean,
+}
+
 export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
-  const [form, setForm] = useState<FormInputs>({
-    username: { value: '' },
-    email: { value: '' },
-    password: { value: '' },
-    confirmPassword: { value: '' },
-    referral: { value: '' },
-  })
 
+  const initialValues = {
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    agree: false,
+  };
   const [password, setPassword] = useState('')
-  const [confirmPass, setConfirmPass] = useState('')
-
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [showErrorMachPassword, setShowErrorMachPassword] = useState(2)
@@ -69,18 +90,6 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
   const [checkedInput, setCheckedInput] = useState(false)
   const classNameInputChecked = classnames('sign-up__checkbox-label', { 'sign-up__checkbox-checked': checkedInput })
 
-  const setReferalLink = (url: string) => {
-    setForm((prev) => ({ ...prev, referral: { value: url } }))
-  }
-
-  useEffect(() => {
-    const url = window.location.href
-
-    if (url.includes('?referral=')) {
-      setReferalLink(url)
-    }
-  }, [])
-
   const handleChangePassword = (e: any) => {
     const {
       target: { value },
@@ -91,125 +100,140 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
     setNumbers(regNumbers.test(value))
     setSpecial(regSpecial.test(value))
     setMinLength(regMinLength.test(value))
-
+    
     setPassword(value)
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedForm = updateFormFromChange(e, form, SignUpInputs)
-    setForm(updatedForm)
-  }
-
-  const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedForm = updateFormFromBlur(e, form)
-    setForm(updatedForm)
-  }
-
-  const handleSubmit = (event: SyntheticEvent) => {
-    const updatedForm = updateFormFromSubmit(event, form, SignUpInputs)
-
-    if (
-      !updatedForm.username.error &&
-      !updatedForm.email.error &&
-      !updatedForm.password.error &&
-      !updatedForm.confirmPassword.error
-    )
-      signUpCallback({
-        username: updatedForm.username.value,
-        email: updatedForm.email.value,
-        password: updatedForm.password.value,
-        confirmPassword: updatedForm.confirmPassword.value,
-        referral: updatedForm.referral.value,
-      })
-    else setForm(updatedForm)
+  const handleSubmit = (values: IFormInputs) => {
+    signUpCallback(values)
   }
 
   return (
     <>
       <HeaderAuth />
-      <form className="sign-up">
-        <p className="sign-up-title">Sign up</p>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={ValidationSchema}
+        onSubmit={handleSubmit}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            setFieldValue,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+          }) => (
+            <form className="sign-up" onSubmit={handleSubmit}>
+              <p className="sign-up-title">Sign up</p>
 
-        <div className="sign-up-name">
-          <label htmlFor="sign-up-user">USERNAME</label>
-          <input type="text" id="sign-up-user" name="usernameOrEmail" />
-        </div>
-        <div className="sign-up-email">
-          <label htmlFor="sign-up-email">EMAIL ADDRESS</label>
-          <input type="text" id="sign-up-email" name="usernameOrEmail" />
-        </div>
-        <div className="sign-up__pass">
-          <img src={eyeForPassword} alt="eye" onClick={() => setShowPassword((prev) => !prev)} />
-          <label htmlFor="sign-up-pass">Choose new password</label>
-          <input
-            type={typeOfInputPassword}
-            id="sign-up-pass"
-            name="solution"
-            onChange={handleChangePassword}
-            value={password}
-            onBlur={handleBlur}
-          />
-        </div>
-        <div className="sign-up__validation">
-          <div className="sign-up__validation-left">
-            <div className="sign-up__validation-left-uppercase-letter">
-              <img src={uppercaseImage} alt="confirm" />
-              Min 1 uppercase letter
-            </div>
-            <div className="sign-up__validation-left-lowercase-letter">
-              <img src={lowercaseImage} alt="confirm" />
-              Min 1 lowercase letter
-            </div>
-            <div className="sign-up__validation-left-number">
-              <img src={numbersImage} alt="confirm" />
-              Min 1 numbers
-            </div>
-          </div>
-          <div className="sign-up__validation-right">
-            <div className="sign-up__validation-right-special-characters" title='Only "!"'>
-              <img src={specialImage} alt="confirm" />
-              Min 1 special characters
-            </div>
-            <div className="sign-up__validation-right-min-length">
-              <img src={minLengthImage} alt="confirm" />
-              Min length = 8
-            </div>
-          </div>
-        </div>
-        <div className="sign-up__confirm-pass">
-          <img src={eyeForConfirmPassword} alt="eye" onClick={() => setShowConfirmPassword((prev) => !prev)} />
-          <label htmlFor="sign-up__confirm-pass">Confirm Password</label>
-          <input
-            type={typeOfInputConfirmPassword}
-            id="sign-up__confirm-pass"
-            // onChange={handleChange}
-            // value={form.newPassword.value}
-            // onBlur={passwordMatching}
-            onChange={(e) => setConfirmPass(e.target.value)}
-            value={confirmPass}
-            autoComplete="new-password"
-          />
-        </div>
-        <div className="sign-up__checkbox" onClick={() => setCheckedInput((prev) => !prev)}>
-          <label
-            htmlFor="sign-up__checkbox"
-            className={classNameInputChecked}
-            onChange={() => setCheckedInput((prev) => !prev)}
-          >
-            <input type="checkbox" id="sign-up__checkbox" className="sign-up__checkbox-input" />
-          </label>
-          <span className="sign-up__checkbox-text">
-            By signing up, you confirm that you've read and accepted our Privacy Policy and you've read Terms of Use
-          </span>
-        </div>
-        <button className="reset-password__sign" type="submit">
-          <img src={ArrowRight} alt="arrow" />
-          Create your free account
-        </button>
-        <Link to="forgot-password">
-          <div className="reset-password__forgot">Forgot your password?</div>
-        </Link>
-      </form>
+              <div className="sign-up-name">
+                <label htmlFor="sign-up-user">USERNAME</label>
+                <input
+                  type="text"
+                  id="sign-up-user"
+                  name="username"
+                  value={values.username}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              <div className="sign-up-email">
+                <label htmlFor="sign-up-email">EMAIL ADDRESS</label>
+                <input
+                  type="email"
+                  id="sign-up-email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              <div className="sign-up__pass">
+                <img src={eyeForPassword} alt="eye" onClick={() => setShowPassword((prev) => !prev)} />
+                <label htmlFor="sign-up-pass">Choose new password</label>
+                <input
+                  type={typeOfInputPassword}
+                  id="sign-up-pass"
+                  name="password"
+                  onChange={(e) => {
+                    handleChangePassword(e)
+
+                    setFieldValue("password", e.target.value)
+                  }}
+                  value={values.password}
+                />
+              </div>
+              <div className="sign-up__validation">
+                <div className="sign-up__validation-left">
+                  <div className="sign-up__validation-left-uppercase-letter">
+                    <img src={uppercaseImage} alt="confirm" />
+                    Min 1 uppercase letter
+                  </div>
+                  <div className="sign-up__validation-left-lowercase-letter">
+                    <img src={lowercaseImage} alt="confirm" />
+                    Min 1 lowercase letter
+                  </div>
+                  <div className="sign-up__validation-left-number">
+                    <img src={numbersImage} alt="confirm" />
+                    Min 1 numbers
+                  </div>
+                </div>
+                <div className="sign-up__validation-right">
+                  <div className="sign-up__validation-right-special-characters" title='Only "!"'>
+                    <img src={specialImage} alt="confirm" />
+                    Min 1 special characters
+                  </div>
+                  <div className="sign-up__validation-right-min-length">
+                    <img src={minLengthImage} alt="confirm" />
+                    Min length = 8
+                  </div>
+                </div>
+              </div>
+              <div className="sign-up__confirm-pass">
+                <img src={eyeForConfirmPassword} alt="eye" onClick={() => setShowConfirmPassword((prev) => !prev)} />
+                <label htmlFor="sign-up__confirm-pass">Confirm Password</label>
+                <input
+                  type={typeOfInputConfirmPassword}
+                  id="sign-up__confirm-pass"
+                  name="confirmPassword"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.confirmPassword}
+                  autoComplete="new-password"
+                />
+              </div>
+              <div className="sign-up__checkbox" onClick={() => setCheckedInput((prev) => !prev)}>
+                <label
+                  htmlFor="sign-up__checkbox"
+                  className={classNameInputChecked}
+                  onChange={() => setCheckedInput((prev) => !prev)}
+                >
+                  <input
+                    type="checkbox"
+                    id="sign-up__checkbox"
+                    className="sign-up__checkbox-input"
+                    name="agree"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </label>
+                <span className="sign-up__checkbox-text">
+                  By signing up, you confirm that you've read and accepted our Privacy Policy and you've read Terms of Use
+                </span>
+              </div>
+              <button className="reset-password__sign" type="submit">
+                <img src={ArrowRight} alt="arrow" />
+                Create your free account
+              </button>
+              <Link to="forgot-password">
+                <div className="reset-password__forgot">Forgot your password?</div>
+              </Link>
+            </form>
+        )}
+      </Formik>
     </>
     // <SignUpStyled>
     //   <SignUpTitle>

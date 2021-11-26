@@ -37,6 +37,16 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
     }
   }
 
+  const formatUsername = (username: string) => {
+    const usernameArr = username.split('_');
+
+    if (usernameArr.length >= 2) {
+      return `${usernameArr[0][0].toUpperCase()}${usernameArr[1][0].toUpperCase()}`
+    }
+
+    return `${usernameArr[0][0].toUpperCase()}`
+  }
+
   const loggedOutHeader = (
     <div className="header-menu-log">
       <Link to="/login" className="header-menu-log__link link__signin">
@@ -51,9 +61,9 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
   const loggedInHeader = (
     <>
       <div className="header-menu-user" onClick={() => setShowUserMenu((st) => !st)}>
-        <div className="header-menu-user__circle">JS</div>
+        <div className="header-menu-user__circle">{formatUsername(user?.username || "U")}</div>
         <div className="header-menu-user__name">
-          John Smith <span>&#9660;</span>
+          {user?.username} <span>&#9660;</span>
         </div>
         <div className={additionalUserMenu}>
           <div className="header-menu-user-menu__item">
