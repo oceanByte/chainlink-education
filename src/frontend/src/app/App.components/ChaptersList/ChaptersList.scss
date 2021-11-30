@@ -1,0 +1,69 @@
+.header-chapters {
+  z-index: 15;
+  position: absolute;
+  background: #fff;
+  top: 80px;
+  right: 325px;
+  padding: 20px 30px;
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 15px 25px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+  &.hidden {
+    display: none;
+  }
+  @include md {
+    top: 125px;
+    right: 50%;
+    transform: translateX(50%);
+    width: calc(100% - 40px);
+  }
+
+  &__item {
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid $grayscale3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $grayscale1;
+
+    &.current {
+      color: $primary;
+    }
+
+    &.no-bb {
+      border-bottom: none;
+    }
+
+    &__name {
+      max-width: 320px;
+      @include fluid-size('font-size', 375px, 1600px, 13px, 15px);
+      line-height: 19px;
+    }
+
+    &__completion {
+      @include fluid-size('font-size', 375px, 1600px, 8px, 11px);
+      @include fluid-size('line-height', 375px, 1600px, 10px, 14px);
+      color: #fff;
+      border-radius: 5px;
+      width: 78px;
+      height: 19px;
+      background: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      line-height: 14px;
+
+      &.completed {
+        background: $secondary3;
+      }
+      &.continue {
+        background: $primary;
+      }
+    }
+  }
+}

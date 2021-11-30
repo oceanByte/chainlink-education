@@ -151,7 +151,7 @@
 
     &__number {
       @include fluid-size("font-size", 375px, 1600px, 16px, 22px);
-      @include fluid-size("line-height", 375px, 1600px, 24px, 33pxpx);
+      @include fluid-size("line-height", 375px, 1600px, 24px, 33px);
     }
   }
 

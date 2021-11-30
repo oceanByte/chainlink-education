@@ -13,42 +13,42 @@ import { data as chapter8 } from './Chapter-8'
 export const chapterData: ChapterData[] = [
   {
     pathname: `/${course.path}/chapter-1`,
-    name: 'Introduction',
+    name: 'What will this course cover?',
     data: chapter1,
   },
   {
     pathname: `/${course.path}/chapter-2`,
-    name: 'Introduction 2',
+    name: 'What are Contracts?',
     data: chapter2,
   },
   {
     pathname: `/${course.path}/chapter-3`,
-    name: 'Introduction 3',
+    name: 'Smart Contracts - The Future',
     data: chapter3,
   },
   {
     pathname: `/${course.path}/chapter-4`,
-    name: 'Introduction 4',
+    name: 'The Smart Contract Connectivity Problem',
     data: chapter4,
   },
   {
     pathname: `/${course.path}/chapter-5`,
-    name: 'Introduction 5',
+    name: 'Chainlink Data Feeds',
     data: chapter5,
   },
   {
     pathname: `/${course.path}/chapter-6`,
-    name: 'Introduction 6',
+    name: 'Conclusion',
     data: chapter6,
   },
   {
     pathname: `/${course.path}/chapter-7`,
-    name: 'Introduction 7',
+    name: 'The Smart Contract Connectivity Problem',
     data: chapter7,
   },
   {
     pathname: `/${course.path}/chapter-8`,
-    name: 'Introduction 8',
+    name: 'Centralized Oracles',
     data: chapter8,
   },
 ]

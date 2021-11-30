@@ -1,18 +1,29 @@
 import * as PropTypes from 'prop-types'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+
 import { PublicUser } from 'shared/user/PublicUser'
-import { useState } from 'react'
-import { isConstructorDeclaration } from 'typescript'
+import { Option } from '../Select/Select.view'
+
+import { chaptersByCourse } from '../../../pages/Course/Course.data'
+import { ChapterData } from '../../../pages/Chapter/Chapter.controller'
+
 import classnames from 'classnames'
+import { ChaptersListView } from '../ChaptersList/ChaptersListView'
 
 type HeaderViewProps = {
   user?: PublicUser
-  removeAuthUserCallback: () => void
+  removeAuthUserCallback: () => void,
+  pathname: string,
+  activeCourse: Option,
 }
 
-export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) => {
-  const { pathname } = useLocation()
+export const HeaderView = ({
+  user,
+  removeAuthUserCallback,
+  pathname,
+  activeCourse
+}: HeaderViewProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(true)
@@ -76,7 +87,7 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
             <Link to="/reset-password">Reset password</Link>
           </div>
           <div className="header-menu-user-menu__item">
-            <Link to="/login">Log out</Link>
+            <div onClick={removeAuthUserCallback}>Log out</div>
           </div>
         </div>
       </div>
@@ -117,94 +128,12 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
             }}
           />
         </div>
-        <div className={`header-chapters p-font ${isDropdownOpen ? '' : 'hidden'}`}>
-          <Link
-            to="/chainlinkIntroduction/chapter-1"
-            className={`header-chapters__item ${pathname === '/chainlinkIntroduction/chapter-1' ? 'current': 'other'}`}
-          >
-            <span className="header-chapters__item__name">
-              Chapter 1: <span className="h-font">What will this course cover?</span>
-            </span>
-            <div className="header-chapters__item__completion completed">COMPLETED</div>
-          </Link>
-          <Link
-            to="/chainlinkIntroduction/chapter-2"
-            className={`header-chapters__item`}
-          >
-            <div className={`header-chapters__item ${pathname === '/chainlinkIntroduction/chapter-2' ? 'current': 'other'}`}>
-              <span className="header-chapters__item__name">
-                Chapter 2: <span className="h-font">What are Contracts?</span>
-              </span>
-              <div className="header-chapters__item__completion completed">COMPLETED</div>
-            </div>
-          </Link>
-          <Link
-            to="/chainlinkIntroduction/chapter-3"
-            className={`header-chapters__item`}
-          >
-            <div className={`header-chapters__item ${pathname === '/chainlinkIntroduction/chapter-3' ? 'current': 'other'}`}>
-              <span className="header-chapters__item__name">
-                Chapter 3: <span className="h-font">Smart Contracts - The Future</span>
-              </span>
-              <div className="header-chapters__item__completion continue">CONTINUE</div>
-            </div>
-          </Link>
-          <Link
-            to="/chainlinkIntroduction/chapter-4"
-            className={`header-chapters__item`}
-          >
-            <div className={`header-chapters__item ${pathname === '/chainlinkIntroduction/chapter-4' ? 'current': 'other'}`}>
-              <span className="header-chapters__item__name">
-                Chapter 4: <span className="h-font">The Smart Contract Connectivity Problem</span>
-              </span>
-              <div className="header-chapters__item__completion"></div>
-            </div>
-          </Link>
-          <Link
-            to="/chainlinkIntroduction/chapter-5"
-            className={`header-chapters__item`}
-          >
-            <div className={`header-chapters__item ${pathname === '/chainlinkIntroduction/chapter-5' ? 'current': 'other'}`}>
-              <span className="header-chapters__item__name">
-                Chapter 5: <span className="h-font">Chainlink Data Feeds</span>
-              </span>
-              <div className="header-chapters__item__completion"></div>
-            </div>
-          </Link>
-          <Link
-            to="/chainlinkIntroduction/chapter-6"
-            className={`header-chapters__item`}
-          >
-            <div className={`header-chapters__item ${pathname === '/chainlinkIntroduction/chapter-6' ? 'current': 'other'}`}>
-              <span className="header-chapters__item__name">
-                Chapter 6: <span className="h-font">Conclusion</span>
-              </span>
-              <div className="header-chapters__item__completion "></div>
-            </div>
-          </Link>
-          <Link
-            to="/chainlinkIntroduction/chapter-7"
-            className={`header-chapters__item`}
-          >
-            <div className={`header-chapters__item ${pathname === '/chainlinkIntroduction/chapter-7' ? 'current': 'other'}`}>
-              <span className="header-chapters__item__name">
-                Chapter 7:
-                <span className="h-font">The Smart Contract Connectivity Problem</span>
-              </span>
-              <div className="header-chapters__item__completion"></div>
-            </div>
-          </Link>
-          <Link
-            to="/chainlinkIntroduction/chapter-8"
-            className={`header-chapters__item `}
-          >
-            <div className={`header-chapters__item no-bb ${pathname === '/chainlinkIntroduction/chapter-8' ? 'current': 'other'}`}>
-              <span className="header-chapters__item__name">
-                Chapter 8: <span className="h-font">Centralized Oracles</span>
-              </span>
-              <div className="header-chapters__item__completion"></div>
-            </div>
-          </Link>
+        <div className={classnames('chapters-list', !isDropdownOpen && 'hidden')}>
+          <ChaptersListView
+            user={user}
+            activeCourse={activeCourse}
+            pathname={pathname}
+          />
         </div>
         <div className={`header-list ${isBurgerMenuOpen ? '' : 'hidden'}`}>
           <div className="header__item-border" />

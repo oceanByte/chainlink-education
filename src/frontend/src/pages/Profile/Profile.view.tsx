@@ -1,24 +1,57 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
+
 import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePassword'
 import { ConfirmYouPassword } from '../../app/App.components/ConfirmYouPassword/ConfirmYouPassword'
 import { DeleteAccount } from '../../app/App.components/DeleteAccount/DeleteAccount'
+import { PublicUser } from 'shared/user/PublicUser'
+import { Option } from 'app/App.components/Select/Select.view'
+import { ChaptersListView } from 'app/App.components/ChaptersList/ChaptersListView'
 
+type ProfileViewProps = {
+  user?: PublicUser,
+  activeCourse: Option,
+}
 
-type ProfileViewProps = {}
+export const ProfileView = ({
+  user,
+  activeCourse,
+}: ProfileViewProps) => {
 
-export const ProfileView = () => {
-  const { search } = useLocation()
+  const { search, pathname } = useLocation()
   const [section, setSection] = useState(1)
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
   const [isDeleteAccVisible, setIsDeleteAccVisible] = useState(true)
+  const [percent, setPercent] = useState(0);
 
   useEffect(() => {
     if (search) {
       setSection(() => +search[search.length-1])
     }
   }, [search])
+
+  console.log(chapterData);
+  chapterData.forEach((chapter, i) => {
+    if (pathname === chapter.pathname) {
+
+      if (i !== 7){
+        setPercent(() => ((i + 1) / chapterData.length) * 100)
+      }
+      else setPercent(() => 100)
+    }
+  })
+
+  useEffect(() => {
+    if (user && user.progress) {
+      const userProgress = user && user.progress.length;
+      setPercent(() => (userProgress / chapterData.length) * 100)
+    }
+  }, [])
+
   return (
     <div className='profile-page'>
       <div className='profile-page-sections'>
@@ -46,43 +79,16 @@ export const ProfileView = () => {
         <div className='profile-page-section__header h-font'>Progress</div>
         <div className='profile-page-progress__bar'>
           <div className='profile-page-progress__bar__line'>
-            <div className='profile-page-progress__bar__line__color' />
+            <div className='profile-page-progress__bar__line__color' style={{ width: `${percent}%` }} />
           </div>
-          <div className='profile-page-progress__bar__number'>8%</div>
+          <div className='profile-page-progress__bar__number'>{percent}%</div>
         </div>
         <div className='profile-page-progress-chapters p-font'>
-          <div className='profile-page-progress-chapters__item'>
-            <span className='profile-page__chapter-name'>Chapter 1: What will this course cover?</span>
-            <div className='profile-page__chapter-completion completed'>COMPLETED</div>
-          </div>
-          <div className='profile-page-progress-chapters__item'>
-            <span className='profile-page__chapter-name'>Chapter 2: What are Contracts?</span>
-            <div className='profile-page__chapter-completion completed'>COMPLETED</div>
-          </div>
-          <div className='profile-page-progress-chapters__item'>
-            <span className='profile-page__chapter-name'>Chapter 3: Digital Agreements - What we have today</span>
-            <div className='profile-page__chapter-completion continue'>CONTINUE</div>
-          </div>
-          <div className='profile-page-progress-chapters__item'>
-            <span className='profile-page__chapter-name'>Chapter 4: Blockchain Introduction</span>
-            <div className='profile-page__chapter-completion'></div>
-          </div>
-          <div className='profile-page-progress-chapters__item'>
-            <span className='profile-page__chapter-name'>Chapter 5: How Blockchains Work Intro</span>
-            <div className='profile-page__chapter-completion'></div>
-          </div>
-          <div className='profile-page-progress-chapters__item'>
-            <span className='profile-page__chapter-name'>Chapter 6: Smart Contracts - The Future</span>
-            <div className='profile-page__chapter-completion'></div>
-          </div>
-          <div className='profile-page-progress-chapters__item'>
-            <span className='profile-page__chapter-name'>Chapter 7: The Smart Contract Connectivity Problem</span>
-            <div className='profile-page__chapter-completion'></div>
-          </div>
-          <div className='profile-page-progress-chapters__item no-bb'>
-            <span className='profile-page__chapter-name'>Chapter 8: Centralized Oracles</span>
-            <div className='profile-page__chapter-completion'></div>
-          </div>
+          <ChaptersListView
+            user={user}
+            activeCourse={activeCourse}
+            pathname={pathname}
+          />
         </div>
         <div className='profile-page-progress__certificate-header h-font'>
           Certificate
@@ -106,25 +112,27 @@ export const ProfileView = () => {
           <div className='profile-page-section__header h-font'>Account info</div>
           <div className='profile-page-account-info__username p-font'>
             <label htmlFor='profile-page-account-info__username__input'>Username</label>
-            <input
+            <div>{user?.username}</div>
+            {/* <input
               type='text'
               id='profile-page-account-info__username__input'
               name='solution'
-            />
+            /> */}
           </div>
           <div className='profile-page-account-info__email p-font'>
             <label htmlFor='profile-page-account-info__email__input'>Email address</label>
-            <input
+            {/* <div>{user?.email}</div> */}
+            {/* <input
               type='email'
               id='profile-page-account-info__email__input'
               name='solution'
-            />
+            /> */}
           </div>
         </div>
-        <button className='btn btn-green'>
+        {/* <button className='btn btn-green'>
           <span className='profile-page-account-info__button__text'> Save changes </span>
           <span className='arrow-upright' />
-        </button>
+        </button> */}
         <div onClick={() => setIsDeleteAccVisible(false)} className='profile-page-account-info__delete-account'>
           Delete your account
         </div>
