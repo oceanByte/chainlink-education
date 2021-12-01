@@ -1,14 +1,16 @@
 import * as React from 'react'
-import { useState } from 'react'
 import * as PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import Eye from '../../assets/eye.png'
-import EyeHide from '../../assets/eyeHide.png'
 import ArrowRight from '../../assets/arrowRight.png'
+
+import { InputField } from '../../app/App.components/Form/InputField/Input.controller';
+import { InputFieldWithEye } from '../../app/App.components/Form/InputFieldWithEye/Input.controller';
+
+import { Row } from './Login.style';
 
 const ValidationSchema = Yup.object().shape({
   usernameOrEmail: Yup.string()
@@ -38,11 +40,6 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
     password: '',
   };
 
-  const [showPassword, setShowPassword] = useState(false)
-
-  const eyeForPassword = showPassword ? EyeHide : Eye
-
-  const typeOfInputPassword = showPassword ? 'text' : 'password'
 
   const handleSubmit = (values: IFormInputs) => {
     loginCallback(values)
@@ -67,31 +64,39 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
         }) => (
           <form className="login-form" onSubmit={handleSubmit}>
             <p className="login-form-title">Sign in</p>
-            <div className="login-form-email">
-              <label htmlFor="login-form-email">Email address</label>
-              <input
+            <Row>
+              <InputField
+                label="Email address"
                 type="text"
-                id="login-form-email"
-                name="usernameOrEmail"
-                onChange={handleChange}
                 value={values.usernameOrEmail}
+                onChange={handleChange}
                 onBlur={handleBlur}
-                // inputStatus={getInputStatus(form.usernameOrEmail)}
-                // errorMessage={getErrorMessage(form.usernameOrEmail)}
+                name="usernameOrEmail"
+                inputStatus={
+                  errors.usernameOrEmail && touched.usernameOrEmail
+                    ? 'error' : !errors.usernameOrEmail && touched.usernameOrEmail 
+                    ? 'success' : undefined
+                  }
+                errorMessage={errors.usernameOrEmail && touched.usernameOrEmail && errors.usernameOrEmail}
+                isDisabled={false}
               />
-            </div>
-            <div className="login-form-password">
-              <img src={eyeForPassword} alt="eye" onClick={() => setShowPassword((prev) => !prev)} />
-              <label htmlFor="login-form-password">Password</label>
-              <input
-                type={typeOfInputPassword}
-                id="login-form-password"
-                name="password"
+            </Row>
+            <Row>
+              <InputFieldWithEye
+                label="Password"
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                name="password"
+                inputStatus={
+                  errors.password && touched.password
+                    ? 'error' : !errors.password && touched.password 
+                    ? 'success' : undefined
+                  }
+                errorMessage={errors.password && touched.password && errors.password}
+                isDisabled={false}
               />
-            </div>
+            </Row>
             <button className="login-form-sign" type="submit">
               <img src={ArrowRight} alt="arrow" />
               Sign In

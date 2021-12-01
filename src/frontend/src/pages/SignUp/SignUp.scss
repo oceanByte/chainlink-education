@@ -20,7 +20,7 @@
     color: $grayscale1;
     font-weight: 900;
     font-size: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 
     @include md {
       font-size: 32px;
@@ -35,78 +35,6 @@
       font-size: 24px;
       margin-bottom: 20px;
     }
-  }
-
-  &-email,
-  &-name {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    color: $grayscale1;
-    font-family: Circular Std Black;
-
-    label {
-      text-transform: uppercase;
-      font-size: 14px;
-    }
-
-    input {
-      width: 100%;
-      border: none;
-      border-bottom: 1px solid $grayscale3;
-      background: none;
-      margin-top: 8px;
-      font-size: 16px;
-      padding-bottom: 15px;
-      color: $grayscale1;
-      font-family: Circular Std Book;
-    }
-  }
-
-  &-email,
-  &__pass {
-    margin-top: 30px;
-  }
-
-  &__pass,
-  &__confirm-pass {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    color: $grayscale1;
-    font-family: Circular Std Black;
-    position: relative;
-
-    label {
-      text-transform: uppercase;
-      font-size: 14px;
-    }
-
-    input {
-      width: 100%;
-      border: none;
-      border-bottom: 1px solid $grayscale3;
-      background: none;
-      margin-top: 8px;
-      font-size: 16px;
-      padding-bottom: 14px;
-      color: $grayscale1;
-      font-family: Circular Std Book;
-    }
-    img {
-      position: absolute;
-      width: 22px;
-      // height: 22px;
-      right: 0;
-      top: 50%;
-      transform: translate(0, -20%);
-      cursor: pointer;
-      z-index: 2723647234;
-    }
-  }
-
-  &__confirm-pass {
-    margin-top: 31px;
   }
 
   &__validation {
@@ -130,37 +58,6 @@
     }
   }
 
-  &__checkbox {
-    align-self: flex-start;
-    display: flex;
-    margin-top: 20px;
-    cursor: pointer;
-    user-select: none;
-
-    input {
-      display: none;
-    }
-
-    &-label {
-      display: block;
-      width: 37px;
-      height: 20px;
-      border: 1px solid black;
-      box-sizing: border-box;
-    }
-
-    &-checked {
-      border: 6px solid #05c46b;
-      width: 30px;
-    }
-
-    &-text {
-      margin-left: 10px;
-      font-family: Circular Std Book;
-      color: $grayscale2;
-      font-size: 14px;
-    }
-  }
 
   @include md {
     max-width: 427px;

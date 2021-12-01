@@ -17,4 +17,6 @@ export const headerColor = '#10122399'
 export const inactiveColor = '#242649'
 export const counterColor = '#6D728F'
 export const okColor = '#12650a'
+export const grayscale1 = '#0c162c'
+export const secondary3 = '#05c46b'
 

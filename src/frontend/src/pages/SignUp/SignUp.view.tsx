@@ -15,6 +15,11 @@ import Confirm from '../../assets/confirm.png'
 import UnConfirm from '../../assets/unconfirm.png'
 import ArrowRight from '../../assets/arrowRight.png'
 
+import { InputField } from '../../app/App.components/Form/InputField/Input.controller';
+import { InputFieldWithEye } from '../../app/App.components/Form/InputFieldWithEye/Input.controller';
+
+import { Row, CheckboxWrapp, ErrorMessage } from './SignUp.style';
+
 export const ValidationSchema = Yup.object().shape({
   username: Yup.string()
     .min(2, 'Username must be longer than or equal to 2 characters')
@@ -24,6 +29,7 @@ export const ValidationSchema = Yup.object().shape({
     .email('Invalid email')
     .required('This field is required!'),
   password: Yup.string()
+    .matches(/(?=.*\d)(?=.*[a-zäöüßа-яієїґ])(?=.*[A-ZÄÖÜА-ЯІЄЇГҐ])(?=.*[-+_!@#$%^&*.,?<>()|"])/, 'Invalid password')
     .min(8, 'Password must be longer than or equal to 8 characters')
     .max(50, 'Password must be shorter than or equal to 50 characters')
     .required('This field is required!'),
@@ -72,7 +78,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
   const regUppercase = /^(?=.*[A-ZÄÖÜА-ЯІЄЇГҐ]).+$/gm
   const regLowercase = /^(?=.*[a-zäöüßа-яієїґ]).+$/gm
   const regNumbers = /^(?=.*\d).+$/gm
-  const regSpecial = /[!@#$%^&*(),.?":{}|<>]/gm
+  const regSpecial = /[-+_!@#$%^&*.,?<>()|"]/gm
   const regMinLength = /^.{8,}$/gm
 
   const uppercaseImage = uppercase ? Confirm : UnConfirm
@@ -128,44 +134,61 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
           }) => (
             <form className="sign-up" onSubmit={handleSubmit}>
               <p className="sign-up-title">Sign up</p>
-
-              <div className="sign-up-name">
-                <label htmlFor="sign-up-user">USERNAME</label>
-                <input
+              
+              <Row>
+                <InputField
+                  label="USERNAME"
                   type="text"
-                  id="sign-up-user"
-                  name="username"
                   value={values.username}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  name="username"
+                  inputStatus={
+                    errors.username && touched.username
+                      ? 'error' : !errors.username && touched.username 
+                      ? 'success' : undefined
+                    }
+                  errorMessage={errors.username && touched.username && errors.username}
+                  isDisabled={false}
                 />
-              </div>
-              <div className="sign-up-email">
-                <label htmlFor="sign-up-email">EMAIL ADDRESS</label>
-                <input
-                  type="email"
-                  id="sign-up-email"
-                  name="email"
+              </Row>
+              <Row>
+                <InputField
+                  label="EMAIL ADDRESS"
+                  type="text"
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  name="email"
+                  inputStatus={
+                    errors.email && touched.email
+                      ? 'error' : !errors.email && touched.email 
+                      ? 'success' : undefined
+                    }
+                  errorMessage={errors.email && touched.email && errors.email}
+                  isDisabled={false}
                 />
-              </div>
-              <div className="sign-up__pass">
-                <img src={eyeForPassword} alt="eye" onClick={() => setShowPassword((prev) => !prev)} />
-                <label htmlFor="sign-up-pass">Choose new password</label>
-                <input
-                  type={typeOfInputPassword}
-                  id="sign-up-pass"
-                  name="password"
+              </Row>
+              <Row>
+                <InputFieldWithEye
+                  label="Choose new password"
+                  value={values.password}
                   onChange={(e) => {
                     handleChangePassword(e)
 
                     setFieldValue("password", e.target.value)
                   }}
-                  value={values.password}
+                  onBlur={handleBlur}
+                  name="password"
+                  inputStatus={
+                    errors.password && touched.password
+                      ? 'error' : !errors.password && touched.password 
+                      ? 'success' : undefined
+                    }
+                  errorMessage={errors.password && touched.password && errors.password}
+                  isDisabled={false}
                 />
-              </div>
+              </Row>
               <div className="sign-up__validation">
                 <div className="sign-up__validation-left">
                   <div className="sign-up__validation-left-uppercase-letter">
@@ -192,118 +215,56 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
                   </div>
                 </div>
               </div>
-              <div className="sign-up__confirm-pass">
-                <img src={eyeForConfirmPassword} alt="eye" onClick={() => setShowConfirmPassword((prev) => !prev)} />
-                <label htmlFor="sign-up__confirm-pass">Confirm Password</label>
-                <input
-                  type={typeOfInputConfirmPassword}
-                  id="sign-up__confirm-pass"
-                  name="confirmPassword"
+              <Row>
+                <InputFieldWithEye
+                  label="Confirm Password"
+                  value={values.confirmPassword}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.confirmPassword}
-                  autoComplete="new-password"
+                  name="confirmPassword"
+                  inputStatus={
+                    errors.confirmPassword && touched.confirmPassword
+                      ? 'error' : !errors.confirmPassword && touched.confirmPassword 
+                      ? 'success' : undefined
+                    }
+                  errorMessage={errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
+                  isDisabled={false}
                 />
-              </div>
-              <div className="sign-up__checkbox" onClick={() => setCheckedInput((prev) => !prev)}>
-                <label
-                  htmlFor="sign-up__checkbox"
-                  className={classNameInputChecked}
-                  onChange={() => setCheckedInput((prev) => !prev)}
-                >
-                  <input
-                    type="checkbox"
-                    id="sign-up__checkbox"
-                    className="sign-up__checkbox-input"
-                    name="agree"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </label>
-                <span className="sign-up__checkbox-text">
-                  By signing up, you confirm that you've read and accepted our Privacy Policy and you've read Terms of Use
-                </span>
-              </div>
+              </Row>
+              <CheckboxWrapp>
+                <div className="sign-up__checkbox" onClick={() => setCheckedInput((prev) => !prev)}>
+                  <label
+                    htmlFor="sign-up__checkbox"
+                    className={classNameInputChecked}
+                    onChange={() => setCheckedInput((prev) => !prev)}
+                  >
+                    <input
+                      type="checkbox"
+                      id="sign-up__checkbox"
+                      className="sign-up__checkbox-input"
+                      name="agree"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                  </label>
+                  <span className="sign-up__checkbox-text">
+                    By signing up, you confirm that you've read and accepted our Privacy Policy and you've read Terms of Use
+                  </span>
+                </div>
+                {touched.agree && errors.agree ? (
+                    <ErrorMessage>
+                      {errors.agree}
+                    </ErrorMessage>
+                  ) : null}
+              </CheckboxWrapp>
               <button className="reset-password__sign" type="submit">
                 <img src={ArrowRight} alt="arrow" />
                 Create your free account
               </button>
-              <Link to="forgot-password">
-                <div className="reset-password__forgot">Forgot your password?</div>
-              </Link>
             </form>
         )}
       </Formik>
     </>
-    // <SignUpStyled>
-    //   <SignUpTitle>
-    //     <h1>Sign Up</h1>
-    //   </SignUpTitle>
-    //   <SignUpCard>
-    //     <form onSubmit={handleSubmit}>
-    //       <Input
-    //         icon="user"
-    //         name="username"
-    //         placeholder="Username"
-    //         type="text"
-    //         onChange={handleChange}
-    //         value={form.username.value}
-    //         onBlur={handleBlur}
-    //         inputStatus={getInputStatus(form.username)}
-    //         errorMessage={getErrorMessage(form.username)}
-    //       />
-    //       <Input
-    //         icon="email"
-    //         name="email"
-    //         placeholder="Email"
-    //         type="text"
-    //         onChange={handleChange}
-    //         value={form.email.value}
-    //         onBlur={handleBlur}
-    //         inputStatus={getInputStatus(form.email)}
-    //         errorMessage={getErrorMessage(form.email)}
-    //       />
-    //       <Input
-    //         icon="password"
-    //         name="password"
-    //         placeholder="Password"
-    //         type="password"
-    //         onChange={handleChange}
-    //         value={form.password.value}
-    //         onBlur={handleBlur}
-    //         inputStatus={getInputStatus(form.password)}
-    //         errorMessage={getErrorMessage(form.password)}
-    //       />
-    //       <Input
-    //         icon="password"
-    //         name="confirmPassword"
-    //         placeholder="Confirm password"
-    //         type="password"
-    //         onChange={handleChange}
-    //         value={form.confirmPassword.value}
-    //         onBlur={handleBlur}
-    //         inputStatus={getInputStatus(form.confirmPassword)}
-    //         errorMessage={getErrorMessage(form.confirmPassword)}
-    //       />
-    //       <Input
-    //         icon="user"
-    //         name="referral"
-    //         placeholder="Referral"
-    //         type="text"
-    //         onChange={handleChange}
-    //         value={form.referral.value}
-    //         onBlur={handleBlur}
-    //         inputStatus={getInputStatus(form.referral)}
-    //         errorMessage={getErrorMessage(form.referral)}
-    //       />
-    //       <InputSpacer />
-    //       <Button type="submit" text="Sign Up" icon="sign-up" loading={loading} />
-    //     </form>
-    //   </SignUpCard>
-    //   <SignUpLogin>
-    //     <Link to="/login">Or login now!</Link>
-    //   </SignUpLogin>
-    // </SignUpStyled>
   )
 }
 
