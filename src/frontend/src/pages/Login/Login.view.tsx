@@ -63,7 +63,7 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
           isSubmitting,
         }) => (
           <form className="login-form" onSubmit={handleSubmit}>
-            <p className="login-form-title">Sign in</p>
+            <div className="login-form-title">Sign in</div>
             <Row>
               <InputField
                 label="Email address"

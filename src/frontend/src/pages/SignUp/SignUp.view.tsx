@@ -133,7 +133,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
             isSubmitting,
           }) => (
             <form className="sign-up" onSubmit={handleSubmit}>
-              <p className="sign-up-title">Sign up</p>
+              <div className="sign-up-title">Sign up</div>
               
               <Row>
                 <InputField

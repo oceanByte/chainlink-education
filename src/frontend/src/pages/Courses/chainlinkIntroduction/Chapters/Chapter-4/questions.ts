@@ -1,6 +1,6 @@
 export const questions = [
     {
-        question: "Use the NEAR CLI view method to query the museum contract and report back the number of memes in the museum",
+        question: "Use the Chainlink CLI view method to query the museum contract and report back the number of memes in the museum",
         answers: [
             "just 1",
             "2",
