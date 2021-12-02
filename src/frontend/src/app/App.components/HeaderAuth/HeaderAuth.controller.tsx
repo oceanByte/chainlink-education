@@ -5,7 +5,13 @@ import { State } from 'reducers'
 
 import { HeaderView } from './HeaderAuth.view'
 
-export const HeaderAuth = () => {
+interface IHeaderAuth {
+  isSignUp?: boolean
+}
+
+export const HeaderAuth = ({
+  isSignUp
+}: IHeaderAuth) => {
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
 
@@ -13,5 +19,5 @@ export const HeaderAuth = () => {
     dispatch(logout())
   }
 
-  return <HeaderView user={user} removeAuthUserCallback={removeAuthUserCallback} />
+  return <HeaderView user={user} removeAuthUserCallback={removeAuthUserCallback} isSignUp={isSignUp} />
 }

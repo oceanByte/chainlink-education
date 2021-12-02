@@ -5,7 +5,7 @@ export const FooterView: any = () => (
   <div className="footer">
     <div className="footer-menu footer-content">
       <div className="footer-menu-list p-font">
-        <a href="https://elastic-johnson-1b0374.netlify.app/" target="_blank" className="footer-menu-list__item">
+        <a href="https://chainlink-education-app.herokuapp.com/" target="_blank" className="footer-menu-list__item">
           Academy
         </a>
         <a href="https://chain.link/" target="_blank" className="footer-menu-list__item">

@@ -116,7 +116,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
 
   return (
     <>
-      <HeaderAuth />
+      <HeaderAuth isSignUp />
       <Formik
         initialValues={initialValues}
         validationSchema={ValidationSchema}

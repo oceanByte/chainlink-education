@@ -13,11 +13,12 @@ import Logo from '../../../assets/logo.png'
 
 type HeaderViewProps = {
   user?: PublicUser
-  removeAuthUserCallback: () => void
+  removeAuthUserCallback: () => void,
+  isSignUp?: boolean
 }
 
 // Overall Navbar
-export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) => {
+export const HeaderView = ({ user, removeAuthUserCallback, isSignUp }: HeaderViewProps) => {
   const history = useHistory()
 
   return (
@@ -40,14 +41,26 @@ export const HeaderView = ({ user, removeAuthUserCallback }: HeaderViewProps) =>
           <img src={Logo} alt="" />
         </Link>
       </div>
-      <div className="header-auth-sign">
-        <div className="header-auth-sign-text">Don't have an account yet?</div>
-        <div className="header-auth-sign-button">
-          <Link to="/sign-up">
-            <button>Sign up</button>
-          </Link>
+      {isSignUp? (
+        <div className="header-auth-sign">
+          <div className="header-auth-sign-text">Already have an account?</div>
+          <div className="header-auth-sign-button">
+            <Link to="/login">
+              <button>Sign in</button>
+            </Link>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="header-auth-sign">
+          <div className="header-auth-sign-text">Don't have an account yet?</div>
+          <div className="header-auth-sign-button">
+            <Link to="/sign-up">
+              <button>Sign up</button>
+            </Link>
+          </div>
+        </div>
+      )}
+      
       {/* {user ? loggedInHeader({ user, removeAuthUserCallback }) : loggedOutHeader()} */}
       {/* loggedInHeader({(user, removeAuthUserCallback)}) */}
     </div>
