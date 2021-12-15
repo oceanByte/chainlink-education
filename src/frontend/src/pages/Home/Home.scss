@@ -92,7 +92,7 @@
   }
 
   &__image {
-    background: url('../../assets/homepage-guy.svg') no-repeat;
+    background: url('../../assets/homepage-guy.png') no-repeat;
     background-size: contain;
     @include fluid-size('width', 335px, 1600px, 260px, 562px);
     @include fluid-size('height', 335px, 1600px, 260px, 562px);
