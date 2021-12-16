@@ -1,7 +1,6 @@
-#####Chapter 5:
+#####Chapter 6:
 
-Chainlink Data Feeds
-=============================
+# Chainlink Data Feeds
 
 <ContentWrapp>
   <div class="imgContainer">
@@ -17,9 +16,10 @@ Chainlink Data Feeds
 
 As discussed in the previous lesson, Chainlink gives developers the ability to create extremely powerful DON’s that provide smart contracts with the highest quality data from outside the blockchain. As a smart contract developer, how can you take advantage of these DONs in your own smart contracts? Chainlink is open source so there’s always the option of making your own DON, but creating a DON is a complex and nuanced process. Instead, in the spirit of old developer adage “Never build something twice”, lets make use of existing DONs if possible.
 
-Luckily, many of the largest and highest quality node operators in the blockchain industry have already combined their knowledge and prowress to create DONs that serve the most in-demand data for smart contract developers to take advantage of. These data serving DONs are called <ColorWord>Chainlink Data Feeds</ColorWord>. Currently most of the data feeds provide data on various currency and cryptocurrency pairs, as that was initially what smart contract developers needed, but data feeds can be used to retrieve any type of data. 
+Luckily, many of the largest and highest quality node operators in the blockchain industry have already combined their knowledge and prowress to create DONs that serve the most in-demand data for smart contract developers to take advantage of. These data serving DONs are called <ColorWord>Chainlink Data Feeds</ColorWord>. Currently most of the data feeds provide data on various currency and cryptocurrency pairs, as that was initially what smart contract developers needed, but data feeds can be used to retrieve any type of data.
 
 You can see these data feeds updating in real time at data.chain.link. There you can select different blockchains Chainlink DONs are posting data to, as well view the details of each DON that compose a particular data feed. For instance if you click on the ETH/USD data feed you will see all the nodes involved in the DON, what price each individual node posted, and the final aggregated price of the asset. Some important terms you may notice are:
+
 <p><ColorWord>Rounds</ColorWord>: DONs update data feeds in rounds. When a new round is initiated the nodes in a DON retrieve the latest data point from data providers, aggregate the data at the individual node level and finally aggregate the between the nodes. Once the final aggregated data point, along with each individual nodes observation, is posted on-chain the round is considered complete.</p>
 <p><ColorWord>Heartbeat</ColorWord>: The maximum amount of time that is allowed to pass before the DON automically starts a new round and updates the data.</p>
 <p><ColorWord>Deviation Threshold</ColorWord>: If a node within the DON senses the data fluctuates by a certain percentage, they will automatically start a new round forcing the DON to update the data feed regardless of how much time has elapsed.</p>
@@ -38,7 +38,7 @@ You can see these data feeds updating in real time at data.chain.link. There you
 
 ## Programming with Chainlink Data Feeds
 
-Now that we  understand how Chainlink data feeds work, lets use them within a smart contract. To use a chainlink data feed within a smart contract you only have to complete three simple steps:
+Now that we understand how Chainlink data feeds work, lets use them within a smart contract. To use a chainlink data feed within a smart contract you only have to complete three simple steps:
 
 <div>
   <ul>
