@@ -1,6 +1,6 @@
-#####Chapter 4:
+#####Chapter 3:
 
-The Smart Contract Connectivity Problem
+Smart Contracts - The Future
 =============================
 
 <ContentWrapp>
@@ -10,111 +10,108 @@ The Smart Contract Connectivity Problem
 
   <div class="itemsContainer">
     <div class="item-text">
-     Now you want to connect your artwork to the physical (off-chain) world. Tell your artwork how to behave. 
+     There is a better way where you do not need to trust anyone and you can get full control and ownership. Emphasize freedom (sharing, exhibitions and owning). 
     </div>
   </div>
 </ContentWrapp>
 
-Blockchains and smart contracts are unaware of any conditions or logic that occur outside of the blockchain itself; they are unable to connect to outside resources.The reason for this is due to the distributed and deterministic nature of blockchains. All of the distributed nodes (nodes are computers running the blockchain software) in the blockchain must come to a consensus on what the blockchain is and any changes to it. If the blockchain just connected to a data source, the nodes could query the data at different times and get different answers, breaking the ability for the nodes to reach consensus. Even worse, if that data source changed locations or is down, the whole blockchain would break.
+Smart contacts result from the evolution of digital agreements. A Smart contract is a self-executing contract with the terms of the agreement being directly written into computer code.  Smart contracts provide the following benefits:
 
-This means developers can program smart contracts as long as their logic doesn’t require any outside data. This may sound  extremely limiting, but there is a system in place that sits in between blockchains and the outside world (a concept aptly called “middleware”).This middleware system is called an Oracle. The name <ColorWord>Oracle</ColorWord> comes from the Greek concept of an Oracle since it needs to determine what is <i>true</i> in outside systems.
-
-<Spacer>
-
-## Centralized Oracles
-
-<ContentWrapp>
-  <div class="imgContainer">
-    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
+<ListItemsContainer>
+  <div class="wrapp">
+    <p class="list__label">security/tamper proofness:</p>
+    <ul class="list__items">
+      <li class="list__item">
+        <p>
+          Many smart contracts have been live for years without security breaches or concerns.. A well designed smart contract cannot be easily changed after it is deployed.
+        </p>
+      </li>
+    </ul>
   </div>
-
-  <div class="itemsContainer">
-    <div class="item-text">
-     Manipulate the artwork to show what they want. Dangerous.
-    </div>
+  <div class="wrapp">
+    <p class="list__label">reliable, guaranteed execution:</p>
+    <ul class="list__items">
+      <li class="list__item">
+        <p>
+          In traditional agreements, the execution and enforcement of the terms detailed within the contract is highly dependent on the signing parties; this may not happen immediately or at all.   In terms of smart contracts, none of the parties have control over the execution or enforcement of contract terms. <br/>
+          <b>Example</b>: In the insurance industry, the contract isn’t immediately executed after the conditions have been met. Rather, a lengthy review process is initiated and it could take months, even years, before a contract is executed.
+        </p>
+      </li>
+    </ul>
   </div>
-</ContentWrapp>
-
-To create functional smart contracts we need a middleware system called an <ColorWord>oracle</ColorWord>, but how will we actually make this oracle? Well we are trying to get price data into our smart contract for NFT’s. Well my friend Jim (trust me, he is good!) is an expert in cryptocurrency prices, and he even has a server set up that we can access for price data. Awesome, we'll make Jim our oracle and he will provide price data to our NFT smart contract. 
-
-But wait….didn’t all the great properties of smart contracts and blockchains come from their decentralized nature? What if Jim wanted to maliciously send our smart contract bad price data so he could manipulate it in his favor? What if his server goes offline when the NFT needs to update and thus can’t? What if Jim isn’t even malicious but gets hacked by a malicious actor? This single oracle solution isn’t really solving much of the oracle problem because it isn’t <i>decentralized</i>, and thus provides a weak link that ruins all of those awesome smart contract properties. You really just need to trust that Jim, and my word on Jim, that he is a great person and will act in the best interest of everyone. But what if we had a decentralized middleware solution, one where Jim doesn’t control everything (sorry Jim) so we didn’t have to trust him? 
-
-Finally we are here…...enter Chainlink!
-
-<Spacer>
-
-## Chainlink and Decentralized Oracles
-
-<ContentWrapp>
-  <div class="imgContainer">
-    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
+  <div class="wrapp">
+    <p class="list__label">Transparency:</p>
+    <ul class="list__items">
+      <li class="list__item">
+        <p>
+          Traditional agreements hide details from users and other systems. Creates issues, such as the 2008 financial crisis
+        SC Transparency of the agreement and it’s enforcement is unavoidably built-in
+        </p>
+      </li>
+    </ul>
   </div>
-
-  <div class="itemsContainer">
-    <div class="item-text">
-     Artworks will follow pre-defined rules.
-    </div>
+  <div class="wrapp">
+    <p class="list__label">Trust Minimization:</p>
+    <ul class="list__items">
+      <li class="list__item">
+        <p>
+          Smart contracts reduce counterparty risk since neither party has control over the execution of an agreement. <br/>
+          <b>Example</b>: Robinhood can no longer stop people from trading Gamestop, unless it is coded into the agreement.
+        </p>
+      </li>
+    </ul>
   </div>
-</ContentWrapp>
-
-Smart contracts have special properties and need decentralized oracles to carry out functions. This is where Chainlink comes in. <ColorWord>Chainlink is a platform for creating decentralized oracle networks that provide various smart contract services</ColorWord>.  So using Chainlink we can create a price oracle that isn’t just Jim, but Jim and 30 other of the most trusted and expert crypto price data aggregators out there and make them come to agreement. 
-
-Chainlink allows developers to create and customize any type of <ColorWord>Decentralized Oracle Network</ColorWord>, or DONs, a smart contract might need. Developers can choose which nodes are a part of a network, what type of data they each node is looking for,  how nodes come to agreement, when nodes should post updates, and any other computation nodes should perform. Finally, with Chainlink developers can build smart contracts that can interact with the outside world in a way that preserves the decentralized nature of smart contracts.
-
-<Spacer>
-
-## How Chainlink Works
-
-<ContentWrapp>
-  <div class="imgContainer">
-    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
+  <div class="wrapp">
+    <p class="list__label">Efficiency:</p>
+    <ul class="list__items">
+      <li class="list__item">
+        <p>
+          The characteristics of smart contracts outlined  earlier can create more efficient, automated processes that save business cost. Insurance claim example
+        </p>
+      </li>
+    </ul>
   </div>
+</ListItemsContainer>
 
-  <div class="itemsContainer">
-    <div class="item-text">
-     Understand the possibilities before programming your artwork to react to the environment.
-    </div>
-  </div>
-</ContentWrapp>
-
-Chainlink allows developers  to build and customize DONs . Chainlink allows DONs to work and assures that node operators  are incentivized to not collude or act maliciously.  
-
-<p><ColorWord>How does Chainlink Work?</ColorWord></p>
-
-<div>
-  <p>Developers can customize several main areas of Chainlink DONs. These include:</p>
-  <ul>
+<MissionContainer>  
+  <div className="title">Activities:</div>
+  <ul className="mission-goals">
     <li>
-      <p>Specifying what data DONs need to provide</p>
+      Think about an industry where agreements and contracts play a crucial role in ensuring its success 
     </li>
     <li>
-      <p>How DONs retrieve data </p>
-    </li>
-    <li>
-      <p>When DONs provide data</p>
-    </li>
-    <li>
-      <p>How agreement (also known as consensus) is achieved among the nodes to achieve a single source of truth for the specified data.</p>
+      Brainstorm ways smart contracts can be used in those industries and how it can improve the current state of the industry.
     </li>
   </ul>
-</div>
+</MissionContainer>
 
-Each step is outlined in more detail below:
- 
-Specifying what data DONs need to provide:
+## Blockchain Introduction
 
-Due to the proliferation of Decentralized Finance (DeFi), a popular use case of Chainlink DONs is relating them with price data. However, any type of data that is available in a digital format can be accessed. This includes but is not limited to weather data, YouTube views, sensor data, or even data from other blockchains. For the NFT we’re just going to stick to price data for now, specifically the ETH/USD price, but you can imagine all the possibilities of cool smart contracts we can make with all of the digital data available today!
+The previous section explained the beneficial properties of smart contracts, but how can self-executing code that doesn’t rely on a trusted intermediary be created and implemented? To achieve this feat, another technology was invented: the <ColorWord>blockchain</ColorWord>. A blockchain is a global network of computers that stores data and transactions in a shared ledger that is <i>decentralized</i>. This means that the ledger isn’t controlled by anyone. Essentially, a blockchain can be compared to a database that is replicated over many computers all over the world secured with the use of cryptography and game theory (a combination of math and sociology).
 
-When DONS provide data:
+You may have heard of a cryptocurrency called Bitcoin. Bitcoin is built on a blockchain (referred to as the <i>Bitcoin blockchain</i>)! No one entity controls Bitcoin so it can be thought of as a sort of “proto-smartcontract”. It has all the properties of smart contracts listed before, but only has one use: transferring value between individuals. 
 
-Some applications require a DON that updates the data once a day. Others need updates once every five minutes or only when the data itself changes by a certain amount. The term <ColorWord>heartbeat</ColorWord> is used to desribe a DON that needs to post an update after a certain amount of time.hen the DON is updated after the data changes by a specified amount it is called a <ColorWord>deviation threshold</ColorWord>.  
+Today, there are blockchains where <i>any</i> code or applications can be built from. The code deployed to a blockchain is indeed a Smart Contract.  This ability was truly pioneered by the Ethereum blockchain, but there are many other blockchains such as Polygon, Avalanche, Solana, Terra, and many others have the same capability. Smart contracts are often written in a programming language called <ColorWord>Solidity</ColorWord>, but others such as Rust are gaining popularity.
 
-How DONs provide data:
-
-Ideally, nodes should retrieve data from multiple sources and <i>aggregate</i>, or combine, the data to return the most accurate price they can. Developers can use external adapters to customize the sources  that nodes use to aggregate data. <ColorWord>External adapters</ColorWord> are custom built software packages that can be added to the nodes. These can be built in any programming language and perform any operations developers may find useful. These operations can be as simple as basic arithmetic but can span to being complex machine learning algorithms.
-
-How Consensus is Reached Among Nodes:
-
-All of the different nodes in the DON have their own version of the price. Using this information, developers customize the aggregation method of Chainlink DONs to determine one value for the true price.  This is another level of aggregation beyond the aggregation completed at the individual node level. Having multiple levels of aggregation ensures the highest level of data quality. This <i>aggregation method</i> can consist of any type of operation including median, mean, weighted mean, mode, or other calculations. In our dynamic NFT will make use of a data feed that takes the median of all the node’s price data, since the median is more resistant to outliers than the mean.
-
-<p><ColorWord>Chainlink Incentives<ColorWord></p>
+<MissionContainer>
+  <div className="title">Quizzes:</div>
+  <ol className="mission-goals">
+    <li>
+      What is a blockchain?.
+    </li>
+    <li>
+      What language are smart contracts written in?
+    </li>
+    <li>What entity pioneered the use of deploying smart contracts on the blockchain?</li>
+    <li>Why is Bitcoin considered a “proto-smartcontract”?</li>
+  </ol>
+  <div className="title">Activities:</div>
+  <ul className="mission-goals">
+    <li>
+      Write a “hello world” smart contract and deploy to Ethereum testnet using Remix. 
+    </li>
+    <li>
+      Possibly fork Anders Brownsworth blockchain demo and add it to the academy.
+    </li>
+  </ul>
+</MissionContainer>

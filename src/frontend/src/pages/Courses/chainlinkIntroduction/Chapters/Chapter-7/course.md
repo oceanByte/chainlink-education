@@ -1,4 +1,4 @@
-#####Chapter 7:
+#####Chapter 6:
 
 Conclusion
 =============================
@@ -36,3 +36,4 @@ You can see these data feeds updating in real time at data.chain.link. There you
 ## Programming with Chainlink Data Feeds
 
 Now that we  understand how Chainlink data feeds work, lets use them within a smart contract. To use a chainlink data feed within a smart contract you only have to complete three simple steps:
+

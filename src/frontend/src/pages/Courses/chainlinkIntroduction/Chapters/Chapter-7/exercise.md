@@ -1,9 +1,6 @@
-// Implement the missing function to display the recent comments
+// Fix the bugs in function add_comment @nearBindgen export class Comment { created_at: Timestamp = context.blockTimestamp; author: AccountId = context.predecessor;
 
-async function setupMemeContracts() { memeList.forEach(meme => { memeContracts.push(await new Contract( window.walletConnection.account(), meme + “.” + nearConfig.contractName, { viewMethods: ['get_meme', ‘get_recent_comments’], changeMethods: [‘set_comment’]})) })
+constructor(public text: string) { }
+}
 
-await Promise.all(memeContracts) }
-
-const memeContracts = []; setupMemeContracts();
-
-async function getRecentComments(index) { // TODO implement me const recentComments = ; return recentComments; }
+const comments = new Vector < Comment > ("c"); static add_comment(text: i32): string { comments.push(new Comment()); }

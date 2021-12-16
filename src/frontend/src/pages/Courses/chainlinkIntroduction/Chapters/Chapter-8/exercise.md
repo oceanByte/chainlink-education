@@ -1,1 +1,9 @@
-// Well done. If you have completed all chapters you can now get your own unique Chainlink Academy certificate! // You can download it, hang it, share it. It’s yours now.
+// Implement the missing function to display the recent comments
+
+async function setupMemeContracts() { memeList.forEach(meme => { memeContracts.push(await new Contract( window.walletConnection.account(), meme + “.” + nearConfig.contractName, { viewMethods: ['get_meme', ‘get_recent_comments’], changeMethods: [‘set_comment’]})) })
+
+await Promise.all(memeContracts) }
+
+const memeContracts = []; setupMemeContracts();
+
+async function getRecentComments(index) { // TODO implement me const recentComments = ; return recentComments; }

@@ -1,12 +1,12 @@
 export const questions = [
     {
-        question: "Answer a simple question: What is a Chainlink contract? Wrong answers only.",
+        question: "Use the Chainlink CLI view method to query the museum contract and report back the number of memes in the museum",
         answers: [
-            "A legal agreement for storing financial assets on the Chainlink network",
-            "A script that is deployed and operates on the Chainlink network",
-            "A fee perceived by contractors of the Chainlink network",
-            "A transaction involving more than one party in the Chainlink network"
+            "just 1",
+            "2",
+            "3",
+            "More than 3"
         ],
-        responses: [],
+        responses: ["More than 3"],
     }
 ]
