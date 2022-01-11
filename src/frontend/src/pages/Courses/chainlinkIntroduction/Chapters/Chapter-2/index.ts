@@ -7,11 +7,11 @@ import exercise from '!raw-loader!./exercise.md'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
 import solution from '!raw-loader!./solution.md'
-import { questions } from './questions'
-
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
 import support from '!raw-loader!./support.md'
 import { Data } from 'pages/Chapter/Chapter.controller'
+
+import { questions } from './questions'
 
 export const data: Data = { course, exercise, solution, supports: { }, questions }

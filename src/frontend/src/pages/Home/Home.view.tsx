@@ -1,10 +1,11 @@
+import AOS from 'aos'
 import React, { useEffect, useRef } from 'react'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FormInputs, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from '../../helpers/form'
 
+import { FormInputs, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from '../../helpers/form'
 import { ContactUsInputs } from '../../shared/user/ContactUs'
-import AOS from 'aos'
+
 import 'aos/dist/aos.css'
 
 type HomeViewProps = {
@@ -78,7 +79,8 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
               NFT Certificate
             </div>
             <div className="home-num-item-content__text__paragraph p-font" data-aos="fade-up" data-aos-delay="200">
-              Complete the course and receive your certificate as a Non-Fungible Token
+              Complete the course and receive your certificate as a Non-Fungible Token (NFT) and share your results on
+              social media.
             </div>
           </div>
         </div>
@@ -94,10 +96,11 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
           </div>
           <div className="home-num-item-content__text">
             <div className="home-num-item-content__text__header h-font" data-aos="fade-up" data-aos-delay="150">
-              Earn To Learn
+              Save your progress
             </div>
             <div className="home-num-item-content__text__paragraph p-font" data-aos="fade-up" data-aos-delay="200">
-              Get your Chainlink Academy mainnet account created for free on course completion
+              Register your account and get an overview of your progress. You can also save your progress and resume it
+              later.
             </div>
           </div>
         </div>
@@ -116,31 +119,35 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
               Contribute to Chainlink Academy
             </div>
             <div className="home-num-item-content__text__paragraph p-font" data-aos="fade-up" data-aos-delay="200">
-              Join the builders of Chainlink Academy on Github. Earn Chainlink Academy if your PR is accepted
+              Join the builders of Chainlink Academy on Github. Implement new features, add further courses, contribute
+              to the documentation, and more.
             </div>
           </div>
         </div>
       </div>
       <div className="home-content home-join">
-        <div className="home-join__header h-font">JOIN THE FUTURE</div>
+        <div className="home-join__header h-font">BUILD THE FUTURE</div>
         <div className="home-join__line" />
         <div className="home-join-content">
           <div className="home-join-content__header h-font">
-            The decentralized internet, or Web3, has been growing at a fast pace since its inception in 2009.
+            Oracles connect off-chain data to on-chain smart contracts resulting in new types of applications.
           </div>
           <div className="home-join-content-column">
             <div className="home-join-content-column__paragraph p-font">
-              It is now a magnet to talent, with more smart developers joining every day. Web3 monthly developers are up
-              +15% over 2020, following investments by venture capital of about $900M USD.
+              Chainlink, smart contracts, blockchains, and the entire cryptocurrency world have been a hot topic of
+              discussion for several years now.
               <br />
               <br />
-              This is very similar to the growth of internet services in the early 2000s, and hints at significant
-              development for years to come. Importantly, the infrastructure has matured and makes it easy to create
-              dApps, the decentralized equivalent to Apps.
+              Whether it's companies like EY and Microsoft looking to use smart contracts to improve their business
+              processes or artists and athletes like LaMelo Ball creating their own "NFTs." Or new companies looking to
+              disrupt long-standing establishments such as the insurance industry.
+              <br />
+              <br />
+              Chainlink and smart contracts are working to become the backbone for world-changing applications.
             </div>
             <Link to="/chainlinkIntroduction/chapter-1">
               <button className="home-join-content-column__button btn btn-green mt-40 h-font">
-                <span className="home-join-content-column__button__text">Join now</span>
+                <span className="home-join-content-column__button__text">Learn about it here</span>
                 <span className="arrow-upright" />
               </button>
             </Link>
@@ -152,13 +159,14 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
         `
         <div className="home-content home-get-started">
           <div className="home-get-started-content">
-            <div className="home-get-started-content__header h-font">Immerse yourself in the course narrative</div>
+            <div className="home-get-started-content__header h-font">
+              Learn about Oracles, Chainlink and Hybrid Smart Contracts
+            </div>
             <div className="home-get-started-content__paragraph p-font">
-              You are about to play the role of a web developer at the Meme Museum. <br />
+              Start your journey now and understand how to use Oracles to connect off-chain data to on-chain smart
+              contracts. Learn to use Chainlink to create dynamic NFTs that react to the real world.
               <br />
-              The year is 2029, the near future. Things are not that different from today except perhaps that life is
-              80% digital now. Innovations that seemed like breakthroughs in the early 2020s are now widely adopted.
-              Chainlink Protocol is the leading blockchain platform.
+              <br />
             </div>
             <Link to="/chainlinkIntroduction/chapter-1">
               <button className="home-get-started-content__button btn btn-green mt-40 h-font">
@@ -172,8 +180,9 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
               <div className="home-get-started-drawings-boxes__gray-box" />
               <div className="home-get-started-drawings-boxes__blue-box p-font">
                 <span>
-                  The new NFT Meme Museum in Rio deJaneiro is the hottest thing right now. Elon Musk was there at its
-                  inauguration last week and that says something!
+                  NFTs are still in their early days. While most NFT projects point to a static image file, you can
+                  utilize Oracles to create dynamic NFTs. They can react to outside real-world events, such as the price
+                  of a cryptocurrency.
                 </span>
               </div>
             </div>

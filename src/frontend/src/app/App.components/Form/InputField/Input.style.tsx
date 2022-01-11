@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
-import { grayscale1, secondary3 } from 'styles'
+
+import { borderColor, grayscale1, secondary3 } from 'styles'
 
 export const Label = styled.label`
   text-transform: uppercase;
@@ -19,7 +20,7 @@ export const Input = styled.input`
   border: none;
   outline: none;
   border-radius: 5px;
-  border: 1px solid transparent;
+  border: 1px solid ${borderColor};
   background: none;
   font-size: 16px;
   line-height: 20px;

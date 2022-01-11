@@ -9,7 +9,7 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     Connect your artwork to the price of gold or ETH or overall Market Cap. Mention the concept of “Hybrid Smart Contracts”. 
+     Chainlink can be used for a lot more than dynamic NFTs. Whenever you need to connect the off-chain world to the on-chain world, Chainlink is the perfect solution.  
     </div>
   </div>
 </ContentWrapp>

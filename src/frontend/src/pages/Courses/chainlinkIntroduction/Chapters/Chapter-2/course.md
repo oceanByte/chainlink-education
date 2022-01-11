@@ -9,7 +9,7 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     Explain art contracts and compare them to digital contracts. 
+     When you buy an artwork, you sign a contract between you and the artist or seller. This contract provides you with proof of ownership of the artwork. But it is possible to forge it and not follow the agreement. The seller could decide not to send the artwork to you though you already paid for it.
     </div>
   </div>
 </ContentWrapp>

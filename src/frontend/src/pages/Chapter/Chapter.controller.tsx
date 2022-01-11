@@ -1,12 +1,12 @@
-import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
-import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
-import { onDomChange } from 'helpers/domlistener'
-import { getUser } from 'pages/User/User.actions'
 import * as React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+
+import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
+import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
+import { getUser } from 'pages/User/User.actions'
 import { State } from 'reducers'
 
 import { CourseData } from '../Course/Course.controller'
@@ -14,9 +14,7 @@ import { chaptersByCourse, courseData } from '../Course/Course.data'
 import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { addProgress } from './Chapter.actions'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
-import { ChapterLocked } from './Chapter.style'
 import { ChapterView } from './Chapter.view'
-import { Footer } from './Footer/Footer.controller'
 
 export interface ChapterData {
   pathname: string
@@ -166,12 +164,12 @@ export const Chapter = () => {
     setData({ ...data, questions: e })
   }
 
-  console.log(`%c percent ${percent}`, 'padding: 20px; color: orange; background: lightgreen; border-radius: 20px')
-  console.log(`%c nextChapter ${nextChapter}`, 'padding: 20px; color: red; background: coral; border-radius: 20px')
-  console.log(
-    `%c previousChapter ${previousChapter}`,
-    'padding: 20px; color: aqua; background: black; border-radius: 20px',
-  )
+  // console.log(`%c percent ${percent}`, 'padding: 20px; color: orange; background: lightgreen; border-radius: 20px')
+  // console.log(`%c nextChapter ${nextChapter}`, 'padding: 20px; color: red; background: coral; border-radius: 20px')
+  // console.log(
+  //   `%c previousChapter ${previousChapter}`,
+  //   'padding: 20px; color: aqua; background: black; border-radius: 20px',
+  // )
 
   return (
     <>
