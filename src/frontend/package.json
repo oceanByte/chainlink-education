@@ -25,6 +25,7 @@
     "import-shared": "rm -Rf src/shared && cp -R ../api/src/shared src/shared"
   },
   "dependencies": {
+    "@babel/helper-builder-react-jsx-experimental": "^7.12.11",
     "@cypress/code-coverage": "^3.8.1",
     "@cypress/instrument-cra": "^1.1.1",
     "@monaco-editor/react": "3.2.1",
