@@ -1,86 +1,113 @@
-import { Button } from 'app/App.components/Button/Button.controller'
-import { Input } from 'app/App.components/Input/Input.controller'
-import { InputSpacer } from 'app/App.components/Input/Input.style'
-//prettier-ignore
-import { FormInputs, getErrorMessage, getInputStatus, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from 'helpers/form'
-import * as PropTypes from 'prop-types'
 import * as React from 'react'
-import { ChangeEvent, SyntheticEvent, useState } from 'react'
+import * as PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { LoginInputs } from 'shared/user/Login'
 
-import { LoginCard, LoginSignUp, LoginStyled, LoginTitle } from './Login.style'
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+import ArrowRight from '../../assets/arrowRight.png'
+
+import { InputField } from '../../app/App.components/Form/InputField/Input.controller';
+import { InputFieldWithEye } from '../../app/App.components/Form/InputFieldWithEye/Input.controller';
+
+import { Row } from './Login.style';
+
+const ValidationSchema = Yup.object().shape({
+  usernameOrEmail: Yup.string()
+    .min(2, 'Username must be longer than or equal to 2 characters')
+    .max(50, 'Username must be shorter than or equal to 50 characters')
+    .required('This field is required!'),
+  password: Yup.string()
+    .min(8, 'Password must be longer than or equal to 8 characters')
+    .max(50, 'Password must be shorter than or equal to 50 characters')
+    .required('This field is required!'),
+});
 
 type LoginViewProps = {
   loginCallback: (values: any) => void
   loading: boolean
 }
 
+interface IFormInputs {
+  usernameOrEmail: string,
+  password: string,
+}
+
 export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
-  const [form, setForm] = useState<FormInputs>({
-    usernameOrEmail: { value: '' },
-    password: { value: '' },
-  })
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedForm = updateFormFromChange(e, form, LoginInputs)
-    setForm(updatedForm)
-  }
+  const initialValues: IFormInputs = {
+    usernameOrEmail: '',
+    password: '',
+  };
 
-  const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedForm = updateFormFromBlur(e, form)
-    setForm(updatedForm)
-  }
 
-  const handleSubmit = (event: SyntheticEvent) => {
-    const updatedForm = updateFormFromSubmit(event, form, LoginInputs)
-
-    if (!updatedForm.usernameOrEmail.error && !updatedForm.password.error)
-      loginCallback({
-        usernameOrEmail: updatedForm.usernameOrEmail.value,
-        password: updatedForm.password.value,
-      })
-    else setForm(updatedForm)
+  const handleSubmit = (values: IFormInputs) => {
+    loginCallback(values)
   }
 
   return (
-    <LoginStyled>
-      <LoginTitle>
-        <h1>Login</h1>
-      </LoginTitle>
-      <LoginCard>
-        <form onSubmit={handleSubmit}>
-          <Input
-            icon="user"
-            name="usernameOrEmail"
-            placeholder="Username or Email"
-            type="text"
-            onChange={handleChange}
-            value={form.usernameOrEmail.value}
-            onBlur={handleBlur}
-            inputStatus={getInputStatus(form.usernameOrEmail)}
-            errorMessage={getErrorMessage(form.usernameOrEmail)}
-          />
-          <Input
-            icon="password"
-            name="password"
-            placeholder="Password"
-            type="password"
-            onChange={handleChange}
-            value={form.password.value}
-            onBlur={handleBlur}
-            inputStatus={getInputStatus(form.password)}
-            errorMessage={getErrorMessage(form.password)}
-          />
-          <InputSpacer />
-          <Button type="submit" text="Login" icon="login" loading={loading} />
-        </form>
-      </LoginCard>
-      <LoginSignUp>
-        <Link to="/sign-up">Or sign up now!</Link>
-        <Link to="/forgot-password">Forgot Password?</Link>
-      </LoginSignUp>
-    </LoginStyled>
+    <>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={ValidationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          setFieldValue,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form className="login-form" onSubmit={handleSubmit}>
+            <div className="login-form-title">Sign in</div>
+            <Row>
+              <InputField
+                label="Email address"
+                type="text"
+                value={values.usernameOrEmail}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="usernameOrEmail"
+                inputStatus={
+                  errors.usernameOrEmail && touched.usernameOrEmail
+                    ? 'error' : !errors.usernameOrEmail && touched.usernameOrEmail 
+                    ? 'success' : undefined
+                  }
+                errorMessage={errors.usernameOrEmail && touched.usernameOrEmail && errors.usernameOrEmail}
+                isDisabled={false}
+              />
+            </Row>
+            <Row>
+              <InputFieldWithEye
+                label="Password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="password"
+                inputStatus={
+                  errors.password && touched.password
+                    ? 'error' : !errors.password && touched.password 
+                    ? 'success' : undefined
+                  }
+                errorMessage={errors.password && touched.password && errors.password}
+                isDisabled={false}
+              />
+            </Row>
+            <button className="login-form-sign" type="submit">
+              <img src={ArrowRight} alt="arrow" />
+              Sign In
+            </button>
+            <Link to="/forgot-password">
+              <div className="login-form-forgot">Forgot your password?</div>
+            </Link>
+          </form>
+        )}
+      </Formik>
+    </>
   )
 }
 

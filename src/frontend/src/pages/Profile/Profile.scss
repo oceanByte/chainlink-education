@@ -1,0 +1,350 @@
+.profile-page {
+  width: 100%;
+  height: auto;
+  font-family: $p-font;
+  color: $grayscale1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: url("../../assets/profile-page-ellipse.png") no-repeat left 50%;
+  @include fluid-size("background-position-y", 375px, 1600px, 0px, -150px);
+  background-size: contain;
+  @include md {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.profile-page-sections {
+  background: #FFF;
+  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+  @include fluid-size("width", 1024px, 1600px, 260px, 320px);
+  @include fluid-size("padding", 1024px, 1600px, 20px, 40px);
+  margin-right: 40px;
+  @include md {
+    width: calc(100% - 40px);
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 18px;
+    line-height: 23px;
+    @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
+    @include fluid-size("line-height", 375px, 1600px, 21px, 23px);
+
+    &__item {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      &.profile-item-selected {
+        color: $primary;
+        //& > .profile-icon {
+        //  @mixin element-color($color) {
+        //    background-image: url('data:image/svg+xml;utf8,<svg ...><path fill="#{$color}" ... /></path></svg>') no-repeat;
+        //    background-size: contain;
+        //  }
+        //
+        //  @include element-color($primary);
+        //}
+      }
+
+      & > .profile-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 16px;
+      }
+
+      & > .profile-text {
+
+      }
+    }
+
+    &__line {
+      width: 100%;
+      border-bottom: 1px solid #D4DBEA;
+      margin: 20px 0;
+    }
+
+    & > .profile-item {
+      &-info {
+        & > .profile-icon {
+          background: url("../../assets/profile-info.svg") no-repeat;
+          background-size: contain;
+
+        }
+      }
+
+      &-progress {
+        & > .profile-icon {
+          background: url("../../assets/profile-progress.svg") no-repeat;
+          background-size: contain;
+        }
+      }
+
+      &-reset {
+        & > .profile-icon {
+          background: url("../../assets/profile-reset.svg") no-repeat;
+          background-size: contain;
+        }
+      }
+    }
+  }
+}
+
+.profile-page-section {
+  display: none;
+  @include fluid-size("padding", 375px, 1600px, 16px, 60px);
+  flex-direction: column;
+  align-items: flex-start;
+  background: #FFF;
+  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+  position: relative;
+  @include fluid-size("width", 1024px, 1600px, 640px, 840px);
+  @include md {
+    width: calc(100% - 40px);
+  }
+  &.profile-page-visible {
+    display: flex;
+  }
+
+  &__header {
+    font-weight: 900;
+    @include fluid-size("font-size", 375px, 1600px, 20px, 32px);
+    @include fluid-size("line-height", 375px, 1600px, 24px, 38pxpx);
+  }
+}
+
+.profile-page-progress {
+  margin-bottom: 100px;
+  @include sm {
+    margin-bottom: 60px;
+  }
+
+  &__bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+
+    &__line {
+      width: 90%;
+      @include sm {
+        width: 75%;
+      }
+      height: 5px;
+      background: $grayscale3;
+
+      &__color {
+        width: 8%;
+        height: 100%;
+        background: $secondary3;
+      }
+    }
+
+    &__number {
+      @include fluid-size("font-size", 375px, 1600px, 16px, 22px);
+      @include fluid-size("line-height", 375px, 1600px, 24px, 33px);
+    }
+  }
+
+  &-chapters {
+    margin-top: 10px;
+    width: 100%;
+
+    &__item {
+      padding: 10px 0;
+      border-bottom: 1px solid $grayscale3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &.no-bb {
+        border-bottom: none;
+      }
+
+      & > .profile-page__chapter-name {
+        @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
+        @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
+      }
+      & > .profile-page__chapter-completion {
+        @include fluid-size("font-size", 375px, 1600px, 8px, 11px);
+        @include fluid-size("line-height", 375px, 1600px, 10px, 14px);
+        color: #FFF;
+        border-radius: 5px;
+        width: 78px;
+        height: 19px;
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.completed {
+          background: $secondary3;
+        }
+        &.continue {
+          background: $primary;
+        }
+      }
+    }
+  }
+
+  &__certificate-header {
+    font-weight: 900;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    @include fluid-size("font-size", 375px, 1600px, 20px, 32px);
+    @include fluid-size("line-height", 375px, 1600px, 24px, 38px);
+  }
+
+  &__warning {
+    color: #FFA451;
+    margin-bottom: 30px;
+    @include fluid-size("width", 1024px, 1600px, 300px, 430px);
+    @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
+    @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
+  }
+
+  &-footer-box {
+    display: flex;
+    align-items: center;
+    @media (max-width: 1599px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__button {
+      margin-right: 30px;
+
+      &.btn-green-disabled {
+        cursor: default;
+        opacity: 0.5;
+        &:hover {
+          background: $secondary3;
+        }
+      }
+
+      &__text {
+
+      }
+    }
+
+    &__copy-link {
+      @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
+      @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
+      cursor: pointer;
+      opacity: 0.5;
+      padding-bottom: 4px;
+      border-bottom: 1px solid $grayscale3;
+      @media (max-width: 1599px) {
+        margin-top: 30px;
+      }
+    }
+  }
+
+  &__image {
+    background: url("../../assets/profile-certification.svg") no-repeat;
+    background-size: contain;
+    @include fluid-size("width", 1024px, 1600px, 230px, 243px);
+    @include fluid-size("height", 1024px, 1600px, 272px, 183px);
+    @include fluid-size("right", 1024px, 1600px, 27px, 50px);
+    @include fluid-size("bottom", 1024px, 1600px, 35px, 60px);
+    position: absolute;
+    @include md {
+      right: 70px;
+    }
+    @include sm {
+      display: none;
+    }
+  }
+}
+
+.profile-page-account-info {
+  margin-bottom: 274px;
+  @include md {
+    margin-bottom: 60px;
+  }
+
+  &-wrapper {
+    width: 400px;
+    @include sm {
+      width: 100%;
+    }
+  }
+
+  &__username,
+  &__email {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: $grayscale1;
+    font-family: $h-font;
+    position: relative;
+
+    label {
+      text-transform: uppercase;
+      font-size: 11px;
+      line-height: 14px;
+      font-weight: 900;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid $grayscale3;
+      background: none;
+      margin-top: 8px;
+      font-size: 16px;
+      padding-bottom: 14px;
+      color: $grayscale1;
+      font-family: Circular Std Book;
+    }
+  }
+
+  .btn {
+    margin-top: 30px;
+  }
+
+  &__delete-account {
+    cursor: pointer;
+    margin-top: 50px;
+    font-size: 18px;
+    line-height: 27px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid $grayscale3;
+    @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
+    @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
+  }
+}
+
+.profile-page-reset-password {
+  &-wrapper {
+    width: 400px;
+  }
+
+  margin-bottom: 214px;
+  @include md {
+    margin-bottom: 60px;
+  }
+}
+
+.profile-page-delete-acc, .profile-page-confirm-pass {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 50;
+}
+
+.invisible {
+  display: none;
+}

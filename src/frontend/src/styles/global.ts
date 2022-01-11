@@ -8,6 +8,8 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
+
+
 body {
   font-family: 'Inter', sans-serif;;
   font-display: optional;
@@ -61,7 +63,7 @@ input {
 }
 
 a {
-  color: #42edf8;
+  color: #3d4556;
   text-decoration: none !important;
   opacity: 1;
   transition: opacity 0.15s ease-in-out-out;
@@ -69,7 +71,7 @@ a {
 }
 
 a:visited {
-  color: inherit;
+  color: #1a2b6b;
 }
 
 a:hover {
@@ -234,4 +236,14 @@ select:-webkit-autofill:focus {
 .rc-slider-mark-text {
   display: none !important;
 }
+
+
+
+
 `
+export function fluidType (minScreen: any, maxScreen: any, minFont: any, maxFont: any) {
+  return `
+    font-size: calc(${minFont} + (${parseInt(maxFont) - parseInt(minFont)}) * (100vw - ${minScreen})/(${parseInt(maxScreen) - parseInt(minScreen)}));
+  `
+}
+

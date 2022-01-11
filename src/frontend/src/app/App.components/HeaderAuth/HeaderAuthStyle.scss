@@ -1,0 +1,96 @@
+.header-auth {
+  max-width: 1920px;
+  width: 100%;
+  background: none;
+  height: 197px;
+  background: url('./../../../assets/Ellipse.png') no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin: 0 auto;
+  padding: 38px 25px;
+  display: flex;
+  justify-content: space-between;
+
+  &-button {
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+
+      span {
+        margin-left: 16px;
+        font-family: Circular Std Book;
+        color: $white;
+        font-weight: 900;
+
+        @include xs {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &-logo {
+    width: 231px;
+    height: 27px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @include sm {
+      width: 190px;
+      height: 22px;
+    }
+  }
+
+  &-sign {
+    display: flex;
+    align-items: center;
+    margin-top: -80px;
+    font-family: Circular Std Book;
+    color: $white;
+
+    @include md {
+      margin-top: -50px;
+    }
+
+    &-text {
+      margin-right: 20px;
+      font-size: 18px;
+
+      @include md {
+        display: none;
+      }
+    }
+
+    &-button {
+      button {
+        border: 1px solid $grayscale3;
+        box-sizing: border-box;
+        border-radius: 3px;
+        background: none;
+        padding: 15px 25px;
+        color: $white;
+        cursor: pointer;
+      }
+      @media (max-width: 485px) {
+        display: none;
+      }
+    }
+  }
+
+  @include md {
+    height: 150px;
+  }
+  @include sm {
+    height: 150px;
+    padding: 33px 25px;
+  }
+  @include xs {
+    height: 100px;
+    padding: 28px 25px;
+  }
+}

@@ -1,0 +1,203 @@
+.footer {
+  color: $grayscale2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100% !important;
+}
+
+.footer-content {
+  @include lg {
+    @include fluid-size("width", 1024px, 1600px, 984px, 1280px);
+  }
+  @include md {
+    width: 728px;
+  }
+  @include sm {
+    @include fluid-size("width", 375px, 768px, 335px, 728px);
+  }
+}
+
+.footer-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  @include md {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &-list {
+    display: flex;
+    width: 90%;
+    justify-content: flex-start;
+
+    a {
+      color: $grayscale2;
+    }
+
+    &:last-child {
+      margin-right: 0 !important;
+    }
+    @include md {
+      justify-content: space-between;
+    }
+    @include sm {
+      flex-wrap: wrap;
+      align-self: center;
+    }
+
+    &__item {
+      font-weight: 400;
+      @include lg {
+        font-size: 18px;
+        line-height: 23px;
+        @include fluid-size("margin-right", 1024px, 1600px, 20px, 35px);
+      }
+      @include md {
+        font-size: 16px;
+        line-height: 20px;
+        margin-right: 0;
+      }
+      @include sm {
+        flex-basis: 50%;
+        margin-right: 0;
+        margin-top: 20px;
+        text-align: center;
+      }
+    }
+  }
+
+  &-social-media {
+    display: flex;
+    align-items: center;
+
+    @include md {
+      display: none;
+    }
+
+    &__item {
+      margin-right: 22px;
+    }
+  }
+}
+
+.footer-separator {
+  width: 100%;
+  position: relative;
+
+  &__line {
+    width: 100%;
+    border-bottom: 1px solid rgba(212, 219, 234, 1);
+  }
+
+  &__arrow {
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    background: url("../../../assets/arrow-up-circle.svg") no-repeat;
+    background-size: contain;
+    height: 50px;
+    width: 50px;
+
+    @media (max-width: 1400px) {
+      left: 50%;
+      top: 50px;
+      transform: translateY(0) translateX(-50%);
+    }
+    @include md {
+      left: auto;
+      transform: translateX(0);
+      right: 30px;
+      top: 75px;
+    }
+    @include sm {
+      right: auto;
+      left: 50%;
+      top: 150px;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+.footer-credentials {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include md {
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+  }
+
+  &__copyright {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    @include md {
+      margin-top: 20px;
+    }
+  }
+
+  &-menu {
+    display: flex;
+    color: $grayscale2;
+    @include md {
+      margin-top: 15px;
+    }
+
+    &__item {
+      margin-right: 25px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+
+  &-social-media {
+    display: none;
+    @include md {
+      display: flex;
+      margin-bottom: 32px;
+    }
+    @include md {
+      margin-top: 32px;
+    }
+
+    &__item {
+      margin-right: 15px;
+    }
+  }
+}
+
+.item {
+  &-discord {
+    background: url("../../../assets/discord-brands.svg") no-repeat;
+    background-size: contain;
+    height: 14px;
+    width: 18px;
+  }
+
+  &-telegram {
+    background: url("../../../assets/telegram.svg") no-repeat;
+    background-size: contain;
+    height: 17px;
+    width: 18px;
+  }
+
+  &-twitter {
+    background: url("../../../assets/twitter.svg") no-repeat;
+    background-size: contain;
+    height: 16px;
+    width: 18px;
+  }
+}
+
+.mr-0 {
+  margin-right: 0;
+}

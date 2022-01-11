@@ -14,6 +14,11 @@ import { ResetPassword } from 'pages/ResetPassword/ResetPassword.controller'
 import { SignUp } from 'pages/SignUp/SignUp.controller'
 import { Terms } from 'pages/Terms/Terms.controller'
 import { User } from 'pages/User/User.controller'
+import { Header } from './App.components/Header/Header.controller'
+import { HeaderAuth } from './App.components/HeaderAuth/HeaderAuth.controller'
+import { ConfirmYouPassword } from './App.components/ConfirmYouPassword/ConfirmYouPassword'
+import { DeleteAccount } from './App.components/DeleteAccount/DeleteAccount'
+import { UpdatePassword } from './App.components/UpdatePassword/UpdatePassword'
 /**
  * React Dependency
  * **/
@@ -21,26 +26,39 @@ import { User } from 'pages/User/User.controller'
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import { ThankYou } from "../pages/ThankYou/ThankYou.controller";
+import { ThankYou } from '../pages/ThankYou/ThankYou.controller'
+import { Footer } from './App.components/Footer/Footer.controller'
+import { Profile } from '../pages/Profile/Profile.controller'
+import { SiteMapView } from 'pages/SiteMap/SiteMap.view'
+import { SiteMapContainer } from 'pages/SiteMap/SiteMap.style'
 
 // import { About } from 'pages/About/About.controller'
-
 
 export const AppRoutes = ({ location }: any) => (
   <Switch location={location}>
     <Route exact path="/">
+      <Header />
       <Home />
+      <Footer />
     </Route>
     <Route exact path="/sign-up">
       <SignUp />
     </Route>
     <Route exact path="/login">
+      <HeaderAuth />
       <Login />
     </Route>
     <Route exact path="/forgot-password">
+      <HeaderAuth />
+
       <ForgotPassword />
     </Route>
-    <Route exact path="/reset-password/:token">
+    {/* <Route exact path="/reset-password/:token">
+      <ResetPassword />
+    </Route> */}
+    <Route exact path="/reset-password">
+      <HeaderAuth />
+
       <ResetPassword />
     </Route>
     <Route exact path="/change-password">
@@ -49,7 +67,11 @@ export const AppRoutes = ({ location }: any) => (
     <Route path="/*/info">
       <Course />
     </Route>
+    <Route path="/profile">
+      <Profile />
+    </Route>
     <Route path="/*/chapter-*">
+      <Header />
       <Chapter />
     </Route>
     <Route exact path="/user/:username">
@@ -63,6 +85,12 @@ export const AppRoutes = ({ location }: any) => (
     </Route> */}
     <Route exact path="/terms">
       <Terms />
+    </Route>
+    <Route exact path="/site-map">
+      <SiteMapContainer>
+        <Header />
+        <SiteMapView />
+      </SiteMapContainer>
     </Route>
     <Route exact path="/thank-you">
       <ThankYou />

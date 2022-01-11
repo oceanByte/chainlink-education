@@ -25,10 +25,10 @@ export class SignUpInputs {
   @IsEqualTo('password')
   confirmPassword!: string
 
-  @Expose()
+  /* @Expose()
   @Length(0, 20)
   @Matches(/^[a-zA-Z0-9_]*$/, { message: 'Referral can only contain letters, numbers and underscores' })
-  referral?: string
+  referral?: string */
 
   @Expose()
   @Length(100, 1000)

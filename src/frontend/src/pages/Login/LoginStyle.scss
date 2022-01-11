@@ -1,0 +1,101 @@
+.login-form {
+  max-width: 620px;
+  width: 100%;
+  background: $white;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 60px 110px;
+  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
+  z-index: 3;
+
+  &-title {
+    margin: 0;
+    font-family: Circular Std Book;
+    color: $grayscale1;
+    font-weight: 900;
+    font-size: 40px;
+
+    @include md {
+      font-size: 32px;
+    }
+
+    @include sm {
+      font-size: 26px;
+      margin-bottom: 30px;
+    }
+
+    @include xs {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &-sign {
+    color: $white;
+    width: 100%;
+    padding: 20px 0;
+    color: #fff;
+    border: none;
+    background: $secondary3;
+    margin-top: 40px;
+    cursor: pointer;
+    font-family: Circular Std Black;
+    font-size: 16px;
+    position: relative;
+    transition: all 0.3s;
+
+    img {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 16px;
+      right: 16px;
+    }
+
+    &:hover {
+      background: $secondary3hover;
+    }
+
+    @include xs {
+      font-size: 14px;
+    }
+  }
+
+  &-forgot {
+    margin-top: 30px;
+    font-family: Circular Std Book;
+    font-size: 18px;
+    color: $grayscale1;
+    padding-bottom: 3px;
+    border-bottom: 1px solid $grayscale3;
+
+    @include sm {
+      font-size: 16px;
+    }
+
+    @include xs {
+      font-size: 14px;
+    }
+  }
+
+  @include md {
+    max-width: 427px;
+    padding: 60px 36px;
+  }
+
+  @include sm {
+    max-width: 478px;
+    padding: 40px;
+  }
+
+  @include xs {
+    max-width: 355px;
+    padding: 40px 26px;
+  }
+}

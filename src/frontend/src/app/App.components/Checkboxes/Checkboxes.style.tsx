@@ -20,8 +20,14 @@ export const CheckboxesStyled = styled.div`
     }
 
     > input:checked + span:before {
-      border-color: blue;
-      background-image: radial-gradient(circle closest-side, transparent 50%, transparent 100%);
+      border-color: rgb(0, 114, 206);
+      background-image: radial-gradient(
+        circle closest-side,
+        rgb(0, 114, 206) 0%,
+        rgb(0, 114, 206) 50%,
+        transparent 50%,
+        transparent 100%
+      );
     }
 
     > input:disabled + span {

@@ -1,0 +1,17 @@
+@import './mixin.scss';
+@import './variables.scss';
+@import '../app/App.components/Header/HeaderStyle.scss';
+@import '../app/App.components/ChaptersList/ChaptersList.scss';
+@import '../pages/Login/LoginStyle.scss';
+@import '../app/App.components/HeaderAuth/HeaderAuthStyle.scss';
+@import '../app/App.components/Header/Header.scss';
+@import '../pages/Home/Home.scss';
+@import '../app/App.components/Footer/Footer.scss';
+@import '../pages/ForgotPassword/FrorgotPassword.scss';
+@import '../pages/ResetPassword/ResetPassword.scss';
+@import '../pages/Profile/Profile.scss';
+@import '../pages/SignUp/SignUp.scss';
+@import '../app/App.components/ConfirmYouPassword/ConfirmYouPassword.scss';
+@import '../app/App.components/DeleteAccount/DeleteAccount.scss';
+@import '../pages/Chapter/Chapter';
+@import '../app/App.components/UpdatePassword/UpdatePassword.scss';

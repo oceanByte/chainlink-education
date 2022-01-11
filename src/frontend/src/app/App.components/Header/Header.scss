@@ -1,0 +1,351 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.header {
+  z-index: 5;
+  font-family: $p-font;
+  max-width: 1920px;
+  height: 100px;
+  padding-left: 40px;
+  padding-right: 40px;
+  @include fluid-size('padding-left', 1024px, 1600px, 20px, 40px);
+  @include fluid-size('padding-right', 1024px, 1600px, 20px, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $primary;
+  margin: 0 auto;
+
+  @include md {
+    height: 80px;
+  }
+
+  &__link {
+    height: 27px;
+    width: 231px;
+    @include fluid-size('width', 375px, 1600px, 190px, 231px);
+    @include fluid-size('height', 375px, 1600px, 22px, 27px);
+    background: url('../../../assets/logo.svg') no-repeat;
+    background-size: contain;
+  }
+
+  &-menu {
+    display: flex;
+    align-items: center;
+
+    &-user {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      cursor: pointer;
+      position: relative;
+
+      &__circle {
+        background: #fff;
+        color: #000;
+        border-radius: 50%;
+        font-size: 15px;
+        line-height: 19px;
+        margin-left: 50px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        @include md {
+          margin-left: 0;
+        }
+
+        @include lg {
+          margin-left: 0;
+        }
+      }
+
+      &__name {
+        margin-left: 10px;
+        font-size: 18px;
+        line-height: 22px;
+
+        & > span {
+          font-size: 10px;
+          @include sm {
+            display: none;
+          }
+        }
+      }
+
+      /* &.lg {
+        @include sm {
+          display: none;
+        }
+      } */
+    }
+
+    &-list {
+      display: flex;
+
+      @include md {
+        display: none;
+      }
+
+      &__item {
+        color: #fff;
+        font-size: 18px;
+        background: none;
+
+        & > span {
+          font-size: 10px;
+        }
+      }
+    }
+
+    &-cred {
+      &.lg {
+        margin-left: 50px;
+        @include xs {
+          display: none;
+          margin-left: 0;
+        }
+      }
+    }
+
+    &-log {
+      display: flex;
+
+      @include sm {
+        display: none;
+      }
+
+      &__link {
+        font-size: 16px;
+        border-radius: 3px;
+        padding: 15px 25px;
+        transition: all 0.3s;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      .link__signin {
+        color: #fff;
+        border: 1px solid #fff;
+
+        &:hover {
+          color: $grayscale1;
+          background: #fff;
+        }
+      }
+      .link__signup {
+        color: $grayscale1;
+        background: #fff;
+
+        &:hover {
+          color: #fff;
+          background: $secondary3;
+        }
+      }
+    }
+
+    &__burger-icon {
+      cursor: pointer;
+      background: url('../../../assets/burger-menu.svg') no-repeat;
+      background-size: contain;
+      height: 24px;
+      width: 24px;
+      margin-left: 40px;
+      display: none;
+      @include md {
+        display: block;
+      }
+    }
+    &__exit-icon {
+      background: url('../../../assets/exit-white.svg') no-repeat;
+      background-size: contain;
+      height: 15px;
+      width: 15px;
+    }
+  }
+}
+
+.chapters-list {
+  z-index: 15;
+  position: absolute;
+  background: #fff;
+  top: 80px;
+  right: 325px;
+  padding: 20px 30px;
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 15px 25px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+
+  @include md {
+    top: 125px;
+    right: 50%;
+    transform: translateX(50%);
+    width: calc(100% - 40px);
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+/* .header-menu-cred {
+  @include sm {
+    display: none;
+  }
+} */
+
+.header-dropdown-user-menu {
+  @include sm {
+    display: block;
+  }
+  & .header-menu-log {
+    display: none;
+    @include sm {
+      margin-top: 17px;
+      display: block;
+    }
+  }
+}
+
+.header-list {
+  z-index: 5;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: url('../../../assets/navbar-ellipse-xs.svg') no-repeat bottom;
+  background-size: cover;
+  padding: 0 20px 70px;
+  align-items: flex-start;
+
+  &__item {
+    width: 100%;
+    background: none;
+    color: #fff;
+    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  & > .header-menu-log {
+    display: none;
+    padding: 14px 0;
+    margin-left: 0;
+    @include sm {
+      display: flex;
+    }
+  }
+
+  & > .header-menu-user {
+    margin: 14px 0;
+
+    & > .header-menu-user__circle {
+      margin-left: 0;
+    }
+
+    & > .header-menu-user__name {
+    }
+  }
+}
+
+.header-menu-user {
+  position: relative;
+}
+
+.header-menu-user-menu {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  z-index: 1;
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-right: 65px;
+  border-radius: 25px;
+  width: 250px;
+  box-sizing: border-box;
+
+  &__item {
+    width: 100%;
+    display: block;
+    font-size: 15px;
+    font-family: Circular Std Black;
+    color: #0c162c;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    a {
+      color: inherit;
+    }
+
+    &:last-child {
+      margin-top: 20px;
+      color: #1a2b6b;
+      font-size: $p-font;
+    }
+  }
+
+  @include xsm {
+    right: -110px;
+  }
+}
+
+.header-menu-user-menu-show {
+  display: none;
+}
+
+.bright-background {
+  display: block;
+  opacity: 0.7;
+  background: #fff;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.opacity-0 {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.with-bt {
+}
+
+.btn {
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.ml {
+  &-10 {
+    margin-left: 10px;
+  }
+  &-30 {
+    margin-left: 30px;
+  }
+  &-50 {
+    margin-left: 50px;
+  }
+}

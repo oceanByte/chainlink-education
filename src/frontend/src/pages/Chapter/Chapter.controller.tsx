@@ -1,12 +1,12 @@
-import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
-import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
-import { onDomChange } from 'helpers/domlistener'
-import { getUser } from 'pages/User/User.actions'
 import * as React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+
+import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
+import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
+import { getUser } from 'pages/User/User.actions'
 import { State } from 'reducers'
 
 import { CourseData } from '../Course/Course.controller'
@@ -14,9 +14,7 @@ import { chaptersByCourse, courseData } from '../Course/Course.data'
 import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { addProgress } from './Chapter.actions'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
-import { ChapterLocked } from './Chapter.style'
 import { ChapterView } from './Chapter.view'
-import { Footer } from './Footer/Footer.controller'
 
 export interface ChapterData {
   pathname: string
@@ -43,6 +41,7 @@ export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING)
   const [showDiff, setShowDiff] = useState(false)
   const [isPopup, setIsPopup] = useState(false)
+  const [isStarted, setIsStarted] = useState(false)
   const { pathname } = useLocation()
   const [data, setData] = useState<Data>({
     course: undefined,
@@ -91,7 +90,7 @@ export const Chapter = () => {
       if (i + 1 < chapterData.length) {
         nextChapter = chapterData[i + 1].pathname
       } else {
-        if (user) nextChapter = `/user/${user.username}`
+        if (user) nextChapter = `/profile`
         else nextChapter = '/sign-up'
       }
       if (i !== 7) percent = ((i + 1) / chapterData.length) * 100
@@ -150,6 +149,10 @@ export const Chapter = () => {
     }
   }
 
+  const startTaskHandler = () => {
+    setIsStarted(true)
+  }
+
   const proposedSolutionCallback = (e: string) => {
     // @ts-ignore
     setData({ ...data, exercise: e })
@@ -157,32 +160,42 @@ export const Chapter = () => {
 
   const proposedQuestionAnswerCallback = (e: Question[]) => {
     // @ts-ignore
+
     setData({ ...data, questions: e })
   }
 
+  // console.log(`%c percent ${percent}`, 'padding: 20px; color: orange; background: lightgreen; border-radius: 20px')
+  // console.log(`%c nextChapter ${nextChapter}`, 'padding: 20px; color: red; background: coral; border-radius: 20px')
+  // console.log(
+  //   `%c previousChapter ${previousChapter}`,
+  //   'padding: 20px; color: aqua; background: black; border-radius: 20px',
+  // )
+
   return (
     <>
-     (
-        data.course && (
-          <ChapterView
-            validatorState={validatorState}
-            validateCallback={validateCallback}
-            solution={data.solution}
-            proposedSolution={data.exercise}
-            proposedSolutionCallback={proposedSolutionCallback}
-            showDiff={showDiff}
-            isPopup={isPopup}
-            course={data.course}
-            closeIsPopup={() => setIsPopup(false)}
-            user={user}
-            supports={data.supports}
-            questions={data.questions}
-            nextChapter={nextChapter}
-            proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
-          />
-        )
-      )
-      <Footer percent={percent} nextChapter={nextChapter} previousChapter={previousChapter} />
+      {data.course && (
+        <ChapterView
+          validatorState={validatorState}
+          validateCallback={validateCallback}
+          solution={data.solution}
+          proposedSolution={data.exercise}
+          proposedSolutionCallback={proposedSolutionCallback}
+          showDiff={showDiff}
+          isPopup={isPopup}
+          course={data.course}
+          closeIsPopup={() => setIsPopup(false)}
+          user={user}
+          supports={data.supports}
+          questions={data.questions}
+          nextChapter={nextChapter}
+          previousChapter={previousChapter}
+          isStarted={isStarted}
+          percent={percent}
+          startedHandler={startTaskHandler}
+          proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
+        />
+      )}
+      {/* <Footer percent={percent} nextChapter={nextChapter} previousChapter={previousChapter} /> */}
     </>
   )
 }

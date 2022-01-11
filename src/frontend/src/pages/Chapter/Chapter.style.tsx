@@ -41,16 +41,20 @@ export const ChapterStyled = styled.div`
 `
 
 export const ChapterGrid = styled.div<{ hasTabs?: boolean }>`
-  display: grid;
-  grid-template-rows: ${(props) => (props.hasTabs ? '30px auto auto' : 'auto auto')};
-  grid-gap: 0;
-  height: calc(100vh - 170px);
+  // display: grid;
+  // grid-template-rows: ${(props) => (props.hasTabs ? '30px auto auto' : 'auto auto')};
+  // grid-gap: 0;
+  // height: calc(100vh - 170px);
   /* overflow-y: scroll; */
 
   @media (max-width: 900px) {
     height: auto;
     overflow-y: initial;
     margin-bottom: 20px;
+  }
+  
+  @media (max-width: 1024px) {
+    margin-top: 20px;
   }
 `
 
@@ -165,28 +169,27 @@ export const ChapterCourse = styled.div`
 `
 
 export const ChapterH1 = styled.div`
-  font-size: 50px;
-  margin-top: 25px;
-  color: #1174cb;
-  line-height: 38px;
-  font-weight: 600;
-  text-align: center;
+  margin-top: 10px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 28px;
+  line-height: 120%;
+  color: #0C162C;
 
-  @media (max-width: 615px) {
-    font-size: 35px;
+  @media (max-width: 760px) {
+    font-size: 20px;
   }
 `
 
 export const ChapterH2 = styled.div`
-  color: #0072ce;
-  padding: 20px 40px 10px 40px;
+  font-style: normal;
   font-weight: 900;
-  font-size: 28px;
-  text-align: left;
+  font-size: 20px;
+  line-height: 120%;
+  color: #0C162C;
 
-  @media (max-width: 615px) {
-    font-size: 26px;
-    padding: 10px;
+  @media (max-width: 760px) {
+    font-size: 16px;
   }
 `
 
@@ -201,8 +204,19 @@ export const ChapterH4 = styled.div`
   margin: 0;
 `
 
+export const ChapterH5 = styled.div`
+  font-style: normal;
+  font-weight: 450;
+  font-size: 15px;
+  line-height: 19px;
+  color: #1A2B6B;
+  margin: 0;
+`
+
 export const ChapterValidator = styled.div`
-  background: white;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
   border: 1px solid white;
   position: relative;
   margin-top: 20px;
@@ -210,11 +224,49 @@ export const ChapterValidator = styled.div`
   align-items: center;
   justify-content: space-around;
   text-align: center;
-  padding: 0 10px;
+  padding: 10px;
   min-height: 180px;
+  
+  .step {
+    background: #05C46B;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    left: 40px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    
+    @media (max-width: 1024px) {
+      left: 20px;
+    }
+    
+    @media (max-width: 760px) {
+      left: 15px;
+    }
 
-  @media (max-width: 900px) {
-    padding: 45px 10px;
+    &-text {
+      font-family: Circular Std, sans-serif;
+      font-style: normal;
+      font-weight: 450;
+      font-size: 15px;
+      line-height: 19px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin: 0 auto;
+      padding: 3px 10px;
+      display: flex;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    padding: 40px 20px;
+  }
+  
+  @media (max-width: 760px) {
+    padding: 40px 15px;
   }
 
   &.ok {
@@ -234,35 +286,159 @@ export const ChapterValidator = styled.div`
       color: ${textColor};
     }
   }
-`
+`;
+
+export const LetsStart = styled.div`
+  background: #FFFFFF;
+  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+  border: 1px solid white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  padding: 40px 30px;
+  min-height: 180px;
+  
+  .step {
+    background: #05C46B;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    left: 40px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    
+    @media (max-width: 1024px) {
+      left: 20px;
+    }
+    
+    @media (max-width: 760px) {
+      left: 15px;
+    }
+
+    &-text {
+      font-family: Circular Std, sans-serif;
+      font-style: normal;
+      font-weight: 450;
+      font-size: 15px;
+      line-height: 19px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin: 0 auto;
+      padding: 3px 10px;
+      display: flex;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    padding: 40px 20px;
+  }
+  
+  @media (max-width: 760px) {
+    padding: 40px 15px;
+  }
+`;
 
 export const ChapterValidatorTitle = styled.div`
-  font-size: 32px;
-  color: #0072ce;
-  font-weight: 600;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 120%;
+  text-align: center;
+  color: #0C162C;
+  margin-bottom: 15px;
+  
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
+  
+  @media (max-width: 760px) {
+    font-size: 16px;
+  }
 `
 
 export const ChapterValidatorContent = styled.div`
-  font-size: 12px;
-  color: #000;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 18px;
+  line-height: 150%;
+  text-align: center;
+  color: #3D4556;
+  
+   @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+  
+  @media (max-width: 760px) {
+    font-size: 14px;
+  }
+  
 `
 
-export const ChapterValidatorContentWrapper = styled.div``
+export const ChapterValidatorContentWrapper = styled.div`
+    padding: 20px 30px;
+    border-radius: 20px;
+    width: 100%;
+    min-height: 210px;
+`
+
+export const ChapterValidatorContentSuccess = styled.div`
+    padding: 20px 30px;
+    border-radius: 20px;
+    background: rgba(5, 196, 107, 0.2);
+    border: 2px solid rgba(5, 196, 107, 0.2);
+    width: 100%;
+    min-height: 210px;
+`
+
+export const ChapterValidatorContentFailed = styled.div`
+    padding: 20px 30px;
+    border-radius: 20px;
+    background: rgba(255, 94, 87, 0.2);
+    border: 2px solid rgba(255, 94, 87, 0.2);
+    width: 100%;
+    min-height: 210px;
+`
 
 export const ButtonStyle = styled.div`
+  display: flex;
   font-size: 14px;
   width: 220px;
-  height: 40px;
-  // border: 1px solid white;
+  height: 60px;
+  background: #05C46B;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
   position: relative;
-  display: inline-block;
   cursor: pointer;
-  margin: 20px auto 10px auto;
+  margin: 30px auto 10px auto;
+  transition: all 0.3s ease;
 
   img {
-    display: inline-block;
-    margin: 10px 20px 10px -10px;
-    vertical-align: bottom;
+    position: absolute;  
+    top: 16px;
+    right: 16px;
+    
+    @media (max-width: 760px) {
+      top: 10px;
+      right: 8px;
+      
+      height: 10px;
+    }
+  }
+  
+  @media (max-width: 760px) {
+    margin: 30px auto 10px 0;
+    width: 170px;
+  }
+
+  &:hover {
+    background: #018447;
+    transition: all 0.3s ease;
   }
 `
 
@@ -299,16 +475,19 @@ export const ButtonText = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
   line-height: 40px;
   z-index: 1;
-  color: ${textColor};
-  text-align: center;
-  background-color: #f2f2f2;
-  border-radius: 55px;
-  font-weight: 600;
-  &:hover {
-    transform: scale(1.05);
-    color: #0072ce;
+  
+  @media(max-width: 760px) {
+    font-size: 16px;
+    line-height: 18px;
   }
 
   > svg {
@@ -320,10 +499,166 @@ export const ButtonText = styled.div`
   }
 `
 
+export const ContentWrapp = styled.div`
+  margin: 40px 0;
+  display: flex;
+  /* align-items: center; */
+
+  .imgContainer {
+    margin-right: 21px;
+  }
+  .itemsContainer {
+    max-width: 550px;
+    .item-text {
+      position: relative;
+      font-style: normal;
+      font-weight: 450;
+      font-size: 16px;
+      line-height: 150%;
+      color: #3D4556;
+      background-color: #DFE7FB;
+      border-radius: 10px;
+      padding: 20px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 30px;
+        left: -25px;
+        width: 0;
+        height: 0;
+        border-right: 35px solid #DFE7FB;
+        border-top: 20px solid transparent;
+        transform: rotate(-30.56deg);
+      }
+
+      & + .item-text {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
+`
+export const ListItemsContainer = styled.div`
+  .list__items {
+    .list__item {
+      font-size: inherit;
+      color: inherit;
+      line-height: inherit;
+    }
+  }
+`
+
+export const MissionContainer = styled.div`
+  background-color: #1a2b6b;
+  box-shadow: 0 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+
+  .title {
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 120%;
+    color: #ffffff;
+    margin: 0 0 20px 0;
+  }
+
+  .mission-goals {
+    padding-left: 20px;
+    margin: 0;
+
+    & + .title {
+      margin-top: 20px;
+    }
+
+    li {
+      font-style: normal;
+      font-weight: 450;
+      font-size: 18px;
+      line-height: 150%;
+      color: #ffffff;
+
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+
+      .major-info {
+        color: #eb4133;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 60px 30px;
+
+    .title {
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+    padding: 40px 15px;
+  }
+`
+
 export const ChapterMonaco = styled.div``
 
-export const ChapterItalic = styled.em`
-  font-style: italic;
+export const ChapterBig = styled.em`
+  font-style: normal;
+  font-weight: 450;
+  font-size: 22px;
+  line-height: 150%;
+  color: #0C162C;
+  margin-bottom: 10px;
+  
+  @media (max-width: 760px) {
+    font-size: 16px;
+  }
+`
+export const RegularP = styled.p`
+  font-style: normal;
+  font-weight: 450;
+  font-size: 18px;
+  line-height: 150%;
+  color: #3D4556;
+  margin-top: 20px;
+
+  > p {
+    margin-bottom: 0;
+  }
+
+  p + p {
+    margin: 0;
+  }
+  
+  @media (max-width: 760px) {
+    font-size: 14px;
+  }
+  
+  img {
+    width: 100%;
+  }
+`
+
+export const BlueParagraph = styled.p`
+    color: #0EA6E8;
+    font-style: normal;
+    font-weight: 450;
+    font-size: 22px;
+    line-height: 150%;
+    
+    @media (max-width: 760px) {
+      font-size: 16px;
+    }
+`
+
+export const ColorWord = styled.span`
+  color: #0EA6E8;
 `
 
 export const ChapterTab = styled.div<{ isSelected?: boolean }>`

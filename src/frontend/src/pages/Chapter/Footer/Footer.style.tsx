@@ -2,7 +2,9 @@ import styled from 'styled-components/macro'
 
 export const FooterStyled = styled.div`
   height: 70px;
-  background: #f2f2f2;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -34,4 +36,11 @@ export const ProgressBarWrapper = styled.div`
   @media (max-width: 900px) {
     display: none;
   }
+`
+
+export const LinkStyled = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 `

@@ -1,0 +1,906 @@
+.home {
+  max-width: 1920px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+.home-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+
+  &.intro {
+    background: $primary;
+    @include fluid-size('padding-top', 1024px, 1600px, 86px, 96px);
+  }
+
+  &.get-started {
+    background: $secondary1;
+    /* margin-bottom: 740px; */
+    margin-bottom: 60px;
+    /* @include sm {
+      margin-bottom: 1032px;
+    } */
+  }
+}
+
+.home-content {
+  @include lg {
+    @include fluid-size('width', 1024px, 1600px, 984px, 1280px);
+  }
+  @include md {
+    width: 728px;
+  }
+  @include sm {
+    @include fluid-size('width', 375px, 768px, 335px, 728px);
+  }
+}
+
+.home-intro {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  margin: 0 auto;
+
+  @include md {
+    flex-direction: column-reverse;
+  }
+
+  &-content {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @include md {
+      width: auto;
+      max-width: 600px;
+    }
+
+    &__header {
+      @include fluid-size('font-size', 375px, 1600px, 32px, 80px);
+      @include fluid-size('line-height', 375px, 1600px, 39px, 96px);
+      font-weight: 900;
+      max-width: 100%;
+      @include md {
+        font-size: 50px;
+        line-height: 60px;
+      }
+      @include sm {
+        font-size: 32px;
+        line-height: 38px;
+      }
+    }
+
+    &__paragraph {
+      font-size: 22px;
+      line-height: 33px;
+      @include fluid-size('max-width', 1024px, 1600px, 557px, 620px);
+      @include md {
+        font-size: 18px;
+        line-height: 27px;
+      }
+      @include sm {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+
+  &__image {
+    background: url('../../assets/homepage-guy.png') no-repeat;
+    background-size: contain;
+    @include fluid-size('width', 335px, 1600px, 260px, 562px);
+    @include fluid-size('height', 335px, 1600px, 260px, 562px);
+
+    @include md {
+      align-self: center;
+    }
+    @include sm {
+      align-self: center;
+    }
+  }
+}
+
+.home-ellipse {
+  max-width: 1920px;
+  width: 100%;
+  height: 140px;
+
+  &-1 {
+    background: url('../../assets/Ellipse.png') no-repeat bottom;
+    background-size: cover;
+    @include fluid-size('margin-bottom', 375px, 1600px, 80px, 180px);
+
+    @include sm {
+      background: url('../../assets/ellipse-xs.png') no-repeat bottom;
+      background-size: cover;
+    }
+  }
+
+  &-2 {
+    background: url('../../assets/ellipse-2.png') no-repeat top;
+    background-size: cover;
+
+    @include sm {
+      background: url('../../assets/ellipse-xs-2.png') no-repeat top;
+      background-size: cover;
+    }
+  }
+}
+
+.home-num-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  @include lg {
+    @include fluid-size('margin-bottom', 1024px, 1600px, 100px, 150px);
+  }
+  @include md {
+    margin-bottom: 80px;
+  }
+  @include sm {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+
+  &.reversed {
+    flex-direction: row-reverse;
+    @include sm {
+      flex-direction: column;
+    }
+  }
+
+  &__image {
+    &.nft {
+      background: url('../../assets/nft-certificate.jpg') no-repeat;
+      background-size: contain;
+    }
+
+    &.etl {
+      background: url('../../assets/easytolearn.svg') no-repeat;
+      background-size: contain;
+    }
+
+    &.cnt {
+      background: url('../../assets/contribute.jpg') no-repeat;
+      background-size: contain;
+    }
+
+    @include fluid-size('width', 1024px, 1600px, 471px, 620px);
+    @include fluid-size('height', 1024px, 1600px, 380px, 500px);
+    @include md {
+      width: 354px;
+      height: 286px;
+    }
+    @include sm {
+      @include fluid-size('width', 375px, 767px, 335px, 727px);
+      @include fluid-size('height', 375px, 767px, 270px, 586px);
+      margin-bottom: 30px;
+    }
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    @include lg {
+      @include fluid-size('width', 1024px, 1600px, 387px, 510px);
+    }
+    @include md {
+      width: 334px;
+    }
+    @include sm {
+      width: 100%;
+    }
+
+    &__header {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      @include sm {
+        display: none;
+      }
+
+      &.half-hidden {
+        .home-num-item-content__header__number {
+          @include lg {
+            @include fluid-size('top', 1024px, 1600px, 20px, 13px);
+          }
+
+          @include md {
+            @include fluid-size('top', 0px, 1024px, 15px, 15px);
+          }
+        }
+      }
+
+      &__number {
+        position: absolute;
+        top: 0;
+        color: #375bd2;
+        font-weight: 900;
+        @include fluid-size('font-size', 1024px, 1600px, 40px, 60px);
+        @include fluid-size('line-height', 1024px, 1600px, 48px, 72px);
+        @include lg {
+          @include fluid-size('top', 1024px, 1600px, 34px, 14px);
+        }
+        @include md {
+          @include fluid-size('top', 0px, 1024px, 12px, 26px);
+        }
+      }
+
+      &__line {
+        margin-top: 80px;
+        width: 100%;
+        border-bottom: 1px solid #d4dbea;
+        @include md {
+          margin-top: 60px;
+        }
+      }
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      @include lg {
+        margin-top: 80px;
+      }
+      @include md {
+        margin-top: 40px;
+      }
+      @include sm {
+        margin-top: 0;
+      }
+
+      &__header {
+        font-weight: 900;
+        @include fluid-size('font-size', 1024px, 1600px, 40px, 50px);
+        @include fluid-size('line-height', 1024px, 1600px, 48px, 60px);
+        @include fluid-size('margin-bottom', 375px, 1600px, 10px, 20px);
+        @include md {
+          font-size: 32px;
+          line-height: 38px;
+        }
+        @include sm {
+          font-size: 26px;
+          line-height: 31px;
+        }
+      }
+
+      &__paragraph {
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 33px;
+        @include md {
+          font-size: 18px;
+          line-height: 27px;
+        }
+        @include sm {
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+}
+
+.home-join {
+  display: flex;
+  flex-direction: column;
+  @include fluid-size('margin-bottom', 375px, 1600px, 80px, 180px);
+
+  &__header {
+    background: linear-gradient(55.74deg, #0ea6e8 1.98%, #0f3bcc 86.84%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+    @include lg {
+      @include fluid-size('font-size', 1024px, 1600px, 70px, 80px);
+      @include fluid-size('line-height', 1024px, 1600px, 84px, 96px);
+    }
+    @include md {
+      font-size: 60px;
+      line-height: 72px;
+    }
+    @include sm {
+      font-size: 37px;
+      line-height: 43px;
+    }
+  }
+
+  &__line {
+    width: 100%;
+    border-bottom: 1px solid #d4dbea;
+    margin-top: 15px;
+    @include fluid-size('margin-bottom', 375px, 1600px, 40px, 60px);
+  }
+
+  &-content {
+    display: flex;
+    justify-content: space-between;
+
+    @include sm {
+      flex-direction: column;
+    }
+
+    &__header {
+      width: 48%;
+      color: $grayscale1;
+      font-weight: 900;
+      @include lg {
+        @include fluid-size('font-size', 1024px, 1600px, 32px, 40px);
+        @include fluid-size('line-height', 1024px, 1600px, 38px, 48px);
+      }
+      @include md {
+        font-size: 26px;
+        line-height: 31px;
+      }
+      @include sm {
+        font-size: 24px;
+        line-height: 29px;
+        width: 100%;
+      }
+    }
+
+    &-column {
+      display: flex;
+      flex-direction: column;
+      width: 48%;
+      @include sm {
+        margin-top: 30px;
+        width: 100%;
+      }
+
+      &__paragraph {
+        weight: 400;
+        color: $grayscale2;
+        font-size: 22px;
+        line-height: 33px;
+        @include md {
+          font-size: 18px;
+          line-height: 27px;
+        }
+        @include sm {
+          font-size: 16px;
+          line-height: 24px;
+          margin-top: 30px;
+        }
+      }
+
+      &__button {
+        align-self: flex-start;
+      }
+    }
+  }
+}
+
+.home-get-started {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  margin-bottom: 220px;
+  @include md {
+    margin-bottom: 190px;
+  }
+  @include sm {
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 160px;
+  }
+
+  &-content {
+    width: 48%;
+    @include sm {
+      width: 100%;
+    }
+
+    &__header {
+      font-weight: 900;
+      @include lg {
+        @include fluid-size('font-size', 1024px, 1600px, 40px, 50px);
+        @include fluid-size('line-height', 1024px, 1600px, 48px, 60px);
+      }
+      @include md {
+        font-size: 32px;
+        line-height: 38px;
+      }
+      @include sm {
+        font-size: 26px;
+        line-height: 31px;
+      }
+    }
+
+    &__paragraph {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 27px;
+      margin-top: 30px;
+      @include md {
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 20px;
+      }
+      @include sm {
+        font-size: 14px;
+        line-height: 21px;
+      }
+    }
+  }
+
+  &-drawings {
+    width: 48%;
+    position: relative;
+    @include sm {
+      width: 100%;
+    }
+
+    &-boxes {
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+      @include sm {
+        margin-top: 80px;
+      }
+
+      &__gray-box {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: rotate(-7deg) translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        @include lg {
+          height: 332px;
+          @include fluid-size('width', 1024px, 1600px, 473px, 550px);
+        }
+        @include md {
+          height: 332px;
+          width: 353px;
+        }
+        @include sm {
+          width: 100%;
+          height: 227px;
+        }
+      }
+
+      &__blue-box {
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 36px;
+        background: rgba(55, 91, 210, 1);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include lg {
+          height: 332px;
+          @include fluid-size('width', 1024px, 1600px, 473px, 550px);
+        }
+        @include md {
+          font-size: 20px;
+          line-height: 30px;
+          height: 332px;
+          width: 353px;
+        }
+        @include sm {
+          font-size: 16px;
+          line-height: 24px;
+          width: 100%;
+          height: 227px;
+        }
+
+        & > span {
+          margin-left: 50px;
+          margin-right: 50px;
+          @include lg {
+            @include fluid-size('margin-right', 1024px, 1600px, 45px, 50px);
+            @include fluid-size('margin-left', 1024px, 1600px, 45px, 50px);
+          }
+          @include md {
+            margin-left: 50px;
+            margin-right: 50px;
+          }
+          @include sm {
+            margin-left: 25px;
+            margin-right: 25px;
+          }
+        }
+      }
+    }
+
+    &__speaker {
+      background: url('../../assets/speaker.svg') no-repeat;
+      background-size: contain;
+      position: absolute;
+      right: 0;
+      bottom: -110px;
+      @include lg {
+        width: 230px;
+        height: 195px;
+      }
+      @include md {
+        width: 171px;
+        height: 145px;
+        bottom: -85px;
+      }
+      @include sm {
+        width: 140px;
+        height: 119px;
+        bottom: -65px;
+      }
+    }
+  }
+}
+
+.home-contact-us {
+  background: $primary;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 80px;
+  height: 714px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  overflow: hidden;
+  @include md {
+    bottom: 70px;
+  }
+  @include sm {
+    bottom: 30px;
+    flex-direction: column;
+    height: 1050px;
+    justify-content: center;
+  }
+
+  &-form {
+    font-weight: 900;
+    @include lg {
+      @include fluid-size('margin-left', 1024px, 1600px, 85px, 110px);
+    }
+    @include md {
+      margin-left: 60px;
+    }
+    @include sm {
+      margin-left: 0;
+    }
+
+    &__header {
+      @include lg {
+        @include fluid-size('font-size', 1024px, 1600px, 40px, 50px);
+        @include fluid-size('line-height', 1024px, 1600px, 48px, 60px);
+        margin-bottom: 60px;
+      }
+      @include md {
+        @include fluid-size('font-size', 768px, 1024px, 32px, 40px);
+        @include fluid-size('line-height', 768px, 1024px, 38px, 48px);
+        margin-bottom: 50px;
+      }
+      @include sm {
+        @include fluid-size('font-size', 375px, 768px, 26px, 32px);
+        @include fluid-size('line-height', 375px, 768px, 31px, 38px);
+        margin-bottom: 30px;
+      }
+    }
+
+    &-fields {
+      &.fields-row {
+        display: flex;
+        align-self: center;
+        justify-content: space-between;
+        margin-bottom: 50px;
+        @include md {
+          margin-bottom: 30px;
+          flex-direction: column;
+        }
+
+        & > .home-input-fn,
+        & > .home-input-email {
+          @include md {
+            margin-bottom: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  &-contacts {
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+    @include lg {
+      @include fluid-size('margin-right', 1024px, 1600px, 45px, 144px);
+    }
+    @include md {
+      margin-right: 74px;
+    }
+    @include sm {
+      margin-top: 215px;
+    }
+
+    &__header,
+    &__office-hours {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 18px;
+      margin-bottom: 8px;
+    }
+
+    &__mail,
+    &__days {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 27px;
+      margin-bottom: 40px;
+      @include md {
+        font-size: 16px;
+      }
+      @include sm {
+        margin-bottom: 30px;
+        font-size: 14px;
+        line-height: 21px;
+      }
+    }
+
+    &__mail {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 30px;
+      @include sm {
+        margin-bottom: 20px;
+      }
+    }
+
+    &-social-media {
+      display: flex;
+
+      &__item {
+        margin-right: 10px;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.item-discord-2 {
+          & > span {
+            background: url('../../assets/discord-brands.svg') no-repeat;
+            background-size: contain;
+            width: 18px;
+            height: 14px;
+          }
+        }
+
+        &.item-telegram-2 {
+          & > span {
+            background: url('../../assets/telegram.svg') no-repeat;
+            background-size: contain;
+            width: 18px;
+            height: 17px;
+          }
+        }
+
+        &.item-twitter-2 {
+          & > span {
+            background: url('../../assets/twitter.svg') no-repeat;
+            background-size: contain;
+            width: 18px;
+            height: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  &__mail-line {
+    background: url('../../assets/mail-line.svg') no-repeat;
+    background-size: contain;
+    position: absolute;
+    height: 213px;
+    width: 184px;
+    top: 0;
+    @include lg {
+      @include fluid-size('right', 1024px, 1600px, 45px, 144px);
+    }
+    @include md {
+      right: 50px;
+    }
+    @include sm {
+      display: none;
+    }
+  }
+
+  &__mail {
+    background: url('../../assets/mail.svg') no-repeat;
+    background-size: contain;
+    position: absolute;
+    height: 123px;
+    width: 120px;
+    top: 127px;
+    @include lg {
+      @include fluid-size('right', 1024px, 1600px, 180px, 280px);
+    }
+    @include md {
+      width: 100px;
+      height: 103px;
+      right: 200px;
+      top: 147px;
+    }
+    @include sm {
+      top: auto;
+      right: auto;
+      bottom: 270px;
+      @include fluid-size('left', 375px, 768px, 22px, 212px);
+    }
+  }
+
+  &__square {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    height: 290px;
+    width: 300px;
+    position: absolute;
+    @include sm {
+      width: 207px;
+      height: 200px;
+    }
+
+    &.square-1 {
+      right: -50px;
+      transform: rotate(-8.92deg);
+      @include lg {
+        @include fluid-size('bottom', 1024px, 1600px, -120px, -100px);
+      }
+      @include md {
+        bottom: -120px;
+        right: -90px;
+      }
+      @include sm {
+        bottom: 120px;
+        right: -100px;
+        transform: rotate(-67deg);
+      }
+    }
+
+    &.square-2 {
+      transform: rotate(12.57deg);
+      @include lg {
+        @include fluid-size('right', 1024px, 1600px, 140px, 93px);
+        @include fluid-size('bottom', 1024px, 1600px, -170px, -150px);
+      }
+      @include md {
+        bottom: -170px;
+        right: 90px;
+      }
+      @include sm {
+        transform: rotate(45deg);
+        bottom: -20px;
+        right: -70px;
+      }
+    }
+  }
+}
+
+.home-input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &.input-ml-20 {
+    margin-left: 20px;
+    @include md {
+      margin-left: 0;
+    }
+  }
+
+  &__label {
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &__input {
+    padding-left: 0;
+    height: 35px;
+    color: #fff;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    @include lg {
+      @include fluid-size('width', 1024px, 1600px, 226px, 300px);
+    }
+    @include md {
+      width: 294px;
+    }
+
+    font-size: 15px;
+
+    &.w-100 {
+      width: 100%;
+      height: 70px;
+      padding-top: 20px;
+      resize: none;
+      @include md {
+        width: 294px;
+      }
+    }
+
+    .input-error {
+      border-bottom: 1px solid $secondary5;
+    }
+  }
+}
+
+.btn {
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 900;
+
+  &-green {
+    background: $secondary3;
+    padding: 20px 50px 20px 30px;
+    color: #fff;
+    transition: all 0.3s;
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+
+    @include sm {
+      font-size: 14px;
+      line-height: 18px;
+      padding: 17px 43px 17px 25px;
+    }
+
+    & > .arrow-upright {
+      height: 13px;
+      width: 13px;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: url('../../assets/arrow-upright-white.svg') no-repeat;
+      background-size: contain;
+
+      @include sm {
+        height: 9px;
+        width: 9px;
+      }
+    }
+
+    &:hover {
+      background: $secondary3hover;
+    }
+
+    &:disabled {
+      cursor: default;
+      background: #b4edd3;
+    }
+  }
+}
+
+.mt {
+  &-40 {
+    margin-top: 40px;
+  }
+
+  &-30 {
+    margin-top: 30px;
+  }
+}
+
+.h-font {
+  font-family: $h-font;
+}
+
+.p-font {
+  font-family: $p-font;
+}

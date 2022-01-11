@@ -3,26 +3,27 @@ import styled from 'styled-components/macro'
 import { bgTextColor, primaryColor, textColor } from 'styles'
 
 export const HeaderStyled = styled.div`
-  position: relative;
+  /* position: relative;
   text-align: center;
   height: 70px;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: green; */
 `
 
 export const HeaderLogo = styled.img`
-  padding: 0px;
+  /* padding: 0px;
   z-index: 1;
   margin: auto;
   @media (max-width: 450px) {
     max-width: 200px;
-  }
+  } */
 `
 
 export const HeaderLoggedOut = styled.div`
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   right: 10px;
   display: flex;
@@ -44,11 +45,11 @@ export const HeaderLoggedOut = styled.div`
       padding: 0px 15px;
       font-size: 14px;
     }
-  }
+  } */
 `
 
 export const HeaderLoggedIn = styled.div`
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   right: 0;
   display: grid;
@@ -59,11 +60,11 @@ export const HeaderLoggedIn = styled.div`
 
   @media (max-width: 1130px) {
     display: none;
-  }
+  } */
 `
 
 export const HeaderMenuItem = styled.div`
-  position: relative;
+  /* position: relative;
   color: ${textColor};
   line-height: 50px;
   font-size: 14px;
@@ -88,10 +89,10 @@ export const HeaderMenuItem = styled.div`
       width: 28px;
       margin: 11px;
       stroke: ${bgTextColor};
-    }
+    } */
   }
 
   @media (max-width: 1440px) {
-    padding: 0 10px;
+    /* padding: 0 10px; */
   }
 `
