@@ -1,24 +1,20 @@
-import * as React from 'react'
-import * as PropTypes from 'prop-types'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-
 import classnames from 'classnames'
 import { Formik } from 'formik';
+import * as PropTypes from 'prop-types'
+import * as React from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import * as Yup from 'yup';
-
-import { HeaderAuth } from '../../app/App.components/HeaderAuth/HeaderAuth.controller'
-
-import Eye from '../../assets/eye.png'
-import EyeHide from '../../assets/eyeHide.png'
-import Confirm from '../../assets/confirm.png'
-import UnConfirm from '../../assets/unconfirm.png'
-import ArrowRight from '../../assets/arrowRight.png'
 
 import { InputField } from '../../app/App.components/Form/InputField/Input.controller';
 import { InputFieldWithEye } from '../../app/App.components/Form/InputFieldWithEye/Input.controller';
-
-import { Row, CheckboxWrapp, ErrorMessage } from './SignUp.style';
+import { HeaderAuth } from '../../app/App.components/HeaderAuth/HeaderAuth.controller'
+import ArrowRight from '../../assets/arrowRight.png'
+import Confirm from '../../assets/confirm.png'
+import Eye from '../../assets/eye.png'
+import EyeHide from '../../assets/eyeHide.png'
+import UnConfirm from '../../assets/unconfirm.png'
+import { CheckboxWrapp, ErrorMessage, Row } from './SignUp.style';
 
 export const ValidationSchema = Yup.object().shape({
   username: Yup.string()
@@ -251,14 +247,13 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
                     By signing up, you confirm that you've read and accepted our Privacy Policy and you've read Terms of Use
                   </span>
                 </div>
-                {touched.agree && errors.agree ? (
+                {!touched.agree && errors.agree ? (
                     <ErrorMessage>
                       {errors.agree}
                     </ErrorMessage>
                   ) : null}
               </CheckboxWrapp>
               <button className="reset-password__sign" type="submit">
-                <img src={ArrowRight} alt="arrow" />
                 Create your free account
               </button>
             </form>

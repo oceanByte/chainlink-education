@@ -2,13 +2,13 @@ import * as React from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { ProfileView } from './Profile.view'
-import { Header } from '../../app/App.components/Header/Header.controller'
-import { MainFooter } from '../../app/App.components/MainFooter/MainFooter.controller'
-import { FooterView } from '../../app/App.components/Footer/Footer.view'
 import { Option } from 'app/App.components/Select/Select.view'
-
 import { State } from 'reducers'
+
+// import { FooterView } from '../../app/App.components/MainFooter/MainFooter.controller'
+import { FooterView } from '../../app/App.components/Footer/Footer.view'
+import { Header } from '../../app/App.components/Header/Header.controller'
+import { ProfileView } from './Profile.view'
 
 export const Profile = () => {
   const user = useSelector((state: State) => state.auth.user)
