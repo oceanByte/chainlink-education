@@ -4,7 +4,7 @@ export const questions = [
     answers: [
       'Coinbase',
       'Bit Reward',
-      'Sha256',
+      'SHA256',
       'Token Field',
     ],
     responses: ['Coinbase'],

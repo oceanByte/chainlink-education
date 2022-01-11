@@ -9,7 +9,7 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     Explain art contracts and compare them to digital contracts. 
+    When you buy an artwork on an online platform, you must agree to the Service Level Agreements. They are usually overly complex and can be challenging to understand. They primarily benefit the platform owner, not the users.
     </div>
   </div>
 </ContentWrapp>

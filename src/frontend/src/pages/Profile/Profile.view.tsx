@@ -1,16 +1,16 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Link, useLocation } from 'react-router-dom'
 
-import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
+import { ChaptersListView } from 'app/App.components/ChaptersList/ChaptersListView'
+import { Option } from 'app/App.components/Select/Select.view'
+import { PublicUser } from 'shared/user/PublicUser'
 
-import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePassword'
 import { ConfirmYouPassword } from '../../app/App.components/ConfirmYouPassword/ConfirmYouPassword'
 import { DeleteAccount } from '../../app/App.components/DeleteAccount/DeleteAccount'
-import { PublicUser } from 'shared/user/PublicUser'
-import { Option } from 'app/App.components/Select/Select.view'
-import { ChaptersListView } from 'app/App.components/ChaptersList/ChaptersListView'
+import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePassword'
+import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 
 type ProfileViewProps = {
   user?: PublicUser,
@@ -48,7 +48,7 @@ export const ProfileView = ({
   useEffect(() => {
     if (user && user.progress) {
       const userProgress = user && user.progress.length;
-      setPercent(() => (userProgress / chapterData.length) * 100)
+      setPercent(() => Math.floor((userProgress / chapterData.length) * 100))
     }
   }, [])
 
@@ -119,15 +119,15 @@ export const ProfileView = ({
               name='solution'
             /> */}
           </div>
-          <div className='profile-page-account-info__email p-font'>
-            <label htmlFor='profile-page-account-info__email__input'>Email address</label>
+          {/* <div className='profile-page-account-info__email p-font'>
+            <label htmlFor='profile-page-account-info__email__input'>Email address</label> */}
             {/* <div>{user?.email}</div> */}
             {/* <input
               type='email'
               id='profile-page-account-info__email__input'
               name='solution'
             /> */}
-          </div>
+          {/* </div> */}
         </div>
         {/* <button className='btn btn-green'>
           <span className='profile-page-account-info__button__text'> Save changes </span>

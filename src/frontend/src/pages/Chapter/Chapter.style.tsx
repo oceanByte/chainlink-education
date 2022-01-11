@@ -416,6 +416,7 @@ export const ButtonStyle = styled.div`
   position: relative;
   cursor: pointer;
   margin: 30px auto 10px auto;
+  transition: all 0.3s ease;
 
   img {
     position: absolute;  
@@ -433,6 +434,11 @@ export const ButtonStyle = styled.div`
   @media (max-width: 760px) {
     margin: 30px auto 10px 0;
     width: 170px;
+  }
+
+  &:hover {
+    background: #018447;
+    transition: all 0.3s ease;
   }
 `
 

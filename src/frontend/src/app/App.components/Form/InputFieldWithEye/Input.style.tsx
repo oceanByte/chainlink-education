@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
-import { grayscale1, secondary3 } from 'styles'
 
+import { borderColor, grayscale1, secondary3 } from 'styles'
 
 export const InputWrapp = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ export const InputWrapp = styled.div`
   box-sizing: border-box;
   border-radius: 5px;
   width: 100%;
-  border: 1px solid transparent;
+  border: 1px solid ${borderColor};
   transition: all .2s;
 
   .eyeContainer {
