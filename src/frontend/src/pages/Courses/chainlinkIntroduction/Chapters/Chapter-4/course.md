@@ -15,7 +15,7 @@
 </ContentWrapp>
 
 <VideoBox>
-<iframe  src="https://www.youtube.com/embed/Un7-hW6GAec" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe  src="https://www.youtube.com/embed/Un7-hW6GAec" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </VideoBox>
 
 Smart contacts result from the evolution of digital agreements. A Smart contract is a self-executing contract with the terms of the agreement being directly written into computer code. Smart contracts provide the following benefits:
@@ -90,8 +90,12 @@ Smart contacts result from the evolution of digital agreements. A Smart contract
   </ul>
 </MissionContainer>
 
-## Blockchain Introduction
-
+# Blockchain Introduction 
+&nbsp;
+<VideoBox>
+  <iframe  src="https://www.youtube.com/embed/4ff9esY_4aU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</VideoBox>
+&nbsp;
 The previous section explained the beneficial properties of smart contracts, but how can self-executing code that doesn’t rely on a trusted intermediary be created and implemented? To achieve this feat, another technology was invented: the <ColorWord>blockchain</ColorWord>. A blockchain is a global network of computers that stores data and transactions in a shared ledger that is <i>decentralized</i>. This means that the ledger isn’t controlled by anyone. Essentially, a blockchain can be compared to a database that is replicated over many computers all over the world secured with the use of cryptography and game theory (a combination of math and sociology).
 
 You may have heard of a cryptocurrency called Bitcoin. Bitcoin is built on a blockchain (referred to as the <i>Bitcoin blockchain</i>)! No one entity controls Bitcoin so it can be thought of as a sort of “proto-smartcontract”. It has all the properties of smart contracts listed before, but only has one use: transferring value between individuals.
@@ -102,10 +106,7 @@ Today, there are blockchains where <i>any</i> code or applications can be built 
   <div className="title">Activities:</div>
   <ul className="mission-goals">
     <li>
-      Watch <a style="color:green" href="https://www.youtube.com/watch?v=_160oMzblY8"> Anders Brownsworth video walkthrough </a> of his blockchain demo.
-    </li>
-    <li>
-      Interact with the <a style="color:green" href="https://andersbrownworth.com/blockchain/hash"> blockchain demo </a> yourself until you have a good understanding of the basics of how blockchains operate.
+      Interact with Anders Brownsworth <a style="color:green" href="https://andersbrownworth.com/blockchain/hash"> blockchain demo </a> to get an understanding of the basics of how blockchains operate.
     </li>
   </ul>
 </MissionContainer>

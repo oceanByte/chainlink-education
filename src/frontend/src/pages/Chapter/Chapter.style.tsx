@@ -538,7 +538,7 @@ export const ContentWrapp = styled.div`
     }
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 600px) {
     display: none;
   }
 `
