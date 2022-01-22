@@ -9,10 +9,14 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     There is a better way where you do not need to trust anyone and you can get full control and ownership. Emphasize freedom (sharing, exhibitions and owning). 
+     Checkout this video on what smart contracts are and how they are changing the nature of agreements and the Internet. 
     </div>
   </div>
 </ContentWrapp>
+
+<VideoBox>
+<iframe  src="https://www.youtube.com/embed/Un7-hW6GAec" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</VideoBox>
 
 Smart contacts result from the evolution of digital agreements. A Smart contract is a self-executing contract with the terms of the agreement being directly written into computer code. Smart contracts provide the following benefits:
 

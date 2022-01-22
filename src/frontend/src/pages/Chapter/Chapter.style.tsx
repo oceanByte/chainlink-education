@@ -861,3 +861,20 @@ export const AnimatedCode = styled.div`
     }
   }
 `
+
+export const VideoBox = styled.div`
+position: relative;
+overflow: hidden;
+width: 100%;
+padding-top: 64%;
+
+    iframe{
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
+`
