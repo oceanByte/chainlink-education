@@ -9,7 +9,7 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     Now you want to connect your artwork to the physical (off-chain) world. Tell your artwork how to behave. 
+     NFTs are a part of Web3.0 so why not take truly advantage of this new primitive and make your NFT change depending on some conditions on the outside world? We call these changing NFTs <i>Dynamic NFT</i> or <i>dNFTs</i>. But how will you connect your dynamic NFT to outside data?  
     </div>
   </div>
 </ContentWrapp>
@@ -29,7 +29,7 @@ This means developers can program smart contracts as long as their logic doesnâ€
 
   <div class="itemsContainer">
     <div class="item-text">
-     Manipulate the artwork to show what they want. Dangerous.
+     So an Oracle is the type of system you want to make a dNFT but it is important that the entire NFT remains decentralized so your art work can truly live on forever. You'll also want the NFT to be have the most accurate up-to-date data.
     </div>
   </div>
 </ContentWrapp>
@@ -51,7 +51,7 @@ Finally we are hereâ€¦...enter Chainlink!
 
   <div class="itemsContainer">
     <div class="item-text">
-     Artworks will follow pre-defined rules.
+     Using a Chainlink Decentralized Oracle Network (DON) as the Oracle for your dNFT can give you strong guarantees that your artwork will truly update with the latest, most acurate data and remain decentralized. 
     </div>
   </div>
 </ContentWrapp>
@@ -71,7 +71,7 @@ Chainlink allows developers to create and customize any type of <ColorWord>Decen
 
   <div class="itemsContainer">
     <div class="item-text">
-     Understand the possibilities before programming your artwork to react to the environment.
+      Curious how Chainlink works? Read below! With Chainlink, any type of data the exists can be brought on chain, and the conditions on which that data is delivered can be customized! 
     </div>
   </div>
 </ContentWrapp>
