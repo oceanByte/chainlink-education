@@ -18,7 +18,7 @@ export const FooterView: any = () => (
           GitHub
         </a>
         <a href="https://docs.chain.link/" target="_blank" rel="noopener noreferrer" className="footer-menu-list__item">
-          Documentation
+          Chainlink Documentation
         </a>
         <a href="https://chain.link/community/events" target="_blank" rel="noopener noreferrer" className="footer-menu-list__item mr-0">
           Upcoming events
