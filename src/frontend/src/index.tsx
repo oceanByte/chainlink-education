@@ -17,7 +17,7 @@ import './styles/main.scss'
 
 export const store = configureStore({})
 
-ReactGA.initialize('G-XJ6R656HH6')
+ReactGA.initialize('UA-217999792-1')
 
 const tagManagerArgs = {
   gtmId: process.env.REACT_APP_GTM_ID,
