@@ -15,11 +15,25 @@ import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.
 type ProfileViewProps = {
   user?: PublicUser,
   activeCourse: Option,
+  authUser?: PublicUser
+  downloadCallback: () => void
+  getCertificateCallback: () => void
+  name: string,
+  accountName: string,
+  setName: (e: string) => void,
+  setAccountName: (e: string) => void,
 }
 
 export const ProfileView = ({
   user,
   activeCourse,
+  authUser,
+  downloadCallback,
+  name,
+  accountName,
+  setName,
+  setAccountName,
+  getCertificateCallback,
 }: ProfileViewProps) => {
 
   const { search, pathname } = useLocation()
@@ -34,7 +48,6 @@ export const ProfileView = ({
     }
   }, [search])
 
-  console.log(chapterData);
   chapterData.forEach((chapter, i) => {
     if (pathname === chapter.pathname) {
 
@@ -93,7 +106,7 @@ export const ProfileView = ({
         <div className='profile-page-progress__certificate-header h-font'>
           Certificate
         </div>
-        <div className='profile-page-progress__warning'>You cannot upload the certificate yet because you have
+        <div className='profile-page-progress__warning'>You cannot download the certificate yet because you have
           not completed the course
         </div>
         <div className='profile-page-progress-footer-box p-font'>
