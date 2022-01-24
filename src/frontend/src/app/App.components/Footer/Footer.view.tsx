@@ -41,7 +41,7 @@ export const FooterView: any = () => (
       />
     </div>
     <div className="footer-credentials footer-content">
-      <div className="footer-credentials__copyright p-font">Copyright &#169; 2021 Chainlink. All rights reserved.</div>
+      <div className="footer-credentials__copyright p-font">2022</div>
       <div className="footer-credentials-menu p-font">
         <Link to="/" className="footer-credentials-menu__item">
           Privacy Policy
