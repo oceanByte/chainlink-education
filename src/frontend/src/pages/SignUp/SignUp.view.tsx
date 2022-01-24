@@ -3,13 +3,11 @@ import { Formik } from 'formik';
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import * as Yup from 'yup';
 
 import { InputField } from '../../app/App.components/Form/InputField/Input.controller';
 import { InputFieldWithEye } from '../../app/App.components/Form/InputFieldWithEye/Input.controller';
 import { HeaderAuth } from '../../app/App.components/HeaderAuth/HeaderAuth.controller'
-import ArrowRight from '../../assets/arrowRight.png'
 import Confirm from '../../assets/confirm.png'
 import Eye from '../../assets/eye.png'
 import EyeHide from '../../assets/eyeHide.png'
@@ -61,9 +59,6 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
     agree: false,
   };
   const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [showErrorMachPassword, setShowErrorMachPassword] = useState(2)
 
   const [uppercase, setUppercase] = useState(false)
   const [lowercase, setLowercase] = useState(false)
@@ -74,7 +69,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
   const regUppercase = /^(?=.*[A-ZÄÖÜА-ЯІЄЇГҐ]).+$/gm
   const regLowercase = /^(?=.*[a-zäöüßа-яієїґ]).+$/gm
   const regNumbers = /^(?=.*\d).+$/gm
-  const regSpecial = /[-+_!@#$%^&*.,?<>()|"]/gm
+  const regSpecial = /[-+_!§@#$%^&*.,?<>()|"]/gm
   const regMinLength = /^.{8,}$/gm
 
   const uppercaseImage = uppercase ? Confirm : UnConfirm
@@ -82,12 +77,6 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
   const numbersImage = numbers ? Confirm : UnConfirm
   const specialImage = special ? Confirm : UnConfirm
   const minLengthImage = minLength ? Confirm : UnConfirm
-
-  const eyeForPassword = showPassword ? EyeHide : Eye
-  const eyeForConfirmPassword = showConfirmPassword ? EyeHide : Eye
-
-  const typeOfInputPassword = showPassword ? 'text' : 'password'
-  const typeOfInputConfirmPassword = showConfirmPassword ? 'text' : 'password'
 
   const [checkedInput, setCheckedInput] = useState(false)
   const classNameInputChecked = classnames('sign-up__checkbox-label', { 'sign-up__checkbox-checked': checkedInput })
