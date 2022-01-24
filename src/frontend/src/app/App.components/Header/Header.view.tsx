@@ -1,15 +1,13 @@
+import classnames from 'classnames'
 import * as PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-
 import { PublicUser } from 'shared/user/PublicUser'
-import { Option } from '../Select/Select.view'
 
-import { chaptersByCourse } from '../../../pages/Course/Course.data'
 import { ChapterData } from '../../../pages/Chapter/Chapter.controller'
-
-import classnames from 'classnames'
+import { chaptersByCourse } from '../../../pages/Course/Course.data'
 import { ChaptersListView } from '../ChaptersList/ChaptersListView'
+import { Option } from '../Select/Select.view'
 
 type HeaderViewProps = {
   user?: PublicUser
@@ -111,13 +109,13 @@ export const HeaderView = ({
         <div className="header-menu">
           <div className="header-menu-list">
             <button className="header-menu-list__item btn" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-              Academy <span>&#9660;</span>
+              Curriculum <span>&#9660;</span>
             </button>
             <button
               className="header-menu-list__item ml-30 btn"
-              onClick={() => window.open('https://chain.link/','_blank')}>
-                Ecosystem
-              </button>
+              onClick={() => window.open('https://chain.link/', '_blank')}>
+              Ecosystem
+            </button>
           </div>
           <div className="header-menu-cred lg">{user ? loggedInHeader : loggedOutHeader}</div>
           <div
@@ -138,7 +136,7 @@ export const HeaderView = ({
         <div className={`header-list ${isBurgerMenuOpen ? '' : 'hidden'}`}>
           <div className="header__item-border" />
           <button className="header-list__item with-bt btn" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-            Academy <span>&#9660;</span>
+            Curriculum <span>&#9660;</span>
           </button>
           <div className="header__item-border" />
           <button className="header-list__item btn">Ecosystem</button>
