@@ -5,8 +5,8 @@ export const FooterView: any = () => (
   <div className="footer">
     <div className="footer-menu footer-content">
       <div className="footer-menu-list p-font">
-        <a href="https://chainlink-education-app.herokuapp.com/" target="_blank" rel="noopener noreferrer" className="footer-menu-list__item">
-          Academy
+        <a href="https://www.chainlink.education/" target="_blank" rel="noopener noreferrer" className="footer-menu-list__item">
+          Home
         </a>
         <a href="https://chain.link/" target="_blank" rel="noopener noreferrer" className="footer-menu-list__item">
           Ecosystem
