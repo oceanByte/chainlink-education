@@ -14,7 +14,7 @@ export const FooterView: any = () => (
         <a href="mailto:chainlink@academy.io" target="_blank" className="footer-menu-list__item">
           Contact
         </a>
-        <a href="https://github.com/oceanByte/chainlink-eduction/tree/dev" target="_blank" className="footer-menu-list__item">
+        <a href="https://github.com/chainlink-education/academy" target="_blank" className="footer-menu-list__item">
           GitHub
         </a>
         <a href="https://docs.chain.link/" target="_blank" className="footer-menu-list__item">
