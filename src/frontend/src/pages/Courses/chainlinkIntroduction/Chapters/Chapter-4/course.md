@@ -18,7 +18,7 @@
   <iframe  src="https://www.youtube.com/embed/Un7-hW6GAec" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </VideoBox>
 
-Smart contacts result from the evolution of digital agreements. A Smart contract is a self-executing contract with the terms of the agreement being directly written into computer code. Smart contracts provide the following benefits:
+Smart contracts result from the evolution of digital agreements. A Smart contract is a self-executing contract with the terms of the agreement being directly written into computer code. Smart contracts provide the following benefits:
 
 <ListItemsContainer>
   <div class="wrapp">
@@ -27,7 +27,7 @@ Smart contacts result from the evolution of digital agreements. A Smart contract
       <li class="list__item">
         <p>
    In traditional agreements, the execution and enforcement of the terms detailed within the contract is highly dependent on the signing parties; this may not happen immediately or at all.   In terms of smart contracts, none of the parties have control over the execution or enforcement of contract terms.
-   <b>Example:</b> In the insurance industry, the contract isn’t immediately executed after the conditions have been met. Rather, a lengthy review process is initiated and it could take months, even years, before a contract is executed.
+   <b>Example:</b> In the insurance industry, the contract isn’t immediately executed after the conditions have been met. Rather, a lengthy review process is initiated and it could take months, even years before a contract is executed.
         </p>
       </li>
     </ul>
