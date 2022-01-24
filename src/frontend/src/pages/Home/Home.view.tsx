@@ -163,14 +163,14 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
               Learn about Oracles, Chainlink and Hybrid Smart Contracts
             </div>
             <div className="home-get-started-content__paragraph p-font">
-              Start your journey now and understand how to use Oracles to connect off-chain data to on-chain smart
+              Start your journey and understand how to use Oracles to connect off-chain data to on-chain smart
               contracts. Learn to use Chainlink to create dynamic NFTs that react to the real world.
               <br />
               <br />
             </div>
             <Link to="/chainlinkIntroduction/chapter-1">
               <button className="home-get-started-content__button btn btn-green mt-40 h-font">
-                <span className="home-get-started-content__button__text">Get started for FREE</span>
+                <span className="home-get-started-content__button__text">Start your journey</span>
                 <span className="arrow-upright" />
               </button>
             </Link>
