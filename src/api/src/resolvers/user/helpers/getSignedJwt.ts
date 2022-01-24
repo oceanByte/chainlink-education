@@ -23,7 +23,7 @@ export const getSignedJwt: GetSignedJwt = (_id, username, userRole) => {
   const signOptions: SignOptions = {
     issuer: 'ChainlinkAcademy',
     subject: username + '',
-    audience: 'https://chainlink.academy',
+    audience: 'https://chainlink.education',
     expiresIn: '30d',
     algorithm: 'RS256',
   }
