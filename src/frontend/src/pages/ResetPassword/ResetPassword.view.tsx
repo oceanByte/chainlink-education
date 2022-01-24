@@ -6,10 +6,7 @@ import { Link } from 'react-router-dom'
 
 import {
   FormInputs,
-  getErrorMessage,
-  getInputStatus,
   updateFormFromBlur,
-  updateFormFromChange,
   updateFormFromSubmit,
 } from 'helpers/form'
 import * as PropTypes from 'prop-types'
