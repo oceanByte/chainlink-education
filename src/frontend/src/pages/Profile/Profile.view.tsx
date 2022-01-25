@@ -22,6 +22,11 @@ export const ProfileView = ({
   activeCourse,
 }: ProfileViewProps) => {
 
+  let badgeUnlocked = false
+  let counter = 0
+  counter = user?.progress?.length ? user?.progress?.length : 0
+  if (counter >= 7) badgeUnlocked = true
+
   const { search, pathname } = useLocation()
   const [section, setSection] = useState(1)
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
@@ -93,9 +98,14 @@ export const ProfileView = ({
         <div className='profile-page-progress__certificate-header h-font'>
           Certificate
         </div>
-        <div className='profile-page-progress__warning'>You cannot upload the certificate yet because you have
+        {badgeUnlocked ? (
+        <div className='profile-page-progress__warning'>You cannot download the certificate yet because you have
           not completed the course
         </div>
+        ) : (
+          <div className='profile-page-progress__success'>Congratulations! You finished the Chainlink introduction course. Your certificate is available for download soon.
+        </div>
+        )}
         <div className='profile-page-progress-footer-box p-font'>
           <button className='profile-page-progress-footer-box__button btn btn-green btn-green-disabled'>
             <span className='profile-page-progress-footer-box__button__text'> Download certificate </span>

@@ -212,6 +212,14 @@
     @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
   }
 
+  &__success {
+    color: #00c08b;
+    margin-bottom: 30px;
+    @include fluid-size("width", 1024px, 1600px, 300px, 430px);
+    @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
+    @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
+  }
+
   &-footer-box {
     display: flex;
     align-items: center;
