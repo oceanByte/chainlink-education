@@ -98,7 +98,7 @@ export const ProfileView = ({
         <div className='profile-page-progress__certificate-header h-font'>
           Certificate
         </div>
-        {badgeUnlocked ? (
+        {!badgeUnlocked ? (
         <div className='profile-page-progress__warning'>You cannot download the certificate yet because you have
           not completed the course
         </div>
