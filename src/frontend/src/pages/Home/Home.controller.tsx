@@ -4,7 +4,7 @@ import { HomeView } from './Home.view'
 
 export const Home = () => {
   const contactUsCallback = async (contactUsInputs: ContactUsInputs) => {
-    console.log(contactUsInputs);
+    // console.log(contactUsInputs);
   }
 
   return <HomeView contactUsCallback={contactUsCallback} />

@@ -39,7 +39,6 @@ export const ProfileView = ({
     }
   }, [search])
 
-  console.log(chapterData);
   chapterData.forEach((chapter, i) => {
     if (pathname === chapter.pathname) {
 

@@ -116,10 +116,8 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
     if (form.solution.value === confirmPass) {
       // setShowErrorMachPassword(33)
       // errorDiv.style.display = 'none'
-      console.log('if')
     } else {
       setShowErrorMachPassword(77)
-      console.log('else')
     }
     setTimeout(() => console.log(showErrorMachPassword), 2000)
 

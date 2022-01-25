@@ -27,16 +27,19 @@ export const FormSevenChapterView = () => {
 
     const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
         const updatedForm = updateFormFromBlur(e, form)
-        console.log(updatedForm)
+        // console.log(updatedForm)
         setForm(updatedForm)
     }
 
     const handleSubmit = (event: SyntheticEvent) => {
         const updatedForm = updateFormFromSubmit(event, form, SevenChapterForm)
-        console.log(updatedForm)
-        if (!updatedForm.meme.error && !updatedForm.title.error && !updatedForm.url.error && !updatedForm.category.error)
-            console.log('success')
-        else setForm(updatedForm)
+        // console.log(updatedForm)
+        if (!updatedForm.meme.error && !updatedForm.title.error && !updatedForm.url.error && !updatedForm.category.error) {
+            // console.log('success')
+        }
+        else { 
+            setForm(updatedForm)
+        }
     }
 
     return (
