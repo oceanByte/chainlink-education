@@ -66,7 +66,7 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
             <div className="login-form-title">Sign in</div>
             <Row>
               <InputField
-                label="Email address"
+                label="Email address or Username"
                 type="text"
                 value={values.usernameOrEmail}
                 onChange={handleChange}
