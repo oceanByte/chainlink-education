@@ -145,7 +145,7 @@ export const TermsView = () => {
           <h2>Changes to our privacy policy</h2>
           <p>
             chainlink.education keeps its privacy policy under regular review and places any updates on this web page. This
-            privacy policy was last updated on 16 November 2021.
+            privacy policy was last updated on 15. January 2022.
           </p>
           <h2>How to contact us</h2>
           <p>

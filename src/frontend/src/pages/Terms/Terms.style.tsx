@@ -6,7 +6,6 @@ export const TermsStyled = styled.div`
   position: relative;
   background: white;
   padding-bottom: 30px;
-  padding-top: 100px;
 
   > img {
     position: absolute;
