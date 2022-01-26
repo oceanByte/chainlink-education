@@ -15,7 +15,7 @@
 </ContentWrapp>
 
 <VideoBox>
-  <iframe  src="https://www.youtube.com/embed/Un7-hW6GAec" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe  src="https://www.youtube.com/embed/Un7-hW6GAec" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </VideoBox>
 
 Smart contracts result from the evolution of digital agreements. A Smart contract is a self-executing contract with the terms of the agreement being directly written into computer code. Smart contracts provide the following benefits:
@@ -93,7 +93,7 @@ Smart contracts result from the evolution of digital agreements. A Smart contrac
 # Blockchain Introduction 
 &nbsp;
 <VideoBox>
-  <iframe  src="https://www.youtube.com/embed/4ff9esY_4aU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe  src="https://www.youtube.com/embed/4ff9esY_4aU" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </VideoBox>
 &nbsp;
 The previous section explained the beneficial properties of smart contracts, but how can self-executing code that doesn’t rely on a trusted intermediary be created and implemented? To achieve this feat, another technology was invented: the <ColorWord>blockchain</ColorWord>. A blockchain is a global network of computers that stores data and transactions in a shared ledger that is <i>decentralized</i>. This means that the ledger isn’t controlled by anyone. Essentially, a blockchain can be compared to a database that is replicated over many computers all over the world secured with the use of cryptography and game theory (a combination of math and sociology).
