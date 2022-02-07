@@ -108,7 +108,7 @@ Due to the proliferation of Decentralized Finance (DeFi), a popular use case of 
 <br>
 <b>When DONS Provide Data</b>
 
-Some applications require a DON that updates the data once a day. Others need updates once every five minutes or only when the data itself changes by a certain amount. The term <ColorWord>heartbeat</ColorWord> is used to desribe a DON that needs to post an update after a certain amount of time.hen the DON is updated after the data changes by a specified amount it is called a <ColorWord>deviation threshold</ColorWord>.
+Some applications require a DON that updates the data once a day. Others need updates once every five minutes or only when the data itself changes by a certain amount. The term <ColorWord>heartbeat</ColorWord> is used to describe the max amount of time that can elapse before a DON updates it's data feed The term <ColorWord>deviation threshold</ColorWord> is used to describe how much variation is allowed in the data before it is posted on-chain, regardless of how much time has elasped. For example, if the ETH/USD deviation threshold is set to 1%, then the DON will update the data feed if it senses the price of ETH versus USD fluctuates more than 1%.
 
 <br>
 <b>How DONs Provide Data</b>
