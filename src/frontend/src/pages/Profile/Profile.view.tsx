@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import { ChaptersListView } from 'app/App.components/ChaptersList/ChaptersListView'
 import { Option } from 'app/App.components/Select/Select.view'
@@ -54,6 +53,7 @@ export const ProfileView = ({
       const userProgress = user && user.progress.length;
       setPercent(() => Math.floor((userProgress / chapterData.length) * 100))
     }
+  // eslint-disable-next-line
   }, [])
 
   return (

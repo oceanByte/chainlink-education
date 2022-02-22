@@ -61,8 +61,10 @@ export const Chapter = () => {
   user?.progress?.forEach((chapter) => {
     counter++
   })
-  if (counter >= 20) badgeUnlocked = true
 
+  if (counter >= 20 && !badgeUnlocked) {
+    badgeUnlocked = true
+  }
   useEffect(() => {
     if (user) dispatch(getUser({ username: user.username }))
 
@@ -81,6 +83,7 @@ export const Chapter = () => {
           })
       })
     })
+    // eslint-disable-next-line
   }, [pathname])
 
   chapterData.forEach((chapter, i) => {

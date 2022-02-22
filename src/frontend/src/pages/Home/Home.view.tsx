@@ -1,10 +1,9 @@
 import AOS from 'aos'
-import React, { useEffect, useRef } from 'react'
-import { ChangeEvent, SyntheticEvent, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import { FormInputs, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from '../../helpers/form'
-import { ContactUsInputs } from '../../shared/user/ContactUs'
+// import { FormInputs, } from '../../helpers/form'
+// import { ContactUsInputs } from '../../shared/user/ContactUs'
 
 import 'aos/dist/aos.css'
 
@@ -13,13 +12,13 @@ type HomeViewProps = {
 }
 
 export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
-  const [form, setForm] = useState<FormInputs>({
-    firstName: { value: '', error: '' },
-    lastName: { value: '', error: '' },
-    email: { value: '', error: '' },
-    subject: { value: '', error: '' },
-    question: { value: '', error: '' },
-  })
+  // const [form, setForm] = useState<FormInputs>({
+  //   firstName: { value: '', error: '' },
+  //   lastName: { value: '', error: '' },
+  //   email: { value: '', error: '' },
+  //   subject: { value: '', error: '' },
+  //   question: { value: '', error: '' },
+  // })
 
   useEffect(() => {
     AOS.init({
@@ -27,22 +26,22 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
     })
   }, [])
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedForm = updateFormFromChange(e, form, ContactUsInputs)
-    setForm(updatedForm)
-  }
+  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const updatedForm = updateFormFromChange(e, form, ContactUsInputs)
+  //   setForm(updatedForm)
+  // }
 
-  const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedForm = updateFormFromBlur(e, form)
-    setForm(updatedForm)
-  }
+  // const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const updatedForm = updateFormFromBlur(e, form)
+  //   setForm(updatedForm)
+  // }
 
-  const handleSubmit = (event: SyntheticEvent) => {
-    const updatedForm = updateFormFromSubmit(event, form, ContactUsInputs)
-    setForm(updatedForm)
-    return
-    contactUsCallback(form)
-  }
+  // const handleSubmit = (event: SyntheticEvent) => {
+  //   const updatedForm = updateFormFromSubmit(event, form, ContactUsInputs)
+  //   setForm(updatedForm)
+  //   return
+  //   contactUsCallback(form)
+  // }
 
   return (
     <div className="home">

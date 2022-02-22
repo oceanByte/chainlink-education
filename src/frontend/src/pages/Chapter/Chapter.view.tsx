@@ -344,8 +344,6 @@ export const ChapterView = ({
   validatorState,
   validateCallback,
   solution,
-  isPopup,
-  closeIsPopup,
   proposedSolution,
   proposedSolutionCallback,
   showDiff,
@@ -392,6 +390,7 @@ export const ChapterView = ({
         }
       })
     }
+  // eslint-disable-next-line
   }, [])
 
   let extension = '.rs'
@@ -465,7 +464,7 @@ export const ChapterView = ({
                   Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries
                 </ChapterValidatorContent>
                 <ButtonStyle>
-                  <img src={ArrowRight} />
+                  <img src={ArrowRight} alt="Right Arrow"/>
                   <ButtonText onClick={() => startedHandler()}>Let’s start!</ButtonText>
                 </ButtonStyle>
               </ChapterValidatorContentWrapper>

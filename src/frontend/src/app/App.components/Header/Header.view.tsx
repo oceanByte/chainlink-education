@@ -1,11 +1,9 @@
 import classnames from 'classnames'
 import * as PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 
-import { ChapterData } from '../../../pages/Chapter/Chapter.controller'
-import { chaptersByCourse } from '../../../pages/Course/Course.data'
 import { ChaptersListView } from '../ChaptersList/ChaptersListView'
 import { Option } from '../Select/Select.view'
 

@@ -9,8 +9,6 @@ import { InputField } from '../../app/App.components/Form/InputField/Input.contr
 import { InputFieldWithEye } from '../../app/App.components/Form/InputFieldWithEye/Input.controller';
 import { HeaderAuth } from '../../app/App.components/HeaderAuth/HeaderAuth.controller'
 import Confirm from '../../assets/confirm.png'
-import Eye from '../../assets/eye.png'
-import EyeHide from '../../assets/eyeHide.png'
 import UnConfirm from '../../assets/unconfirm.png'
 import { CheckboxWrapp, ErrorMessage, Row } from './SignUp.style';
 
@@ -58,7 +56,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
     confirmPassword: '',
     agree: false,
   };
-  const [password, setPassword] = useState('')
+  const [, setPassword] = useState('')
 
   const [uppercase, setUppercase] = useState(false)
   const [lowercase, setLowercase] = useState(false)

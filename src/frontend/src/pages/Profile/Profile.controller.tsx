@@ -14,7 +14,7 @@ export const Profile = () => {
   const user = useSelector((state: State) => state.auth.user)
 
   let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
-  const [activeCourse, setActiveCourse] = useState(defaultCourse)
+  const [activeCourse, ] = useState(defaultCourse)
   return (
     <>
       <Header />

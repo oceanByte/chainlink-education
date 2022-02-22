@@ -16,9 +16,6 @@ import { Terms } from 'pages/Terms/Terms.controller'
 import { User } from 'pages/User/User.controller'
 import { Header } from './App.components/Header/Header.controller'
 import { HeaderAuth } from './App.components/HeaderAuth/HeaderAuth.controller'
-import { ConfirmYouPassword } from './App.components/ConfirmYouPassword/ConfirmYouPassword'
-import { DeleteAccount } from './App.components/DeleteAccount/DeleteAccount'
-import { UpdatePassword } from './App.components/UpdatePassword/UpdatePassword'
 /**
  * React Dependency
  * **/

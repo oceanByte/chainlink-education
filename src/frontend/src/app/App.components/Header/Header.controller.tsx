@@ -17,7 +17,7 @@ export const Header = () => {
   const { pathname } = useLocation()
 
   let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
-  const [activeCourse, setActiveCourse] = useState(defaultCourse)
+  const [activeCourse, ] = useState(defaultCourse)
 
   function removeAuthUserCallback() {
     dispatch(logout())

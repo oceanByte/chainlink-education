@@ -9,7 +9,6 @@ import exercise from '!raw-loader!./exercise.md'
 import solution from '!raw-loader!./solution.md'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
-import support from '!raw-loader!./support.md'
 import { Data } from 'pages/Chapter/Chapter.controller'
 
 import { questions } from './questions'

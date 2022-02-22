@@ -1,6 +1,3 @@
-import { Button } from 'app/App.components/Button/Button.controller'
-import { Input } from 'app/App.components/Input/Input.controller'
-import { InputSpacer } from 'app/App.components/Input/Input.style'
 //prettier-ignore
 import { Link } from 'react-router-dom'
 
@@ -14,7 +11,6 @@ import * as React from 'react'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { ResetPasswordInputs } from 'shared/user/ResetPassword'
 
-import { ResetPasswordCard, ResetPasswordStyled, ResetPasswordTitle } from './ResetPassword.style'
 import Eye from '../../assets/eye.png'
 import EyeHide from '../../assets/eyeHide.png'
 import Confirm from '../../assets/confirm.png'

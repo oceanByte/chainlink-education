@@ -25,9 +25,9 @@ export const FooterView: any = () => (
         </a>
       </div>
       <div className="footer-menu-social-media">
-        <a href="https://discord.com/invite/aSK4zew" target="_blank" rel="noopener noreferrer" className="footer-menu-social-media__item item-discord" />
-        <a href="https://t.me/chainlinkofficial" target="_blank" rel="noopener noreferrer" className="footer-menu-social-media__item item-telegram" />
-        <a href="https://twitter.com/chainlink" target="_blank" rel="noopener noreferrer" className="footer-menu-social-media__item item-twitter mr-0" />
+        <a href="https://discord.com/invite/aSK4zew" target="_blank" rel="noopener noreferrer" className="footer-menu-social-media__item item-discord"> </a>
+        <a href="https://t.me/chainlinkofficial" target="_blank" rel="noopener noreferrer" className="footer-menu-social-media__item item-telegram"> </a>
+        <a href="https://twitter.com/chainlink" target="_blank" rel="noopener noreferrer" className="footer-menu-social-media__item item-twitter mr-0"> </a>
       </div>
     </div>
     <div className="footer-separator">
@@ -51,9 +51,9 @@ export const FooterView: any = () => (
         </Link>
       </div>
       <div className="footer-credentials-social-media">
-        <a href="https://discord.com/invite/aSK4zew" rel="noopener noreferrer" className="footer-credentials-social-media__item item-discord" />
-        <a href="https://t.me/chainlinkofficial" rel="noopener noreferrer" className="footer-credentials-social-media__item item-telegram" />
-        <a href="https://twitter.com/chainlink" rel="noopener noreferrer" className="footer-credentials-social-media__item item-twitter mr-0" />
+        <a href="https://discord.com/invite/aSK4zew" rel="noopener noreferrer" className="footer-credentials-social-media__item item-discord"> </a>
+        <a href="https://t.me/chainlinkofficial" rel="noopener noreferrer" className="footer-credentials-social-media__item item-telegram"> </a>
+        <a href="https://twitter.com/chainlink" rel="noopener noreferrer" className="footer-credentials-social-media__item item-twitter mr-0"> </a>
       </div>
     </div>
   </div>
