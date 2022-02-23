@@ -2,7 +2,6 @@ import styled from 'styled-components/macro'
 
 export const CertificateStyled = styled.div`
   width: 100vw;
-  margin-top: 50px;
 `
 
 export const CertificateItself = styled.div`
@@ -19,7 +18,7 @@ export const CertificateItself = styled.div`
     color: #282640;
     position: absolute;
     text-align: center;
-    top: 39vw;
+    top: 31vw;
   }
 `
 

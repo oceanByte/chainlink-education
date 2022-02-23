@@ -238,19 +238,13 @@
           background: $secondary3;
         }
       }
-
-      &__text {
-
-      }
     }
 
     &__copy-link {
       @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
       @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
       cursor: pointer;
-      opacity: 0.5;
-      padding-bottom: 4px;
-      border-bottom: 1px solid $grayscale3;
+      opacity: 0.85;
       @media (max-width: 1599px) {
         margin-top: 30px;
       }
@@ -351,6 +345,13 @@
   left: 0;
   top: 0;
   z-index: 50;
+}
+
+.profile-nft-certificate {
+  padding-top: 25px;
+  .button {
+    background-color: black;
+  }
 }
 
 .invisible {

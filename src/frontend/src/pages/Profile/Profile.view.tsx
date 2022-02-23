@@ -1,10 +1,16 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { ChaptersListView } from 'app/App.components/ChaptersList/ChaptersListView'
 import { Option } from 'app/App.components/Select/Select.view'
 import { PublicUser } from 'shared/user/PublicUser'
+
+import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
+import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
+// import contract from '../../helpers/contracts.abi.json'
+// import { ethers } from 'ethers'
 
 import { ConfirmYouPassword } from '../../app/App.components/ConfirmYouPassword/ConfirmYouPassword'
 import { DeleteAccount } from '../../app/App.components/DeleteAccount/DeleteAccount'
@@ -14,12 +20,16 @@ import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.
 type ProfileViewProps = {
   user?: PublicUser,
   activeCourse: Option,
+  downloadCallback: () => void
 }
 
 export const ProfileView = ({
   user,
   activeCourse,
+  downloadCallback
 }: ProfileViewProps) => {
+
+  const dispatch = useDispatch()
 
   let badgeUnlocked = false
   let counter = 0
@@ -55,6 +65,33 @@ export const ProfileView = ({
     }
   // eslint-disable-next-line
   }, [])
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(`https://www.chainlink.education/certificate/${user?.username}`);
+    dispatch(showToaster(SUCCESS, 'Certificate link copied', 'You can share this link now.'));
+  }
+
+  // const connectToMetamask = async () => {
+  //   const provider = new ethers.providers.Web3Provider((window as any).ethereum)
+  //   await provider.send("eth_requestAccounts", []);
+  //   const signer = provider.getSigner()
+
+  //   return signer;
+  // }
+
+  // const issueCertificate = async () => {
+  //   try {
+  //     const signer = await connectToMetamask();
+  //     const certificateContract = new ethers.Contract(contract.address, contract.abi, signer)
+  //     console.log(await signer.getAddress(), user?.username)
+  //     const nft = await certificateContract.mintNFT(await signer.getAddress(), user?.username)
+  //     dispatch(showToaster(SUCCESS, 'NFT Certificate issued', 'Enjoy your new NFT!'));
+  //     console.log(nft)
+  //   } catch (e) {
+  //     dispatch(showToaster(ERROR, 'NFT Certificate', 'Failed to issue a new NFT certificate.'));
+  //     console.error(e)
+  //   }
+  // }
 
   return (
     <div className='profile-page'>
@@ -102,18 +139,23 @@ export const ProfileView = ({
           not completed the course
         </div>
         ) : (
-          <div className='profile-page-progress__success'>Congratulations! You finished the Chainlink introduction course. Your certificate is available for download soon.
+          <div className='profile-page-progress__success'>Congratulations! You finished the Chainlink introduction course. Download and share your certificate now.
         </div>
         )}
         <div className='profile-page-progress-footer-box p-font'>
-          <button className='profile-page-progress-footer-box__button btn btn-green btn-green-disabled'>
+          <button className='profile-page-progress-footer-box__button btn btn-green btn-green' onClick={downloadCallback}>
             <span className='profile-page-progress-footer-box__button__text'> Download certificate </span>
             <span className='arrow-upright' />
           </button>
-          <div className='profile-page-progress-footer-box__copy-link'>
+          <div className='profile-page-progress-footer-box__copy-link' onClick={copyToClipboard}>
             Copy certificate link
           </div>
         </div>
+        {/* <div className="profile-nft-certificate">
+        <button className='profile-page-progress-footer-box__button btn btn-green' onClick={issueCertificate}>
+            <span className='profile-page-progress-footer-box__button__text'> Issue NFT certificate </span>
+          </button>
+        </div> */}
         <div className='profile-page-progress__image' />
       </div>
       <div className={`profile-page-account-info profile-page-section ${section === 2 ? 'profile-page-visible' : ''}`}>

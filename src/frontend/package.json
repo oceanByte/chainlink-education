@@ -62,6 +62,7 @@
     "cypress": "^4.7.0",
     "dayjs": "^1.8.28",
     "eslint-config-react-app": "^5.2.1",
+    "ethers": "^5.5.4",
     "formik": "^2.2.9",
     "history": "^4.10.1",
     "ismounted": "^0.1.8",

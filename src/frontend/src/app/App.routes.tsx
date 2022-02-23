@@ -47,7 +47,6 @@ export const AppRoutes = ({ location }: any) => (
     </Route>
     <Route exact path="/forgot-password">
       <HeaderAuth />
-
       <ForgotPassword />
     </Route>
     {/* <Route exact path="/reset-password/:token">
@@ -55,7 +54,6 @@ export const AppRoutes = ({ location }: any) => (
     </Route> */}
     <Route exact path="/reset-password">
       <HeaderAuth />
-
       <ResetPassword />
     </Route>
     <Route exact path="/change-password">
