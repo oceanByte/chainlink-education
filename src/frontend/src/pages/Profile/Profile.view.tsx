@@ -135,13 +135,13 @@ export const ProfileView = ({
           Certificate
         </div>
         {!badgeUnlocked ? (
-        <div className='profile-page-progress__warning'>You cannot download the certificate yet because you have
-          not completed the course
+        <div className='profile-page-progress__warning'> Keep going! Finish the Chainlink introduction course and download and share your certificate.
         </div>
         ) : (
           <div className='profile-page-progress__success'>Congratulations! You finished the Chainlink introduction course. Download and share your certificate now.
         </div>
         )}
+        {badgeUnlocked ? (
         <div className='profile-page-progress-footer-box p-font'>
           <button className='profile-page-progress-footer-box__button btn btn-green btn-green' onClick={downloadCallback}>
             <span className='profile-page-progress-footer-box__button__text'> Download certificate </span>
@@ -151,6 +151,9 @@ export const ProfileView = ({
             Copy certificate link
           </div>
         </div>
+
+          ) : (<></>
+        )}
         {/* <div className="profile-nft-certificate">
         <button className='profile-page-progress-footer-box__button btn btn-green' onClick={issueCertificate}>
             <span className='profile-page-progress-footer-box__button__text'> Issue NFT certificate </span>
