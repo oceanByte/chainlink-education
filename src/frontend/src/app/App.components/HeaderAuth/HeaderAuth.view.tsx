@@ -6,6 +6,7 @@ import { PublicUser } from 'shared/user/PublicUser'
 
 import { Button } from '../Button/Button.controller'
 import { HamburgerLeft } from '../Hamburger/Hamburger.controller'
+import { Header } from '../Header/Header.controller'
 // prettier-ignore
 import { HeaderLoggedIn, HeaderLoggedOut, HeaderLogo, HeaderMenuItem, HeaderStyled } from "./HeaderAuth.style";
 import Arrow from '../../../assets/Vector.png'
@@ -29,41 +30,50 @@ export const HeaderView = ({ user, removeAuthUserCallback, isSignUp }: HeaderVie
     //     </Link>
     //     {user ? loggedInHeader({user, removeAuthUserCallback}) : loggedOutHeader()}
     // </HeaderStyled>
-    <div className="header-auth">
-      <div className="header-auth-button">
-        <button onClick={() => history.goBack()}>
-          <img src={Arrow} alt="arrow" width="12" height="12" />
-          <span>Back</span>
-        </button>
+    <>
+      {user ? (
+        <div className="header-auth isUser">
+        <Header />
+        
+        
+        {/* {user ? loggedInHeader({ user, removeAuthUserCallback }) : loggedOutHeader()} */}
+        {/* loggedInHeader({(user, removeAuthUserCallback)}) */}
       </div>
-      <div className="header-auth-logo">
-        <Link to="/">
-          <img src={Logo} alt="" />
-        </Link>
-      </div>
-      {isSignUp? (
-        <div className="header-auth-sign">
-          <div className="header-auth-sign-text">Already have an account?</div>
-          <div className="header-auth-sign-button">
-            <Link to="/login">
-              <button>Sign in</button>
-            </Link>
-          </div>
-        </div>
       ) : (
-        <div className="header-auth-sign">
-          <div className="header-auth-sign-text">Don't have an account yet?</div>
-          <div className="header-auth-sign-button">
-            <Link to="/sign-up">
-              <button>Sign up</button>
+        <div className="header-auth">
+          <div className="header-auth-button">
+            <button onClick={() => history.goBack()}>
+              <img src={Arrow} alt="arrow" width="12" height="12" />
+              <span>Back</span>
+            </button>
+          </div>
+          <div className="header-auth-logo">
+            <Link to="/">
+              <img src={Logo} alt="" />
             </Link>
           </div>
+          {isSignUp? (
+            <div className="header-auth-sign">
+              <div className="header-auth-sign-text">Already have an account?</div>
+              <div className="header-auth-sign-button">
+                <Link to="/login">
+                  <button>Sign in</button>
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="header-auth-sign">
+              <div className="header-auth-sign-text">Don't have an account yet?</div>
+              <div className="header-auth-sign-button">
+                <Link to="/sign-up">
+                  <button>Sign up</button>
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       )}
-      
-      {/* {user ? loggedInHeader({ user, removeAuthUserCallback }) : loggedOutHeader()} */}
-      {/* loggedInHeader({(user, removeAuthUserCallback)}) */}
-    </div>
+    </>
   )
 }
 
