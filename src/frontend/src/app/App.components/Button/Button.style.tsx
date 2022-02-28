@@ -19,7 +19,6 @@ export const ButtonStyled = styled.button`
   font-size: 18px;
   cursor: pointer;
   border-radius: 55px;
-  will-change: box-shadow;
   width: 100%;
   max-width: 275px;
   user-select: none;
@@ -55,7 +54,9 @@ export const ButtonStyled = styled.button`
 export const ButtonText = styled.div`
   text-align: center;
   margin: auto;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 36px;
 `
 
@@ -65,6 +66,10 @@ export const ButtonIcon = styled.svg<{ invertIcon?: boolean }>`
   display: inline-block;
   vertical-align: sub;
   margin: ${(props) => (props.invertIcon ? '0 15px 0 0' : '0 0 0 15px')};
+
+  @media (max-width: 900px) {
+    margin: ${(props) => (props.invertIcon ? '0 0 0 0' : '0 0 0 8px')};
+  }
 
   &.primary {
     stroke: ${buttonColor};
