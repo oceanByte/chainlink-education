@@ -69,6 +69,11 @@ html {
         font-size: 18px;
         line-height: 22px;
 
+        @media (max-width: 560px) {
+          display: none;
+        }
+        
+
         & > span {
           font-size: 10px;
           @include sm {
@@ -203,6 +208,11 @@ html {
 } */
 
 .header-dropdown-user-menu {
+
+  .header-menu-user__name {
+    display: block;
+  }
+
   @include sm {
     display: block;
   }

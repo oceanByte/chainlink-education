@@ -432,7 +432,6 @@ export const ButtonStyle = styled.div`
   }
   
   @media (max-width: 760px) {
-    margin: 30px auto 10px 0;
     width: 170px;
   }
 

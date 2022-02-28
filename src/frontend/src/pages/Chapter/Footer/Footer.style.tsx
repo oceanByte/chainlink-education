@@ -10,7 +10,6 @@ export const FooterStyled = styled.div`
   align-items: center;
 
   @media (max-width: 900px) {
-    margin: 0 10px;
     justify-content: space-between;
   }
 

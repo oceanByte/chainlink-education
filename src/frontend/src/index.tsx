@@ -19,7 +19,11 @@ import './styles/main.scss'
 
 export const store = configureStore({})
 
-ReactGA.initialize('UA-XXXXXXXX-1')
+ReactGA.initialize('UA-XXXXXXXX-1', {
+  gaOptions: {
+    cookieFlags: 'SameSite=None;Secure'
+  }
+})
 hotjar.initialize(111111, 1)
 
 const tagManagerArgs = {

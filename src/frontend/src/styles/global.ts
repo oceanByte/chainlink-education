@@ -67,7 +67,6 @@ a {
   text-decoration: none !important;
   opacity: 1;
   transition: opacity 0.15s ease-in-out-out;
-  will-change: opacity;
 }
 
 a:visited {
@@ -117,7 +116,6 @@ select:-webkit-autofill:focus {
 
 .appear {
   opacity: 0;
-  will-change: transform, opacity;
   animation: ${fadeInFromLeft} ease-in-out 1;
   animation-fill-mode: forwards;
   animation-duration: 0.3s;

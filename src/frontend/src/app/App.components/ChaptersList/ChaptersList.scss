@@ -40,6 +40,8 @@
 
     &__name {
       max-width: 320px;
+      width: 100%;
+      padding-right: 10px;
       @include fluid-size('font-size', 375px, 1600px, 13px, 15px);
       line-height: 19px;
     }
