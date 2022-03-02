@@ -52,6 +52,13 @@ export class User {
   @IsNumber()
   @Min(6)
   tokenId?: number
+
+  @Property({ default: Math.floor(Math.random() * 10000) })
+  @IsNumber()
+  nonce?: number
+
+  @Property({ nullable: true, optional: true })
+  publicAddress?: string
 }
 
 export const UserModel = getModel(User, { schemaOptions: { timestamps: true } })

@@ -1,6 +1,6 @@
 import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
-import { LoginInputs } from 'shared/user/Login'
+import { LoginInputs, LoginMetaMask } from 'shared/user/Login'
 import { redirect } from 'app/App.actions'
 
 export const LOGOUT = 'LOGOUT'
@@ -24,6 +24,29 @@ export const login = ({ usernameOrEmail, password, recaptchaToken }: LoginInputs
           url: `${process.env.REACT_APP_BACKEND_URL}/user/login`,
           method: 'POST',
           json: { usernameOrEmail, password, recaptchaToken },
+        },
+        commit: {
+          type: LOGIN_COMMIT,
+          meta: {
+            thunks: [showToaster(SUCCESS, 'Welcome back!', 'Happy to see you again'), redirect('/')],
+          },
+        },
+        rollback: { type: LOGIN_ROLLBACK },
+      },
+    },
+  })
+}
+
+export const loginMetaMask = ({ publicAddress, signature }: LoginMetaMask) => (dispatch: any) => {
+  dispatch({
+    type: LOGIN_REQUEST,
+    payload: {},
+    meta: {
+      offline: {
+        effect: {
+          url: `${process.env.REACT_APP_BACKEND_URL}/auth`,
+          method: 'POST',
+          json: { publicAddress, signature },
         },
         commit: {
           type: LOGIN_COMMIT,
