@@ -27,3 +27,11 @@ export class LoginOutputs {
   @Expose()
   user!: PublicUser
 }
+
+export class LoginMetaMask {
+  @Expose()
+  publicAddress!: string
+
+  @Expose()
+  signature!: string
+}

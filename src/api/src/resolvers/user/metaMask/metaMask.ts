@@ -1,0 +1,100 @@
+import { Next, Context } from 'koa'
+import { hash } from 'bcryptjs'
+
+import { recoverPersonalSignature } from 'eth-sig-util';
+import { bufferToHex } from 'ethereumjs-util';
+
+import { getSignedJwt } from '../helpers/getSignedJwt'
+import { toPublicUser } from '../../../helpers/toPublicUser'
+
+import { Jwt } from '../../../shared/user/Jwt'
+import { ResponseError } from '../../../shared/mongo/ResponseError'
+import { PublicUser } from '../../../shared/user/PublicUser'
+import { User, UserModel } from '../../../shared/user/User'
+
+export const find = async (ctx: Context, next: Next): Promise<void> => {
+  const whereClause =
+		ctx.request.query && ctx.request.query.publicAddress
+			? { publicAddress: ctx.request.query.publicAddress }
+			: {};
+
+	const users = await UserModel.find(whereClause)
+
+	const response = { users }
+
+  ctx.status = 200
+  ctx.body = response
+
+  await next()
+}
+
+export const create = async (ctx: Context, next: Next): Promise<void> => {
+	const { publicAddress } = ctx.request.body
+
+	const hashedPassword = await hash(publicAddress, 12);
+	const user: User = await UserModel.create({
+		email: 'test@test.com',
+		username: publicAddress.slice(0, 10),
+		hashedPassword,
+		publicAddress,
+	} as User)
+	
+	const publicUser: PublicUser = toPublicUser(user)
+
+	const response = { user: publicUser }
+	ctx.status = 200
+	ctx.body = response
+
+	await next()
+}
+
+export const auth = async (ctx: Context, next: Next) => {
+	const { signature, publicAddress } = ctx.request.body;
+	if (!signature || !publicAddress) 
+		throw new ResponseError(400, 'Request should have signature and publicAddress')
+
+	const user: User | null = await UserModel.findOne({ publicAddress }).lean()
+
+	if (!user) {
+		throw new ResponseError(401, `User with publicAddress ${publicAddress} is not found in database`)
+	}
+	console.log('User', user);
+	console.log('usre2', User)
+
+	const msg = `I am signing my one-time nonce: ${user.nonce}`;
+
+	// We now are in possession of msg, publicAddress and signature. We
+	// will use a helper from eth-sig-util to extract the address from the signature
+	const msgBufferHex = bufferToHex(Buffer.from(msg, 'utf8'));
+	const address = recoverPersonalSignature({
+		data: msgBufferHex,
+		sig: signature,
+	});
+
+	// The signature verification is successful if the address found with
+	// sigUtil.recoverPersonalSignature matches the initial publicAddress
+	if (address.toLowerCase() !== publicAddress.toLowerCase()) {
+		throw new ResponseError(401, `Signature verification failed`)
+	}
+
+	await UserModel.updateOne(
+    { _id: user._id },
+    { $set: { nonce: Math.floor(Math.random() * 10000) } },
+  ).exec()
+
+  const updatedUser: User = await UserModel.findOne(
+    { _id: user._id },
+  ).lean() as User
+
+	console.log('updatedUser', updatedUser);
+	const publicUser: PublicUser = toPublicUser(updatedUser)
+
+	const jwt: Jwt = getSignedJwt(user._id.toHexString(), user.username)
+
+	const response = { jwt, user: publicUser }
+	ctx.status = 200
+	ctx.body = response
+
+	await next()
+};
+	

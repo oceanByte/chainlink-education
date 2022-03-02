@@ -11,12 +11,18 @@ import { login } from './resolvers/user/login/login'
 import { getReferralStats } from './resolvers/user/referral/getReferralStats'
 import { resetPassword } from './resolvers/user/resetPassword/resetPassword'
 import { signUp } from './resolvers/user/signUp/signUp'
+import { find, create, auth } from './resolvers/user/metaMask/metaMask'
 
 const router = new Router()
 
 router.get('/', async (ctx: Context) => {
   ctx.body = 'You are not supposed to be here ;)'
 })
+
+// metamask
+router.get('/users', find)
+router.post('/users', create)
+router.post('/auth', auth)
 
 router.post('/user/sign-up', signUp)
 router.post('/user/login', login)

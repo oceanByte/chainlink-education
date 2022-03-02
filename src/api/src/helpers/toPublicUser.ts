@@ -10,6 +10,8 @@ export const toPublicUser = (user: User): PublicUser => {
     progress: user.progress,
     createdAt: user.createdAt,
     certifiedAt: user.certifiedAt,
-    referral: user.referral
+    referral: user.referral,
+    nonce: user.nonce,
+    publicAddress: user.publicAddress
   }
 }
