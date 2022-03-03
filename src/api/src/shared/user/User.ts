@@ -59,6 +59,9 @@ export class User {
 
   @Property({ nullable: true, optional: true })
   publicAddress?: string
+
+  @Property({ nullable: true })
+  courses!: any[]
 }
 
 export const UserModel = getModel(User, { schemaOptions: { timestamps: true } })

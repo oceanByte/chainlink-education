@@ -12,8 +12,10 @@ import { Jwt } from '../../../shared/user/Jwt'
 import { PublicUser } from '../../../shared/user/PublicUser'
 import { SignUpInputs, SignUpOutputs } from '../../../shared/user/SignUp'
 import { User, UserModel } from '../../../shared/user/User'
+import { Course, CourseModel } from '../../../shared/course/Course'
 import { getSignedJwt } from '../helpers/getSignedJwt'
 import { verifyRecaptchaToken } from '../helpers/verifyRecaptchaToken'
+import { COURSES } from '../../../constants'
 
 export const signUp = async (ctx: Context, next: Next): Promise<void> => {
   const signUpArgs = plainToClass(SignUpInputs, ctx.request.body, { excludeExtraneousValues: true })
@@ -41,6 +43,16 @@ export const signUp = async (ctx: Context, next: Next): Promise<void> => {
   
   const hashedPassword = await hash(password, 12)
   const user: User = await UserModel.create({ email, username, hashedPassword } as User)
+
+  for (const course of COURSES) {
+    await CourseModel.create({
+      userId: user._id,
+      name: course,
+    } as Course)
+  }
+  
+  const courses = await CourseModel.find({ userId: user._id });
+
   const publicUser: PublicUser = toPublicUser(user)
 
   const jwt: Jwt = getSignedJwt(user._id.toHexString(), user.username)
@@ -71,7 +83,10 @@ export const signUp = async (ctx: Context, next: Next): Promise<void> => {
     rewarded
   }
   
-  const response: SignUpOutputs = { jwt, user: publicUser }
+  const response: SignUpOutputs = { jwt, user: {
+    ...publicUser,
+    courses
+  } }
 
   ctx.status = 200
   ctx.body = response

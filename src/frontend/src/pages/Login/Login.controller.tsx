@@ -112,10 +112,7 @@ export const Login = () => {
 		)
 			.then((response) => response.json())
 			// If yes, retrieve it. If no, create it.
-			.then(({users}) => {
-        console.log(users);
-        return users.length ? {user: users[0]} : handleSignup(publicAddress)
-      })
+			.then(({users}) => users.length ? {user: users[0]} : handleSignup(publicAddress))
 			// Popup MetaMask confirmation modal to sign message
 			.then(handleSignMessage)
 			// Send signature to backend on the /auth route

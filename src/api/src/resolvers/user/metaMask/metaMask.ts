@@ -11,6 +11,8 @@ import { Jwt } from '../../../shared/user/Jwt'
 import { ResponseError } from '../../../shared/mongo/ResponseError'
 import { PublicUser } from '../../../shared/user/PublicUser'
 import { User, UserModel } from '../../../shared/user/User'
+import { Course, CourseModel } from '../../../shared/course/Course'
+import { COURSES } from '../../../constants'
 
 export const find = async (ctx: Context, next: Next): Promise<void> => {
   const whereClause =
@@ -18,7 +20,16 @@ export const find = async (ctx: Context, next: Next): Promise<void> => {
 			? { publicAddress: ctx.request.query.publicAddress }
 			: {};
 
-	const users = await UserModel.find(whereClause)
+	let users = await UserModel.find(whereClause)
+
+	if (users.length) {
+		const user = users[0];
+		
+		const courses = await CourseModel.find({ userId: user._id });
+
+		user.courses = courses;
+		users = [user]
+	}
 
 	const response = { users }
 
@@ -38,7 +49,14 @@ export const create = async (ctx: Context, next: Next): Promise<void> => {
 		hashedPassword,
 		publicAddress,
 	} as User)
-	
+
+	for (const course of COURSES) {
+    await CourseModel.create({
+      userId: user._id,
+      name: course,
+    } as Course)
+  }
+  
 	const publicUser: PublicUser = toPublicUser(user)
 
 	const response = { user: publicUser }
@@ -58,8 +76,6 @@ export const auth = async (ctx: Context, next: Next) => {
 	if (!user) {
 		throw new ResponseError(401, `User with publicAddress ${publicAddress} is not found in database`)
 	}
-	console.log('User', user);
-	console.log('usre2', User)
 
 	const msg = `I am signing my one-time nonce: ${user.nonce}`;
 
@@ -86,12 +102,16 @@ export const auth = async (ctx: Context, next: Next) => {
     { _id: user._id },
   ).lean() as User
 
-	console.log('updatedUser', updatedUser);
+	const courses = await CourseModel.find({ userId: user._id });
+
 	const publicUser: PublicUser = toPublicUser(updatedUser)
 
 	const jwt: Jwt = getSignedJwt(user._id.toHexString(), user.username)
 
-	const response = { jwt, user: publicUser }
+	const response = { jwt, user: {
+		...publicUser,
+		courses
+	} }
 	ctx.status = 200
 	ctx.body = response
 

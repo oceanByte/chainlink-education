@@ -11,6 +11,7 @@ import { ConfirmYouPassword } from '../../app/App.components/ConfirmYouPassword/
 import { DeleteAccount } from '../../app/App.components/DeleteAccount/DeleteAccount'
 import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePassword'
 import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
+import { CoursesListView } from 'app/App.components/CoursesList/CourseList.view'
 
 type ProfileViewProps = {
   user?: PublicUser,
@@ -34,7 +35,7 @@ export const ProfileView = ({
     }
   }, [search])
 
-  console.log(chapterData);
+
   chapterData.forEach((chapter, i) => {
     if (pathname === chapter.pathname) {
 
@@ -76,36 +77,7 @@ export const ProfileView = ({
         </div>
       </div>
       <div className={`profile-page-progress profile-page-section ${section === 1 ? 'profile-page-visible' : ''}`}>
-        <div className='profile-page-section__header h-font'>Progress</div>
-        <div className='profile-page-progress__bar'>
-          <div className='profile-page-progress__bar__line'>
-            <div className='profile-page-progress__bar__line__color' style={{ width: `${percent}%` }} />
-          </div>
-          <div className='profile-page-progress__bar__number'>{percent}%</div>
-        </div>
-        <div className='profile-page-progress-chapters p-font'>
-          <ChaptersListView
-            user={user}
-            activeCourse={activeCourse}
-            pathname={pathname}
-          />
-        </div>
-        <div className='profile-page-progress__certificate-header h-font'>
-          Certificate
-        </div>
-        <div className='profile-page-progress__warning'>You cannot upload the certificate yet because you have
-          not completed the course
-        </div>
-        <div className='profile-page-progress-footer-box p-font'>
-          <button className='profile-page-progress-footer-box__button btn btn-green btn-green-disabled'>
-            <span className='profile-page-progress-footer-box__button__text'> Download certificate </span>
-            <span className='arrow-upright' />
-          </button>
-          <div className='profile-page-progress-footer-box__copy-link'>
-            Copy certificate link
-          </div>
-        </div>
-        <div className='profile-page-progress__image' />
+        <CoursesListView user={user} />
       </div>
       <div className={`profile-page-account-info profile-page-section ${section === 2 ? 'profile-page-visible' : ''}`}>
         <div className='profile-page-account-info-wrapper'>
