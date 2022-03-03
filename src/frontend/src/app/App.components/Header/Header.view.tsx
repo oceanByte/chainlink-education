@@ -10,6 +10,7 @@ import { ChapterData } from '../../../pages/Chapter/Chapter.controller'
 
 import classnames from 'classnames'
 import { ChaptersListView } from '../ChaptersList/ChaptersListView'
+import { CoursesView } from '../Courses/Courses.view'
 
 type HeaderViewProps = {
   user?: PublicUser
@@ -25,6 +26,7 @@ export const HeaderView = ({
   activeCourse
 }: HeaderViewProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isCoursesOpen, setIsCoursesOpen] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(true)
 
@@ -104,13 +106,26 @@ export const HeaderView = ({
     </>
   )
 
+  const showCourses = () => {
+    setIsCoursesOpen(!isCoursesOpen)
+    setIsDropdownOpen(() => false)
+  }
+
+  const showListAcademy = () => {
+    setIsDropdownOpen(!isDropdownOpen)
+    setIsCoursesOpen(() => false)
+  }
+
   return (
     <>
       <div className="header">
         <Link to="/" className="header__link" />
         <div className="header-menu">
           <div className="header-menu-list">
-            <button className="header-menu-list__item btn" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+            {/* <button className="header-menu-list__item btn" onClick={showCourses}>
+              Courses <span>&#9660;</span>
+            </button> */}
+            <button className="header-menu-list__item btn" onClick={showListAcademy}>
               Academy <span>&#9660;</span>
             </button>
             <button
@@ -128,6 +143,13 @@ export const HeaderView = ({
             }}
           />
         </div>
+        {/* <div className={classnames('courses-list', !isCoursesOpen && 'hidden')}>
+          <CoursesView
+            user={user}
+            activeCourse={activeCourse}
+            pathname={pathname}
+          />
+        </div> */}
         <div className={classnames('chapters-list', !isDropdownOpen && 'hidden')}>
           <ChaptersListView
             user={user}

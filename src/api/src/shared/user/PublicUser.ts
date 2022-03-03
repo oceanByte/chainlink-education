@@ -34,5 +34,8 @@ export class PublicUser {
 
   publicAddress?: string
 
+  @IsArray()
+  courses?: any[]
+
   stats?: Object
 }

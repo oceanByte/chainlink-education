@@ -3,6 +3,7 @@ import { validateOrReject } from 'class-validator'
 import { Context, Next } from 'koa'
 
 import { firstError } from '../../../helpers/firstError'
+import { CourseModel } from '../../../shared/course/Course'
 import { ResponseError } from '../../../shared/mongo/ResponseError'
 import { GetPublicUserInputs, GetPublicUserOutputs } from '../../../shared/page/GetPublicUser'
 import { PublicUser } from '../../../shared/user/PublicUser'
@@ -17,6 +18,8 @@ export const getPublicUser = async (ctx: Context, next: Next): Promise<void> => 
 
   const user: PublicUser = (await UserModel.findOne({ username }, PUBLIC_USER_MONGO_SELECTOR).lean()) as PublicUser
   if (!user) throw new ResponseError(404, 'User not found')
+
+  const courses = await CourseModel.find({ userId: user._id });
 
   let pending = 0
   let completed = 0
@@ -44,7 +47,10 @@ export const getPublicUser = async (ctx: Context, next: Next): Promise<void> => 
     rewarded
   }
 
-  const response: GetPublicUserOutputs = { user }
+  const response: GetPublicUserOutputs = { user: {
+      ...user,
+      courses
+  }}
 
   ctx.status = 200
   ctx.body = response
