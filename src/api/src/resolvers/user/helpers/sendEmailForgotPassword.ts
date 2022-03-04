@@ -12,8 +12,8 @@ export const sendEmailForgotPassword: SendEmailForgotPassword = async (email, ca
     to: email,
     from: { name: 'ChainlinkAcademy', email: process.env.FROM_EMAIL as string },
     subject: 'Password reset',
-    text: `Please enter the following: ${captchaSolution} on https://chainlinnk.academy/reset-password?key=${token}`,
-    html: `Please enter the following: ${captchaSolution} <br />on <a href="https://chainlinnk.academy/reset-password?key=${token}">https://chainlinnk.academy/reset-password?key=${token}</a>`,
+    text: `Please enter the following: ${captchaSolution} on ${process.env.FRONTEND_URL || 'https://chainlink.academy'}/reset-password?key=${token}`,
+    html: `Please enter the following: ${captchaSolution} <br />on <a href="${process.env.FRONTEND_URL || 'https://chainlink.academy'}/reset-password?key=${token}">${process.env.FRONTEND_URL || 'https://chainlink.academy'}/reset-password?key=${token}</a>`,
   }
 
   await sendgrid.send(message)
