@@ -1,25 +1,17 @@
-import { Button } from 'app/App.components/Button/Button.controller'
-import { Input } from 'app/App.components/Input/Input.controller'
-import { InputSpacer } from 'app/App.components/Input/Input.style'
 //prettier-ignore
 import { Link } from 'react-router-dom'
 
-import {
-  FormInputs,
-  getErrorMessage,
-  getInputStatus,
-  updateFormFromBlur,
-  updateFormFromChange,
-  updateFormFromSubmit,
-} from 'helpers/form'
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
-import { ResetPasswordInputs } from 'shared/user/ResetPassword'
 
-import { ResetPasswordCard, ResetPasswordStyled, ResetPasswordTitle } from './ResetPassword.style'
-import Eye from '../../assets/eye.png'
-import EyeHide from '../../assets/eyeHide.png'
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+import { InputField } from '../../app/App.components/Form/InputField/Input.controller';
+import { InputFieldWithEye } from '../../app/App.components/Form/InputFieldWithEye/Input.controller';
+
+import { Row } from './ResetPassword.style'
 import Confirm from '../../assets/confirm.png'
 import UnConfirm from '../../assets/unconfirm.png'
 import ArrowRight from '../../assets/arrowRight.png'
@@ -29,17 +21,33 @@ type ResetPasswordViewProps = {
   loading: boolean
 }
 
-export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPasswordViewProps) => {
-  const [form, setForm] = useState<FormInputs>({
-    solution: { value: '' },
-    newPassword: { value: '' },
-  })
-  const [password, setPassword] = useState('')
-  const [confirmPass, setConfirmPass] = useState('')
+export const ValidationSchema = Yup.object().shape({
+  solution: Yup.string()
+    .matches(/^\d+$/, 'Only positive number!')
+    .required('This field is required!'),
+  password: Yup.string()
+    .matches(/(?=.*\d)(?=.*[a-zäöüßа-яієїґ])(?=.*[A-ZÄÖÜА-ЯІЄЇГҐ])(?=.*[-+_!@#$%^&*.,?<>()|"])/, 'Invalid password')
+    .min(8, 'Password must be longer than or equal to 8 characters')
+    .max(50, 'Password must be shorter than or equal to 50 characters')
+    .required('This field is required!'),
+  confirmPassword: Yup.string()
+    .required('Please confirm your password')
+    .oneOf([Yup.ref('password'), null], 'Password mismatch'),
+});
 
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [showErrorMachPassword, setShowErrorMachPassword] = useState(2)
+interface IFormInputs {
+  solution: string,
+  password: string,
+  confirmPassword: string,
+}
+
+export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPasswordViewProps) => {
+
+  const initialValues = {
+    solution: '',
+    password: '',
+    confirmPassword: '',
+  };
 
   const [uppercase, setUppercase] = useState(false)
   const [lowercase, setLowercase] = useState(false)
@@ -59,28 +67,6 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
   const specialImage = special ? Confirm : UnConfirm
   const minLengthImage = minLength ? Confirm : UnConfirm
 
-  const eyeForPassword = showPassword ? EyeHide : Eye
-  const eyeForConfirmPassword = showConfirmPassword ? EyeHide : Eye
-
-  const typeOfInputPassword = showPassword ? 'text' : 'password'
-  const typeOfInputConfirmPassword = showConfirmPassword ? 'text' : 'password'
-
-  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const {
-  //     target: { value },
-  //   } = e
-
-  //   setUppercase(regUppercase.test(value))
-  //   setLowercase(regLowercase.test(value))
-  //   setNumbers(regNumbers.test(value))
-  //   setSpecial(regSpecial.test(value))
-  //   setMinLength(regMinLength.test(value))
-
-  //   const updatedForm = updateFormFromChange(e, form, ResetPasswordInputs)
-
-  //   setForm(updatedForm)
-  // }
-
   const handleChangePassword = (e: any) => {
     const {
       target: { value },
@@ -92,142 +78,128 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
     setSpecial(regSpecial.test(value))
     setMinLength(regMinLength.test(value))
 
-    setPassword(value)
   }
 
-  const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedForm = updateFormFromBlur(e, form)
-
-    setForm(updatedForm)
-  }
-
-  const handleSubmit = (event: SyntheticEvent) => {
-    const updatedForm = updateFormFromSubmit(event, form, ResetPasswordInputs)
-
-    if (!updatedForm.newPassword.error && !updatedForm.solution.error)
-      resetPasswordCallback({
-        newPassword: updatedForm.newPassword.value,
-        solution: updatedForm.solution.value,
-      })
-    else setForm(updatedForm)
-  }
-
-  const passwordMatching = () => {
-    const errorDiv = document.querySelector('.reset-password__error')
-    console.log(errorDiv)
-
-    if (form.solution.value === confirmPass) {
-      // setShowErrorMachPassword(33)
-      // errorDiv.style.display = 'none'
-      console.log('if')
-    } else {
-      setShowErrorMachPassword(77)
-      console.log('else')
-    }
-    setTimeout(() => console.log(showErrorMachPassword), 2000)
-
-    // console.dir(errorDiv)
+  const handleSubmit = (values: IFormInputs) => {
+    resetPasswordCallback({
+      solution: values.solution,
+      newPassword: values.password
+    })
   }
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="reset-password">
-        <div className="reset-password-title">Reset your password</div>
-        <div className="reset-password-subtitle">
-          Pick and set a new password for your account, and you’re good to go!
-        </div>
-        <div className="reset-password__pass">
-          <img src={eyeForPassword} alt="eye" onClick={() => setShowPassword((prev) => !prev)} />
-          <label htmlFor="reset-password-pass">Choose new password</label>
-          <input
-            type={typeOfInputPassword}
-            id="reset-password-pass"
-            name="solution"
-            onChange={handleChangePassword}
-            value={password}
-            onBlur={handleBlur}
-          />
-        </div>
-        <div className="reset-password__validation">
-          <div className="reset-password__validation-left">
-            <div className="reset-password__validation-left-uppercase-letter">
-              <img src={uppercaseImage} alt="confirm" />
-              Min 1 uppercase letter
-            </div>
-            <div className="reset-password__validation-left-lowercase-letter">
-              <img src={lowercaseImage} alt="confirm" />
-              Min 1 lowercase letter
-            </div>
-            <div className="reset-password__validation-left-number">
-              <img src={numbersImage} alt="confirm" />
-              Min 1 numbers
-            </div>
-          </div>
-          <div className="reset-password__validation-right">
-            <div className="reset-password__validation-right-special-characters" title="@, &, %, *, !, ?">
-              <img src={specialImage} alt="confirm" />
-              Min 1 special characters
-            </div>
-            <div className="reset-password__validation-right-min-length">
-              <img src={minLengthImage} alt="confirm" />
-              Min length = 8
-            </div>
-          </div>
-        </div>
-        <div className="reset-password__confirm-pass">
-          <img src={eyeForConfirmPassword} alt="eye" onClick={() => setShowConfirmPassword((prev) => !prev)} />
-          <label htmlFor="reset-password__confirm-pass">Confirm Password</label>
-          <input
-            type={typeOfInputConfirmPassword}
-            id="reset-password__confirm-pass"
-            // onChange={handleChange}
-            // value={form.newPassword.value}
-            onChange={(e) => setConfirmPass(e.target.value)}
-            onBlur={passwordMatching}
-            value={confirmPass}
-          />
-        </div>
-        <button className="reset-password__sign" type="submit">
-          <img src={ArrowRight} alt="arrow" />
-          Sign In
-        </button>
-        <Link to="/login">
-          <div className="reset-password__forgot">Return to Sign In</div>
-        </Link>
-      </form>
-      {/* <ResetPasswordStyled>
-        <ResetPasswordTitle>
-          <h1>Reset Password</h1>
-        </ResetPasswordTitle>
-        <ResetPasswordCard>
-          <form onSubmit={handleSubmit}>
-            <Input
-              icon="check-shield"
-              name="solution"
-              placeholder="Captcha from email"
-              type="text"
-              onChange={handleChange}
-              value={form.solution.value}
-              onBlur={handleBlur}
-              inputStatus={getInputStatus(form.solution)}
-              errorMessage={getErrorMessage(form.solution)}
-            />
-            <Input
-              icon="password"
-              name="newPassword"
-              placeholder="New password"
-              type="password"
-              onChange={handleChange}
-              value={form.newPassword.value}
-              onBlur={handleBlur}
-              inputStatus={getInputStatus(form.newPassword)}
-              errorMessage={getErrorMessage(form.newPassword)}
-            />
-            <InputSpacer />
-            <Button type="submit" text="Submit" icon="login" loading={loading} />
-          </form>
-        </ResetPasswordCard>
-      </ResetPasswordStyled> */}
+      <Formik
+        initialValues={initialValues}
+        validationSchema={ValidationSchema}
+        onSubmit={handleSubmit}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            setFieldValue,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+          }) => (
+            <form className="reset-password" onSubmit={handleSubmit}>
+              <div className="reset-password-title">Reset your password</div>
+              <div className="reset-password-subtitle">
+                Pick and set a new password for your account, and you’re good to go!
+              </div>
+              
+              <Row>
+                <InputField
+                  label="SOLUTION"
+                  type="text"
+                  value={values.solution}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="solution"
+                  inputStatus={
+                    errors.solution && touched.solution
+                      ? 'error' : !errors.solution && touched.solution 
+                      ? 'success' : undefined
+                    }
+                  errorMessage={errors.solution && touched.solution && errors.solution}
+                  isDisabled={false}
+                />
+              </Row>
+              <Row>
+                <InputFieldWithEye
+                  label="Choose new password"
+                  value={values.password}
+                  onChange={(e) => {
+                    handleChangePassword(e)
+
+                    setFieldValue("password", e.target.value)
+                  }}
+                  onBlur={handleBlur}
+                  name="password"
+                  inputStatus={
+                    errors.password && touched.password
+                      ? 'error' : !errors.password && touched.password 
+                      ? 'success' : undefined
+                    }
+                  errorMessage={errors.password && touched.password && errors.password}
+                  isDisabled={false}
+                />
+              </Row>
+              <div className="sign-up__validation">
+                <div className="sign-up__validation-left">
+                  <div className="sign-up__validation-left-uppercase-letter">
+                    <img src={uppercaseImage} alt="confirm" />
+                    Min 1 uppercase letter
+                  </div>
+                  <div className="sign-up__validation-left-lowercase-letter">
+                    <img src={lowercaseImage} alt="confirm" />
+                    Min 1 lowercase letter
+                  </div>
+                  <div className="sign-up__validation-left-number">
+                    <img src={numbersImage} alt="confirm" />
+                    Min 1 numbers
+                  </div>
+                </div>
+                <div className="sign-up__validation-right">
+                  <div className="sign-up__validation-right-special-characters" title='Only "!"'>
+                    <img src={specialImage} alt="confirm" />
+                    Min 1 special characters
+                  </div>
+                  <div className="sign-up__validation-right-min-length">
+                    <img src={minLengthImage} alt="confirm" />
+                    Min length = 8
+                  </div>
+                </div>
+              </div>
+              <Row>
+                <InputFieldWithEye
+                  label="Confirm Password"
+                  value={values.confirmPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="confirmPassword"
+                  inputStatus={
+                    errors.confirmPassword && touched.confirmPassword
+                      ? 'error' : !errors.confirmPassword && touched.confirmPassword 
+                      ? 'success' : undefined
+                    }
+                  errorMessage={errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
+                  isDisabled={false}
+                />
+              </Row>
+
+              <button className="reset-password__sign" type="submit">
+                <img src={ArrowRight} alt="arrow" />
+                Sign In
+              </button>
+              <Link to="/login">
+                <div className="reset-password__forgot">Return to Sign In</div>
+              </Link>
+            </form>
+        )}
+      </Formik>
     </>
   )
 }

@@ -23,7 +23,7 @@ export const forgotPassword = ({ usernameOrEmail, recaptchaToken }: ForgotPasswo
           meta: {
             thunks: [
               showToaster(SUCCESS, 'Check your email', 'for a reset captcha'),
-              redirect('/reset-password/$resetPasswordToken'),
+              redirect('/reset-password?key=$resetPasswordToken'),
             ],
           },
         },
