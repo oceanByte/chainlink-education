@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 
 import { State } from 'reducers'
 
@@ -12,6 +12,7 @@ import { HeaderView } from './Header.view'
 
 
 export const Header = () => {
+  const history = useHistory();
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
   const { pathname } = useLocation()
@@ -20,7 +21,8 @@ export const Header = () => {
   const [activeCourse, setActiveCourse] = useState(defaultCourse)
 
   function removeAuthUserCallback() {
-    dispatch(logout())
+    dispatch(logout());
+    history.push('/');
   }
 
   return (<HeaderView
