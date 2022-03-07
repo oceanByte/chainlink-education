@@ -16,7 +16,11 @@ export const CoursesListView = ({
   return (
     <>
       { user && user.courses ?
-        user.courses.map((course: Course)=> (<CourseView course={course} user={user} activeCourse={defaultCourse} /> ))
+        user.courses.map((course: Course, key: number)=> (
+          <div className='profile-page-section__course' key={key}>
+            <CourseView course={course} user={user} activeCourse={defaultCourse} />
+          </div>
+         ))
         : null
       }
     </>

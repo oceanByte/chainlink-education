@@ -40,7 +40,7 @@ export interface Data {
 export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING)
   const [showDiff, setShowDiff] = useState(false)
-  const [isPopup, setIsPopup] = useState(false)
+  const [isAccount, setIsAccount] = useState(false)
   const [isStarted, setIsStarted] = useState(false)
   const { pathname } = useLocation()
   const [data, setData] = useState<Data>({
@@ -102,7 +102,7 @@ export const Chapter = () => {
     if (pathname === '/chainlinkIntroduction/chapter-8') {
       setValidatorState(RIGHT)
       if (user) dispatch(addProgress({ chapterDone: pathname }))
-      setIsPopup(true)
+      setIsAccount(true)
       return
     }
 
@@ -122,7 +122,7 @@ export const Chapter = () => {
       })
       if (ok) {
         setValidatorState(RIGHT)
-        setIsPopup(true)
+        setIsAccount(true)
         if (user) dispatch(addProgress({ chapterDone: pathname }))
         else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
       } else setValidatorState(WRONG)
@@ -140,7 +140,7 @@ export const Chapter = () => {
             data.solution.replace(/\s+|\/\/ Type your solution below/g, '')
           ) {
             setValidatorState(RIGHT)
-            setIsPopup(true)
+            setIsAccount(true)
             if (user) dispatch(addProgress({ chapterDone: pathname }))
             else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
           } else setValidatorState(WRONG)
@@ -181,9 +181,9 @@ export const Chapter = () => {
           proposedSolution={data.exercise}
           proposedSolutionCallback={proposedSolutionCallback}
           showDiff={showDiff}
-          isPopup={isPopup}
+          isAccount={isAccount}
           course={data.course}
-          closeIsPopup={() => setIsPopup(false)}
+          closeIsAccountModal={() => setIsAccount(false)}
           user={user}
           supports={data.supports}
           questions={data.questions}
