@@ -19,7 +19,7 @@ export const HeaderAuth = ({
 
   function removeAuthUserCallback() {
     dispatch(logout())
-    console.log(history);
+
     history.push('/');
   }
 
