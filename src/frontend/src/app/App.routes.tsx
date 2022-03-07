@@ -31,6 +31,7 @@ import { Footer } from './App.components/Footer/Footer.controller'
 import { Profile } from '../pages/Profile/Profile.controller'
 import { SiteMapView } from 'pages/SiteMap/SiteMap.view'
 import { SiteMapContainer } from 'pages/SiteMap/SiteMap.style'
+import PrivateRoute from 'containers/PrivateRoute'
 
 // import { About } from 'pages/About/About.controller'
 
@@ -61,30 +62,37 @@ export const AppRoutes = ({ location }: any) => (
 
       <ResetPassword />
     </Route>
-    <Route exact path="/delete-account">
-      <HeaderAuth />
 
-      <DeleteAccount />
-    </Route>
     <Route exact path="/change-password">
       <ChangePassword />
     </Route>
-    <Route path="/*/info">
-      <Course />
-    </Route>
-    <Route path="/profile">
-      <Profile />
-    </Route>
+
     <Route path="/*/chapter-*">
       <Header />
       <Chapter />
     </Route>
-    <Route exact path="/user/:username">
+
+    <Route path="/*/info">
+      <Course />
+    </Route>
+
+    <PrivateRoute path="/profile">
+      <Profile />
+    </PrivateRoute>
+
+    <PrivateRoute path="/delete-account">
+      <HeaderAuth />
+      <DeleteAccount />
+    </PrivateRoute>
+
+    <PrivateRoute path="/user/:username">
       <User />
-    </Route>
-    <Route exact path="/certificate/:username">
+    </PrivateRoute>
+    
+    <PrivateRoute path="/certificate/:username">
       <Certificate />
-    </Route>
+    </PrivateRoute>
+
     {/* <Route exact path="/about">
       <About />
     </Route> */}

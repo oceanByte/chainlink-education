@@ -30,7 +30,6 @@ export const Login = () => {
 
   const loginCallback = async (loginInputs: LoginInputs) => {
     dispatch(recaptchaRequest())
-
     /* if (!executeRecaptcha) {
       dispatch(showToaster(ERROR, 'Recaptcha not ready', 'Please try again'))
       return

@@ -4,6 +4,7 @@ import { LoginInputs, LoginMetaMask } from 'shared/user/Login'
 import { redirect } from 'app/App.actions'
 
 export const LOGOUT = 'LOGOUT'
+
 export const logout = () => (dispatch: any) => {
   dispatch({
     type: LOGOUT,

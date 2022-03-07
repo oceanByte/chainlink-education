@@ -86,7 +86,7 @@ export const HeaderView = ({
             <Link to="/profile?accountInfo=2">Account info</Link>
           </div>
           <div className="header-menu-user-menu__item">
-            <Link to="/reset-password">Reset password</Link>
+            <Link to="/profile?resetPassword=3">Reset password</Link>
           </div>
           <div className="header-menu-user-menu__item">
             <div onClick={removeAuthUserCallback}>Log out</div>
