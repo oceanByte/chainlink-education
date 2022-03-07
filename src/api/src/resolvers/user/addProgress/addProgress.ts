@@ -4,6 +4,7 @@ import { Context, Next } from 'koa'
 
 import { firstError } from '../../../helpers/firstError'
 import { toPublicUser } from '../../../helpers/toPublicUser'
+import { CourseModel } from '../../../shared/course/Course'
 import { AddProgressInputs, AddProgressOutputs } from '../../../shared/user/AddProgress'
 import { PublicUser } from '../../../shared/user/PublicUser'
 import { User, UserModel } from '../../../shared/user/User'
@@ -41,7 +42,12 @@ export const addProgress = async (ctx: Context, next: Next): Promise<void> => {
       .exec();
   }
 
-  const response: AddProgressOutputs = { user: publicUser }
+  const courses = await CourseModel.find({ userId: updatedUser._id });
+
+  const response: AddProgressOutputs = { user: {
+    ...publicUser,
+    courses
+  } }
 
   ctx.status = 200
   ctx.body = response

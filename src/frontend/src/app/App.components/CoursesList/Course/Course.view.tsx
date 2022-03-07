@@ -38,10 +38,10 @@ export const CourseView = ({
       const userProgress = user && user.progress.length;
       setPercent(() => Math.floor((userProgress / chapterData.length) * 100))
     }
-  }, [])
+  }, [user])
 
   return (
-    <div className='profile-page-section__course'>
+    <>
       <div className='profile-page-section__header h-font'>Progress {course.name}</div>
 
       <div className='profile-page-progress__bar'>
@@ -77,6 +77,6 @@ export const CourseView = ({
           <div className='profile-page-progress__image' />
           </>
         ): null}
-    </div>
+    </>
   )
 }

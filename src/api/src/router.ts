@@ -12,6 +12,7 @@ import { getReferralStats } from './resolvers/user/referral/getReferralStats'
 import { resetPassword } from './resolvers/user/resetPassword/resetPassword'
 import { signUp } from './resolvers/user/signUp/signUp'
 import { find, create, auth } from './resolvers/user/metaMask/metaMask'
+import { deleteAccountPending, deleteAccountPermanently } from './resolvers/user/deleteAccount/deleteAccount'
 
 const router = new Router()
 
@@ -32,6 +33,8 @@ router.post('/user/forgot-password', forgotPassword)
 router.post('/user/change-password', changePassword)
 router.get('/user/is-certified', isCertified)
 router.get('/user/referral', getReferralStats)
+router.post('/user/delete-account', deleteAccountPending)
+router.post('/user/permanently-delete-account', deleteAccountPermanently)
 
 router.post('/page/get-user', getPublicUser)
 router.post('/page/set-name', setName)

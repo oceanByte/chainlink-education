@@ -1,32 +1,32 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
-import { ChaptersListView } from 'app/App.components/ChaptersList/ChaptersListView'
 import { Option } from 'app/App.components/Select/Select.view'
 import { PublicUser } from 'shared/user/PublicUser'
 
 import { ConfirmYouPassword } from '../../app/App.components/ConfirmYouPassword/ConfirmYouPassword'
-import { DeleteAccount } from '../../app/App.components/DeleteAccount/DeleteAccount'
 import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePassword'
 import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { CoursesListView } from 'app/App.components/CoursesList/CourseList.view'
+import { DeleteAccountModal } from 'modals/DeleteAccount/DeleteAccount.view'
 
 type ProfileViewProps = {
   user?: PublicUser,
   activeCourse: Option,
+  deleteAccountCallback: ()=> void
 }
 
 export const ProfileView = ({
   user,
   activeCourse,
+  deleteAccountCallback,
 }: ProfileViewProps) => {
 
   const { search, pathname } = useLocation()
   const [section, setSection] = useState(1)
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
-  const [isDeleteAccVisible, setIsDeleteAccVisible] = useState(true)
+  const [isDeleteAccVisible, setIsDeleteAccVisible] = useState(false)
   const [percent, setPercent] = useState(0);
 
   useEffect(() => {
@@ -52,6 +52,15 @@ export const ProfileView = ({
       setPercent(() => Math.floor((userProgress / chapterData.length) * 100))
     }
   }, [])
+
+  const showDeleteAccountModal = () => {
+    setIsDeleteAccVisible(() => true)
+    deleteAccountCallback()
+  }
+
+  const hideDeleteAccountModal = () => {
+    setIsDeleteAccVisible(() => false)
+  }
 
   return (
     <div className='profile-page'>
@@ -105,7 +114,7 @@ export const ProfileView = ({
           <span className='profile-page-account-info__button__text'> Save changes </span>
           <span className='arrow-upright' />
         </button> */}
-        <div onClick={() => setIsDeleteAccVisible(false)} className='profile-page-account-info__delete-account'>
+        <div onClick={showDeleteAccountModal} className='profile-page-account-info__delete-account'>
           Delete your account
         </div>
       </div>
@@ -114,7 +123,11 @@ export const ProfileView = ({
         <UpdatePassword setShowModal={setIsConfirmPassVisible} />
       </div>
       <ConfirmYouPassword showModal={isConfirmPassVisible} setShowModal={setIsConfirmPassVisible} />
-      <DeleteAccount showModal={isDeleteAccVisible} setShowModal={setIsDeleteAccVisible} />
+      {/* <DeleteAccount showModal={isDeleteAccVisible} setShowModal={setIsDeleteAccVisible} /> */}
+      <DeleteAccountModal
+        open={isDeleteAccVisible}
+        onClose={hideDeleteAccountModal}
+      />
     </div>
   )
 }

@@ -8,6 +8,7 @@ import { Dialog } from 'app/App.components/Dialog/Dialog.controller'
 import { Popup } from 'app/App.components/Popup/Popup.controller'
 import useIsMounted from 'ismounted'
 import Markdown from 'markdown-to-jsx'
+import { NoAccountModal } from 'modals/NoAccount/NoAccount.view'
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
@@ -326,8 +327,8 @@ type ChapterViewProps = {
   proposedSolution: string
   proposedSolutionCallback: (e: string) => void
   showDiff: boolean
-  isPopup: boolean
-  closeIsPopup: () => void
+  isAccount: boolean
+  closeIsAccountModal: () => void
   course?: string
   user?: PublicUser
   supports: Record<string, string | undefined>
@@ -341,8 +342,8 @@ export const ChapterView = ({
   validatorState,
   validateCallback,
   solution,
-  isPopup,
-  closeIsPopup,
+  isAccount,
+  closeIsAccountModal,
   proposedSolution,
   proposedSolutionCallback,
   showDiff,
@@ -395,40 +396,25 @@ export const ChapterView = ({
 
   const closePopupSaveProcess = () => {
     setIsSaveConfirmPopup(false)
+    closeIsAccountModal()
     localStorage.setItem('popupConfirm', 'true')
   }
 
-  const rootElement = document.getElementById('root') as HTMLElement
-
-  const PopupPortal = ReactDOM.createPortal(
-    <Popup
-      closePopup={closePopupSaveProcess}
-      buttonTextClose={'Continue without account'}
-      buttonText={'Sign up'}
-      img={'/images/chap_5_0.png'}
-      isImage={false}
-      link={'/login'}
-      title={''}
-      text={'Create an account to save your progress and earn your certificate'}
-    />,
-    rootElement,
-  )
-
   return (
     <div className="chapter-info-wrapper">
-      {nextChapter === '/chainlinkIntroduction/chapter-2' && !user && isSaveConfirmPopup ? PopupPortal : null}
-      {/* {isPopup ? (
-        <Popup
-          closePopup={closeIsPopup}
-          buttonText={nextChapter !== '/sign-up' ? 'Next Chapter' : 'Get certificate'}
-          buttonTextClose={'Close'}
-          link={nextChapter}
-          img={'/icons/dog.svg'}
-          isImage={true}
-          title={'Success'}
-          text={'Congratulations'}
+      {nextChapter === '/chainlinkIntroduction/chapter-2' && !user && isSaveConfirmPopup ? (
+        <NoAccountModal
+          open={!user}
+          onClose={closePopupSaveProcess}
+          buttonTextClose={'Continue without account'}
+          buttonText={'Sign up'}
+          img={'/images/chap_5_0.png'}
+          isImage={false}
+          link={'/login'}
+          title={''}
+          text={'Create an account to save your progress and earn your certificate'}
         />
-      ) : null} */}
+      ) : null}
       <div className={`chapter-info-container ${!isStarted ? '' : 'isStarted'}`}>
         <div>
           <div className="chapter-block">
