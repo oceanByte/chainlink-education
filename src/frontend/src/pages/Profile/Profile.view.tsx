@@ -2,6 +2,9 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
 import { Option } from 'app/App.components/Select/Select.view'
 import { PublicUser } from 'shared/user/PublicUser'
 
@@ -10,24 +13,37 @@ import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePa
 import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { CoursesListView } from 'app/App.components/CoursesList/CourseList.view'
 import { DeleteAccountModal } from 'modals/DeleteAccount/DeleteAccount.view'
+import { InputField } from 'app/App.components/Form/InputField/Input.controller';
 
 type ProfileViewProps = {
   user?: PublicUser,
   activeCourse: Option,
+  changeEmailCallback: ({email}: {email: string})=> void,
   deleteAccountCallback: ()=> void
 }
+
+export const ValidationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('This field is required!'),
+});
 
 export const ProfileView = ({
   user,
   activeCourse,
+  changeEmailCallback,
   deleteAccountCallback,
 }: ProfileViewProps) => {
-
+  
   const { search, pathname } = useLocation()
   const [section, setSection] = useState(1)
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
+  const [isMessageVisible, setIsMessageVisible] = useState(false)
   const [isDeleteAccVisible, setIsDeleteAccVisible] = useState(false)
   const [percent, setPercent] = useState(0);
+  const initialValue = {
+    email: user? user?.email : ''
+  }
 
   useEffect(() => {
     if (search) {
@@ -60,6 +76,11 @@ export const ProfileView = ({
 
   const hideDeleteAccountModal = () => {
     setIsDeleteAccVisible(() => false)
+  }
+
+  const handleSubmit = (values: { email: string }) => {
+    changeEmailCallback(values);
+    setIsMessageVisible(() => true);
   }
 
   return (
@@ -100,20 +121,53 @@ export const ProfileView = ({
               name='solution'
             /> */}
           </div>
-          {/* <div className='profile-page-account-info__email p-font'>
-            <label htmlFor='profile-page-account-info__email__input'>Email address</label> */}
-            {/* <div>{user?.email}</div> */}
-            {/* <input
-              type='email'
-              id='profile-page-account-info__email__input'
-              name='solution'
-            /> */}
-          {/* </div> */}
+          <Formik
+            initialValues={initialValue}
+            validationSchema={ValidationSchema}
+            onSubmit={handleSubmit}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                setFieldValue,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+              }) => (
+                <form className="" onSubmit={handleSubmit}>
+                  <div className='profile-page-account-info__email p-font'>
+                    <InputField
+                      label="EMAIL ADDRESS"
+                      type="text"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      name="email"
+                      inputStatus={
+                        errors.email && touched.email
+                          ? 'error' : !errors.email && touched.email 
+                          ? 'success' : undefined
+                        }
+                      errorMessage={errors.email && touched.email && errors.email}
+                      isDisabled={false}
+                    />
+                  </div>
+                  <button className='btn btn-green' type='submit'>
+                    <span className='profile-page-account-info__button__text'> Save changes </span>
+                    <span className='arrow-upright' />
+                  </button>
+                </form>
+            )}
+          </Formik>
         </div>
-        {/* <button className='btn btn-green'>
-          <span className='profile-page-account-info__button__text'> Save changes </span>
-          <span className='arrow-upright' />
-        </button> */}
+        {user && user.changeEmailPending ? (
+          <div className='profile-page-account-info__message'>
+            You have received an email. Please open the link to confirm your email update.
+          </div>
+        ) : null}
+        
         <div onClick={showDeleteAccountModal} className='profile-page-account-info__delete-account'>
           Delete your account
         </div>
@@ -123,7 +177,7 @@ export const ProfileView = ({
         <UpdatePassword setShowModal={setIsConfirmPassVisible} />
       </div>
       <ConfirmYouPassword showModal={isConfirmPassVisible} setShowModal={setIsConfirmPassVisible} />
-      {/* <DeleteAccount showModal={isDeleteAccVisible} setShowModal={setIsDeleteAccVisible} /> */}
+
       <DeleteAccountModal
         open={isDeleteAccVisible}
         onClose={hideDeleteAccountModal}

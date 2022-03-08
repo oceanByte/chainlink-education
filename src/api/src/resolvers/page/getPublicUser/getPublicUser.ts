@@ -9,7 +9,7 @@ import { GetPublicUserInputs, GetPublicUserOutputs } from '../../../shared/page/
 import { PublicUser } from '../../../shared/user/PublicUser'
 import { UserModel } from '../../../shared/user/User'
 
-export const PUBLIC_USER_MONGO_SELECTOR = '_id username name emailVerified progress createdAt referral accountName'
+export const PUBLIC_USER_MONGO_SELECTOR = '_id username name email emailVerified progress createdAt referral accountName'
 
 export const getPublicUser = async (ctx: Context, next: Next): Promise<void> => {
   const getPublicUserArgs = plainToClass(GetPublicUserInputs, ctx.request.body, { excludeExtraneousValues: true })

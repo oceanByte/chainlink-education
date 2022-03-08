@@ -1,6 +1,7 @@
 import { RESET, RESTORE } from 'app/App.actions'
 import { FORGOT_PASSWORD_COMMIT } from 'pages/ForgotPassword/ForgotPassword.actions'
 import { LOGIN_COMMIT, LOGIN_ROLLBACK, LOGOUT } from 'pages/Login/Login.actions'
+import { SET_EMAIL_COMMIT } from 'pages/Profile/Profile.actions'
 import { SIGN_UP_COMMIT, SIGN_UP_ROLLBACK } from 'pages/SignUp/SignUp.actions'
 import { GET_USER_COMMIT, SET_NAME_COMMIT, SET_ACCOUNT_NAME_ROLLBACK, SET_ACCOUNT_NAME_COMMIT } from 'pages/User/User.actions'
 import { Jwt } from 'shared/user/Jwt'
@@ -70,6 +71,12 @@ export function auth(state = authDefaultState, action: any): AuthState {
       }
     }
     case SET_NAME_COMMIT: {
+      return {
+        ...state,
+        user: action.payload.user,
+      }
+    }
+    case SET_EMAIL_COMMIT: {
       return {
         ...state,
         user: action.payload.user,
