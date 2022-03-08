@@ -19,7 +19,12 @@ export class PublicUser {
   name!: string
 
   @IsEmail()
+  email!: string
+
+  @IsEmail()
   emailVerified?: boolean
+
+  changeEmailPending?: boolean
 
   @IsArray()
   progress?: string[]

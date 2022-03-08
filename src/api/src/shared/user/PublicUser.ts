@@ -15,6 +15,9 @@ export class PublicUser {
   name!: string
 
   @IsEmail()
+  email!: string
+
+  @IsEmail()
   emailVerified?: boolean
 
   @IsArray()

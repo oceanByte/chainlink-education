@@ -6,6 +6,7 @@ export const toPublicUser = (user: User): PublicUser => {
     _id: user._id,
     username: user.username,
     name: user.name,
+    email: user.email,
     emailVerified: user.emailVerified,
     progress: user.progress,
     createdAt: user.createdAt,

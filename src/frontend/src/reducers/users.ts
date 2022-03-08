@@ -1,3 +1,4 @@
+import { SET_EMAIL_COMMIT, changeEmailPending } from './../pages/Profile/Profile.actions';
 import { RESET, RESTORE } from 'app/App.actions'
 import { GET_USER_COMMIT } from 'pages/User/User.actions'
 import { PublicUser } from 'shared/user/PublicUser'

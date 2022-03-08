@@ -328,7 +328,6 @@
       background: none;
       margin-top: 8px;
       font-size: 16px;
-      padding-bottom: 14px;
       color: $grayscale1;
       font-family: Circular Std Book;
     }
@@ -336,6 +335,15 @@
 
   .btn {
     margin-top: 30px;
+  }
+
+  &__message {
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 500;
+    color: $secondary3;
+    font-family: Circular Std Book;
+    margin-top: 20px;
   }
 
   &__delete-account {
