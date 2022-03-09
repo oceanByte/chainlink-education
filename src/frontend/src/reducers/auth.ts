@@ -1,4 +1,5 @@
 import { RESET, RESTORE } from 'app/App.actions'
+import { DELETE_ACCOUNT_COMMIT } from 'pages/DeleteAccount/DeleteAccount.actions'
 import { FORGOT_PASSWORD_COMMIT } from 'pages/ForgotPassword/ForgotPassword.actions'
 import { LOGIN_COMMIT, LOGIN_ROLLBACK, LOGOUT } from 'pages/Login/Login.actions'
 import { SET_EMAIL_COMMIT } from 'pages/Profile/Profile.actions'
@@ -77,6 +78,12 @@ export function auth(state = authDefaultState, action: any): AuthState {
       }
     }
     case SET_EMAIL_COMMIT: {
+      return {
+        ...state,
+        user: action.payload.user,
+      }
+    }
+    case DELETE_ACCOUNT_COMMIT: {
       return {
         ...state,
         user: action.payload.user,

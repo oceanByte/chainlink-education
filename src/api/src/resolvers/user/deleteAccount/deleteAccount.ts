@@ -17,6 +17,8 @@ import { DeleteAccountPendingInputs, DeleteAccountPermanentlyInputs } from '../.
 import { sendEmailDeleteAccount } from '../helpers/sendEmailDeleteAccount'
 import { matchPassword } from '../helpers/matchPassword'
 import { verifyCaptcha } from '../helpers/verifyCaptcha'
+import { PublicUser } from '../../../shared/user/PublicUser'
+import { toPublicUser } from '../../../helpers/toPublicUser'
 
 export const deleteAccountPending = async (ctx: Context, next: Next): Promise<void> => {
   const deleteAccountArgs = plainToClass(DeleteAccountPendingInputs, ctx.request.body, { excludeExtraneousValues: true })
@@ -33,7 +35,15 @@ export const deleteAccountPending = async (ctx: Context, next: Next): Promise<vo
 
   await sendEmailDeleteAccount(user.email, captcha.token)
 
-  const response = {}
+  const courses = await CourseModel.find({ userId: user._id });
+
+  const publicUser: PublicUser = toPublicUser(user)
+
+  const response = { user: {
+		...publicUser,
+    deleteAccountPending: true,
+		courses
+	} }
 
   ctx.status = 200
   ctx.body = response

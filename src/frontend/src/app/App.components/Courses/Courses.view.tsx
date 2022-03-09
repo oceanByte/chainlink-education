@@ -36,7 +36,7 @@ export const CoursesView = ({
             key={key}
           >
             <span className="header-courses__item__name">
-              <span className="h-font">{course.name}</span>
+              <span className="h-font">{course.title}</span>
             </span>
           </Link>
         )

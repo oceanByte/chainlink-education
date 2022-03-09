@@ -5,14 +5,20 @@ import { Link } from 'react-router-dom'
 
 import { FormInputs, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from '../../helpers/form'
 import { ContactUsInputs } from '../../shared/user/ContactUs'
+import { PublicUser } from 'shared/user/PublicUser'
+import { CourseCardView } from 'app/App.components/CourseCard/CourseCard.view'
+import { Option } from 'app/App.components/Select/Select.view'
 
 import 'aos/dist/aos.css'
 
+
 type HomeViewProps = {
+  user?: PublicUser,
   contactUsCallback: (values: any) => void
 }
 
-export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
+export const HomeView = ({ contactUsCallback, user }: HomeViewProps) => {
+  let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
   const [form, setForm] = useState<FormInputs>({
     firstName: { value: '', error: '' },
     lastName: { value: '', error: '' },
@@ -65,6 +71,28 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
         </div>
       </div>
       <div className="home-ellipse home-ellipse-1" />
+
+      {user ? (
+        <div className="home-wrapper courses">
+          <div className="home-content home-courses-content">
+            <div className="home-courses-content__header h-font">
+                Choose your own path
+              </div>
+              <div className="home-courses-content__paragraph p-font">
+                Each course is free of charge and <br />
+                gives yoy a better understanding of the world around you.
+            </div>
+            <div className='home-courses-content__items'>
+              {user.courses?.map((course) => (
+                <div key={course._id} className='home-course'>
+                  <CourseCardView course={course} user={user} activeCourse={defaultCourse}/>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       <div className="home-content home-num-item">
         <div className="home-num-item__image nft" />
         <div className="home-num-item-content">

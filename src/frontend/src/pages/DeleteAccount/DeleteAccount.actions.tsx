@@ -21,6 +21,7 @@ export const deleteAccountPending = ({ id }: DeleteAccountPendingInputs) => (dis
           method: 'POST',
           json: { id },
         },
+        commit: { type: DELETE_ACCOUNT_COMMIT, meta: {} },
       },
     },
   })
