@@ -25,6 +25,7 @@ export class PublicUser {
   emailVerified?: boolean
 
   changeEmailPending?: boolean
+  deleteAccountPending?: boolean
 
   @IsArray()
   progress?: string[]

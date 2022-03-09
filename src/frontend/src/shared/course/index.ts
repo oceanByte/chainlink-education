@@ -6,10 +6,16 @@ export class Course {
   readonly _id!: ObjectId
 
   @Length(2, 20)
-  name!: string
+  title!: string
 
   @IsArray()
   progress!: string[]
+
+  description!: string
+
+  status!: string
+
+  difficulty!: number
 
   @IsMongoId()
   userId!: ObjectId

@@ -25,6 +25,9 @@ export const changeEmailPending = async (ctx: Context, next: Next): Promise<void
 
   const user: User = await authenticate(ctx)
 
+  const findUser: User | null = await UserModel.findOne({ email }).lean()
+  if (findUser) throw new ResponseError(400, 'This email address is already being used')
+
   await rateLimit(user._id, QuotaType.NEW_CAPTCHA)
 
   const captcha: Captcha = await createCaptcha(user._id, CaptchaFor.CAPTCHA_FOR_CHANGE_EMAIL)

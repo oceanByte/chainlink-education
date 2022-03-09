@@ -15,7 +15,7 @@ import { User, UserModel } from '../../../shared/user/User'
 import { Course, CourseModel } from '../../../shared/course/Course'
 import { getSignedJwt } from '../helpers/getSignedJwt'
 import { verifyRecaptchaToken } from '../helpers/verifyRecaptchaToken'
-import { COURSES } from '../../../constants'
+import { COURSES } from '../../../shared/course/CourseType';
 
 export const signUp = async (ctx: Context, next: Next): Promise<void> => {
   const signUpArgs = plainToClass(SignUpInputs, ctx.request.body, { excludeExtraneousValues: true })
@@ -47,7 +47,10 @@ export const signUp = async (ctx: Context, next: Next): Promise<void> => {
   for (const course of COURSES) {
     await CourseModel.create({
       userId: user._id,
-      name: course,
+      title: course.title,
+      description: course.description,
+      difficulty: course.difficulty,
+      status: course.status
     } as Course)
   }
   

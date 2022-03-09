@@ -42,7 +42,7 @@ export const CourseView = ({
 
   return (
     <>
-      <div className='profile-page-section__header h-font'>Progress {course.name}</div>
+      <div className='profile-page-section__header h-font'>Progress {course.title}</div>
 
       <div className='profile-page-progress__bar'>
         <div className='profile-page-progress__bar__line'>
@@ -57,7 +57,7 @@ export const CourseView = ({
           pathname={pathname}
         />
       </div>
-      {course.name === 'Ocean 101' ? (
+      {course.title === 'Ocean 101' ? (
         <>
           <div className='profile-page-progress__certificate-header h-font'>
             Certificate

@@ -69,8 +69,13 @@ export const ProfileView = ({
     }
   }, [])
 
+  useEffect(() => {
+    if (user && user.deleteAccountPending) {
+      setIsDeleteAccVisible(() => true)
+    }
+  }, [user])
+
   const showDeleteAccountModal = () => {
-    setIsDeleteAccVisible(() => true)
     deleteAccountCallback()
   }
 
@@ -122,6 +127,7 @@ export const ProfileView = ({
             /> */}
           </div>
           <Formik
+            enableReinitialize
             initialValues={initialValue}
             validationSchema={ValidationSchema}
             onSubmit={handleSubmit}
