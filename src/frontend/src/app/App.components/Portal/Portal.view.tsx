@@ -16,7 +16,7 @@ export const Portal: FC = ({children}) => {
         parent.removeChild(el);
       }
     }
-  }, [])
+  }, [el])
 
   return ReactDOM.createPortal(
     children,

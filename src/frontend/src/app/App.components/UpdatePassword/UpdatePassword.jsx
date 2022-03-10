@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
-import classnames from 'classnames'
 import Eye from '../../../assets/eye.png'
 import EyeHide from '../../../assets/eyeHide.png'
 import Confirm from '../../../assets/confirm.png'
 import UnConfirm from '../../../assets/unconfirm.png'
-import ArrowRight from '../../../assets/arrowRight.png'
-import { Link } from 'react-router-dom'
 
 export const UpdatePassword = ({ setShowModal }) => {
   const [currentPassword, setCurrentPassword] = useState('')

@@ -1,16 +1,12 @@
 import * as PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { PublicUser } from 'shared/user/PublicUser'
 import { Option } from '../Select/Select.view'
 
-import { chaptersByCourse } from '../../../pages/Course/Course.data'
-import { ChapterData } from '../../../pages/Chapter/Chapter.controller'
-
 import classnames from 'classnames'
 import { ChaptersListView } from '../ChaptersList/ChaptersListView'
-import { CoursesView } from '../Courses/Courses.view'
 
 type HeaderViewProps = {
   user?: PublicUser
@@ -26,7 +22,7 @@ export const HeaderView = ({
   activeCourse
 }: HeaderViewProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [isCoursesOpen, setIsCoursesOpen] = useState(false)
+  // const [isCoursesOpen, setIsCoursesOpen] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(true)
 
@@ -106,14 +102,14 @@ export const HeaderView = ({
     </>
   )
 
-  const showCourses = () => {
-    setIsCoursesOpen(!isCoursesOpen)
-    setIsDropdownOpen(() => false)
-  }
+  // const showCourses = () => {
+  //   setIsCoursesOpen(!isCoursesOpen)
+  //   setIsDropdownOpen(() => false)
+  // }
 
   const showListAcademy = () => {
     setIsDropdownOpen(!isDropdownOpen)
-    setIsCoursesOpen(() => false)
+    // setIsCoursesOpen(() => false)
   }
 
   return (
