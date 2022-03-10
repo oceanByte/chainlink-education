@@ -5,14 +5,13 @@
 import Editor, { ControlledEditor, DiffEditor, monaco } from '@monaco-editor/react'
 import { Checkboxes } from 'app/App.components/Checkboxes/Checkboxes.controller'
 import { Dialog } from 'app/App.components/Dialog/Dialog.controller'
-import { Popup } from 'app/App.components/Popup/Popup.controller'
 import useIsMounted from 'ismounted'
 import Markdown from 'markdown-to-jsx'
 import { NoAccountModal } from 'modals/NoAccount/NoAccount.view'
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
-import ReactDOM from 'react-dom'
+
 // @ts-ignore
 import Highlight from 'react-highlight.js'
 import { PublicUser } from 'shared/user/PublicUser'
@@ -390,6 +389,7 @@ export const ChapterView = ({
         }
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   let extension = '.rs'
@@ -448,7 +448,7 @@ export const ChapterView = ({
                   Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries
                 </ChapterValidatorContent>
                 <ButtonStyle>
-                  <img src={ArrowRight} />
+                  <img src={ArrowRight} alt="Arrow right" />
                   <ButtonText onClick={() => startedHandler()}>Let’s start!</ButtonText>
                 </ButtonStyle>
               </ChapterValidatorContentWrapper>

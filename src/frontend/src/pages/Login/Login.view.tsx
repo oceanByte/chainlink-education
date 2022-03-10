@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Web3 from 'web3';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -13,9 +11,7 @@ import { InputField } from '../../app/App.components/Form/InputField/Input.contr
 import { InputFieldWithEye } from '../../app/App.components/Form/InputFieldWithEye/Input.controller';
 
 import { Row } from './Login.style';
-import { Auth } from './Login.controller';
 
-let web3: Web3 | undefined = undefined; // Will hold the web3 instance
 
 const ValidationSchema = Yup.object().shape({
   usernameOrEmail: Yup.string()

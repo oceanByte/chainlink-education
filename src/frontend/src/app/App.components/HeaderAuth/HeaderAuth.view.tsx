@@ -4,11 +4,8 @@ import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 
-import { Button } from '../Button/Button.controller'
-import { HamburgerLeft } from '../Hamburger/Hamburger.controller'
 import { Header } from '../Header/Header.controller'
-// prettier-ignore
-import { HeaderLoggedIn, HeaderLoggedOut, HeaderLogo, HeaderMenuItem, HeaderStyled } from "./HeaderAuth.style";
+
 import Arrow from '../../../assets/Vector.png'
 import Logo from '../../../assets/logo.png'
 
@@ -74,46 +71,6 @@ export const HeaderView = ({ user, removeAuthUserCallback, isSignUp }: HeaderVie
         </div>
       )}
     </>
-  )
-}
-
-function loggedOutHeader() {
-  return (
-    <HeaderLoggedOut>
-      {/* <Link className={'get-started'} to="/chainlinkIntroduction/chapter-1">
-            <Button text="GET STARTED" color="secondary"/>
-        </Link> */}
-      {/*<Link to="/terms">*/}
-      {/*  <HeaderMenuItem>TERMS</HeaderMenuItem>*/}
-      {/*</Link>*/}
-      <Link to="/sign-up">
-        <HeaderMenuItem>SIGN UP</HeaderMenuItem>
-      </Link>
-      <Link to="/login">
-        <HeaderMenuItem>LOGIN</HeaderMenuItem>
-      </Link>
-    </HeaderLoggedOut>
-  )
-}
-
-function loggedInHeader({ user, removeAuthUserCallback }: HeaderViewProps) {
-  return (
-    <HeaderLoggedIn>
-      {/*<Link to="/terms">*/}
-      {/*    <HeaderMenuItem>TERMS</HeaderMenuItem>*/}
-      {/*</Link>*/}
-      <Link to={`/user/${user?.username}`}>
-        <HeaderMenuItem>{user?.username}</HeaderMenuItem>
-      </Link>
-      <Link
-        to="/"
-        onClick={() => {
-          removeAuthUserCallback()
-        }}
-      >
-        <HeaderMenuItem>LOGOUT</HeaderMenuItem>
-      </Link>
-    </HeaderLoggedIn>
   )
 }
 

@@ -56,12 +56,14 @@ export const Chapter = () => {
   let nextChapter = '/'
   let percent = 0
 
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   let badgeUnlocked = false
-  let counter = 0
+  let counter = 0;
   user?.progress?.forEach((chapter) => {
     counter++
-  })
+  });
   if (counter >= 20) badgeUnlocked = true
+
 
   useEffect(() => {
     if (user) dispatch(getUser({ username: user.username }))
@@ -81,6 +83,7 @@ export const Chapter = () => {
           })
       })
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
   chapterData.forEach((chapter, i) => {

@@ -1,4 +1,3 @@
-import * as PropTypes from 'prop-types'
 import * as React from 'react'
 
 import { PopupText, DeleteAccountWrapper } from './DeleteAccount.style'

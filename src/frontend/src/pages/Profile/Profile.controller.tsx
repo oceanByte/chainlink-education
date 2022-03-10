@@ -19,7 +19,7 @@ export const Profile = () => {
   const user = useSelector((state: State) => state.auth.user)
 
   let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
-  const [activeCourse, setActiveCourse] = useState(defaultCourse)
+  const [activeCourse] = useState(defaultCourse)
 
   const changeEmailCallback = async ({ email }: { email: string }) => {
     dispatch(changeEmailPending({ email }))
@@ -31,6 +31,7 @@ export const Profile = () => {
 
   useEffect(() => {
     dispatch(getUser({ username: user ? user.username : '' }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

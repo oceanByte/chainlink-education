@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 
 import { hasAuthData } from '../../helpers/authStorage';
 
-const PrivateRoute= ({ children, ...rest }: RouteProps) => (
+const PrivateRoute = ({ children, ...rest }: RouteProps) => (
   <Route
     {...rest}
     render={(props) =>

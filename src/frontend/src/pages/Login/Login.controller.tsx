@@ -1,18 +1,17 @@
 import { recaptchaRequest } from 'app/App.actions'
 import * as React from 'react'
-import { useState } from 'react'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+
+// import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import { useDispatch, useSelector } from 'react-redux'
 import { LoginInputs } from 'shared/user/Login'
 
 import Web3 from 'web3';
-import { showToaster } from '../../app/App.components/Toaster/Toaster.actions'
-import { ERROR } from '../../app/App.components/Toaster/Toaster.constants'
+// import { showToaster } from '../../app/App.components/Toaster/Toaster.actions'
+// import { ERROR } from '../../app/App.components/Toaster/Toaster.constants'
 import { State } from '../../reducers'
 import { login, loginMetaMask } from './Login.actions'
 import { LoginView } from './Login.view'
 
-const LS_KEY = 'login-with-metamask:auth';
 let web3: Web3 | undefined = undefined; // Will hold the web3 instance
 
 export interface Auth {
@@ -25,7 +24,7 @@ interface IMetaState {
 
 export const Login = () => {
   const dispatch = useDispatch()
-  const { executeRecaptcha } = useGoogleReCaptcha()
+  // const { executeRecaptcha } = useGoogleReCaptcha()
   const loading = useSelector((state: State) => state.loading)
 
   const loginCallback = async (loginInputs: LoginInputs) => {

@@ -3,16 +3,12 @@ import { Formik } from 'formik';
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import * as Yup from 'yup';
 
 import { InputField } from '../../app/App.components/Form/InputField/Input.controller';
 import { InputFieldWithEye } from '../../app/App.components/Form/InputFieldWithEye/Input.controller';
 import { HeaderAuth } from '../../app/App.components/HeaderAuth/HeaderAuth.controller'
-import ArrowRight from '../../assets/arrowRight.png'
 import Confirm from '../../assets/confirm.png'
-import Eye from '../../assets/eye.png'
-import EyeHide from '../../assets/eyeHide.png'
 import UnConfirm from '../../assets/unconfirm.png'
 import { CheckboxWrapp, ErrorMessage, Row } from './SignUp.style';
 
@@ -51,7 +47,7 @@ interface IFormInputs {
   agree: boolean,
 }
 
-export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
+export const SignUpView = ({ signUpCallback }: SignUpViewProps) => {
 
   const initialValues = {
     username: '',
@@ -60,10 +56,6 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
     confirmPassword: '',
     agree: false,
   };
-  const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [showErrorMachPassword, setShowErrorMachPassword] = useState(2)
 
   const [uppercase, setUppercase] = useState(false)
   const [lowercase, setLowercase] = useState(false)
@@ -83,12 +75,6 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
   const specialImage = special ? Confirm : UnConfirm
   const minLengthImage = minLength ? Confirm : UnConfirm
 
-  const eyeForPassword = showPassword ? EyeHide : Eye
-  const eyeForConfirmPassword = showConfirmPassword ? EyeHide : Eye
-
-  const typeOfInputPassword = showPassword ? 'text' : 'password'
-  const typeOfInputConfirmPassword = showConfirmPassword ? 'text' : 'password'
-
   const [checkedInput, setCheckedInput] = useState(false)
   const classNameInputChecked = classnames('sign-up__checkbox-label', { 'sign-up__checkbox-checked': checkedInput })
 
@@ -103,7 +89,6 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
     setSpecial(regSpecial.test(value))
     setMinLength(regMinLength.test(value))
     
-    setPassword(value)
   }
 
   const handleSubmit = (values: IFormInputs) => {

@@ -69,6 +69,7 @@
     "jest": "^24.9.0",
     "jspdf": "^2.1.1",
     "jwt-decode": "^2.2.0",
+    "logrocket": "^2.2.0",
     "markdown-to-jsx": "^6.11.4",
     "mockdate": "^3.0.2",
     "raw-loader": "^4.0.1",

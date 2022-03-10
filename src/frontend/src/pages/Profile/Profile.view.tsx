@@ -10,7 +10,6 @@ import { PublicUser } from 'shared/user/PublicUser'
 
 import { ConfirmYouPassword } from '../../app/App.components/ConfirmYouPassword/ConfirmYouPassword'
 import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePassword'
-import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { CoursesListView } from 'app/App.components/CoursesList/CourseList.view'
 import { DeleteAccountModal } from 'modals/DeleteAccount/DeleteAccount.view'
 import { InputField } from 'app/App.components/Form/InputField/Input.controller';
@@ -35,12 +34,10 @@ export const ProfileView = ({
   deleteAccountCallback,
 }: ProfileViewProps) => {
   
-  const { search, pathname } = useLocation()
+  const { search } = useLocation()
   const [section, setSection] = useState(1)
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
-  const [isMessageVisible, setIsMessageVisible] = useState(false)
   const [isDeleteAccVisible, setIsDeleteAccVisible] = useState(false)
-  const [percent, setPercent] = useState(0);
   const initialValue = {
     email: user? user?.email : ''
   }
@@ -51,23 +48,6 @@ export const ProfileView = ({
     }
   }, [search])
 
-
-  chapterData.forEach((chapter, i) => {
-    if (pathname === chapter.pathname) {
-
-      if (i !== 7){
-        setPercent(() => ((i + 1) / chapterData.length) * 100)
-      }
-      else setPercent(() => 100)
-    }
-  })
-
-  useEffect(() => {
-    if (user && user.progress) {
-      const userProgress = user && user.progress.length;
-      setPercent(() => Math.floor((userProgress / chapterData.length) * 100))
-    }
-  }, [])
 
   useEffect(() => {
     if (user && user.deleteAccountPending) {
@@ -85,7 +65,6 @@ export const ProfileView = ({
 
   const handleSubmit = (values: { email: string }) => {
     changeEmailCallback(values);
-    setIsMessageVisible(() => true);
   }
 
   return (
