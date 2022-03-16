@@ -19,7 +19,7 @@ export const getPublicUser = async (ctx: Context, next: Next): Promise<void> => 
   const user: PublicUser = (await UserModel.findOne({ username }, PUBLIC_USER_MONGO_SELECTOR).lean()) as PublicUser
   if (!user) throw new ResponseError(404, 'User not found')
 
-  const courses = await CourseModel.find({ userId: user._id });
+  const courses = await CourseModel.find({ userId: user._id }).lean();
 
   let pending = 0
   let completed = 0

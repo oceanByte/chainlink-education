@@ -31,7 +31,7 @@ export const login = async (ctx: Context, next: Next): Promise<void> => {
   }
   if (!user) throw new ResponseError(401, 'Wrong username or password')
 
-  const courses = await CourseModel.find({ userId: user._id });
+  const courses = await CourseModel.find({ userId: user._id }).lean();
 
   const publicUser: PublicUser = toPublicUser(user)
 

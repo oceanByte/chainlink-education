@@ -35,7 +35,7 @@ export const setName = async (ctx: Context, next: Next): Promise<void> => {
 
   console.log(updatedUser)
 
-  const courses = await CourseModel.find({ userId: user._id });
+  const courses = await CourseModel.find({ userId: user._id }).lean();
 
   const publicUser: PublicUser = toPublicUser(updatedUser)
   
