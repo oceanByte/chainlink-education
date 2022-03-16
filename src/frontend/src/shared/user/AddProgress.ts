@@ -10,10 +10,14 @@ export class AddProgressInputs {
   @Matches(/^[a-zA-Z0-9-\/]*$/, { message: 'Chapter slug can only contain letters, numbers, dashes and slashes' })
   chapterDone!: string
 
+  @Expose()
   courseId!: ObjectId
 
   @Expose()
   time!: number
+
+  @Expose()
+  isCompleted!: boolean
 }
 
 export class AddProgressOutputs {

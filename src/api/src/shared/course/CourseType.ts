@@ -1,18 +1,19 @@
 export enum CourseStatusType {
   COMPLETED = 'COMPLETED',
+  PENDING = 'PENDING',
   NEW = 'NEW',
   IN_PROGRESS = 'IN PROGRESS',
 }
 
-export enum CourseTitle {
-  OCEAN_101 = 'Ocean 101',
-  INTRO_TO_DATA = 'Intro to Data defi',
-  COMPUTE_TO_DATA = 'Compute-to-data'
+export enum CourseTitleType {
+  CHAINLINK_101 = 'Chainlink 101',
+  SOLIDITY_INTRO = 'Solidity Intro',
+  VDF_V2 = 'VDF v2 Overview'
 }
 
 export const COURSES = [
   {
-    title: CourseTitle.OCEAN_101,
+    title: CourseTitleType.CHAINLINK_101,
     description: `This is a simple Chainlink 101 course that teaches you the basicsof the
       Chainlink Ecosystem and how Oracles work in general
     `,
@@ -20,7 +21,7 @@ export const COURSES = [
     status: CourseStatusType.NEW
   },
   {
-    title: CourseTitle.COMPUTE_TO_DATA,
+    title: CourseTitleType.SOLIDITY_INTRO,
     description: `This is a simple Chainlink 101 course that teaches you the basicsof the
       Chainlink Ecosystem and how Oracles work in general
     `,
@@ -28,7 +29,7 @@ export const COURSES = [
     status: CourseStatusType.NEW
   },
   {
-    title: CourseTitle.INTRO_TO_DATA,
+    title: CourseTitleType.VDF_V2,
     description: `This is a simple Chainlink 101 course that teaches you the basicsof the
       Chainlink Ecosystem and how Oracles work in general
     `,

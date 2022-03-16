@@ -6,7 +6,7 @@ import { PublicUser } from 'shared/user/PublicUser'
 import { Option } from '../Select/Select.view'
 
 import classnames from 'classnames'
-import { ChaptersListView } from '../ChaptersList/ChaptersListView'
+import { ChaptersListView } from '../HeaderCoursesList/HeaderCoursesListView'
 
 type HeaderViewProps = {
   user?: PublicUser
@@ -22,7 +22,6 @@ export const HeaderView = ({
   activeCourse
 }: HeaderViewProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  // const [isCoursesOpen, setIsCoursesOpen] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(true)
 
@@ -102,14 +101,8 @@ export const HeaderView = ({
     </>
   )
 
-  // const showCourses = () => {
-  //   setIsCoursesOpen(!isCoursesOpen)
-  //   setIsDropdownOpen(() => false)
-  // }
-
   const showListAcademy = () => {
     setIsDropdownOpen(!isDropdownOpen)
-    // setIsCoursesOpen(() => false)
   }
 
   return (
@@ -118,9 +111,6 @@ export const HeaderView = ({
         <Link to="/" className="header__link" />
         <div className="header-menu">
           <div className="header-menu-list">
-            {/* <button className="header-menu-list__item btn" onClick={showCourses}>
-              Courses <span>&#9660;</span>
-            </button> */}
             <div className='header-menu-list__item'>
               <button className="btn" onClick={showListAcademy}>
                 Academy <span>&#9660;</span>
@@ -150,14 +140,7 @@ export const HeaderView = ({
             }}
           />
         </div>
-        {/* <div className={classnames('courses-list', !isCoursesOpen && 'hidden')}>
-          <CoursesView
-            user={user}
-            activeCourse={activeCourse}
-            pathname={pathname}
-          />
-        </div> */}
-        
+
         <div className={`header-list ${isBurgerMenuOpen ? '' : 'hidden'}`}>
           <div className="header__item-border" />
           <div className='header-list__item'>

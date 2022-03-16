@@ -4,7 +4,8 @@ import { Context, Next } from 'koa'
 
 import { firstError } from '../../../helpers/firstError'
 import { toPublicUser } from '../../../helpers/toPublicUser'
-import { CourseModel } from '../../../shared/course/Course'
+import { CourseModel, Course } from '../../../shared/course/Course'
+import { CourseTitleType, CourseStatusType } from '../../../shared/course/CourseType'
 import { AddProgressInputs, AddProgressOutputs } from '../../../shared/user/AddProgress'
 import { PublicUser } from '../../../shared/user/PublicUser'
 import { User, UserModel } from '../../../shared/user/User'
@@ -16,19 +17,14 @@ export const PUBLIC_USER_MONGO_SELECTOR = '_id username emailVerified createdAt'
 export const addProgress = async (ctx: Context, next: Next): Promise<void> => {
   const addProgressArgs = plainToClass(AddProgressInputs, ctx.request.body, { excludeExtraneousValues: true })
   await validateOrReject(addProgressArgs, { forbidUnknownValues: true }).catch(firstError)
-  const { chapterDone, courseId, time } = addProgressArgs
+  const { chapterDone, courseId, time, isCompleted } = addProgressArgs
 
   const user: User = await authenticate(ctx)
 
   await rateLimit(user._id)
 
-  await UserModel.updateOne(
-    { _id: user._id },
-    { $addToSet: { progress: chapterDone } },
-  ).exec()
-
   await CourseModel.updateOne(
-    { "userId": courseId, title: "Ocean 101", 'chapterTimes.chapter':{$nin: [chapterDone]} },
+    { _id: courseId, 'chapterTimes.chapter':{$nin: [chapterDone]} },
     { $push: {
         chapterTimes: {
           chapter: chapterDone,
@@ -36,21 +32,30 @@ export const addProgress = async (ctx: Context, next: Next): Promise<void> => {
         },
         progress: chapterDone
       },
+      $set: { status: isCompleted ? CourseStatusType.COMPLETED : CourseStatusType.IN_PROGRESS }
     })
     .exec();
 
   const updatedUser: User = await UserModel.findOne(
-    { _id: user._id },
-  ).lean() as User
-
+      { _id: user._id },
+    ).lean() as User
+  
   const publicUser: PublicUser = toPublicUser(updatedUser)
 
+  const updatedCourse: Course = await CourseModel.findOne(
+    { _id: courseId },
+  ).lean() as Course
+    
   // set referral to completed 
-  if (publicUser.progress && publicUser.progress.length >= 8) {
+  if (
+    updatedCourse.title === CourseTitleType.CHAINLINK_101 &&
+    updatedCourse.progress &&
+    updatedCourse.progress.length >= 8
+  ) {
     // update referral status
     await UserModel.updateOne(
-      { "referral": { $elemMatch: { username: publicUser.username, status: 'PENDING' } } },
-      { $set: { "referral.$.status": 'COMPLETED' } }) // TODO: use const enum here
+      { "referral": { $elemMatch: { username: publicUser.username, status: CourseStatusType.PENDING } } },
+      { $set: { "referral.$.status": CourseStatusType.COMPLETED } }) // TODO: use const enum here
       .exec();
   }
 
