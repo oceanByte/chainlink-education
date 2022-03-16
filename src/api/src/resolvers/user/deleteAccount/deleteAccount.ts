@@ -35,7 +35,7 @@ export const deleteAccountPending = async (ctx: Context, next: Next): Promise<vo
 
   await sendEmailDeleteAccount(user.email, captcha.token)
 
-  const courses = await CourseModel.find({ userId: user._id });
+  const courses = await CourseModel.find({ userId: user._id }).lean();
 
   const publicUser: PublicUser = toPublicUser(user)
 

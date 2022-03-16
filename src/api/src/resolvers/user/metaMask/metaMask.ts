@@ -105,7 +105,7 @@ export const auth = async (ctx: Context, next: Next) => {
     { _id: user._id },
   ).lean() as User
 
-	const courses = await CourseModel.find({ userId: user._id });
+	const courses = await CourseModel.find({ userId: user._id }).lean();
 
 	const publicUser: PublicUser = toPublicUser(updatedUser)
 

@@ -121,14 +121,25 @@ export const HeaderView = ({
             {/* <button className="header-menu-list__item btn" onClick={showCourses}>
               Courses <span>&#9660;</span>
             </button> */}
-            <button className="header-menu-list__item btn" onClick={showListAcademy}>
-              Academy <span>&#9660;</span>
-            </button>
-            <button
-              className="header-menu-list__item ml-30 btn"
-              onClick={() => window.open('https://chain.link/','_blank')}>
-                Ecosystem
+            <div className='header-menu-list__item'>
+              <button className="btn" onClick={showListAcademy}>
+                Academy <span>&#9660;</span>
               </button>
+              <div className={classnames('chapters-list', !isDropdownOpen && 'hidden')}>
+                <ChaptersListView
+                  user={user}
+                  activeCourse={activeCourse}
+                  pathname={pathname}
+                />
+              </div>
+            </div>
+            <div className='header-menu-list__item'>
+              <button
+                className="ml-30 btn"
+                onClick={() => window.open('https://chain.link/','_blank')}>
+                  Ecosystem
+                </button>
+            </div>
           </div>
           <div className="header-menu-cred lg">{user ? loggedInHeader : loggedOutHeader}</div>
           <div
@@ -146,24 +157,31 @@ export const HeaderView = ({
             pathname={pathname}
           />
         </div> */}
-        <div className={classnames('chapters-list', !isDropdownOpen && 'hidden')}>
-          <ChaptersListView
-            user={user}
-            activeCourse={activeCourse}
-            pathname={pathname}
-          />
-        </div>
+        
         <div className={`header-list ${isBurgerMenuOpen ? '' : 'hidden'}`}>
           <div className="header__item-border" />
-          <button className="header-list__item with-bt btn" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-            Academy <span>&#9660;</span>
-          </button>
+          <div className='header-list__item'>
+            <button className="btn" onClick={showListAcademy}>
+              Academy <span>&#9660;</span>
+            </button>
+            <div className={classnames('chapters-list', !isDropdownOpen && 'hidden')}>
+              <ChaptersListView
+                user={user}
+                activeCourse={activeCourse}
+                pathname={pathname}
+              />
+            </div>
+          </div>
           <div className="header__item-border" />
-          <button className="header-list__item btn">Ecosystem</button>
+          <div className='header-list__item'>
+            <button className="btn">Ecosystem</button>
+          </div>
           <div className="header__item-border" />
-          <button className="header-list__item btn" onClick={scrollTo}>
-            Contact
-          </button>
+          <div className='header-list__item'>
+            <button className="btn" onClick={scrollTo}>
+              Contact
+            </button>
+          </div>
           <div className="header__item-border" />
           <div className="header-dropdown-user-menu xs">{user ? loggedInHeader : loggedOutHeader}</div>
         </div>

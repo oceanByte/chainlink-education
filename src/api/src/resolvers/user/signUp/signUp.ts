@@ -54,7 +54,7 @@ export const signUp = async (ctx: Context, next: Next): Promise<void> => {
     } as Course)
   }
   
-  const courses = await CourseModel.find({ userId: user._id });
+  const courses = await CourseModel.find({ userId: user._id }).lean();
 
   const publicUser: PublicUser = toPublicUser(user)
 

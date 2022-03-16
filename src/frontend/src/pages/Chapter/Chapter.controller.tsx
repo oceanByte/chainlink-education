@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
@@ -38,6 +37,9 @@ export interface Data {
 }
 
 export const Chapter = () => {
+  const [time, setTime] = useState({
+    value: 0,
+  });
   const [validatorState, setValidatorState] = useState(PENDING)
   const [showDiff, setShowDiff] = useState(false)
   const [isAccount, setIsAccount] = useState(false)
@@ -55,6 +57,7 @@ export const Chapter = () => {
   let previousChapter = '/'
   let nextChapter = '/'
   let percent = 0
+  let intervalID: any = useRef(null);
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
   let badgeUnlocked = false
@@ -101,10 +104,27 @@ export const Chapter = () => {
     }
   })
 
+  const countUp = () => {
+    setTime((prev) => ({
+      value: ++prev.value,
+    }));
+  }
+
+  useEffect(() => {
+    intervalID.current = setInterval(countUp, 1000);
+  }, [])
+
   const validateCallback = () => {
     if (pathname === '/chainlinkIntroduction/chapter-8') {
       setValidatorState(RIGHT)
-      if (user) dispatch(addProgress({ chapterDone: pathname }))
+      if (user) {
+        clearInterval(intervalID.current);
+        dispatch(addProgress({
+          chapterDone: pathname,
+          courseId: user._id,
+          time: time.value  
+        }))
+      }
       setIsAccount(true)
       return
     }
@@ -126,7 +146,14 @@ export const Chapter = () => {
       if (ok) {
         setValidatorState(RIGHT)
         setIsAccount(true)
-        if (user) dispatch(addProgress({ chapterDone: pathname }))
+        if (user) {
+          clearInterval(intervalID.current);
+          dispatch(addProgress({
+            chapterDone: pathname,
+            courseId: user._id,
+            time: time.value  
+          }))
+        }
         else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
       } else setValidatorState(WRONG)
     } else {
@@ -144,7 +171,14 @@ export const Chapter = () => {
           ) {
             setValidatorState(RIGHT)
             setIsAccount(true)
-            if (user) dispatch(addProgress({ chapterDone: pathname }))
+            if (user) {
+              clearInterval(intervalID.current);
+              dispatch(addProgress({
+                chapterDone: pathname,
+                courseId: user._id,
+                time: time.value  
+              }))
+            }
             else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
           } else setValidatorState(WRONG)
         } else setValidatorState(WRONG)

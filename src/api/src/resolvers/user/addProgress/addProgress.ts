@@ -16,7 +16,7 @@ export const PUBLIC_USER_MONGO_SELECTOR = '_id username emailVerified createdAt'
 export const addProgress = async (ctx: Context, next: Next): Promise<void> => {
   const addProgressArgs = plainToClass(AddProgressInputs, ctx.request.body, { excludeExtraneousValues: true })
   await validateOrReject(addProgressArgs, { forbidUnknownValues: true }).catch(firstError)
-  const { chapterDone } = addProgressArgs
+  const { chapterDone, courseId, time } = addProgressArgs
 
   const user: User = await authenticate(ctx)
 
@@ -26,6 +26,18 @@ export const addProgress = async (ctx: Context, next: Next): Promise<void> => {
     { _id: user._id },
     { $addToSet: { progress: chapterDone } },
   ).exec()
+
+  await CourseModel.updateOne(
+    { "userId": courseId, title: "Ocean 101", 'chapterTimes.chapter':{$nin: [chapterDone]} },
+    { $push: {
+        chapterTimes: {
+          chapter: chapterDone,
+          time 
+        },
+        progress: chapterDone
+      },
+    })
+    .exec();
 
   const updatedUser: User = await UserModel.findOne(
     { _id: user._id },
@@ -42,7 +54,7 @@ export const addProgress = async (ctx: Context, next: Next): Promise<void> => {
       .exec();
   }
 
-  const courses = await CourseModel.find({ userId: updatedUser._id });
+  const courses = await CourseModel.find({ userId: updatedUser._id }).lean();
 
   const response: AddProgressOutputs = { user: {
     ...publicUser,

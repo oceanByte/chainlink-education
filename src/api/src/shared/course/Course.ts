@@ -5,6 +5,11 @@ import { ObjectId } from 'mongodb'
 import { getModel, Property } from '../../helpers/typegoose'
 import { CourseStatusType } from './CourseType'
 
+type TimeCourse = {
+  time: number,
+  chapter: string
+}
+
 export class Course {
   @IsMongoId()
   readonly _id!: ObjectId
@@ -15,8 +20,11 @@ export class Course {
   @Property({ nullable: true })
   description!: string
 
-  @Property({ nullable: true })
+  @Property({ nullable: true, default: [] })
   progress!: string[]
+
+  @Property({ nullable: true, default: [] })
+  chapterTimes!: [TimeCourse]
 
   @Property({ nullable: true })
   @IsEnum(CourseStatusType)

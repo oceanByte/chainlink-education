@@ -34,7 +34,7 @@ export const changeEmailPending = async (ctx: Context, next: Next): Promise<void
 
   await sendEmailConfirmEmail(email, captcha.token)
 
-  const courses = await CourseModel.find({ userId: user._id });
+  const courses = await CourseModel.find({ userId: user._id }).lean();
 
   const publicUser: PublicUser = toPublicUser(user)
   

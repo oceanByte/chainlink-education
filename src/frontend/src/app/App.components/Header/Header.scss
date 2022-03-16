@@ -97,12 +97,30 @@ html {
       }
 
       &__item {
-        color: #fff;
-        font-size: 18px;
-        background: none;
+        position: relative;
+        padding: 15px 0;
+        cursor: pointer;
 
-        & > span {
-          font-size: 10px;
+        .btn {
+          color: #fff;
+          font-size: 18px;
+          background: none;
+
+          & > span {
+            font-size: 10px;
+          }
+        }
+
+        &:hover {
+          .chapters-list {
+            visibility: visible;
+            opacity: 1;
+            transition: all 0.3s ease;
+          }
+
+          .hidden {
+            display: block;
+          }
         }
       }
     }
@@ -180,14 +198,17 @@ html {
   z-index: 15;
   position: absolute;
   background: #fff;
-  top: 80px;
-  right: 325px;
+  top: 40px;
+  left: -50%;
+  transform: translateX(-50%);
   padding: 20px 30px;
   width: 480px;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 15px 25px rgba(12, 22, 44, 0.1);
   border-radius: 20px;
+  visibility: hidden;
+  opacity: 0;
 
   @include md {
     top: 125px;
@@ -196,9 +217,10 @@ html {
     width: calc(100% - 40px);
   }
 
-  &.hidden {
-    display: none;
-  }
+  // &.hidden {
+  //   visibility: hidden;
+  //   opacity: 0;
+  // }
 }
 
 .courses-list {
@@ -215,9 +237,9 @@ html {
   border-radius: 20px;
 
   @include md {
-    top: 125px;
-    right: 50%;
-    transform: translateX(50%);
+    // top: 125px;
+    // right: 50%;
+    // transform: translateX(50%);
     width: calc(100% - 40px);
   }
 
@@ -265,12 +287,31 @@ html {
 
   &__item {
     width: 100%;
-    background: none;
-    color: #fff;
     padding: 14px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    cursor: pointer;
+
+    .btn {
+      background: none;
+      color: #fff;
+    }
+
+    &:hover {
+      .chapters-list {
+        top: 43px;
+        left: 10px;
+        transform: translateX(-10px);
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .hidden {
+        display: block;
+      }
+    }
   }
 
   & > .header-menu-log {

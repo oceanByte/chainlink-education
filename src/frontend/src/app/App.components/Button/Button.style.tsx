@@ -32,7 +32,11 @@ export const ButtonStyled = styled.button`
 
   &.primary {
     color: ${buttonColor};
-    background: blue;
+    background: #0800ff;
+    &:hover {
+      background: #060295;
+      transition: all 0.3s ease;
+    }
   }
 
   &.secondary {
