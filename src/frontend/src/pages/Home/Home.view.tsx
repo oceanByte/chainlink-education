@@ -52,8 +52,7 @@ export const HomeView = ({ user }: HomeViewProps) => {
                 Choose your own path
               </div>
               <div className="home-courses-content__paragraph p-font">
-                Each course is free of charge and <br />
-                gives yoy a better understanding of the world around you.
+                Learn how to study in web3 <br />
             </div>
             <div className='home-courses-content__items'>
               {user.courses?.map((course) => (
