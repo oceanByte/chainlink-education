@@ -12,13 +12,12 @@ interface ICoursesListView{
 export const CoursesListView = ({
   user,
 }: ICoursesListView) => {
-  let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
   return (
     <>
       { user && user.courses ?
         user.courses.map((course: Course, key: number)=> (
           <div className='profile-page-section__course' key={key}>
-            <CourseView course={course} user={user} activeCourse={defaultCourse} />
+            <CourseView course={course} user={user} />
           </div>
          ))
         : null

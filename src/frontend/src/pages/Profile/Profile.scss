@@ -278,9 +278,13 @@
     background: url("../../assets/profile-certification.svg") no-repeat;
     background-size: contain;
     @include fluid-size("width", 1024px, 1600px, 230px, 243px);
-    @include fluid-size("height", 1024px, 1600px, 272px, 183px);
-    @include fluid-size("right", 1024px, 1600px, 27px, 50px);
-    @include fluid-size("bottom", 1024px, 1600px, 35px, 60px);
+    // @include fluid-size("height", 1024px, 1600px, 272px, 183px);
+    height: 222px;
+    // width: 243px;
+    // @include fluid-size("right", 1024px, 1600px, 27px, 50px);
+    // @include fluid-size("bottom", 1024px, 1600px, 35px, 60px);
+    bottom: 0;
+    right: 0;
     position: absolute;
     @include md {
       right: 70px;

@@ -14,6 +14,9 @@ export class AddProgressInputs {
 
   @Expose()
   time!: number
+
+  @Expose()
+  isCompleted!: number
 }
 
 export class AddProgressOutputs {

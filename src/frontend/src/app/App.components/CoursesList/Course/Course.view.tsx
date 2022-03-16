@@ -1,44 +1,48 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
-import { chapterData } from '../../../../pages/Courses/chainlinkIntroduction/Chapters/Chapters.data'
+import { course as ChainlinkIntroduction } from '../../../../pages/Courses/chainlinkIntroduction'
+import { course as SolidityIntroduction } from '../../../../pages/Courses/solidityIntroduction'
+import { course as VDFIntroduction } from '../../../../pages/Courses/vdfIntroduction'
+
+import { chapterData as ChainlinkIntroductionChapters } from '../../../../pages/Courses/chainlinkIntroduction/Chapters/Chapters.data'
+import { chapterData as SolidityIntroductionChapters } from '../../../../pages/Courses/solidityIntroduction/Chapters/Chapters.data'
+import { chapterData as VDFIntroductionChapters } from '../../../../pages/Courses/vdfIntroduction/Chapters/Chapters.data'
 
 import { PublicUser } from 'shared/user/PublicUser'
 import { Option } from '../../Select/Select.view'
 import { ChaptersListView } from 'app/App.components/ChaptersList/ChaptersListView'
 import { Course } from 'shared/course'
+import { CourseNameType } from 'pages/Course/Course.data'
 
 
 interface ICourseView{
   course: Course,
   user?: PublicUser,
-  activeCourse: Option,
 }
 
 export const CourseView = ({
   course,
   user,
-  activeCourse
 }: ICourseView) => {
   const [percent, setPercent] = useState(0);
+  const [coursePath, setActiveCoursePath] = useState('');
   const { pathname } = useLocation()
 
-  chapterData.forEach((chapter, i) => {
-    if (pathname === chapter.pathname) {
-
-      if (i !== 7){
-        setPercent(() => ((i + 1) / chapterData.length) * 100)
-      }
-      else setPercent(() => 100)
-    }
-  })
-
   useEffect(() => {
-    if (user && user.progress) {
-      const userProgress = user && user.progress.length;
-      setPercent(() => Math.floor((userProgress / chapterData.length) * 100))
+    const courseProgress = course && course.progress.length;
+    if (course && course.title === CourseNameType.CHAINLINK_101) {
+      setPercent(() => Math.floor((courseProgress / ChainlinkIntroductionChapters.length) * 100))
+      setActiveCoursePath(() => ChainlinkIntroduction.path)
+    } else if (course && course.title === CourseNameType.SOLIDITY_INTRO) {
+      setPercent(() => Math.floor((courseProgress / SolidityIntroductionChapters.length) * 100))
+      setActiveCoursePath(() => SolidityIntroduction.path)
+    } else {
+      setPercent(() => Math.floor((courseProgress / VDFIntroductionChapters.length) * 100))
+      setActiveCoursePath(() => VDFIntroduction.path)
     }
-  }, [user])
+    
+  }, [])
 
   return (
     <>
@@ -53,11 +57,12 @@ export const CourseView = ({
       <div className='profile-page-progress-chapters p-font'>
         <ChaptersListView
           user={user}
-          activeCourse={activeCourse}
+          coursePath={coursePath}
+          course={course}
           pathname={pathname}
         />
       </div>
-      {course.title === 'Ocean 101' ? (
+      {course.title === CourseNameType.CHAINLINK_101 ? (
         <>
           <div className='profile-page-progress__certificate-header h-font'>
             Certificate

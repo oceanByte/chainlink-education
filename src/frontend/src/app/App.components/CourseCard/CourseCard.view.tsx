@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import classnames from 'classnames'
 
-import { chapterData } from '../../../pages/Courses/chainlinkIntroduction/Chapters/Chapters.data'
+import { course as ChainlinkIntroduction } from '../../../pages/Courses/chainlinkIntroduction'
+import { course as SolidityIntroduction } from '../../../pages/Courses/solidityIntroduction'
+import { course as VDFIntroduction } from '../../../pages/Courses/vdfIntroduction'
+
+import { chapterData as ChainlinkIntroductionChapters } from '../../../pages/Courses/chainlinkIntroduction/Chapters/Chapters.data'
+import { chapterData as SolidityIntroductionChapters } from '../../../pages/Courses/solidityIntroduction/Chapters/Chapters.data'
+import { chapterData as VDFIntroductionChapters } from '../../../pages/Courses/vdfIntroduction/Chapters/Chapters.data'
 
 import { PublicUser } from 'shared/user/PublicUser'
 import { Option } from '../Select/Select.view'
 import { Course } from 'shared/course'
+import { CourseNameType } from 'pages/Course/Course.data'
+
 
 
 interface ICourseView{
@@ -22,24 +30,33 @@ export const CourseCardView = ({
   activeCourse
 }: ICourseView) => {
   const [percent, setPercent] = useState(0);
-  const { pathname } = useLocation()
+  const [url, setUrl] = useState('/');
 
-  chapterData.forEach((chapter, i) => {
-    if (pathname === chapter.pathname) {
-
-      if (i !== 7){
-        setPercent(() => ((i + 1) / chapterData.length) * 100)
-      }
-      else setPercent(() => 100)
+  const getUrl = (progress: number, path: string, countChapter: number) => {
+    if (progress === 0 || progress === countChapter) {
+      setUrl(() => `/${path}/chapter-1`)
+      return;
     }
-  })
+
+    setUrl(() => `/${path}/chapter-${progress+1}`)
+  }
+
 
   useEffect(() => {
-    if (user && user.progress) {
-      const userProgress = user && user.progress.length;
-      setPercent(() => Math.floor((userProgress / chapterData.length) * 100))
+    const courseProgress = course && course.progress.length;
+
+    if (course && course.title === CourseNameType.CHAINLINK_101) {
+      getUrl(courseProgress, ChainlinkIntroduction.path, ChainlinkIntroductionChapters.length)
+      setPercent(() => Math.floor((courseProgress / ChainlinkIntroductionChapters.length) * 100))
+    } else if (course && course.title === CourseNameType.SOLIDITY_INTRO) {
+      getUrl(courseProgress, SolidityIntroduction.path, SolidityIntroductionChapters.length)
+      setPercent(() => Math.floor((courseProgress / SolidityIntroductionChapters.length) * 100))
+    } else {
+      getUrl(courseProgress, VDFIntroduction.path, SolidityIntroductionChapters.length)
+      setPercent(() => Math.floor((courseProgress / VDFIntroductionChapters.length) * 100))
     }
-  }, [user])
+    
+  }, [])
 
   return (
     <>
@@ -65,16 +82,17 @@ export const CourseCardView = ({
             <span>{course.difficulty}/5</span>{' '}<span>Difficulty</span>
           </div>
           <div className='course-btn-wrapper'>
-            <button className={classnames(
+            <Link to={url} className={classnames(
               'btn course-btn', 
               !percent && 'new',
               percent && percent !== 100 && 'continue',  
-              percent && percent === 100 && 'completed'  
-            )}>
+              percent && percent === 100 && 'completed' 
+            )}
+            >
               {!percent ? (<span className="btn__text">Start your journey</span>): null}
               {percent && percent !== 100 ? (<span className="btn__text">Continue</span>): null}
               {percent && percent === 100 ? (<span className="btn__text">Repeat</span>): null}
-            </button>
+            </Link>
           </div>
         </div>
       </div>

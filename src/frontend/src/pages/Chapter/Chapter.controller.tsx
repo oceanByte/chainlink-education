@@ -9,11 +9,14 @@ import { getUser } from 'pages/User/User.actions'
 import { State } from 'reducers'
 
 import { CourseData } from '../Course/Course.controller'
-import { chaptersByCourse, courseData } from '../Course/Course.data'
-import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
+import { chaptersByCourse, courseData, CourseNameType } from '../Course/Course.data'
+import { chapterData as ChainlinkIntroductionChapters } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
+import { chapterData as SolidityIntroductionChapters } from '../Courses/solidityIntroduction/Chapters/Chapters.data'
+import { chapterData as VDFIntroductionChapters } from '../Courses/vdfIntroduction/Chapters/Chapters.data'
 import { addProgress } from './Chapter.actions'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
 import { ChapterView } from './Chapter.view'
+import { PublicUser } from 'shared/user/PublicUser'
 
 export interface ChapterData {
   pathname: string
@@ -52,12 +55,17 @@ export const Chapter = () => {
     supports: {},
     questions: [],
   })
+  const [percent, setPercent] = useState(0);
+  const [stateChapter, setStateChapter] = useState({
+    previousChapter: '/',
+    nextChapter: '/'
+  });
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
-  let previousChapter = '/'
-  let nextChapter = '/'
-  let percent = 0
+
   let intervalID: any = useRef(null);
+  const partCurrentUrl = pathname.split('/')[1];
+  const findLocalCourse = courseData.find((course) => course.path === partCurrentUrl);
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
   let badgeUnlocked = false
@@ -89,20 +97,47 @@ export const Chapter = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
-  chapterData.forEach((chapter, i) => {
-    if (pathname === chapter.pathname) {
-      if (i - 1 >= 0) previousChapter = chapterData[i - 1].pathname
-      percent = 0
-      if (i + 1 < chapterData.length) {
-        nextChapter = chapterData[i + 1].pathname
-      } else {
-        if (user) nextChapter = `/profile`
-        else nextChapter = '/sign-up'
+  
+
+  const getPercent = (chapterData: ChapterData[]) => {
+
+    chapterData.forEach((chapter, i) => {
+      if (pathname === chapter.pathname) {
+
+        if (i - 1 >= 0) {
+          setStateChapter((prev) => ({
+            ...prev,
+            previousChapter: chapterData[i - 1].pathname
+          }))
+        }
+
+        if (i + 1 < chapterData.length) {
+          setStateChapter((prev) => ({
+            ...prev,
+            nextChapter: chapterData[i + 1].pathname
+          }))
+        } else {
+          if (user) {
+            setStateChapter((prev) => ({
+              ...prev,
+              nextChapter: `/profile`
+            }))
+          }
+          else {
+            setStateChapter((prev) => ({
+              ...prev,
+              nextChapter: '/sign-up'
+            }))
+          }
+        }
+        
+        if (i !== 7) {
+          setPercent(() => ((i + 1) / chapterData.length) * 100)
+        }
+        else setPercent(() => 100)
       }
-      if (i !== 7) percent = ((i + 1) / chapterData.length) * 100
-      else percent = 100
-    }
-  })
+    })
+  }
 
   const countUp = () => {
     setTime((prev) => ({
@@ -112,17 +147,40 @@ export const Chapter = () => {
 
   useEffect(() => {
     intervalID.current = setInterval(countUp, 1000);
+    return () => clearInterval(intervalID.current);
   }, [])
 
+  useEffect(() => {
+    if (findLocalCourse && findLocalCourse.name === CourseNameType.CHAINLINK_101) {
+      getPercent(ChainlinkIntroductionChapters);
+    } else if (findLocalCourse && findLocalCourse.name === CourseNameType.SOLIDITY_INTRO) {
+      getPercent(SolidityIntroductionChapters);
+    } else {
+      getPercent(VDFIntroductionChapters);
+    }
+  }, [])
+
+  const findCurrentCourse = (user: PublicUser) => {
+    let course = null;
+    const { courses } = user;
+    
+    if (findLocalCourse) {
+      course = courses?.find((course) => course.title === findLocalCourse?.name);
+    }
+    return course;
+  }
+
   const validateCallback = () => {
-    if (pathname === '/chainlinkIntroduction/chapter-8') {
+    if (stateChapter.nextChapter === `/profile`) {
       setValidatorState(RIGHT)
       if (user) {
         clearInterval(intervalID.current);
+        const course = findCurrentCourse(user);
         dispatch(addProgress({
           chapterDone: pathname,
-          courseId: user._id,
-          time: time.value  
+          courseId: course ? course._id : '',
+          time: time.value,
+          isCompleted: true 
         }))
       }
       setIsAccount(true)
@@ -148,10 +206,12 @@ export const Chapter = () => {
         setIsAccount(true)
         if (user) {
           clearInterval(intervalID.current);
+          const course = findCurrentCourse(user)
           dispatch(addProgress({
             chapterDone: pathname,
-            courseId: user._id,
-            time: time.value  
+            courseId: course ? course._id : '',
+            time: time.value,
+            isCompleted: false 
           }))
         }
         else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
@@ -173,10 +233,12 @@ export const Chapter = () => {
             setIsAccount(true)
             if (user) {
               clearInterval(intervalID.current);
+              const course = findCurrentCourse(user)
               dispatch(addProgress({
                 chapterDone: pathname,
-                courseId: user._id,
-                time: time.value  
+                courseId: course ? course._id : '',
+                time: time.value,
+                isCompleted: false
               }))
             }
             else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
@@ -224,8 +286,8 @@ export const Chapter = () => {
           user={user}
           supports={data.supports}
           questions={data.questions}
-          nextChapter={nextChapter}
-          previousChapter={previousChapter}
+          nextChapter={stateChapter.nextChapter}
+          previousChapter={stateChapter.previousChapter}
           isStarted={isStarted}
           percent={percent}
           startedHandler={startTaskHandler}
