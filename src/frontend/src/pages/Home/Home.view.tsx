@@ -71,8 +71,7 @@ export const HomeView = ({ user }: HomeViewProps) => {
       <div className="home-wrapper courses">
         <div className="home-content home-courses-content">
           <div className="home-courses-content__header h-font">Get started now</div>
-
-          {user ? (
+          {user && user.courses && user.courses.length > 0 ? (
             <div className="home-courses-content__items">
               {user.courses?.map((course) => (
                 <div key={course._id} className="home-course">
