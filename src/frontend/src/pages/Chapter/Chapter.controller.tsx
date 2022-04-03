@@ -12,7 +12,7 @@ import { CourseData } from '../Course/Course.controller'
 import { chaptersByCourse, courseData, CourseNameType } from '../Course/Course.data'
 import { chapterData as ChainlinkIntroductionChapters } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { chapterData as SolidityIntroductionChapters } from '../Courses/solidityIntroduction/Chapters/Chapters.data'
-import { chapterData as VDFIntroductionChapters } from '../Courses/vdfIntroduction/Chapters/Chapters.data'
+import { chapterData as vrfIntroductionChapters } from '../Courses/vrfIntroduction/Chapters/Chapters.data'
 import { addProgress } from './Chapter.actions'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
 import { ChapterView } from './Chapter.view'
@@ -149,7 +149,7 @@ export const Chapter = () => {
     } else if (findLocalCourse && findLocalCourse.name === CourseNameType.SOLIDITY_INTRO) {
       getPercent(SolidityIntroductionChapters)
     } else {
-      getPercent(VDFIntroductionChapters)
+      getPercent(vrfIntroductionChapters)
     }
     // eslint-disable-next-line
   }, [])

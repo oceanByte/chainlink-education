@@ -7,31 +7,26 @@ export enum CourseStatusType {
 
 export enum CourseTitleType {
   CHAINLINK_101 = 'Chainlink 101',
-  SOLIDITY_INTRO = 'Solidity Intro',
-  VDF_V2 = 'VDF v2 Overview'
+  SOLIDITY_INTRO = 'Solidity Introduction',
+  VRF_V2 = 'VRF v2 Introduction'
 }
 
 export const COURSES = [
   {
     title: CourseTitleType.CHAINLINK_101,
-    description: `This is a simple Chainlink 101 course that teaches you the basicsof the
-      Chainlink Ecosystem and how Oracles work in general
-    `,
-    difficulty: 3,
+    description: `Chainlink decentralized oracle networks provide tamper-proof inputs, outputs, and computations`,
+    difficulty: 2,
     status: CourseStatusType.NEW
   },
   {
     title: CourseTitleType.SOLIDITY_INTRO,
-    description: `This is a simple Chainlink 101 course that teaches you the basicsof the
-      Chainlink Ecosystem and how Oracles work in general
-    `,
+    description: `Solidity is an object-oriented, high-level language for implementing smart contracts. Learn about the basics here.`,
     difficulty: 3,
     status: CourseStatusType.NEW
   },
   {
-    title: CourseTitleType.VDF_V2,
-    description: `This is a simple Chainlink 101 course that teaches you the basicsof the
-      Chainlink Ecosystem and how Oracles work in general
+    title: CourseTitleType.VRF_V2,
+    description: `Study how VRF can be used to bring Verfiable Randomness to blockchain. 
     `,
     difficulty: 3,
     status: CourseStatusType.NEW

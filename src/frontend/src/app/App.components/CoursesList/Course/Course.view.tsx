@@ -3,11 +3,11 @@ import { useLocation } from 'react-router-dom'
 
 import { course as ChainlinkIntroduction } from '../../../../pages/Courses/chainlinkIntroduction'
 import { course as SolidityIntroduction } from '../../../../pages/Courses/solidityIntroduction'
-import { course as VDFIntroduction } from '../../../../pages/Courses/vdfIntroduction'
+import { course as vrfIntroduction } from '../../../../pages/Courses/vrfIntroduction'
 
 import { chapterData as ChainlinkIntroductionChapters } from '../../../../pages/Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { chapterData as SolidityIntroductionChapters } from '../../../../pages/Courses/solidityIntroduction/Chapters/Chapters.data'
-import { chapterData as VDFIntroductionChapters } from '../../../../pages/Courses/vdfIntroduction/Chapters/Chapters.data'
+import { chapterData as vrfIntroductionChapters } from '../../../../pages/Courses/vrfIntroduction/Chapters/Chapters.data'
 
 import { PublicUser } from 'shared/user/PublicUser'
 // import { Option } from '../../Select/Select.view'
@@ -34,8 +34,8 @@ export const CourseView = ({ course, user }: ICourseView) => {
       setPercent(() => Math.floor((courseProgress / SolidityIntroductionChapters.length) * 100))
       setActiveCoursePath(() => SolidityIntroduction.path)
     } else {
-      setPercent(() => Math.floor((courseProgress / VDFIntroductionChapters.length) * 100))
-      setActiveCoursePath(() => VDFIntroduction.path)
+      setPercent(() => Math.floor((courseProgress / vrfIntroductionChapters.length) * 100))
+      setActiveCoursePath(() => vrfIntroduction.path)
     }
     // eslint-disable-next-line
   }, [])

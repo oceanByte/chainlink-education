@@ -1,15 +1,15 @@
 import { course as ChainlinkIntroduction } from '../Courses/chainlinkIntroduction'
 import { course as SolidityIntroduction } from '../Courses/solidityIntroduction'
-import { course as VDFIntroduction } from '../Courses/vdfIntroduction'
+import { course as vrfIntroduction } from '../Courses/vrfIntroduction'
 import { chapterData as ChainlinkIntroductionChapters } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { chapterData as SolidityIntroductionChapters } from '../Courses/solidityIntroduction/Chapters/Chapters.data'
-import { chapterData as VDFIntroductionChapters } from '../Courses/vdfIntroduction/Chapters/Chapters.data'
+import { chapterData as vrfIntroductionChapters } from '../Courses/vrfIntroduction/Chapters/Chapters.data'
 import { CourseData } from './Course.controller'
 
 export enum CourseNameType {
   CHAINLINK_101 = 'Chainlink 101',
-  SOLIDITY_INTRO = 'Solidity Intro',
-  VDF_V2 = 'VDF v2 Overview'
+  SOLIDITY_INTRO = 'Solidity Introduction',
+  VRF_V2 = 'VRF v2 Overview',
 }
 
 export enum CourseStatusType {
@@ -33,10 +33,10 @@ export const courseData: CourseData[] = [
     data: SolidityIntroduction,
   },
   {
-    path: VDFIntroduction.path,
-    pathname: `/${VDFIntroduction.path}/info`,
-    name: CourseNameType.VDF_V2,
-    data: VDFIntroduction,
+    path: vrfIntroduction.path,
+    pathname: `/${vrfIntroduction.path}/info`,
+    name: CourseNameType.VRF_V2,
+    data: vrfIntroduction,
   },
 ]
 
@@ -49,5 +49,5 @@ type ChapterDataDictionary = {
 export const chaptersByCourse: ChapterDataDictionary = {
   chainlinkIntroduction: ChainlinkIntroductionChapters,
   solidityIntroduction: SolidityIntroductionChapters,
-  vdfIntroduction: VDFIntroductionChapters,
+  vrfIntroduction: vrfIntroductionChapters,
 }
