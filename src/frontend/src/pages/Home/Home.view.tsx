@@ -18,22 +18,22 @@ export const COURSES = [
     title: 'Chainlink 101',
     description: `Chainlink decentralized oracle networks provide tamper-proof inputs, outputs, and computations.`,
     difficulty: 2,
-    status: 'New',
-    progress: ['0'],
+    status: 'NEW',
+    progress: [],
   },
   {
     title: 'Solidity Introduction',
     description: `Solidity is an object-oriented, high-level language for implementing smart contracts. Learn about the basics here.`,
     difficulty: 3,
     status: 'New',
-    progress: [''],
+    progress: [],
   },
   {
-    title: 'VRF v2 Overview',
+    title: 'VRF v2 Introduction',
     description: `Study how VRF can be used to bring Verfiable Randomness to blockchain.`,
     difficulty: 3,
     status: 'New',
-    progress: [''],
+    progress: [],
   },
 ]
 

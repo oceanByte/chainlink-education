@@ -236,6 +236,7 @@
 
         .course-inner {
           width: 100%;
+
           .course-status {
             display: flex;
             justify-content: flex-end;
@@ -323,6 +324,7 @@
                 @include fluid-size('line-height', 375px, 1600px, 10px, 14px);
                 color: #fff;
                 padding: 10px;
+                min-width: 100px;
                 border-radius: 10px;
                 background: none;
                 display: flex;

@@ -9,7 +9,7 @@ import { CourseData } from './Course.controller'
 export enum CourseNameType {
   CHAINLINK_101 = 'Chainlink 101',
   SOLIDITY_INTRO = 'Solidity Introduction',
-  VRF_V2 = 'VRF v2 Overview',
+  VRF_V2 = 'VRF v2 Introduction',
 }
 
 export enum CourseStatusType {
