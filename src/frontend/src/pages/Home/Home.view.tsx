@@ -16,27 +16,21 @@ type HomeViewProps = {
 export const COURSES = [
   {
     title: 'Chainlink 101',
-    description: `This is a simple Chainlink 101 course that teaches you the basicsof the
-      Chainlink Ecosystem and how Oracles work in general
-    `,
-    difficulty: 3,
+    description: `Chainlink decentralized oracle networks provide tamper-proof inputs, outputs, and computations.`,
+    difficulty: 2,
     status: 'New',
     progress: ['0'],
   },
   {
-    title: 'Solidity Intro',
-    description: `This is a simple Chainlink 101 course that teaches you the basicsof the
-      Chainlink Ecosystem and how Oracles work in general
-    `,
+    title: 'Solidity Introduction',
+    description: `Solidity is an object-oriented, high-level language for implementing smart contracts. Learn about the basics here.`,
     difficulty: 3,
     status: 'New',
     progress: [''],
   },
   {
-    title: 'VRF v2',
-    description: `This is a simple Chainlink 101 course that teaches you the basicsof the
-      Chainlink Ecosystem and how Oracles work in general
-    `,
+    title: 'VRF v2 Overview',
+    description: `Study how VRF can be used to bring Verfiable Randomness to blockchain.`,
     difficulty: 3,
     status: 'New',
     progress: [''],
@@ -76,10 +70,8 @@ export const HomeView = ({ user }: HomeViewProps) => {
 
       <div className="home-wrapper courses">
         <div className="home-content home-courses-content">
-          <div className="home-courses-content__header h-font">Choose your own path</div>
-          <div className="home-courses-content__paragraph p-font">
-            Learn how to study in web3 <br />
-          </div>
+          <div className="home-courses-content__header h-font">Get started now</div>
+
           {user ? (
             <div className="home-courses-content__items">
               {user.courses?.map((course) => (
@@ -114,7 +106,7 @@ export const HomeView = ({ user }: HomeViewProps) => {
               NFT Certificate
             </div>
             <div className="home-num-item-content__text__paragraph p-font" data-aos="fade-up" data-aos-delay="200">
-              Complete the course and receive your certificate as a Non-Fungible Token (NFT) and share your results on
+              Complete a course and receive your certificate as a Non-Fungible Token (NFT) and share your results on
               social media.
             </div>
           </div>
