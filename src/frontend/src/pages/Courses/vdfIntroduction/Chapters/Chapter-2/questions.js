@@ -1,12 +1,12 @@
 export const questions = [
   {
-    question: 'Which factor does not affect the enforcement of a non-contractual agreement?',
+    question: 'Why can’t blockchains produce randomness?',
     answers: [
-      'Reputation',
-      'A Court of Law',
-      'Magnitude of The Terms',
-      'The Involved Parties'
+      'They are expensive',
+      'They are deterministic',
+      'They are quantum secure',
+      'They are too fast'
     ],
-    responses: ['A Court of Law'],
+    responses: ['They are deterministic'],
   },
 ]

@@ -16,34 +16,27 @@ import { Option } from '../Select/Select.view'
 import { Course } from 'shared/course'
 import { CourseNameType } from 'pages/Course/Course.data'
 
-
-
-interface ICourseView{
-  course: Course,
-  user?: PublicUser,
-  activeCourse: Option,
+interface ICourseView {
+  course: Course
+  user?: PublicUser
+  activeCourse: Option
 }
 
-export const CourseCardView = ({
-  course,
-  user,
-  activeCourse
-}: ICourseView) => {
-  const [percent, setPercent] = useState(0);
-  const [url, setUrl] = useState('/');
+export const CourseCardView = ({ course, user, activeCourse }: ICourseView) => {
+  const [percent, setPercent] = useState(0)
+  const [url, setUrl] = useState('/')
 
   const getUrl = (progress: number, path: string, countChapter: number) => {
     if (progress === 0 || progress === countChapter) {
       setUrl(() => `/${path}/chapter-1`)
-      return;
+      return
     }
 
-    setUrl(() => `/${path}/chapter-${progress+1}`)
+    setUrl(() => `/${path}/chapter-${progress + 1}`)
   }
 
-
   useEffect(() => {
-    const courseProgress = course && course.progress.length;
+    const courseProgress = course && course.progress.length
 
     if (course && course.title === CourseNameType.CHAINLINK_101) {
       getUrl(courseProgress, ChainlinkIntroduction.path, ChainlinkIntroductionChapters.length)
@@ -55,43 +48,47 @@ export const CourseCardView = ({
       getUrl(courseProgress, VDFIntroduction.path, SolidityIntroductionChapters.length)
       setPercent(() => Math.floor((courseProgress / VDFIntroductionChapters.length) * 100))
     }
-    
+    // eslint-disable-next-line
   }, [])
 
   return (
     <>
-      <div className='course-line'></div>
-      <div className='course-inner'>
-        <div className='course-status'>
-          <div className='course-status-text'>{course.status}</div>
+      <div className="course-line"></div>
+      <div className="course-inner">
+        <div className="course-status">
+          <div className="course-status-text">{course.status}</div>
         </div>
-        <div className='course-title'>
-          <div className='course-title-text'>{course.title}</div>
-          <div className='course-title-line' />
+        <div className="course-title">
+          <div className="course-title-text">{course.title}</div>
+          <div className="course-title-line" />
         </div>
-        <div className='course-description'>{course.description}</div>
+        <div className="course-description">{course.description}</div>
 
-        <div className='course-progress__bar'>
-          <div className='course-progress__bar__line'>
-            <div className='course-progress__bar__line__color' style={{ width: `${percent}%` }} />
-            <div className='course-progress__bar__line__number' style={{ left: `${percent ? percent - 11 : 3}%` }}>{percent}%</div>
+        <div className="course-progress__bar">
+          <div className="course-progress__bar__line">
+            <div className="course-progress__bar__line__color" style={{ width: `${percent}%` }} />
+            <div className="course-progress__bar__line__number" style={{ left: `${percent ? percent - 11 : 3}%` }}>
+              {percent}%
+            </div>
           </div>
         </div>
-        <div className='course-difficulty'>
-          <div className='course-difficulty-content'>
-            <span>{course.difficulty}/5</span>{' '}<span>Difficulty</span>
+        <div className="course-difficulty">
+          <div className="course-difficulty-content">
+            <span>{course.difficulty}/5</span> <span>Difficulty</span>
           </div>
-          <div className='course-btn-wrapper'>
-            <Link to={url} className={classnames(
-              'btn course-btn', 
-              !percent && 'new',
-              percent && percent !== 100 && 'continue',  
-              percent && percent === 100 && 'completed' 
-            )}
+          <div className="course-btn-wrapper">
+            <Link
+              to={url}
+              className={classnames(
+                'btn course-btn',
+                !percent && 'new',
+                percent && percent !== 100 && 'continue',
+                percent && percent === 100 && 'completed',
+              )}
             >
-              {!percent ? (<span className="btn__text">Start your journey</span>): null}
-              {percent && percent !== 100 ? (<span className="btn__text">Continue</span>): null}
-              {percent && percent === 100 ? (<span className="btn__text">Repeat</span>): null}
+              {!percent ? <span className="btn__text">Start your journey</span> : null}
+              {percent && percent !== 100 ? <span className="btn__text">Continue</span> : null}
+              {percent && percent === 100 ? <span className="btn__text">Repeat</span> : null}
             </Link>
           </div>
         </div>

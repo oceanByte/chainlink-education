@@ -42,7 +42,7 @@ export interface Data {
 export const Chapter = () => {
   const [time, setTime] = useState({
     value: 0,
-  });
+  })
   const [validatorState, setValidatorState] = useState(PENDING)
   const [showDiff, setShowDiff] = useState(false)
   const [isAccount, setIsAccount] = useState(false)
@@ -55,26 +55,25 @@ export const Chapter = () => {
     supports: {},
     questions: [],
   })
-  const [percent, setPercent] = useState(0);
+  const [percent, setPercent] = useState(0)
   const [stateChapter, setStateChapter] = useState({
     previousChapter: '/',
-    nextChapter: '/'
-  });
+    nextChapter: '/',
+  })
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
 
-  let intervalID: any = useRef(null);
-  const partCurrentUrl = pathname.split('/')[1];
-  const findLocalCourse = courseData.find((course) => course.path === partCurrentUrl);
+  let intervalID: any = useRef(null)
+  const partCurrentUrl = pathname.split('/')[1]
+  const findLocalCourse = courseData.find((course) => course.path === partCurrentUrl)
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
   let badgeUnlocked = false
-  let counter = 0;
+  let counter = 0
   user?.progress?.forEach((chapter) => {
     counter++
-  });
+  })
   if (counter >= 20) badgeUnlocked = true
-
 
   useEffect(() => {
     if (user) dispatch(getUser({ username: user.username }))
@@ -97,44 +96,38 @@ export const Chapter = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
-  
-
   const getPercent = (chapterData: ChapterData[]) => {
-
     chapterData.forEach((chapter, i) => {
       if (pathname === chapter.pathname) {
-
         if (i - 1 >= 0) {
           setStateChapter((prev) => ({
             ...prev,
-            previousChapter: chapterData[i - 1].pathname
+            previousChapter: chapterData[i - 1].pathname,
           }))
         }
 
         if (i + 1 < chapterData.length) {
           setStateChapter((prev) => ({
             ...prev,
-            nextChapter: chapterData[i + 1].pathname
+            nextChapter: chapterData[i + 1].pathname,
           }))
         } else {
           if (user) {
             setStateChapter((prev) => ({
               ...prev,
-              nextChapter: `/profile`
+              nextChapter: `/profile`,
             }))
-          }
-          else {
+          } else {
             setStateChapter((prev) => ({
               ...prev,
-              nextChapter: '/sign-up'
+              nextChapter: '/sign-up',
             }))
           }
         }
-        
+
         if (i !== 7) {
           setPercent(() => ((i + 1) / chapterData.length) * 100)
-        }
-        else setPercent(() => 100)
+        } else setPercent(() => 100)
       }
     })
   }
@@ -142,46 +135,49 @@ export const Chapter = () => {
   const countUp = () => {
     setTime((prev) => ({
       value: ++prev.value,
-    }));
+    }))
   }
 
   useEffect(() => {
-    intervalID.current = setInterval(countUp, 1000);
-    return () => clearInterval(intervalID.current);
+    intervalID.current = setInterval(countUp, 1000)
+    return () => clearInterval(intervalID.current)
   }, [])
 
   useEffect(() => {
     if (findLocalCourse && findLocalCourse.name === CourseNameType.CHAINLINK_101) {
-      getPercent(ChainlinkIntroductionChapters);
+      getPercent(ChainlinkIntroductionChapters)
     } else if (findLocalCourse && findLocalCourse.name === CourseNameType.SOLIDITY_INTRO) {
-      getPercent(SolidityIntroductionChapters);
+      getPercent(SolidityIntroductionChapters)
     } else {
-      getPercent(VDFIntroductionChapters);
+      getPercent(VDFIntroductionChapters)
     }
+    // eslint-disable-next-line
   }, [])
 
   const findCurrentCourse = (user: PublicUser) => {
-    let course = null;
-    const { courses } = user;
-    
+    let course = null
+    const { courses } = user
+
     if (findLocalCourse) {
-      course = courses?.find((course) => course.title === findLocalCourse?.name);
+      course = courses?.find((course) => course.title === findLocalCourse?.name)
     }
-    return course;
+    return course
   }
 
   const validateCallback = () => {
     if (stateChapter.nextChapter === `/profile`) {
       setValidatorState(RIGHT)
       if (user) {
-        clearInterval(intervalID.current);
-        const course = findCurrentCourse(user);
-        dispatch(addProgress({
-          chapterDone: pathname,
-          courseId: course ? course._id : '',
-          time: time.value,
-          isCompleted: true 
-        }))
+        clearInterval(intervalID.current)
+        const course = findCurrentCourse(user)
+        dispatch(
+          addProgress({
+            chapterDone: pathname,
+            courseId: course ? course._id : '',
+            time: time.value,
+            isCompleted: true,
+          }),
+        )
       }
       setIsAccount(true)
       return
@@ -205,16 +201,17 @@ export const Chapter = () => {
         setValidatorState(RIGHT)
         setIsAccount(true)
         if (user) {
-          clearInterval(intervalID.current);
+          clearInterval(intervalID.current)
           const course = findCurrentCourse(user)
-          dispatch(addProgress({
-            chapterDone: pathname,
-            courseId: course ? course._id : '',
-            time: time.value,
-            isCompleted: false 
-          }))
-        }
-        else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
+          dispatch(
+            addProgress({
+              chapterDone: pathname,
+              courseId: course ? course._id : '',
+              time: time.value,
+              isCompleted: false,
+            }),
+          )
+        } else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
       } else setValidatorState(WRONG)
     } else {
       if (showDiff) {
@@ -232,16 +229,17 @@ export const Chapter = () => {
             setValidatorState(RIGHT)
             setIsAccount(true)
             if (user) {
-              clearInterval(intervalID.current);
+              clearInterval(intervalID.current)
               const course = findCurrentCourse(user)
-              dispatch(addProgress({
-                chapterDone: pathname,
-                courseId: course ? course._id : '',
-                time: time.value,
-                isCompleted: false
-              }))
-            }
-            else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
+              dispatch(
+                addProgress({
+                  chapterDone: pathname,
+                  courseId: course ? course._id : '',
+                  time: time.value,
+                  isCompleted: false,
+                }),
+              )
+            } else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
           } else setValidatorState(WRONG)
         } else setValidatorState(WRONG)
       }

@@ -1,12 +1,12 @@
 export const questions = [
   {
-    question: 'What are the special blockchain "block reward" transactions called?',
+    question: 'What are the main duties of the VRF Coordinator Contract?',
     answers: [
-      'Coinbase',
-      'Bit Reward',
-      'SHA256',
-      'Token Field',
+      'Allows a contract to communicate with the VRF',
+      'Coordinating the LINK token',
+      'Managing subscriptions to the VRF and verifying randomness',
+      'Accepting Price Data'
     ],
-    responses: ['Coinbase'],
+    responses: ['Managing subscriptions to the VRF and verifying randomness'],
   },
 ]

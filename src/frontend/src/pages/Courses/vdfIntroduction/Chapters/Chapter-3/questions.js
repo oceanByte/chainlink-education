@@ -1,12 +1,12 @@
 export const questions = [
   {
-    question: 'An equity trading service provider has a 99% uptime SLA, approximately how many hours per year can their service go down without breaching the SLA?',
+    question: 'What does VRF stand for?',
     answers: [
-      '1 hour',
-      '13 hours',
-      '34 hours',
-      '87 hours'
+      'Very Random Friends',
+      'Verifiable Range Function',
+      'Verifiable Ransom Function',
+      'Verifiable Random Function'
     ],
-    responses: ['87 hours'],
+    responses: ['Verifiable Random Function'],
   },
 ]

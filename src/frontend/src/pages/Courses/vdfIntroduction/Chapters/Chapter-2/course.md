@@ -1,6 +1,6 @@
 #####Chapter 2:
 
-# What are Contracts?
+# Randomness and Blockchains
 
 <ContentWrapp>
   <div class="imgContainer">
@@ -9,20 +9,11 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     When you buy an artwork, you sign a contract between you and the artist or seller. This contract provides you with proof of ownership of the artwork. But it is possible to forge it and not follow the agreement. The seller could decide not to send the artwork to you though you already paid for it.
+     Upon research, you realize popular languages like Javascript have built-in randomness functions maybe you can use something like that in Solidity? 
     </div>
   </div>
 </ContentWrapp>
 
-Agreements, deals, promises: these are concepts that humans universally have an intuition for across cultures. Maybe as a child you agreed to trade three of your toys for one friend’s rare toy. Perhaps you’ve agreed to lend your car to a friend as long as they don’t put more than 100 miles on it and return it with a full tank. You may have even made an agreement with your health coach not to eat more than 2,500 calories per day.
+Blockchains are deterministic, meaning that any computations that use blockchains must have predictable outcomes. This so all of the nodes that run the blockchain can come to an agreement on what the blockchain is. But deterministic runs counter to random. If everyone knows what the next hand of poker will be before it is dealt it wouldn’t be considered random. So if randomness is impossible on a blockchain, how can we bring the awesome powers of smart contracts to any applications that need randomness?
 
-These are all examples of agreements. Agreements can be spoken orally, written down on paper, or even typed in digital documents. The enforcement of such agreements is oftentimes informal and “wishy washy.” Disagreement is handled outside of courts or other formal institutions: a friend who brings back your car with 600 miles on it and an almost empty tank of gas loses your trust. Your health coach will be very disappointed in you if you’ve eaten 5,000 calories a day for the past week. Though factors such as reputation, magnitude, and parties within an agreement can affect its enforcement, there is no guarantee that an agreement will be fulfilled.
-
-Contracts are agreements that are enforceable in a court of law. You may have signed a leasing contract to rent an apartment or house. Restaurateurs typically sign contracts with food suppliers to obtain necessary ingredients at a specific price and time no matter what happens in different food markets. You may sign an employment agreement with a company to establish your pay rate and employee benefits. In any form, once these contractual agreements have been made, they are enforced by a court of law. Any clause that is not fulfilled within a contract can be disputed and discussed within the court.
-
-<MissionContainer>
-  <div className="title">Arbitration Court</div>
-    <div style="color:white">
-    In fact legal contracts have become so notorousily difficult to enforce, more companies have been putting "arbitration" clauses in their contracts. This means a private arbitration court is used to uphold the contract rather than a public judicial court. There has been a lot of controversy surrounding arbitration courts. You can read more about the history of arbitration courts in <a style="color:green" href="https://www.americanbar.org/groups/tort_trial_insurance_practice/publications/the_brief/2018-19/summer/a-brief-history-arbitration/"> this article by the american bar association </a>.
-    </div>
-</MissionContainer>
+We could get the randomness from an outside resource! But it can’t be a trusted centralized service (as discussed in Chainlink 101), or we would be ruining the decentralized properties of blockchains and smart contracts. And it would be great if it could be verified that the number wasn’t tampered with and is genuinely random. This is a perfect example of where a decentralized oracle network powered by Chainlink could be used!

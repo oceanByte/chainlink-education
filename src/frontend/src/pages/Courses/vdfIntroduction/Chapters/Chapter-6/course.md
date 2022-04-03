@@ -1,55 +1,14 @@
-#####Chapter 6:
+#####Chapter 6: Building a Basic Contract
 
-# Chainlink Data Feeds
+# Configuring Randomness Settings
 
-<ContentWrapp>
-  <div class="imgContainer">
-    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
-  </div>
+Chainlink VRF allows you to customize several randomness parameters.
 
-  <div class="itemsContainer">
-    <div class="item-text">
-     Now that you understood how to connect the off-chain world you can utilize this knowledge now for your NFT. Imagine a NFT that reacts to the price of Ethereum. It could rain when the price falls and it could be sunny when the price rises.
-    </div>
-  </div>
-</ContentWrapp>
+**uint64 s_subscriptionId**: The subscription ID that this contract uses for funding requests. We just need to declare this variable and it will be set later.
+**address vrfCoordinator**: The address of the Chainlink VRF Coordinator contract. We will use the Rinkeby coordinator address **0x6168499c0cFfCaCD319c818142124B7A15E857ab**
+**address link**: The LINK token address for your selected network. We will use the Rinkeby LINK address **0x01BE23585060835E02B77ef475b0Cc51aA1e0709**
+**bytes32 keyHash**: The gas lane key hash value, which is the maximum gas price you are willing to pay for a request in wei. It functions as an ID of the off-chain VRF job that runs in response to requests. We will use **0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc**
+**uint32 callbackGasLimit**: The limit for how much gas to use for the callback request to your contract's **fulfillRandomWords()** function. It must be less than the **maxGasLimit** limit on the coordinator contract. In this example, the **fulfillRandomWords()** function stores two random values, which cost about 20,000 gas each, so a limit of 100,000 gas is sufficient. Adjust this value for larger requests depending on how your fulfillRandomWords() function processes and stores the received random values. If your **callbackGasLimit** is not sufficient, the callback will fail and your subscription is still charged for the work done to generate your requested random values. We will use a limit of **100000**.
 
-As discussed in the previous lesson, Chainlink gives developers the ability to create extremely powerful DON’s that provide smart contracts with the highest quality data from outside the blockchain. As a smart contract developer, how can you take advantage of these DONs in your own smart contracts? Chainlink is open source so there’s always the option of making your own DON, but creating a DON is a complex and nuanced process. Instead, in the spirit of old developer adage “Never build something twice”, lets make use of existing DONs if possible.
-
-Luckily, many of the largest and highest quality node operators in the blockchain industry have already combined their knowledge and prowress to create DONs that serve the most in-demand data for smart contract developers to take advantage of. These data serving DONs are called <ColorWord>Chainlink Data Feeds</ColorWord>. Currently most of the data feeds provide data on various currency and cryptocurrency pairs, as that was initially what smart contract developers needed, but data feeds can be used to retrieve any type of data.
-
-You can see these data feeds updating in real time at data.chain.link. There you can select different blockchains Chainlink DONs are posting data to, as well view the details of each DON that compose a particular data feed. For instance if you click on the ETH/USD data feed you will see all the nodes involved in the DON, what price each individual node posted, and the final aggregated price of the asset. Some important terms you may notice are:
-
-<p><ColorWord>Rounds</ColorWord>DONs update data feeds in rounds. When a new round is initiated the nodes in a DON retrieve the latest data point from data providers, aggregate the data at the individual node level and finally aggregate the between the nodes. Once the final aggregated data point, along with each individual nodes observation, is posted on-chain the round is considered complete.</p>
-<p><ColorWord>Heartbeat</ColorWord>The maximum amount of time that is allowed to pass before the DON automically starts a new round and updates the data.</p>
-<p><ColorWord>Deviation Threshold</ColorWord>If a node within the DON senses the data fluctuates by a certain percentage, they will automatically start a new round forcing the DON to update the data feed regardless of how much time has elapsed.</p>
-
-<MissionContainer>
-  <div className="title">Quizzes:</div>
-  <ol className="mission-goals">
-    <li>
-      What is the heartbeat for the ETH/USD data feed on Ethereum mainnet?
-    </li>
-    <li>
-      What is the deviation threshold for the BTC/USD data feed on Binance Smart Chain mainnet?
-    </li>
-  </ol>
-</MissionContainer>
-
-## Programming with Chainlink Data Feeds
-
-Now that we understand how Chainlink data feeds work, lets use them within a smart contract. To use a chainlink data feed within a smart contract you only have to complete three simple steps:
-
-<div>
-  <ul>
-    <li>
-      <p>Import the AggregatorV3Interface into your smart contract</p>
-    </li>
-    <li>
-      <p>Point the interface to the desired data feed</p>
-    </li>
-    <li>
-      <p>Access the latest data!</p>
-    </li>
-  </ul>
-</div>
+**uint16 requestConfirmations**: How many confirmations the Chainlink node should wait before responding. The longer the node waits, the more secure the random value is. It must be greater than the **minimumRequestBlockConfirmations** limit on the coordinator contract. We will set this to **3**
+**uint16 numWords**: How many random values to request. If you can use several random values in a single callback, you can reduce the amount of gas that you spend per random value. The total cost of the callback request depends on how your **fulfillRandomWords()** function processes and stores the received random values, so adjust your **callbackGasLimit** accordingly. We will set this to **2**

@@ -1,6 +1,6 @@
 #####Chapter 3:
 
-# Digital Agreements - What we have Today
+# Chainlink VRF
 
 <ContentWrapp>
   <div class="imgContainer">
@@ -9,20 +9,11 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-    When you buy an artwork on an online platform, you must agree to the Service Level Agreements. They are usually overly complex and can be challenging to understand. They primarily benefit the platform owner, not the users.
+     So you’ve realized that you need Chainlink VRF to build your raffle. But what makes Chainlink VRF so special?
     </div>
   </div>
 </ContentWrapp>
 
-Digital agreements have been the most common format of agreements in the past decade. From bank agreements to social media, to Netflix, and crypto exchanges, companies who provide services on the internet typically use digital agreements to detail the exact conditions of the service to be provided. These are called SLAs, or Service Level Agreements.
+As discussed in the previous lesson randomness provided by an outside service needs to be verifiable and decentralized, and that’s exactly what Chainlink VRF is! VRF stands for Verifiable Randomness Function. Essentially Chainlink VRF provides cryptographic proof alongside every random number generated, that the random number wasn’t tampered with (and indeed generated in a random way).
 
-What makes a digital agreement different from a regular agreement or contractual agreement? Well they’re like regular agreements….but in a digital format. These agreements can be enforced in a court of law under certain circumstances. However, this doesn’t happen often due to costs of going to court coupled with the low value these contracts represent for individual consumers.
-
-Customers also tend not to read these agreements due to lengthy, complex legalese. Oftentimes digital agreements give consumers very little recourse at all! Due to these reasons, the power of digital agreements are heavily skewed towards the institutions who create them rather than being a fair, equitable agreement between institutions and their consumers. A prime example of this is the <a style="color:blue" href="https://www.jama.work/blog/on-robinhood-and-availability"> Robinhood Gamestop downtime incident</a>.
-
-<MissionContainer>
-  <div className="title">What are the SLAs you have agreed to?</div>
-    <div style="color:white">
-    Think about any digital services you subscribe to, for example video streaming or banking services. Do you know the terms of the SLAs between you and the service provider? If not, take the time and read over one of them.
-    </div>
-</MissionContainer>
+How does this cryptographic proof work? It’s quite mathematically complicated and outside the scope of this lesson, but you can read more about it in the “Technical Walkthrough” section of this [blog post](https://blog.chain.link/chainlink-vrf-on-chain-verifiable-randomness/). The cryptographic proof is then verified by a smart contract on-chain, which means it is verified by every node on the blockchain! This completes our verifiable and decentralized criteria. So now we understand that Chainlink VRF is verifiably random and decentralized how do we use it?
