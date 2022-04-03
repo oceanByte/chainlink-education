@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb'
 
 export class Course {
   @IsMongoId()
-  readonly _id!: ObjectId
+  readonly _id?: ObjectId
 
   @Length(2, 20)
   title!: string
@@ -18,5 +18,5 @@ export class Course {
   difficulty!: number
 
   @IsMongoId()
-  userId!: ObjectId
+  userId?: ObjectId
 }

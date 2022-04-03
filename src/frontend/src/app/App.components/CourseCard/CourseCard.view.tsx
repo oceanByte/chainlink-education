@@ -36,7 +36,7 @@ export const CourseCardView = ({ course, user, activeCourse }: ICourseView) => {
   }
 
   useEffect(() => {
-    const courseProgress = course && course.progress.length
+    const courseProgress = (course && course.progress.length) || 0
 
     if (course && course.title === CourseNameType.CHAINLINK_101) {
       getUrl(courseProgress, ChainlinkIntroduction.path, ChainlinkIntroductionChapters.length)
@@ -64,14 +64,16 @@ export const CourseCardView = ({ course, user, activeCourse }: ICourseView) => {
         </div>
         <div className="course-description">{course.description}</div>
 
-        <div className="course-progress__bar">
-          <div className="course-progress__bar__line">
-            <div className="course-progress__bar__line__color" style={{ width: `${percent}%` }} />
-            <div className="course-progress__bar__line__number" style={{ left: `${percent ? percent - 11 : 3}%` }}>
-              {percent}%
+        {user && (
+          <div className="course-progress__bar">
+            <div className="course-progress__bar__line">
+              <div className="course-progress__bar__line__color" style={{ width: `${percent}%` }} />
+              <div className="course-progress__bar__line__number" style={{ left: `${percent ? percent - 11 : 3}%` }}>
+                {percent}%
+              </div>
             </div>
           </div>
-        </div>
+        )}
         <div className="course-difficulty">
           <div className="course-difficulty-content">
             <span>{course.difficulty}/5</span> <span>Difficulty</span>
@@ -86,7 +88,7 @@ export const CourseCardView = ({ course, user, activeCourse }: ICourseView) => {
                 percent && percent === 100 && 'completed',
               )}
             >
-              {!percent ? <span className="btn__text">Start your journey</span> : null}
+              {!percent ? <span className="btn__text">Start</span> : null}
               {percent && percent !== 100 ? <span className="btn__text">Continue</span> : null}
               {percent && percent === 100 ? <span className="btn__text">Repeat</span> : null}
             </Link>

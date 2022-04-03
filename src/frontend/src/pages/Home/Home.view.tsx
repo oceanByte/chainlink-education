@@ -5,14 +5,43 @@ import { Link } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 import { CourseCardView } from 'app/App.components/CourseCard/CourseCard.view'
 import { Option } from 'app/App.components/Select/Select.view'
-
 import 'aos/dist/aos.css'
 
-
 type HomeViewProps = {
-  user?: PublicUser,
+  user?: PublicUser
   contactUsCallback: (values: any) => void
 }
+
+// from src/api/src/shared/course/CourseType.ts
+export const COURSES = [
+  {
+    title: 'Chainlink 101',
+    description: `This is a simple Chainlink 101 course that teaches you the basicsof the
+      Chainlink Ecosystem and how Oracles work in general
+    `,
+    difficulty: 3,
+    status: 'New',
+    progress: ['0'],
+  },
+  {
+    title: 'Solidity Intro',
+    description: `This is a simple Chainlink 101 course that teaches you the basicsof the
+      Chainlink Ecosystem and how Oracles work in general
+    `,
+    difficulty: 3,
+    status: 'New',
+    progress: [''],
+  },
+  {
+    title: 'VRF v2',
+    description: `This is a simple Chainlink 101 course that teaches you the basicsof the
+      Chainlink Ecosystem and how Oracles work in general
+    `,
+    difficulty: 3,
+    status: 'New',
+    progress: [''],
+  },
+]
 
 export const HomeView = ({ user }: HomeViewProps) => {
   let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
@@ -45,25 +74,31 @@ export const HomeView = ({ user }: HomeViewProps) => {
       </div>
       <div className="home-ellipse home-ellipse-1" />
 
-      {user ? (
-        <div className="home-wrapper courses">
-          <div className="home-content home-courses-content">
-            <div className="home-courses-content__header h-font">
-                Choose your own path
-              </div>
-              <div className="home-courses-content__paragraph p-font">
-                Learn how to study in web3 <br />
-            </div>
-            <div className='home-courses-content__items'>
+      <div className="home-wrapper courses">
+        <div className="home-content home-courses-content">
+          <div className="home-courses-content__header h-font">Choose your own path</div>
+          <div className="home-courses-content__paragraph p-font">
+            Learn how to study in web3 <br />
+          </div>
+          {user ? (
+            <div className="home-courses-content__items">
               {user.courses?.map((course) => (
-                <div key={course._id} className='home-course'>
-                  <CourseCardView course={course} user={user} activeCourse={defaultCourse}/>
+                <div key={course._id} className="home-course">
+                  <CourseCardView course={course} user={user} activeCourse={defaultCourse} />
                 </div>
               ))}
             </div>
-          </div>
+          ) : (
+            <div className="home-courses-content__items">
+              {COURSES.map((course) => (
+                <div key={course.title} className="home-course">
+                  <CourseCardView course={course} user={user} activeCourse={defaultCourse} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      ) : null}
+      </div>
 
       <div className="home-content home-num-item">
         <div className="home-num-item__image nft" />
