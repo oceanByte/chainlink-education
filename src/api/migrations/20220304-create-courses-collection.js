@@ -28,7 +28,7 @@ const courseSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const Course = mongoose.model('Course', courseSchema )
+const Course = mongoose.model('Course', courseSchema)
 
 const COURSES = [
   {
@@ -59,25 +59,23 @@ async function main() {
   const users = await User.find({});
   // 2 create one new entry per course for each user (there is only chainlink101 atm)
   for (user of users) {
-    if (!user?.progress || user?.progress?.length === 0) {
-      continue
+    for (course of COURSES) {
+      const payload = {
+        title: course.title,
+        description: course.description,
+        difficulty: course.difficulty,
+        progress: user.progress ? user.progress : [],
+        chapterTimes: user.progress ? new Array(user.progress.length).fill({ chapter: course.title, time: -1 }) : [],
+        status: user.progress.length < 7 ? 'IN PROGRESS' : 'COMPLETED',
+        userId: mongoose.mongo.ObjectId(user._id)
+      }
+
+      const newCourse = new Course(payload)
+      console.log(user._id)
+      // 3 store entries
+      await newCourse.save()
+
     }
-
-    const payload = {
-      title: COURSES[0].title,
-      description: COURSES[0].description,
-      difficulty: 2,
-      progress: user.progress,
-      chapterTimes: new Array(user.progress.length).fill(-1),
-      status: user.progress.length < 7 ? 'IN PROGRESS' : 'COMPLETED',
-      userId: mongoose.mongo.ObjectId(user._id)
-    }
-
-    console.log(payload)
-
-    const course = new Course(payload)
-    // 3 store entries
-    await course.save()
   }
 }
 
