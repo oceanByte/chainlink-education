@@ -288,6 +288,10 @@
     bottom: 0;
     right: 0;
     position: absolute;
+
+    &.isCertificate {
+      bottom: -50px;
+    }
     @include md {
       right: 70px;
     }
@@ -304,9 +308,19 @@
   }
 
   &-wrapper {
-    width: 400px;
+    width: 550px;
     @include sm {
       width: 100%;
+    }
+  }
+
+  &__name {
+    margin-top: 20px;
+
+    input:disabled {
+      background-color: #fff;
+      border-color: #ccc;
+      color: rgb(145, 145, 145);
     }
   }
 

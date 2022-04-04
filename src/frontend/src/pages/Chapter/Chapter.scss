@@ -66,6 +66,16 @@
   color: black;
   box-shadow: 0 4px 15px rgba(12, 22, 44, 0.1);
   border-radius: 20px;
+
+  p {
+    a {
+      color: $primary;
+
+      &:hover {
+        text-decoration: underline !important;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 1024px) {

@@ -480,7 +480,7 @@ export const ChapterView = ({
                     <div>
                       {showDiff ? (
                         <MonacoDiff
-                          height={350}
+                          height={550}
                           width={editorWidth}
                           solution={solution}
                           proposedSolution={proposedSolution}
@@ -488,7 +488,7 @@ export const ChapterView = ({
                       ) : (
                         <MonacoEditor
                           width={editorWidth}
-                          height={350}
+                          height={550}
                           proposedSolution={proposedSolution}
                           proposedSolutionCallback={proposedSolutionCallback}
                         />

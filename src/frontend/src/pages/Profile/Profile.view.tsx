@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { Option } from 'app/App.components/Select/Select.view'
 import { PublicUser } from 'shared/user/PublicUser'
 
 import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
@@ -21,8 +21,9 @@ import { InputField } from 'app/App.components/Form/InputField/Input.controller'
 
 type ProfileViewProps = {
   user?: PublicUser,
-  activeCourse: Option,
   changeEmailCallback: ({email}: {email: string})=> void,
+  downloadCallback: () => void
+  getCertificateCallback: ({ name }: { name: string }) => void
   deleteAccountCallback: ()=> void
 }
 
@@ -34,11 +35,12 @@ export const ValidationSchema = Yup.object().shape({
 
 export const ProfileView = ({
   user,
-  activeCourse,
   changeEmailCallback,
   deleteAccountCallback,
+  downloadCallback,
+  getCertificateCallback,
 }: ProfileViewProps) => {
-  
+  const dispatch = useDispatch()
   const { search } = useLocation()
   const [section, setSection] = useState(1)
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
@@ -72,7 +74,7 @@ export const ProfileView = ({
     changeEmailCallback(values);
   }
 
-  const copyToClipboard = (dispatch: any) => {
+  const copyToClipboard = () => {
     navigator.clipboard.writeText(`https://www.chainlink.education/certificate/${user?.username}`);
     dispatch(showToaster(SUCCESS, 'Certificate link copied', 'You can share this link now.'));
   }
@@ -123,7 +125,12 @@ export const ProfileView = ({
         </div>
       </div>
       <div className={`profile-page-progress profile-page-section ${section === 1 ? 'profile-page-visible' : ''}`}>
-        <CoursesListView user={user} />
+        <CoursesListView
+          user={user}
+          copyToClipboard={copyToClipboard}
+          downloadCallback={downloadCallback}
+          getCertificateCallback={getCertificateCallback}
+        />
       </div>
       <div className={`profile-page-account-info profile-page-section ${section === 2 ? 'profile-page-visible' : ''}`}>
         <div className='profile-page-account-info-wrapper'>
@@ -153,7 +160,7 @@ export const ProfileView = ({
                 handleSubmit,
                 isSubmitting,
               }) => (
-                <form className="" onSubmit={handleSubmit}>
+                <form className="profile-page-account-info__form" onSubmit={handleSubmit}>
                   <div className='profile-page-account-info__email p-font'>
                     <InputField
                       label="EMAIL ADDRESS"
