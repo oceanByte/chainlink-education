@@ -1,4 +1,4 @@
-#####Chapter 7: Building a Basic Contract
+#####Chapter 8: Building a Basic Contract
 
 ## Requesting Randomness
 

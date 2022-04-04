@@ -1,4 +1,4 @@
-#####Chapter 9: Subscribing to the VRF
+#####Chapter 10: Subscribing to the VRF
 
 # Recieving Randomness
 
@@ -44,7 +44,7 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
       numWords
     );
   }
-  
+
   function fulfillRandomWords(
     uint256, /* requestId */
     uint256[] memory randomWords
