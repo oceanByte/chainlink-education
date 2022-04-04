@@ -1,11 +1,12 @@
 import * as React from 'react'
 import ReactGA from 'react-ga'
+import hotjar from 'react-hotjar'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 // @ts-ignore
 import TagManager from 'react-gtm-module'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-import TwitterConvTrkr from 'react-twitter-conversion-tracker'
+// import TwitterConvTrkr from 'react-twitter-conversion-tracker'
 import LogRocket from 'logrocket';
 
 import { App } from './app/App.controller'
@@ -28,7 +29,7 @@ ReactGA.initialize('UA-XXXXXXXX-1', {
     cookieFlags: 'SameSite=None;Secure'
   }
 })
-hotjar.initialize(111111, 1)
+// hotjar.initialize(111111, 1)
 
 const tagManagerArgs = {
   gtmId: process.env.REACT_APP_GTM_ID,

@@ -72,7 +72,7 @@ export const ProfileView = ({
     changeEmailCallback(values);
   }
 
-  const copyToClipboard = () => {
+  const copyToClipboard = (dispatch: any) => {
     navigator.clipboard.writeText(`https://www.chainlink.education/certificate/${user?.username}`);
     dispatch(showToaster(SUCCESS, 'Certificate link copied', 'You can share this link now.'));
   }

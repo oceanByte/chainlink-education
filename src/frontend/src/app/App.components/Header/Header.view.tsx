@@ -6,22 +6,16 @@ import { Link } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 import { Option } from '../Select/Select.view'
 
-import classnames from 'classnames'
 import { ChaptersListView } from '../HeaderCoursesList/HeaderCoursesListView'
 
 type HeaderViewProps = {
   user?: PublicUser
-  removeAuthUserCallback: () => void,
-  pathname: string,
-  activeCourse: Option,
+  removeAuthUserCallback: () => void
+  pathname: string
+  activeCourse: Option
 }
 
-export const HeaderView = ({
-  user,
-  removeAuthUserCallback,
-  pathname,
-  activeCourse
-}: HeaderViewProps) => {
+export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCourse }: HeaderViewProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(true)
@@ -47,7 +41,7 @@ export const HeaderView = ({
   }
 
   const formatUsername = (username: string) => {
-    const usernameArr = username.split('_');
+    const usernameArr = username.split('_')
 
     if (usernameArr.length >= 2) {
       return `${usernameArr[0][0].toUpperCase()}${usernameArr[1][0].toUpperCase()}`
@@ -70,7 +64,7 @@ export const HeaderView = ({
   const loggedInHeader = (
     <>
       <div className="header-menu-user" onClick={() => setShowUserMenu((st) => !st)}>
-        <div className="header-menu-user__circle">{formatUsername(user?.username || "U")}</div>
+        <div className="header-menu-user__circle">{formatUsername(user?.username || 'U')}</div>
         <div className="header-menu-user__name">
           {user?.username} <span>&#9660;</span>
         </div>
@@ -112,24 +106,18 @@ export const HeaderView = ({
         <Link to="/" className="header__link" />
         <div className="header-menu">
           <div className="header-menu-list">
-            <div className='header-menu-list__item'>
+            <div className="header-menu-list__item">
               <button className="btn" onClick={showListAcademy}>
                 Academy <span>&#9660;</span>
               </button>
               <div className={classnames('chapters-list', !isDropdownOpen && 'hidden')}>
-                <ChaptersListView
-                  user={user}
-                  activeCourse={activeCourse}
-                  pathname={pathname}
-                />
+                <ChaptersListView user={user} activeCourse={activeCourse} pathname={pathname} />
               </div>
             </div>
-            <div className='header-menu-list__item'>
-              <button
-                className="ml-30 btn"
-                onClick={() => window.open('https://chain.link/','_blank')}>
-                  Ecosystem
-                </button>
+            <div className="header-menu-list__item">
+              <button className="ml-30 btn" onClick={() => window.open('https://chain.link/', '_blank')}>
+                Ecosystem
+              </button>
             </div>
           </div>
           <div className="header-menu-cred lg">{user ? loggedInHeader : loggedOutHeader}</div>
@@ -144,24 +132,20 @@ export const HeaderView = ({
 
         <div className={`header-list ${isBurgerMenuOpen ? '' : 'hidden'}`}>
           <div className="header__item-border" />
-          <div className='header-list__item'>
+          <div className="header-list__item">
             <button className="btn" onClick={showListAcademy}>
               Academy <span>&#9660;</span>
             </button>
             <div className={classnames('chapters-list', !isDropdownOpen && 'hidden')}>
-              <ChaptersListView
-                user={user}
-                activeCourse={activeCourse}
-                pathname={pathname}
-              />
+              <ChaptersListView user={user} activeCourse={activeCourse} pathname={pathname} />
             </div>
           </div>
           <div className="header__item-border" />
-          <div className='header-list__item'>
+          <div className="header-list__item">
             <button className="btn">Ecosystem</button>
           </div>
           <div className="header__item-border" />
-          <div className='header-list__item'>
+          <div className="header-list__item">
             <button className="btn" onClick={scrollTo}>
               Contact
             </button>
