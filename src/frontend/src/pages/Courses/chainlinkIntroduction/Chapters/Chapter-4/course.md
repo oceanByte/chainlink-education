@@ -106,7 +106,10 @@ Today, there are blockchains where <i>any</i> code or applications can be built 
   <div className="title">Activities:</div>
   <ul className="mission-goals">
     <li>
-      Interact with Anders Brownsworth <a style="color:green" href="https://andersbrownworth.com/blockchain/hash"> blockchain demo </a> to get an understanding of the basics of how blockchains operate.
+      Watch <a style="color:green" target="__blank" href="https://www.youtube.com/watch?v=_160oMzblY8"> Anders Brownsworth video walkthrough </a> of his blockchain demo.
+    </li>
+    <li>
+      Interact with the <a style="color:green" target="__blank" href="https://andersbrownworth.com/blockchain/hash"> blockchain demo </a> yourself until you have a good understanding of the basics of how blockchains operate.
     </li>
   </ul>
 </MissionContainer>

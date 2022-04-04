@@ -1,4 +1,4 @@
-import { IsArray, IsDate, IsEmail, IsMongoId, Length, Matches } from 'class-validator'
+import { IsArray, IsDate, IsEmail, IsMongoId, IsNumber, Length, Matches } from 'class-validator'
 import { ObjectId } from 'mongodb'
 
 import { Referral } from '../referral/Referral'
@@ -19,7 +19,13 @@ export class PublicUser {
   name!: string
 
   @IsEmail()
+  email!: string
+
+  @IsEmail()
   emailVerified?: boolean
+
+  changeEmailPending?: boolean
+  deleteAccountPending?: boolean
 
   @IsArray()
   progress?: string[]
@@ -32,6 +38,14 @@ export class PublicUser {
 
   @IsDate()
   certifiedAt?: Date
+
+  @IsNumber()
+  nonce?: number
+
+  publicAddress?: string
+
+  @IsArray()
+  courses?: any[]
 
   stats?: Object
 }

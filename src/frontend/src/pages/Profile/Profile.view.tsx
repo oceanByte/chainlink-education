@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 
-import { ChaptersListView } from 'app/App.components/ChaptersList/ChaptersListView'
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
 import { Option } from 'app/App.components/Select/Select.view'
 import { PublicUser } from 'shared/user/PublicUser'
 
@@ -13,34 +14,38 @@ import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 // import { ethers } from 'ethers'
 
 import { ConfirmYouPassword } from '../../app/App.components/ConfirmYouPassword/ConfirmYouPassword'
-import { DeleteAccount } from '../../app/App.components/DeleteAccount/DeleteAccount'
 import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePassword'
-import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
+import { CoursesListView } from 'app/App.components/CoursesList/CourseList.view'
+import { DeleteAccountModal } from 'modals/DeleteAccount/DeleteAccount.view'
+import { InputField } from 'app/App.components/Form/InputField/Input.controller';
 
 type ProfileViewProps = {
   user?: PublicUser,
   activeCourse: Option,
-  downloadCallback: () => void
+  changeEmailCallback: ({email}: {email: string})=> void,
+  deleteAccountCallback: ()=> void
 }
+
+export const ValidationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('This field is required!'),
+});
 
 export const ProfileView = ({
   user,
   activeCourse,
-  downloadCallback
+  changeEmailCallback,
+  deleteAccountCallback,
 }: ProfileViewProps) => {
-
-  const dispatch = useDispatch()
-
-  let badgeUnlocked = false
-  let counter = 0
-  counter = user?.progress?.length ? user?.progress?.length : 0
-  if (counter >= 7) badgeUnlocked = true
-
-  const { search, pathname } = useLocation()
+  
+  const { search } = useLocation()
   const [section, setSection] = useState(1)
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
-  const [isDeleteAccVisible, setIsDeleteAccVisible] = useState(true)
-  const [percent, setPercent] = useState(0);
+  const [isDeleteAccVisible, setIsDeleteAccVisible] = useState(false)
+  const initialValue = {
+    email: user? user?.email : ''
+  }
 
   useEffect(() => {
     if (search) {
@@ -48,23 +53,24 @@ export const ProfileView = ({
     }
   }, [search])
 
-  chapterData.forEach((chapter, i) => {
-    if (pathname === chapter.pathname) {
-
-      if (i !== 7){
-        setPercent(() => ((i + 1) / chapterData.length) * 100)
-      }
-      else setPercent(() => 100)
-    }
-  })
 
   useEffect(() => {
-    if (user && user.progress) {
-      const userProgress = user && user.progress.length;
-      setPercent(() => Math.floor((userProgress / chapterData.length) * 100))
+    if (user && user.deleteAccountPending) {
+      setIsDeleteAccVisible(() => true)
     }
-  // eslint-disable-next-line
-  }, [])
+  }, [user])
+
+  const showDeleteAccountModal = () => {
+    deleteAccountCallback()
+  }
+
+  const hideDeleteAccountModal = () => {
+    setIsDeleteAccVisible(() => false)
+  }
+
+  const handleSubmit = (values: { email: string }) => {
+    changeEmailCallback(values);
+  }
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(`https://www.chainlink.education/certificate/${user?.username}`);
@@ -117,49 +123,7 @@ export const ProfileView = ({
         </div>
       </div>
       <div className={`profile-page-progress profile-page-section ${section === 1 ? 'profile-page-visible' : ''}`}>
-        <div className='profile-page-section__header h-font'>Progress</div>
-        <div className='profile-page-progress__bar'>
-          <div className='profile-page-progress__bar__line'>
-            <div className='profile-page-progress__bar__line__color' style={{ width: `${percent}%` }} />
-          </div>
-          <div className='profile-page-progress__bar__number'>{percent}%</div>
-        </div>
-        <div className='profile-page-progress-chapters p-font'>
-          <ChaptersListView
-            user={user}
-            activeCourse={activeCourse}
-            pathname={pathname}
-          />
-        </div>
-        <div className='profile-page-progress__certificate-header h-font'>
-          Certificate
-        </div>
-        {!badgeUnlocked ? (
-        <div className='profile-page-progress__warning'> Keep going! Finish the Chainlink introduction course and download and share your certificate.
-        </div>
-        ) : (
-          <div className='profile-page-progress__success'>Congratulations! You finished the Chainlink introduction course. Download and share your certificate now.
-        </div>
-        )}
-        {badgeUnlocked ? (
-        <div className='profile-page-progress-footer-box p-font'>
-          <button className='profile-page-progress-footer-box__button btn btn-green btn-green' onClick={downloadCallback}>
-            <span className='profile-page-progress-footer-box__button__text'> Download certificate </span>
-            <span className='arrow-upright' />
-          </button>
-          <div className='profile-page-progress-footer-box__copy-link' onClick={copyToClipboard}>
-            Copy certificate link
-          </div>
-        </div>
-
-          ) : (<></>
-        )}
-        {/* <div className="profile-nft-certificate">
-        <button className='profile-page-progress-footer-box__button btn btn-green' onClick={issueCertificate}>
-            <span className='profile-page-progress-footer-box__button__text'> Issue NFT certificate </span>
-          </button>
-        </div> */}
-        <div className='profile-page-progress__image' />
+        <CoursesListView user={user} />
       </div>
       <div className={`profile-page-account-info profile-page-section ${section === 2 ? 'profile-page-visible' : ''}`}>
         <div className='profile-page-account-info-wrapper'>
@@ -173,21 +137,55 @@ export const ProfileView = ({
               name='solution'
             /> */}
           </div>
-          {/* <div className='profile-page-account-info__email p-font'>
-            <label htmlFor='profile-page-account-info__email__input'>Email address</label> */}
-            {/* <div>{user?.email}</div> */}
-            {/* <input
-              type='email'
-              id='profile-page-account-info__email__input'
-              name='solution'
-            /> */}
-          {/* </div> */}
+          <Formik
+            enableReinitialize
+            initialValues={initialValue}
+            validationSchema={ValidationSchema}
+            onSubmit={handleSubmit}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                setFieldValue,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+              }) => (
+                <form className="" onSubmit={handleSubmit}>
+                  <div className='profile-page-account-info__email p-font'>
+                    <InputField
+                      label="EMAIL ADDRESS"
+                      type="text"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      name="email"
+                      inputStatus={
+                        errors.email && touched.email
+                          ? 'error' : !errors.email && touched.email 
+                          ? 'success' : undefined
+                        }
+                      errorMessage={errors.email && touched.email && errors.email}
+                      isDisabled={false}
+                    />
+                  </div>
+                  <button className='btn btn-green' type='submit'>
+                    <span className='profile-page-account-info__button__text'> Save changes </span>
+                    <span className='arrow-upright' />
+                  </button>
+                </form>
+            )}
+          </Formik>
         </div>
-        {/* <button className='btn btn-green'>
-          <span className='profile-page-account-info__button__text'> Save changes </span>
-          <span className='arrow-upright' />
-        </button> */}
-        <div onClick={() => setIsDeleteAccVisible(false)} className='profile-page-account-info__delete-account'>
+        {user && user.changeEmailPending ? (
+          <div className='profile-page-account-info__message'>
+            You have received an email. Please open the link to confirm your email update.
+          </div>
+        ) : null}
+        
+        <div onClick={showDeleteAccountModal} className='profile-page-account-info__delete-account'>
           Delete your account
         </div>
       </div>
@@ -196,7 +194,11 @@ export const ProfileView = ({
         <UpdatePassword setShowModal={setIsConfirmPassVisible} />
       </div>
       <ConfirmYouPassword showModal={isConfirmPassVisible} setShowModal={setIsConfirmPassVisible} />
-      <DeleteAccount showModal={isDeleteAccVisible} setShowModal={setIsDeleteAccVisible} />
+
+      <DeleteAccountModal
+        open={isDeleteAccVisible}
+        onClose={hideDeleteAccountModal}
+      />
     </div>
   )
 }

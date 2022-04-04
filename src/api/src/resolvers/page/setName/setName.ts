@@ -4,6 +4,7 @@ import { Context, Next } from 'koa'
 
 import { firstError } from '../../../helpers/firstError'
 import { toPublicUser } from '../../../helpers/toPublicUser'
+import { CourseModel } from '../../../shared/course/Course'
 import { SetNameInputs, SetNameOutputs } from '../../../shared/page/SetName'
 import { PublicUser } from '../../../shared/user/PublicUser'
 import { User, UserModel } from '../../../shared/user/User'
@@ -34,9 +35,14 @@ export const setName = async (ctx: Context, next: Next): Promise<void> => {
 
   console.log(updatedUser)
 
+  const courses = await CourseModel.find({ userId: user._id }).lean();
+
   const publicUser: PublicUser = toPublicUser(updatedUser)
   
-  const response: SetNameOutputs = { user: publicUser }
+  const response: SetNameOutputs = { user: {
+		...publicUser,
+		courses
+	} }
 
   ctx.status = 200
   ctx.body = response

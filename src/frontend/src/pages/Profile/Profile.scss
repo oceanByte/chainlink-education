@@ -114,6 +114,18 @@
     display: flex;
   }
 
+  &__course {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    position: relative;
+  }
+
+  &__course + &__course {
+    position: relative;
+    margin-top: 20px;
+  }
+
   &__header {
     font-weight: 900;
     @include fluid-size("font-size", 375px, 1600px, 20px, 32px);
@@ -228,8 +240,21 @@
       align-items: flex-start;
     }
 
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      &__button {
+        margin-right: 0;
+      }
+    }
+
     &__button {
       margin-right: 30px;
+
+      @media (max-width: 767px) {
+        margin-right: 0;
+      }
 
       &.btn-green-disabled {
         cursor: default;
@@ -255,9 +280,13 @@
     background: url("../../assets/profile-certification.svg") no-repeat;
     background-size: contain;
     @include fluid-size("width", 1024px, 1600px, 230px, 243px);
-    @include fluid-size("height", 1024px, 1600px, 272px, 183px);
-    @include fluid-size("right", 1024px, 1600px, 27px, 50px);
-    @include fluid-size("bottom", 1024px, 1600px, 35px, 60px);
+    // @include fluid-size("height", 1024px, 1600px, 272px, 183px);
+    height: 222px;
+    // width: 243px;
+    // @include fluid-size("right", 1024px, 1600px, 27px, 50px);
+    // @include fluid-size("bottom", 1024px, 1600px, 35px, 60px);
+    bottom: 0;
+    right: 0;
     position: absolute;
     @include md {
       right: 70px;
@@ -305,7 +334,6 @@
       background: none;
       margin-top: 8px;
       font-size: 16px;
-      padding-bottom: 14px;
       color: $grayscale1;
       font-family: Circular Std Book;
     }
@@ -313,6 +341,15 @@
 
   .btn {
     margin-top: 30px;
+  }
+
+  &__message {
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 500;
+    color: $secondary3;
+    font-family: Circular Std Book;
+    margin-top: 20px;
   }
 
   &__delete-account {

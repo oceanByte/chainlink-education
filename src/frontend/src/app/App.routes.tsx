@@ -11,6 +11,7 @@ import { ForgotPassword } from 'pages/ForgotPassword/ForgotPassword.controller'
 import { Home } from 'pages/Home/Home.controller'
 import { Login } from 'pages/Login/Login.controller'
 import { ResetPassword } from 'pages/ResetPassword/ResetPassword.controller'
+import { DeleteAccount } from 'pages/DeleteAccount/DeleteAccount.controller'
 import { SignUp } from 'pages/SignUp/SignUp.controller'
 import { Terms } from 'pages/Terms/Terms.controller'
 import { User } from 'pages/User/User.controller'
@@ -28,6 +29,7 @@ import { Footer } from './App.components/Footer/Footer.controller'
 import { Profile } from '../pages/Profile/Profile.controller'
 import { SiteMapView } from 'pages/SiteMap/SiteMap.view'
 import { SiteMapContainer } from 'pages/SiteMap/SiteMap.style'
+import PrivateRoute from 'containers/PrivateRoute'
 
 // import { About } from 'pages/About/About.controller'
 
@@ -56,25 +58,37 @@ export const AppRoutes = ({ location }: any) => (
       <HeaderAuth />
       <ResetPassword />
     </Route>
+
     <Route exact path="/change-password">
       <ChangePassword />
     </Route>
-    <Route path="/*/info">
-      <Course />
-    </Route>
-    <Route path="/profile">
-      <Profile />
-    </Route>
+
     <Route path="/*/chapter-*">
       <Header />
       <Chapter />
     </Route>
-    <Route exact path="/user/:username">
+
+    <Route path="/*/info">
+      <Course />
+    </Route>
+
+    <PrivateRoute path="/profile">
+      <Profile />
+    </PrivateRoute>
+
+    <PrivateRoute path="/delete-account">
+      <HeaderAuth />
+      <DeleteAccount />
+    </PrivateRoute>
+
+    <PrivateRoute path="/user/:username">
       <User />
-    </Route>
-    <Route exact path="/certificate/:username">
+    </PrivateRoute>
+    
+    <PrivateRoute path="/certificate/:username">
       <Certificate />
-    </Route>
+    </PrivateRoute>
+
     {/* <Route exact path="/about">
       <About />
     </Route> */}

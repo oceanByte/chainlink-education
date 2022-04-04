@@ -3,6 +3,7 @@ import { routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import { applyMiddleware, compose, createStore, Store } from 'redux'
 import thunk from 'redux-thunk'
+import LogRocket from 'logrocket';
 
 import { reducers, State } from '../reducers'
 import { googleAnalytics } from './App.analytics'
@@ -25,6 +26,7 @@ export function configureStore(preloadedState: any) {
     reducers(history) as any,
     preloadedState,
     composeEnhancer(
+      applyMiddleware(LogRocket.reduxMiddleware()),
       applyMiddleware(routerMiddleware(history)),
       applyMiddleware(googleAnalytics),
       applyMiddleware(thunk),

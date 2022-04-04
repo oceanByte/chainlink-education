@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router'
+import { useLocation } from 'react-router-dom'
 import { State } from 'reducers'
 import { ResetPasswordInputs } from 'shared/user/ResetPassword'
 
@@ -9,11 +9,13 @@ import { ResetPasswordView } from './ResetPassword.view'
 
 export const ResetPassword = () => {
   const dispatch = useDispatch()
-  let { token } = useParams()
+  const location = useLocation();
+  let key = new URLSearchParams(location.search).get("key");
+
   const loading = useSelector((state: State) => state.loading)
 
   const resetPasswordCallback = async (resetPasswordInputs: ResetPasswordInputs) => {
-    dispatch(resetPassword({ ...resetPasswordInputs, token }))
+    dispatch(resetPassword({ ...resetPasswordInputs, token: key }))
   }
 
   return <ResetPasswordView resetPasswordCallback={resetPasswordCallback} loading={loading} />

@@ -8,7 +8,7 @@ export class ResetPasswordInputs {
 
   @Expose()
   @Length(16, 32)
-  token!: string
+  token!: string | null
 
   @Expose()
   @Length(8, 50)

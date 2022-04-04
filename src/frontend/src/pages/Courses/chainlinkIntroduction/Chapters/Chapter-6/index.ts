@@ -11,4 +11,6 @@ import exercise from '!raw-loader!./exercise.md'
 // @ts-ignore
 import solution from '!raw-loader!./solution.md'
 
+
+
 export const data: Data = { course, exercise, solution, supports: {}, questions: [] }

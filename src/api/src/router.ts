@@ -11,12 +11,20 @@ import { login } from './resolvers/user/login/login'
 import { getReferralStats } from './resolvers/user/referral/getReferralStats'
 import { resetPassword } from './resolvers/user/resetPassword/resetPassword'
 import { signUp } from './resolvers/user/signUp/signUp'
+import { find, create, auth } from './resolvers/user/metaMask/metaMask'
+import { deleteAccountPending, deleteAccountPermanently } from './resolvers/user/deleteAccount/deleteAccount'
+import { changeEmailPending, changeEmailSuccess } from './resolvers/user/changeEmail/changeEmail'
 
 const router = new Router()
 
 router.get('/', async (ctx: Context) => {
   ctx.body = 'You are not supposed to be here ;)'
 })
+
+// metamask
+router.get('/users', find)
+router.post('/users', create)
+router.post('/auth', auth)
 
 router.post('/user/sign-up', signUp)
 router.post('/user/login', login)
@@ -26,6 +34,12 @@ router.post('/user/forgot-password', forgotPassword)
 router.post('/user/change-password', changePassword)
 router.get('/user/is-certified', isCertified)
 router.get('/user/referral', getReferralStats)
+
+router.get('/user/change-email', changeEmailSuccess)
+router.post('/user/change-email', changeEmailPending)
+
+router.post('/user/delete-account', deleteAccountPending)
+router.post('/user/permanently-delete-account', deleteAccountPermanently)
 
 router.post('/page/get-user', getPublicUser)
 router.post('/page/set-name', setName)

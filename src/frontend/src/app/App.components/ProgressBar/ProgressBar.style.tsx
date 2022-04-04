@@ -10,7 +10,6 @@ export const ProgressBarStyled = styled.div`
   z-index: 20;
   height: 2px;
   background-color: ${primaryColor};
-  will-change: transform;
   transform: translate3d(-100vw, 0, 0);
   opacity: 0;
 

@@ -18,7 +18,6 @@ export const InputComponent = styled.input`
   border-color: ${borderColor};
   border-radius: 4px;
   transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  will-change: border-color, box-shadow;
   background-color: ${backgroundColorDark};
 
   &:hover {
@@ -71,7 +70,6 @@ export const InputStatus = styled.div`
   text-align: center;
   visibility: visible;
   pointer-events: none;
-  will-change: transform, opacity;
 
   &.error {
     background-image: url('/icons/input-error.svg');
@@ -115,7 +113,6 @@ const slideDown = keyframes`
 export const InputErrorMessage = styled.div`
   color: ${downColor};
   line-height: 24px;
-  will-change: transform, opacity;
   animation: ${slideDown} 0.3s cubic-bezier(0.12, 0.4, 0.29, 1.46);
   white-space: nowrap;
   overflow: hidden;

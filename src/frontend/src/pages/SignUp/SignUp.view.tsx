@@ -47,7 +47,7 @@ interface IFormInputs {
   agree: boolean,
 }
 
-export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
+export const SignUpView = ({ signUpCallback }: SignUpViewProps) => {
 
   const initialValues = {
     username: '',
@@ -56,7 +56,6 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
     confirmPassword: '',
     agree: false,
   };
-  const [, setPassword] = useState('')
 
   const [uppercase, setUppercase] = useState(false)
   const [lowercase, setLowercase] = useState(false)
@@ -89,8 +88,7 @@ export const SignUpView = ({ signUpCallback, loading }: SignUpViewProps) => {
     setNumbers(regNumbers.test(value))
     setSpecial(regSpecial.test(value))
     setMinLength(regMinLength.test(value))
-
-    setPassword(value)
+    
   }
 
   const handleSubmit = (values: IFormInputs) => {

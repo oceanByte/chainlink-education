@@ -7,7 +7,6 @@ export const DrawerMask = styled.div`
   top: 0;
   left: 0;
   opacity: 0;
-  will-change: opacity;
   transition: opacity 0.2s ease-in-out;
 
   &.true {

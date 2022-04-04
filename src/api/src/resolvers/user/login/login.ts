@@ -4,6 +4,7 @@ import { Context, Next } from 'koa'
 
 import { firstError } from '../../../helpers/firstError'
 import { toPublicUser } from '../../../helpers/toPublicUser'
+import { CourseModel } from '../../../shared/course/Course'
 import { ResponseError } from '../../../shared/mongo/ResponseError'
 import { QuotaType } from '../../../shared/quota/QuotaType'
 import { Jwt } from '../../../shared/user/Jwt'
@@ -29,6 +30,8 @@ export const login = async (ctx: Context, next: Next): Promise<void> => {
     user = await UserModel.findOne({ username: usernameOrEmail }).lean()
   }
   if (!user) throw new ResponseError(401, 'Wrong username or password')
+
+  const courses = await CourseModel.find({ userId: user._id }).lean();
 
   const publicUser: PublicUser = toPublicUser(user)
 
@@ -64,7 +67,10 @@ export const login = async (ctx: Context, next: Next): Promise<void> => {
     rewarded
   }
 
-  const response: LoginOutputs = { jwt, user: publicUser }
+  const response: LoginOutputs = { jwt, user: {
+		...publicUser,
+		courses
+	} }
 
   ctx.status = 200
   ctx.body = response
