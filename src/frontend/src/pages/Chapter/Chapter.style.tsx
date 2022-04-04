@@ -432,7 +432,6 @@ export const ButtonStyle = styled.div`
   }
   
   @media (max-width: 760px) {
-    margin: 30px auto 10px 0;
     width: 170px;
   }
 
@@ -671,7 +670,7 @@ export const ChapterTab = styled.div<{ isSelected?: boolean }>`
   border-top: 1px solid ${primaryColor};
   border-right: 1px solid ${primaryColor};
   border-left: 1px solid ${primaryColor};
-  background-color: ${(props) => (props.isSelected ? '${primaryColor}' : 'initial')};
+  background-color: ${(props) => (props.isSelected ? primaryColor : 'initial')};
 `
 
 export const ChapterLocked = styled.div`

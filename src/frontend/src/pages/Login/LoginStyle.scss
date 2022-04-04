@@ -62,6 +62,15 @@
       background: $secondary3hover;
     }
 
+    &.metaMask {
+      margin-top: 20px;
+      background: $secondary6;
+
+      &:hover {
+        background: $secondary6hover;
+      }
+    }
+
     @include xs {
       font-size: 14px;
     }

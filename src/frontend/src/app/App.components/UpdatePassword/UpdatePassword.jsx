@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
-import classnames from 'classnames'
 import Eye from '../../../assets/eye.png'
 import EyeHide from '../../../assets/eyeHide.png'
 import Confirm from '../../../assets/confirm.png'
 import UnConfirm from '../../../assets/unconfirm.png'
-import ArrowRight from '../../../assets/arrowRight.png'
-import { Link } from 'react-router-dom'
 
 export const UpdatePassword = ({ setShowModal }) => {
   const [currentPassword, setCurrentPassword] = useState('')
@@ -65,10 +62,10 @@ export const UpdatePassword = ({ setShowModal }) => {
       <div className="update-password-title">Reset password</div>
       <div className="update-password__confirm-pass">
         <img src={eyeForCurrentPassword} alt="eye" onClick={() => setShowCurrentPassword((prev) => !prev)} />
-        <label htmlFor="update-password__confirm-pass">Current Password</label>
+        <label htmlFor="update-password__current-pass">Current Password</label>
         <input
           type={typeOfInputCurrentPassword}
-          id="update-password__confirm-pass"
+          id="update-password__current-pass"
           onChange={(e) => setCurrentPassword(e.target.value)}
           value={currentPassword}
         />

@@ -1,6 +1,6 @@
-import * as React from 'react'
-import * as PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -11,6 +11,7 @@ import { InputField } from '../../app/App.components/Form/InputField/Input.contr
 import { InputFieldWithEye } from '../../app/App.components/Form/InputFieldWithEye/Input.controller';
 
 import { Row } from './Login.style';
+
 
 const ValidationSchema = Yup.object().shape({
   usernameOrEmail: Yup.string()
@@ -25,6 +26,7 @@ const ValidationSchema = Yup.object().shape({
 
 type LoginViewProps = {
   loginCallback: (values: any) => void
+  loginMetaMaskCallback: (values: any) => void;
   loading: boolean
 }
 
@@ -33,13 +35,15 @@ interface IFormInputs {
   password: string,
 }
 
-export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
+export const LoginView = ({
+  loginCallback,
+  loginMetaMaskCallback
+}: LoginViewProps) => {
 
   const initialValues: IFormInputs = {
     usernameOrEmail: '',
     password: '',
   };
-
 
   const handleSubmit = (values: IFormInputs) => {
     loginCallback(values)
@@ -100,6 +104,14 @@ export const LoginView = ({ loginCallback, loading }: LoginViewProps) => {
             <button className="login-form-sign" type="submit">
               <img src={ArrowRight} alt="arrow" />
               Sign In
+            </button>
+            <button
+              className="login-form-sign metaMask"
+              type='button'
+              onClick={loginMetaMaskCallback}
+            >
+              <img src={ArrowRight} alt="arrow" />
+              Login with MetaMask
             </button>
             <Link to="/forgot-password">
               <div className="login-form-forgot">Forgot your password?</div>

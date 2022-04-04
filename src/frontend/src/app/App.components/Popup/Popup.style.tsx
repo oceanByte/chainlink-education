@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import { textColorBlue } from 'styles'
 
 export const PopupStyle = styled.div`
   position: fixed;
@@ -22,12 +23,13 @@ export const PopupStyle = styled.div`
       flex-direction: column;
 
       button {
+        height: 50px;
         margin-bottom: 20px;
       }
     }
 
     button {
-      height: 40px;
+      height: 60px;
     }
   }
 `
@@ -36,7 +38,8 @@ export const PopupWrapper = styled.div`
   border-radius: 22px;
   box-shadow: 0px 0px 49px -17px rgb(0 0 0 / 62%);
   background: #fff;
-  max-height: 600px;
+  max-height: 300px;
+  height: 100%;
   min-height: 200px;
   position: relative;
   width: 600px;
@@ -45,9 +48,9 @@ export const PopupWrapper = styled.div`
   flex-direction: column;
 
   @media (max-width: 992px) {
-    width: 90%;
-    max-height: 90%;
+    max-height: 400px;
   }
+
 `
 
 export const PopupTitle = styled.h2`
@@ -63,7 +66,9 @@ export const PopupText = styled.p`
   padding: 20px;
   font-size: 24px;
   text-align: center;
-  margin: 0;
+  margin: 70px 0 0;
+  font-weight: 600;
+  color: ${textColorBlue};
 `
 
 export const PopupImage = styled.div`

@@ -49,7 +49,6 @@ export const sendName = ({ name }: SetNameInputs) => (dispatch: any) => {
   })
 }
 
-
 export const SET_ACCOUNT_NAME_REQUEST = 'SET_ACCOUNT_NAME_REQUEST'
 export const SET_ACCOUNT_NAME_COMMIT = 'GET_ACCOUNT_NAME_COMMIT'
 export const SET_ACCOUNT_NAME_ROLLBACK = 'SET_ACCOUNT_NAME_ROLLBACK'

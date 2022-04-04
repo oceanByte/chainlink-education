@@ -49,7 +49,6 @@ export const HamburgerInner = styled.div`
   width: 24px;
   height: 1px;
   border-radius: 1px;
-  will-change: transform;
   background-color: ${textColor};
 `
 

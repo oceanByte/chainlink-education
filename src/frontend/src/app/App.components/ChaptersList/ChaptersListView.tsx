@@ -6,26 +6,28 @@ import { ChapterData } from '../../../pages/Chapter/Chapter.controller'
 
 import classnames from 'classnames'
 
+import { Course } from 'shared/course'
 import { PublicUser } from 'shared/user/PublicUser'
-import { Option } from '../Select/Select.view'
 
 interface IChaptersListView {
   user?: PublicUser
   pathname: string,
-  activeCourse: Option,
+  coursePath: string,
+  course: Course,
 }
 
 export const ChaptersListView = ({
-  activeCourse,
+  coursePath,
   user,
   pathname,
+  course
 }: IChaptersListView) => {
   return (
     <>
-      {chaptersByCourse[activeCourse.path].map((chapter: ChapterData, key: number) => { 
+      {coursePath && chaptersByCourse[coursePath].map((chapter: ChapterData, key: number) => { 
         let done = false;
         let nextChapter = '';
-        const currentPath = `/chainlinkIntroduction/chapter-${key + 1}`;
+        const currentPath = `/${coursePath}/chapter-${key + 1}`;
 
         const checkChapter = (progress: string[], chapterPathname: string): string => {
           const sortedArray = progress.sort();
@@ -33,7 +35,7 @@ export const ChaptersListView = ({
           const lastItem = sortedArray[sortedArray.length - 1];
           let nextChapterUrl = '';
 
-          if (!lastItem && chapterPathname === `/chainlinkIntroduction/chapter-1`) {
+          if (!lastItem && chapterPathname === `/${coursePath}/chapter-1`) {
             return chapterPathname;
           }
 
@@ -47,8 +49,8 @@ export const ChaptersListView = ({
         } 
 
         if (user) {
-          done = user.progress ? user.progress.indexOf(chapter.pathname) >= 0 : false
-          nextChapter = user.progress ? checkChapter(user.progress, chapter.pathname) : ''
+          done = course.progress ? course.progress.indexOf(chapter.pathname) >= 0 : false
+          nextChapter = course.progress ? checkChapter(course.progress, chapter.pathname) : ''
         }
 
         return (

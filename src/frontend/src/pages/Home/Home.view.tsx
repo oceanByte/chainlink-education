@@ -1,48 +1,50 @@
 import AOS from 'aos'
-import React, { useEffect, useRef } from 'react'
-import { ChangeEvent, SyntheticEvent, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import { FormInputs, updateFormFromBlur, updateFormFromChange, updateFormFromSubmit } from '../../helpers/form'
-import { ContactUsInputs } from '../../shared/user/ContactUs'
-
+import { PublicUser } from 'shared/user/PublicUser'
+import { CourseCardView } from 'app/App.components/CourseCard/CourseCard.view'
+import { Option } from 'app/App.components/Select/Select.view'
 import 'aos/dist/aos.css'
 
 type HomeViewProps = {
+  user?: PublicUser
   contactUsCallback: (values: any) => void
 }
 
-export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
-  const [form, setForm] = useState<FormInputs>({
-    firstName: { value: '', error: '' },
-    lastName: { value: '', error: '' },
-    email: { value: '', error: '' },
-    subject: { value: '', error: '' },
-    question: { value: '', error: '' },
-  })
+// from src/api/src/shared/course/CourseType.ts
+export const COURSES = [
+  {
+    title: 'Chainlink 101',
+    description: `Chainlink decentralized oracle networks provide tamper-proof inputs, outputs, and computations.`,
+    difficulty: 2,
+    status: 'NEW',
+    progress: [],
+  },
+  {
+    title: 'Solidity Introduction',
+    description: `Solidity is an object-oriented, high-level language for implementing smart contracts. COMING SOON.`,
+    difficulty: 3,
+    status: 'New',
+    progress: [],
+  },
+  {
+    title: 'VRF v2 Introduction',
+    description: `Study how VRF can be used to bring Verfiable Randomness to blockchain.`,
+    difficulty: 3,
+    status: 'New',
+    progress: [],
+  },
+]
+
+export const HomeView = ({ user }: HomeViewProps) => {
+  let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
 
   useEffect(() => {
     AOS.init({
       duration: 700,
     })
   }, [])
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedForm = updateFormFromChange(e, form, ContactUsInputs)
-    setForm(updatedForm)
-  }
-
-  const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedForm = updateFormFromBlur(e, form)
-    setForm(updatedForm)
-  }
-
-  const handleSubmit = (event: SyntheticEvent) => {
-    const updatedForm = updateFormFromSubmit(event, form, ContactUsInputs)
-    setForm(updatedForm)
-    return
-    contactUsCallback(form)
-  }
 
   return (
     <div className="home">
@@ -65,6 +67,30 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
         </div>
       </div>
       <div className="home-ellipse home-ellipse-1" />
+
+      <div className="home-wrapper courses">
+        <div className="home-content home-courses-content">
+          <div className="home-courses-content__header h-font">Get started now</div>
+          {user && user.courses && user.courses.length > 0 ? (
+            <div className="home-courses-content__items">
+              {user.courses?.map((course) => (
+                <div key={course._id} className="home-course">
+                  <CourseCardView course={course} user={user} activeCourse={defaultCourse} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="home-courses-content__items">
+              {COURSES.map((course) => (
+                <div key={course.title} className="home-course">
+                  <CourseCardView course={course} user={user} activeCourse={defaultCourse} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
       <div className="home-content home-num-item">
         <div className="home-num-item__image nft" />
         <div className="home-num-item-content">
@@ -79,7 +105,7 @@ export const HomeView = ({ contactUsCallback }: HomeViewProps) => {
               NFT Certificate
             </div>
             <div className="home-num-item-content__text__paragraph p-font" data-aos="fade-up" data-aos-delay="200">
-              Complete the course and receive your certificate as a Non-Fungible Token (NFT) and share your results on
+              Complete a course and receive your certificate as a Non-Fungible Token (NFT) and share your results on
               social media.
             </div>
           </div>

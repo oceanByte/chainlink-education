@@ -16,7 +16,6 @@ export const ToasterStyled = styled.div`
   box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.2);
   transform: translate3d(0px, 0, 0);
   transition: transform 1s ease-in-out;
-  will-change: transform;
   overflow: hidden;
 
   &.showing {
@@ -41,7 +40,6 @@ export const ToasterCountdown = styled.div`
   width: 400px;
   max-width: calc(100vw - 20px);
   border-radius: 0 0 4px 0;
-  will-change: transform;
   transform: translate3d(470px, 0, 0);
 
   &.showing {
