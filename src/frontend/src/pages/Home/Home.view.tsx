@@ -23,7 +23,7 @@ export const COURSES = [
   },
   {
     title: 'Solidity Introduction',
-    description: `Solidity is an object-oriented, high-level language for implementing smart contracts. Learn about the basics here.`,
+    description: `Solidity is an object-oriented, high-level language for implementing smart contracts. COMING SOON.`,
     difficulty: 3,
     status: 'New',
     progress: [],
