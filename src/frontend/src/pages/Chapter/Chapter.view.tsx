@@ -406,10 +406,7 @@ export const ChapterView = ({
     closeIsAccountModal()
     localStorage.setItem('popupConfirm', 'true')
   }
-  console.log(currentCourse);
-  console.log(user);
-  console.log(pathname);
-  console.log(validatorState);
+
   return (
     <div className="chapter-info-wrapper">
       {nextChapter === '/chainlinkIntroduction/chapter-2' && !user && isSaveConfirmPopup ? (
