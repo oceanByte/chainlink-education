@@ -62,6 +62,12 @@ export const ChapterQuestions = styled.div`
   padding: 20px;
   border: 1px solid blue;
   background: white;
+  position: relative;
+
+  .questions-container {
+    margin-top: 20px;
+  }
+
   h2 {
     font-weight: 600;
   }
