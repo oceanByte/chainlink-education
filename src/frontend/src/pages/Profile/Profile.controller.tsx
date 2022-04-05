@@ -1,9 +1,8 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { jsPDF } from 'jspdf'
-import { Option } from 'app/App.components/Select/Select.view'
 import { State } from 'reducers'
 
 // import { FooterView } from '../../app/App.components/MainFooter/MainFooter.controller'
@@ -12,7 +11,7 @@ import { Header } from '../../app/App.components/Header/Header.controller'
 import { ProfileView } from './Profile.view'
 import { deleteAccountPending } from 'pages/DeleteAccount/DeleteAccount.actions'
 import { changeEmailPending } from './Profile.actions'
-import { getUser } from 'pages/User/User.actions'
+import { getUser, sendName } from 'pages/User/User.actions'
 
 
 export const Profile = () => {
@@ -27,15 +26,16 @@ export const Profile = () => {
     })
     doc.addImage('/certificate.jpg', 'JPEG', 0, 0, 1100, 800)
     doc.setFontSize(50)
-    doc.text(user?.username || '', 550, 410, { align: 'center' })
+    doc.text(user?.name || '', 550, 410, { align: 'center' })
     doc.save('chainlink_academy_certifciate.pdf')
   }
 
-  let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
-  const [activeCourse] = useState(defaultCourse)
-
   const changeEmailCallback = async ({ email }: { email: string }) => {
     dispatch(changeEmailPending({ email }))
+  }
+
+  const getCertificateCallback = ({ name }: { name: string }) => {
+    dispatch(sendName({ name }))
   }
 
   const deleteAccountCallback = async () => {
@@ -52,7 +52,8 @@ export const Profile = () => {
       <Header />
       <ProfileView
         user={user}
-        activeCourse={activeCourse}
+        downloadCallback={downloadCallback}
+        getCertificateCallback={getCertificateCallback}
         changeEmailCallback={changeEmailCallback}
         deleteAccountCallback={deleteAccountCallback}
       />

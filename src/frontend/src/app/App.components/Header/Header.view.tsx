@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import * as PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { PublicUser } from 'shared/user/PublicUser'
 import { Option } from '../Select/Select.view'
@@ -19,6 +19,7 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(true)
+  const history = useHistory();
 
   const additionalUserMenu = classnames('header-menu-user-menu', {
     'header-menu-user-menu-show': showUserMenu,
@@ -119,6 +120,13 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
                 Ecosystem
               </button>
             </div>
+            {user? (
+              <div className="header-menu-list__item">
+                <button className="ml-30 btn" onClick={() => history.push('/profile')}>
+                  Progress
+                </button>
+              </div>
+            ): null}
           </div>
           <div className="header-menu-cred lg">{user ? loggedInHeader : loggedOutHeader}</div>
           <div
@@ -144,6 +152,11 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
           <div className="header-list__item">
             <button className="btn">Ecosystem</button>
           </div>
+          <div className="header-list__item">
+            <button className="btn" onClick={() => history.push('/profile')}>
+              Progress
+            </button>
+          </div>
           <div className="header__item-border" />
           <div className="header-list__item">
             <button className="btn" onClick={scrollTo}>
@@ -151,7 +164,7 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
             </button>
           </div>
           <div className="header__item-border" />
-          <div className="header-dropdown-user-menu xs">{user ? loggedInHeader : loggedOutHeader}</div>
+          <div className="header-dropdown-user-menu xs">{!user ? loggedOutHeader : null}</div>
         </div>
       </div>
       <div className={`bright-background ${isBurgerMenuOpen ? '' : 'opacity-0'}`} />

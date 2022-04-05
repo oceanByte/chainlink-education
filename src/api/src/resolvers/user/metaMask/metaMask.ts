@@ -44,7 +44,7 @@ export const create = async (ctx: Context, next: Next): Promise<void> => {
 
 	const hashedPassword = await hash(publicAddress, 12);
 	const user: User = await UserModel.create({
-		email: publicAddress + '@test.com',
+		email: publicAddress + '@metamaskmail.com',
 		username: publicAddress.slice(0, 10),
 		hashedPassword,
 		publicAddress,
