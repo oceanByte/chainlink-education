@@ -14,6 +14,7 @@ import { useEffect, useRef, useState } from 'react'
 
 // @ts-ignore
 import Highlight from 'react-highlight.js'
+import { useLocation } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 import { backgroundColorLight } from 'styles'
 
@@ -338,6 +339,7 @@ type ChapterViewProps = {
   proposedQuestionAnswerCallback: (e: Question[]) => void
   isStarted: boolean
   startedHandler: () => void
+  currentCourse: any
 }
 
 export const ChapterView = ({
@@ -359,7 +361,9 @@ export const ChapterView = ({
   percent,
   startedHandler,
   proposedQuestionAnswerCallback,
+  currentCourse
 }: ChapterViewProps) => {
+  const { pathname } = useLocation();
   const [display, setDisplay] = useState('solution')
   const [editorWidth, setEditorWidth] = useState(0)
   const [editorHeight, setEditorHeight] = useState(0)
@@ -422,7 +426,10 @@ export const ChapterView = ({
         <div>
           <div className="chapter-block">
             <div className="step">
-              <p className="step-text">Step 1</p>
+              <p className="step-text">{
+                (currentCourse && currentCourse.progress.includes(pathname)) || (user && validatorState === RIGHT) ?
+                'Chapter completed' : 'Step 1'
+              }</p>
             </div>
             <Content course={course || ''} />
           </div>
@@ -460,8 +467,11 @@ export const ChapterView = ({
             <>
               {questions.length > 0 && nextChapter !== '/chainlinkIntroduction/chapter-8' ? (
                 <ChapterQuestions>
+                  <div className="step">
+                    <p className="step-text">Step 2</p>
+                  </div>
                   {questions.map((question, i) => (
-                    <div key={question.question}>
+                    <div key={question.question} className="questions-container">
                       <h2>{question.question}</h2>
                       <Checkboxes
                         items={question.answers}

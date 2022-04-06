@@ -141,9 +141,11 @@ export const Chapter = () => {
   }
 
   useEffect(() => {
-    intervalID.current = setInterval(countUp, 1000)
+    if (user) {
+      intervalID.current = setInterval(countUp, 1000)
+    }
     return () => clearInterval(intervalID.current)
-  }, [])
+  }, [user])
 
   useEffect(() => {
     if (findLocalCourse && findLocalCourse.name === CourseNameType.CHAINLINK_101) {
@@ -292,6 +294,7 @@ export const Chapter = () => {
           percent={percent}
           startedHandler={startTaskHandler}
           proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
+          currentCourse={user ? findCurrentCourse(user) : null}
         />
       )}
       {/* <Footer percent={percent} nextChapter={nextChapter} previousChapter={previousChapter} /> */}

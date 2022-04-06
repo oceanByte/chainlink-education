@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 import { Option } from '../Select/Select.view'
 
-import { ChaptersListView } from '../HeaderCoursesList/HeaderCoursesListView'
+import { CoursesListView } from '../HeaderCoursesList/HeaderCoursesListView'
 
 type HeaderViewProps = {
   user?: PublicUser
@@ -17,6 +17,7 @@ type HeaderViewProps = {
 
 export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCourse }: HeaderViewProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isShowList, setIsShowList] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(true)
   const history = useHistory();
@@ -100,6 +101,9 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
   const showListAcademy = () => {
     setIsDropdownOpen(!isDropdownOpen)
   }
+  const showListAcademyMobile = () => {
+    setIsShowList(!isShowList)
+  }
 
   return (
     <>
@@ -111,8 +115,8 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
               <button className="btn" onClick={showListAcademy}>
                 Academy <span>&#9660;</span>
               </button>
-              <div className={classnames('chapters-list', !isDropdownOpen && 'hidden')}>
-                <ChaptersListView user={user} activeCourse={activeCourse} pathname={pathname} />
+              <div className={classnames('courses-list', !isDropdownOpen && 'hidden')}>
+                <CoursesListView user={user} pathname={pathname} />
               </div>
             </div>
             <div className="header-menu-list__item">
@@ -138,27 +142,27 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
           />
         </div>
 
-        <div className={`header-list ${isBurgerMenuOpen ? '' : 'hidden'}`}>
+        <div className={`header-list-mobile ${isBurgerMenuOpen ? '' : 'hidden'}`}>
           <div className="header__item-border" />
-          <div className="header-list__item">
-            <button className="btn" onClick={showListAcademy}>
+          <div className="header-list-mobile__item">
+            <button className="btn" onClick={showListAcademyMobile}>
               Academy <span>&#9660;</span>
             </button>
-            <div className={classnames('chapters-list', !isDropdownOpen && 'hidden')}>
-              <ChaptersListView user={user} activeCourse={activeCourse} pathname={pathname} />
+            <div className={classnames('courses-list', isShowList && 'show')}>
+              <CoursesListView user={user} pathname={pathname} isMobile />
             </div>
           </div>
-          <div className="header__item-border" />
-          <div className="header-list__item">
+          <div className="header-list-mobile-border" />
+          <div className="header-list-mobile__item">
             <button className="btn">Ecosystem</button>
           </div>
-          <div className="header-list__item">
+          <div className="header-list-mobile__item">
             <button className="btn" onClick={() => history.push('/profile')}>
               Progress
             </button>
           </div>
           <div className="header__item-border" />
-          <div className="header-list__item">
+          <div className="header-list-mobile__item">
             <button className="btn" onClick={scrollTo}>
               Contact
             </button>

@@ -1,3 +1,76 @@
+.courses-container {
+  position: relative;
+  padding-right: 20px;
+
+  .chapters-container {
+    position: absolute;
+    transform: translateX(100%);
+    margin-top: 30px;
+    margin-left: 30px;
+    top: 0;
+    left: 50px;
+    opacity: 0;
+    visibility: hidden;
+    background: #fff;
+    z-index: 15;
+    padding: 20px 30px;
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 15px 25px rgba(12, 22, 44, 0.1);
+    border-radius: 20px;
+    overflow-y: auto;
+    max-height: 435px;
+    transition: all .3s ease-in-out;
+
+    &.no-user {
+      width: 280px;
+      left: 150px;
+    }
+  }
+
+  &:hover {
+    .chapters-container {
+      margin-top: 0;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &-mobile {
+    position: static;
+
+    &.chapters-list {
+      position: relative;
+    }
+    .chapters-container {
+      position: static;
+      max-height: 335px;
+      overflow-y: auto;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      color: $primary;
+      font-size: 13px;
+
+      .btn__text {
+        height: 14px;
+        padding-left: 7px;
+      }
+
+      .arrow-left {
+        width: 0px; 
+        height: 0px; 
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-right: 7px solid $primary;
+      }
+    }
+  }
+}
+
 .header-chapters {
   z-index: 15;
   position: absolute;
@@ -46,30 +119,44 @@
       line-height: 19px;
     }
 
-    &__completion {
-      @include fluid-size('font-size', 375px, 1600px, 8px, 11px);
-      @include fluid-size('line-height', 375px, 1600px, 10px, 14px);
-      color: #fff;
-      border-radius: 5px;
-      width: 100px;
-      padding: 5px 10px;
-      background: none;
+    &__status {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      line-height: 14px;
 
-      &.completed {
-        background: $secondary3;
-
-        &:hover {
-          background: $secondary3hover;
+      .completion {
+        @include fluid-size('font-size', 375px, 1600px, 8px, 11px);
+        @include fluid-size('line-height', 375px, 1600px, 10px, 14px);
+        color: #fff;
+        border-radius: 5px;
+        width: 100px;
+        padding: 5px 10px;
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        line-height: 14px;
+  
+        &.completed {
+          background: $secondary3;
+  
+          &:hover {
+            background: $secondary3hover;
+          }
+          
         }
-        
+        &.continue {
+          background: $primary;
+        }
       }
-      &.continue {
-        background: $primary;
+
+      .arrow-right {
+        margin-left: 10px;
+        width: 0; 
+        height: 0; 
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-left: 8px solid $primary;
       }
     }
   }
