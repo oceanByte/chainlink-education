@@ -14,15 +14,3 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
   uint32 callbackGasLimit = 100000;
   uint16 requestConfirmations = 3;
   uint32 numWords =  2;
-
-  // Storage parameters
-  uint256[] public s_randomWords;
-  uint256 public s_requestId;
-  uint64 public s_subscriptionId;
-  address s_owner;
-
-  constructor() VRFConsumerBaseV2(vrfCoordinator) {
-    COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
-    LINKTOKEN = LinkTokenInterface(link_token_contract);
-    s_owner = ;
-  }

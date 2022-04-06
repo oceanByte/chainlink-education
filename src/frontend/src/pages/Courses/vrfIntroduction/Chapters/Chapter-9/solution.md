@@ -8,7 +8,6 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
   VRFCoordinatorV2Interface COORDINATOR;
   LinkTokenInterface LINKTOKEN;
 
-
   address vrfCoordinator = 0x6168499c0cFfCaCD319c818142124B7A15E857ab;
   address link_token_contract = 0x01BE23585060835E02B77ef475b0Cc51aA1e0709;
   bytes32 keyHash = 0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc;
@@ -26,23 +25,5 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
     COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
     LINKTOKEN = LinkTokenInterface(link_token_contract);
     s_owner = msg.sender;
+    s_subscriptionId = subscriptionId;
   }
-
-  function requestRandomWords() external {
-    s_requestId = COORDINATOR.requestRandomWords(
-      keyHash,
-      s_subscriptionId,
-      requestConfirmations,
-      callbackGasLimit,
-      numWords
-    );
-  }
-  
-  function fulfillRandomWords(
-    uint256, /* requestId */
-    uint256[] memory randomWords
-  ) internal override {
-    s_randomWords = randomWords;
-  }
-}
-
