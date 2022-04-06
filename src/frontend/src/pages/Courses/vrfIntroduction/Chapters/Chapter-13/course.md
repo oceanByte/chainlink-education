@@ -14,5 +14,4 @@
   </div>
 </ContentWrapp>
 
-Content:
 Congrats! You now know how to get a verfiably secure random number for use in a smart contract!
