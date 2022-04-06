@@ -1,3 +1,10 @@
+#####Chapter 12: Subscribing to the VRF
+
+# Subscribing
+
+Congrats you have completed the contract! Your final contract should look like this:
+
+```
 pragma solidity ^0.8.7;
 
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
@@ -37,3 +44,14 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
       numWords
     );
   }
+
+  function fulfillRandomWords(
+    uint256, /* requestId */
+    uint256[] memory randomWords
+  ) internal override {
+    s_randomWords = randomWords;
+  }
+}
+```
+
+Now that the contract is complete you need to subscribe your contract to the VRFCoordinator. You can do so via the Subscription Manager at [vrf.chain.link](https://vrf.chain.link/). Go to the website and follow the steps to see what it would be like to set up a subscription.

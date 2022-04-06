@@ -1,15 +1,13 @@
 #####Chapter 8: Building a Basic Contract
 
-## Requesting Randomness
+#Setting Storage Variables
 
-Now that our contract is configured and the constructor is defined, lets set up the function that will send a request for random numbers. To send a request you need to call the “coordinator variable we set up earlier and call the requestRandomWords function from it:
+For this example we will store the latest random numbers the contract recieves. Every request also generates a "requestId" which uniquely identifies every request sent and we will also store the latest requestId. To do this we will create two storage variables; one for the latest random numbers called s\_randomWords and one for the latest requestId called s\_requestId. Finally we will be creating a subscription for our contract when we deploy it and we will create a variable of type address to store the wallet address of the wallet that owns the subscription.
 
 ```
- s_requestId = COORDINATOR.requestRandomWords(
-      keyHash,
-      s_subscriptionId,
-      requestConfirmations,
-      callbackGasLimit,
-      numWords
-    );
-```
+  uint256[] public s_randomWords;
+  uint256 public s_requestId
+  address s_owner;
+  ```
+
+The s\_randomWords variable is an array of uint256's because we can request multiple random numbers at once. The variable s\_requestId is just a single uint256, because every request will only generate a single requestId.
