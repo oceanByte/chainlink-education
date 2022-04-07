@@ -76,6 +76,49 @@
       }
     }
   }
+
+  &__transaction {
+    color: $primary;
+    font-weight: bold;
+    &-title {
+      margin-top: 20px;
+    }
+    &-address {
+      margin-top: 15px;
+      
+    }
+    &-form {
+      margin-top: 15px;
+      display: flex;
+      &-ether {
+        margin-right: 30px;
+        box-sizing: border-box;
+      }
+      .btn-primary {
+        max-height: 55px;
+        padding: 10px 30px;
+        color: $white;
+        background: $primaryBackground;
+        font-weight: 600;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 55px;
+        &:hover {
+          background: $primaryBackgroundHover;
+          transition: all 0.3s ease;
+        }
+
+        .loader {
+          display: block;
+          width: 30px;
+          height: 30px;
+          border: 5px solid $white;
+          border-radius: 50%;
+          box-sizing: border-box;
+        } 
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 1024px) {

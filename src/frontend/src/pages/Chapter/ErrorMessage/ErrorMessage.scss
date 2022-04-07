@@ -1,0 +1,13 @@
+.error-message__block {
+  padding: 20px;
+  margin-top: 15px;
+  font-size: 14px;
+  line-height: 18px;
+  color: #F87171;
+  background-color: #FECDD3;
+  border-radius: 10px;
+  
+  &:first-letter {
+    text-transform: uppercase;
+  }
+}

@@ -12,6 +12,10 @@ import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
 
+import { Formik } from 'formik';
+import classNames from 'classnames'
+import * as Yup from 'yup';
+
 // @ts-ignore
 import Highlight from 'react-highlight.js'
 import { useLocation } from 'react-router-dom'
@@ -20,13 +24,21 @@ import { backgroundColorLight } from 'styles'
 
 import { Button } from '../../app/App.components/Button/Button.controller'
 import { Input } from '../../app/App.components/Input/Input.controller'
+import { InputField } from 'app/App.components/Form/InputField/Input.controller';
 import ArrowRight from '../../assets/arrow-upright-white.svg'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
-import { Question } from './Chapter.controller'
+import { IFormValues, Question } from './Chapter.controller'
 //prettier-ignore
 import { BlueParagraph, ButtonBorder, ButtonStyle, ButtonText, ChapterBig, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterH4, ChapterH5, ChapterQuestions, ChapterTab, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentFailed, ChapterValidatorContentSuccess, ChapterValidatorContentWrapper, ChapterValidatorTitle, ColorWord, ContentWrapp, FormWrapper, LetsStart, ListItemsContainer, MissionContainer, narrativeText, RegularP, Spacer, TextWrapper, VerticalAlign, VideoBox } from './Chapter.style'
 import { AnimatedCode, BackgroundContainer, Difficulty, ImageContainer, SpecialCode } from './Chapter.style'
 import { Footer } from './Footer/Footer.controller'
+import { ErrorMessage } from './ErrorMessage/ErrorMessage.view'
+import { TxList } from './TxList/TxLis.view'
+
+export const ValidationSchema = Yup.object().shape({
+  ether: Yup.string()
+    .required('This field is required!'),
+});
 
 monaco
   .init()
@@ -339,7 +351,11 @@ type ChapterViewProps = {
   proposedQuestionAnswerCallback: (e: Question[]) => void
   isStarted: boolean
   startedHandler: () => void
-  currentCourse: any
+  currentCourse: any,
+  handleSubmit: (values: IFormValues) => void
+  isLoading: boolean
+  transactionData: any
+  transactionErrorMessage: string | null
 }
 
 export const ChapterView = ({
@@ -361,7 +377,11 @@ export const ChapterView = ({
   percent,
   startedHandler,
   proposedQuestionAnswerCallback,
-  currentCourse
+  currentCourse,
+  isLoading,
+  handleSubmit,
+  transactionData,
+  transactionErrorMessage
 }: ChapterViewProps) => {
   const { pathname } = useLocation();
   const [display, setDisplay] = useState('solution')
@@ -371,6 +391,10 @@ export const ChapterView = ({
 
   const wrapperRef = useRef<HTMLDivElement>(null)
   const isMounted = useIsMounted()
+
+  const initialValue: IFormValues = {
+    ether: '0.005'
+  }
 
   useEffect(() => {
     if (nextChapter === '/chainlinkIntroduction/chapter-2' && localStorage.getItem('popupConfirm')) {
@@ -432,6 +456,70 @@ export const ChapterView = ({
               }</p>
             </div>
             <Content course={course || ''} />
+            {/* <div className="chapter-block__transaction p-font">
+              <h3 className='chapter-block__transaction-title'>Challenge</h3>
+
+              {transactionData ? (
+                <TxList txs={transactionData} />
+              ) : (
+                <>
+                <div className='chapter-block__transaction-address'>
+                  Send 0.005 ETH to this address {process.env.REACT_APP_ADDRESS_RECIPIENT}
+                </div>
+                <Formik
+                  enableReinitialize
+                  initialValues={initialValue}
+                  validationSchema={ValidationSchema}
+                  onSubmit={handleSubmit}
+                  >
+                    {({
+                      values,
+                      errors,
+                      touched,
+                      handleChange,
+                      handleBlur,
+                      handleSubmit,
+                    }) => (
+                      <form className="chapter-block__transaction-form" onSubmit={handleSubmit}>
+                        <div className='chapter-block__transaction-form-ether p-font'>
+                          <InputField
+                            label=""
+                            type="text"
+                            value={values.ether}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            name="ether"
+                            inputStatus={
+                              errors.ether && touched.ether || transactionErrorMessage
+                                ? 'error' : !errors.ether && touched.ether 
+                                ? 'success' : undefined
+                              }
+                            errorMessage={errors.ether && touched.ether && errors.ether}
+                            isDisabled={false}
+                          />
+                        </div>
+                        <div>
+                          <button
+                            type='submit'
+                            className={classNames(
+                            'form-transaction__button',
+                            'btn',
+                            'btn-primary',
+                            )}>
+                              {isLoading ? (
+                                <span className="loader"></span>
+                              ) : (
+                                <span className="form-transaction__button__text">SEND ETH</span>
+                              )}
+                          </button>
+                        </div>
+                      </form>
+                  )}
+                </Formik>
+                <ErrorMessage message={transactionErrorMessage} />
+                </>
+              )}
+            </div> */}
           </div>
         </div>
         <ChapterGrid hasTabs={Object.keys(supports).length > 0}>

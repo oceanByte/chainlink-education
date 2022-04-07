@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
+import { ethers } from "ethers";
+
 import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 import { getUser } from 'pages/User/User.actions'
@@ -39,10 +41,56 @@ export interface Data {
   questions: Question[]
 }
 
+export interface IFormValues {
+  ether: string
+}
+
+interface IPayment {
+  setError: any
+  setTxs: any
+  ether: string | null
+  addr: string | null
+}
+
+declare let window: any;
+
+
+const startPayment = async ({ ether, addr, setTxs, setError }: IPayment) => {
+  try {
+    if (!window.ethereum)
+      throw new Error("No crypto wallet found. Please install it.");
+
+    await window.ethereum.send("eth_requestAccounts");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const address = addr || ''
+    ethers.utils.getAddress(address);
+    const tx = await signer.sendTransaction({
+      to: address,
+      value: ethers.utils.parseEther(ether || '')
+    });
+
+    setTxs({
+      reqData: {
+        ether,
+        addr
+      },
+      resTx: [tx]
+    });
+  } catch (err) {
+    const findSymbol = (err as Error).message.indexOf('(');
+    const formatMessage = findSymbol !== -1 ? (err as Error).message.slice(0, findSymbol) : (err as Error).message;
+    setError(formatMessage)
+  }
+};
+
 export const Chapter = () => {
   const [time, setTime] = useState({
     value: 0,
   })
+  const [error, setError] = useState(null);
+  const [txs, setTxs] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [validatorState, setValidatorState] = useState(PENDING)
   const [showDiff, setShowDiff] = useState(false)
   const [isAccount, setIsAccount] = useState(false)
@@ -98,6 +146,17 @@ export const Chapter = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
+  const handleSubmit = async (values: IFormValues) => {
+    setIsLoading(true);
+    await startPayment({
+      setError,
+      setTxs,
+      ether: values.ether,
+      addr: process.env.REACT_APP_ADDRESS_RECIPIENT || '0x0A0De0c303E10A18b438f5D5dabDD406f3a99C02'
+    });
+    setIsLoading(false);
+  };
+
   const getPercent = (chapterData: ChapterData[]) => {
     chapterData.forEach((chapter, i) => {
       if (pathname === chapter.pathname) {
@@ -127,7 +186,7 @@ export const Chapter = () => {
           }
         }
 
-        if (i !== 7) {
+        if (i !== chapterData.length) {
           setPercent(() => ((i + 1) / chapterData.length) * 100)
         } else setPercent(() => 100)
       }
@@ -295,6 +354,10 @@ export const Chapter = () => {
           startedHandler={startTaskHandler}
           proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
           currentCourse={user ? findCurrentCourse(user) : null}
+          handleSubmit={handleSubmit}
+          isLoading={isLoading}
+          transactionData={txs}
+          transactionErrorMessage={error}
         />
       )}
       {/* <Footer percent={percent} nextChapter={nextChapter} previousChapter={previousChapter} /> */}
