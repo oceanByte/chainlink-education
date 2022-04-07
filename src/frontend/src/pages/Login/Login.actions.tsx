@@ -38,7 +38,7 @@ export const login = ({ usernameOrEmail, password, recaptchaToken }: LoginInputs
   })
 }
 
-export const loginMetaMask = ({ publicAddress, signature }: LoginMetaMask) => (dispatch: any) => {
+export const loginMetaMask = ({ publicAddress, signature, isRedirect }: LoginMetaMask) => (dispatch: any) => {
   dispatch({
     type: LOGIN_REQUEST,
     payload: {},
@@ -52,7 +52,7 @@ export const loginMetaMask = ({ publicAddress, signature }: LoginMetaMask) => (d
         commit: {
           type: LOGIN_COMMIT,
           meta: {
-            thunks: [showToaster(SUCCESS, 'Welcome back!', 'Happy to see you again'), redirect('/')],
+            thunks: [showToaster(SUCCESS, 'Welcome back!', 'Happy to see you again'), isRedirect && redirect('/')],
           },
         },
         rollback: { type: LOGIN_ROLLBACK },

@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom'
 
 import { ethers } from "ethers";
 
+import { useMetaMask } from '../Login/Login.hooks';
+
 import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 import { getUser } from 'pages/User/User.actions'
@@ -54,7 +56,6 @@ interface IPayment {
 
 declare let window: any;
 
-
 const startPayment = async ({ ether, addr, setTxs, setError }: IPayment) => {
   try {
     if (!window.ethereum)
@@ -78,7 +79,11 @@ const startPayment = async ({ ether, addr, setTxs, setError }: IPayment) => {
       resTx: [tx]
     });
   } catch (err) {
-    const findSymbol = (err as Error).message.indexOf('(');
+    let findSymbol = (err as Error).message.indexOf('(');
+
+    if (findSymbol !== -1) {
+      findSymbol = (err as Error).message.indexOf('[');
+    }
     const formatMessage = findSymbol !== -1 ? (err as Error).message.slice(0, findSymbol) : (err as Error).message;
     setError(formatMessage)
   }
@@ -110,6 +115,7 @@ export const Chapter = () => {
   })
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
+  const { loginMetaMaskCallback } = useMetaMask(false);
 
   let intervalID: any = useRef(null)
   const partCurrentUrl = pathname.split('/')[1]
@@ -147,6 +153,9 @@ export const Chapter = () => {
   }, [pathname])
 
   const handleSubmit = async (values: IFormValues) => {
+    if (!user) {
+      await loginMetaMaskCallback()
+    }
     setIsLoading(true);
     await startPayment({
       setError,

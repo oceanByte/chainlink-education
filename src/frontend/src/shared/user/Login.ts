@@ -34,4 +34,7 @@ export class LoginMetaMask {
 
   @Expose()
   signature!: string
+
+  @Expose()
+  isRedirect?: boolean
 }

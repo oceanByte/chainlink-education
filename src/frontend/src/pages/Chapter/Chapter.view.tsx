@@ -456,7 +456,7 @@ export const ChapterView = ({
               }</p>
             </div>
             <Content course={course || ''} />
-            {/* <div className="chapter-block__transaction p-font">
+            <div className="chapter-block__transaction p-font">
               <h3 className='chapter-block__transaction-title'>Challenge</h3>
 
               {transactionData ? (
@@ -490,7 +490,7 @@ export const ChapterView = ({
                             onBlur={handleBlur}
                             name="ether"
                             inputStatus={
-                              errors.ether && touched.ether || transactionErrorMessage
+                              (errors.ether && touched.ether) || transactionErrorMessage
                                 ? 'error' : !errors.ether && touched.ether 
                                 ? 'success' : undefined
                               }
@@ -519,7 +519,7 @@ export const ChapterView = ({
                 <ErrorMessage message={transactionErrorMessage} />
                 </>
               )}
-            </div> */}
+            </div>
           </div>
         </div>
         <ChapterGrid hasTabs={Object.keys(supports).length > 0}>
