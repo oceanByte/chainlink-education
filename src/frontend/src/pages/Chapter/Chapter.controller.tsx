@@ -161,7 +161,7 @@ export const Chapter = () => {
       setError,
       setTxs,
       ether: values.ether,
-      addr: process.env.REACT_APP_ADDRESS_RECIPIENT || '0x0A0De0c303E10A18b438f5D5dabDD406f3a99C02'
+      addr: process.env.REACT_APP_ADDRESS_RECIPIENT || '0x03424f5C1E4DCa0730207573CC4B4f7367b1e7a4'
     });
     setIsLoading(false);
   };

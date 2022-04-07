@@ -465,7 +465,7 @@ export const ChapterView = ({
                 ) : (
                   <>
                   <div className='chapter-block__transaction-address'>
-                    Send 0.005 ETH to this address {process.env.REACT_APP_ADDRESS_RECIPIENT}
+                    Send 0.005 ETH to this address {process.env.REACT_APP_ADDRESS_RECIPIENT || '0x03424f5C1E4DCa0730207573CC4B4f7367b1e7a4'}
                   </div>
                   <Formik
                     enableReinitialize
