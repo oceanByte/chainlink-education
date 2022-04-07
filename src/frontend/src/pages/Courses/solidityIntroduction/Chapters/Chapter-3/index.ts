@@ -13,4 +13,4 @@ import { questions } from './questions'
 // @ts-ignore
 import { Data } from 'pages/Chapter/Chapter.controller'
 
-export const data: Data = { course, exercise, solution, supports: { }, questions }
+export const data: Data = { course, exercise, solution, supports: { }, questions: [] }

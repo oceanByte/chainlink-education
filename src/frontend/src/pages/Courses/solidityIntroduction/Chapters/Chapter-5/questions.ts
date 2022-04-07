@@ -7,6 +7,6 @@ export const questions = [
       'address',
       'complex',
     ],
-    responses: ['A platform for creating decentralized oracle networks'],
+    responses: ['complex'],
   },
 ]
