@@ -1,6 +1,6 @@
 #####Chapter 4:
 
-# Smart Contracts - The Future
+# Naming a Contract
 
 <!-- <ContentWrapp>
   <div class="imgContainer">

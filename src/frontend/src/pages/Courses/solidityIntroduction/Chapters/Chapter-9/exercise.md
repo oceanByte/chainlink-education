@@ -1,1 +1,6 @@
-// Well done. If you have completed all chapters you can now get your own unique Chainlink Academy certificate! // You can download it, hang it, share it. It’s yours now.
+pragma solidity ^0.8.7;
+
+contract HelloWeb3 {
+string[] myBooks = [ “Mastering Ethereum”, “Programming Rust”, “Zombie Survival Guide”]
+string myFirstBook = myBook[];
+}

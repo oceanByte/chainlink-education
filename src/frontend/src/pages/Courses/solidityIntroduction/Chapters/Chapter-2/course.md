@@ -1,6 +1,6 @@
 #####Chapter 2:
 
-# What are Contracts?
+# EVM Intro
 
 <ContentWrapp>
   <div class="imgContainer">
@@ -14,7 +14,7 @@
   </div>
 </ContentWrapp>
 
-Not so quick! I know you are ready to learn Solidity, but there is one other important subject you should know before moving on: the Ethereum Virtual Machine or EVM. The EVM is what reads your code when it is deployed to a blockchain. When Solidity code is compiled, it is turned into EVM **bytecode**. EVM bytecode is the commands that the EVM can actually read and act on. When a smart contract is deployed to Ethereum, its bytecode lives there forever; always accessible. Any language other than Solidity that can compile to EVM bytecode can also be used to write smart contracts on blockchains that utilize the EVM. Another language that compiles to EVM bytecode is Vyper. Examples of blockchains that run the EVM are Ethereum, Polygon, and Avalanche (among many others). Many blockchains now use the EVM making Solidity an even more powerful smart contract language! 
+Not so quick! I know you are ready to learn Solidity, but there is one other important subject you should know before moving on: the Ethereum Virtual Machine or EVM. The EVM is what reads your code when it is deployed to a blockchain. When Solidity code is compiled, it is turned into EVM bytecode. EVM bytecode is commands that the EVM can read and act on. When a smart contract is deployed to Ethereum, its bytecode lives there forever; always accessible. Any language other than Solidity that can compile to EVM bytecode can also be used to write smart contracts on blockchains that utilize the EVM. Another language that compiles to EVM bytecode is Vyper. Examples of blockchains that run the EVM are Ethereum, Polygon, and Avalanche (among many others). Many blockchains now use the EVM making Solidity an even more powerful smart contract language! 
 
 Some blockchains have virtual machines other than the EVM and thus have different programming languages and bytecode compilation targets, but for this course, we’ll stick with Solidity and the EVM.
 

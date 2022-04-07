@@ -1,6 +1,6 @@
 #####Chapter 1:
 
-# What will this course cover?
+# Solidity
 
 <ContentWrapp>
   <div class="imgContainer">

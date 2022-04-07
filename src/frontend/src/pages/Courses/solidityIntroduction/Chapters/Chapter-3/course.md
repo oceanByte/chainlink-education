@@ -1,6 +1,6 @@
 #####Chapter 3:
 
-# Digital Agreements - What we have Today
+# Pragma Solidity
 
 <ContentWrapp>
   <div class="imgContainer">

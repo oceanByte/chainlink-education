@@ -14,7 +14,7 @@
   </div>
 </ContentWrapp> -->
 
-In the last activity we created a variable called “myFavoriteNumber” of type uint, but what if we want to actually store a value in that variable. That’s what the equal sign ( = ) “assignment” operator is for. In programming an operator is a symbol that represents an action or process. In the case of the assignment operator whatever is to the left of the equals sign is being assigned the value of whatever is on the right of the equal sign. For instance if we had:
+In the last activity we created a variable called “myFavoriteNumber” of type uint, but what if we want to actually store a value in that variable? That’s what the equal sign ( = ) “assignment” operator is for. In programming an operator is a symbol that represents an action or process. In the case of the assignment operator whatever is to the left of the equals sign is being assigned the value of whatever is on the right of the equal sign. For instance if we had:
 ```
 uint myFavNum; 
 myFavNum = 42;

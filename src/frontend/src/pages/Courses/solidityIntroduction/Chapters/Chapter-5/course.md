@@ -1,6 +1,6 @@
 #####Chapter 5:
 
-# The Smart Contract Connectivity Problem
+# Contract State, Variables and Data Types
 
 <!-- <ContentWrapp>
   <div class="imgContainer">
