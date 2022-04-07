@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import { borderColorCheckbox, secondary3 } from 'styles'
 
 export const CheckboxesStyled = styled.div`
   padding: 1em;
@@ -15,19 +16,14 @@ export const CheckboxesStyled = styled.div`
       height: 1em;
       width: 1em;
       border-radius: 10%;
-      border: 3px solid blue;
+      border: 2px solid ${borderColorCheckbox};
       margin-right: 0.5em;
     }
 
     > input:checked + span:before {
-      border-color: rgb(0, 114, 206);
-      background-image: radial-gradient(
-        circle closest-side,
-        rgb(0, 114, 206) 0%,
-        rgb(0, 114, 206) 50%,
-        transparent 50%,
-        transparent 100%
-      );
+      width: 0.5em;
+      height: 0.5em;
+      border: 6px solid ${secondary3};
     }
 
     > input:disabled + span {
@@ -35,13 +31,7 @@ export const CheckboxesStyled = styled.div`
     }
 
     > input:disabled:checked + span:before {
-      background-image: radial-gradient(
-        circle closest-side,
-        rgba(0, 0, 0, 0.5) 0%,
-        rgba(0, 0, 0, 0.5) 50%,
-        transparent 50%,
-        transparent 100%
-      );
+      
     }
 
     > input {
