@@ -565,6 +565,10 @@ export const MissionContainer = styled.div`
   margin-top: 80px;
   margin-bottom: 80px;
 
+  a {
+    color: #a26274;
+  }
+
   .title {
     font-weight: 900;
     font-size: 32px;

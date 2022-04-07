@@ -63,7 +63,7 @@ const MonacoReadOnly = ({ children }: any) => {
         height={height}
         value={children}
         language="typescript"
-        theme="vs-dark"
+        theme="light"
         options={{
           lineNumbers: false,
           scrollBeyondLastLine: false,

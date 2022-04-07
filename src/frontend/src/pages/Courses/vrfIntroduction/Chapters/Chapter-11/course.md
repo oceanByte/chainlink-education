@@ -6,11 +6,11 @@ Now that we have a function that can send a request to the Chainlink VRF for ran
 
 In this function, you can run whatever logic you would like with the randomNumber. For this lesson, we will just be storing them in the variable s_randomWords set up in our contract.
 
-```
+<Highlight class="language-javascript">
 function fulfillRandomWords(
-    uint256, /* requestId */
+    uint256, // requestId
     uint256[] memory randomWords
   ) internal override {
     s_randomWords = randomWords;
   }
-```
+</Highlight>
