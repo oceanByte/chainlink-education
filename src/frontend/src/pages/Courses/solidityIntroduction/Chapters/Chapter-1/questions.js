@@ -1,10 +1,12 @@
 export const questions = [
   {
-    question: 'Do you like the Academy? (trick question)',
+    question: 'Solidity can be considered what type of programming language?',
     answers: [
-      'Yes',
-      'No'
+      'Functional',
+      'Object-Oriented',
+      'Convoluted',
+      'Spicy'
     ],
-    responses: ['Yes'],
+    responses: ['Object-Oriented'],
   },
 ]

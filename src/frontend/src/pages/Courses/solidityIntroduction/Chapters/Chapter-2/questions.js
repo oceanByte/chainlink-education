@@ -1,12 +1,12 @@
 export const questions = [
   {
-    question: 'Which factor does not affect the enforcement of a non-contractual agreement?',
+    question: 'What does Solidity compile to?',
     answers: [
-      'Reputation',
-      'A Court of Law',
-      'Magnitude of The Terms',
-      'The Involved Parties'
+      'Binary',
+      'JVM Bytecode',
+      'German',
+      'EVM Bytecode'
     ],
-    responses: ['A Court of Law'],
+    responses: ['EVM Bytecode'],
   },
 ]
