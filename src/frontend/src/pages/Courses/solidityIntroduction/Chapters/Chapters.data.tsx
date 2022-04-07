@@ -19,37 +19,37 @@ import { data as chapter13 } from './Chapter-13'
 export const chapterData: ChapterData[] = [
   {
     pathname: `/${course.path}/chapter-1`,
-    name: 'COMING SOON',
+    name: 'Solidity',
     data: chapter1,
   },
   {
     pathname: `/${course.path}/chapter-2`,
-    name: 'COMING SOON',
+    name: 'EVM Intro',
     data: chapter2,
   },
   {
     pathname: `/${course.path}/chapter-3`,
-    name: 'COMING SOON',
+    name: 'Pragma Solidity',
     data: chapter3,
   },
   {
     pathname: `/${course.path}/chapter-4`,
-    name: 'COMING SOON',
+    name: 'Naming a Contract',
     data: chapter4,
   },
   {
     pathname: `/${course.path}/chapter-5`,
-    name: 'COMING SOON',
+    name: 'Contract State, Variables and Data Types',
     data: chapter5,
   },
   {
     pathname: `/${course.path}/chapter-6`,
-    name: 'COMING SOON',
+    name: 'Assigning Variables Values',
     data: chapter6,
   },
   {
     pathname: `/${course.path}/chapter-7`,
-    name: 'COMING SOON',
+    name: 'Access Modifiers',
     data: chapter7,
   },
   {
