@@ -456,70 +456,72 @@ export const ChapterView = ({
               }</p>
             </div>
             <Content course={course || ''} />
-            <div className="chapter-block__transaction p-font">
-              <h3 className='chapter-block__transaction-title'>Challenge</h3>
+            {user ? (
+              <div className="chapter-block__transaction p-font">
+                <h3 className='chapter-block__transaction-title'>Challenge</h3>
 
-              {transactionData ? (
-                <TxList txs={transactionData} />
-              ) : (
-                <>
-                <div className='chapter-block__transaction-address'>
-                  Send 0.005 ETH to this address {process.env.REACT_APP_ADDRESS_RECIPIENT}
-                </div>
-                <Formik
-                  enableReinitialize
-                  initialValues={initialValue}
-                  validationSchema={ValidationSchema}
-                  onSubmit={handleSubmit}
-                  >
-                    {({
-                      values,
-                      errors,
-                      touched,
-                      handleChange,
-                      handleBlur,
-                      handleSubmit,
-                    }) => (
-                      <form className="chapter-block__transaction-form" onSubmit={handleSubmit}>
-                        <div className='chapter-block__transaction-form-ether p-font'>
-                          <InputField
-                            label=""
-                            type="text"
-                            value={values.ether}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            name="ether"
-                            inputStatus={
-                              (errors.ether && touched.ether) || transactionErrorMessage
-                                ? 'error' : !errors.ether && touched.ether 
-                                ? 'success' : undefined
-                              }
-                            errorMessage={errors.ether && touched.ether && errors.ether}
-                            isDisabled={false}
-                          />
-                        </div>
-                        <div>
-                          <button
-                            type='submit'
-                            className={classNames(
-                            'form-transaction__button',
-                            'btn',
-                            'btn-primary',
-                            )}>
-                              {isLoading ? (
-                                <span className="loader"></span>
-                              ) : (
-                                <span className="form-transaction__button__text">SEND ETH</span>
-                              )}
-                          </button>
-                        </div>
-                      </form>
-                  )}
-                </Formik>
-                <ErrorMessage message={transactionErrorMessage} />
-                </>
-              )}
-            </div>
+                {transactionData ? (
+                  <TxList txs={transactionData} />
+                ) : (
+                  <>
+                  <div className='chapter-block__transaction-address'>
+                    Send 0.005 ETH to this address {process.env.REACT_APP_ADDRESS_RECIPIENT}
+                  </div>
+                  <Formik
+                    enableReinitialize
+                    initialValues={initialValue}
+                    validationSchema={ValidationSchema}
+                    onSubmit={handleSubmit}
+                    >
+                      {({
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                      }) => (
+                        <form className="chapter-block__transaction-form" onSubmit={handleSubmit}>
+                          <div className='chapter-block__transaction-form-ether p-font'>
+                            <InputField
+                              label=""
+                              type="text"
+                              value={values.ether}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              name="ether"
+                              inputStatus={
+                                (errors.ether && touched.ether) || transactionErrorMessage
+                                  ? 'error' : !errors.ether && touched.ether 
+                                  ? 'success' : undefined
+                                }
+                              errorMessage={errors.ether && touched.ether && errors.ether}
+                              isDisabled={false}
+                            />
+                          </div>
+                          <div>
+                            <button
+                              type='submit'
+                              className={classNames(
+                              'form-transaction__button',
+                              'btn',
+                              'btn-primary',
+                              )}>
+                                {isLoading ? (
+                                  <span className="loader"></span>
+                                ) : (
+                                  <span className="form-transaction__button__text">SEND ETH</span>
+                                )}
+                            </button>
+                          </div>
+                        </form>
+                    )}
+                  </Formik>
+                  <ErrorMessage message={transactionErrorMessage} />
+                  </>
+                )}
+              </div>
+            ) : null}
           </div>
         </div>
         <ChapterGrid hasTabs={Object.keys(supports).length > 0}>
