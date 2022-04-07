@@ -9,20 +9,22 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-    When you buy an artwork on an online platform, you must agree to the Service Level Agreements. They are usually overly complex and can be challenging to understand. They primarily benefit the platform owner, not the users.
+    Now let's dive into programming in Solidity!
     </div>
   </div>
 </ContentWrapp>
 
-Digital agreements have been the most common format of agreements in the past decade. From bank agreements to social media, to Netflix, and crypto exchanges, companies who provide services on the internet typically use digital agreements to detail the exact conditions of the service to be provided. These are called SLAs, or Service Level Agreements.
+One of the first things you will write for any Solidity is the pragma statement. The pragma tells the solidity compiler what version of Solidity you are writing. It typically looks something like this:
 
-What makes a digital agreement different from a regular agreement or contractual agreement? Well they’re like regular agreements….but in a digital format. These agreements can be enforced in a court of law under certain circumstances. However, this doesn’t happen often due to costs of going to court coupled with the low value these contracts represent for individual consumers.
+`pragma solidity ^0.8.7;`
 
-Customers also tend not to read these agreements due to lengthy, complex legalese. Oftentimes digital agreements give consumers very little recourse at all! Due to these reasons, the power of digital agreements are heavily skewed towards the institutions who create them rather than being a fair, equitable agreement between institutions and their consumers. A prime example of this is the <a style="color:blue" href="https://www.jama.work/blog/on-robinhood-and-availability"> Robinhood Gamestop downtime incident</a>.
+This says we are writing our code in Solidity, and the`^`   followed by `0.8.7;` means that we will not allow the compiler to compile to a version earlier than 0.8.7 and must compile to a version earlier than 0.9.0.
 
-<MissionContainer>
+The semi-colon `;`means we are finished writing that line. Whenever a line of logic is complete in Solidity, it must be followed with a semi-colon.
+
+<!-- <MissionContainer>
   <div className="title">What are the SLAs you have agreed to?</div>
     <div style="color:white">
     Think about any digital services you subscribe to, for example video streaming or banking services. Do you know the terms of the SLAs between you and the service provider? If not, take the time and read over one of them.
     </div>
-</MissionContainer>
+</MissionContainer> -->

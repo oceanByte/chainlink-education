@@ -1,9 +1,8 @@
-#####Chapter 7:
+#####Chapter 8:
 
-Conclusion
-=============================
+# Creating Arrays
 
-<ContentWrapp>
+<!-- <ContentWrapp>
   <div class="imgContainer">
     <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
   </div>
@@ -13,26 +12,28 @@ Conclusion
      Connect your artwork to the price of gold or ETH or overall Market Cap. Mention the concept of “Hybrid Smart Contracts”. 
     </div>
   </div>
-</ContentWrapp>
+</ContentWrapp> -->
 
-As discussed in the previous lesson, Chainlink gives developers the ability to create extremely powerful DON’s that provide smart contracts with the highest quality data from outside the blockchain. As a smart contract developer, how can you take advantage of these DONs in your own smart contracts? Chainlink is open source so there’s always the option of making your own DON, but creating a DON is a complex and nuanced process. Instead, in the spirit of old developer adage “Never build something twice”, lets make use of existing DONs if possible.
+It is common in programming to want to store many associated values together. For instance I may want to store the title of every book I own. We could put each book title in it’s own variable of type string, but it would be difficult to have to access, and keep track of, each variable when I want to read this information. So instead we can store the book titles in an **array** of type string. What is an array? It’s many different but related pieces of data stored in a single variable!
 
-Luckily, many of the largest and highest quality node operators in the blockchain industry have already combined their knowledge and prowress to create DONs that serve the most in-demand data for smart contract developers to take advantage of. These data serving DONs are called <ColorWord>Chainlink Data Feeds</ColorWord>. Currently most of the data feeds provide data on various currency and cryptocurrency pairs, as that was initially what smart contract developers needed, but data feeds can be used to retrieve any type of data. 
+Just like regular variables arrays can only store one type of data, but can have multiple values of that type stored within it. To declare a variable as an array, we put square brackets next to the type of the variable. For example:
 
-You can see these data feeds updating in real time at data.chain.link. There you can select different blockchains Chainlink DONs are posting data to, as well view the details of each DON that compose a particular data feed. For instance if you click on the ETH/USD data feed you will see all the nodes involved in the DON, what price each individual node posted, and the final aggregated price of the asset. Some important terms you may notice are:
+string[]  myBooks;
 
-<MissionContainer>
-  <div className="title">Quizzes:</div>
-  <ol className="mission-goals">
-    <li>
-      What is the heartbeat for the ETH/USD data feed on Ethereum mainnet?
-    </li>
-    <li>
-      What is the deviation threshold for the BTC/USD data feed on Binance Smart Chain mainnet?
-    </li>
-  </ol>
-</MissionContainer>
+Creates a variable called “myBooks” which is an array of strings.
 
-## Programming with Chainlink Data Feeds
+You can then assign multiple values to the array by using the assignment operator. The difference from a regular variable assignment is that on the right side of the assignment operator you put the values you want in-between square brackets and separate each value by a comma for example:
+`
+string[] myBooks = [ “Mastering Ethereum”, “Programming Rust”, “Zombie Survival Guide”]`
 
-Now that we  understand how Chainlink data feeds work, lets use them within a smart contract. To use a chainlink data feed within a smart contract you only have to complete three simple steps:
+Or 
+```
+uint[] numbers;
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+```
+
+You can limit the amount of values that can go into the array by putting a number in the brackets by the array type when you declare it. For example:
+`
+uint[6] numbers;`
+Limits the amount of values that can fit into the array called “numbers” to a max of 6 values.
+
