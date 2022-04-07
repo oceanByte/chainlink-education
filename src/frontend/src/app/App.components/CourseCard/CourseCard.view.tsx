@@ -78,23 +78,21 @@ export const CourseCardView = ({ course, user, activeCourse }: ICourseView) => {
           <div className="course-difficulty-content">
             <span>{course.difficulty}/5</span> <span>Difficulty</span>
           </div>
-          {course.title !== 'Solidity Introduction' && (
-            <div className="course-btn-wrapper">
-              <Link
-                to={url}
-                className={classnames(
-                  'btn course-btn',
-                  !percent && 'new',
-                  percent && percent !== 100 && 'continue',
-                  percent && percent === 100 && 'completed',
-                )}
-              >
-                {!percent ? <span className="btn__text">Start</span> : null}
-                {percent && percent !== 100 ? <span className="btn__text">Continue</span> : null}
-                {percent && percent === 100 ? <span className="btn__text">Repeat</span> : null}
-              </Link>
-            </div>
-          )}
+          <div className="course-btn-wrapper">
+            <Link
+              to={url}
+              className={classnames(
+                'btn course-btn',
+                !percent && 'new',
+                percent && percent !== 100 && 'continue',
+                percent && percent === 100 && 'completed',
+              )}
+            >
+              {!percent ? <span className="btn__text">Start</span> : null}
+              {percent && percent !== 100 ? <span className="btn__text">Continue</span> : null}
+              {percent && percent === 100 ? <span className="btn__text">Repeat</span> : null}
+            </Link>
+          </div>
         </div>
       </div>
     </>
