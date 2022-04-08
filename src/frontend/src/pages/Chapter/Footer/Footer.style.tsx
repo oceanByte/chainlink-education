@@ -75,7 +75,6 @@ export const ProgressBarWrapper = styled.div`
     display: none;
   }
 `
-
 export const LinkStyled = styled.div`
   width: 100%;
   display: flex;
