@@ -22,7 +22,7 @@ import { Button } from '../../app/App.components/Button/Button.controller'
 import { Input } from '../../app/App.components/Input/Input.controller'
 import ArrowRight from '../../assets/arrow-upright-white.svg'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
-import { Question } from './Chapter.controller'
+import { IValidator, IValidatorContent, Question } from './Chapter.controller'
 //prettier-ignore
 import { BlueParagraph, ButtonBorder, ButtonStyle, ButtonText, ChapterBig, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterH4, ChapterH5, ChapterQuestions, ChapterTab, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentFailed, ChapterValidatorContentSuccess, ChapterValidatorContentWrapper, ChapterValidatorTitle, ColorWord, ContentWrapp, FormWrapper, LetsStart, ListItemsContainer, MissionContainer, narrativeText, RegularP, Spacer, TextWrapper, VerticalAlign, VideoBox } from './Chapter.style'
 import { AnimatedCode, BackgroundContainer, Difficulty, ImageContainer, SpecialCode } from './Chapter.style'
@@ -178,34 +178,43 @@ let triggerAnim = function () {
   myTry.classList.add('tryagain')
 }
 
-const Validator = ({ validatorState, validateCallback }: any) => (
+const Validator = ({ validatorState, validateCallback, validatorContent }: IValidator) => (
   <ChapterValidator className={validatorState === RIGHT ? 'ok' : 'no'}>
     <div className="step">
       <p className="step-text">Step 3</p>
     </div>
     {validatorState === PENDING && (
       <ChapterValidatorContentWrapper>
-        <ChapterValidatorTitle>Awaiting validation</ChapterValidatorTitle>
-        <ChapterValidatorContent>Provide your solution above and validate your answer</ChapterValidatorContent>
+        <ChapterValidatorTitle>{validatorContent.pending.title || 'Awaiting validation'}</ChapterValidatorTitle>
+        <ChapterValidatorContent>
+          {validatorContent.pending.text || 'Provide your solution above and validate your answer'}
+        </ChapterValidatorContent>
         <ButtonStyle>
           {/*<ButtonBorder />*/}
           {/* <img src={ArrowRight} /> */}
-          <ButtonText onClick={() => validateCallback()}>Validate answer</ButtonText>
+          <ButtonText onClick={() => validateCallback()}>
+            {validatorContent.pending.textInBtn || 'Validate answer'}</ButtonText>
         </ButtonStyle>
       </ChapterValidatorContentWrapper>
     )}
     {validatorState === RIGHT && (
       <ChapterValidatorContentSuccess>
-        <ChapterValidatorTitle>THIS IS CORRECT</ChapterValidatorTitle>
-        <ChapterValidatorContent>Go on to the next chapter</ChapterValidatorContent>
+        <ChapterValidatorTitle>
+          {validatorContent.right.title || 'THIS IS CORRECT'}
+        </ChapterValidatorTitle>
+        <ChapterValidatorContent>
+          {validatorContent.right.text || 'Go on to the next chapter'}
+        </ChapterValidatorContent>
       </ChapterValidatorContentSuccess>
     )}
     {validatorState === WRONG && (
       <ChapterValidatorContentFailed>
         <ChapterValidatorTitle id={'try'} className={'tryagain'}>
-          This is wrong
+          {validatorContent.wrong.title || 'This is wrong'}
         </ChapterValidatorTitle>
-        <ChapterValidatorContent>Correct your answer and try again</ChapterValidatorContent>
+        <ChapterValidatorContent>
+          {validatorContent.wrong.text || 'Correct your answer and try again'}
+        </ChapterValidatorContent>
         <ButtonStyle>
           <ButtonBorder />
           <ButtonText
@@ -214,7 +223,7 @@ const Validator = ({ validatorState, validateCallback }: any) => (
               triggerAnim()
             }}
           >
-            Try Again
+            {validatorContent.wrong.textInBtn || 'Try Again'}
           </ButtonText>
         </ButtonStyle>
       </ChapterValidatorContentFailed>
@@ -336,6 +345,7 @@ type ChapterViewProps = {
   user?: PublicUser
   supports: Record<string, string | undefined>
   questions: Question[]
+  validatorContent: IValidatorContent
   proposedQuestionAnswerCallback: (e: Question[]) => void
   isStarted: boolean
   startedHandler: () => void
@@ -355,6 +365,7 @@ export const ChapterView = ({
   user,
   supports,
   questions,
+  validatorContent,
   isStarted,
   nextChapter,
   previousChapter,
@@ -511,7 +522,7 @@ export const ChapterView = ({
                   )}
                 </div>
               )}
-              <Validator validatorState={validatorState} validateCallback={validateCallback} />
+              <Validator validatorState={validatorState} validateCallback={validateCallback} validatorContent={validatorContent} />
             </>
           )}
           <Footer percent={Math.floor(percent)} nextChapter={nextChapter} previousChapter={previousChapter} />

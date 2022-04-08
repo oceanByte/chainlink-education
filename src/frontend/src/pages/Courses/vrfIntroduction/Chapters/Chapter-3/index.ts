@@ -12,5 +12,6 @@ import { questions } from './questions'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
 import { Data } from 'pages/Chapter/Chapter.controller'
+import { validatorContent } from './validatorContent'
 
-export const data: Data = { course, exercise, solution, supports: { }, questions }
+export const data: Data = { course, exercise, solution, supports: { }, questions, validatorContent }

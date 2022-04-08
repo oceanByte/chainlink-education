@@ -88,69 +88,72 @@ export const CourseView = ({ course, user, downloadCallback, getCertificateCallb
             <div className="profile-page-progress__warning">
               You cannot download the certificate yet because you have not completed the course
             </div>
-          ) : null}
-
-          {user && user.name ? (
-            <div className="profile-page-progress-footer-box p-font">
-              <button onClick={downloadCallback} className={classNames(
-                'profile-page-progress-footer-box__button',
-                'btn',
-                'btn-green',
-                !isCertificate && 'btn-green-disabled')}>
-                <span className="profile-page-progress-footer-box__button__text"> Download certificate </span>
-                <span className="arrow-upright" />
-              </button>
-              <div onClick={copyToClipboard} className="profile-page-progress-footer-box__copy-link">Copy certificate link</div>
-            </div>
-          ) : (
-            <div className="profile-page-progress-footer-box p-font">
-              <Formik
-                enableReinitialize
-                initialValues={initialValue}
-                validationSchema={ValidationSchema}
-                onSubmit={handleSubmit}
-                >
-                  {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                  }) => (
-                    <form className="profile-page-account-info__form" onSubmit={handleSubmit}>
-                      <button
-                        type='submit'
-                        className={classNames(
-                        'profile-page-progress-footer-box__button',
-                        'btn',
-                        'btn-green',
-                        !isCertificate && 'btn-green-disabled')}>
-                        <span className="profile-page-progress-footer-box__button__text"> Issue certificate </span>
-                      </button>
-                      <div className='profile-page-account-info__name p-font'>
-                        <InputField
-                          label=""
-                          type="text"
-                          value={values.name}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          name="name"
-                          inputStatus={
-                            errors.name && touched.name
-                              ? 'error' : !errors.name && touched.name 
-                              ? 'success' : undefined
-                            }
-                          errorMessage={errors.name && touched.name && errors.name}
-                          isDisabled={!isCertificate}
-                        />
-                      </div>
-                    </form>
-                )}
-              </Formik>
-            </div>
-          )}
-          <div className={classNames("profile-page-progress__image", isCertificate && "isCertificate")} />
+          ) : (<>
+            {user && user.name ? (
+              <div className="profile-page-progress-footer-box p-font">
+                <button onClick={downloadCallback} className={classNames(
+                  'profile-page-progress-footer-box__button',
+                  'btn',
+                  'btn-green',
+                  )}>
+                  <span className="profile-page-progress-footer-box__button__text"> Download certificate </span>
+                  <span className="arrow-upright" />
+                </button>
+                <div onClick={copyToClipboard} className="profile-page-progress-footer-box__copy-link">Copy certificate link</div>
+              </div>
+            ) : (
+              <div className="profile-page-progress-footer-box p-font">
+                <Formik
+                  enableReinitialize
+                  initialValues={initialValue}
+                  validationSchema={ValidationSchema}
+                  onSubmit={handleSubmit}
+                  >
+                    {({
+                      values,
+                      errors,
+                      touched,
+                      handleChange,
+                      handleBlur,
+                      handleSubmit,
+                    }) => (
+                      <form className="profile-page-account-info__form" onSubmit={handleSubmit}>
+                        <button
+                          type='submit'
+                          className={classNames(
+                          'profile-page-progress-footer-box__button',
+                          'btn',
+                          'btn-green',
+                          )}>
+                          <span className="profile-page-progress-footer-box__button__text"> Issue certificate </span>
+                        </button>
+                        <div className='profile-page-account-info__name p-font'>
+                          <InputField
+                            label=""
+                            type="text"
+                            value={values.name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            name="name"
+                            inputStatus={
+                              errors.name && touched.name
+                                ? 'error' : !errors.name && touched.name 
+                                ? 'success' : undefined
+                              }
+                            errorMessage={errors.name && touched.name && errors.name}
+                            isDisabled={false}
+                          />
+                        </div>
+                      </form>
+                  )}
+                </Formik>
+              </div>
+            )}
+          </>)}
+          <div className={classNames("profile-page-progress__image",
+          user && !user.name && 'pendingCertificate',
+          user && user.name && isCertificate && "isCertificate"
+          )} />
         </>
       ) : null}
     </>

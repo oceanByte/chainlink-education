@@ -9,5 +9,6 @@ import solution from '!raw-loader!./solution.md'
 import { questions } from './questions'
 
 import { Data } from 'pages/Chapter/Chapter.controller'
+import { validatorContent } from './validatorContent'
 
-export const data: Data = { course, exercise: undefined, solution, supports: { }, questions }
+export const data: Data = { course, exercise: undefined, solution, supports: { }, questions, validatorContent }

@@ -31,12 +31,31 @@ export type Question = {
   proposedResponses?: string[]
 }
 
+export interface IValidator {
+  validatorState: string
+  validateCallback: () => void
+  validatorContent: IValidatorContent
+}
+
+export interface IValidatorContent {
+  pending: {
+    [key: string]: string
+  },
+  wrong: {
+    [key: string]: string
+  },
+  right: {
+    [key: string]: string
+  },
+}
+
 export interface Data {
   course: string | undefined
   exercise: string | undefined
   solution: string | undefined
   supports: Record<string, string | undefined>
-  questions: Question[]
+  questions: Question[],
+  validatorContent: IValidatorContent
 }
 
 export const Chapter = () => {
@@ -54,6 +73,11 @@ export const Chapter = () => {
     solution: undefined,
     supports: {},
     questions: [],
+    validatorContent: {
+      pending: {},
+      right: {},
+      wrong: {}
+    }
   })
   const [percent, setPercent] = useState(0)
   const [stateChapter, setStateChapter] = useState({
@@ -92,6 +116,7 @@ export const Chapter = () => {
             questions: chapter.data.questions.map((question) => {
               return { ...question, proposedResponses: [] }
             }),
+            validatorContent: chapter.data.validatorContent,
           })
       })
     })
@@ -278,6 +303,7 @@ export const Chapter = () => {
         <ChapterView
           validatorState={validatorState}
           validateCallback={validateCallback}
+          validatorContent={data.validatorContent}
           solution={data.solution}
           proposedSolution={data.exercise}
           proposedSolutionCallback={proposedSolutionCallback}

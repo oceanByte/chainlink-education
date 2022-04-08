@@ -11,6 +11,6 @@ import exercise from '!raw-loader!./exercise.md'
 // @ts-ignore
 import solution from '!raw-loader!./solution.md'
 
+import { validatorContent } from './validatorContent'
 
-
-export const data: Data = { course, exercise, solution, supports: {}, questions: [] }
+export const data: Data = { course, exercise, solution, supports: {}, questions: [], validatorContent }

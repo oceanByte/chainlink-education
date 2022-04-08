@@ -2172,11 +2172,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@ramonak/react-progress-bar@^3.1.0":
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@ramonak/react-progress-bar/-/react-progress-bar-3.3.1.tgz#250a3a893237ef1365e22e9685a6f20798df576a"
-  integrity sha512-U4vmF/hqoydfshDrpVpUKk4t0QT65AXaICk18VnDzIuQnlcN770d9AfI1hQRK0FczUj47Lkct0Av5hBgVPRsuw==
-
 "@redux-offline/redux-offline@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@redux-offline/redux-offline/-/redux-offline-2.6.0.tgz#4db5d81b89ab0372115134e1671c9389e8d3d8e1"

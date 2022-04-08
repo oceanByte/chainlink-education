@@ -10,4 +10,6 @@ import { questions } from './questions'
 
 import { Data } from 'pages/Chapter/Chapter.controller'
 
-export const data: Data = { course, exercise: undefined, solution, supports: { }, questions }
+import { validatorContent } from './validatorContent'
+
+export const data: Data = { course, exercise: undefined, solution, supports: { }, questions, validatorContent }

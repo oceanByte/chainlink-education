@@ -1,7 +1,6 @@
 import { Button } from 'app/App.components/Button/Button.controller'
 import * as React from 'react'
 import { useLocation } from 'react-router-dom'
-import ProgressBar from '@ramonak/react-progress-bar'
 
 import { Link } from 'react-router-dom'
 
@@ -12,7 +11,14 @@ export const FooterView = ({ nextChapter, previousChapter, percent }: any) => {
   return (
     <FooterStyled>
       <ProgressBarWrapper>
-        <ProgressBar baseBgColor={'silver'} bgColor={'#00C08B'} completed={percent} />
+        <div className="course-progress__bar">
+          <div className="line">
+            <div className="completed" style={{ width: `${percent}%` }} />
+            <div className="label">
+              {percent}%
+            </div>
+          </div>
+        </div>
       </ProgressBarWrapper>
       <LinkStyled>
         <Link to={previousChapter}>

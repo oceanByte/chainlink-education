@@ -11,6 +11,7 @@ import solution from '!raw-loader!./solution.md'
 // @ts-ignore
 
 import { Data } from 'pages/Chapter/Chapter.controller'
-import { questions } from './questions'
 
-export const data: Data = { course, exercise, solution, supports: { }, questions: [] }
+import { validatorContent } from './validatorContent'
+
+export const data: Data = { course, exercise, solution, supports: { }, questions: [], validatorContent }

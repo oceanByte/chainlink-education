@@ -113,24 +113,24 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
           <div className="header-menu-list">
             <div className="header-menu-list__item">
               <button className="btn" onClick={showListAcademy}>
-                Academy <span>&#9660;</span>
+                Courses <span>&#9660;</span>
               </button>
               <div className={classnames('courses-list', !isDropdownOpen && 'hidden')}>
                 <CoursesListView user={user} pathname={pathname} />
               </div>
             </div>
+            {user? (
+              <div className="header-menu-list__item">
+                <button className="ml-30 btn" onClick={() => history.push('/profile')}>
+                  Your Progress
+                </button>
+              </div>
+            ): null}
             <div className="header-menu-list__item">
               <button className="ml-30 btn" onClick={() => window.open('https://chain.link/', '_blank')}>
                 Ecosystem
               </button>
             </div>
-            {user? (
-              <div className="header-menu-list__item">
-                <button className="ml-30 btn" onClick={() => history.push('/profile')}>
-                  Progress
-                </button>
-              </div>
-            ): null}
           </div>
           <div className="header-menu-cred lg">{user ? loggedInHeader : loggedOutHeader}</div>
           <div
@@ -146,20 +146,21 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
           <div className="header__item-border" />
           <div className="header-list-mobile__item">
             <button className="btn" onClick={showListAcademyMobile}>
-              Academy <span>&#9660;</span>
+              Courses <span>&#9660;</span>
             </button>
             <div className={classnames('courses-list', isShowList && 'show')}>
               <CoursesListView user={user} pathname={pathname} isMobile />
             </div>
           </div>
+          <div className="header__item-border" />
+          <div className="header-list-mobile__item">
+            <button className="btn" onClick={() => history.push('/profile')}>
+              Your Progress
+            </button>
+          </div>
           <div className="header-list-mobile-border" />
           <div className="header-list-mobile__item">
             <button className="btn">Ecosystem</button>
-          </div>
-          <div className="header-list-mobile__item">
-            <button className="btn" onClick={() => history.push('/profile')}>
-              Progress
-            </button>
           </div>
           <div className="header__item-border" />
           <div className="header-list-mobile__item">
