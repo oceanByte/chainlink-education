@@ -1,3 +1,3 @@
-# VRF V2 Introduction
+# VRF Introduction
 
-A short description here. WIP.
+An introduction to randomness on the Blockchain and Chainlink VRF
