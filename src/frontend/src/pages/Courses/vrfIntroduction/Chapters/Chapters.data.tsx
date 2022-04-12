@@ -18,67 +18,67 @@ import { data as chapter9 } from './Chapter-9'
 export const chapterData: ChapterData[] = [
   {
     pathname: `/${course.path}/chapter-1`,
-    name: 'What will this course cover?',
+    name: 'Randomness',
     data: chapter1,
   },
   {
     pathname: `/${course.path}/chapter-2`,
-    name: 'What are Contracts?',
+    name: 'Randomness and Blockchains',
     data: chapter2,
   },
   {
     pathname: `/${course.path}/chapter-3`,
-    name: 'Digital Agreements - What we have today',
+    name: 'Chainlink VRF',
     data: chapter3,
   },
   {
     pathname: `/${course.path}/chapter-4`,
-    name: 'Smart Contracts - The Future',
+    name: 'Architecture of Chainlink VRF',
     data: chapter4,
   },
   {
     pathname: `/${course.path}/chapter-5`,
-    name: 'The Smart Contract Connectivity Problem',
+    name: 'Subscribing to the VRF',
     data: chapter5,
   },
   {
     pathname: `/${course.path}/chapter-6`,
-    name: 'Chainlink Data Feeds',
+    name: 'Imports',
     data: chapter6,
   },
   {
     pathname: `/${course.path}/chapter-7`,
-    name: 'Conclusion',
+    name: 'Configuring Subscription Settings',
     data: chapter7,
   },
   {
     pathname: `/${course.path}/chapter-8`,
-    name: 'The Smart Contract Connectivity Problem',
+    name: 'Setting Storage Variables',
     data: chapter8,
   },
   {
     pathname: `/${course.path}/chapter-9`,
-    name: 'Centralized Oracles',
+    name: 'The Constructor',
     data: chapter9,
   },
   {
     pathname: `/${course.path}/chapter-10`,
-    name: 'Centralized Oracles',
+    name: 'Requesting Randomness',
     data: chapter10,
   },
   {
     pathname: `/${course.path}/chapter-11`,
-    name: 'Centralized Oracles',
+    name: 'Recieving Randomness',
     data: chapter11,
   },
   {
     pathname: `/${course.path}/chapter-12`,
-    name: 'Centralized Oracles',
+    name: 'Subscribing',
     data: chapter12,
   },
   {
     pathname: `/${course.path}/chapter-13`,
-    name: 'Centralized Oracles',
+    name: 'Conclusion',
     data: chapter13,
   },
 ]

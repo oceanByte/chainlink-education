@@ -127,7 +127,7 @@ export const Chapter = () => {
           }
         }
 
-        if (i !== 7) {
+        if (i + 1 !== chapterData.length) {
           setPercent(() => ((i + 1) / chapterData.length) * 100)
         } else setPercent(() => 100)
       }
