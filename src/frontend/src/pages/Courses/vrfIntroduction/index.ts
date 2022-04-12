@@ -6,5 +6,6 @@ import { Course } from '../../Course/Course.controller'
 
 export const course: Course = {
     path: "vrfIntroduction",
-    description: data
+    description: data,
+    amountOfTime: '4 hours', 
 }

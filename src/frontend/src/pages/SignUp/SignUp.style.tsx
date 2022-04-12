@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-import { Card, CardPage, FadeInFromTop } from '../../styles'
+import { Card, CardPage, FadeInFromTop, grayscale2 } from '../../styles'
 import { grayscale1 } from 'styles'
 
 export const SignUpStyled = styled(CardPage)`
@@ -62,7 +62,7 @@ export const CheckboxWrapp = styled.div`
     &-text {
       margin-left: 10px;
       font-family: Circular Std Book;
-      color: $grayscale2;
+      color: ${grayscale2};
       font-size: 14px;
     }
   }

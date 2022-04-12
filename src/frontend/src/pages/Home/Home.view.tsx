@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 import { PublicUser } from 'shared/user/PublicUser'
 import { CourseCardView } from 'app/App.components/CourseCard/CourseCard.view'
-import { Option } from 'app/App.components/Select/Select.view'
 import 'aos/dist/aos.css'
 
 type HomeViewProps = {
@@ -38,7 +37,6 @@ export const COURSES = [
 ]
 
 export const HomeView = ({ user }: HomeViewProps) => {
-  let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
 
   useEffect(() => {
     AOS.init({
@@ -68,22 +66,27 @@ export const HomeView = ({ user }: HomeViewProps) => {
       </div>
       <div className="home-ellipse home-ellipse-1" />
 
-      <div className="home-wrapper courses">
+      <div className="home-content courses">
         <div className="home-content home-courses-content">
-          <div className="home-courses-content__header h-font">Get started now</div>
+          <div className="home-courses-content__header h-font">
+            <div className="home-courses-content__header-text" data-aos="fade-up" data-aos-delay="100">
+              Get started now
+            </div>
+            <div className="home-courses-content__header__line" />
+          </div>
           {user && user.courses && user.courses.length > 0 ? (
-            <div className="home-courses-content__items">
+            <div className="home-courses-content__items" data-aos="fade-up" data-aos-delay="150">
               {user.courses?.map((course) => (
-                <div key={course._id} className="home-course">
-                  <CourseCardView course={course} user={user} activeCourse={defaultCourse} />
+                <div key={course._id} className="home-courses-content__item">
+                  <CourseCardView course={course} user={user} />
                 </div>
               ))}
             </div>
           ) : (
-            <div className="home-courses-content__items">
+            <div className="home-courses-content__items" data-aos="fade-up" data-aos-delay="150">
               {COURSES.map((course) => (
-                <div key={course.title} className="home-course">
-                  <CourseCardView course={course} user={user} activeCourse={defaultCourse} />
+                <div key={course.title} className="home-courses-content__item">
+                  <CourseCardView course={course} user={user} />
                 </div>
               ))}
             </div>

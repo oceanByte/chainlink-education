@@ -19,6 +19,21 @@ export const headerColor = '#10122399'
 export const inactiveColor = '#242649'
 export const counterColor = '#6D728F'
 export const okColor = '#12650a'
-export const grayscale1 = '#0c162c'
+
+export const primary = '#375bd2'
+
+export const secondary1 = '#212F67'
+export const secondary2 = '#dfe7fb'
 export const secondary3 = '#05c46b'
+export const secondary3Hover = '#00AA5B'
+export const secondary3Disabled = '#05C46B'
+export const secondary4 = '#0ea6e8'
+export const secondary5 = '#ff5e57'
+export const secondary6 = '#ffa451'
+export const secondary6Hover = '#cf8744'
+
+export const grayscale1 = '#0c162c'
+export const grayscale2 = '#3d4556'
+export const grayscale3 = '#D4DBEA'
+export const grayscale4 = '#5f7fd'
 
