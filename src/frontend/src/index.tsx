@@ -7,7 +7,7 @@ import TagManager from 'react-gtm-module'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 // import TwitterConvTrkr from 'react-twitter-conversion-tracker'
-import LogRocket from 'logrocket';
+import LogRocket from 'logrocket'
 
 import { App } from './app/App.controller'
 import { configureStore } from './app/App.store'
@@ -22,12 +22,12 @@ export const store = configureStore({})
 
 const LOG_ROCKET_PROJECT_ID = 'xh6oiw/chainlink-education-test'
 
-LogRocket.init(LOG_ROCKET_PROJECT_ID);
+LogRocket.init(LOG_ROCKET_PROJECT_ID)
 
-ReactGA.initialize('UA-XXXXXXXX-1', {
+ReactGA.initialize('UA-217999792-1', {
   gaOptions: {
-    cookieFlags: 'SameSite=None;Secure'
-  }
+    cookieFlags: 'SameSite=None;Secure',
+  },
 })
 // hotjar.initialize(111111, 1)
 
