@@ -2,7 +2,6 @@ import React from 'react'
 
 import { CourseView } from './Course/Course.view'
 import { PublicUser } from 'shared/user/PublicUser'
-// import { Option } from '../Select/Select.view'
 import { Course } from 'shared/course'
 
 interface ICoursesListView {

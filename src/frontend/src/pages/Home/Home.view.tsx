@@ -1,10 +1,14 @@
-import AOS from 'aos'
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+import AOS from 'aos'
+
 import { PublicUser } from 'shared/user/PublicUser'
-import { CourseCardView } from 'app/App.components/CourseCard/CourseCard.view'
+
+import { CourseCards } from 'app/App.components/CourseCard/CourseCard.controller'
+
 import 'aos/dist/aos.css'
+
 
 type HomeViewProps = {
   user?: PublicUser
@@ -24,14 +28,14 @@ export const COURSES = [
     title: 'Solidity Introduction',
     description: `Solidity is an object-oriented, high-level language for implementing smart contracts. COMING SOON.`,
     difficulty: 3,
-    status: 'New',
+    status: 'NEW',
     progress: [],
   },
   {
     title: 'VRF v2 Introduction',
     description: `Study how VRF can be used to bring Verfiable Randomness to blockchain.`,
     difficulty: 3,
-    status: 'New',
+    status: 'NEW',
     progress: [],
   },
 ]
@@ -74,23 +78,9 @@ export const HomeView = ({ user }: HomeViewProps) => {
             </div>
             <div className="home-courses-content__header__line" />
           </div>
-          {user && user.courses && user.courses.length > 0 ? (
-            <div className="home-courses-content__items" data-aos="fade-up" data-aos-delay="150">
-              {user.courses?.map((course) => (
-                <div key={course._id} className="home-courses-content__item">
-                  <CourseCardView course={course} user={user} />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="home-courses-content__items" data-aos="fade-up" data-aos-delay="150">
-              {COURSES.map((course) => (
-                <div key={course.title} className="home-courses-content__item">
-                  <CourseCardView course={course} user={user} />
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="home-courses-content__items" data-aos="fade-up" data-aos-delay="150">
+            <CourseCards courses={user? user.courses : COURSES} user={user} />
+          </div>
         </div>
       </div>
 

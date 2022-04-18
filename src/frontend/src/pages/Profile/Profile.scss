@@ -9,9 +9,15 @@
   background: url("../../assets/profile-page-ellipse.png") no-repeat left 50%;
   @include fluid-size("background-position-y", 375px, 1600px, 0px, -150px);
   background-size: contain;
+  padding-bottom: 75px;
+
   @include md {
     flex-direction: column;
     align-items: center;
+    padding-bottom: 200px;
+  }
+  @include sm {
+    padding-bottom: 270px;
   }
 }
 
@@ -52,6 +58,37 @@
         //
         //  @include element-color($primary);
         //}
+        &.profile-item {
+          &-progress {
+            & > .profile-icon {
+              background: url("../../assets/profile-progressBlue.svg") no-repeat;
+              background-size: contain;
+            }
+          }
+    
+          &-certificate {
+            & > .profile-icon {
+              background: url("../../assets/profile-certificateBlue.svg") no-repeat;
+              background-size: contain;
+            }
+          }
+    
+          &-info {
+            & > .profile-icon {
+              background: url("../../assets/profile-infoBlue.svg") no-repeat;
+              background-size: contain;
+    
+            }
+          }
+    
+          &-reset {
+            & > .profile-icon {
+              background: url("../../assets/profile-resetBlue.svg") no-repeat;
+              background-size: contain;
+            }
+          }
+        }
+        
       }
 
       & > .profile-icon {
@@ -72,18 +109,26 @@
     }
 
     & > .profile-item {
+      
+      &-progress {
+        & > .profile-icon {
+          background: url("../../assets/profile-progress.svg") no-repeat;
+          background-size: contain;
+        }
+      }
+
+      &-certificate {
+        & > .profile-icon {
+          background: url("../../assets/profile-certificate.svg") no-repeat;
+          background-size: contain;
+        }
+      }
+
       &-info {
         & > .profile-icon {
           background: url("../../assets/profile-info.svg") no-repeat;
           background-size: contain;
 
-        }
-      }
-
-      &-progress {
-        & > .profile-icon {
-          background: url("../../assets/profile-progress.svg") no-repeat;
-          background-size: contain;
         }
       }
 
@@ -129,7 +174,7 @@
   &__header {
     font-weight: 900;
     @include fluid-size("font-size", 375px, 1600px, 20px, 32px);
-    @include fluid-size("line-height", 375px, 1600px, 24px, 38pxpx);
+    @include fluid-size("line-height", 375px, 1600px, 24px, 38px);
   }
 }
 

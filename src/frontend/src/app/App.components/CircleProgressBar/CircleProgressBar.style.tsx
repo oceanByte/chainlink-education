@@ -1,11 +1,15 @@
 import styled from 'styled-components/macro'
 import { secondary2, textColorBlue } from 'styles'
 
-interface CircleStyledProps {
-  percentage: number;
-}
+export const CircleStyled = styled.svg`
+  width: 60px;
+  height: 60px;
 
-export const CircleStyled = styled.svg<{ percentage?: number }>`
+  @media screen and (max-width: 576px) {
+    width: 50px;
+    height: 50px;
+  }
+
   .circle-background,
   .circle-progress {
     fill: none;
@@ -13,12 +17,10 @@ export const CircleStyled = styled.svg<{ percentage?: number }>`
 
   .circle-background {
     stroke: ${secondary2};
-    stroke-width: 5px;
   }
 
   .circle-progress {
     stroke: url(#GradientColor);
-    stroke-width: 5px;
   }
 
   .circle-text {
@@ -29,5 +31,11 @@ export const CircleStyled = styled.svg<{ percentage?: number }>`
     fill: ${textColorBlue};
     width: 60px;
     z-index: 1;
+
+    @media screen and (max-width: 576px) {
+      width: 50px;
+      font-size: 14px;
+      line-height: 17px;
+    }
   }
 `

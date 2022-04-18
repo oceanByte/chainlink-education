@@ -42,6 +42,12 @@ export const ButtonStyled = styled.button`
   padding-left: 25px;
   padding-right: 49px;
 
+  @media (max-width: 576px) {
+    height: 50px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
   .arrow-upright,
   .arrow-down,
   .arrow-left,
@@ -51,11 +57,6 @@ export const ButtonStyled = styled.button`
     position: absolute;
     top: 16px;
     right: 16px;
-
-    @include sm {
-      height: 9px;
-      width: 9px;
-    }
   }
 
   &:disabled {
@@ -71,6 +72,12 @@ export const ButtonStyled = styled.button`
 
     .arrow-upright {
       background: url(${arrowUpRightWhite}) no-repeat;
+
+      @media screen and (max-width: 576px) {
+        width: 10px;
+        height: 10px;
+        background-size: contain;
+      }
     }
 
     &.isCompleted {
@@ -105,15 +112,42 @@ export const ButtonStyled = styled.button`
 
     .arrow-upright {
       background: url(${arrowUpRightBlue}) no-repeat;
+
+      @media screen and (max-width: 576px) {
+        width: 10px;
+        height: 10px;
+        background-size: contain;
+      }
     }
 
     &.isCompleted {
       .arrow-down {
         height: 24px;
         width: 24px;
-        top: 16px;
+        top: 50%;
         right: 16px;
+        transform: translateY(-50%);
         background: url(${arrowDownBlue}) no-repeat;
+        transition: all .2s ease-in-out;
+
+        @media screen and (max-width: 576px) {
+          width: 18px;
+          height: 18px;
+          background-size: contain;
+        }
+      }
+
+      &.hasArrowUp {
+        .arrow-down {
+          transform: translateY(-50%) rotate(180deg);
+          transition: all .2s ease-in-out;
+
+          @media screen and (max-width: 576px) {
+            width: 18px;
+            height: 18px;
+            background-size: contain;
+          }
+        }
       }
     }
   }

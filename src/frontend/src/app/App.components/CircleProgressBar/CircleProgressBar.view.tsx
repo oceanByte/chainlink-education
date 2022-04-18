@@ -9,16 +9,14 @@ interface ICircularProgressBar {
 
 export const CircularProgressBar = ({ sqSize, percentage, strokeWidth}: ICircularProgressBar) => {
   const radius = (+sqSize - +strokeWidth) / 2;
+  const circumferency = radius * Math.PI * 2;
   const viewBox = `0 0 ${sqSize} ${sqSize}`;
-  const dashArray = radius * Math.PI * 2;
-  const dashOffset = dashArray - dashArray * percentage / 100;
+  const dashOffset = circumferency - circumferency * percentage / 100;
 
   return (
       <CircleStyled
-        width={sqSize}
-        height={sqSize}
-        percentage={percentage}
-        viewBox={viewBox}>
+        viewBox={viewBox}
+        >
           <defs>
             <linearGradient id="GradientColor" gradientTransform="rotate(55.74)">
               <stop offset="1.98%" stopColor="#0EA6E8" />
@@ -39,18 +37,17 @@ export const CircularProgressBar = ({ sqSize, percentage, strokeWidth}: ICircula
           strokeWidth={`${strokeWidth}px`}
           // Start progress marker at 12 O'Clock
           transform={`rotate(-90 ${+sqSize / 2} ${+sqSize / 2})`}
-          style={{
-            strokeDasharray: dashArray,
-            strokeDashoffset: dashOffset
-          }} />
+          strokeDashoffset={dashOffset}
+          strokeDasharray={circumferency}
+          />
         <text
           className="circle-text"
           x="50%"
           y="50%"
           dy=".3em"
           textAnchor="middle">
-          {`${+percentage}%`}
+          {`${percentage}%`}
         </text>
-    </CircleStyled>
+      </CircleStyled>
   );
 }

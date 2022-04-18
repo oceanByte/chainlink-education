@@ -18,6 +18,7 @@ import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePa
 import { CoursesListView } from 'app/App.components/CoursesList/CourseList.view'
 import { DeleteAccountModal } from 'modals/DeleteAccount/DeleteAccount.view'
 import { InputField } from 'app/App.components/Form/InputField/Input.controller';
+import { Certificates } from 'app/App.components/Certificates/Certificates.controller';
 
 type ProfileViewProps = {
   user?: PublicUser,
@@ -108,17 +109,23 @@ export const ProfileView = ({
           <div onClick={() => setSection(1)}
                className={`profile-page-sections-content__item profile-item-progress ${section === 1 ? 'profile-item-selected' : ''}`}>
             <div className='profile-icon' />
-            <div className='profile-text'>Progress & Certificate</div>
+            <div className='profile-text'>Progress</div>
           </div>
           <div className='profile-page-sections-content__line' />
           <div onClick={() => setSection(2)}
-               className={`profile-page-sections-content__item profile-item-info ${section === 2 ? 'profile-item-selected' : ''}`}>
+               className={`profile-page-sections-content__item profile-item-certificate ${section === 2 ? 'profile-item-selected' : ''}`}>
+            <div className='profile-icon' />
+            <div className='profile-text'>Certificate</div>
+          </div>
+          <div className='profile-page-sections-content__line' />
+          <div onClick={() => setSection(3)}
+               className={`profile-page-sections-content__item profile-item-info ${section === 3 ? 'profile-item-selected' : ''}`}>
             <div className='profile-icon' />
             <div className='profile-text'>Account Info</div>
           </div>
           <div className='profile-page-sections-content__line' />
-          <div onClick={() => setSection(3)}
-               className={`profile-page-sections-content__item profile-item-reset ${section === 3 ? 'profile-item-selected' : ''}`}>
+          <div onClick={() => setSection(4)}
+               className={`profile-page-sections-content__item profile-item-reset ${section === 4 ? 'profile-item-selected' : ''}`}>
             <div className='profile-icon' />
             <div className='profile-text'>Reset Password</div>
           </div>
@@ -132,7 +139,10 @@ export const ProfileView = ({
           getCertificateCallback={getCertificateCallback}
         />
       </div>
-      <div className={`profile-page-account-info profile-page-section ${section === 2 ? 'profile-page-visible' : ''}`}>
+      <div className={`profile-page-progress profile-page-section ${section === 2 ? 'profile-page-visible' : ''}`}>
+        <Certificates user={user} />
+      </div>
+      <div className={`profile-page-account-info profile-page-section ${section === 3 ? 'profile-page-visible' : ''}`}>
         <div className='profile-page-account-info-wrapper'>
           <div className='profile-page-section__header h-font'>Account info</div>
           <div className='profile-page-account-info__username p-font'>
@@ -197,7 +207,7 @@ export const ProfileView = ({
         </div>
       </div>
       <div
-        className={`profile-page-reset-password profile-page-section ${section === 3 ? 'profile-page-visible' : ''}`}>
+        className={`profile-page-reset-password profile-page-section ${section === 4 ? 'profile-page-visible' : ''}`}>
         <UpdatePassword setShowModal={setIsConfirmPassVisible} />
       </div>
       <ConfirmYouPassword showModal={isConfirmPassVisible} setShowModal={setIsConfirmPassVisible} />

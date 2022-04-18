@@ -10,21 +10,23 @@ type MainButtonViewProps = {
   text: string
   onClick?: () => void
   type?: ButtonTypes
-  loading: boolean,
-  disabled?: boolean,
-  isSecondary?: boolean,
-  isPrimary?: boolean,
-  isCompleted?: boolean,
-  isChapter?: boolean,
-  hasArrowUpRight?: boolean,
-  hasArrowRight?: boolean,
-  hasArrowLeft?: boolean,
-  hasArrowDown?: boolean,
+  className?: string
+  loading: boolean
+  disabled?: boolean
+  isSecondary?: boolean
+  isPrimary?: boolean
+  isCompleted?: boolean
+  isChapter?: boolean
+  hasArrowUpRight?: boolean
+  hasArrowRight?: boolean
+  hasArrowLeft?: boolean
+  hasArrowDown?: boolean
 }
 
 export const MainButtonView = ({
   text,
   disabled,
+  className,
   onClick,
   type,
   loading,
@@ -48,6 +50,7 @@ export const MainButtonView = ({
         hasArrowRight && 'hasArrowRight',
         hasArrowLeft && 'hasArrowLeft',
         hasArrowDown && 'hasArrowDown',
+        className
       )}
       onClick={onClick}
       type={type}

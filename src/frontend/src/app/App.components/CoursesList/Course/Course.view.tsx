@@ -14,7 +14,6 @@ import { chapterData as SolidityIntroductionChapters } from '../../../../pages/C
 import { chapterData as vrfIntroductionChapters } from '../../../../pages/Courses/vrfIntroduction/Chapters/Chapters.data'
 
 import { PublicUser } from 'shared/user/PublicUser'
-// import { Option } from '../../Select/Select.view'
 import { ChaptersListView } from 'app/App.components/ChaptersList/ChaptersListView'
 import { Course } from 'shared/course'
 import { CourseNameType } from 'pages/Course/Course.data'
