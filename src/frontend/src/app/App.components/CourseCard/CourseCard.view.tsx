@@ -11,9 +11,9 @@ import { MainButtonView } from '../MainButton/MainButton.view'
 import { CircularProgressBar } from '../CircleProgressBar/CircleProgressBar.view'
 import { ShareCertificate } from '../ShareCertificate/ShareCertificate.view'
 import { BadgeView } from '../Badge/Badge.view'
-import { IDataCourses } from '../Certificates/Certificates.view'
+import { IDataCourses } from '../Profile/Certificates/Certificates.view'
 
-const MAX_DIFFICULTY = 5;
+import { MAX_DIFFICULTY } from '../Profile/OverallProgress/OveralProgress.view'
 
 interface ICourseView {
   course: Course

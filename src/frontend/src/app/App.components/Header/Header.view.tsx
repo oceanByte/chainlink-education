@@ -72,13 +72,16 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
         </div>
         <div className={additionalUserMenu}>
           <div className="header-menu-user-menu__item">
-            <Link to="/profile">Progress & Certificate</Link>
+            <Link to="/profile/progress">Progress</Link>
           </div>
           <div className="header-menu-user-menu__item">
-            <Link to="/profile?accountInfo=2">Account info</Link>
+            <Link to="/profile/certificates">Certificate</Link>
           </div>
           <div className="header-menu-user-menu__item">
-            <Link to="/profile?resetPassword=3">Reset password</Link>
+            <Link to="/profile/account-info">Account info</Link>
+          </div>
+          <div className="header-menu-user-menu__item">
+            <Link to="/profile/reset-password">Reset password</Link>
           </div>
           <div className="header-menu-user-menu__item">
             <div onClick={removeAuthUserCallback}>Log out</div>
@@ -121,7 +124,7 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
             </div>
             {user? (
               <div className="header-menu-list__item">
-                <button className="ml-30 btn" onClick={() => history.push('/profile')}>
+                <button className="ml-30 btn" onClick={() => history.push('/profile/progress')}>
                   Your Progress
                 </button>
               </div>
@@ -154,7 +157,7 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
           </div>
           <div className="header__item-border" />
           <div className="header-list-mobile__item">
-            <button className="btn" onClick={() => history.push('/profile')}>
+            <button className="btn" onClick={() => history.push('/profile/progress')}>
               Your Progress
             </button>
           </div>

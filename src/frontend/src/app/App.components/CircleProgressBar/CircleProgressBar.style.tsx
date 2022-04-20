@@ -5,6 +5,11 @@ export const CircleStyled = styled.svg`
   width: 60px;
   height: 60px;
 
+  &.isOverallProgress {
+    width: 80px;
+    height: 80px;
+  }
+
   @media screen and (max-width: 576px) {
     width: 50px;
     height: 50px;
@@ -31,6 +36,11 @@ export const CircleStyled = styled.svg`
     fill: ${textColorBlue};
     width: 60px;
     z-index: 1;
+
+    @media screen and (max-width: 768px) {
+      font-size: 16px;
+      line-height: 22px;
+    }
 
     @media screen and (max-width: 576px) {
       width: 50px;

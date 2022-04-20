@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { CourseStatusType } from '../../../pages/Course/Course.data'
+import { CourseStatusType } from '../../../../pages/Course/Course.data'
 
 import { Course } from 'shared/course'
 import { PublicUser } from 'shared/user/PublicUser'
-import { BadgeView } from '../Badge/Badge.view'
-import { MainButtonView } from '../MainButton/MainButton.view'
-import { ShareCertificate } from '../ShareCertificate/ShareCertificate.view'
+import { BadgeView } from '../../Badge/Badge.view'
+import { MainButtonView } from '../../MainButton/MainButton.view'
+import { ShareCertificate } from '../../ShareCertificate/ShareCertificate.view'
 
 export interface IDataCourses {
   courses: any

@@ -1,13 +1,15 @@
+import classnames from 'classnames';
 import React from 'react'
 import { CircleStyled } from './CircleProgressBar.style';
 
 interface ICircularProgressBar {
   sqSize: string
   percentage: number,
-  strokeWidth: string
+  strokeWidth: string,
+  isOverallProgress?: boolean,
 }
 
-export const CircularProgressBar = ({ sqSize, percentage, strokeWidth}: ICircularProgressBar) => {
+export const CircularProgressBar = ({ sqSize, percentage, strokeWidth, isOverallProgress}: ICircularProgressBar) => {
   const radius = (+sqSize - +strokeWidth) / 2;
   const circumferency = radius * Math.PI * 2;
   const viewBox = `0 0 ${sqSize} ${sqSize}`;
@@ -16,6 +18,7 @@ export const CircularProgressBar = ({ sqSize, percentage, strokeWidth}: ICircula
   return (
       <CircleStyled
         viewBox={viewBox}
+        className={classnames(isOverallProgress && 'isOverallProgress')}
         >
           <defs>
             <linearGradient id="GradientColor" gradientTransform="rotate(55.74)">

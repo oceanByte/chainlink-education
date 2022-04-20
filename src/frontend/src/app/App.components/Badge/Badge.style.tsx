@@ -84,6 +84,45 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
     }
   }
 
+  .only-small-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 60px;
+    position: relative;
+
+    .badge {
+      width: 43px;
+      height: 48px;
+      background: url(${badgeSmallNoCompleted}) no-repeat center;
+    }
+
+    &.isCompleted {
+      .badge {
+        width: 43px;
+        height: 48px;
+
+        &.chainlink-101 {
+          background: url(${badgeSmall_Chainlink}) no-repeat center;
+        }
+        &.soliditi-intro {
+          background: url(${badgeSmall_SolidityIntroduction}) no-repeat center;
+        }
+        &.vrf-v2 {
+          background: url(${badgeSmall_VRFv2Introduction}) no-repeat center;
+        }
+        &.advanced-vrf-v2 {
+          background: url(${badgeSmall_AdvancedVRFv2Introduction}) no-repeat center;
+        }
+        &.chainlink-keepers {
+          background: url(${badgeSmall_ChainlinkKeepers}) no-repeat center;
+        }
+      }
+    }
+  }
+
   @media screen and (min-width: 1300px) {
     .large-badge {
       display: flex;

@@ -64,7 +64,8 @@ export const getCoursesData = (courses: Course[]) => {
       percent: Math.floor((courseProgress / chapters.length) * 100),
       countChapters: chapters.length,
       amountOfTime:  additionalInfo?.amountOfTime,
-      urlChapter
+      urlChapter,
+      urlCourse: additionalInfo.path
     }
 
     numberAllChapters += chapters.length;

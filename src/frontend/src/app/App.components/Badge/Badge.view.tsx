@@ -15,7 +15,7 @@ const DASH_ARRAY_FOR_SMALL = 6 * 30;
 const DASH_ARRAY_FOR_MEDIUM = 6 * 58.6666;
 const DASH_ARRAY_FOR_LARGE = 6 * 62.3333333;
 
-export const BadgeView = ({ percentage, hasMediumBadge, isCompleted, title }: IBadgeView) => {
+export const BadgeView = ({ percentage, hasMediumBadge, hasSmallBadge, isCompleted, title }: IBadgeView) => {
 
   const getDashOfSet = (dashArray: number) => dashArray - dashArray * percentage / 100
 
@@ -54,6 +54,22 @@ export const BadgeView = ({ percentage, hasMediumBadge, isCompleted, title }: IB
                 style={{
                   strokeDasharray: DASH_ARRAY_FOR_MEDIUM,
                   strokeDashoffset: getDashOfSet(DASH_ARRAY_FOR_MEDIUM)
+                }}
+              />
+            </svg>
+            <div className={classnames('badge', getClassForCourse(title || ''))}></div>
+          </div>
+        ) : hasSmallBadge ? (
+          <div className={classnames('only-small-badge', isCompleted && 'isCompleted')}>
+            <svg width="55" height="60" viewBox="0 0 55 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23.7047 2.00273C26.0533 0.665757 28.9487 0.665757 31.2972 2.00273L50.2143 12.7718C52.5613 14.1079 54 16.572 54 19.231V40.769C54 43.428 52.5613 45.8921 50.2143 47.2282L31.2972 57.9973C28.9487 59.3342 26.0533 59.3342 23.7047 57.9973L4.78765 47.2282C2.44062 45.8921 1.00195 43.428 1.00195 40.769V19.231C1.00195 16.572 2.44062 14.1079 4.78765 12.7718L23.7047 2.00273Z" fill='white' stroke="#D4DBEA" strokeWidth="2"/>
+              <path
+                d="M23.7047 2.00273C26.0533 0.665757 28.9487 0.665757 31.2972 2.00273L50.2143 12.7718C52.5613 14.1079 54 16.572 54 19.231V40.769C54 43.428 52.5613 45.8921 50.2143 47.2282L31.2972 57.9973C28.9487 59.3342 26.0533 59.3342 23.7047 57.9973L4.78765 47.2282C2.44062 45.8921 1.00195 43.428 1.00195 40.769V19.231C1.00195 16.572 2.44062 14.1079 4.78765 12.7718L23.7047 2.00273Z"
+                stroke="#05C46B"
+                strokeWidth="2"
+                style={{
+                  strokeDasharray: DASH_ARRAY_FOR_SMALL,
+                  strokeDashoffset: getDashOfSet(DASH_ARRAY_FOR_SMALL)
                 }}
               />
             </svg>
