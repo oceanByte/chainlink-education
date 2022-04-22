@@ -203,40 +203,19 @@
         }
 
         &__difficulty {
-          width: 70px;
-          height: 34px;
-          background: $white;
-          border: 1px solid $grayscale4;
-          border-radius: 20px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          position: relative;
+          margin-left: 10px;
 
-          @media (max-width: 1160px) {
-            height: 26px;
-          }
-
-          .difficulty-items {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 50px;
-          }
-
-          .difficulty-item {
-            width: 6px;
-            height: 6px;
-            border: 1px solid $primary;
-            border-radius: 50%;
-
-            &.isFilled {
-              background:$primary;
+          .overall-progress {
+            @include md {
+              height: 26px;
+            }
+      
+            @include lg {
+              height: 26px;
+            } 
+            
+            @include xl {
+              height: 34px;
             }
           }
         }

@@ -53,6 +53,7 @@ export interface Data {
   course: string | undefined
   exercise: string | undefined
   solution: string | undefined
+  description: string | undefined
   supports: Record<string, string | undefined>
   questions: Question[],
   validatorContent: IValidatorContent
@@ -71,6 +72,7 @@ export const Chapter = () => {
     course: undefined,
     exercise: undefined,
     solution: undefined,
+    description: undefined,
     supports: {},
     questions: [],
     validatorContent: {
@@ -113,6 +115,7 @@ export const Chapter = () => {
             exercise: chapter.data.exercise,
             solution: chapter.data.solution,
             supports: chapter.data.supports,
+            description: chapter.data.description,
             questions: chapter.data.questions.map((question) => {
               return { ...question, proposedResponses: [] }
             }),

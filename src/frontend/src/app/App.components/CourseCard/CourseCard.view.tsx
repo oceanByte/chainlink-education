@@ -13,7 +13,8 @@ import { ShareCertificate } from '../ShareCertificate/ShareCertificate.view'
 import { BadgeView } from '../Badge/Badge.view'
 import { IDataCourses } from '../Profile/Certificates/Certificates.view'
 
-import { MAX_DIFFICULTY } from '../Profile/OverallProgress/OveralProgress.view'
+import { Difficulty } from './Difficulty/Difficulty.view'
+import { UseCertificate } from './UseCertificate/UseCertificate.view'
 
 interface ICourseView {
   course: Course
@@ -45,7 +46,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isShowList]);
-  
+
   return (
     <>
       <div className="course-inner">
@@ -59,13 +60,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
             />
           </div>
           <div className='course-inner__difficulty'>
-            <div className='course-inner__difficulty-items'>
-              {new Array(MAX_DIFFICULTY)
-                .fill('')
-                .map((_, index) => (
-                  <div key={index} className={classnames('course-inner__difficulty-item', index + 1 <= course.difficulty && 'isFilled')} />
-                ))}
-            </div>
+            <Difficulty difficulty={course.difficulty} />
           </div>
         </div>
         <div className='course-inner__container'>
@@ -90,7 +85,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
                   isPrimary
                   hasArrowUpRight
                   text='View Course'
-                  onClick={() => history.push(additionalInfo.urlChapter)}
+                  onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
                   loading={false}
                   disabled={false}
                 /> : null}
@@ -98,7 +93,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
                   isSecondary
                   hasArrowUpRight
                   text='Continue'
-                  onClick={() => history.push(additionalInfo.urlChapter)}
+                  onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
                   loading={false}
                   disabled={false}
                 /> : null}
@@ -115,25 +110,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
                       disabled={false}
                       className={isShowList ? 'hasArrowUp' : ''}
                     />
-
-                  <div className={classnames('useCertificate__list', isShowList && 'show')}>
-                    <ul>
-                      <li>
-                        <MainButtonView
-                          isCompleted
-                          isSecondary
-                          hasArrowDown
-                          text='Download certificate'
-                          onClick={() => history.push(additionalInfo.urlChapter)}
-                          loading={false}
-                          disabled={false}
-                        />
-                      </li>
-                      <li>
-                        <ShareCertificate />
-                      </li>
-                    </ul>
-                  </div>
+                  <UseCertificate isSecondary isShowList={isShowList} additionalInfo={additionalInfo} />
                   </div>
                   <div className='downloadCertificate'>
                     <MainButtonView
@@ -141,7 +118,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
                       isSecondary
                       hasArrowDown
                       text='Download certificate'
-                      onClick={() => history.push(additionalInfo.urlChapter)}
+                      onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
                       loading={false}
                       disabled={false}
                     />
@@ -160,7 +137,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
             ): null}
 
             {user && additionalInfo.percent && additionalInfo.percent === 100 ? (
-              <div className='downloadCertificate'>
+              <div className='shareCertificate'>
                 <ShareCertificate className="isCardCourse" />
               </div>
             ): null}

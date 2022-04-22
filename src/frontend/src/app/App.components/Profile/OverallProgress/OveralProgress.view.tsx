@@ -10,8 +10,7 @@ import { MainButtonView } from '../../MainButton/MainButton.view'
 import { CircularProgressBar } from '../../CircleProgressBar/CircleProgressBar.view'
 import { BadgeView } from '../../Badge/Badge.view'
 import { IDataCourses } from '../Certificates/Certificates.view'
-
-export const MAX_DIFFICULTY = 5;
+import { Difficulty } from 'app/App.components/CourseCard/Difficulty/Difficulty.view'
 
 interface ICourseView {
   infoCourses: IDataCourses
@@ -71,14 +70,8 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                                 <div className='course-additional-info__time item'>
                                   <div className='icon'/><div>{additionalInfo.amountOfTime}</div>
                                 </div>
-                                <div className='course-additional-info__difficulty item'> 
-                                  <div className='difficulty-items'>
-                                    {new Array(MAX_DIFFICULTY)
-                                      .fill('')
-                                      .map((_, index) => (
-                                        <div key={index} className={classnames('difficulty-item', index + 1 <= course.difficulty && 'isFilled')} />
-                                      ))}
-                                  </div>
+                                <div className='course-additional-info__difficulty'>
+                                  <Difficulty difficulty={course.difficulty} />
                                 </div>
                               </div>
                             </div>
@@ -90,14 +83,8 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                             <div className='course-additional-info__time item'>
                               <div className='icon'/><div>{additionalInfo.amountOfTime}</div>
                             </div>
-                            <div className='course-additional-info__difficulty item'> 
-                              <div className='difficulty-items'>
-                                {new Array(MAX_DIFFICULTY)
-                                  .fill('')
-                                  .map((_, index) => (
-                                    <div key={index} className={classnames('difficulty-item', index + 1 <= course.difficulty && 'isFilled')} />
-                                  ))}
-                              </div>
+                            <div className='course-additional-info__difficulty'>
+                              <Difficulty difficulty={course.difficulty} />
                             </div>
                           </div>
                           <div className="course-description">{course.description}</div>

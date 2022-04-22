@@ -7,6 +7,11 @@ import exercise from '!raw-loader!./exercise.md'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
 import solution from '!raw-loader!./solution.md'
+/* eslint import/no-webpack-loader-syntax: off */
+// @ts-ignore
+import description from '!raw-loader!./description.md'
+/* eslint import/no-webpack-loader-syntax: off */
+// @ts-ignore
 import { questions } from './questions'
 
 /* eslint import/no-webpack-loader-syntax: off */
@@ -14,4 +19,4 @@ import { questions } from './questions'
 import { Data } from 'pages/Chapter/Chapter.controller'
 import { validatorContent } from './validatorContent'
 
-export const data: Data = { course, exercise, solution, supports: { }, questions, validatorContent }
+export const data: Data = { course, description, exercise, solution, supports: { }, questions, validatorContent }

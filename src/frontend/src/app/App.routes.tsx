@@ -1,4 +1,11 @@
 /**
+ * React Dependency
+ * **/
+
+ import React from 'react'
+ import { Route, Switch } from 'react-router-dom'
+
+/**
  * Custom Components
  * **/
 
@@ -17,18 +24,13 @@ import { Terms } from 'pages/Terms/Terms.controller'
 import { User } from 'pages/User/User.controller'
 import { Header } from './App.components/Header/Header.controller'
 import { HeaderAuth } from './App.components/HeaderAuth/HeaderAuth.controller'
-/**
- * React Dependency
- * **/
-
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-
 import { ThankYou } from '../pages/ThankYou/ThankYou.controller'
 import { Footer } from './App.components/Footer/Footer.controller'
 import { Profile } from '../pages/Profile/Profile.controller'
 import { SiteMapView } from 'pages/SiteMap/SiteMap.view'
 import { SiteMapContainer } from 'pages/SiteMap/SiteMap.style'
+import { DescriptionCourse } from 'pages/DescriptionCourse/DescriptionCourse.controller'
+
 import PrivateRoute from 'containers/PrivateRoute'
 
 // import { About } from 'pages/About/About.controller'
@@ -70,6 +72,10 @@ export const AppRoutes = ({ location }: any) => (
 
     <Route path="/*/info">
       <Course />
+    </Route>
+
+    <Route path="/description/:courseId">
+      <DescriptionCourse />
     </Route>
 
     <PrivateRoute path="/profile">

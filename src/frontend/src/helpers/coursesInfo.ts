@@ -37,7 +37,8 @@ export const getCourseChapters = (title: string) => {
     chapters: [],
     additionalInfo: {
       amountOfTime: '',
-      path: '/'
+      path: '/',
+      description: ''
     }
   };
 }
@@ -63,9 +64,11 @@ export const getCoursesData = (courses: Course[]) => {
       ...course,
       percent: Math.floor((courseProgress / chapters.length) * 100),
       countChapters: chapters.length,
+      chapters,
       amountOfTime:  additionalInfo?.amountOfTime,
       urlChapter,
-      urlCourse: additionalInfo.path
+      urlCourse: additionalInfo.path,
+      descriptionCourse: additionalInfo.description
     }
 
     numberAllChapters += chapters.length;

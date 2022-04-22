@@ -166,6 +166,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        padding-top: 5px;
 
         @include fluid-size('font-size', 375px, 1600px, 32px, 80px);
         @include fluid-size('line-height', 1024px, 1600px, 38px, 96px);
@@ -265,40 +266,9 @@
         }
 
         &__difficulty {
-          width: 70px;
-          height: 34px;
           position: absolute;
           right: 30px;
           top: 20px;
-          background: $white;
-          border: 1px solid $grayscale4;
-          border-radius: 20px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-
-          @include md {
-            height: 26px;
-          }
-
-            &-items {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              width: 50px;
-            }
-
-            &-item {
-              width: 6px;
-              height: 6px;
-              border: 1px solid $primary;
-              border-radius: 50%;
-
-              &.isFilled {
-                background:$primary;
-              }
-            }
         }
 
         &__container {
@@ -386,6 +356,7 @@
 
             .useCertificate {
               display: none;
+              position: relative;
             }
 
             &__progress-bar {
@@ -396,70 +367,49 @@
               }
             }
 
-            // @media screen and (max-width: 1366px) {
-            //   &.completed {
-            //     max-width: 198px;
-            //     width: 100%;
-            //     .course-btn-wrapper {
-            //       width: 100%;
-            //     }
-            //   }
-            // }
-
-            @media screen and (max-width: 576px) {
-              &.completed {
-                .course-btn-wrapper {
-                  max-width: 220px;
-                  width: 100%;
-                }
-                .downloadCertificate {
-                  
-                  .social-networks__wrapp {
-                    margin-top: 0;
-                  }
-                }
-              }
-            }
-
-            @media screen and (max-width: 1366px) {
-              .downloadCertificate {
+            @include md {
+              .downloadCertificate,
+              .shareCertificate {
                 display: none;
               }
 
               .useCertificate {
                 display: block;
-                position: relative;
-                
-
-                ul {
-                  list-style: none;
-                  padding: 0;
-                  margin: 0;
-                }
-                
-                &__list {
-                  width: 247px;
-                  position: absolute;
-                  top: 60px;
-                  left: 0;
-                  margin-top: 30px;
-                  transition: all .3s ease-in-out;
-                  visibility: hidden;
-                  opacity: 0;
-                  z-index: 10;
-
-                  &.show {
-                    margin-top: 10px;
-                    visibility: visible;
-                    opacity: 1;
-                    transition: all 0.3s ease;
-                  }
-                }
               }
             }
 
-            @media screen and (max-width: 576px) {
-              .downloadCertificate {
+            @include sm {
+              &.completed {
+                .downloadCertificate,
+                .shareCertificate {
+                  display: block;
+
+                  .social-networks__wrapp {
+                    margin-top: 0;
+                  }
+                }
+  
+                .useCertificate {
+                  display: none;
+                }
+              }
+              
+            }
+
+            @include lg {
+              .downloadCertificate,
+              .shareCertificate {
+                display: none;
+              }
+
+              .useCertificate {
+                display: block;
+              }
+            }
+
+            @include xl {
+              .downloadCertificate,
+              .shareCertificate {
                 display: block;
               }
 

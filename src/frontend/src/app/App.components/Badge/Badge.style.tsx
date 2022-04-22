@@ -44,6 +44,43 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
     background-size: contain;
   }
 
+  .only-large-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 115px;
+    height: 125px;
+    position: relative;
+
+    .badge {
+      width: 104px;
+      height: 114px;
+      background: url(${badgeLargeNoCompleted}) no-repeat center;
+    }
+
+    &.isCompleted {
+      .badge {
+
+        &.chainlink-101 {
+          background: url(${badgeLarge_Chainlink}) no-repeat center;
+        }
+        &.soliditi-intro {
+          background: url(${badgeLarge_SolidityIntroduction}) no-repeat center;
+        }
+        &.vrf-v2 {
+          background: url(${badgeLarge_VRFv2Introduction}) no-repeat center;
+        }
+        &.advanced-vrf-v2 {
+          background: url(${badgeLarge_AdvancedVRFv2Introduction}) no-repeat center;
+        }
+        &.chainlink-keepers {
+          background: url(${badgeLarge_ChainlinkKeepers}) no-repeat center;
+        }
+      }
+    }
+  }
+
   .only-medium-badge {
     display: flex;
     flex-direction: column;
@@ -61,9 +98,6 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
 
     &.isCompleted {
       .badge {
-        width: 79px;
-        height: 88px;
-
         &.chainlink-101 {
           background: url(${badgeMedium_Chainlink}) no-repeat center;
         }
@@ -80,7 +114,6 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
           background: url(${badgeMedium_ChainlinkKeepers}) no-repeat center;
         }
       }
-      
     }
   }
 
@@ -101,8 +134,6 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
 
     &.isCompleted {
       .badge {
-        width: 43px;
-        height: 48px;
 
         &.chainlink-101 {
           background: url(${badgeSmall_Chainlink}) no-repeat center;
@@ -211,8 +242,6 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
 
       &.isCompleted {
         .badge {
-          width: 43px;
-          height: 48px;
 
           &.chainlink-101 {
             background: url(${badgeSmall_Chainlink}) no-repeat center;
