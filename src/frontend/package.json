@@ -90,6 +90,7 @@
     "react-router-dom": "^5.2.0",
     "react-router-transition": "^2.0.0",
     "react-scripts": "^3.4.1",
+    "react-share": "^4.4.0",
     "react-test-renderer": "^16.13.1",
     "react-transition-group": "^4.4.1",
     "react-twitter-conversion-tracker": "^1.0.0",

@@ -15,6 +15,7 @@ import { IDataCourses } from '../Profile/Certificates/Certificates.view'
 
 import { Difficulty } from './Difficulty/Difficulty.view'
 import { UseCertificate } from './UseCertificate/UseCertificate.view'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 
 interface ICourseView {
   course: Course
@@ -26,7 +27,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const history = useHistory();
   const [isShowList, setIsShowList] = useState(false);
-  const additionalInfo = infoCourses.courses[course.title]
+  const additionalInfo: IAdditionalInfo = infoCourses.courses[course.title]
 
   const showList = () => {
     setIsShowList((prev) => !prev);
@@ -110,7 +111,12 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
                       disabled={false}
                       className={isShowList ? 'hasArrowUp' : ''}
                     />
-                  <UseCertificate isSecondary isShowList={isShowList} additionalInfo={additionalInfo} />
+                  <UseCertificate
+                    isSecondary
+                    isShowList={isShowList}
+                    user={user}
+                    additionalInfo={additionalInfo}
+                  />
                   </div>
                   <div className='downloadCertificate'>
                     <MainButtonView
@@ -138,7 +144,11 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
 
             {user && additionalInfo.percent && additionalInfo.percent === 100 ? (
               <div className='shareCertificate'>
-                <ShareCertificate className="isCardCourse" />
+                <ShareCertificate
+                  className="isCardCourse"
+                  additionalInfo={additionalInfo}
+                  username={user.username}
+                />
               </div>
             ): null}
           </div>

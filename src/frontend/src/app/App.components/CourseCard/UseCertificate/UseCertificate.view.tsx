@@ -6,15 +6,18 @@ import classnames from 'classnames';
 import { UseCertificateStyled } from './UseCerificate.style';
 import { MainButtonView } from 'app/App.components/MainButton/MainButton.view';
 import { ShareCertificate } from 'app/App.components/ShareCertificate/ShareCertificate.view';
+import { PublicUser } from 'shared/user/PublicUser';
+import { IAdditionalInfo } from 'helpers/coursesInfo';
 
 interface IUseCertificate {
   isPrimary?: boolean
   isSecondary?: boolean
   isShowList: boolean
-  additionalInfo: any
+  additionalInfo: IAdditionalInfo
+  user?: PublicUser
 }
 
-export const UseCertificate = ({ isPrimary, isSecondary, additionalInfo, isShowList }: IUseCertificate) => {
+export const UseCertificate = ({ isPrimary, isSecondary, additionalInfo, isShowList, user }: IUseCertificate) => {
   const history = useHistory()
 
   return (
@@ -34,7 +37,7 @@ export const UseCertificate = ({ isPrimary, isSecondary, additionalInfo, isShowL
             />
           </li>
           <li>
-            <ShareCertificate />
+            <ShareCertificate additionalInfo={additionalInfo} username={user?.username} />
           </li>
         </ul>
       </div>

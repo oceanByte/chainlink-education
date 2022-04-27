@@ -14,6 +14,7 @@ import { signUp } from './resolvers/user/signUp/signUp'
 import { find, create, auth } from './resolvers/user/metaMask/metaMask'
 import { deleteAccountPending, deleteAccountPermanently } from './resolvers/user/deleteAccount/deleteAccount'
 import { changeEmailPending, changeEmailSuccess } from './resolvers/user/changeEmail/changeEmail'
+import { getCertificate } from './resolvers/page/getCertificate/getCertificate'
 
 const router = new Router()
 
@@ -41,6 +42,7 @@ router.post('/user/change-email', changeEmailPending)
 router.post('/user/delete-account', deleteAccountPending)
 router.post('/user/permanently-delete-account', deleteAccountPermanently)
 
+router.post('/page/get-certificate', getCertificate)
 router.post('/page/get-user', getPublicUser)
 router.post('/page/set-name', setName)
 

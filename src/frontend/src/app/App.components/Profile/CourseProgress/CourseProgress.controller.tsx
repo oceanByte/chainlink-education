@@ -5,7 +5,7 @@ import { PublicUser } from 'shared/user/PublicUser'
 import { Course } from 'shared/course'
 
 import { CourseProgressView } from './CourseProgress.view'
-import { getCoursesData } from 'helpers/coursesInfo'
+import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
 import { courseData } from 'pages/Course/Course.data'
 import { Error404 } from 'pages/Error404/Error404.controller'
 
@@ -17,6 +17,7 @@ interface ICourseCard {
 
 export type CourseID = {
   courseId: string
+  username?: string
 }
 
 export const CourseProgress = ({ courses, user, showSubList }: ICourseCard) => {
@@ -24,7 +25,7 @@ export const CourseProgress = ({ courses, user, showSubList }: ICourseCard) => {
 
   const infoCourses = getCoursesData(courses || []);
   const currentCourse = courseData.find((course) => course.path === courseId);
-  const courseAdditionalInfo = infoCourses.courses[currentCourse?.name || '']
+  const courseAdditionalInfo: IAdditionalInfo = infoCourses.courses[currentCourse?.name || '']
 
   useEffect(() => {
     if (courseId) {

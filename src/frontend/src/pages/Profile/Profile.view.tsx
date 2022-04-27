@@ -1,21 +1,15 @@
 import * as React from 'react'
 import { useState,useCallback } from 'react'
 import { Switch, NavLink, Route } from 'react-router-dom'
-// import { useDispatch } from 'react-redux'
 
 import { PublicUser } from 'shared/user/PublicUser'
-
-// import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
-// import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
-// import contract from '../../helpers/contracts.abi.json'
-// import { ethers } from 'ethers'
 
 import { ConfirmYouPassword } from '../../app/App.components/ConfirmYouPassword/ConfirmYouPassword'
 import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePassword'
 import { Certificates } from 'app/App.components/Profile/Certificates/Certificates.controller';
 import { OverallProgress } from 'app/App.components/Profile/OverallProgress/OveralProgress.controller';
 import { AccountInfo } from 'app/App.components/Profile/AccountInfo/AccountInfo.view';
-import { getCoursesData } from 'helpers/coursesInfo'
+import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
 import { CourseProgress } from 'app/App.components/Profile/CourseProgress/CourseProgress.controller'
 import { Error404 } from 'pages/Error404/Error404.controller'
 
@@ -31,7 +25,6 @@ export const ProfileView = ({
   deleteAccountCallback,
 }: ProfileViewProps) => {
   const [isShow, setIsShow] = useState(false);
-  // const dispatch = useDispatch()
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
 
   const infoCourses = getCoursesData(user?.courses || []);
@@ -44,28 +37,6 @@ export const ProfileView = ({
   const showSubList = useCallback((isShow: boolean) => {
     setIsShow(() => isShow)
   }, [])
-
-  // const connectToMetamask = async () => {
-  //   const provider = new ethers.providers.Web3Provider((window as any).ethereum)
-  //   await provider.send("eth_requestAccounts", []);
-  //   const signer = provider.getSigner()
-
-  //   return signer;
-  // }
-
-  // const issueCertificate = async () => {
-  //   try {
-  //     const signer = await connectToMetamask();
-  //     const certificateContract = new ethers.Contract(contract.address, contract.abi, signer)
-  //     console.log(await signer.getAddress(), user?.username)
-  //     const nft = await certificateContract.mintNFT(await signer.getAddress(), user?.username)
-  //     dispatch(showToaster(SUCCESS, 'NFT Certificate issued', 'Enjoy your new NFT!'));
-  //     console.log(nft)
-  //   } catch (e) {
-  //     dispatch(showToaster(ERROR, 'NFT Certificate', 'Failed to issue a new NFT certificate.'));
-  //     console.error(e)
-  //   }
-  // }
 
   return (
     <div className='profile-page'>
@@ -81,7 +52,7 @@ export const ProfileView = ({
           {user && isShow ? (
             <div className='progress-courses__wrapper'>
               {user.courses ? user.courses.map((course) => {
-                const additionalInfo = infoCourses.courses[course.title]
+                const additionalInfo: IAdditionalInfo = infoCourses.courses[course.title]
                 return (
                   <div className='progress-courses__item' key={course.title}>
                     <NavLink
@@ -147,7 +118,6 @@ export const ProfileView = ({
             <Error404 />
           </Route>
         </Switch>
-        {/* <OverallProgress user={user} courses={user?.courses}/> */}
         {/* <CoursesListView
           user={user}
           copyToClipboard={copyToClipboard}

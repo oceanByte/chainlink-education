@@ -1,12 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react'
 
+import {
+  LinkedinShareButton,
+  TwitterShareButton,
+} from "react-share";
+
 import classnames  from 'classnames'
+import { IAdditionalInfo } from 'helpers/coursesInfo';
 
 interface IShareCertificate {
   className?: string
+  additionalInfo: IAdditionalInfo
+  username?: string
 }
 
-export const ShareCertificate = ({ className }: IShareCertificate) => {
+export const ShareCertificate = ({ className, additionalInfo, username }: IShareCertificate) => {
+
+  const shareUrl = `https://www.chainlink.education/verify/${additionalInfo.urlCourse}/${username}`
+  const message = `I just finished the '${additionalInfo.title}'. Here is my certificate:`
+
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const [isShowList, setIsShowList] = useState(false);
@@ -37,10 +49,21 @@ export const ShareCertificate = ({ className }: IShareCertificate) => {
           <div ref={wrapperRef} className='share-btn' onClick={showList}></div>
           <ul className="submenu">
             <li className='share-list-item linkedin'>
-              <div className='share-list-item linkedin'></div>
+              <LinkedinShareButton
+                url={shareUrl}
+                title={message}
+              >
+                <div className='share-list-item linkedin'></div>
+              </LinkedinShareButton>
+              
             </li>
             <li className='share-list-item twitter'>
-              <div className='share-list-item twitter'></div>
+              <TwitterShareButton
+                url={shareUrl}
+                title={message}
+              >
+                <div className='share-list-item twitter'></div>
+              </TwitterShareButton>
             </li>
           </ul>
         </li>

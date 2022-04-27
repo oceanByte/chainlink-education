@@ -42,7 +42,7 @@ export const ButtonStyled = styled.button`
   padding-left: 25px;
   padding-right: 49px;
 
-  @media (max-width: 576px) {
+  @media (max-width: 767px) {
     height: 50px;
     font-size: 14px;
     line-height: 18px;
@@ -87,6 +87,10 @@ export const ButtonStyled = styled.button`
         top: 16px;
         right: 16px;
         background: url(${arrowDownWhite}) no-repeat;
+
+        @media (max-width: 767px) {
+          top: 12px;
+        }
       }
     }
 

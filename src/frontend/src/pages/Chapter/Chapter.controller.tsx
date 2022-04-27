@@ -145,7 +145,7 @@ export const Chapter = () => {
           if (user) {
             setStateChapter((prev) => ({
               ...prev,
-              nextChapter: `/profile`,
+              nextChapter: `/profile/certificates`,
             }))
           } else {
             setStateChapter((prev) => ({
@@ -155,7 +155,7 @@ export const Chapter = () => {
           }
         }
 
-        if (i !== 7) {
+        if (i !== chapterData.length) {
           setPercent(() => ((i + 1) / chapterData.length) * 100)
         } else setPercent(() => 100)
       }
@@ -192,22 +192,29 @@ export const Chapter = () => {
 
     if (findLocalCourse) {
       course = courses?.find((course) => course.title === findLocalCourse?.name)
+
+      return {
+        ...course,
+        path: findLocalCourse.path
+      }
     }
     return course
   }
 
   const validateCallback = () => {
-    if (stateChapter.nextChapter === `/profile`) {
+    if (stateChapter.nextChapter === `/profile/certificates`) {
       setValidatorState(RIGHT)
       if (user) {
         clearInterval(intervalID.current)
         const course = findCurrentCourse(user)
+
         dispatch(
           addProgress({
             chapterDone: pathname,
             courseId: course ? course._id : '',
             time: time.value,
             isCompleted: true,
+            coursePath: course ? course.path : ''
           }),
         )
       }
@@ -241,6 +248,7 @@ export const Chapter = () => {
               courseId: course ? course._id : '',
               time: time.value,
               isCompleted: false,
+              coursePath: course.path
             }),
           )
         } else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
@@ -269,6 +277,7 @@ export const Chapter = () => {
                   courseId: course ? course._id : '',
                   time: time.value,
                   isCompleted: false,
+                  coursePath: course.path
                 }),
               )
             } else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))

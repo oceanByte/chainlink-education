@@ -7,13 +7,14 @@ import { CourseStatusType } from 'pages/Course/Course.data'
 import { CircularProgressBar } from '../../CircleProgressBar/CircleProgressBar.view'
 import { BadgeView } from '../../Badge/Badge.view'
 import { ChaptersListView } from 'app/App.components/ChaptersList/ChaptersListView'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 
 export const MAX_DIFFICULTY = 5;
 
 interface ICourseView {
   user?: PublicUser
   courseId: string
-  additionalInfo: any
+  additionalInfo: IAdditionalInfo
 }
 
 export const CourseProgressView = ({ user, courseId, additionalInfo }: ICourseView) => {

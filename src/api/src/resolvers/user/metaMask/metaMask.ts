@@ -15,12 +15,10 @@ import { Course, CourseModel } from '../../../shared/course/Course'
 import { COURSES } from '../../../shared/course/CourseType';
 
 export const find = async (ctx: Context, next: Next): Promise<void> => {
-  const whereClause =
-		ctx.request.query && ctx.request.query.publicAddress
-			? { publicAddress: ctx.request.query.publicAddress }
-			: {};
 
-	let users = await UserModel.find(whereClause)
+	let users = await UserModel.find({
+		...ctx.request.query
+	})
 
 	if (users.length) {
 		const user = users[0];

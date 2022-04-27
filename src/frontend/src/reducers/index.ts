@@ -13,6 +13,7 @@ import { progressBar, ProgressBarState } from './progressBar'
 import { serviceWorker, ServiceWorkerState } from './serviceWorker'
 import { toaster, ToasterState } from './toaster'
 import { users, UsersState } from './users'
+import { certificate, CertificateState } from './certificate'
 
 export const reducers = (history: any) =>
   combineReducers({
@@ -26,6 +27,7 @@ export const reducers = (history: any) =>
     progressBar,
     serviceWorker,
     gdpr,
+    certificate
   })
 
 export interface State {
@@ -38,4 +40,5 @@ export interface State {
   progressBar: ProgressBarState
   serviceWorker: ServiceWorkerState
   gdpr: GdprState
+  certificate: CertificateState
 }

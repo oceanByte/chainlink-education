@@ -9,7 +9,7 @@ import { Header } from '../../app/App.components/Header/Header.controller'
 import { DescriptionCourseView } from './DescriptionCourse.view'
 
 import { CourseID } from 'app/App.components/Profile/CourseProgress/CourseProgress.controller'
-import { getCoursesData } from 'helpers/coursesInfo'
+import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
 import { courseData } from 'pages/Course/Course.data'
 import { COURSES } from 'pages/Home/Home.view'
 
@@ -20,7 +20,7 @@ export const DescriptionCourse = () => {
 
   const infoCourses = getCoursesData((user && user.courses) || COURSES);
   const currentCourse = courseData.find((course) => course.path === courseId);
-  const additionalInfo = infoCourses.courses[currentCourse?.name || '']
+  const additionalInfo: IAdditionalInfo = infoCourses.courses[currentCourse?.name || '']
 
   return (
     <>

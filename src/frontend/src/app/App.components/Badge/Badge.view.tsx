@@ -1,6 +1,9 @@
-import classnames from 'classnames';
-import { CourseNameType } from 'pages/Course/Course.data';
 import React from 'react'
+
+import classnames from 'classnames';
+
+import { getClassForCourse } from 'helpers/getInfoForCourse';
+
 import { BadgeStyled } from './Badge.style';
 
 interface IBadgeView {
@@ -26,24 +29,6 @@ export const BadgeView = ({
 }: IBadgeView) => {
 
   const getDashOfSet = (dashArray: number) => dashArray - dashArray * percentage / 100
-
-  const getClassForCourse = (title: string) => {
-    switch (title) {
-      case CourseNameType.CHAINLINK_101:
-        return 'chainlink-101'
-      case CourseNameType.SOLIDITY_INTRO:
-        return 'soliditi-intro'
-      case CourseNameType.VRF_V2:
-        return 'vrf-v2'
-      case CourseNameType.ADVANCED_VRF_V2:
-        return 'advanced-vrf-v2'
-      case CourseNameType.CHAINLINK_KEEPERS:
-        return 'chainlink-keepers'
-    
-      default:
-        return ''
-    }
-  }
 
   return (
       <BadgeStyled>

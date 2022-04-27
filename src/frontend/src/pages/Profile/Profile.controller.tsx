@@ -18,18 +18,6 @@ export const Profile = () => {
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
 
-  // const downloadCallback = () => {
-  //   const doc = new jsPDF({
-  //     orientation: 'landscape',
-  //     unit: 'px',
-  //     format: [1100, 800],
-  //   })
-  //   doc.addImage('/certificate.jpg', 'JPEG', 0, 0, 1100, 800)
-  //   doc.setFontSize(50)
-  //   doc.text(user?.name || '', 550, 410, { align: 'center' })
-  //   doc.save('chainlink_academy_certifciate.pdf')
-  // }
-
   const changeEmailCallback = async ({ email }: { email: string }) => {
     dispatch(changeEmailPending({ email }))
   }

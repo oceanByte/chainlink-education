@@ -30,8 +30,10 @@ import { Profile } from '../pages/Profile/Profile.controller'
 import { SiteMapView } from 'pages/SiteMap/SiteMap.view'
 import { SiteMapContainer } from 'pages/SiteMap/SiteMap.style'
 import { DescriptionCourse } from 'pages/DescriptionCourse/DescriptionCourse.controller'
+import { PreviewCertificate } from 'pages/PreviewCertificate/PreviewCertificate.controller'
 
 import PrivateRoute from 'containers/PrivateRoute'
+
 
 // import { About } from 'pages/About/About.controller'
 
@@ -77,6 +79,14 @@ export const AppRoutes = ({ location }: any) => (
     <Route path="/description/:courseId">
       <DescriptionCourse />
     </Route>
+
+    <Route path="/verify/:courseId/:username">
+      <PreviewCertificate />
+    </Route>
+
+    <PrivateRoute path="/:courseId/certificate/preview">
+      <PreviewCertificate />
+    </PrivateRoute>
 
     <PrivateRoute path="/profile">
       <Profile />

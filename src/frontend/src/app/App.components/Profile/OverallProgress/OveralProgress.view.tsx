@@ -11,6 +11,7 @@ import { CircularProgressBar } from '../../CircleProgressBar/CircleProgressBar.v
 import { BadgeView } from '../../Badge/Badge.view'
 import { IDataCourses } from '../Certificates/Certificates.view'
 import { Difficulty } from 'app/App.components/CourseCard/Difficulty/Difficulty.view'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 
 interface ICourseView {
   infoCourses: IDataCourses
@@ -43,7 +44,7 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
           <div className='sections-content__line' />
           <div className='sections-content__courses'>
             {user && user.courses ? user.courses.map((course) => {
-              const additionalInfo = infoCourses.courses[course.title]
+              const additionalInfo: IAdditionalInfo = infoCourses.courses[course.title]
               return (
                 <React.Fragment key={course.title}>
                   {course.status !== CourseStatusType.COMPLETED ? (

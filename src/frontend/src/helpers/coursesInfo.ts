@@ -43,6 +43,22 @@ export const getCourseChapters = (title: string) => {
   };
 }
 
+export interface IAdditionalInfo {
+  amountOfTime: string
+  chapterTimes: any
+  chapters: any
+  countChapters: number
+  description: string
+  descriptionCourse: string
+  difficulty: number
+  percent: number
+  progress: any
+  status: string
+  title: string
+  urlChapter: string
+  urlCourse: string
+}
+
 export const getCoursesData = (courses: Course[]) => {
   const coursesData: ICoursesData = {
     overallProgress: 0,
@@ -57,7 +73,7 @@ export const getCoursesData = (courses: Course[]) => {
   courses.forEach((course:Course) => {
     const title = course.title
     const courseProgress = course.progress.length
-
+    
     const { chapters, additionalInfo } = getCourseChapters(title)
     const urlChapter = getUrl(courseProgress, additionalInfo.path, ChainlinkIntroductionChapters.length)
     coursesData.courses[title] = {

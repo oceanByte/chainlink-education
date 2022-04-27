@@ -55,9 +55,10 @@ export const changeEmailSuccess = async (ctx: Context, next: Next): Promise<void
   const { key: token, email } = ctx.request.query
 
   const captcha: Captcha = (await CaptchaModel.findOne({
-    token,
+    token: `${token?.toString()}`,
     captchaFor: CaptchaFor.CAPTCHA_FOR_CHANGE_EMAIL,
   }).lean()) as Captcha
+  
   if (!captcha) throw new ResponseError(401, 'Wrong token key')
 
   const user: User = (await UserModel.findOne({ _id: captcha.userId }).lean()) as User

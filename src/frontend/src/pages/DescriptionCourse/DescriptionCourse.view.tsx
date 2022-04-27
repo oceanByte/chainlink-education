@@ -16,11 +16,12 @@ import { MainButtonView } from 'app/App.components/MainButton/MainButton.view'
 import { CircularProgressBar } from 'app/App.components/CircleProgressBar/CircleProgressBar.view'
 import { ShareCertificate } from 'app/App.components/ShareCertificate/ShareCertificate.view'
 import { UseCertificate } from 'app/App.components/CourseCard/UseCertificate/UseCertificate.view'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 
 
 type DescriptionCourseViewProps = {
   user?: PublicUser,
-  additionalInfo: any
+  additionalInfo: IAdditionalInfo
 }
 
 export const Content = ({ course }: any) => (
@@ -201,7 +202,7 @@ export const DescriptionCourseView = ({
                         isPrimary
                         hasArrowDown
                         text='Download certificate'
-                        onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
+                        onClick={() => history.push(`/${additionalInfo.urlCourse}/certificate/preview`)}
                         loading={false}
                         disabled={false}
                       />
@@ -222,7 +223,7 @@ export const DescriptionCourseView = ({
 
               {additionalInfo.percent && additionalInfo.percent === 100 ? (
                 <div className='shareCertificate'>
-                  <ShareCertificate className="isDescription" />
+                  <ShareCertificate className="isDescription" username={user.username} additionalInfo={additionalInfo} />
                 </div>
             ): null}
             </div>

@@ -1,12 +1,15 @@
 import React from 'react'
 
-import { CourseStatusType } from '../../../../pages/Course/Course.data'
+import { useHistory } from 'react-router-dom'
+
+import { courseData, CourseStatusType } from '../../../../pages/Course/Course.data'
 
 import { Course } from 'shared/course'
 import { PublicUser } from 'shared/user/PublicUser'
 import { BadgeView } from '../../Badge/Badge.view'
 import { MainButtonView } from '../../MainButton/MainButton.view'
 import { ShareCertificate } from '../../ShareCertificate/ShareCertificate.view'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 
 export interface IDataCourses {
   courses: any
@@ -21,6 +24,7 @@ interface ICertificatesView {
 }
 
 export const CertificatesView = ({ user, infoCourses }: ICertificatesView) => {
+  const history = useHistory()
   return (
     <div className='profile-page-certificates-wrapper'>
       <div className='top-header'>
@@ -31,7 +35,7 @@ export const CertificatesView = ({ user, infoCourses }: ICertificatesView) => {
       <div className='badges-list'>
       {user && user.courses
         ? user.courses.map((course: Course, key: number) => {
-          const additionalInfo = infoCourses.courses[course.title]
+          const additionalInfo: IAdditionalInfo = infoCourses.courses[course.title]
           return (
             <div className="badge-wrapp" key={course.title}>
               <BadgeView percentage={additionalInfo.percent} title={course.title} isCompleted={course.status === CourseStatusType.COMPLETED} />
@@ -43,7 +47,11 @@ export const CertificatesView = ({ user, infoCourses }: ICertificatesView) => {
       {infoCourses.numberCompletedCourses ? (<div className='sections-content__line' />) : null}
       <div className='certificates-list'>
         {user && user.courses
-          ? user.courses.map((course: Course, key: number) => (
+          ? user.courses.map((course: Course, key: number) => {
+            const currentCourse = courseData.find((c) => c.name === course.title);
+            const additionalInfo: IAdditionalInfo = infoCourses.courses[currentCourse?.name || '']
+
+            return (
               <React.Fragment key={key}>
                 {course.status === CourseStatusType.COMPLETED ? (
                   <div className="certificate-wrapp" key={key}>
@@ -57,16 +65,17 @@ export const CertificatesView = ({ user, infoCourses }: ICertificatesView) => {
                         isSecondary
                         hasArrowDown
                         text='Download certificate'
-                        onClick={() => ({})}
+                        onClick={() => history.push(currentCourse? `/description/${additionalInfo.urlCourse}`: '/')}
                         loading={false}
                         disabled={false}
                         />
-                        <ShareCertificate />
+                        <ShareCertificate username={user.username} additionalInfo={additionalInfo} />
                     </div>
                   </div>
                 ) : null}
               </React.Fragment>
-            ))
+            )
+          })
           : null}
       </div>
     </div>

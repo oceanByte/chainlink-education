@@ -6,7 +6,7 @@ import { UserModel } from '../../../shared/user/User'
 export const PUBLIC_USER_MONGO_SELECTOR = '_id username emailVerified createdAt'
 
 export const isCertified = async (ctx: Context, next: Next): Promise<void> => {
-  const name = ctx.request.query.name
+  const name = String(ctx.request.query.name || '')
 
   let userFound = false
   let isCertified = false

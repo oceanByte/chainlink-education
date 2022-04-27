@@ -5,7 +5,7 @@ export const ADD_PROGRESS_REQUEST = 'ADD_PROGRESS_REQUEST'
 export const ADD_PROGRESS_COMMIT = 'ADD_PROGRESS_COMMIT'
 export const ADD_PROGRESS_ROLLBACK = 'ADD_PROGRESS_ROLLBACK'
 
-export const addProgress = ({ chapterDone, courseId, time, isCompleted }: AddProgressInputs) => (dispatch: any) => {
+export const addProgress = ({ chapterDone, courseId, time, isCompleted, coursePath }: AddProgressInputs) => (dispatch: any) => {
   dispatch({
     type: ADD_PROGRESS_REQUEST,
     payload: {},
@@ -15,9 +15,9 @@ export const addProgress = ({ chapterDone, courseId, time, isCompleted }: AddPro
           url: `${process.env.REACT_APP_BACKEND_URL}/user/add-progress`,
           method: 'POST',
           headers: { Authorization: `Bearer ${store.getState().auth.jwt}` },
-          json: { chapterDone, courseId, time, isCompleted },
+          json: { chapterDone, courseId, time, isCompleted, coursePath },
         },
-        commit: { type: ADD_PROGRESS_COMMIT, meta: {} },
+        commit: { type: ADD_PROGRESS_COMMIT, meta: {}},
         rollback: { type: ADD_PROGRESS_ROLLBACK, meta: {} },
       },
     },
