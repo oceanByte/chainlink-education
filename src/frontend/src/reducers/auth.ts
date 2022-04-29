@@ -90,12 +90,10 @@ export function auth(state = authDefaultState, action: any): AuthState {
       }
     }
     case GET_USER_COMMIT: {
-      if(state.user?.username === action.payload.user?.username)
       return {
         ...state,
         user: action.payload.user,
       }
-      else return state
     }
     case SET_ACCOUNT_NAME_COMMIT: {
       return {

@@ -6,23 +6,31 @@ import * as Yup from 'yup';
 import { PublicUser } from 'shared/user/PublicUser'
 import { InputField } from 'app/App.components/Form/InputField/Input.controller';
 import { DeleteAccountModal } from 'modals/DeleteAccount/DeleteAccount.view';
+import { MainButtonView } from 'app/App.components/MainButton/MainButton.view';
+import { IChangeUsernameEmail } from 'pages/Profile/Profile.controller';
 
 interface ICertificatesView {
   user?: PublicUser
-  changeEmailCallback: ({email}: {email: string})=> void,
+  changeEmailOrUsernameCallback: ({email, username}: IChangeUsernameEmail)=> void,
   deleteAccountCallback: ()=> void
 }
 
 const ValidationSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Invalid email')
+    .email('Please enter a valid email address')
+    .required('This field is required!'),
+  username: Yup.string()
+    .matches(/^[a-zA-Z0-9_]*$/, 'Username can only contain letters, numbers and underscores')
+    .min(2, 'Username must be longer than or equal to 2 characters')
+    .max(50, 'Username must be shorter than or equal to 50 characters')
     .required('This field is required!'),
 });
 
-export const AccountInfo = ({ user, changeEmailCallback, deleteAccountCallback }: ICertificatesView) => {
+export const AccountInfo = ({ user, changeEmailOrUsernameCallback, deleteAccountCallback }: ICertificatesView) => {
   const [isDeleteAccVisible, setIsDeleteAccVisible] = useState(false)
   const initialValue = {
-    email: user? user?.email : ''
+    email: user? user?.email : '',
+    username: user? user?.username : ''
   }
 
   const showDeleteAccountModal = () => {
@@ -33,8 +41,22 @@ export const AccountInfo = ({ user, changeEmailCallback, deleteAccountCallback }
     setIsDeleteAccVisible(() => false)
   }
 
-  const handleSubmit = (values: { email: string }) => {
-    changeEmailCallback(values);
+  const handleSubmit = (values: { email: string, username: string }) => {
+    let newValues = {};
+
+    if (values.email !== user?.email) {
+      newValues = {
+        email: values.email
+      }
+    }
+    if (values.username !== user?.username) {
+      newValues = {
+        ...newValues,
+        username: values.username
+      }
+    }
+
+    changeEmailOrUsernameCallback(newValues);
   }
 
   useEffect(() => {
@@ -47,15 +69,6 @@ export const AccountInfo = ({ user, changeEmailCallback, deleteAccountCallback }
     <>
       <div className='profile-page-account-info-wrapper'>
         <div className='profile-page-section__header h-font'>Account info</div>
-          <div className='profile-page-account-info__username p-font'>
-            <label htmlFor='profile-page-account-info__username__input'>Username</label>
-            <div>{user?.username}</div>
-            {/* <input
-              type='text'
-              id='profile-page-account-info__username__input'
-              name='solution'
-            /> */}
-          </div>
           <Formik
             enableReinitialize
             initialValues={initialValue}
@@ -71,8 +84,25 @@ export const AccountInfo = ({ user, changeEmailCallback, deleteAccountCallback }
                 handleBlur,
                 handleSubmit,
                 isSubmitting,
+                isValid
               }) => (
                 <form className="profile-page-account-info__form" onSubmit={handleSubmit}>
+                  <div className='profile-page-account-info__username p-font'>
+                    <InputField
+                      label="USERNAME"
+                      type="text"
+                      value={values.username}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      name="username"
+                      inputStatus={
+                        errors.username && touched.username
+                          ? 'error' : undefined
+                        }
+                      errorMessage={errors.username && touched.username && errors.username}
+                      isDisabled={false}
+                    />
+                  </div>
                   <div className='profile-page-account-info__email p-font'>
                     <InputField
                       label="EMAIL ADDRESS"
@@ -83,17 +113,22 @@ export const AccountInfo = ({ user, changeEmailCallback, deleteAccountCallback }
                       name="email"
                       inputStatus={
                         errors.email && touched.email
-                          ? 'error' : !errors.email && touched.email 
-                          ? 'success' : undefined
+                          ? 'error' : undefined
                         }
                       errorMessage={errors.email && touched.email && errors.email}
                       isDisabled={false}
                     />
                   </div>
-                  <button className='btn btn-green' type='submit'>
-                    <span className='profile-page-account-info__button__text'> Save changes </span>
-                    <span className='arrow-upright' />
-                  </button>
+                  <div className='btn-wrapper'>
+                    <MainButtonView
+                      isPrimary
+                      type='submit'
+                      hasArrowUpRight
+                      text='Save changes'
+                      loading={false}
+                      disabled={!isValid || (values.email === user?.email && values.username === user.username)}
+                    />
+                  </div>
                 </form>
             )}
           </Formik>

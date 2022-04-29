@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { useLocation, useHistory } from 'react-router-dom'
 
 import { State } from 'reducers'
@@ -11,10 +11,10 @@ import { Option } from '../Select/Select.view'
 import { HeaderView } from './Header.view'
 
 
-export const Header = () => {
+const Header = ({ user }: any) => {
   const history = useHistory();
   const dispatch = useDispatch()
-  const user = useSelector((state: State) => state.auth.user)
+
   const { pathname } = useLocation()
 
   let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
@@ -32,3 +32,8 @@ export const Header = () => {
     activeCourse={activeCourse}
   />)
 }
+
+export default connect(
+  (state: State) => ({
+    user: state.auth.user,
+  }), {})(Header);

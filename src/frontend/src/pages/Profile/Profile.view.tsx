@@ -12,16 +12,17 @@ import { AccountInfo } from 'app/App.components/Profile/AccountInfo/AccountInfo.
 import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
 import { CourseProgress } from 'app/App.components/Profile/CourseProgress/CourseProgress.controller'
 import { Error404 } from 'pages/Error404/Error404.controller'
+import { IChangeUsernameEmail } from './Profile.controller'
 
 type ProfileViewProps = {
   user?: PublicUser,
-  changeEmailCallback: ({email}: {email: string})=> void,
+  changeEmailOrUsernameCallback: ({email, username}: IChangeUsernameEmail)=> void,
   deleteAccountCallback: ()=> void
 }
 
 export const ProfileView = ({
   user,
-  changeEmailCallback,
+  changeEmailOrUsernameCallback,
   deleteAccountCallback,
 }: ProfileViewProps) => {
   const [isShow, setIsShow] = useState(false);
@@ -106,7 +107,7 @@ export const ProfileView = ({
           <Route path={`/profile/account-info`}>
             <AccountInfo
               user={user}
-              changeEmailCallback={changeEmailCallback}
+              changeEmailOrUsernameCallback={changeEmailOrUsernameCallback}
               deleteAccountCallback={deleteAccountCallback}
             />
           </Route>

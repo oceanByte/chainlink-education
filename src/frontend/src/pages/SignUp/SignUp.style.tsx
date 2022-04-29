@@ -69,10 +69,13 @@ export const CheckboxWrapp = styled.div`
 `
 
 export const ErrorMessage = styled.div`
+  font-style: normal;
+  font-weight: 400;
   font-size: 13px;
-  line-height: 18px;
+  line-height: 13px;
   margin-top: 6px;
-  color: #F87171;
+  color: #FF5E57;
+  font-family: 'Circular Std', sans-serif;
   
   &:first-letter {
     text-transform: uppercase;

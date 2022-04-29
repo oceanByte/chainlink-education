@@ -14,6 +14,7 @@ import { CheckboxWrapp, ErrorMessage, Row } from './SignUp.style';
 
 export const ValidationSchema = Yup.object().shape({
   username: Yup.string()
+    .matches(/^[a-zA-Z0-9_]*$/, 'Username can only contain letters, numbers and underscores')
     .min(2, 'Username must be longer than or equal to 2 characters')
     .max(50, 'Username must be shorter than or equal to 50 characters')
     .required('This field is required!'),
@@ -112,6 +113,7 @@ export const SignUpView = ({ signUpCallback }: SignUpViewProps) => {
           handleBlur,
           handleSubmit,
           isSubmitting,
+          isValid
         }) => (
           <form className="sign-up" onSubmit={handleSubmit}>
             <div className="sign-up-title">Sign up</div>
@@ -126,8 +128,7 @@ export const SignUpView = ({ signUpCallback }: SignUpViewProps) => {
                 name="username"
                 inputStatus={
                   errors.username && touched.username
-                    ? 'error' : !errors.username && touched.username
-                      ? 'success' : undefined
+                    ? 'error' : undefined
                 }
                 errorMessage={errors.username && touched.username && errors.username}
                 isDisabled={false}
@@ -143,8 +144,7 @@ export const SignUpView = ({ signUpCallback }: SignUpViewProps) => {
                 name="email"
                 inputStatus={
                   errors.email && touched.email
-                    ? 'error' : !errors.email && touched.email
-                      ? 'success' : undefined
+                    ? 'error' : undefined
                 }
                 errorMessage={errors.email && touched.email && errors.email}
                 isDisabled={false}
@@ -163,8 +163,7 @@ export const SignUpView = ({ signUpCallback }: SignUpViewProps) => {
                 name="password"
                 inputStatus={
                   errors.password && touched.password
-                    ? 'error' : !errors.password && touched.password
-                      ? 'success' : undefined
+                    ? 'error' : undefined
                 }
                 errorMessage={errors.password && touched.password && errors.password}
                 isDisabled={false}
@@ -205,8 +204,7 @@ export const SignUpView = ({ signUpCallback }: SignUpViewProps) => {
                 name="confirmPassword"
                 inputStatus={
                   errors.confirmPassword && touched.confirmPassword
-                    ? 'error' : !errors.confirmPassword && touched.confirmPassword
-                      ? 'success' : undefined
+                    ? 'error' : undefined
                 }
                 errorMessage={errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
                 isDisabled={false}
@@ -232,13 +230,13 @@ export const SignUpView = ({ signUpCallback }: SignUpViewProps) => {
                   By signing up, you confirm that you've agreed to our <a href="/terms">Terms of Use</a>
                 </span>
               </div>
-              {!touched.agree && errors.agree ? (
+              {touched.agree && errors.agree ? (
                 <ErrorMessage>
                   {errors.agree}
                 </ErrorMessage>
               ) : null}
             </CheckboxWrapp>
-            <button className="reset-password__sign" type="submit">
+            <button className="reset-password__sign" disabled={!isValid} type="submit">
               Create your free account
             </button>
           </form>

@@ -1,15 +1,14 @@
 import styled from 'styled-components/macro'
 
-import { borderColor, grayscale1, secondary3 } from 'styles'
+import { grayscale1, grayscale3, secondary3 } from 'styles'
 
 export const InputWrapp = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  border-radius: 5px;
   width: 100%;
-  border: 1px solid ${borderColor};
+  border-bottom: 1px solid ${grayscale3};
   transition: all .2s;
 
   .eyeContainer {
@@ -33,11 +32,7 @@ export const InputWrapp = styled.div`
 
   }
   &.error {
-    background-color: #FECDD3;
-    border: 1px solid #DC2626;
-    input {
-      color: ${grayscale1};
-    }
+    border-bottom: 1px solid #E8505B;
   }
 
   &.disabled {
@@ -68,13 +63,16 @@ export const Input = styled.input`
   line-height: 20px;
   padding: 10px;
   color: ${grayscale1};
-  font-family: Circular Std Book;
+  font-family: 'Circular Std', sans-serif;
 `
 export const InvalidBox = styled.div`
+  font-style: normal;
+  font-weight: 400;
   font-size: 13px;
-  line-height: 18px;
+  line-height: 13px;
   margin-top: 6px;
-  color: #F87171;
+  color: #FF5E57;
+  font-family: 'Circular Std', sans-serif;
   
   &:first-letter {
     text-transform: uppercase;

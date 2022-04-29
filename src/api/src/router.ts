@@ -15,6 +15,7 @@ import { find, create, auth } from './resolvers/user/metaMask/metaMask'
 import { deleteAccountPending, deleteAccountPermanently } from './resolvers/user/deleteAccount/deleteAccount'
 import { changeEmailPending, changeEmailSuccess } from './resolvers/user/changeEmail/changeEmail'
 import { getCertificate } from './resolvers/page/getCertificate/getCertificate'
+import { changeUsername } from './resolvers/user/changeUsername/changeUsername'
 
 const router = new Router()
 
@@ -36,6 +37,7 @@ router.post('/user/change-password', changePassword)
 router.get('/user/is-certified', isCertified)
 router.get('/user/referral', getReferralStats)
 
+router.post('/user/change-username', changeUsername)
 router.get('/user/change-email', changeEmailSuccess)
 router.post('/user/change-email', changeEmailPending)
 

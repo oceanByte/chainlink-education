@@ -124,6 +124,10 @@ export const ButtonStyled = styled.button`
       }
     }
 
+    &.hasHome {
+      width: 100%;
+    }
+
     &.isCompleted {
       .arrow-down {
         height: 24px;

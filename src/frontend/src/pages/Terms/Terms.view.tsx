@@ -1,4 +1,4 @@
-import { Header } from 'app/App.components/Header/Header.controller'
+import Header from 'app/App.components/Header/Header.controller'
 import { MainFooter } from 'app/App.components/MainFooter/MainFooter.controller'
 import * as React from 'react'
 

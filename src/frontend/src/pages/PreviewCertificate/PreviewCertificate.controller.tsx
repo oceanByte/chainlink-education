@@ -7,7 +7,7 @@ import { jsPDF } from 'jspdf'
 import { State } from 'reducers'
 
 import { FooterView } from '../../app/App.components/Footer/Footer.view'
-import { Header } from '../../app/App.components/Header/Header.controller'
+import Header from '../../app/App.components/Header/Header.controller'
 import { PreviewCertificateView } from './PreviewCertificate.view'
 
 import { CourseID } from 'app/App.components/Profile/CourseProgress/CourseProgress.controller'

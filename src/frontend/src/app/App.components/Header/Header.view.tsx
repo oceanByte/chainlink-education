@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import * as PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 import { PublicUser } from 'shared/user/PublicUser'
@@ -19,12 +19,8 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isShowList, setIsShowList] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
-  const [showUserMenu, setShowUserMenu] = useState(true)
+  const [showUserMenu, setShowUserMenu] = useState(false)
   const history = useHistory();
-
-  const additionalUserMenu = classnames('header-menu-user-menu', {
-    'header-menu-user-menu-show': showUserMenu,
-  })
 
   useEffect(() => {
     window.addEventListener('resize', (e) => {
@@ -52,6 +48,27 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
     return `${usernameArr[0][0].toUpperCase()}`
   }
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const showMenu = () => {
+    setShowUserMenu((prev) => !prev);
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setShowUserMenu(() => false);
+      }
+    }
+    if (showUserMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showUserMenu]);
+
   const loggedOutHeader = (
     <div className="header-menu-log">
       <Link to="/login" className="header-menu-log__link link__signin">
@@ -65,12 +82,15 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
 
   const loggedInHeader = (
     <>
-      <div className="header-menu-user" onClick={() => setShowUserMenu((st) => !st)}>
-        <div className="header-menu-user__circle">{formatUsername(user?.username || 'U')}</div>
-        <div className="header-menu-user__name">
-          {user?.username} <span>&#9660;</span>
+      <div className="header-menu-user">
+        <div ref={wrapperRef} className='header-menu-btn' onClick={showMenu}>
+          <div className="header-menu-user__circle">{formatUsername(user?.username || 'U')}</div>
+          <div className="header-menu-user__name">
+            {user?.username} <span>&#9660;</span>
+          </div>
         </div>
-        <div className={additionalUserMenu}>
+        
+        <div className={classnames('header-menu-user-menu', showUserMenu && 'show')}>
           <div className="header-menu-user-menu__item">
             <Link to="/profile/progress">Progress</Link>
           </div>

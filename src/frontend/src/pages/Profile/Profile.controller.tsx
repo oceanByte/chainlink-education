@@ -1,25 +1,33 @@
 import * as React from 'react'
 import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import {  useDispatch, connect } from 'react-redux'
 
-// import { jsPDF } from 'jspdf'
-import { State } from 'reducers'
-
-// import { FooterView } from '../../app/App.components/MainFooter/MainFooter.controller'
 import { FooterView } from '../../app/App.components/Footer/Footer.view'
-import { Header } from '../../app/App.components/Header/Header.controller'
+import Header from '../../app/App.components/Header/Header.controller'
 import { ProfileView } from './Profile.view'
 import { deleteAccountPending } from 'pages/DeleteAccount/DeleteAccount.actions'
-import { changeEmailPending } from './Profile.actions'
-import { getUser, sendName } from 'pages/User/User.actions'
+import { changeEmailPending, changeUsername } from './Profile.actions'
+import { getUser } from 'pages/User/User.actions'
+import { State } from 'reducers'
 
+export interface IChangeUsernameEmail {
+  email?: string
+  username?: string
+}
 
-export const Profile = () => {
+const Profile = ({ user }: any) => {
   const dispatch = useDispatch()
-  const user = useSelector((state: State) => state.auth.user)
 
-  const changeEmailCallback = async ({ email }: { email: string }) => {
-    dispatch(changeEmailPending({ email }))
+  const changeEmailOrUsernameCallback = async ({ email, username }: IChangeUsernameEmail) => {
+
+    if (username) {
+      dispatch(changeUsername({ username }))
+    }
+
+    if (email) {
+      dispatch(changeEmailPending({ email }))
+    }
+    
   }
 
   // const getCertificateCallback = ({ name }: { name: string }) => {
@@ -40,10 +48,15 @@ export const Profile = () => {
       <Header />
       <ProfileView
         user={user}
-        changeEmailCallback={changeEmailCallback}
+        changeEmailOrUsernameCallback={changeEmailOrUsernameCallback}
         deleteAccountCallback={deleteAccountCallback}
       />
       <FooterView />
     </>
   )
 }
+
+export default connect(
+  (state: State) => ({
+    user: state.auth.user,
+  }), {})(Profile);
