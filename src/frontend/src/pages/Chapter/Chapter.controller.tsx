@@ -215,7 +215,7 @@ export const Chapter = () => {
   }
 
   const validateCallback = () => {
-    if (stateChapter.nextChapter === `/profile/certificates`) {
+    if (stateChapter.nextChapter === `/profile/certificates` || additionalInfo.progress.length === additionalInfo.countChapters - 1) {
       setValidatorState(RIGHT)
       if (user) {
         clearInterval(intervalID.current)
@@ -226,7 +226,7 @@ export const Chapter = () => {
             chapterDone: pathname,
             courseId: course ? course._id : '',
             time: time.value,
-            isCompleted: true,
+            isCompleted: course.progress.length === additionalInfo.countChapters - 1,
             coursePath: course ? course.path : ''
           }),
         )

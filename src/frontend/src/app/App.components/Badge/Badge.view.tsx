@@ -16,7 +16,7 @@ interface IBadgeView {
 }
 
 const DASH_ARRAY_FOR_SMALL = 6 * 30;
-const DASH_ARRAY_FOR_MEDIUM = 6 * 58.6666;
+const DASH_ARRAY_FOR_MEDIUM = 6 * 51.6666;
 const DASH_ARRAY_FOR_LARGE = 6 * 62.3333333;
 
 export const BadgeView = ({

@@ -13,6 +13,7 @@ import { CourseModel } from '../../../shared/course/Course'
 import { toPublicUser } from '../../../helpers/toPublicUser'
 import { PublicUser } from '../../../shared/user/PublicUser'
 import { ChangeUsernameInputs } from '../../../shared/user/ChangeUsername'
+import { CertificateModel } from '../../../shared/certificate/Certificate'
 
 export const changeUsername = async (ctx: Context, next: Next): Promise<void> => {
   const changeUsernameArgs = plainToClass(ChangeUsernameInputs, ctx.request.body, { excludeExtraneousValues: true })
@@ -30,6 +31,8 @@ export const changeUsername = async (ctx: Context, next: Next): Promise<void> =>
     { _id: user._id },
     { $set: { username } },
   ).exec()
+
+  await CertificateModel.updateMany({ userId: user._id }, { $set: { username } })
 
   const courses = await CourseModel.find({ userId: user._id }).lean();
 
