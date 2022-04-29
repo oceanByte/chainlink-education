@@ -5,6 +5,7 @@
 import Editor, { ControlledEditor, DiffEditor, monaco } from '@monaco-editor/react'
 import { Checkboxes } from 'app/App.components/Checkboxes/Checkboxes.controller'
 import { Dialog } from 'app/App.components/Dialog/Dialog.controller'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 import useIsMounted from 'ismounted'
 import Markdown from 'markdown-to-jsx'
 import { NoAccountModal } from 'modals/NoAccount/NoAccount.view'
@@ -63,7 +64,7 @@ const MonacoReadOnly = ({ children }: any) => {
         height={height}
         value={children}
         language="typescript"
-        theme="vs-dark"
+        theme="light"
         options={{
           lineNumbers: false,
           scrollBeyondLastLine: false,
@@ -349,7 +350,8 @@ type ChapterViewProps = {
   proposedQuestionAnswerCallback: (e: Question[]) => void
   isStarted: boolean
   startedHandler: () => void
-  currentCourse: any
+  currentCourse: any,
+  additionalInfo: IAdditionalInfo
 }
 
 export const ChapterView = ({
@@ -372,7 +374,8 @@ export const ChapterView = ({
   percent,
   startedHandler,
   proposedQuestionAnswerCallback,
-  currentCourse
+  currentCourse,
+  additionalInfo
 }: ChapterViewProps) => {
   const { pathname } = useLocation();
   const [display, setDisplay] = useState('solution')
@@ -384,7 +387,7 @@ export const ChapterView = ({
   const isMounted = useIsMounted()
 
   useEffect(() => {
-    if (nextChapter === '/chainlinkIntroduction/chapter-2' && localStorage.getItem('popupConfirm')) {
+    if (nextChapter === `/${additionalInfo.urlCourse}/chapter-2` && localStorage.getItem('popupConfirm')) {
       setIsSaveConfirmPopup(false)
     } else setIsSaveConfirmPopup(true)
 
@@ -420,7 +423,7 @@ export const ChapterView = ({
 
   return (
     <div className="chapter-info-wrapper">
-      {nextChapter === '/chainlinkIntroduction/chapter-2' && !user && isSaveConfirmPopup ? (
+      {nextChapter === `/${additionalInfo.urlCourse}/chapter-2` && !user && isSaveConfirmPopup ? (
         <NoAccountModal
           open={!user}
           onClose={closePopupSaveProcess}
@@ -476,7 +479,7 @@ export const ChapterView = ({
             </LetsStart>
           ) : (
             <>
-              {questions.length > 0 && nextChapter !== '/chainlinkIntroduction/chapter-8' ? (
+              {questions.length > 0 && nextChapter !== `/${additionalInfo.urlCourse}/chapter-${additionalInfo.chapters.length + 1}` ? (
                 <ChapterQuestions>
                   <div className="step">
                     <p className="step-text">Step 2</p>
@@ -525,7 +528,7 @@ export const ChapterView = ({
               <Validator validatorState={validatorState} validateCallback={validateCallback} validatorContent={validatorContent} />
             </>
           )}
-          <Footer percent={Math.floor(percent)} nextChapter={nextChapter} previousChapter={previousChapter} />
+          <Footer percent={Math.floor(percent)} nextChapter={nextChapter} previousChapter={previousChapter} additionalInfo={additionalInfo} />
         </ChapterGrid>
       </div>
     </div>

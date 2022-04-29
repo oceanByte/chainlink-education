@@ -32,8 +32,9 @@ Programs, in very broad terms, do two things: store data and change data. We sto
 There are more but we can learn more about them later, these are the major ones for now! Once a variable is assigned a type, it’s type can’t change.
 
 An example variable declaration would be: 
-`
+
+<Highlight class="language-javascript">
 uint myFavNum;
-`
+</Highlight>
 
 This creates a variable called “myFavNum” and assigns it the type uint, or unsigned integer. Now we can use myFavoriteNumber to store numbers like 0,1,2,3,4…etc. in our contract. 

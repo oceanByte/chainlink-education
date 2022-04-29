@@ -23,17 +23,22 @@ string[]  myBooks;
 Creates a variable called “myBooks” which is an array of strings.
 
 You can then assign multiple values to the array by using the assignment operator. The difference from a regular variable assignment is that on the right side of the assignment operator you put the values you want in-between square brackets and separate each value by a comma for example:
-`
-string[] myBooks = [ “Mastering Ethereum”, “Programming Rust”, “Zombie Survival Guide”]`
+<Highlight class="language-javascript">
+string[] myBooks = [ “Mastering Ethereum”, “Programming Rust”, “Zombie Survival Guide”]
+</Highlight>
 
 Or 
-```
+
+<Highlight class="language-javascript">
 uint[] numbers;
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-```
+</Highlight>
 
 You can limit the amount of values that can go into the array by putting a number in the brackets by the array type when you declare it. For example:
-`
-uint[6] numbers;`
+
+<Highlight class="language-javascript">
+uint[6] numbers;
+</Highlight>
+
 Limits the amount of values that can fit into the array called “numbers” to a max of 6 values.
 

@@ -45,7 +45,7 @@ export const PreviewCertificate = () => {
     doc.text(certificate?.code|| '', 190, 450, { align: 'center' })
     doc.save('chainlink_academy_certificate.pdf')
   }
-  console.log(certificate);
+
   useEffect(() => {
     if (isPublicView) {
       dispatch(getCertificate({ username: username || '', coursePath: courseId }))

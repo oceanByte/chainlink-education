@@ -70,6 +70,7 @@ export const AppRoutes = ({ location }: any) => (
     <Route path="/*/chapter-*">
       <Header />
       <Chapter />
+      <Footer />
     </Route>
 
     <Route path="/*/info">

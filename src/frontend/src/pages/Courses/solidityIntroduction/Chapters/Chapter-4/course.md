@@ -14,10 +14,15 @@
   </div>
 </ContentWrapp> -->
 
-Now we will give our smart contract a name. The classic first programming exercise is called “HelloWorld” but this is Web3 so lets call it “HelloWeb3”. To name a contract, you type the keyword `contract` followed by the name. You then put a set of curly braces beside it. Here’s an example: 
+Now we will give our smart contract a name. The classic first programming exercise is called “HelloWorld” but this is Web3 so lets call it “HelloWeb3”. To name a contract, you type the keyword <Highlight class="language-javascript">contract</Highlight> followed by the name. You then put a set of curly braces beside it. Here’s an example: 
 
-`contract HelloWeb3{`
-`}`
+<Highlight class="language-javascript">
+contract HelloWeb3{
+
+}
+
+</Highlight>
+
 Everything within the curly braces is considered part of the HelloWeb3 smart contract. Try completing the contract on the right with the name “HelloWeb3”.
 
 

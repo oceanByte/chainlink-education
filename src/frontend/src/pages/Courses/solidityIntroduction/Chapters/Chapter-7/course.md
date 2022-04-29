@@ -29,16 +29,19 @@ To help prevent this we can declare “access modifiers” when declaring our va
     * The variable/function can only be accessed/changed from outside code or blockchain wallets
 
 To declare the access modifier of a variable we put it inbetween the function type and name like this:
-`
+
+<Highlight class="language-javascript">
 uint public myFavNum;
-`
+</Highlight>
 
 If no access modifier is declared then the variable is automatically assigned the private modifier. For example
-`
+
+<Highlight class="language-javascript">
 uint myFavNum;
-`
+</Highlight>
  
 Is equivalent to 
-`
+
+<Highlight class="language-javascript">
 uint private myFavNum;
-`
+</Highlight>

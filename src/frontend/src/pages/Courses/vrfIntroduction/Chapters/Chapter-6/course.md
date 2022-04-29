@@ -16,10 +16,10 @@
 
 We will begin by declaring the Solidity compiler version and importing the code we need. There are 3 contracts we will be importing: LinkTokenInterface, VRFCoordinatorV2Interface, and VRFConsumerBase:
 
-```
+<Highlight class="language-javascript">
 pragma solidity ^0.8.7;
 
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
-```
+</Highlight>

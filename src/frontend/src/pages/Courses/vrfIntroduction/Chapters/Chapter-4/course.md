@@ -23,9 +23,15 @@ VRF Client Contract:
 
 The contract you are building must import and inherit the client contract. It allows your contract to send the proper requests and receive answers from the Chainlink VRF. To send requests it allows your contract to utilize a function called “RequestRandomness”. To receive answers your contract will need to have a “FulfillRandomness” function. To import the Client Contract you need only one line at the top of your Solidity code:
 
-`import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";`
+<Highlight class="language-javascript">
+import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
+</Highlight>
+
 And to inherit the contract you must put the following when naming your contract:
-`contract VRFv2Consumer is VRFConsumerBaseV2`
+
+<Highlight class="language-javascript">
+contract VRFv2Consumer is VRFConsumerBaseV2
+</Highlight>
 
 VRF Coordinator Contract:
 

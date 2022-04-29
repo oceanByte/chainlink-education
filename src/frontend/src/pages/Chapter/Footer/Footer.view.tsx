@@ -2,8 +2,9 @@ import * as React from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { MainButtonView } from 'app/App.components/MainButton/MainButton.view'
 import { FooterStyled, ProgressBarWrapper, LinkStyled } from './Footer.style'
+import { IFooter } from './Footer.controller'
 
-export const FooterView = ({ nextChapter, previousChapter, percent }: any) => {
+export const FooterView = ({ nextChapter, previousChapter, percent, additionalInfo }: IFooter) => {
   const { pathname } = useLocation()
   const history = useHistory()
 
@@ -23,7 +24,7 @@ export const FooterView = ({ nextChapter, previousChapter, percent }: any) => {
         <MainButtonView
             isChapter
             hasArrowLeft
-            text={pathname !== '/chainlinkIntroduction/chapter-1' ? 'Previous Chapter' : 'Home Page'}
+            text={pathname !== `/${additionalInfo.urlCourse}/chapter-1` ? 'Previous Chapter' : 'Home Page'}
             onClick={() => history.push(previousChapter)}
             loading={false}
             disabled={false}
@@ -31,7 +32,7 @@ export const FooterView = ({ nextChapter, previousChapter, percent }: any) => {
         <MainButtonView
             isChapter
             hasArrowRight
-            text={pathname !== '/chainlinkIntroduction/chapter-8' ? 'Next Chapter' : 'Get certificate'}
+            text={pathname === `/${additionalInfo.urlCourse}/chapter-${additionalInfo.chapters.length}` ? 'Done' : 'Next Chapter'}
             onClick={() => history.push(nextChapter)}
             loading={false}
             disabled={false}

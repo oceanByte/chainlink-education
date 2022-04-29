@@ -3,20 +3,28 @@ import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
-import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
-import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
-import { getUser } from 'pages/User/User.actions'
 import { State } from 'reducers'
+import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
+import { PENDING, RIGHT, WRONG } from './Chapter.constants'
+import { COURSES } from 'pages/Home/Home.view'
+
+import { getUser } from 'pages/User/User.actions'
+import { addProgress } from './Chapter.actions'
+import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
+
+
+import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
+
+
+import { PublicUser } from 'shared/user/PublicUser'
 
 import { CourseData } from '../Course/Course.controller'
 import { chaptersByCourse, courseData, CourseNameType } from '../Course/Course.data'
 import { chapterData as ChainlinkIntroductionChapters } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { chapterData as SolidityIntroductionChapters } from '../Courses/solidityIntroduction/Chapters/Chapters.data'
 import { chapterData as vrfIntroductionChapters } from '../Courses/vrfIntroduction/Chapters/Chapters.data'
-import { addProgress } from './Chapter.actions'
-import { PENDING, RIGHT, WRONG } from './Chapter.constants'
+
 import { ChapterView } from './Chapter.view'
-import { PublicUser } from 'shared/user/PublicUser'
 
 export interface ChapterData {
   pathname: string
@@ -89,9 +97,14 @@ export const Chapter = () => {
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
 
+  
+
   let intervalID: any = useRef(null)
   const partCurrentUrl = pathname.split('/')[1]
   const findLocalCourse = courseData.find((course) => course.path === partCurrentUrl)
+
+  const infoCourses = getCoursesData((user && user.courses) || COURSES);
+  const additionalInfo: IAdditionalInfo = infoCourses.courses[findLocalCourse?.name || '']
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
   let badgeUnlocked = false
@@ -333,6 +346,7 @@ export const Chapter = () => {
           startedHandler={startTaskHandler}
           proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
           currentCourse={user ? findCurrentCourse(user) : null}
+          additionalInfo={additionalInfo}
         />
       )}
       {/* <Footer percent={percent} nextChapter={nextChapter} previousChapter={previousChapter} /> */}

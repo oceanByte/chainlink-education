@@ -161,7 +161,8 @@ export const ButtonStyled = styled.button`
     background: ${backgroundColorLight};
     color: ${textColorBlue};
     transition: all .2s ease-in-out;
-
+    height: 54px;
+    
     &:not(:disabled):hover{
       border: 1px solid ${secondary3};
 
@@ -178,13 +179,13 @@ export const ButtonStyled = styled.button`
     }
 
     &.hasArrowLeft {
-      padding-left: 62px;
-      padding-right: 28px;
+      padding-left: 59px;
+      padding-right: 25px;
     }
 
     &.hasArrowRight {
-      padding-right: 62px;
-      padding-left: 28px;
+      padding-right: 59px;
+      padding-left: 25px;
     }
 
     .arrow-left, .arrow-right {
@@ -199,6 +200,26 @@ export const ButtonStyled = styled.button`
     .arrow-right {
       right: 30px;
       background: url(${arrowRight}) no-repeat;
+    }
+
+    @media screen and (max-width: 1284px) {
+      width: auto !important;
+      &.hasArrowLeft {
+        padding-left: 40px;
+        padding-right: 15px;
+      }
+
+      &.hasArrowRight {
+        padding-right: 40px;
+        padding-left: 15px;
+      }
+
+      .arrow-left {
+        left: 20px;
+      }
+      .arrow-right {
+        right: 20px;
+      }
     }
   }
 

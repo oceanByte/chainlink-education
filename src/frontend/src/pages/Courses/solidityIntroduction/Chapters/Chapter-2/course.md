@@ -20,7 +20,7 @@ Some blockchains have virtual machines other than the EVM and thus have differen
 
 <!-- <MissionContainer>
   <div className="title">Arbitration Court</div>
-    <div style="color:white">
+    <div className="description">
     In fact legal contracts have become so notorousily difficult to enforce, more companies have been putting "arbitration" clauses in their contracts. This means a private arbitration court is used to uphold the contract rather than a public judicial court. There has been a lot of controversy surrounding arbitration courts. You can read more about the history of arbitration courts in <a style="color:green" href="https://www.americanbar.org/groups/tort_trial_insurance_practice/publications/the_brief/2018-19/summer/a-brief-history-arbitration/"> this article by the american bar association </a>.
     </div>
 </MissionContainer> -->
