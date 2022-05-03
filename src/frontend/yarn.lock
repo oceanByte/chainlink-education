@@ -12462,10 +12462,10 @@ react-highlight.js@^1.0.7:
     highlight.js "^9.3.0"
     prop-types "^15.6.0"
 
-react-hotjar@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/react-hotjar/-/react-hotjar-2.2.1.tgz#5f06d15a146960262dba612657c828c8b58da8a3"
-  integrity sha512-rkHdsFDfI7HCKeAwkHPf8Vq7ZbpX0oE4/5GgVvNambWw8z0PSKKxi59qWYX7H+dDYjchiL3z3hrAFQ+PohgQOA==
+react-hotjar@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-hotjar/-/react-hotjar-5.0.0.tgz#72beaa2e0067b407c4183dc3ace5020f68959cab"
+  integrity sha512-nEKDm+O5a77C9DlheuA9tz5rwhRjeIFPLhdvynGFxEYTT1qrYC3NU12Z9/tgvN2l9Tzyn7erUQ0C8fZHZBceTw==
 
 react-icons@^4.1.0:
   version "4.3.1"

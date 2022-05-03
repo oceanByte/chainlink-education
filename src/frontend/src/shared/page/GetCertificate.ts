@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { Expose } from 'class-transformer'
 
 export class GetCertificateInputs {
@@ -6,4 +7,7 @@ export class GetCertificateInputs {
 
   @Expose()
   coursePath!: string
+
+  @Expose()
+  courseId?: ObjectId | string
 }

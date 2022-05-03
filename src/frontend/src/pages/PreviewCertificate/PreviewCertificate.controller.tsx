@@ -50,7 +50,11 @@ export const PreviewCertificate = () => {
     if (isPublicView) {
       dispatch(getCertificate({ username: username || '', coursePath: courseId }))
     } else {
-      dispatch(getCertificate({ username: user ? user.username : '', coursePath: courseId }))
+      dispatch(getCertificate({
+        username: user ? user.username : '',
+        coursePath: courseId,
+        courseId: additionalInfo ? additionalInfo._id : ''
+    }))
     }
     
     // eslint-disable-next-line react-hooks/exhaustive-deps

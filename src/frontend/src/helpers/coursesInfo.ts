@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 import { CourseNameType, CourseStatusType } from "pages/Course/Course.data";
 import { Course } from "shared/course";
 
@@ -57,6 +59,7 @@ export interface IAdditionalInfo {
   title: string
   urlChapter: string
   urlCourse: string
+  _id: ObjectId
 }
 
 export const getCoursesData = (courses: Course[]) => {
