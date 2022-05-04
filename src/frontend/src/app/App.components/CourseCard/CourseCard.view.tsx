@@ -116,6 +116,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
                     isShowList={isShowList}
                     user={user}
                     additionalInfo={additionalInfo}
+                    nextPath={`/description/${additionalInfo.urlCourse}`}
                   />
                   </div>
                   <div className='downloadCertificate'>

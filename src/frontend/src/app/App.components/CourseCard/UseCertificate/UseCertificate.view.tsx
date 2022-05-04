@@ -15,9 +15,10 @@ interface IUseCertificate {
   isShowList: boolean
   additionalInfo: IAdditionalInfo
   user?: PublicUser
+  nextPath: string
 }
 
-export const UseCertificate = ({ isPrimary, isSecondary, additionalInfo, isShowList, user }: IUseCertificate) => {
+export const UseCertificate = ({ isPrimary, isSecondary, additionalInfo, isShowList, user, nextPath }: IUseCertificate) => {
   const history = useHistory()
 
   return (
@@ -31,7 +32,7 @@ export const UseCertificate = ({ isPrimary, isSecondary, additionalInfo, isShowL
               isSecondary={isSecondary}
               hasArrowDown
               text='Download certificate'
-              onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
+              onClick={() => history.push(nextPath)}
               loading={false}
               disabled={false}
             />

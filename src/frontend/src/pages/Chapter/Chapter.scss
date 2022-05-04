@@ -12,7 +12,7 @@
 
   &-container {
     display: grid;
-    grid-template-columns: 5fr 3fr;
+    grid-template-columns: 4fr 3fr;
     grid-gap: 40px;
     margin: 80px 20px 0;
 
@@ -51,6 +51,53 @@
         margin: 0 auto;
         padding: 3px 10px;
         display: flex;
+      }
+    }
+
+    .tabs-container {
+      position: absolute;
+      top: 10px;
+      right: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      line-height: 20px;
+
+      .tab-item {
+        color: $primary;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &.active {
+          color: $secondary3;
+
+          &:hover {
+            color: $secondary3hover;
+          }
+        }
+
+        &:hover {
+          color: $secondary3;
+        }
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+      .divider {
+        color: $primary;
+        padding: 0 5px;
+        user-select: none;
+      }
+
+      @include sm {
+        font-size: 14px;
+        line-height: 16px;
+      }
+      @include xsm {
+        font-size: 12px;
+        line-height: 14px;
       }
     }
 

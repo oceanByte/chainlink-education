@@ -39,6 +39,12 @@ export type Question = {
   proposedResponses?: string[]
 }
 
+export enum TabType {
+  CONTENT = 'Content',
+  VIDEO = 'Video',
+  HINTS = 'Hints'
+}
+
 export interface IValidator {
   validatorState: string
   validateCallback: () => void
@@ -62,6 +68,8 @@ export interface Data {
   exercise: string | undefined
   solution: string | undefined
   description: string | undefined
+  video: string | undefined
+  hints: string | undefined
   supports: Record<string, string | undefined>
   questions: Question[],
   validatorContent: IValidatorContent
@@ -81,6 +89,8 @@ export const Chapter = () => {
     exercise: undefined,
     solution: undefined,
     description: undefined,
+    video: undefined,
+    hints: undefined,
     supports: {},
     questions: [],
     validatorContent: {
@@ -89,6 +99,7 @@ export const Chapter = () => {
       wrong: {}
     }
   })
+  const [tab, setTab] = useState<string>(TabType.CONTENT)
   const [percent, setPercent] = useState(0)
   const [stateChapter, setStateChapter] = useState({
     previousChapter: '/',
@@ -129,6 +140,8 @@ export const Chapter = () => {
             solution: chapter.data.solution,
             supports: chapter.data.supports,
             description: chapter.data.description,
+            video: chapter.data.video,
+            hints: chapter.data.hints,
             questions: chapter.data.questions.map((question) => {
               return { ...question, proposedResponses: [] }
             }),
@@ -214,6 +227,24 @@ export const Chapter = () => {
     return course
   }
 
+  const getContentOnPage = (): string => {
+    switch (tab) {
+      case TabType.CONTENT:
+        return data.course || ''
+      case TabType.VIDEO:
+        return data.video || ''
+      case TabType.HINTS:
+        return data.hints || ''
+    
+      default:
+        return data.course || ''
+    }
+  }
+
+  const setTabOnPage = (currentTab: string) => {
+    setTab(() => currentTab)
+  }
+
   const validateCallback = () => {
     if (stateChapter.nextChapter === `/profile/certificates` || additionalInfo.progress.length === additionalInfo.countChapters - 1) {
       setValidatorState(RIGHT)
@@ -241,10 +272,10 @@ export const Chapter = () => {
         if (!question.proposedResponses) ok = false
         else {
           question.responses.forEach((response) => {
-            if (!(question.proposedResponses && question.proposedResponses.indexOf(response) >= 0)) ok = false
+            if (!(question.proposedResponses && question.proposedResponses.includes(response))) ok = false
           })
           question.proposedResponses.forEach((proposedResponse) => {
-            if (!(question.responses.indexOf(proposedResponse) >= 0)) ok = false
+            if (!(question.responses.includes(proposedResponse))) ok = false
           })
         }
         if (question.responses.length === 0) ok = true
@@ -315,13 +346,6 @@ export const Chapter = () => {
     setData({ ...data, questions: e })
   }
 
-  // console.log(`%c percent ${percent}`, 'padding: 20px; color: orange; background: lightgreen; border-radius: 20px')
-  // console.log(`%c nextChapter ${nextChapter}`, 'padding: 20px; color: red; background: coral; border-radius: 20px')
-  // console.log(
-  //   `%c previousChapter ${previousChapter}`,
-  //   'padding: 20px; color: aqua; background: black; border-radius: 20px',
-  // )
-
   return (
     <>
       {data.course && (
@@ -334,7 +358,9 @@ export const Chapter = () => {
           proposedSolutionCallback={proposedSolutionCallback}
           showDiff={showDiff}
           isAccount={isAccount}
-          course={data.course}
+          course={getContentOnPage()}
+          tab={tab}
+          setTabOnPage={setTabOnPage}
           closeIsAccountModal={() => setIsAccount(false)}
           user={user}
           supports={data.supports}

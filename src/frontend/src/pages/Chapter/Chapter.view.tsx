@@ -5,6 +5,7 @@
 import Editor, { ControlledEditor, DiffEditor, monaco } from '@monaco-editor/react'
 import { Checkboxes } from 'app/App.components/Checkboxes/Checkboxes.controller'
 import { Dialog } from 'app/App.components/Dialog/Dialog.controller'
+import classnames from 'classnames'
 import { IAdditionalInfo } from 'helpers/coursesInfo'
 import useIsMounted from 'ismounted'
 import Markdown from 'markdown-to-jsx'
@@ -23,7 +24,7 @@ import { Button } from '../../app/App.components/Button/Button.controller'
 import { Input } from '../../app/App.components/Input/Input.controller'
 import ArrowRight from '../../assets/arrow-upright-white.svg'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
-import { IValidator, IValidatorContent, Question } from './Chapter.controller'
+import { IValidator, IValidatorContent, Question, TabType } from './Chapter.controller'
 //prettier-ignore
 import { BlueParagraph, ButtonBorder, ButtonStyle, ButtonText, ChapterBig, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterH4, ChapterH5, ChapterQuestions, ChapterTab, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentFailed, ChapterValidatorContentSuccess, ChapterValidatorContentWrapper, ChapterValidatorTitle, ColorWord, ContentWrapp, FormWrapper, LetsStart, ListItemsContainer, MissionContainer, narrativeText, RegularP, Spacer, TextWrapper, VerticalAlign, VideoBox } from './Chapter.style'
 import { AnimatedCode, BackgroundContainer, Difficulty, ImageContainer, SpecialCode } from './Chapter.style'
@@ -343,6 +344,8 @@ type ChapterViewProps = {
   isAccount: boolean
   closeIsAccountModal: () => void
   course?: string
+  tab: string
+  setTabOnPage: (currentTab: string) => void
   user?: PublicUser
   supports: Record<string, string | undefined>
   questions: Question[]
@@ -364,6 +367,8 @@ export const ChapterView = ({
   proposedSolutionCallback,
   showDiff,
   course,
+  tab,
+  setTabOnPage,
   user,
   supports,
   questions,
@@ -444,6 +449,13 @@ export const ChapterView = ({
                 (currentCourse && currentCourse.progress.includes(pathname)) || (user && validatorState === RIGHT) ?
                 'Chapter completed' : 'Step 1'
               }</p>
+            </div>
+            <div className="tabs-container">
+              <div className={classnames("tab-item", tab === TabType.CONTENT && 'active')} onClick={() => setTabOnPage(TabType.CONTENT)}>Content</div>
+              <div className='divider'>|</div>
+              <div className={classnames("tab-item", tab === TabType.VIDEO && 'active')} onClick={() => setTabOnPage(TabType.VIDEO)}>Video</div>
+              <div className='divider'>|</div>
+              <div className={classnames("tab-item", tab === TabType.HINTS && 'active')} onClick={() => setTabOnPage(TabType.HINTS)}>Hints</div>
             </div>
             <Content course={course || ''} />
           </div>

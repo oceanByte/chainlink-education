@@ -14,6 +14,8 @@ import { User, UserModel } from '../../../shared/user/User'
 import { Course, CourseModel } from '../../../shared/course/Course'
 import { COURSES } from '../../../shared/course/CourseType';
 
+import { getCourses } from '../../../helpers/getCourses';
+
 export const find = async (ctx: Context, next: Next): Promise<void> => {
 
 	let users = await UserModel.find({
@@ -103,7 +105,7 @@ export const auth = async (ctx: Context, next: Next) => {
     { _id: user._id },
   ).lean() as User
 
-	const courses = await CourseModel.find({ userId: user._id }).lean();
+	const courses = await getCourses({ user: updatedUser });
 
 	const publicUser: PublicUser = toPublicUser(updatedUser)
 

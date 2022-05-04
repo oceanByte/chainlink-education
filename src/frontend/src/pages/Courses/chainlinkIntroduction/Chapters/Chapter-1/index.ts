@@ -12,8 +12,14 @@ import solution from '!raw-loader!./solution.md'
 import description from '!raw-loader!./description.md'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
+import video from '!raw-loader!./video.md'
+/* eslint import/no-webpack-loader-syntax: off */
+// @ts-ignore
+import hints from '!raw-loader!./hints.md'
+/* eslint import/no-webpack-loader-syntax: off */
+// @ts-ignore
 import { Data } from 'pages/Chapter/Chapter.controller'
 import { questions } from './questions'
 import { validatorContent } from './validatorContent'
 
-export const data: Data = { course, exercise, solution, supports: { }, description, questions, validatorContent }
+export const data: Data = { course, video, hints, exercise, solution, supports: { }, description, questions, validatorContent }

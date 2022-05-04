@@ -194,7 +194,12 @@ export const DescriptionCourseView = ({
                         disabled={false}
                         className={isShowList ? 'hasArrowUp' : ''}
                       />
-                    <UseCertificate isSecondary isShowList={isShowList} additionalInfo={additionalInfo} />
+                    <UseCertificate
+                      isSecondary
+                      isShowList={isShowList}
+                      additionalInfo={additionalInfo}
+                      nextPath={`/${additionalInfo.urlCourse}/certificate/preview`}
+                    />
                     </div>
                     <div className='downloadCertificate'>
                       <MainButtonView
