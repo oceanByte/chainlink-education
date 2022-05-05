@@ -41,7 +41,7 @@ export const getCourses = async ({ user }: IGetCourses) => {
 
     const getStatus = (userProgress: number) => {
 
-      if (userProgress === progress) {
+      if (completedCourse && userProgress === progress) {
         return CourseStatusType.COMPLETED
       } else if (userProgress > 0) {
         return CourseStatusType.IN_PROGRESS
