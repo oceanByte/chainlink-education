@@ -1,0 +1,82 @@
+.profile-page-account-info {
+  margin-bottom: 274px;
+  @include md {
+    margin-bottom: 60px;
+  }
+
+  &__form {
+    .btn-wrapper {
+      margin-top: 30px;
+    }
+  }
+
+  &-wrapper {
+    width: 550px;
+    @include sm {
+      width: 100%;
+    }
+  }
+
+  &__name {
+    margin-top: 20px;
+
+    input:disabled {
+      background-color: #fff;
+      border-color: #ccc;
+      color: rgb(145, 145, 145);
+    }
+  }
+
+  &__username,
+  &__email {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: $grayscale1;
+    font-family: $h-font;
+    position: relative;
+
+    label {
+      text-transform: uppercase;
+      font-size: 11px;
+      line-height: 14px;
+      font-weight: 900;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid $grayscale3;
+      background: none;
+      margin-top: 8px;
+      font-size: 16px;
+      color: $grayscale1;
+      font-family: Circular Std Book;
+    }
+  }
+
+  &__email + .btn {
+    margin-top: 30px;
+  }
+
+  &__message {
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 500;
+    color: $secondary3;
+    font-family: Circular Std Book;
+    margin-top: 20px;
+  }
+
+  &__delete-account {
+    cursor: pointer;
+    margin-top: 50px;
+    font-size: 18px;
+    line-height: 27px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid $grayscale3;
+    @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
+    @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
+  }
+}

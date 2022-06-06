@@ -1,0 +1,414 @@
+.description-page {
+  width: 100%;
+  height: auto;
+  font-family: $p-font;
+  color: $grayscale1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: url("../../assets/profile-page-ellipse.png") no-repeat left 50%;
+  @include fluid-size("background-position-y", 375px, 1600px, 0px, -150px);
+  background-size: contain;
+  padding-bottom: 75px;
+
+  @include md {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 200px;
+  }
+  @include sm {
+    padding-bottom: 270px;
+  }
+}
+
+.description-page-section {
+  background: $white;
+  box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
+  border-radius: 20px;
+  position: relative;
+
+  &.section-chapters {
+    padding: 60px;
+    @include fluid-size("width", 1024px, 1600px, 643px, 840px);
+
+    @include md {
+      width: calc(100% - 40px);
+      padding: 40px 30px;
+      margin-bottom: 20px;
+    }
+    @include sm {
+      padding: 40px 15px;
+      width: calc(100% - 20px);
+    }
+    @include lg {
+      padding: 60px 30px;
+      margin-bottom: 100px;
+    }
+    @include xl {
+      padding: 80px 60px; 
+    }
+
+    .program-wrapp {
+      font-weight: 900;
+      
+      color: $grayscale1;
+      
+      @include md {
+        margin-top: 40px;
+        font-size: 28px;
+        line-height: 34px;
+      }
+      @include sm {
+        font-size: 22px;
+        line-height: 26px;
+      }
+      @include lg {
+        margin-top: 40px;
+        font-size: 32px;
+        line-height: 38px;
+      }
+      @include xl {
+        margin-top: 60px;
+      }
+    }
+
+    .chapters {
+
+      @include md {
+        margin-top: 20px;
+      }
+      @include lg {
+        margin-top: 20px;
+      }
+      @include xl {
+        margin-top: 40px;
+      }
+
+      .chapter {
+        border-bottom: 1px solid $secondary2;
+        padding: 20px 0;
+
+        &-main {
+          position: relative;
+          cursor: pointer;
+          
+          .arrow-down {
+            width: 24px;
+            height: 24px;
+            background: url('../../assets/fi_arrow-up.svg') no-repeat;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            transition: all .3s ease-in-out;
+          }
+
+          &.open {
+            .arrow-down {
+              transform: translateY(-50%) rotate(180deg);
+              transition: all 0.3s ease;
+            }
+          }
+
+          &__number {
+            font-style: normal;
+            font-weight: 450;
+            font-size: 16px;
+            line-height: 24px;
+            color: $secondary1;
+          }
+          &__name {
+            font-style: normal;
+            font-weight: 900;
+            font-size: 18px;
+            line-height: 22px;
+            color: $grayscale1;
+            padding-right: 40px;
+          }
+        }
+
+        &-description {
+          overflow: hidden;
+          transition: max-height .6s ease;
+          margin-top: 7px;
+          
+          p {
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            line-height: 27px;
+            color: $grayscale2;
+          }
+        }
+
+        &:first-child {
+          padding-top: 0;
+        }
+        &:last-child {
+          border-bottom: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+
+  &.section-info {
+    margin-left: 40px;
+    padding: 30px 0;
+    @include fluid-size("width", 1024px, 1600px, 301px, 400px);
+
+    @include md {
+      width: calc(100% - 40px);
+      margin-left: 0;
+      margin-bottom: 60px;
+    }
+
+    @include sm {
+      width: calc(100% - 20px);
+    }
+
+    .badge-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .additional-info {
+      margin-top: 20px;
+      align-items: center;
+
+      @include md {
+        display: none;
+      }
+
+      .item {
+        background: $grayscale3;
+        width: 100%;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @include md {
+          width: calc(100% - 40px);
+          padding: 40px 30px;
+        }
+        @include sm {
+          padding: 40px 15px;
+        }
+        @include lg {
+          padding: 10px 8px; 
+        }
+        @include xl {
+          padding: 10px 30px;
+        }
+
+        .title {
+          font-weight: 450;
+          font-size: 16px;
+          line-height: 24px;
+          color: $secondary1;
+        }
+
+        .wrapp {
+          padding: 0 10px;
+          background: $white;
+          border: 1px solid $grayscale4;
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-weight: 450;
+          
+          color: $secondary1;
+
+          @include sm {
+            font-size: 16px;
+            line-height: 19px;
+          }
+          @include md {
+            height: 26px;
+            font-size: 16px;
+            line-height: 24px;
+            padding: 0 5px;
+          }
+    
+          @include lg {
+            height: 34px;
+            padding: 0 10px;
+            font-size: 16px;
+            line-height: 24px;
+          }
+        }
+
+    
+        .icon {
+          margin-right: 6px;
+        }
+
+        & + .item {
+          margin-top: 5px;
+        }
+      }
+
+      &__chapters { 
+        .icon {
+          background: url('../../assets/amountChapters.svg') no-repeat;
+          width: 16px;
+          height: 20px;
+        }
+      }
+      &__time {
+        .icon {
+          background: url('../../assets/clock.svg') no-repeat;
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    .additional-info-mobile {
+      margin-top: 10px;
+      align-items: center;
+      justify-content: center;
+
+      @include md {
+        display: flex;
+      }
+
+      @include lg {
+        display: none;
+      }
+
+      .item {
+        padding: 0 10px;
+        background: $white;
+        border: 1px solid $grayscale4;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 450;
+        color: $secondary1;
+        height: 34px;
+        padding: 0 10px;
+
+        & + .item {
+          margin-left: 10px;
+        }
+
+        .icon {
+          margin-right: 6px;
+        }
+      }
+
+      &__difficulty {
+        margin-left: 10px;
+
+        .overall-progress {
+          height: 34px;
+        }
+      }
+    }
+
+    .additional-info__footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      width: 100%;
+
+      .course-footer {
+        width: 100%;
+        display: flex;
+
+        .useCertificate {
+          display: none;
+          position: relative;
+        }
+        
+
+        &.center {
+          justify-content: center;
+        }
+
+        &__progress-bar {
+          .circle-wrap {
+            width: 60px;
+            height: 60px;
+            position: relative;
+          }
+        }
+
+        @include md {
+          justify-content: center;
+
+          &.completed {
+            justify-content: center;
+          }
+
+          .shareCertificate,
+          .course-footer__progress-bar {
+            margin-left: 20px;
+          }
+
+          .shareCertificate,
+          .downloadCertificate  {
+            display: block;
+          }
+
+          .useCertificate {
+            display: none;
+          }
+        }
+
+        @include lg {
+          justify-content: space-between;
+          padding: 0 8px;
+          &.completed {
+            justify-content: center;
+            padding: 0 27px;
+          }
+
+          .shareCertificate,
+          .downloadCertificate {
+            display: none;
+          }
+
+          .useCertificate {
+            display: block;
+          }
+        }
+
+        @include xl {
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 30px;
+
+          &.completed {
+            justify-content: space-between;
+          }
+
+          .shareCertificate,
+          .downloadCertificate  {
+            display: block;
+          }
+
+          .useCertificate {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  @include sm {
+    margin-bottom: 60px;
+  }
+  
+  @include md {
+    width: calc(100% - 40px);
+  }
+}
+
+

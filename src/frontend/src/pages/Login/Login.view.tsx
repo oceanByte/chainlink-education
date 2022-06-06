@@ -70,7 +70,7 @@ export const LoginView = ({
             <div className="login-form-title">Sign in</div>
             <Row>
               <InputField
-                label="Email address"
+                label="Email address or Username"
                 type="text"
                 value={values.usernameOrEmail}
                 onChange={handleChange}
@@ -78,8 +78,7 @@ export const LoginView = ({
                 name="usernameOrEmail"
                 inputStatus={
                   errors.usernameOrEmail && touched.usernameOrEmail
-                    ? 'error' : !errors.usernameOrEmail && touched.usernameOrEmail 
-                    ? 'success' : undefined
+                    ? 'error' : undefined
                   }
                 errorMessage={errors.usernameOrEmail && touched.usernameOrEmail && errors.usernameOrEmail}
                 isDisabled={false}
@@ -94,8 +93,7 @@ export const LoginView = ({
                 name="password"
                 inputStatus={
                   errors.password && touched.password
-                    ? 'error' : !errors.password && touched.password 
-                    ? 'success' : undefined
+                    ? 'error' : undefined
                   }
                 errorMessage={errors.password && touched.password && errors.password}
                 isDisabled={false}

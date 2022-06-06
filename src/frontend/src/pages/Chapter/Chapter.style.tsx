@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-import { backgroundColorLight, downColor, okColor, primaryColor, textColor } from 'styles'
+import { backgroundColorLight, downColor, okColor, primaryColor, textColor, textColorWhite } from 'styles'
 
 export const ChapterStyled = styled.div`
   background: linear-gradient(236.29deg, #1174cb 3.4%, #20c1dc 100%);
@@ -60,8 +60,16 @@ export const ChapterGrid = styled.div<{ hasTabs?: boolean }>`
 
 export const ChapterQuestions = styled.div`
   padding: 20px;
-  border: 1px solid blue;
-  background: white;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 15px rgb(12 22 44 / 10%);
+  border-radius: 20px;
+  border: 1px solid white;
+  position: relative;
+
+  .questions-container {
+    margin-top: 20px;
+  }
+
   h2 {
     font-weight: 600;
   }
@@ -537,7 +545,7 @@ export const ContentWrapp = styled.div`
     }
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 600px) {
     display: none;
   }
 `
@@ -559,12 +567,23 @@ export const MissionContainer = styled.div`
   margin-top: 80px;
   margin-bottom: 80px;
 
+  a {
+    color: #c96765;
+  }
+
   .title {
     font-weight: 900;
     font-size: 32px;
     line-height: 120%;
     color: #ffffff;
     margin: 0 0 20px 0;
+  }
+
+  .description {
+    color: ${textColorWhite};
+    font-size: 18px;
+    line-height: 27px;
+    font-weight: 400;
   }
 
   .mission-goals {
@@ -859,4 +878,21 @@ export const AnimatedCode = styled.div`
       background-position: 0 50%;
     }
   }
+`
+
+export const VideoBox = styled.div`
+position: relative;
+overflow: hidden;
+width: 100%;
+padding-top: 64%;
+
+    iframe{
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
 `

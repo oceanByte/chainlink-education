@@ -14,6 +14,7 @@ import { CheckboxWrapp, ErrorMessage, Row } from './SignUp.style';
 
 export const ValidationSchema = Yup.object().shape({
   username: Yup.string()
+    .matches(/^[a-zA-Z0-9_]*$/, 'Username can only contain letters, numbers and underscores')
     .min(2, 'Username must be longer than or equal to 2 characters')
     .max(50, 'Username must be shorter than or equal to 50 characters')
     .required('This field is required!'),
@@ -29,9 +30,9 @@ export const ValidationSchema = Yup.object().shape({
     .required('Please confirm your password')
     .oneOf([Yup.ref('password'), null], 'Password mismatch'),
   agree: Yup.bool().oneOf(
-      [true],
-      "You can't continue without agreeing to terms of use"
-    ),
+    [true],
+    "You can't continue without agreeing to terms of use"
+  ),
 });
 
 type SignUpViewProps = {
@@ -66,7 +67,7 @@ export const SignUpView = ({ signUpCallback }: SignUpViewProps) => {
   const regUppercase = /^(?=.*[A-ZÄÖÜА-ЯІЄЇГҐ]).+$/gm
   const regLowercase = /^(?=.*[a-zäöüßа-яієїґ]).+$/gm
   const regNumbers = /^(?=.*\d).+$/gm
-  const regSpecial = /[-+_!@#$%^&*.,?<>()|"]/gm
+  const regSpecial = /[-+_!§@#$%^&*.,?<>()|"]/gm
   const regMinLength = /^.{8,}$/gm
 
   const uppercaseImage = uppercase ? Confirm : UnConfirm
@@ -102,146 +103,143 @@ export const SignUpView = ({ signUpCallback }: SignUpViewProps) => {
         initialValues={initialValues}
         validationSchema={ValidationSchema}
         onSubmit={handleSubmit}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            setFieldValue,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (
-            <form className="sign-up" onSubmit={handleSubmit}>
-              <div className="sign-up-title">Sign up</div>
-              
-              <Row>
-                <InputField
-                  label="USERNAME"
-                  type="text"
-                  value={values.username}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="username"
-                  inputStatus={
-                    errors.username && touched.username
-                      ? 'error' : !errors.username && touched.username 
-                      ? 'success' : undefined
-                    }
-                  errorMessage={errors.username && touched.username && errors.username}
-                  isDisabled={false}
-                />
-              </Row>
-              <Row>
-                <InputField
-                  label="EMAIL ADDRESS"
-                  type="text"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="email"
-                  inputStatus={
-                    errors.email && touched.email
-                      ? 'error' : !errors.email && touched.email 
-                      ? 'success' : undefined
-                    }
-                  errorMessage={errors.email && touched.email && errors.email}
-                  isDisabled={false}
-                />
-              </Row>
-              <Row>
-                <InputFieldWithEye
-                  label="Choose new password"
-                  value={values.password}
-                  onChange={(e) => {
-                    handleChangePassword(e)
+      >
+        {({
+          values,
+          errors,
+          touched,
+          setFieldValue,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          isValid
+        }) => (
+          <form className="sign-up" onSubmit={handleSubmit}>
+            <div className="sign-up-title">Sign up</div>
 
-                    setFieldValue("password", e.target.value)
-                  }}
-                  onBlur={handleBlur}
-                  name="password"
-                  inputStatus={
-                    errors.password && touched.password
-                      ? 'error' : !errors.password && touched.password 
-                      ? 'success' : undefined
-                    }
-                  errorMessage={errors.password && touched.password && errors.password}
-                  isDisabled={false}
-                />
-              </Row>
-              <div className="sign-up__validation">
-                <div className="sign-up__validation-left">
-                  <div className="sign-up__validation-left-uppercase-letter">
-                    <img src={uppercaseImage} alt="confirm" />
-                    Min 1 uppercase letter
-                  </div>
-                  <div className="sign-up__validation-left-lowercase-letter">
-                    <img src={lowercaseImage} alt="confirm" />
-                    Min 1 lowercase letter
-                  </div>
-                  <div className="sign-up__validation-left-number">
-                    <img src={numbersImage} alt="confirm" />
-                    Min 1 numbers
-                  </div>
+            <Row>
+              <InputField
+                label="USERNAME"
+                type="text"
+                value={values.username}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="username"
+                inputStatus={
+                  errors.username && touched.username
+                    ? 'error' : undefined
+                }
+                errorMessage={errors.username && touched.username && errors.username}
+                isDisabled={false}
+              />
+            </Row>
+            <Row>
+              <InputField
+                label="EMAIL ADDRESS"
+                type="text"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="email"
+                inputStatus={
+                  errors.email && touched.email
+                    ? 'error' : undefined
+                }
+                errorMessage={errors.email && touched.email && errors.email}
+                isDisabled={false}
+              />
+            </Row>
+            <Row>
+              <InputFieldWithEye
+                label="Choose new password"
+                value={values.password}
+                onChange={(e) => {
+                  handleChangePassword(e)
+
+                  setFieldValue("password", e.target.value)
+                }}
+                onBlur={handleBlur}
+                name="password"
+                inputStatus={
+                  errors.password && touched.password
+                    ? 'error' : undefined
+                }
+                errorMessage={errors.password && touched.password && errors.password}
+                isDisabled={false}
+              />
+            </Row>
+            <div className="sign-up__validation">
+              <div className="sign-up__validation-left">
+                <div className="sign-up__validation-left-uppercase-letter">
+                  <img src={uppercaseImage} alt="confirm" />
+                  Min 1 uppercase letter
                 </div>
-                <div className="sign-up__validation-right">
-                  <div className="sign-up__validation-right-special-characters" title='Only "!"'>
-                    <img src={specialImage} alt="confirm" />
-                    Min 1 special characters
-                  </div>
-                  <div className="sign-up__validation-right-min-length">
-                    <img src={minLengthImage} alt="confirm" />
-                    Min length = 8
-                  </div>
+                <div className="sign-up__validation-left-lowercase-letter">
+                  <img src={lowercaseImage} alt="confirm" />
+                  Min 1 lowercase letter
+                </div>
+                <div className="sign-up__validation-left-number">
+                  <img src={numbersImage} alt="confirm" />
+                  Min 1 numbers
                 </div>
               </div>
-              <Row>
-                <InputFieldWithEye
-                  label="Confirm Password"
-                  value={values.confirmPassword}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  name="confirmPassword"
-                  inputStatus={
-                    errors.confirmPassword && touched.confirmPassword
-                      ? 'error' : !errors.confirmPassword && touched.confirmPassword 
-                      ? 'success' : undefined
-                    }
-                  errorMessage={errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
-                  isDisabled={false}
-                />
-              </Row>
-              <CheckboxWrapp>
-                <div className="sign-up__checkbox" onClick={() => setCheckedInput((prev) => !prev)}>
-                  <label
-                    htmlFor="sign-up__checkbox"
-                    className={classNameInputChecked}
-                    onChange={() => setCheckedInput((prev) => !prev)}
-                  >
-                    <input
-                      type="checkbox"
-                      id="sign-up__checkbox"
-                      className="sign-up__checkbox-input"
-                      name="agree"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                  </label>
-                  <span className="sign-up__checkbox-text">
-                    By signing up, you confirm that you've read and accepted our Privacy Policy and you've read Terms of Use
-                  </span>
+              <div className="sign-up__validation-right">
+                <div className="sign-up__validation-right-special-characters" title='Only "!"'>
+                  <img src={specialImage} alt="confirm" />
+                  Min 1 special characters
                 </div>
-                {!touched.agree && errors.agree ? (
-                    <ErrorMessage>
-                      {errors.agree}
-                    </ErrorMessage>
-                  ) : null}
-              </CheckboxWrapp>
-              <button className="reset-password__sign" type="submit">
-                Create your free account
-              </button>
-            </form>
+                <div className="sign-up__validation-right-min-length">
+                  <img src={minLengthImage} alt="confirm" />
+                  Min length = 8
+                </div>
+              </div>
+            </div>
+            <Row>
+              <InputFieldWithEye
+                label="Confirm Password"
+                value={values.confirmPassword}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="confirmPassword"
+                inputStatus={
+                  errors.confirmPassword && touched.confirmPassword
+                    ? 'error' : undefined
+                }
+                errorMessage={errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
+                isDisabled={false}
+              />
+            </Row>
+            <CheckboxWrapp>
+              <div className="sign-up__checkbox" onClick={() => setCheckedInput((prev) => !prev)}>
+                <label
+                  htmlFor="sign-up__checkbox"
+                  className={classNameInputChecked}
+                  onChange={() => setCheckedInput((prev) => !prev)}
+                >
+                  <input
+                    type="checkbox"
+                    id="sign-up__checkbox"
+                    className="sign-up__checkbox-input"
+                    name="agree"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </label>
+                <span className="sign-up__checkbox-text">
+                  By signing up, you confirm that you've agreed to our <a href="/terms">Terms of Use</a>
+                </span>
+              </div>
+              {touched.agree && errors.agree ? (
+                <ErrorMessage>
+                  {errors.agree}
+                </ErrorMessage>
+              ) : null}
+            </CheckboxWrapp>
+            <button className="reset-password__sign" disabled={!isValid} type="submit">
+              Create your free account
+            </button>
+          </form>
         )}
       </Formik>
     </>

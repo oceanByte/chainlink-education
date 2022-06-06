@@ -15,7 +15,7 @@ export const verifySignedJwt: VerifySignedJwt = (jwt) => {
   const verifyOptions = {
     issuer: 'ChainlinkAcademy',
     subject: jwtDecoded ? jwtDecoded.username : undefined,
-    audience: 'https://chainlink.academy',
+    // audience: 'https://chainlink.academy',
     expiresIn: '30d',
     algorithm: ['RS256'],
   }

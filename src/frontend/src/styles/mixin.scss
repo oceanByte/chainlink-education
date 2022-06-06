@@ -1,5 +1,7 @@
+@use "sass:math";
+
 @function strip-unit($value) {
-  @return $value / ($value * 0 + 1);
+  @return math.div($value, ($value * 0 + 1));
 }
 
 @mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
@@ -78,6 +80,12 @@
 
 @mixin lg {
   @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: 1600px) {
     @content;
   }
 }

@@ -1,8 +1,8 @@
 #####Chapter 9:
 
-# Conclusion
+# Reading Array Values
 
-<ContentWrapp>
+<!-- <ContentWrapp>
   <div class="imgContainer">
     <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
   </div>
@@ -12,26 +12,25 @@
      Connect your artwork to the price of gold or ETH or overall Market Cap. Mention the concept of “Hybrid Smart Contracts”. 
     </div>
   </div>
-</ContentWrapp>
+</ContentWrapp> -->
 
-As discussed in the previous lesson, Chainlink gives developers the ability to create extremely powerful DON’s that provide smart contracts with the highest quality data from outside the blockchain. As a smart contract developer, how can you take advantage of these DONs in your own smart contracts? Chainlink is open source so there’s always the option of making your own DON, but creating a DON is a complex and nuanced process. Instead, in the spirit of old developer adage “Never build something twice”, lets make use of existing DONs if possible.
+Now that we can store multiple related values into a single array our lives organizing our data should be much easier! But how do we access those stored values later? Data stored in arrays is associated with an index which describes the order of the data. Indexing in Solidity starts at 0. So this means the first values assigned to an array has the index of 0, the second value assigned to the array has an index of 1, the third value an index of 2 and so on.
 
-Luckily, many of the largest and highest quality node operators in the blockchain industry have already combined their knowledge and prowress to create DONs that serve the most in-demand data for smart contract developers to take advantage of. These data serving DONs are called <ColorWord>Chainlink Data Feeds</ColorWord>. Currently most of the data feeds provide data on various currency and cryptocurrency pairs, as that was initially what smart contract developers needed, but data feeds can be used to retrieve any type of data.
+You can access the values in an array by calling the array variable and putting the index of the value you want to access within square brackets. For example:
 
-You can see these data feeds updating in real time at data.chain.link. There you can select different blockchains Chainlink DONs are posting data to, as well view the details of each DON that compose a particular data feed. For instance if you click on the ETH/USD data feed you will see all the nodes involved in the DON, what price each individual node posted, and the final aggregated price of the asset. Some important terms you may notice are:
+<Highlight class="language-javascript">
+string[] myBooks = [ “Mastering Ethereum”, “Programming Rust”, “Zombie Survival Guide”]
+</Highlight>
 
-<MissionContainer>
-  <div className="title">Quizzes:</div>
-  <ol className="mission-goals">
-    <li>
-      What is the heartbeat for the ETH/USD data feed on Ethereum mainnet?
-    </li>
-    <li>
-      What is the deviation threshold for the BTC/USD data feed on Binance Smart Chain mainnet?
-    </li>
-  </ol>
-</MissionContainer>
+And then
 
-## Programming with Chainlink Data Feeds
+myBooks[0] will access the first value assigned to the myBooks array (since Solidity indexes at 0) which will be the value “Mastering Ethereum”.
 
-Now that we understand how Chainlink data feeds work, lets use them within a smart contract. To use a chainlink data feed within a smart contract you only have to complete three simple steps:
+As another example I could take a value in an array and also assign it to another variable:
+
+<Highlight class="language-javascript">
+string myFirstBook = myBooks[0];
+</Highlight>
+
+Which will take the value indexed at zero in the “myBooks” array (which is “Mastering Ethereum”) and assign it to the string named “myFirstBook”. This won’t erase it from the myBooks array but make a copy and assign to the new “myFirstBook” variable.
+

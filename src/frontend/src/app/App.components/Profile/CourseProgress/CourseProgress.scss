@@ -1,0 +1,62 @@
+.profile-page-progress-wrapper {
+  width: 100%;
+
+  .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title-wrapp {
+      display: flex;
+      align-items: center;
+      .title {
+        margin-left: 10px;
+        font-style: normal;
+        font-weight: 900;
+        color: $grayscale1;
+        
+        @include sm {
+          font-size: 16px;
+          line-height: 19px;
+        }
+        @include md {
+          font-size: 18px;
+          line-height: 22px;
+        }
+  
+        @include lg {
+          font-size: 20px;
+          line-height: 24px;
+        } 
+        
+        @include xl {
+          font-size: 24px;
+          line-height: 29px;
+        }
+        
+      }
+    }
+  }
+
+  .chapters__container {
+    margin-top: 30px;
+
+    @include md {
+      margin-top: 20px;
+    }
+
+    .header-chapters__item__name {
+      max-width: 100%;
+      font-size: 18px;
+      line-height: 27px;
+
+      @include sm {
+        width: calc(100% - 90px);
+      }
+      @include md {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+}

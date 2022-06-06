@@ -1,12 +1,12 @@
 export const questions = [
   {
-    question: 'What is Chainlink?',
+    question: 'Which of the following isn’t a data type in Solidity??',
     answers: [
-      'A monolithic decentralized oracle network',
-      'Ten decentralized oracle networks working in conjunction',
-      'A blockchain',
-      'A platform for creating decentralized oracle networks',
+      'uint',
+      'bool',
+      'address',
+      'complex',
     ],
-    responses: ['A platform for creating decentralized oracle networks'],
+    responses: ['complex'],
   },
 ]

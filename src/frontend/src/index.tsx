@@ -1,12 +1,12 @@
 import * as React from 'react'
 import ReactGA from 'react-ga'
+import { hotjar } from 'react-hotjar';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 // @ts-ignore
 import TagManager from 'react-gtm-module'
-import { hotjar } from 'react-hotjar'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-import TwitterConvTrkr from 'react-twitter-conversion-tracker'
+// import TwitterConvTrkr from 'react-twitter-conversion-tracker'
 import LogRocket from 'logrocket';
 
 import { App } from './app/App.controller'
@@ -35,9 +35,6 @@ const tagManagerArgs = {
   gtmId: process.env.REACT_APP_GTM_ID,
 }
 TagManager.initialize(tagManagerArgs)
-
-TwitterConvTrkr.init('xxxxx')
-TwitterConvTrkr.pageView()
 
 export const Root = () => {
   return (

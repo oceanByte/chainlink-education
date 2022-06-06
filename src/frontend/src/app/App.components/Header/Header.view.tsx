@@ -1,33 +1,26 @@
+import classnames from 'classnames'
 import * as PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 
 import { PublicUser } from 'shared/user/PublicUser'
 import { Option } from '../Select/Select.view'
 
-import classnames from 'classnames'
-import { ChaptersListView } from '../HeaderCoursesList/HeaderCoursesListView'
+import { CoursesListView } from '../HeaderCoursesList/HeaderCoursesListView'
 
 type HeaderViewProps = {
   user?: PublicUser
-  removeAuthUserCallback: () => void,
-  pathname: string,
-  activeCourse: Option,
+  removeAuthUserCallback: () => void
+  pathname: string
+  activeCourse: Option
 }
 
-export const HeaderView = ({
-  user,
-  removeAuthUserCallback,
-  pathname,
-  activeCourse
-}: HeaderViewProps) => {
+export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCourse }: HeaderViewProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isShowList, setIsShowList] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
-  const [showUserMenu, setShowUserMenu] = useState(true)
-
-  const additionalUserMenu = classnames('header-menu-user-menu', {
-    'header-menu-user-menu-show': showUserMenu,
-  })
+  const [showUserMenu, setShowUserMenu] = useState(false)
+  const history = useHistory();
 
   useEffect(() => {
     window.addEventListener('resize', (e) => {
@@ -46,7 +39,7 @@ export const HeaderView = ({
   }
 
   const formatUsername = (username: string) => {
-    const usernameArr = username.split('_');
+    const usernameArr = username.split('_')
 
     if (usernameArr.length >= 2) {
       return `${usernameArr[0][0].toUpperCase()}${usernameArr[1][0].toUpperCase()}`
@@ -54,6 +47,27 @@ export const HeaderView = ({
 
     return `${usernameArr[0][0].toUpperCase()}`
   }
+
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const showMenu = () => {
+    setShowUserMenu((prev) => !prev);
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setShowUserMenu(() => false);
+      }
+    }
+    if (showUserMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showUserMenu]);
 
   const loggedOutHeader = (
     <div className="header-menu-log">
@@ -68,20 +82,26 @@ export const HeaderView = ({
 
   const loggedInHeader = (
     <>
-      <div className="header-menu-user" onClick={() => setShowUserMenu((st) => !st)}>
-        <div className="header-menu-user__circle">{formatUsername(user?.username || "U")}</div>
-        <div className="header-menu-user__name">
-          {user?.username} <span>&#9660;</span>
+      <div className="header-menu-user">
+        <div ref={wrapperRef} className='header-menu-btn' onClick={showMenu}>
+          <div className="header-menu-user__circle">{formatUsername(user?.username || 'U')}</div>
+          <div className="header-menu-user__name">
+            {user?.username} <span>&#9660;</span>
+          </div>
         </div>
-        <div className={additionalUserMenu}>
+        
+        <div className={classnames('header-menu-user-menu', showUserMenu && 'show')}>
           <div className="header-menu-user-menu__item">
-            <Link to="/profile">Progress & Certificate</Link>
+            <Link to="/profile/progress">Progress</Link>
           </div>
           <div className="header-menu-user-menu__item">
-            <Link to="/profile?accountInfo=2">Account info</Link>
+            <Link to="/profile/certificates">Certificate</Link>
           </div>
           <div className="header-menu-user-menu__item">
-            <Link to="/profile?resetPassword=3">Reset password</Link>
+            <Link to="/profile/account-info">Account info</Link>
+          </div>
+          <div className="header-menu-user-menu__item">
+            <Link to="/profile/reset-password">Reset password</Link>
           </div>
           <div className="header-menu-user-menu__item">
             <div onClick={removeAuthUserCallback}>Log out</div>
@@ -104,6 +124,9 @@ export const HeaderView = ({
   const showListAcademy = () => {
     setIsDropdownOpen(!isDropdownOpen)
   }
+  const showListAcademyMobile = () => {
+    setIsShowList(!isShowList)
+  }
 
   return (
     <>
@@ -111,24 +134,25 @@ export const HeaderView = ({
         <Link to="/" className="header__link" />
         <div className="header-menu">
           <div className="header-menu-list">
-            <div className='header-menu-list__item'>
+            <div className="header-menu-list__item">
               <button className="btn" onClick={showListAcademy}>
-                Academy <span>&#9660;</span>
+                Courses <span>&#9660;</span>
               </button>
-              <div className={classnames('chapters-list', !isDropdownOpen && 'hidden')}>
-                <ChaptersListView
-                  user={user}
-                  activeCourse={activeCourse}
-                  pathname={pathname}
-                />
+              <div className={classnames('courses-list', !isDropdownOpen && 'hidden')}>
+                <CoursesListView user={user} pathname={pathname} />
               </div>
             </div>
-            <div className='header-menu-list__item'>
-              <button
-                className="ml-30 btn"
-                onClick={() => window.open('https://chain.link/','_blank')}>
-                  Ecosystem
+            {user? (
+              <div className="header-menu-list__item">
+                <button className="ml-30 btn" onClick={() => history.push('/profile/progress')}>
+                  Your Progress
                 </button>
+              </div>
+            ): null}
+            <div className="header-menu-list__item">
+              <button className="ml-30 btn" onClick={() => window.open('https://chain.link/', '_blank')}>
+                Ecosystem
+              </button>
             </div>
           </div>
           <div className="header-menu-cred lg">{user ? loggedInHeader : loggedOutHeader}</div>
@@ -141,32 +165,34 @@ export const HeaderView = ({
           />
         </div>
 
-        <div className={`header-list ${isBurgerMenuOpen ? '' : 'hidden'}`}>
+        <div className={`header-list-mobile ${isBurgerMenuOpen ? '' : 'hidden'}`}>
           <div className="header__item-border" />
-          <div className='header-list__item'>
-            <button className="btn" onClick={showListAcademy}>
-              Academy <span>&#9660;</span>
+          <div className="header-list-mobile__item">
+            <button className="btn" onClick={showListAcademyMobile}>
+              Courses <span>&#9660;</span>
             </button>
-            <div className={classnames('chapters-list', !isDropdownOpen && 'hidden')}>
-              <ChaptersListView
-                user={user}
-                activeCourse={activeCourse}
-                pathname={pathname}
-              />
+            <div className={classnames('courses-list', isShowList && 'show')}>
+              <CoursesListView user={user} pathname={pathname} isMobile />
             </div>
           </div>
           <div className="header__item-border" />
-          <div className='header-list__item'>
+          <div className="header-list-mobile__item">
+            <button className="btn" onClick={() => history.push('/profile/progress')}>
+              Your Progress
+            </button>
+          </div>
+          <div className="header-list-mobile-border" />
+          <div className="header-list-mobile__item">
             <button className="btn">Ecosystem</button>
           </div>
           <div className="header__item-border" />
-          <div className='header-list__item'>
+          <div className="header-list-mobile__item">
             <button className="btn" onClick={scrollTo}>
               Contact
             </button>
           </div>
           <div className="header__item-border" />
-          <div className="header-dropdown-user-menu xs">{user ? loggedInHeader : loggedOutHeader}</div>
+          <div className="header-dropdown-user-menu xs">{!user ? loggedOutHeader : null}</div>
         </div>
       </div>
       <div className={`bright-background ${isBurgerMenuOpen ? '' : 'opacity-0'}`} />

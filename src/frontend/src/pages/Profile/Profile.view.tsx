@@ -1,172 +1,131 @@
 import * as React from 'react'
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useState,useCallback } from 'react'
+import { Switch, NavLink, Route } from 'react-router-dom'
 
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-
-import { Option } from 'app/App.components/Select/Select.view'
 import { PublicUser } from 'shared/user/PublicUser'
 
 import { ConfirmYouPassword } from '../../app/App.components/ConfirmYouPassword/ConfirmYouPassword'
 import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePassword'
-import { CoursesListView } from 'app/App.components/CoursesList/CourseList.view'
-import { DeleteAccountModal } from 'modals/DeleteAccount/DeleteAccount.view'
-import { InputField } from 'app/App.components/Form/InputField/Input.controller';
+import { Certificates } from 'app/App.components/Profile/Certificates/Certificates.controller';
+import { OverallProgress } from 'app/App.components/Profile/OverallProgress/OveralProgress.controller';
+import { AccountInfo } from 'app/App.components/Profile/AccountInfo/AccountInfo.view';
+import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
+import { CourseProgress } from 'app/App.components/Profile/CourseProgress/CourseProgress.controller'
+import { Error404 } from 'pages/Error404/Error404.controller'
+import { IChangeUsernameEmail } from './Profile.controller'
 
 type ProfileViewProps = {
   user?: PublicUser,
-  activeCourse: Option,
-  changeEmailCallback: ({email}: {email: string})=> void,
+  changeEmailOrUsernameCallback: ({email, username}: IChangeUsernameEmail)=> void,
   deleteAccountCallback: ()=> void
 }
 
-export const ValidationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Invalid email')
-    .required('This field is required!'),
-});
-
 export const ProfileView = ({
   user,
-  activeCourse,
-  changeEmailCallback,
+  changeEmailOrUsernameCallback,
   deleteAccountCallback,
 }: ProfileViewProps) => {
-  
-  const { search } = useLocation()
-  const [section, setSection] = useState(1)
+  const [isShow, setIsShow] = useState(false);
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
-  const [isDeleteAccVisible, setIsDeleteAccVisible] = useState(false)
-  const initialValue = {
-    email: user? user?.email : ''
-  }
 
-  useEffect(() => {
-    if (search) {
-      setSection(() => +search[search.length-1])
-    }
-  }, [search])
+  const infoCourses = getCoursesData(user?.courses || []);
 
+  // const copyToClipboard = () => {
+  //   navigator.clipboard.writeText(`https://www.chainlink.education/certificate/${user?.username}`);
+  //   dispatch(showToaster(SUCCESS, 'Certificate link copied', 'You can share this link now.'));
+  // }
 
-  useEffect(() => {
-    if (user && user.deleteAccountPending) {
-      setIsDeleteAccVisible(() => true)
-    }
-  }, [user])
-
-  const showDeleteAccountModal = () => {
-    deleteAccountCallback()
-  }
-
-  const hideDeleteAccountModal = () => {
-    setIsDeleteAccVisible(() => false)
-  }
-
-  const handleSubmit = (values: { email: string }) => {
-    changeEmailCallback(values);
-  }
+  const showSubList = useCallback((isShow: boolean) => {
+    setIsShow(() => isShow)
+  }, [])
 
   return (
     <div className='profile-page'>
       <div className='profile-page-sections'>
         <div className='profile-page-sections-content'>
-          <div onClick={() => setSection(1)}
-               className={`profile-page-sections-content__item profile-item-progress ${section === 1 ? 'profile-item-selected' : ''}`}>
-            <div className='profile-icon' />
-            <div className='profile-text'>Progress & Certificate</div>
-          </div>
+          <NavLink
+            to={`/profile/progress`}
+            className={`profile-page-sections-content__item profile-item-progress`}
+            >
+              <div className='profile-icon' />
+              <div className='profile-text'>Progress</div>
+          </NavLink>
+          {user && isShow ? (
+            <div className='progress-courses__wrapper'>
+              {user.courses ? user.courses.map((course) => {
+                const additionalInfo: IAdditionalInfo = infoCourses.courses[course.title]
+                return (
+                  <div className='progress-courses__item' key={course.title}>
+                    <NavLink
+                      to={`/profile/progress/${additionalInfo.urlCourse}`}
+                      className={`profile-page-sections-content__item profile-item-progress`}
+                    >
+                      {course.title}
+                    </NavLink>
+                  </div>
+                )
+              }): null}
+            </div>
+          ) : null }
           <div className='profile-page-sections-content__line' />
-          <div onClick={() => setSection(2)}
-               className={`profile-page-sections-content__item profile-item-info ${section === 2 ? 'profile-item-selected' : ''}`}>
+          <NavLink
+            to={`/profile/certificates`}
+            className={`profile-page-sections-content__item profile-item-certificate`}
+          >
+            <div className='profile-icon' />
+            <div className='profile-text'>Certificate</div>
+          </NavLink>
+          <div className='profile-page-sections-content__line' />
+          <NavLink
+            to={`/profile/account-info`}
+            className={`profile-page-sections-content__item profile-item-info`}
+          >
             <div className='profile-icon' />
             <div className='profile-text'>Account Info</div>
-          </div>
+          </NavLink>
           <div className='profile-page-sections-content__line' />
-          <div onClick={() => setSection(3)}
-               className={`profile-page-sections-content__item profile-item-reset ${section === 3 ? 'profile-item-selected' : ''}`}>
+          <NavLink
+            to={`/profile/reset-password`}
+            className={`profile-page-sections-content__item profile-item-reset`}
+          >
             <div className='profile-icon' />
             <div className='profile-text'>Reset Password</div>
-          </div>
+          </NavLink>
         </div>
       </div>
-      <div className={`profile-page-progress profile-page-section ${section === 1 ? 'profile-page-visible' : ''}`}>
-        <CoursesListView user={user} />
+      <div className={`profile-page-progress profile-page-section profile-page-visible`}>
+        <Switch>
+          <Route path={`/profile/progress`} exact>
+            <OverallProgress user={user} courses={user?.courses}/>
+          </Route>
+          <Route path={`/profile/progress/:courseId`} exact>
+            <CourseProgress user={user} courses={user?.courses} showSubList={showSubList}/>
+          </Route>
+          <Route path={`/profile/certificates`}>
+            <Certificates user={user} />
+          </Route>
+          <Route path={`/profile/account-info`}>
+            <AccountInfo
+              user={user}
+              changeEmailOrUsernameCallback={changeEmailOrUsernameCallback}
+              deleteAccountCallback={deleteAccountCallback}
+            />
+          </Route>
+          <Route path={`/profile/reset-password`}>
+            <UpdatePassword setShowModal={setIsConfirmPassVisible} />
+            <ConfirmYouPassword showModal={isConfirmPassVisible} setShowModal={setIsConfirmPassVisible} />
+          </Route>
+          <Route>
+            <Error404 />
+          </Route>
+        </Switch>
+        {/* <CoursesListView
+          user={user}
+          copyToClipboard={copyToClipboard}
+          downloadCallback={downloadCallback}
+          getCertificateCallback={getCertificateCallback}
+        /> */}
       </div>
-      <div className={`profile-page-account-info profile-page-section ${section === 2 ? 'profile-page-visible' : ''}`}>
-        <div className='profile-page-account-info-wrapper'>
-          <div className='profile-page-section__header h-font'>Account info</div>
-          <div className='profile-page-account-info__username p-font'>
-            <label htmlFor='profile-page-account-info__username__input'>Username</label>
-            <div>{user?.username}</div>
-            {/* <input
-              type='text'
-              id='profile-page-account-info__username__input'
-              name='solution'
-            /> */}
-          </div>
-          <Formik
-            enableReinitialize
-            initialValues={initialValue}
-            validationSchema={ValidationSchema}
-            onSubmit={handleSubmit}
-            >
-              {({
-                values,
-                errors,
-                touched,
-                setFieldValue,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                isSubmitting,
-              }) => (
-                <form className="" onSubmit={handleSubmit}>
-                  <div className='profile-page-account-info__email p-font'>
-                    <InputField
-                      label="EMAIL ADDRESS"
-                      type="text"
-                      value={values.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      name="email"
-                      inputStatus={
-                        errors.email && touched.email
-                          ? 'error' : !errors.email && touched.email 
-                          ? 'success' : undefined
-                        }
-                      errorMessage={errors.email && touched.email && errors.email}
-                      isDisabled={false}
-                    />
-                  </div>
-                  <button className='btn btn-green' type='submit'>
-                    <span className='profile-page-account-info__button__text'> Save changes </span>
-                    <span className='arrow-upright' />
-                  </button>
-                </form>
-            )}
-          </Formik>
-        </div>
-        {user && user.changeEmailPending ? (
-          <div className='profile-page-account-info__message'>
-            You have received an email. Please open the link to confirm your email update.
-          </div>
-        ) : null}
-        
-        <div onClick={showDeleteAccountModal} className='profile-page-account-info__delete-account'>
-          Delete your account
-        </div>
-      </div>
-      <div
-        className={`profile-page-reset-password profile-page-section ${section === 3 ? 'profile-page-visible' : ''}`}>
-        <UpdatePassword setShowModal={setIsConfirmPassVisible} />
-      </div>
-      <ConfirmYouPassword showModal={isConfirmPassVisible} setShowModal={setIsConfirmPassVisible} />
-
-      <DeleteAccountModal
-        open={isDeleteAccVisible}
-        onClose={hideDeleteAccountModal}
-      />
     </div>
   )
 }

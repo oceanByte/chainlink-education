@@ -16,14 +16,14 @@ export const CertificateView = ({ loading, user }: CertificateViewProps) => {
   user.progress?.forEach(() => {
     counter++
   })
-  if (counter >= 8) badgeUnlocked = true
+  if (counter >= 7) badgeUnlocked = true
 
   return (
     <CertificateStyled>
       {badgeUnlocked ? (
         <CertificateItself>
           <img alt="certificate" src="/certificate.jpg" />
-          <div>{user.name}</div>
+          <div>{user.username}</div>
         </CertificateItself>
       ) : (
         <CertificateNone>No active certificate</CertificateNone>

@@ -14,8 +14,17 @@ export const Checkboxes = ({ items, onUpdate }: CheckboxesProps) => {
 
   const clickCallback = (e: any) => {
     const { value } = e.target
-    setSelected(() => [value])
-    onUpdate([value])
+    
+    setSelected((prev) => {
+
+      if (selected.indexOf(value) >= 0) {
+        const newValues = selected.filter((el) => el !== value)
+        onUpdate(newValues)
+        return newValues
+      }
+      onUpdate([...prev, value])
+      return [...prev, value]
+    })
   }
 
   return <CheckboxesView items={items} clickCallback={clickCallback} selected={selected} />

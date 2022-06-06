@@ -1,100 +1,158 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import classnames from 'classnames'
 
-import { course as ChainlinkIntroduction } from '../../../pages/Courses/chainlinkIntroduction'
-import { course as SolidityIntroduction } from '../../../pages/Courses/solidityIntroduction'
-import { course as vrfIntroduction } from '../../../pages/Courses/vrfIntroduction'
-
-import { chapterData as ChainlinkIntroductionChapters } from '../../../pages/Courses/chainlinkIntroduction/Chapters/Chapters.data'
-import { chapterData as SolidityIntroductionChapters } from '../../../pages/Courses/solidityIntroduction/Chapters/Chapters.data'
-import { chapterData as vrfIntroductionChapters } from '../../../pages/Courses/vrfIntroduction/Chapters/Chapters.data'
-
 import { PublicUser } from 'shared/user/PublicUser'
-import { Option } from '../Select/Select.view'
 import { Course } from 'shared/course'
-import { CourseNameType } from 'pages/Course/Course.data'
+
+import { CourseStatusType } from 'pages/Course/Course.data'
+import { MainButtonView } from '../MainButton/MainButton.view'
+import { CircularProgressBar } from '../CircleProgressBar/CircleProgressBar.view'
+import { ShareCertificate } from '../ShareCertificate/ShareCertificate.view'
+import { BadgeView } from '../Badge/Badge.view'
+import { IDataCourses } from '../Profile/Certificates/Certificates.view'
+
+import { Difficulty } from './Difficulty/Difficulty.view'
+import { UseCertificate } from './UseCertificate/UseCertificate.view'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 
 interface ICourseView {
   course: Course
+  infoCourses: IDataCourses
   user?: PublicUser
-  activeCourse: Option
 }
 
-export const CourseCardView = ({ course, user, activeCourse }: ICourseView) => {
-  const [percent, setPercent] = useState(0)
-  const [url, setUrl] = useState('/')
+export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const history = useHistory();
+  const [isShowList, setIsShowList] = useState(false);
+  const additionalInfo: IAdditionalInfo = infoCourses.courses[course.title]
 
-  const getUrl = (progress: number, path: string, countChapter: number) => {
-    if (progress === 0 || progress === countChapter) {
-      setUrl(() => `/${path}/chapter-1`)
-      return
-    }
-
-    setUrl(() => `/${path}/chapter-${progress + 1}`)
+  const showList = () => {
+    setIsShowList((prev) => !prev);
   }
 
   useEffect(() => {
-    const courseProgress = (course && course.progress.length) || 0
-
-    if (course && course.title === CourseNameType.CHAINLINK_101) {
-      getUrl(courseProgress, ChainlinkIntroduction.path, ChainlinkIntroductionChapters.length)
-      setPercent(() => Math.floor((courseProgress / ChainlinkIntroductionChapters.length) * 100))
-    } else if (course && course.title === CourseNameType.SOLIDITY_INTRO) {
-      getUrl(courseProgress, SolidityIntroduction.path, SolidityIntroductionChapters.length)
-      setPercent(() => Math.floor((courseProgress / SolidityIntroductionChapters.length) * 100))
-    } else {
-      getUrl(courseProgress, vrfIntroduction.path, SolidityIntroductionChapters.length)
-      setPercent(() => Math.floor((courseProgress / vrfIntroductionChapters.length) * 100))
+    const handleClickOutside = (event: any) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsShowList(() => false);
+      }
     }
-    // eslint-disable-next-line
-  }, [])
+    if (isShowList) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isShowList]);
 
   return (
     <>
-      <div className="course-line"></div>
       <div className="course-inner">
-        <div className="course-status">
-          <div className="course-status-text">{course.status}</div>
+        <div className='course-inner__header'>
+          <div className='course-inner__badge-container'>
+            <BadgeView
+              hasMediumBadge
+              percentage={additionalInfo.percent}
+              isCompleted={course.status === CourseStatusType.COMPLETED}
+              title={course.title}
+            />
+          </div>
+          <div className='course-inner__difficulty'>
+            <Difficulty difficulty={course.difficulty} />
+          </div>
         </div>
-        <div className="course-title">
-          <div className="course-title-text">{course.title}</div>
-          <div className="course-title-line" />
-        </div>
-        <div className="course-description">{course.description}</div>
-
-        {user && (
-          <div className="course-progress__bar">
-            <div className="course-progress__bar__line">
-              <div className="course-progress__bar__line__color" style={{ width: `${percent}%` }} />
-              <div className="course-progress__bar__line__number" style={{ left: `${percent ? percent - 11 : 3}%` }}>
-                {percent}%
+        <div className='course-inner__container'>
+          <div className='course-inner__top'>
+            <div className="course-title h-font">
+              {course.title}
+            </div>
+            <div className='course-additional-info'>
+              <div className='course-additional-info__chapters item'>
+                <div className='icon'/><div>{additionalInfo.countChapters} chapters</div>
+              </div>
+              <div className='course-additional-info__time item'>
+                <div className='icon'/><div>{additionalInfo.amountOfTime}</div>
               </div>
             </div>
+            <div className="course-description">{course.description}</div>
           </div>
-        )}
-        <div className="course-difficulty">
-          <div className="course-difficulty-content">
-            <span>{course.difficulty}/5</span> <span>Difficulty</span>
-          </div>
-          {course.title !== 'Solidity Introduction' && (
+          
+          <div className={classnames('course-footer', additionalInfo.percent === 100 && 'completed')}>
             <div className="course-btn-wrapper">
-              <Link
-                to={url}
-                className={classnames(
-                  'btn course-btn',
-                  !percent && 'new',
-                  percent && percent !== 100 && 'continue',
-                  percent && percent === 100 && 'completed',
-                )}
-              >
-                {!percent ? <span className="btn__text">Start</span> : null}
-                {percent && percent !== 100 ? <span className="btn__text">Continue</span> : null}
-                {percent && percent === 100 ? <span className="btn__text">Repeat</span> : null}
-              </Link>
+              {!additionalInfo.percent ? <MainButtonView
+                  isPrimary
+                  hasArrowUpRight
+                  text='View Course'
+                  onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
+                  loading={false}
+                  disabled={false}
+                /> : null}
+              {additionalInfo.percent && additionalInfo.percent !== 100 ? <MainButtonView
+                  isSecondary
+                  hasArrowUpRight
+                  text='Continue'
+                  onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
+                  loading={false}
+                  disabled={false}
+                /> : null}
+              {additionalInfo.percent && additionalInfo.percent === 100 ? (
+                <>
+                  <div ref={wrapperRef} className='useCertificate'>
+                    <MainButtonView
+                      isCompleted
+                      isSecondary
+                      hasArrowDown
+                      text='Use certificate'
+                      onClick={showList}
+                      loading={false}
+                      disabled={false}
+                      className={isShowList ? 'hasArrowUp' : ''}
+                    />
+                  <UseCertificate
+                    isSecondary
+                    isShowList={isShowList}
+                    user={user}
+                    additionalInfo={additionalInfo}
+                    nextPath={`/description/${additionalInfo.urlCourse}`}
+                  />
+                  </div>
+                  <div className='downloadCertificate'>
+                    <MainButtonView
+                      isCompleted
+                      isSecondary
+                      hasArrowDown
+                      text='Download certificate'
+                      onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
+                      loading={false}
+                      disabled={false}
+                    />
+                  </div>
+                </>)  : null}
             </div>
-          )}
+            {user && additionalInfo.percent && additionalInfo.percent !== 100 ? (
+              <div className="course-footer__progress-bar">
+                <div className="circle-wrap">
+                  <CircularProgressBar
+                    strokeWidth="7"
+                    sqSize="60"
+                    percentage={additionalInfo.percent}/>
+                </div>
+                </div>
+            ): null}
+
+            {user && additionalInfo.percent && additionalInfo.percent === 100 ? (
+              <div className='shareCertificate'>
+                <ShareCertificate
+                  className="isCardCourse"
+                  additionalInfo={additionalInfo}
+                  username={user.username}
+                />
+              </div>
+            ): null}
+          </div>
         </div>
       </div>
     </>

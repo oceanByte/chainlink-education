@@ -14,13 +14,13 @@ import { User, UserModel } from '../../../shared/user/User'
 import { Course, CourseModel } from '../../../shared/course/Course'
 import { COURSES } from '../../../shared/course/CourseType';
 
-export const find = async (ctx: Context, next: Next): Promise<void> => {
-  const whereClause =
-		ctx.request.query && ctx.request.query.publicAddress
-			? { publicAddress: ctx.request.query.publicAddress }
-			: {};
+import { getCourses } from '../../../helpers/getCourses';
 
-	let users = await UserModel.find(whereClause)
+export const find = async (ctx: Context, next: Next): Promise<void> => {
+
+	let users = await UserModel.find({
+		...ctx.request.query
+	})
 
 	if (users.length) {
 		const user = users[0];
@@ -44,7 +44,7 @@ export const create = async (ctx: Context, next: Next): Promise<void> => {
 
 	const hashedPassword = await hash(publicAddress, 12);
 	const user: User = await UserModel.create({
-		email: publicAddress + '@test.com',
+		email: publicAddress + '@metamaskmail.com',
 		username: publicAddress.slice(0, 10),
 		hashedPassword,
 		publicAddress,
@@ -105,7 +105,7 @@ export const auth = async (ctx: Context, next: Next) => {
     { _id: user._id },
   ).lean() as User
 
-	const courses = await CourseModel.find({ userId: user._id }).lean();
+	const courses = await getCourses({ user: updatedUser });
 
 	const publicUser: PublicUser = toPublicUser(updatedUser)
 

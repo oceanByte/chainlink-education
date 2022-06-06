@@ -9,12 +9,16 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     There is a better way where you do not need to trust anyone and you can get full control and ownership. Emphasize freedom (sharing, exhibitions and owning). 
+     Checkout this video on what smart contracts are and how they are changing the nature of agreements and the Internet. 
     </div>
   </div>
 </ContentWrapp>
 
-Smart contacts result from the evolution of digital agreements. A Smart contract is a self-executing contract with the terms of the agreement being directly written into computer code. Smart contracts provide the following benefits:
+<VideoBox>
+  <iframe  src="https://www.youtube.com/embed/Un7-hW6GAec" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</VideoBox>
+
+Smart contracts result from the evolution of digital agreements. A Smart contract is a self-executing contract with the terms of the agreement being directly written into computer code. Smart contracts provide the following benefits:
 
 <ListItemsContainer>
   <div class="wrapp">
@@ -23,7 +27,7 @@ Smart contacts result from the evolution of digital agreements. A Smart contract
       <li class="list__item">
         <p>
    In traditional agreements, the execution and enforcement of the terms detailed within the contract is highly dependent on the signing parties; this may not happen immediately or at all.   In terms of smart contracts, none of the parties have control over the execution or enforcement of contract terms.
-   <b>Example:</b> In the insurance industry, the contract isn’t immediately executed after the conditions have been met. Rather, a lengthy review process is initiated and it could take months, even years, before a contract is executed.
+   <b>Example:</b> In the insurance industry, the contract isn’t immediately executed after the conditions have been met. Rather, a lengthy review process is initiated and it could take months, even years before a contract is executed.
         </p>
       </li>
     </ul>
@@ -86,8 +90,12 @@ Smart contacts result from the evolution of digital agreements. A Smart contract
   </ul>
 </MissionContainer>
 
-## Blockchain Introduction
-
+# Blockchain Introduction 
+&nbsp;
+<VideoBox>
+  <iframe  src="https://www.youtube.com/embed/4ff9esY_4aU" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</VideoBox>
+&nbsp;
 The previous section explained the beneficial properties of smart contracts, but how can self-executing code that doesn’t rely on a trusted intermediary be created and implemented? To achieve this feat, another technology was invented: the <ColorWord>blockchain</ColorWord>. A blockchain is a global network of computers that stores data and transactions in a shared ledger that is <i>decentralized</i>. This means that the ledger isn’t controlled by anyone. Essentially, a blockchain can be compared to a database that is replicated over many computers all over the world secured with the use of cryptography and game theory (a combination of math and sociology).
 
 You may have heard of a cryptocurrency called Bitcoin. Bitcoin is built on a blockchain (referred to as the <i>Bitcoin blockchain</i>)! No one entity controls Bitcoin so it can be thought of as a sort of “proto-smartcontract”. It has all the properties of smart contracts listed before, but only has one use: transferring value between individuals.
@@ -98,10 +106,10 @@ Today, there are blockchains where <i>any</i> code or applications can be built 
   <div className="title">Activities:</div>
   <ul className="mission-goals">
     <li>
-      Watch <a style="color:green" target="__blank" href="https://www.youtube.com/watch?v=_160oMzblY8"> Anders Brownsworth video walkthrough </a> of his blockchain demo.
+      Watch <a target="__blank" href="https://www.youtube.com/watch?v=_160oMzblY8"> Anders Brownsworth video walkthrough </a> of his blockchain demo.
     </li>
     <li>
-      Interact with the <a style="color:green" target="__blank" href="https://andersbrownworth.com/blockchain/hash"> blockchain demo </a> yourself until you have a good understanding of the basics of how blockchains operate.
+      Interact with the <a target="__blank" href="https://andersbrownworth.com/blockchain/hash"> blockchain demo </a> yourself until you have a good understanding of the basics of how blockchains operate.
     </li>
   </ul>
 </MissionContainer>

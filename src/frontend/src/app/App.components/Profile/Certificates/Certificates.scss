@@ -1,0 +1,142 @@
+.profile-page-certificates-wrapper {
+  width: 100%;
+  .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .opened-badged {
+      position: relative;
+      padding-right: 33px;
+      font-weight: 450;
+      font-size: 18px;
+      line-height: 27px;
+
+      color: $grayscale1;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 22px;
+        height: 23px;
+        background: url('../../../../assets/rocket.svg') no-repeat;
+        background-size: contain;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+      }
+
+      span {
+        font-weight: 700;
+      }
+    }
+
+    @include sm {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .opened-badged {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .badges-list {
+    margin-top: 30px;
+    display: grid;
+    grid-auto-rows: minmax(102px, auto);
+    grid-template-columns: repeat(auto-fit, minmax(55px, 115px));
+    @include fluid-size('gap', 400px, 1600px, 30px, 33px);
+    margin-bottom: 35px;
+
+    .badge-wrapp {
+      .title {
+        margin-top: 10px;
+        font-style: normal;
+        font-weight: 450;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        color: $grayscale1;
+      }
+    }
+  }
+
+  .sections-content__line{
+    width: 100%;
+    border-bottom: 1px solid #D4DBEA;
+    margin: 30px 0;
+  }
+
+  .certificates-list {
+    display: grid;
+    grid-auto-rows: minmax(202px, auto);
+    grid-template-columns: repeat(2, minmax(281px, 340px));
+    gap: 30px 40px;
+
+    .certificate-wrapp {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .title {
+        font-style: normal;
+        font-weight: 900;
+        font-size: 24px;
+        line-height: 29px;
+        color: $grayscale1;
+      }
+
+      .description {
+        margin-top: 10px;
+        font-style: normal;
+        font-weight: 450;
+        font-size: 18px;
+        line-height: 27px;
+        color: $grayscale2;
+      }
+
+      .course-btn-wrapper {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @include md {
+          flex-direction: column;
+          align-items: flex-start;
+
+          .social-networks__wrapp {
+            margin-top: 10px;
+          }
+        }
+
+        @include lg {
+          flex-direction: column;
+          align-items: flex-start;
+
+          .social-networks__wrapp {
+            margin-top: 10px;
+          }
+        }
+
+        @include xl {
+          flex-direction: row;
+          align-items: center;
+
+          .social-networks__wrapp {
+            margin-top: 0;
+          }
+        }
+      } 
+    }
+
+    @include md {
+      grid-template-columns: repeat(2, minmax(190px, auto));
+    }
+    @include sm {
+      grid-template-columns: repeat(1, minmax(auto, 325px));
+    }
+  }
+}

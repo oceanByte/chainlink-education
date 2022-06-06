@@ -46,7 +46,7 @@ export const ChaptersListView = ({
           }
 
           return nextChapterUrl;
-        } 
+        }
 
         if (user) {
           done = course.progress ? course.progress.indexOf(chapter.pathname) >= 0 : false
@@ -64,17 +64,17 @@ export const ChaptersListView = ({
             key={key}
           >
             <span className="header-chapters__item__name">
-              <span>Chapter {key + 1}:</span> <span className="h-font">{chapter.name}</span>
+              <span className='chapter-number'>Chapter {key + 1}:</span> <span className="title">{chapter.name}</span>
             </span>
             {done ? (
-              <div className={classnames('header-chapters__item__completion', 'completed')}>COMPLETED</div>
+              <div className={classnames('header-chapters__item__completion', 'completed')}>
+                <span>COMPLETED</span></div>
             ) : (<>
               {user && nextChapter === currentPath ? (
                 <div className="header-chapters__item__completion continue">CONTINUE</div>
               ) : null}
               </>
             )}
-            
           </Link>
         )
       })}

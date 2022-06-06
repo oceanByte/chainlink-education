@@ -8,7 +8,6 @@ import { getSignedJwt } from './getSignedJwt'
 describe('User', () => {
   beforeAll(() => {
     process.env.JWT_PRIVATE_KEY =
-      '-----BEGIN RSA PRIVATE KEY-----\nMIIBOAIBAAJAdbl2XgrYP6biZBeaWDm0ejnmDipjNXG5qLXNQe5uxqXZDr3zvJP6\n9t9F0DttXWKqerb05LmwWYgnOOVPrmBN0wIDAQABAkAMyMg27DyRpQDe18VWIWYd\nA96c2TOO4TvFO4D/0PHMtp0AxQLC7gS6gMYXSG25gyBGl8ywhjYYKp4zdecxW5UB\nAiEA4RgFBMtaL2p6uNnJqa/kc5k4pGPUMii81Gig03S54IECIQCF43EeIykLl7SQ\nIEJRwx3SY+H6TqZOlqLhN3+PkVqEUwIga6lDbUGeRyOUwylX7VN131yf3PDqo3sc\npjPNCJbB+QECICNydvVaq7hE/uoVkFljRhb4mNCTWBaAbTkhX2VcP1G/AiBeEpLY\nsU90PIZjVhgSVgi+eA6gPAyZJzRoPB+3XyZ3ZQ==\n-----END RSA PRIVATE KEY-----'
   })
 
   it('can get a signed JWT for users', () => {

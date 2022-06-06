@@ -7,7 +7,7 @@ import { State } from 'reducers'
 export const Home = () => {
   const user = useSelector((state: State) => state.auth.user)
   const contactUsCallback = async (contactUsInputs: ContactUsInputs) => {
-    console.log(contactUsInputs);
+    // console.log(contactUsInputs);
   }
 
   return <HomeView contactUsCallback={contactUsCallback} user={user} />

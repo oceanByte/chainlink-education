@@ -1,29 +1,38 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import {  useDispatch, connect } from 'react-redux'
 
-import { Option } from 'app/App.components/Select/Select.view'
-import { State } from 'reducers'
-
-// import { FooterView } from '../../app/App.components/MainFooter/MainFooter.controller'
 import { FooterView } from '../../app/App.components/Footer/Footer.view'
-import { Header } from '../../app/App.components/Header/Header.controller'
+import Header from '../../app/App.components/Header/Header.controller'
 import { ProfileView } from './Profile.view'
 import { deleteAccountPending } from 'pages/DeleteAccount/DeleteAccount.actions'
-import { changeEmailPending } from './Profile.actions'
+import { changeEmailPending, changeUsername } from './Profile.actions'
 import { getUser } from 'pages/User/User.actions'
+import { State } from 'reducers'
 
+export interface IChangeUsernameEmail {
+  email?: string
+  username?: string
+}
 
-export const Profile = () => {
+const Profile = ({ user }: any) => {
   const dispatch = useDispatch()
-  const user = useSelector((state: State) => state.auth.user)
 
-  let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
-  const [activeCourse] = useState(defaultCourse)
+  const changeEmailOrUsernameCallback = async ({ email, username }: IChangeUsernameEmail) => {
 
-  const changeEmailCallback = async ({ email }: { email: string }) => {
-    dispatch(changeEmailPending({ email }))
+    if (username) {
+      dispatch(changeUsername({ username }))
+    }
+
+    if (email) {
+      dispatch(changeEmailPending({ email }))
+    }
+    
   }
+
+  // const getCertificateCallback = ({ name }: { name: string }) => {
+  //   dispatch(sendName({ name }))
+  // }
 
   const deleteAccountCallback = async () => {
     dispatch(deleteAccountPending({ id: user ? user._id : '' }))
@@ -39,11 +48,15 @@ export const Profile = () => {
       <Header />
       <ProfileView
         user={user}
-        activeCourse={activeCourse}
-        changeEmailCallback={changeEmailCallback}
+        changeEmailOrUsernameCallback={changeEmailOrUsernameCallback}
         deleteAccountCallback={deleteAccountCallback}
       />
       <FooterView />
     </>
   )
 }
+
+export default connect(
+  (state: State) => ({
+    user: state.auth.user,
+  }), {})(Profile);

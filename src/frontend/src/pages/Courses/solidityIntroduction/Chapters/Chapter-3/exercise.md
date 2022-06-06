@@ -1,1 +1,1 @@
-
+pragma solidity ;

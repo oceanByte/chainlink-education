@@ -1,21 +1,16 @@
-#####Chapter 11: Conclusion
+#####Chapter 11: Building a Basic Contract
 
-# Conclusion
+# Recieving Randomness
 
-<ContentWrapp>
-  <div class="imgContainer">
-    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
-  </div>
+Now that we have a function that can send a request to the Chainlink VRF for randomness, we need a function that will take in the random number from the VRF. This function has to be called fulfillRandomWords. The parameters we will have in the is function is an array of type uint256[] called randomWords.
 
-  <div class="itemsContainer">
-    <div class="item-text">
-    Now, with the power to get a random number into a smart contract you are one step closer to completing that raffle. Keep an eye out for future lessons on building the raffle.
-    </div>
-  </div>
-</ContentWrapp>
+In this function, you can run whatever logic you would like with the randomNumber. For this lesson, we will just be storing them in the variable s_randomWords set up in our contract.
 
-Narrative:
-Now, with the power to get a random number into a smart contract you are one step closer to completing that raffle. Keep an eye out for future lessons on building the raffle.
-
-Content:
-Congrats! You now know how to get a verfiably secure random number for use in a smart contract!
+<Highlight class="language-javascript">
+function fulfillRandomWords(
+    uint256, // requestId
+    uint256[] memory randomWords
+  ) internal override {
+    s_randomWords = randomWords;
+  }
+</Highlight>

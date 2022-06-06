@@ -9,14 +9,14 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     Now you want to connect your artwork to the physical (off-chain) world. Tell your artwork how to behave. 
+     NFTs are a part of Web3.0 so why not take truly advantage of this new primitive and make your NFT change depending on some conditions on the outside world? We call these changing NFTs <i>Dynamic NFT</i> or <i>dNFTs</i>. But how will you connect your dynamic NFT to outside data?  
     </div>
   </div>
 </ContentWrapp>
 
-Blockchains and smart contracts are unaware of any conditions or logic that occur outside of the blockchain itself; they are unable to connect to outside resources.The reason for this is due to the distributed and deterministic nature of blockchains. All of the distributed nodes (nodes are computers running the blockchain software) in the blockchain must come to a consensus on what the blockchain is and any changes to it. If the blockchain just connected to a data source, the nodes could query the data at different times and get different answers, breaking the ability for the nodes to reach consensus. Even worse, if that data source changed locations or is down, the whole blockchain would break.
+Blockchains and smart contracts are unaware of any conditions or logic that occur outside of the blockchain itself; they cannot connect to outside resources. This is due to the distributed and deterministic nature of blockchains. All of the distributed nodes (nodes are computers running the blockchain software) in the blockchain must come to a consensus on what the blockchain is and any changes to it. If the blockchain just connected to a data source, the nodes could query the data at different times and get other answers, breaking the ability for the nodes to reach consensus. Even worse, if that data source changed locations or is down, the whole blockchain would break.
 
-This means developers can program smart contracts as long as their logic doesn’t require any outside data. This may sound extremely limiting, but there is a system in place that sits in between blockchains and the outside world (a concept aptly called “middleware”).This middleware system is called an Oracle. The name <ColorWord>Oracle</ColorWord> comes from the Greek concept of an Oracle since it needs to determine what is <i>true</i> in outside systems.
+This means developers can program smart contracts as long as their logic doesn’t require any outside data. This may sound highly limiting, but there is a system in place that sits in between blockchains and the outside world (a concept aptly called “middleware”). This middleware system is called an Oracle. The name <ColorWord>Oracle</ColorWord> comes from the Greek concept of an Oracle since it needs to determine what is <i>true</i> in outside systems.
 
 <Spacer>
 
@@ -29,14 +29,14 @@ This means developers can program smart contracts as long as their logic doesn�
 
   <div class="itemsContainer">
     <div class="item-text">
-     Manipulate the artwork to show what they want. Dangerous.
+     So an Oracle is the type of system you want to make a dNFT but it is important that the entire NFT remains decentralized so your art work can truly live on forever. You'll also want the NFT to be have the most accurate up-to-date data.
     </div>
   </div>
 </ContentWrapp>
 
-To create functional smart contracts we need a middleware system called an <ColorWord>Oracle</ColorWord>, but how will we actually make this Oracle? Well we are trying to get price data into our smart contract for NFT’s. Well my friend Jim (trust me, he is good!) is an expert in cryptocurrency prices, and he even has a server set up that we can access for price data. Awesome, we'll make Jim our oracle and he will provide price data to our NFT smart contract.
+To create functional smart contracts we need a middleware system called an <ColorWord>Oracle</ColorWord>, but how will we make this Oracle? Well, we are trying to get price data into our smart contract for NFT’s. My friend Jim (trust me, he is good!) is an expert in cryptocurrency prices, and he even has a server set up that we can access for price data. Awesome, we'll make Jim our oracle and he will provide price data to our NFT smart contract.
 
-But wait….didn’t all the great properties of smart contracts and blockchains come from their decentralized nature? What if Jim wanted to maliciously send our smart contract bad price data so he could manipulate it in his favor? What if his server goes offline when the NFT needs to update and thus can’t? What if Jim isn’t even malicious but gets hacked by a malicious actor? This single oracle solution isn’t really solving much of the oracle problem because it isn’t <i>decentralized</i>, and thus provides a weak link that ruins all of those awesome smart contract properties. You really just need to trust that Jim, and my word on Jim, that he is a great person and will act in the best interest of everyone. But what if we had a decentralized middleware solution, one where Jim doesn’t control everything (sorry Jim) so we didn’t have to trust him?
+But wait….didn’t all the great properties of smart contracts and blockchains come from their decentralized nature? What if Jim wanted to maliciously send our smart contract bad price data so he could manipulate it in his favor? What if his server goes offline when the NFT needs to update and thus can’t? What if Jim isn’t even malicious but gets hacked by a malicious actor? This single oracle solution isn’t solving much of the oracle problem because it isn’t <i>decentralized</i>, and thus provides a weak link that ruins all of those awesome smart contract properties. You  need to trust that Jim, and my word on Jim, that he is a great person and will act in the best interest of everyone. But what if we had a decentralized middleware solution, one where Jim doesn’t control everything (sorry Jim), so we didn’t have to trust him?
 
 Finally we are here…...enter Chainlink!
 
@@ -51,14 +51,14 @@ Finally we are here…...enter Chainlink!
 
   <div class="itemsContainer">
     <div class="item-text">
-     Artworks will follow pre-defined rules.
+     Using a Chainlink Decentralized Oracle Network (DON) as the Oracle for your dNFT can give you strong guarantees that your artwork will truly update with the latest, most acurate data and remain decentralized. 
     </div>
   </div>
 </ContentWrapp>
 
-Smart contracts have special properties and need decentralized oracles to carry out functions. This is where Chainlink comes in. <ColorWord>Chainlink is a platform for creating decentralized oracle networks that provide various smart contract services</ColorWord>. So using Chainlink we can create a price oracle that isn’t just Jim, but Jim and 30 other of the most trusted and expert crypto price data aggregators out there and make them come to agreement.
+Smart contracts have special properties and need decentralized oracles to carry out functions. This is where Chainlink comes in. <ColorWord>Chainlink is a platform for creating decentralized oracle networks that provide various smart contract services</ColorWord>. So using Chainlink, we can create a price oracle that isn’t just Jim but Jim and 30 other of the most trusted and expert crypto price data aggregators out there and make them come to an agreement.
 
-Chainlink allows developers to create and customize any type of <ColorWord>Decentralized Oracle Network</ColorWord>, or DONs, a smart contract might need. Developers can choose which nodes are a part of a network, what type of data they each node is looking for, how nodes come to agreement, when nodes should post updates, and any other computation nodes should perform. Finally, with Chainlink developers can build smart contracts that can interact with the outside world in a way that preserves the decentralized nature of smart contracts.
+Chainlink allows developers to create and customize any type of <ColorWord>Decentralized Oracle Network</ColorWord>, or DONs, a smart contract might need. Developers can choose which nodes are a part of a network, what type of data each node is looking for, how nodes come to an agreement, when nodes should post updates, and any other computation nodes should perform. Finally, with Chainlink, developers can build smart contracts that can interact with the outside world to preserve the decentralized nature of smart contracts.
 
 <Spacer>
 
@@ -71,12 +71,12 @@ Chainlink allows developers to create and customize any type of <ColorWord>Decen
 
   <div class="itemsContainer">
     <div class="item-text">
-     Understand the possibilities before programming your artwork to react to the environment.
+      Curious how Chainlink works? Read below! With Chainlink, any type of data the exists can be brought on chain, and the conditions on which that data is delivered can be customized! 
     </div>
   </div>
 </ContentWrapp>
 
-Chainlink allows developers to build and customize DONs. Chainlink allows DONs to work and assures that node operators are incentivized to not collude or act maliciously.
+Chainlink allows developers to build and customize DONs. Chainlink allows DONs to work and assures that node operators are incentivized not to collude or act maliciously.
 
 <p><ColorWord>How does Chainlink Work?</ColorWord></p>
 
@@ -108,7 +108,7 @@ Due to the proliferation of Decentralized Finance (DeFi), a popular use case of 
 <br>
 <b>When DONS Provide Data</b>
 
-Some applications require a DON that updates the data once a day. Others need updates once every five minutes or only when the data itself changes by a certain amount. The term <ColorWord>heartbeat</ColorWord> is used to desribe a DON that needs to post an update after a certain amount of time.hen the DON is updated after the data changes by a specified amount it is called a <ColorWord>deviation threshold</ColorWord>.
+Some applications require a DON that updates the data once a day. Others need updates once every five minutes or only when the data itself changes by a certain amount. The term <ColorWord>heartbeat</ColorWord> is used to describe the max amount of time that can elapse before a DON updates it's data feed The term <ColorWord>deviation threshold</ColorWord> is used to describe how much variation is allowed in the data before it is posted on-chain, regardless of how much time has elasped. For example, if the ETH/USD deviation threshold is set to 1%, then the DON will update the data feed if it senses the price of ETH versus USD fluctuates more than 1%.
 
 <br>
 <b>How DONs Provide Data</b>

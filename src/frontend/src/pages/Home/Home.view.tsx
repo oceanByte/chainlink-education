@@ -1,11 +1,14 @@
-import AOS from 'aos'
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+import AOS from 'aos'
+
 import { PublicUser } from 'shared/user/PublicUser'
-import { CourseCardView } from 'app/App.components/CourseCard/CourseCard.view'
-import { Option } from 'app/App.components/Select/Select.view'
+
+import { CourseCards } from 'app/App.components/CourseCard/CourseCard.controller'
+
 import 'aos/dist/aos.css'
+
 
 type HomeViewProps = {
   user?: PublicUser
@@ -25,20 +28,19 @@ export const COURSES = [
     title: 'Solidity Introduction',
     description: `Solidity is an object-oriented, high-level language for implementing smart contracts. COMING SOON.`,
     difficulty: 3,
-    status: 'New',
+    status: 'NEW',
     progress: [],
   },
   {
     title: 'VRF v2 Introduction',
     description: `Study how VRF can be used to bring Verfiable Randomness to blockchain.`,
     difficulty: 3,
-    status: 'New',
+    status: 'NEW',
     progress: [],
   },
 ]
 
 export const HomeView = ({ user }: HomeViewProps) => {
-  let defaultCourse: Option = { name: 'Chalink Introduction', path: 'chainlinkIntroduction' }
 
   useEffect(() => {
     AOS.init({
@@ -68,26 +70,17 @@ export const HomeView = ({ user }: HomeViewProps) => {
       </div>
       <div className="home-ellipse home-ellipse-1" />
 
-      <div className="home-wrapper courses">
+      <div className="home-content courses">
         <div className="home-content home-courses-content">
-          <div className="home-courses-content__header h-font">Get started now</div>
-          {user && user.courses && user.courses.length > 0 ? (
-            <div className="home-courses-content__items">
-              {user.courses?.map((course) => (
-                <div key={course._id} className="home-course">
-                  <CourseCardView course={course} user={user} activeCourse={defaultCourse} />
-                </div>
-              ))}
+          <div className="home-courses-content__header h-font">
+            <div className="home-courses-content__header-text" data-aos="fade-up" data-aos-delay="100">
+              Get started now
             </div>
-          ) : (
-            <div className="home-courses-content__items">
-              {COURSES.map((course) => (
-                <div key={course.title} className="home-course">
-                  <CourseCardView course={course} user={user} activeCourse={defaultCourse} />
-                </div>
-              ))}
-            </div>
-          )}
+            <div className="home-courses-content__header__line" />
+          </div>
+          <div className="home-courses-content__items" data-aos="fade-up" data-aos-delay="150">
+            <CourseCards courses={user? user.courses : COURSES} user={user} />
+          </div>
         </div>
       </div>
 
@@ -189,14 +182,14 @@ export const HomeView = ({ user }: HomeViewProps) => {
               Learn about Oracles, Chainlink and Hybrid Smart Contracts
             </div>
             <div className="home-get-started-content__paragraph p-font">
-              Start your journey now and understand how to use Oracles to connect off-chain data to on-chain smart
+              Start your journey and understand how to use Oracles to connect off-chain data to on-chain smart
               contracts. Learn to use Chainlink to create dynamic NFTs that react to the real world.
               <br />
               <br />
             </div>
             <Link to="/chainlinkIntroduction/chapter-1">
               <button className="home-get-started-content__button btn btn-green mt-40 h-font">
-                <span className="home-get-started-content__button__text">Get started for FREE</span>
+                <span className="home-get-started-content__button__text">Start your journey</span>
                 <span className="arrow-upright" />
               </button>
             </Link>
