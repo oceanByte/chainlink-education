@@ -2,9 +2,12 @@ import { plainToClass } from 'class-transformer'
 import { validateOrReject } from 'class-validator'
 import { Context, Next } from 'koa'
 
+import * as randomstring from 'randomstring'
+
 import { firstError } from '../../../helpers/firstError'
 import { toPublicUser } from '../../../helpers/toPublicUser'
 import { CourseModel, Course } from '../../../shared/course/Course'
+import { CertificateModel, Certificate } from '../../../shared/certificate/Certificate'
 import { CourseTitleType, CourseStatusType } from '../../../shared/course/CourseType'
 import { AddProgressInputs, AddProgressOutputs } from '../../../shared/user/AddProgress'
 import { PublicUser } from '../../../shared/user/PublicUser'
@@ -17,7 +20,7 @@ export const PUBLIC_USER_MONGO_SELECTOR = '_id username emailVerified createdAt'
 export const addProgress = async (ctx: Context, next: Next): Promise<void> => {
   const addProgressArgs = plainToClass(AddProgressInputs, ctx.request.body, { excludeExtraneousValues: true })
   await validateOrReject(addProgressArgs, { forbidUnknownValues: true }).catch(firstError)
-  const { chapterDone, courseId, time, isCompleted } = addProgressArgs
+  const { chapterDone, courseId, time, isCompleted, coursePath } = addProgressArgs
 
   const user: User = await authenticate(ctx)
 
@@ -35,6 +38,26 @@ export const addProgress = async (ctx: Context, next: Next): Promise<void> => {
       $set: { status: isCompleted ? CourseStatusType.COMPLETED : CourseStatusType.IN_PROGRESS }
     })
     .exec();
+
+  if (isCompleted) {
+    const certificate = await CertificateModel.findOne({
+      coursePath,
+      username: user.username,
+    }).lean() as Certificate
+    
+    const code = randomstring.generate({length: 62, charset: 'hex'});
+
+    if (!certificate) {
+      
+      await CertificateModel.create({
+        coursePath,
+        username: user.username,
+        userId: user._id,
+        courseId,
+        code: `0x${code}`
+      })
+    }
+  }
 
   const updatedUser: User = await UserModel.findOne(
       { _id: user._id },

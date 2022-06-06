@@ -8,6 +8,7 @@ import { CaptchaFor } from '../../../shared/captcha/CaptchaFor'
 import { ResponseError } from '../../../shared/mongo/ResponseError'
 import { User, UserModel } from '../../../shared/user/User'
 import { CourseModel } from '../../../shared/course/Course'
+import { CertificateModel } from '../../../shared/certificate/Certificate'
 import { QuotaModel } from '../../../shared/quota/Quota'
 import { createCaptcha } from '../../captcha/helpers/createCaptcha'
 
@@ -71,6 +72,7 @@ export const deleteAccountPermanently = async (ctx: Context, next: Next): Promis
   await verifyCaptcha(user._id, captcha.solution, CaptchaFor.CAPTCHA_FOR_DELETE_ACCOUNT)
 
   await CourseModel.deleteMany({ userId: user._id });
+  await CertificateModel.deleteMany({ userId: user._id });
   await QuotaModel.deleteMany({ userId: user._id });
 
   await UserModel.deleteOne({ _id: user._id }).exec()

@@ -2,8 +2,34 @@ import { store } from 'index'
 import { ChangeEmailInputs } from 'shared/user/ChangeEmail'
 import { GetPublicUserInputs } from 'shared/page/GetPublicUser'
 import { SetNameInputs } from 'shared/page/SetName'
+import { ChangeUsernameInputs } from 'shared/user/ChangeUsername'
 
 
+export const CHANGE_USERNAME = 'CHANGE_USERNAME'
+export const SET_USERNAME_COMMIT = 'SET_USERNAME_COMMIT'
+
+export const changeUsername = ({ username }: ChangeUsernameInputs) => (dispatch: any) => {
+  dispatch({
+    type: CHANGE_USERNAME,
+    payload: { username },
+    meta: {
+      offline: {
+        effect: {
+          url: `${process.env.REACT_APP_BACKEND_URL}/user/change-username`,
+          method: 'POST',
+          headers: { Authorization: `Bearer ${store.getState().auth.jwt}` },
+          json: { username },
+        },
+        commit: {
+          type: SET_USERNAME_COMMIT,
+          meta: {
+            thunks: [getUser({username})]
+          }
+      },
+      },
+    },
+  })
+}
 export const CHANGE_EMAIL_PENDING = 'CHANGE_EMAIL_PENDING'
 export const SET_EMAIL_COMMIT = 'SET_EMAIL_COMMIT'
 

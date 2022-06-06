@@ -4,6 +4,7 @@ import { CourseView } from './Course.view'
 
 export interface Course {
   path: string
+  amountOfTime: string
   description: string | undefined
 }
 

@@ -9,9 +9,15 @@
   background: url("../../assets/profile-page-ellipse.png") no-repeat left 50%;
   @include fluid-size("background-position-y", 375px, 1600px, 0px, -150px);
   background-size: contain;
+  padding-bottom: 75px;
+
   @include md {
     flex-direction: column;
     align-items: center;
+    padding-bottom: 200px;
+  }
+  @include sm {
+    padding-bottom: 270px;
   }
 }
 
@@ -42,7 +48,7 @@
       align-items: center;
       cursor: pointer;
 
-      &.profile-item-selected {
+      &.active {
         color: $primary;
         //& > .profile-icon {
         //  @mixin element-color($color) {
@@ -52,6 +58,37 @@
         //
         //  @include element-color($primary);
         //}
+        &.profile-item {
+          &-progress {
+            & > .profile-icon {
+              background: url("../../assets/profile-progressBlue.svg") no-repeat;
+              background-size: contain;
+            }
+          }
+    
+          &-certificate {
+            & > .profile-icon {
+              background: url("../../assets/profile-certificateBlue.svg") no-repeat;
+              background-size: contain;
+            }
+          }
+    
+          &-info {
+            & > .profile-icon {
+              background: url("../../assets/profile-infoBlue.svg") no-repeat;
+              background-size: contain;
+    
+            }
+          }
+    
+          &-reset {
+            & > .profile-icon {
+              background: url("../../assets/profile-resetBlue.svg") no-repeat;
+              background-size: contain;
+            }
+          }
+        }
+        
       }
 
       & > .profile-icon {
@@ -72,18 +109,26 @@
     }
 
     & > .profile-item {
+      
+      &-progress {
+        & > .profile-icon {
+          background: url("../../assets/profile-progress.svg") no-repeat;
+          background-size: contain;
+        }
+      }
+
+      &-certificate {
+        & > .profile-icon {
+          background: url("../../assets/profile-certificate.svg") no-repeat;
+          background-size: contain;
+        }
+      }
+
       &-info {
         & > .profile-icon {
           background: url("../../assets/profile-info.svg") no-repeat;
           background-size: contain;
 
-        }
-      }
-
-      &-progress {
-        & > .profile-icon {
-          background: url("../../assets/profile-progress.svg") no-repeat;
-          background-size: contain;
         }
       }
 
@@ -94,12 +139,23 @@
         }
       }
     }
+
+    .progress-courses {
+      &__wrapper {
+        margin-top: 10px;
+        margin-left: 40px;
+      }
+
+      &__item {
+        margin-top: 10px;
+      }
+    }
   }
 }
 
 .profile-page-section {
   display: none;
-  @include fluid-size("padding", 375px, 1600px, 16px, 60px);
+  padding: 60px;
   flex-direction: column;
   align-items: flex-start;
   background: #FFF;
@@ -107,6 +163,20 @@
   border-radius: 20px;
   position: relative;
   @include fluid-size("width", 1024px, 1600px, 640px, 840px);
+  
+  @include md {
+    padding: 40px 30px;
+  }
+  @include sm {
+    padding: 30px 10px;
+  }
+  @include lg {
+    padding: 40px 30px;
+  }
+  @include xl {
+    padding: 60px 60px; 
+  }
+
   @include md {
     width: calc(100% - 40px);
   }
@@ -123,13 +193,13 @@
 
   &__course + &__course {
     position: relative;
-    margin-top: 20px;
+    margin-top: 50px;
   }
 
   &__header {
     font-weight: 900;
     @include fluid-size("font-size", 375px, 1600px, 20px, 32px);
-    @include fluid-size("line-height", 375px, 1600px, 24px, 38pxpx);
+    @include fluid-size("line-height", 375px, 1600px, 24px, 38px);
   }
 }
 
@@ -137,244 +207,6 @@
   margin-bottom: 100px;
   @include sm {
     margin-bottom: 60px;
-  }
-
-  &__bar {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 15px 0;
-
-    &__line {
-      width: 90%;
-      @include sm {
-        width: 75%;
-      }
-      height: 5px;
-      background: $grayscale3;
-
-      &__color {
-        width: 8%;
-        height: 100%;
-        background: $secondary3;
-      }
-    }
-
-    &__number {
-      @include fluid-size("font-size", 375px, 1600px, 16px, 22px);
-      @include fluid-size("line-height", 375px, 1600px, 24px, 33px);
-    }
-  }
-
-  &-chapters {
-    margin-top: 10px;
-    width: 100%;
-
-    &__item {
-      padding: 10px 0;
-      border-bottom: 1px solid $grayscale3;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      &.no-bb {
-        border-bottom: none;
-      }
-
-      & > .profile-page__chapter-name {
-        @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
-        @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
-      }
-      & > .profile-page__chapter-completion {
-        @include fluid-size("font-size", 375px, 1600px, 8px, 11px);
-        @include fluid-size("line-height", 375px, 1600px, 10px, 14px);
-        color: #FFF;
-        border-radius: 5px;
-        width: 78px;
-        height: 19px;
-        background: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &.completed {
-          background: $secondary3;
-        }
-        &.continue {
-          background: $primary;
-        }
-      }
-    }
-  }
-
-  &__certificate-header {
-    font-weight: 900;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    @include fluid-size("font-size", 375px, 1600px, 20px, 32px);
-    @include fluid-size("line-height", 375px, 1600px, 24px, 38px);
-  }
-
-  &__warning {
-    color: #FFA451;
-    margin-bottom: 30px;
-    @include fluid-size("width", 1024px, 1600px, 300px, 430px);
-    @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
-    @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
-  }
-
-  &__success {
-    color: #00c08b;
-    margin-bottom: 30px;
-    @include fluid-size("width", 1024px, 1600px, 300px, 430px);
-    @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
-    @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
-  }
-
-  &-footer-box {
-    display: flex;
-    align-items: center;
-    @media (max-width: 1599px) {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    @media (max-width: 767px) {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      &__button {
-        margin-right: 0;
-      }
-    }
-
-    &__button {
-      margin-right: 30px;
-
-      @media (max-width: 767px) {
-        margin-right: 0;
-      }
-
-      &.btn-green-disabled {
-        cursor: default;
-        opacity: 0.5;
-        &:hover {
-          background: $secondary3;
-        }
-      }
-    }
-
-    &__copy-link {
-      @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
-      @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
-      cursor: pointer;
-      opacity: 0.85;
-      @media (max-width: 1599px) {
-        margin-top: 30px;
-      }
-    }
-  }
-
-  &__image {
-    background: url("../../assets/profile-certification.svg") no-repeat;
-    background-size: contain;
-    @include fluid-size("width", 1024px, 1600px, 230px, 243px);
-    // @include fluid-size("height", 1024px, 1600px, 272px, 183px);
-    height: 222px;
-    // width: 243px;
-    // @include fluid-size("right", 1024px, 1600px, 27px, 50px);
-    // @include fluid-size("bottom", 1024px, 1600px, 35px, 60px);
-    bottom: 0;
-    right: 0;
-    position: absolute;
-
-    &.isCertificate {
-      bottom: -50px;
-    }
-    @include md {
-      right: 70px;
-    }
-    @include sm {
-      display: none;
-    }
-  }
-}
-
-.profile-page-account-info {
-  margin-bottom: 274px;
-  @include md {
-    margin-bottom: 60px;
-  }
-
-  &-wrapper {
-    width: 550px;
-    @include sm {
-      width: 100%;
-    }
-  }
-
-  &__name {
-    margin-top: 20px;
-
-    input:disabled {
-      background-color: #fff;
-      border-color: #ccc;
-      color: rgb(145, 145, 145);
-    }
-  }
-
-  &__username,
-  &__email {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    color: $grayscale1;
-    font-family: $h-font;
-    position: relative;
-
-    label {
-      text-transform: uppercase;
-      font-size: 11px;
-      line-height: 14px;
-      font-weight: 900;
-    }
-
-    input {
-      width: 100%;
-      border: none;
-      border-bottom: 1px solid $grayscale3;
-      background: none;
-      margin-top: 8px;
-      font-size: 16px;
-      color: $grayscale1;
-      font-family: Circular Std Book;
-    }
-  }
-
-  .btn {
-    margin-top: 30px;
-  }
-
-  &__message {
-    font-size: 14px;
-    line-height: 14px;
-    font-weight: 500;
-    color: $secondary3;
-    font-family: Circular Std Book;
-    margin-top: 20px;
-  }
-
-  &__delete-account {
-    cursor: pointer;
-    margin-top: 50px;
-    font-size: 18px;
-    line-height: 27px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid $grayscale3;
-    @include fluid-size("font-size", 375px, 1600px, 14px, 18px);
-    @include fluid-size("line-height", 375px, 1600px, 21px, 27px);
   }
 }
 

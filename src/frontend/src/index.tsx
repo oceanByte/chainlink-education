@@ -1,6 +1,6 @@
 import * as React from 'react'
 import ReactGA from 'react-ga'
-import hotjar from 'react-hotjar'
+import { hotjar } from 'react-hotjar';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 // @ts-ignore
 import TagManager from 'react-gtm-module'
@@ -29,7 +29,7 @@ ReactGA.initialize('UA-217999792-1', {
     cookieFlags: 'SameSite=None;Secure',
   },
 })
-// hotjar.initialize(111111, 1)
+hotjar.initialize(111111, 1)
 
 const tagManagerArgs = {
   gtmId: process.env.REACT_APP_GTM_ID,

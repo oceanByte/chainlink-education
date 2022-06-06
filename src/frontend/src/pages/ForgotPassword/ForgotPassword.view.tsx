@@ -70,8 +70,7 @@ export const ForgotPasswordView = ({ forgotPasswordCallback, loading }: ForgotPa
                   name="usernameOrEmail"
                   inputStatus={
                     errors.usernameOrEmail && touched.usernameOrEmail
-                      ? 'error' : !errors.usernameOrEmail && touched.usernameOrEmail 
-                      ? 'success' : undefined
+                      ? 'error' : undefined
                     }
                   errorMessage={errors.usernameOrEmail && touched.usernameOrEmail && errors.usernameOrEmail}
                   isDisabled={false}

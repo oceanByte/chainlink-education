@@ -83,3 +83,9 @@
     @content;
   }
 }
+
+@mixin xl {
+  @media (min-width: 1600px) {
+    @content;
+  }
+}

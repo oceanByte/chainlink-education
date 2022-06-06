@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 
-import { Header } from '../Header/Header.controller'
+import Header from '../Header/Header.controller'
 
 import Arrow from '../../../assets/Vector.png'
 import Logo from '../../../assets/logo.png'

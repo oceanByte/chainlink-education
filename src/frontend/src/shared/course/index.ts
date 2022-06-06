@@ -1,4 +1,4 @@
-import { IsArray, IsDate, IsEmail, IsMongoId, IsNumber, Length, Matches } from 'class-validator'
+import { IsArray, IsMongoId, Length } from 'class-validator'
 import { ObjectId } from 'mongodb'
 
 export class Course {

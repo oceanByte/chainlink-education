@@ -1,0 +1,253 @@
+.profile-page-progress-wrapper {
+  width: 100%;
+
+  .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .profile-page-section__header {
+
+      @include sm {
+        font-size: 20px;
+        line-height: 24px;
+      }
+      @include md {
+        font-size: 22px;
+        line-height: 26px;
+      }
+
+      @include lg {
+        font-size: 28px;
+        line-height: 34px;
+      } 
+      
+      @include xl {
+        font-size: 32px;
+        line-height: 38px;
+      }
+      
+    }
+
+    .profile-page-section__description {
+      font-weight: 450;
+      font-size: 18px;
+      line-height: 27px;
+      color: $grayscale2;
+      margin-top: 10px;
+      max-width: 500px;
+      width: 100%;
+      padding-right: 20px;
+
+      @include sm {
+        font-size: 14px;
+        line-height: 21px;
+      }
+
+      @include md {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+
+  .sections-content__line {
+    width: 100%;
+    border-bottom: 1px solid $grayscale4;
+    margin: 30px 0;
+  }
+
+  .sections-content__courses {
+    width: 100%;
+    display: grid;
+    grid-auto-rows: minmax(202px, auto);
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+    gap: 30px;
+
+    .course-inner {
+      .outside {
+        display: flex;
+        margin-top: 10px;
+      }
+
+      .inside {
+        display: none;
+      }
+
+      &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      &__header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .title-wrapp {
+          padding-left: 10px; 
+          .title {
+            font-style: normal;
+            font-weight: 900;
+            
+            color: $grayscale1;
+            
+
+            @include sm {
+              font-size: 16px;
+              line-height: 19px;
+            }
+            @include md {
+              font-size: 18px;
+              line-height: 22px;
+            }
+      
+            @include lg {
+              font-size: 20px;
+              line-height: 24px;
+            } 
+            
+            @include xl {
+              font-size: 24px;
+              line-height: 29px;
+            }
+            
+          }
+        }
+      }
+
+      @include md {
+        .inside {
+          display: flex;
+          margin-top: 5px;
+        }
+
+        .outside {
+          display: none;
+        }
+      }
+
+      .course-additional-info {
+        align-items: center;
+
+        .item {
+          padding: 0 10px;
+          background: $white;
+          border: 1px solid $grayscale4;
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-weight: 450;
+          
+          color: $secondary1;
+
+          @include sm {
+            font-size: 16px;
+            line-height: 19px;
+          }
+          @include md {
+            height: 26px;
+            font-size: 16px;
+            line-height: 24px;
+            padding: 0 5px;
+          }
+    
+          @include lg {
+            height: 26px;
+            font-size: 16px;
+            line-height: 24px;
+            padding: 0 5px;
+          } 
+          
+          @include xl {
+            height: 34px;
+            padding: 0 10px;
+          }
+
+          @media (max-width: 400px) {
+            font-size: 14px;
+            line-height: 20px;
+            padding: 0 3px;
+          }
+
+          .icon {
+            margin-right: 6px;
+
+            @media (max-width: 1600px) {
+              display: none;
+            }
+          }
+
+          & + .item {
+            margin-left: 10px;
+          }
+        }
+
+        &__chapters { 
+          .icon {
+            background: url('../../../../assets/amountChapters.svg') no-repeat;
+            width: 16px;
+            height: 20px;
+          }
+        }
+        &__time {
+          .icon {
+            background: url('../../../../assets/clock.svg') no-repeat;
+            width: 20px;
+            height: 20px;
+          }
+        }
+
+        &__difficulty {
+          margin-left: 10px;
+
+          .overall-progress {
+            @include md {
+              height: 26px;
+            }
+      
+            @include lg {
+              height: 26px;
+            } 
+            
+            @include xl {
+              height: 34px;
+            }
+          }
+        }
+      }
+
+      .course-description{
+        margin-top: 10px;
+        font-style: normal;
+        font-weight: 450;
+        font-size: 18px;
+        line-height: 27px;
+        color: $grayscale2;
+
+        @include lg {
+          margin-top: 15px;
+        }
+      }
+
+      .course-footer {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      } 
+    }
+
+    @include md {
+      grid-template-columns: repeat(2, minmax(auto, 340px));
+    }
+
+    @media screen and (max-width: 798px) {
+      grid-template-columns: repeat(1, 100%);
+    }
+  }
+}

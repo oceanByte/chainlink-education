@@ -3,8 +3,8 @@ import { validateOrReject } from 'class-validator'
 import { Context, Next } from 'koa'
 
 import { firstError } from '../../../helpers/firstError'
+import { getCourses } from '../../../helpers/getCourses'
 import { toPublicUser } from '../../../helpers/toPublicUser'
-import { CourseModel } from '../../../shared/course/Course'
 import { ResponseError } from '../../../shared/mongo/ResponseError'
 import { QuotaType } from '../../../shared/quota/QuotaType'
 import { Jwt } from '../../../shared/user/Jwt'
@@ -31,7 +31,7 @@ export const login = async (ctx: Context, next: Next): Promise<void> => {
   }
   if (!user) throw new ResponseError(401, 'Wrong username or password')
 
-  const courses = await CourseModel.find({ userId: user._id }).lean();
+  const courses = await getCourses({ user });
 
   const publicUser: PublicUser = toPublicUser(user)
 

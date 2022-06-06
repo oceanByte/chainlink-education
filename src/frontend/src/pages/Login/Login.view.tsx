@@ -78,8 +78,7 @@ export const LoginView = ({
                 name="usernameOrEmail"
                 inputStatus={
                   errors.usernameOrEmail && touched.usernameOrEmail
-                    ? 'error' : !errors.usernameOrEmail && touched.usernameOrEmail 
-                    ? 'success' : undefined
+                    ? 'error' : undefined
                   }
                 errorMessage={errors.usernameOrEmail && touched.usernameOrEmail && errors.usernameOrEmail}
                 isDisabled={false}
@@ -94,8 +93,7 @@ export const LoginView = ({
                 name="password"
                 inputStatus={
                   errors.password && touched.password
-                    ? 'error' : !errors.password && touched.password 
-                    ? 'success' : undefined
+                    ? 'error' : undefined
                   }
                 errorMessage={errors.password && touched.password && errors.password}
                 isDisabled={false}

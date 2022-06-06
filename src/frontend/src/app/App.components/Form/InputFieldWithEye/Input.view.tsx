@@ -31,7 +31,7 @@ export const InputViewWithEye = ({
   errorMessage,
 }: InputViewWithEyeProps) => {
   const [showPassword, setShowPassword] = useState(false)
-  const eyeForPassword = showPassword ? EyeHide : Eye
+  const eyeForPassword = showPassword ? Eye : EyeHide
 
   const typeOfInputPassword = showPassword ? 'text' : 'password'
   return (

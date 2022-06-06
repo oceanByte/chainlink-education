@@ -5,6 +5,8 @@
 import Editor, { ControlledEditor, DiffEditor, monaco } from '@monaco-editor/react'
 import { Checkboxes } from 'app/App.components/Checkboxes/Checkboxes.controller'
 import { Dialog } from 'app/App.components/Dialog/Dialog.controller'
+// import classnames from 'classnames'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 import useIsMounted from 'ismounted'
 import Markdown from 'markdown-to-jsx'
 import { NoAccountModal } from 'modals/NoAccount/NoAccount.view'
@@ -22,7 +24,7 @@ import { Button } from '../../app/App.components/Button/Button.controller'
 import { Input } from '../../app/App.components/Input/Input.controller'
 import ArrowRight from '../../assets/arrow-upright-white.svg'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
-import { Question } from './Chapter.controller'
+import { IValidator, IValidatorContent, Question } from './Chapter.controller' // TabType
 //prettier-ignore
 import { BlueParagraph, ButtonBorder, ButtonStyle, ButtonText, ChapterBig, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterH4, ChapterH5, ChapterQuestions, ChapterTab, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentFailed, ChapterValidatorContentSuccess, ChapterValidatorContentWrapper, ChapterValidatorTitle, ColorWord, ContentWrapp, FormWrapper, LetsStart, ListItemsContainer, MissionContainer, narrativeText, RegularP, Spacer, TextWrapper, VerticalAlign, VideoBox } from './Chapter.style'
 import { AnimatedCode, BackgroundContainer, Difficulty, ImageContainer, SpecialCode } from './Chapter.style'
@@ -63,7 +65,7 @@ const MonacoReadOnly = ({ children }: any) => {
         height={height}
         value={children}
         language="typescript"
-        theme="vs-dark"
+        theme="light"
         options={{
           lineNumbers: false,
           scrollBeyondLastLine: false,
@@ -178,34 +180,40 @@ let triggerAnim = function () {
   myTry.classList.add('tryagain')
 }
 
-const Validator = ({ validatorState, validateCallback }: any) => (
+const Validator = ({ validatorState, validateCallback, validatorContent }: IValidator) => (
   <ChapterValidator className={validatorState === RIGHT ? 'ok' : 'no'}>
     <div className="step">
       <p className="step-text">Step 3</p>
     </div>
     {validatorState === PENDING && (
       <ChapterValidatorContentWrapper>
-        <ChapterValidatorTitle>Awaiting validation</ChapterValidatorTitle>
-        <ChapterValidatorContent>Provide your solution above and validate your answer</ChapterValidatorContent>
+        <ChapterValidatorTitle>{validatorContent.pending.title || 'Awaiting validation'}</ChapterValidatorTitle>
+        <ChapterValidatorContent>
+          {validatorContent.pending.text || 'Provide your solution above and validate your answer'}
+        </ChapterValidatorContent>
         <ButtonStyle>
           {/*<ButtonBorder />*/}
           {/* <img src={ArrowRight} /> */}
-          <ButtonText onClick={() => validateCallback()}>Validate answer</ButtonText>
+          <ButtonText onClick={() => validateCallback()}>
+            {validatorContent.pending.textInBtn || 'Validate answer'}
+          </ButtonText>
         </ButtonStyle>
       </ChapterValidatorContentWrapper>
     )}
     {validatorState === RIGHT && (
       <ChapterValidatorContentSuccess>
-        <ChapterValidatorTitle>THIS IS CORRECT</ChapterValidatorTitle>
-        <ChapterValidatorContent>Go on to the next chapter</ChapterValidatorContent>
+        <ChapterValidatorTitle>{validatorContent.right.title || 'THIS IS CORRECT'}</ChapterValidatorTitle>
+        <ChapterValidatorContent>{validatorContent.right.text || 'Go on to the next chapter'}</ChapterValidatorContent>
       </ChapterValidatorContentSuccess>
     )}
     {validatorState === WRONG && (
       <ChapterValidatorContentFailed>
         <ChapterValidatorTitle id={'try'} className={'tryagain'}>
-          This is wrong
+          {validatorContent.wrong.title || 'This is wrong'}
         </ChapterValidatorTitle>
-        <ChapterValidatorContent>Correct your answer and try again</ChapterValidatorContent>
+        <ChapterValidatorContent>
+          {validatorContent.wrong.text || 'Correct your answer and try again'}
+        </ChapterValidatorContent>
         <ButtonStyle>
           <ButtonBorder />
           <ButtonText
@@ -214,7 +222,7 @@ const Validator = ({ validatorState, validateCallback }: any) => (
               triggerAnim()
             }}
           >
-            Try Again
+            {validatorContent.wrong.textInBtn || 'Try Again'}
           </ButtonText>
         </ButtonStyle>
       </ChapterValidatorContentFailed>
@@ -311,7 +319,7 @@ const Content = ({ course }: any) => (
         },
         VideoBox: {
           component: VideoBox,
-        }
+        },
         // FormSevenChapter: {
         //   component: FormSevenChapter
         // }
@@ -333,13 +341,17 @@ type ChapterViewProps = {
   isAccount: boolean
   closeIsAccountModal: () => void
   course?: string
+  tab: string
+  setTabOnPage: (currentTab: string) => void
   user?: PublicUser
   supports: Record<string, string | undefined>
   questions: Question[]
+  validatorContent: IValidatorContent
   proposedQuestionAnswerCallback: (e: Question[]) => void
   isStarted: boolean
   startedHandler: () => void
   currentCourse: any
+  additionalInfo: IAdditionalInfo
 }
 
 export const ChapterView = ({
@@ -352,18 +364,22 @@ export const ChapterView = ({
   proposedSolutionCallback,
   showDiff,
   course,
+  tab,
+  setTabOnPage,
   user,
   supports,
   questions,
+  validatorContent,
   isStarted,
   nextChapter,
   previousChapter,
   percent,
   startedHandler,
   proposedQuestionAnswerCallback,
-  currentCourse
+  currentCourse,
+  additionalInfo,
 }: ChapterViewProps) => {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
   const [display, setDisplay] = useState('solution')
   const [editorWidth, setEditorWidth] = useState(0)
   const [editorHeight, setEditorHeight] = useState(0)
@@ -373,7 +389,7 @@ export const ChapterView = ({
   const isMounted = useIsMounted()
 
   useEffect(() => {
-    if (nextChapter === '/chainlinkIntroduction/chapter-2' && localStorage.getItem('popupConfirm')) {
+    if (nextChapter === `/${additionalInfo.urlCourse}/chapter-2` && localStorage.getItem('popupConfirm')) {
       setIsSaveConfirmPopup(false)
     } else setIsSaveConfirmPopup(true)
 
@@ -409,7 +425,7 @@ export const ChapterView = ({
 
   return (
     <div className="chapter-info-wrapper">
-      {nextChapter === '/chainlinkIntroduction/chapter-2' && !user && isSaveConfirmPopup ? (
+      {nextChapter === `/${additionalInfo.urlCourse}/chapter-2` && !user && isSaveConfirmPopup ? (
         <NoAccountModal
           open={!user}
           onClose={closePopupSaveProcess}
@@ -426,11 +442,19 @@ export const ChapterView = ({
         <div>
           <div className="chapter-block">
             <div className="step">
-              <p className="step-text">{
-                (currentCourse && currentCourse.progress.includes(pathname)) || (user && validatorState === RIGHT) ?
-                'Chapter completed' : 'Step 1'
-              }</p>
+              <p className="step-text">
+                {(currentCourse && currentCourse.progress.includes(pathname)) || (user && validatorState === RIGHT)
+                  ? 'Chapter completed'
+                  : 'Step 1'}
+              </p>
             </div>
+            {/* <div className="tabs-container">
+              <div className={classnames("tab-item", tab === TabType.CONTENT && 'active')} onClick={() => setTabOnPage(TabType.CONTENT)}>Content</div>
+              <div className='divider'>|</div>
+              <div className={classnames("tab-item", tab === TabType.VIDEO && 'active')} onClick={() => setTabOnPage(TabType.VIDEO)}>Video</div>
+              <div className='divider'>|</div>
+              <div className={classnames("tab-item", tab === TabType.HINTS && 'active')} onClick={() => setTabOnPage(TabType.HINTS)}>Hints</div>
+            </div> */}
             <Content course={course || ''} />
           </div>
         </div>
@@ -465,7 +489,8 @@ export const ChapterView = ({
             </LetsStart>
           ) : (
             <>
-              {questions.length > 0 && nextChapter !== '/chainlinkIntroduction/chapter-8' ? (
+              {questions.length > 0 &&
+              nextChapter !== `/${additionalInfo.urlCourse}/chapter-${additionalInfo.chapters.length + 1}` ? (
                 <ChapterQuestions>
                   <div className="step">
                     <p className="step-text">Step 2</p>
@@ -511,10 +536,19 @@ export const ChapterView = ({
                   )}
                 </div>
               )}
-              <Validator validatorState={validatorState} validateCallback={validateCallback} />
+              <Validator
+                validatorState={validatorState}
+                validateCallback={validateCallback}
+                validatorContent={validatorContent}
+              />
             </>
           )}
-          <Footer percent={Math.floor(percent)} nextChapter={nextChapter} previousChapter={previousChapter} />
+          <Footer
+            percent={Math.floor(percent)}
+            nextChapter={nextChapter}
+            previousChapter={previousChapter}
+            additionalInfo={additionalInfo}
+          />
         </ChapterGrid>
       </div>
     </div>

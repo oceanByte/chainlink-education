@@ -1,35 +1,42 @@
-import { Button } from 'app/App.components/Button/Button.controller'
 import * as React from 'react'
-import { useLocation } from 'react-router-dom'
-import ProgressBar from '@ramonak/react-progress-bar'
-
-import { Link } from 'react-router-dom'
-
+import { useLocation, useHistory } from 'react-router-dom'
+import { MainButtonView } from 'app/App.components/MainButton/MainButton.view'
 import { FooterStyled, ProgressBarWrapper, LinkStyled } from './Footer.style'
+import { IFooter } from './Footer.controller'
 
-export const FooterView = ({ nextChapter, previousChapter, percent }: any) => {
+export const FooterView = ({ nextChapter, previousChapter, percent, additionalInfo }: IFooter) => {
   const { pathname } = useLocation()
+  const history = useHistory()
+
   return (
     <FooterStyled>
       <ProgressBarWrapper>
-        <ProgressBar baseBgColor={'silver'} bgColor={'#00C08B'} completed={percent} />
+        <div className="course-progress__bar">
+          <div className="line">
+            <div className="completed" style={{ width: `${percent}%` }} />
+            <div className="label">
+              {percent}%
+            </div>
+          </div>
+        </div>
       </ProgressBarWrapper>
       <LinkStyled>
-        <Link to={previousChapter}>
-          <Button
-            text={pathname !== '/chainlinkIntroduction/chapter-1' ? 'Previous' : 'Go to Home'}
-            color="primary"
-            icon="left-arrow"
-            invertIcon
+        <MainButtonView
+            isChapter
+            hasArrowLeft
+            text={pathname !== `/${additionalInfo.urlCourse}/chapter-1` ? 'Previous Chapter' : 'Home Page'}
+            onClick={() => history.push(previousChapter)}
+            loading={false}
+            disabled={false}
           />
-        </Link>
-        <Link to={nextChapter}>
-          <Button
-            text={pathname !== '/chainlinkIntroduction/chapter-8' ? 'Next' : 'Get certificate'}
-            color="primary"
-            icon="right-arrow"
+        <MainButtonView
+            isChapter
+            hasArrowRight
+            text={pathname === `/${additionalInfo.urlCourse}/chapter-${additionalInfo.chapters.length}` ? 'Done' : 'Next Chapter'}
+            onClick={() => history.push(nextChapter)}
+            loading={false}
+            disabled={false}
           />
-        </Link>
       </LinkStyled>
     </FooterStyled>
   )

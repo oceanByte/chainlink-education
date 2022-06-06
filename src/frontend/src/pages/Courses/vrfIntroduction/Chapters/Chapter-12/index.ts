@@ -7,7 +7,20 @@ import solution from '!raw-loader!./solution.md'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
 import { questions } from './questions'
+/* eslint import/no-webpack-loader-syntax: off */
+// @ts-ignore
+import description from '!raw-loader!./description.md'
+/* eslint import/no-webpack-loader-syntax: off */
+// @ts-ignore
+import video from '!raw-loader!./video.md'
+/* eslint import/no-webpack-loader-syntax: off */
+// @ts-ignore
+import hints from '!raw-loader!./hints.md'
+/* eslint import/no-webpack-loader-syntax: off */
+// @ts-ignore
 
 import { Data } from 'pages/Chapter/Chapter.controller'
 
-export const data: Data = { course, exercise: undefined, solution, supports: { }, questions }
+import { validatorContent } from './validatorContent'
+
+export const data: Data = { course, video, hints, description, exercise: undefined, solution, supports: { }, questions, validatorContent }

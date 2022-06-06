@@ -19,33 +19,45 @@ Thus far, we’ve mainly been concerned with storing data in variables and acces
 You can think of functions as little machines that take in data, run some logic and produce an output. The values that are input into functions are called **arguments**. The logic is put in the **body** of the function. If the function directly returns a value as an output of the function that output is called the **return** value. Finally, just like variables have access modifiers, functions also have **modifiers** (including access modifiers too). Some functions don’t take in any arguments. Some functions just run calculations to change some state variables or make a request to run other code (or to a Chainlink node!) Some functions don’t return a direct value and just run calculations based on storage variables, or make a request to run other code (or send a request to a Chainlink node!) Basically, functions can be customized to do anything.
 
 To define a function, we first type the “function” keyword, define a name for the function and add a pair of parentheses beside the name as such:
-`
-function addNumbers()`
+
+<Highlight class="language-javascript">
+function addNumbers()
+</Highlight>
 
 After this is complete you can define **parameters** for the function. Parameters are the name and types of the arguments we can input into the function. They are variables that only that function can access. For this example, we will define two parameters: 
-`
-function addNumbers(uint num1, uint num2)`
+
+<Highlight class="language-javascript">
+function addNumbers(uint num1, uint num2)
+</Highlight>
 
 Now we can add any modifiers to the function. In this case we’ll simply add public for now:
-`
-function addNumbers(uint num1, uint num2) public`
+
+<Highlight class="language-javascript">
+function addNumbers(uint num1, uint num2) public
+</Highlight>
 
 Now we’ll define what the function returns. Remember a function doesn’t **have** to return anything. In this example we will add the parameters and return the result. Since we are adding two uints, the return value will also have to be a uint:
-`
-function addNumbers(uint num1, uint num2) public returns (uint)`
+
+<Highlight class="language-javascript">
+function addNumbers(uint num1, uint num2) public returns (uint)
+</Highlight>
 
 Finally we’ll create the function body by typing a pair of curly braces and typing our function logic within them:
-`
+
+<Highlight class="language-javascript">
 function addNumbers(uint num1, uint num2) public returns (int) {
-answer = num1 + num2;
-return answer;
-}`
+ answer = num1 + num2;
+ return answer;
+}
+</Highlight>
 
 As you can see the function takes the two parameters, num1 and num2, sums them, stores the sum in a variable called answer, and then returns the value inside the variable answer.
 
 So if we were to call the function, we could store the result in another variable:
-`
-storedAnswer = addNumbers(1,2)`
+
+<Highlight class="language-javascript">
+storedAnswer = addNumbers(1,2)
+</Highlight>
 
 The variable storedAnswer would then contain the uint 3.
 

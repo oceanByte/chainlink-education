@@ -11,10 +11,13 @@ export const AppBg = styled.div`
 `
 
 export const AppWrapper = styled.div`
-  position: absolute;
+  position: relative;
+  min-height: 100vh;
   width: 100vw;
-  top: 0;
-  left: 0;
+
+  @media screen and (max-width: 1400px){
+    min-height: calc(100vh - 50px);
+  }
 
   @media (max-width: 992px) {
     background: transparent;

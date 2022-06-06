@@ -17,6 +17,9 @@ export class AddProgressInputs {
 
   @Expose()
   isCompleted!: number
+
+  @Expose()
+  coursePath!: string
 }
 
 export class AddProgressOutputs {

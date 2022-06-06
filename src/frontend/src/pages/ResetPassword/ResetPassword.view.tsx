@@ -120,8 +120,7 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
                   name="solution"
                   inputStatus={
                     errors.solution && touched.solution
-                      ? 'error' : !errors.solution && touched.solution 
-                      ? 'success' : undefined
+                      ? 'error' : undefined
                     }
                   errorMessage={errors.solution && touched.solution && errors.solution}
                   isDisabled={false}
@@ -140,8 +139,7 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
                   name="password"
                   inputStatus={
                     errors.password && touched.password
-                      ? 'error' : !errors.password && touched.password 
-                      ? 'success' : undefined
+                      ? 'error' : undefined
                     }
                   errorMessage={errors.password && touched.password && errors.password}
                   isDisabled={false}
@@ -182,8 +180,7 @@ export const ResetPasswordView = ({ resetPasswordCallback, loading }: ResetPassw
                   name="confirmPassword"
                   inputStatus={
                     errors.confirmPassword && touched.confirmPassword
-                      ? 'error' : !errors.confirmPassword && touched.confirmPassword 
-                      ? 'success' : undefined
+                      ? 'error' : undefined
                     }
                   errorMessage={errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
                   isDisabled={false}

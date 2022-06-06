@@ -2,6 +2,7 @@
 @import './variables.scss';
 @import '../app/App.components/Header/HeaderStyle.scss';
 @import '../app/App.components/ChaptersList/ChaptersList.scss';
+@import '../app/App.components/ShareCertificate/ShareCertificate.scss';
 @import '../app/App.components/HeaderCoursesList/HeaderCoursesList.scss';
 @import '../pages/Login/LoginStyle.scss';
 @import '../app/App.components/HeaderAuth/HeaderAuthStyle.scss';
@@ -12,6 +13,12 @@
 @import '../pages/ResetPassword/ResetPassword.scss';
 @import '../pages/DeleteAccount/DeleteAccount.scss';
 @import '../pages/Profile/Profile.scss';
+@import '../pages/DescriptionCourse/DescriptionCourse.scss';
+@import '../pages/PreviewCertificate/PreviewCertificate.scss';
+@import '../app/App.components/Profile/OverallProgress/OverallProgress.scss';
+@import '../app/App.components/Profile/CourseProgress/CourseProgress.scss';
+@import '../app/App.components/Profile/Certificates/Certificates.scss';
+@import '../app/App.components/Profile/AccountInfo/AccountInfo.scss';
 @import '../pages/SignUp/SignUp.scss';
 @import '../app/App.components/ConfirmYouPassword/ConfirmYouPassword.scss';
 // @import '../app/App.components/DeleteAccount/DeleteAccount.scss';

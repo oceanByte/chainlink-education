@@ -10,6 +10,8 @@ export enum CourseNameType {
   CHAINLINK_101 = 'Chainlink 101',
   SOLIDITY_INTRO = 'Solidity Introduction',
   VRF_V2 = 'VRF v2 Introduction',
+  ADVANCED_VRF_V2 = 'Advanced course on VRF v2',
+  CHAINLINK_KEEPERS = 'Chainlink Keepers',
 }
 
 export enum CourseStatusType {

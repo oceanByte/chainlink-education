@@ -1,0 +1,268 @@
+.social-networks__wrapp {
+  .menu {
+    padding:0;
+    margin:0;
+    list-style-type:none;
+
+    .share{
+      position: relative;
+      z-index: 999;
+      width: 60px;
+      height: 60px;
+      text-align:center;
+      line-height:50px;
+      background-color: #fff;
+      border-radius:2px;
+
+      .share-btn {
+        outline: none;
+        background: url('../../../assets/shareLink.svg') no-repeat center;
+        border: 1px solid $grayscale4;
+        border-radius: 3px;
+        width: 60px;
+        height: 60px;
+        transition: all .2s ease-in-out;
+        cursor: pointer;
+    
+        &:not(:disabled):hover {
+          border: 1px solid $primary;
+        }
+    
+        &:disabled {
+          cursor: pointer;
+          opacity: 0.3;
+        }
+
+        @media (max-width: 576px) {
+          height: 50px;
+          width: 50px;
+        }
+      }
+  
+      &.show {
+        .share-btn {
+          background: url('../../../assets/closeIcon.svg') no-repeat center;
+        }
+        @media screen and (min-width: 1366px) {
+           &.top{
+            .submenu{
+              @for $i from 1 through 3{
+                li:nth-child(#{$i}){
+                  opacity:1;
+                  top:#{-$i*65}px;
+                  transition-delay:#{$i*0.08}s;
+                  transform:rotateY(0deg);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      @media (max-width: 576px) {
+        height: 50px;
+        width: 50px;
+      }
+    }
+    .submenu{
+      list-style-type:none;
+      padding:0;
+      margin:0;
+      li {
+        transition:all ease-in-out 0.5s;
+        position:absolute;
+        top: 0;
+        left: 0;
+        z-index:-1;
+        opacity:0;
+        cursor: pointer;
+        padding-bottom: 5px;
+
+        .share-list-item {
+          width: 60px;
+          height: 60px;
+          border: 1px solid $grayscale4;
+          border-radius: 3px;
+          transition: all .2s ease-in-out;
+
+          &:not(:disabled):hover {
+            border: 1px solid $primary;
+          }
+
+          &.linkedin {
+            background: url('../../../assets/linkedin-icon.svg') $white no-repeat center;
+          }
+          &.twitter {
+            background: url('../../../assets/twitter-icon.svg') $white no-repeat center;
+          }
+
+          @media (max-width: 576px) {
+            height: 50px;
+            width: 50px;
+          }
+        }
+      }
+      
+      @for $i from 1 through 3{
+        li:nth-child(#{$i}){
+          transform:rotateX(#{$i*45}deg);
+        }
+      }
+      
+    }
+  }
+
+  @include md {
+    .menu {
+      .share {
+        &.show {
+          &.right{
+            .submenu{
+              @for $i from 1 through 3{
+                li:nth-child(#{$i}){
+                  opacity:1;
+                  top: 0;
+                  left:#{$i*65}px;
+                  transform:rotate(0deg);
+                  transition-delay:#{$i*0.08}s;
+                  border-radius: 3px;
+
+                  @media (max-width: 576px) {
+                    left:#{$i*60}px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .submenu{
+        li {
+          padding-right: 5px;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+  @include lg {
+    .menu {
+      .share {
+        &.show {
+          &.right{
+            .submenu{
+              @for $i from 1 through 3{
+                li:nth-child(#{$i}){
+                  opacity:1;
+                  top: 0;
+                  left:#{$i*65}px;
+                  transform:rotate(0deg);
+                  transition-delay:#{$i*0.08}s;
+                  border-radius: 3px;
+
+                  @media (max-width: 576px) {
+                    left:#{$i*60}px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .submenu{
+        li {
+          padding-right: 5px;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+
+  @include xl {
+
+    .menu {
+      .share {
+        &.show {
+          &.top{
+            .submenu{
+              @for $i from 1 through 3{
+                li:nth-child(#{$i}){
+                  opacity:1;
+                  top:#{-$i*65}px;
+                  left: 0;
+                  transition-delay:#{$i*0.08}s;
+                  transform:rotateY(0deg);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .submenu{
+        li {
+          padding-right: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+  @include md {
+    .menu {
+      .share {
+        &.show {
+          &.top.isDescription {
+            .submenu{
+              @for $i from 1 through 3{
+                li:nth-child(#{$i}){
+                  top:#{-$i*65}px;
+                  left: 0;
+                  transition-delay:#{$i*0.08}s;
+                  transform:rotateY(0deg);
+                }
+              }
+            }
+          }
+        }
+      }
+  
+      .submenu{
+        li {
+          top: 0;
+          left: 0;
+          padding-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  @include sm {
+    .menu {
+      .share {
+        &.show {
+          &.top.isCardCourse {
+            .submenu{
+              @for $i from 1 through 3{
+                li:nth-child(#{$i}){
+                  top:#{-$i*65}px;
+                  left: 0;
+                  transition-delay:#{$i*0.08}s;
+                  transform:rotateY(0deg);
+                }
+              }
+            }
+          }
+        }
+      }
+  
+      .submenu{
+        li {
+          top: 0;
+          left: 0;
+          padding-bottom: 5px;
+        }
+      }
+    }
+  }
+}

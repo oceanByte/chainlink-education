@@ -6,5 +6,6 @@ import { Course } from '../../Course/Course.controller'
 
 export const course: Course = {
     path: "chainlinkIntroduction",
-    description: data
+    description: data,
+    amountOfTime: '2 hours', 
 }

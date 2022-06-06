@@ -22,7 +22,7 @@ Customers also tend not to read these agreements due to lengthy, complex legales
 
 <MissionContainer>
   <div className="title">What are the SLAs you have agreed to?</div>
-    <div style="color:white">
+    <div className="description">
     Think about any digital services you subscribe to, for example video streaming or banking services. Do you know the terms of the SLAs between you and the service provider? If not, take the time and read over one of them.
     </div>
 </MissionContainer>
