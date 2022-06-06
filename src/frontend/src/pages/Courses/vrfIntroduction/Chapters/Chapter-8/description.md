@@ -1,2 +1,1 @@
-
-In Web 1.0, the internet was a static place where web pages and content were created and owned by a single entity (i.e., a website for the news such as the New York Times, where they curated and owned all articles). In Web 2.0, which we are currently moving away from, applications are created to allow users to create their own content on web pages.
+Create a subscription for our contract when we deploy it and create a variable of type address to store the wallet address of the wallet that owns the subscription.

@@ -4,4 +4,6 @@
   Solidity is an object-oriented, high-level language for implementing smart contracts. Learn about the basics here.
 </GradientTextWrapp>
 
-Chainlink, smart contracts, blockchains, and the entire world of cryptocurrency have been a hot topic of discussion for several years now. Whether it’s companies like EY and Microsoft looking to use smart contracts to improve their business processes, artists and athletes like LaMelo Ball creating their own “NFTs,” or up and coming companies looking to disrupt long-standing establishments such as the insurance industry, Chainlink and smart contracts are working to become the backbone for world-changing applications.
+In Chainlink 101, we discussed how and why Smart Contracts are revolutionizing the nature of agreements, and the Internet. But how do we write smart contracts? Well, smart contracts are programmed, and while there are now several smart contract programming languages, the most popular language today is Solidity. Ethereum developers created Soldity from the ground up to work with Ethereum, the first major smart contract blockchain! This is a major reason why contracts written in Solidity have become so prominent.
+
+Throughout this course, we will learn the basics of Solidity syntax and then apply it to some activities. The best way to learn to program is to program! With that said, let's dive right in!

@@ -1,2 +1,1 @@
-
-In Web 1.0, the internet was a static place where web pages and content were created and owned by a single entity (i.e., a website for the news such as the New York Times, where they curated and owned all articles). In Web 2.0, which we are currently moving away from, applications are created to allow users to create their own content on web pages.
+Programs, in very broad terms, do two things: store data and change data. We store data in programs by utilizing variables and change data by defining logic in functions. In smart contracts, when we define variables outside of a function they can be used to store data for that contract, to be accessed at a later time.

@@ -1,2 +1,1 @@
-
-In Web 1.0, the internet was a static place where web pages and content were created and owned by a single entity (i.e., a website for the news such as the New York Times, where they curated and owned all articles). In Web 2.0, which we are currently moving away from, applications are created to allow users to create their own content on web pages.
+Chainlink can be used for a lot more than dynamic NFTs. Whenever you need to connect the off-chain world to the on-chain world, Chainlink is the perfect solution.

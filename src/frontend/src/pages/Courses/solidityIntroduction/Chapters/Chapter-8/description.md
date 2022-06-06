@@ -1,2 +1,1 @@
-
-In Web 1.0, the internet was a static place where web pages and content were created and owned by a single entity (i.e., a website for the news such as the New York Times, where they curated and owned all articles). In Web 2.0, which we are currently moving away from, applications are created to allow users to create their own content on web pages.
+It is common in programming to want to store many associated values together. For instance I may want to store the title of every book I own. We could put each book title in it’s own variable of type string, but it would be difficult to access all those variables at once, and keep track of each variable when I need to read this information.

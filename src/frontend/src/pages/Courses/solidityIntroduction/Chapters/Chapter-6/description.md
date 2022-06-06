@@ -1,2 +1,1 @@
-
-In Web 1.0, the internet was a static place where web pages and content were created and owned by a single entity (i.e., a website for the news such as the New York Times, where they curated and owned all articles). In Web 2.0, which we are currently moving away from, applications are created to allow users to create their own content on web pages.
+In programming an operator is a symbol that represents an action or process. In the case of the assignment operator whatever is to the left of the equals sign is being assigned the value of whatever is on the right of the equal sign.
