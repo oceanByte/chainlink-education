@@ -1,2 +1,1 @@
-
-In Web 1.0, the internet was a static place where web pages and content were created and owned by a single entity (i.e., a website for the news such as the New York Times, where they curated and owned all articles). In Web 2.0, which we are currently moving away from, applications are created to allow users to create their own content on web pages.
+Randomness is essential for many types of applications. Think about how many games have randomness built-in. Rolling dice in dungeons and dragons, a random starting hand of poker, or a random next block in Tetris, randomness is an essential component of a majority of games.

@@ -1,2 +1,1 @@
-
-In Web 1.0, the internet was a static place where web pages and content were created and owned by a single entity (i.e., a website for the news such as the New York Times, where they curated and owned all articles). In Web 2.0, which we are currently moving away from, applications are created to allow users to create their own content on web pages.
+When you buy an artwork, you sign a contract between you and the artist or seller. This contract provides you with proof of ownership of the artwork. But it is possible to forge it and not follow the agreement. The seller could decide not to send the artwork to you though you already paid for it.

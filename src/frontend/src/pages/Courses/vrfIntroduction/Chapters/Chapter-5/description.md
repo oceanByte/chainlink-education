@@ -1,2 +1,1 @@
-
-In Web 1.0, the internet was a static place where web pages and content were created and owned by a single entity (i.e., a website for the news such as the New York Times, where they curated and owned all articles). In Web 2.0, which we are currently moving away from, applications are created to allow users to create their own content on web pages.
+Just like all Chainlink powered services, we must pay the Chainlink VRF for the work completed by using the LINK token. In the past, in version one of Chainlink VRF, this involved sending a set amount of LINK tokens alongside each request. And because a contract itself sends out the requests, this meant that smart contracts had to be sent LINK before they could request a random number.

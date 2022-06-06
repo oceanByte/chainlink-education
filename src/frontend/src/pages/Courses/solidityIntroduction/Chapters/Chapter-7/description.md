@@ -1,2 +1,1 @@
-
-In Web 1.0, the internet was a static place where web pages and content were created and owned by a single entity (i.e., a website for the news such as the New York Times, where they curated and owned all articles). In Web 2.0, which we are currently moving away from, applications are created to allow users to create their own content on web pages.
+We can actually give more information to the Solidity compiler on how we want to use our variables (and later functions). We can tell the compiler how we want our variables to be accessed. Many blockchains, such as Ethereum, act as one monolithic computer.
