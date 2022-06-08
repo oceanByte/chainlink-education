@@ -50,12 +50,14 @@ interface IChapterItem {
 
 const ChapterItem = ({ chapter, index }: IChapterItem) => {
   const content = useRef<HTMLDivElement>(null);
+  const history = useHistory()
   const [isShow, setIsShow] = useState(false);
   const [height, setHeight] = useState('0px');
   const toggle = () => {
     setIsShow((prev) => !prev)
-    setHeight(() => isShow ? "0px": `${content.current?.scrollHeight}px`)
+    setHeight(() => isShow ? "0px" : `${content.current?.scrollHeight}px`)
   }
+
   return (
     <div className='chapter' >
       <div className={classnames('chapter-main', isShow && 'open')} onClick={toggle}>
@@ -69,8 +71,15 @@ const ChapterItem = ({ chapter, index }: IChapterItem) => {
           maxHeight: `${height}`,
         }}
         className={classnames('chapter-description')}
-        >
+      >
         <Content course={chapter.data.description} />
+        <button
+          className="chapter-view__chapter"
+          type="button"
+          onClick={() => history.push(chapter.pathname)}
+        >
+          View Chapter
+        </button>
       </div>
     </div>
   )
@@ -132,27 +141,27 @@ export const DescriptionCourseView = ({
           <div className='additional-info__chapters item'>
             <div className='title'>Number of chapters</div>
             <div className='wrapp'>
-              <div className='icon'/><div>{additionalInfo.countChapters} chapters</div>
+              <div className='icon' /><div>{additionalInfo.countChapters} chapters</div>
             </div>
-            
+
           </div>
           <div className='additional-info__time item'>
             <div className='title'>Amount of time</div>
             <div className='wrapp'>
-              <div className='icon'/><div>{additionalInfo.amountOfTime}</div>
+              <div className='icon' /><div>{additionalInfo.amountOfTime}</div>
             </div>
           </div>
-          <div className='additional-info__difficulty item'> 
+          <div className='additional-info__difficulty item'>
             <div className='title'>Level of difficulty</div>
             <Difficulty difficulty={additionalInfo.difficulty} />
           </div>
         </div>
         <div className='additional-info-mobile'>
           <div className='additional-info__chapters item'>
-            <div className='icon'/><div>{additionalInfo.countChapters} chapters</div>
+            <div className='icon' /><div>{additionalInfo.countChapters} chapters</div>
           </div>
           <div className='additional-info__time item'>
-            <div className='icon'/><div>{additionalInfo.amountOfTime}</div>
+            <div className='icon' /><div>{additionalInfo.amountOfTime}</div>
           </div>
           <div className='additional-info-mobile__difficulty'>
             <Difficulty difficulty={additionalInfo.difficulty} />
@@ -161,26 +170,26 @@ export const DescriptionCourseView = ({
         <div className='additional-info__footer '>
           {user ? (
             <div className={classnames('course-footer',
-            !additionalInfo.percent && 'center',
-            additionalInfo.percent === 100 && 'completed'
+              !additionalInfo.percent && 'center',
+              additionalInfo.percent === 100 && 'completed'
             )}>
               <div className="course-btn-wrapper">
                 {!additionalInfo.percent ? <MainButtonView
-                    isPrimary
-                    hasArrowUpRight
-                    text='Start Course Now'
-                    onClick={() => history.push(`${additionalInfo.urlChapter}`)}
-                    loading={false}
-                    disabled={false}
-                  /> : null}
+                  isPrimary
+                  hasArrowUpRight
+                  text='Start Course Now'
+                  onClick={() => history.push(`${additionalInfo.urlChapter}`)}
+                  loading={false}
+                  disabled={false}
+                /> : null}
                 {additionalInfo.percent && additionalInfo.percent !== 100 ? <MainButtonView
-                    isPrimary
-                    hasArrowUpRight
-                    text='Continue Course'
-                    onClick={() => history.push(`${additionalInfo.urlChapter}`)}
-                    loading={false}
-                    disabled={false}
-                  /> : null}
+                  isPrimary
+                  hasArrowUpRight
+                  text='Continue Course'
+                  onClick={() => history.push(`${additionalInfo.urlChapter}`)}
+                  loading={false}
+                  disabled={false}
+                /> : null}
                 {additionalInfo.percent && additionalInfo.percent === 100 ? (
                   <>
                     <div ref={wrapperRef} className='useCertificate'>
@@ -194,12 +203,12 @@ export const DescriptionCourseView = ({
                         disabled={false}
                         className={isShowList ? 'hasArrowUp' : ''}
                       />
-                    <UseCertificate
-                      isSecondary
-                      isShowList={isShowList}
-                      additionalInfo={additionalInfo}
-                      nextPath={`/${additionalInfo.urlCourse}/certificate/preview`}
-                    />
+                      <UseCertificate
+                        isSecondary
+                        isShowList={isShowList}
+                        additionalInfo={additionalInfo}
+                        nextPath={`/${additionalInfo.urlCourse}/certificate/preview`}
+                      />
                     </div>
                     <div className='downloadCertificate'>
                       <MainButtonView
@@ -212,7 +221,7 @@ export const DescriptionCourseView = ({
                         disabled={false}
                       />
                     </div>
-                </>)  : null}
+                  </>) : null}
               </div>
 
               {additionalInfo.percent && additionalInfo.percent !== 100 ? (
@@ -221,16 +230,16 @@ export const DescriptionCourseView = ({
                     <CircularProgressBar
                       strokeWidth="7"
                       sqSize="60"
-                      percentage={additionalInfo.percent}/>
+                      percentage={additionalInfo.percent} />
                   </div>
-                  </div>
-              ): null}
+                </div>
+              ) : null}
 
               {additionalInfo.percent && additionalInfo.percent === 100 ? (
                 <div className='shareCertificate'>
                   <ShareCertificate className="isDescription" username={user.username} additionalInfo={additionalInfo} />
                 </div>
-            ): null}
+              ) : null}
             </div>
           ) : (
             <MainButtonView

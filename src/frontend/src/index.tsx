@@ -20,7 +20,7 @@ import './styles/main.scss'
 
 export const store = configureStore({})
 
-const LOG_ROCKET_PROJECT_ID = 'xh6oiw/chainlink-education-test'
+const LOG_ROCKET_PROJECT_ID = 'vq2xcu/chainlink'
 
 LogRocket.init(LOG_ROCKET_PROJECT_ID)
 
