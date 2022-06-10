@@ -397,8 +397,8 @@ export const ChapterView = ({
       setEditorWidth(wrapperRef.current ? wrapperRef.current.offsetWidth - 30 : 0)
       setEditorHeight(
         wrapperRef.current!.parentElement!.offsetHeight -
-          (wrapperRef.current!.nextElementSibling as HTMLElement).offsetHeight -
-          300,
+        (wrapperRef.current!.nextElementSibling as HTMLElement).offsetHeight -
+        300,
       )
       window.addEventListener('resize', () => {
         if (isMounted.current) {
@@ -406,8 +406,8 @@ export const ChapterView = ({
           setEditorWidth(wrapperRef.current ? wrapperRef.current.offsetWidth - 30 : 0)
           setEditorHeight(
             wrapperRef.current!.parentElement!.offsetHeight -
-              (wrapperRef.current!.nextElementSibling as HTMLElement).offsetHeight -
-              300,
+            (wrapperRef.current!.nextElementSibling as HTMLElement).offsetHeight -
+            300,
           )
         }
       })
@@ -490,7 +490,7 @@ export const ChapterView = ({
           ) : (
             <>
               {questions.length > 0 &&
-              nextChapter !== `/${additionalInfo.urlCourse}/chapter-${additionalInfo.chapters.length + 1}` ? (
+                nextChapter !== `/${additionalInfo.urlCourse}/chapter-${additionalInfo.chapters.length + 1}` ? (
                 <ChapterQuestions>
                   <div className="step">
                     <p className="step-text">Step 2</p>
