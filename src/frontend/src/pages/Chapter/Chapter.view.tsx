@@ -12,13 +12,14 @@ import Markdown from 'markdown-to-jsx'
 import { NoAccountModal } from 'modals/NoAccount/NoAccount.view'
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 
 // @ts-ignore
 import Highlight from 'react-highlight.js'
 import { useLocation } from 'react-router-dom'
 import { PublicUser } from 'shared/user/PublicUser'
 import { backgroundColorLight } from 'styles'
+import { useMediaQuery } from 'helpers/useMediaQuery'
 
 import { Button } from '../../app/App.components/Button/Button.controller'
 import { Input } from '../../app/App.components/Input/Input.controller'
@@ -109,10 +110,10 @@ const MonacoEditorSupport = ({ support, height }: any) => {
   )
 }
 
-const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, height }: any) => {
+const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, height, handleResizeOnClick, showResizeButtons }: any) => {
   return (
     <div className="editor-wrapper">
-      <div className="step">
+      <div className="step" >
         <p className="step-text">Step 2</p>
       </div>
       <ControlledEditor
@@ -138,6 +139,12 @@ const MonacoEditor = ({ proposedSolution, proposedSolutionCallback, width, heigh
           },
         }}
       />
+      {showResizeButtons && (
+        <div className="resize">
+          <button type='button' onClick={() => handleResizeOnClick('decrease')}>-</button>
+          <button type='button' onClick={() => handleResizeOnClick('increase')}>+</button>
+        </div>
+      )}
     </div>
   )
 }
@@ -384,9 +391,12 @@ export const ChapterView = ({
   const [editorWidth, setEditorWidth] = useState(0)
   const [editorHeight, setEditorHeight] = useState(0)
   const [isSaveConfirmPopup, setIsSaveConfirmPopup] = useState<any>(null)
+  const [minEditorWidth, setMinEditorWidth] = useState<number | null>(null)
 
   const wrapperRef = useRef<HTMLDivElement>(null)
   const isMounted = useIsMounted()
+  const tabletAdaptation = useMediaQuery('1024px')
+  const maxEditorWidth = useMemo(() => minEditorWidth && minEditorWidth * 1.4, [minEditorWidth])
 
   useEffect(() => {
     if (nextChapter === `/${additionalInfo.urlCourse}/chapter-2` && localStorage.getItem('popupConfirm')) {
@@ -394,6 +404,7 @@ export const ChapterView = ({
     } else setIsSaveConfirmPopup(true)
 
     if (wrapperRef.current) {
+      !tabletAdaptation && setMinEditorWidth(wrapperRef.current ? wrapperRef.current.offsetWidth - 30 : 0)
       setEditorWidth(wrapperRef.current ? wrapperRef.current.offsetWidth - 30 : 0)
       setEditorHeight(
         wrapperRef.current!.parentElement!.offsetHeight -
@@ -402,6 +413,7 @@ export const ChapterView = ({
       )
       window.addEventListener('resize', () => {
         if (isMounted.current) {
+          !tabletAdaptation && setMinEditorWidth(wrapperRef.current && wrapperRef.current.offsetWidth - 30)
           setEditorWidth(0)
           setEditorWidth(wrapperRef.current ? wrapperRef.current.offsetWidth - 30 : 0)
           setEditorHeight(
@@ -414,6 +426,17 @@ export const ChapterView = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const handleResizeOnClick = (resizeType: string) => {
+    if (resizeType === 'increase') {
+      if (maxEditorWidth && (editorWidth + 10 >= maxEditorWidth)) setEditorWidth(maxEditorWidth)
+      else setEditorWidth((currentEditorWidth: number) => currentEditorWidth + 10)
+
+    } else {
+      if (minEditorWidth && (editorWidth - 10 <= minEditorWidth)) setEditorWidth(minEditorWidth)
+      else setEditorWidth((currentEditorWidth: number) => currentEditorWidth - 10)
+    }
+  }
 
   let extension = '.rs'
 
@@ -526,6 +549,8 @@ export const ChapterView = ({
                           height={550}
                           proposedSolution={proposedSolution}
                           proposedSolutionCallback={proposedSolutionCallback}
+                          handleResizeOnClick={handleResizeOnClick}
+                          showResizeButtons={!tabletAdaptation}
                         />
                       )}
                     </div>

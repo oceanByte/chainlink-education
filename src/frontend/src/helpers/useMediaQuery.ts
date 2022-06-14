@@ -4,8 +4,7 @@ export const useMediaQuery = (value: string) => {
     const [isRequiredResolution, setIsRequiredResolution] = useState(window.innerWidth <= +value.replace('px', ''))
 
     const handleResize = () => {
-        if(window.innerWidth <= +value.replace('px', '')) setIsRequiredResolution(true)
-        else setIsRequiredResolution(false)
+        setIsRequiredResolution( window.innerWidth <= +value.replace('px', '') )
     }
 
     useEffect(() => {

@@ -84,7 +84,11 @@ export const FooterView: any = ({ hideLinks }: { hideLinks: boolean }) => (
       />
     </div>
     <div className="footer-credentials footer-content">
-      <div className="footer-credentials__copyright p-font">2022</div>
+      <div className="footer-credentials__copyright p-font">
+        2022
+        <span><b>{` | v${process.env.REACT_APP_VERSION} | `}</b></span>
+        <span><b>Changelog</b></span>
+      </div>
       <div className="footer-credentials-menu p-font">
         <Link to="/terms" className="footer-credentials-menu__item">
           Terms of Use

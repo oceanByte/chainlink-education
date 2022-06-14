@@ -54,6 +54,26 @@
       }
     }
 
+    .resize {
+      float: right;
+
+      button {
+        border-radius: 50%;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        transition: .3s ease;
+
+        &:first-child {
+          margin-right: 2px;
+        }
+
+        &:hover {
+          background: $secondary3;
+        }
+      }
+    }
+
     .tabs-container {
       position: absolute;
       top: 10px;
@@ -85,6 +105,7 @@
           padding-right: 0;
         }
       }
+
       .divider {
         color: $primary;
         padding: 0 5px;
@@ -95,6 +116,7 @@
         font-size: 14px;
         line-height: 16px;
       }
+
       @include xsm {
         font-size: 12px;
         line-height: 14px;
