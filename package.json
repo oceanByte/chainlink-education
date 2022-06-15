@@ -1,5 +1,5 @@
 {
-  "name": "ChainlinkAcademy",
+  "name": "chainlink-cademy",
   "version": "0.0.0-development",
   "scripts": {
     "start": "lerna exec -- yarn run --parallel start",
