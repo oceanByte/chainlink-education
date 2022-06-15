@@ -10,7 +10,7 @@
     "prettier": "prettier -l '**/*.{js,jsx,ts,tsx,json,md}'",
     "test": "lerna run --parallel test",
     "postinstall": "lerna bootstrap",
-    "semantic-release": "semantic-release --branches ci-setup",
+    "semantic-release": "semantic-release",
     "commit": "git-cz"
   },
   "devDependencies": {
