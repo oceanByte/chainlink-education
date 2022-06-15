@@ -63,7 +63,7 @@
     "url": "https://github.com/oceanByte/chainlink-eduction.git"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "config": {
     "commitizen": {
