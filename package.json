@@ -10,7 +10,7 @@
     "prettier": "prettier -l '**/*.{js,jsx,ts,tsx,json,md}'",
     "test": "lerna run --parallel test",
     "postinstall": "lerna bootstrap",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release --branches ci-setup"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.1.0",
@@ -58,5 +58,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/oceanByte/chainlink-eduction.git"
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }
