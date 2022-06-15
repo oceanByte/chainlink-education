@@ -40,5 +40,5 @@ jobs:
     - run: yarn run semantic-release
       env:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        repo-token: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       
