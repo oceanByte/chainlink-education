@@ -1,0 +1,137 @@
+.about__chainlink {
+    display: flex;
+
+    @include md {
+        flex-direction: column;
+    }
+
+    &-wrapper {
+        margin-right: 20px;
+        width: calc(100% - 695px);
+
+        @include md {
+            width: 100%;
+        }
+    }
+
+    &-content__header {
+        color: $grayscale1;
+        font-weight: 900;
+
+        @include lg {
+            @include fluid-size('font-size', 1024px, 1600px, 32px, 40px);
+            @include fluid-size('line-height', 1024px, 1600px, 38px, 48px);
+        }
+
+        @include md {
+            font-size: 26px;
+            line-height: 31px;
+        }
+
+        @include sm {
+            font-size: 24px;
+            line-height: 29px;
+            width: 100%;
+        }
+    }
+
+    &-content__text {
+        color: $grayscale2;
+        font-size: 22px;
+        line-height: 33px;
+
+        @include md {
+            font-size: 18px;
+            line-height: 27px;
+        }
+
+        @include sm {
+            font-size: 16px;
+            line-height: 24px;
+            margin-bottom: 30px;
+        }
+    }
+
+    &-content__image {
+        width: 675px;
+        height: 350px;
+        cursor: pointer;
+        position: relative;
+        background-image: url('https://assets-global.website-files.com/5f6b7190899f41fb70882d08/5f9c386d08933b6862a12fa6_why-chainlink-thumb.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        @include sm {
+            height: auto;
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+        }
+    }
+
+    &-play__btn {
+        width: 0;
+        height: 0;
+        border-top: 30px solid transparent;
+        border-bottom: 30px solid transparent;
+        border-left: 50px solid $primary;
+
+        position: absolute;
+        top: 50%;
+        left: 40%;
+        transform: translate(-40%, -50%);
+        animation: size-switch 2s ease infinite;
+    }
+
+    @keyframes size-switch {
+        0% {
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-left: 30px solid $primary;
+        }
+
+        50% {
+            border-top: 30px solid transparent;
+            border-bottom: 30px solid transparent;
+            border-left: 50px solid $primary;
+        }
+
+        100% {
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-left: 30px solid $primary;
+        }
+    }
+
+    &-cross {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        transform: rotate(45deg);
+        font-size: 30px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    &-modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+
+        iframe {
+            width: 800px;
+            height: 600px;
+        }
+    }
+}

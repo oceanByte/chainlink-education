@@ -6,6 +6,7 @@ import AOS from 'aos'
 import { PublicUser } from 'shared/user/PublicUser'
 
 import { CourseCards } from 'app/App.components/CourseCard/CourseCard.controller'
+import { AboutChainlink } from 'app/App.components/AboutChainlink/AboutChainlink.controller'
 
 import 'aos/dist/aos.css'
 
@@ -79,7 +80,7 @@ export const HomeView = ({ user }: HomeViewProps) => {
             <div className="home-courses-content__header__line" />
           </div>
           <div className="home-courses-content__items" data-aos="fade-up" data-aos-delay="150">
-            <CourseCards courses={user? user.courses : COURSES} user={user} />
+            <CourseCards courses={user ? user.courses : COURSES} user={user} />
           </div>
         </div>
       </div>
@@ -143,6 +144,11 @@ export const HomeView = ({ user }: HomeViewProps) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="home-content home-join">
+        <div className="home-join__header h-font">WHAT IS CHAINLINK?</div>
+        <div className="home-join__line" />
+        <AboutChainlink />
       </div>
       <div className="home-content home-join">
         <div className="home-join__header h-font">BUILD THE FUTURE</div>
