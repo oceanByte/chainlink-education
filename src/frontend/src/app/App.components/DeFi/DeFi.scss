@@ -1,0 +1,97 @@
+.defi__tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-row {
+        display: flex;
+
+        @include msm {
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    &-tab {
+        font-size: 22px;
+        padding: 9px 30px;
+        margin-bottom: 16px;
+        border-bottom: 2px solid $grayscale4;
+        color: $grayscale2;
+        cursor: pointer;
+
+        @include md {
+            font-size: 18px;
+        }
+
+        @include sm {
+            font-size: 16px;
+        }
+    }
+
+    &-active__tab {
+        color: $primary;
+        border-bottom: 2px solid $primary;
+    }
+}
+
+.defi__content {
+    &-image {
+        width: 100%;
+    }
+
+    &-text {
+        box-sizing: border-box;
+        position: relative;
+        padding: 30px 15px 0 15px;
+        max-width: 80%;
+        margin: 0 auto;
+        font-size: 20px;
+        text-align: center;
+        border-top: 2px solid $grayscale4;
+
+        @include md {
+            font-size: 18px;
+        }
+
+        @include sm {
+            font-size: 16px;
+        }
+
+        &::before {
+            content: '';
+            display: block;
+            height: 2px;
+            background: linear-gradient(to right, $secondary4, $primary);
+            position: absolute;
+            top: -2px;
+            left: 0;
+            animation: moving-line 6s ease infinite;
+
+            @keyframes moving-line {
+                0% {
+                    width: 0px;
+                }
+
+                10% {
+                    width: 100px
+                }
+
+                50% {
+                    width: 0px;
+                    left: 100%;
+                }
+
+                60% {
+                    width: 100px;
+                }
+
+                100% {
+                    width: 0px;
+                    left: 0;
+                }
+            }
+        }
+    }
+}

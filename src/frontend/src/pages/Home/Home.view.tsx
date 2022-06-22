@@ -7,6 +7,7 @@ import { PublicUser } from 'shared/user/PublicUser'
 
 import { CourseCards } from 'app/App.components/CourseCard/CourseCard.controller'
 import { AboutChainlink } from 'app/App.components/AboutChainlink/AboutChainlink.controller'
+import { DeFi } from 'app/App.components/DeFi/DeFi.controller'
 
 import 'aos/dist/aos.css'
 
@@ -149,6 +150,11 @@ export const HomeView = ({ user }: HomeViewProps) => {
         <div className="home-join__header h-font">WHAT IS CHAINLINK?</div>
         <div className="home-join__line" />
         <AboutChainlink />
+      </div>
+      <div className="home-content home-join">
+        <div className="home-join__header h-font">Build DeFi applications across a multitude of use cases</div>
+        <div className="home-join__line" />
+        <DeFi />
       </div>
       <div className="home-content home-join">
         <div className="home-join__header h-font">BUILD THE FUTURE</div>
