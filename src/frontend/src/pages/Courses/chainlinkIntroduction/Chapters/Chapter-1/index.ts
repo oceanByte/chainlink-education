@@ -22,4 +22,4 @@ import { Data } from 'pages/Chapter/Chapter.controller'
 import { questions } from './questions'
 import { validatorContent } from './validatorContent'
 
-export const data: Data = { course, video, hints, exercise, solution, supports: { }, description, questions, validatorContent }
+export const data: Data = { course, video, hints, exercise, errors: exercise, solution, supports: { }, description, questions, validatorContent }

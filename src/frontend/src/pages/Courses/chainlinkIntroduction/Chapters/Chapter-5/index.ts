@@ -16,4 +16,4 @@ import { Data } from '../../../../Chapter/Chapter.controller'
 import { questions } from './questions'
 import { validatorContent } from './validatorContent'
 
-export const data: Data = { course, video, hints, description, exercise: undefined, solution: undefined, supports: {}, questions, validatorContent }
+export const data: Data = { course, video, hints, description, exercise: undefined, solution: undefined, errors: undefined, supports: {}, questions, validatorContent }

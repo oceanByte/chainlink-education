@@ -22,4 +22,4 @@ import solution from '!raw-loader!./solution.md'
 
 import { validatorContent } from './validatorContent'
 
-export const data: Data = { course, video, hints, description, exercise, solution, supports: {}, questions: [], validatorContent }
+export const data: Data = { course, video, hints, description, exercise, solution, errors: exercise, supports: {}, questions: [], validatorContent }

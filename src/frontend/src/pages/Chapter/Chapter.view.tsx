@@ -27,7 +27,7 @@ import ArrowRight from '../../assets/arrow-upright-white.svg'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
 import { IValidator, IValidatorContent, Question } from './Chapter.controller' // TabType
 //prettier-ignore
-import { BlueParagraph, ButtonBorder, ButtonStyle, ButtonText, ChapterBig, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterH4, ChapterH5, ChapterQuestions, ChapterTab, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentFailed, ChapterValidatorContentSuccess, ChapterValidatorContentWrapper, ChapterValidatorTitle, ColorWord, ContentWrapp, FormWrapper, LetsStart, ListItemsContainer, MissionContainer, narrativeText, RegularP, Spacer, TextWrapper, VerticalAlign, VideoBox } from './Chapter.style'
+import { ActionWrapper, BlueParagraph, ButtonBorder, ButtonStyle, ButtonText, ChapterBig, ChapterGrid, ChapterH1, ChapterH2, ChapterH3, ChapterH4, ChapterH5, ChapterQuestions, ChapterTab, ChapterValidator, ChapterValidatorContent, ChapterValidatorContentFailed, ChapterValidatorContentSuccess, ChapterValidatorContentWrapper, ChapterValidatorTitle, ColorWord, ContentWrapp, FormWrapper, LetsStart, ListItemsContainer, MissionContainer, narrativeText, RegularP, Spacer, TextWrapper, VerticalAlign, VideoBox } from './Chapter.style'
 import { AnimatedCode, BackgroundContainer, Difficulty, ImageContainer, SpecialCode } from './Chapter.style'
 import { Footer } from './Footer/Footer.controller'
 
@@ -187,7 +187,7 @@ let triggerAnim = function () {
   myTry.classList.add('tryagain')
 }
 
-const Validator = ({ validatorState, validateCallback, validatorContent }: IValidator) => (
+const Validator = ({ validatorState, validateCallback, validatorContent, setShowHint }: IValidator) => (
   <ChapterValidator className={validatorState === RIGHT ? 'ok' : 'no'}>
     <div className="step">
       <p className="step-text">Step 3</p>
@@ -221,17 +221,28 @@ const Validator = ({ validatorState, validateCallback, validatorContent }: IVali
         <ChapterValidatorContent>
           {validatorContent.wrong.text || 'Correct your answer and try again'}
         </ChapterValidatorContent>
-        <ButtonStyle>
-          <ButtonBorder />
-          <ButtonText
-            onClick={() => {
-              validateCallback()
-              triggerAnim()
-            }}
-          >
-            {validatorContent.wrong.textInBtn || 'Try Again'}
-          </ButtonText>
-        </ButtonStyle>
+        <ActionWrapper>
+          <ButtonStyle>
+            <ButtonBorder />
+            <ButtonText
+              onClick={() => {
+                validateCallback()
+                triggerAnim()
+                setShowHint(false)
+              }}
+            >
+              {validatorContent.wrong.textInBtn || 'Try Again'}
+            </ButtonText>
+          </ButtonStyle>
+
+          <ButtonStyle className='hint__button'>
+            <ButtonText
+              onClick={() => setShowHint(true)}
+            >
+              Hint
+            </ButtonText>
+          </ButtonStyle>
+        </ActionWrapper>
       </ChapterValidatorContentFailed>
     )}
   </ChapterValidator>
@@ -359,6 +370,7 @@ type ChapterViewProps = {
   startedHandler: () => void
   currentCourse: any
   additionalInfo: IAdditionalInfo
+  setShowHint: (showHint: boolean) => void
 }
 
 export const ChapterView = ({
@@ -385,6 +397,7 @@ export const ChapterView = ({
   proposedQuestionAnswerCallback,
   currentCourse,
   additionalInfo,
+  setShowHint
 }: ChapterViewProps) => {
   const { pathname } = useLocation()
   const [display, setDisplay] = useState('solution')
@@ -565,6 +578,7 @@ export const ChapterView = ({
                 validatorState={validatorState}
                 validateCallback={validateCallback}
                 validatorContent={validatorContent}
+                setShowHint={setShowHint}
               />
             </>
           )}

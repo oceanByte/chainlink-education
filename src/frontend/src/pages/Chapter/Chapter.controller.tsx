@@ -48,6 +48,7 @@ export enum TabType {
 export interface IValidator {
   validatorState: string
   validateCallback: () => void
+  setShowHint: (showHint: boolean) => void
   validatorContent: IValidatorContent
 }
 
@@ -67,6 +68,7 @@ export interface Data {
   course: string | undefined
   exercise: string | undefined
   solution: string | undefined
+  errors?: string | undefined
   description: string | undefined
   video: string | undefined
   hints: string | undefined
@@ -83,11 +85,13 @@ export const Chapter = () => {
   const [showDiff, setShowDiff] = useState(false)
   const [isAccount, setIsAccount] = useState(false)
   const [isStarted, setIsStarted] = useState(false)
+  const [showHint, setShowHint] = useState(false)
   const { pathname } = useLocation()
   const [data, setData] = useState<Data>({
     course: undefined,
     exercise: undefined,
     solution: undefined,
+    errors: undefined,
     description: undefined,
     video: undefined,
     hints: undefined,
@@ -108,7 +112,7 @@ export const Chapter = () => {
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
 
-  
+
 
   let intervalID: any = useRef(null)
   const partCurrentUrl = pathname.split('/')[1]
@@ -139,6 +143,7 @@ export const Chapter = () => {
             exercise: chapter.data.exercise,
             solution: chapter.data.solution,
             supports: chapter.data.supports,
+            errors: chapter.data.exercise,
             description: chapter.data.description,
             video: chapter.data.video,
             hints: chapter.data.hints,
@@ -150,7 +155,7 @@ export const Chapter = () => {
       })
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname])
+  }, [pathname, showDiff])
 
   const getPercent = (chapterData: ChapterData[]) => {
     chapterData.forEach((chapter, i) => {
@@ -235,7 +240,7 @@ export const Chapter = () => {
         return data.video || ''
       case TabType.HINTS:
         return data.hints || ''
-    
+
       default:
         return data.course || ''
     }
@@ -246,6 +251,24 @@ export const Chapter = () => {
   }
 
   const validateCallback = () => {
+    if (!showDiff) {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/compile`, {
+        body: JSON.stringify({ data: data.exercise }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      }).then((response) => response.json())
+        .then(({ data }) => {
+          if (JSON.parse(data).errors) {
+            setData(currentState => ({
+              ...currentState,
+              errors: currentState.errors + '\n' + JSON.parse(data).errors.join('\n'),
+            }))
+          }
+        })
+    }
+
     if (stateChapter.nextChapter === `/profile/certificates` || additionalInfo.progress.length === additionalInfo.countChapters - 1) {
       setValidatorState(RIGHT)
       if (user) {
@@ -353,8 +376,8 @@ export const Chapter = () => {
           validatorState={validatorState}
           validateCallback={validateCallback}
           validatorContent={data.validatorContent}
-          solution={data.solution}
-          proposedSolution={data.exercise}
+          solution={showHint ? data.solution : data.exercise}
+          proposedSolution={showDiff && !showHint ? data.errors : data.exercise}
           proposedSolutionCallback={proposedSolutionCallback}
           showDiff={showDiff}
           isAccount={isAccount}
@@ -373,6 +396,7 @@ export const Chapter = () => {
           proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
           currentCourse={user ? findCurrentCourse(user) : null}
           additionalInfo={additionalInfo}
+          setShowHint={setShowHint}
         />
       )}
       {/* <Footer percent={percent} nextChapter={nextChapter} previousChapter={previousChapter} /> */}

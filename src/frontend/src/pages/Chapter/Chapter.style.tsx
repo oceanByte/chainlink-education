@@ -506,6 +506,10 @@ export const ButtonText = styled.div`
   }
 `
 
+export const ActionWrapper = styled.div`
+  display: flex;
+`
+
 export const ContentWrapp = styled.div`
   margin: 40px 0;
   display: flex;

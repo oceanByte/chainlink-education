@@ -3,6 +3,7 @@ import { Context } from 'koa'
 
 import { getPublicUser } from './resolvers/page/getPublicUser/getPublicUser'
 import { setName } from './resolvers/page/setName/setName'
+import { compileSmartContracts } from './resolvers/page/some/some'
 import { addProgress } from './resolvers/user/addProgress/addProgress'
 import { changePassword } from './resolvers/user/changePassword/changePassword'
 import { forgotPassword } from './resolvers/user/forgotPassword/forgotPassword'
@@ -48,5 +49,6 @@ router.post('/page/get-certificate', getCertificate)
 router.post('/page/get-user', getPublicUser)
 router.post('/page/set-name', setName)
 
+router.post('/compile', compileSmartContracts)
 
 export { router }

@@ -17,7 +17,7 @@ export const addProgress = ({ chapterDone, courseId, time, isCompleted, coursePa
           headers: { Authorization: `Bearer ${store.getState().auth.jwt}` },
           json: { chapterDone, courseId, time, isCompleted, coursePath },
         },
-        commit: { type: ADD_PROGRESS_COMMIT, meta: {}},
+        commit: { type: ADD_PROGRESS_COMMIT, meta: {} },
         rollback: { type: ADD_PROGRESS_ROLLBACK, meta: {} },
       },
     },
