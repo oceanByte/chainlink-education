@@ -1,4 +1,4 @@
-pragma solidity ^0.8.7;
+pragma solidity ^0.4.25;
 
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
@@ -21,9 +21,10 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
   uint64 public s_subscriptionId;
   address s_owner;
 
-  constructor() VRFConsumerBaseV2(vrfCoordinator) {
+  constructor() public {
     COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
     LINKTOKEN = LinkTokenInterface(link_token_contract);
     s_owner = msg.sender;
-    s_subscriptionId = subscriptionId;
+    s_subscriptionId = s_subscriptionId;
   }
+}

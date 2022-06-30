@@ -21,7 +21,8 @@ import video from '!raw-loader!./video.md'
 import hints from '!raw-loader!./hints.md'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
+import exerciseDependencies from '!raw-loader!./exerciseDependencies.md'
 
 import { validatorContent } from './validatorContent'
 
-export const data: Data = { course, video, hints, description, exercise, solution, supports: {}, questions: [], validatorContent }
+export const data: Data = { course, video, hints, description, exercise, solution, exerciseDependencies, supports: {}, questions: [], validatorContent }

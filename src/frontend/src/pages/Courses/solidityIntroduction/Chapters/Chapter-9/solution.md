@@ -1,6 +1,6 @@
-pragma solidity ^0.8.7;
+pragma solidity ^0.4.25;
 
 contract HelloWeb3 {
-string[] myBooks = [ “Mastering Ethereum”, “Programming Rust”, “Zombie Survival Guide”]
+string[] myBooks = [“Mastering Ethereum”, “Programming Rust”, “Zombie Survival Guide”]
 string myFirstBook = myBook[0];
 }

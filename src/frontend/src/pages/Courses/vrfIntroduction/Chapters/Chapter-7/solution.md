@@ -1,4 +1,4 @@
-pragma solidity ^0.8.7;
+pragma solidity ^0.4.25;
 
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
@@ -14,3 +14,4 @@ contract VRFv2SubscriptionManager is VRFConsumerBaseV2 {
   uint32 callbackGasLimit = 100000;
   uint16 requestConfirmations = 3;
   uint32 numWords =  2;
+}

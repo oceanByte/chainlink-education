@@ -19,7 +19,10 @@ import hints from '!raw-loader!./hints.md'
 /* eslint import/no-webpack-loader-syntax: off */
 // @ts-ignore
 import solution from '!raw-loader!./solution.md'
+/* eslint import/no-webpack-loader-syntax: off */
+// @ts-ignore
+import exerciseDependencies from '!raw-loader!./exerciseDependencies.md'
 
 import { validatorContent } from './validatorContent'
 
-export const data: Data = { course, video, hints, description, exercise, solution, errors: exercise, supports: {}, questions: [], validatorContent }
+export const data: Data = { course, video, hints, description, exercise, solution, errors: exercise, exerciseDependencies, supports: {}, questions: [], validatorContent }

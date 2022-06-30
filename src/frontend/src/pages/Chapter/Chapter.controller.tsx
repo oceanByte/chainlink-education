@@ -69,6 +69,7 @@ export interface Data {
   exercise: string | undefined
   solution: string | undefined
   errors?: string | undefined
+  exerciseDependencies?: string | undefined
   description: string | undefined
   video: string | undefined
   hints: string | undefined
@@ -92,6 +93,7 @@ export const Chapter = () => {
     exercise: undefined,
     solution: undefined,
     errors: undefined,
+    exerciseDependencies: undefined,
     description: undefined,
     video: undefined,
     hints: undefined,
@@ -144,6 +146,7 @@ export const Chapter = () => {
             solution: chapter.data.solution,
             supports: chapter.data.supports,
             errors: chapter.data.exercise,
+            exerciseDependencies: chapter.data.exerciseDependencies,
             description: chapter.data.description,
             video: chapter.data.video,
             hints: chapter.data.hints,
@@ -155,7 +158,7 @@ export const Chapter = () => {
       })
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, showDiff])
+  }, [pathname])
 
   const getPercent = (chapterData: ChapterData[]) => {
     chapterData.forEach((chapter, i) => {
@@ -251,9 +254,14 @@ export const Chapter = () => {
   }
 
   const validateCallback = () => {
+
+    const codeToCompile = data.exerciseDependencies ?
+      data.exerciseDependencies.concat(data.exercise!.split('\n').filter(row => !row.match('import')).join('\n')) :
+      data.exercise
+
     if (!showDiff) {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/compile`, {
-        body: JSON.stringify({ data: data.exercise }),
+        body: JSON.stringify({ data: codeToCompile }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -267,6 +275,7 @@ export const Chapter = () => {
             }))
           }
         })
+        .catch(error => error)
     }
 
     if (stateChapter.nextChapter === `/profile/certificates` || additionalInfo.progress.length === additionalInfo.countChapters - 1) {
@@ -360,7 +369,7 @@ export const Chapter = () => {
 
   const proposedSolutionCallback = (e: string) => {
     // @ts-ignore
-    setData({ ...data, exercise: e })
+    setData({ ...data, exercise: e, errors: e })
   }
 
   const proposedQuestionAnswerCallback = (e: Question[]) => {
