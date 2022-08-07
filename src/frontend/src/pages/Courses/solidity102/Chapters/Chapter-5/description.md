@@ -1,0 +1,1 @@
+Programs, in very broad terms, do two things: store data and change data. We store data in programs by utilizing variables and change data by defining logic in functions. In smart contracts, when we define variables outside of a function they can be used to store data for that contract, to be accessed at a later time.

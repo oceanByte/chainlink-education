@@ -12,9 +12,7 @@ import { getUser } from 'pages/User/User.actions'
 import { addProgress } from './Chapter.actions'
 import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 
-
 import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
-
 
 import { PublicUser } from 'shared/user/PublicUser'
 
@@ -22,6 +20,7 @@ import { CourseData } from '../Course/Course.controller'
 import { chaptersByCourse, courseData, CourseNameType } from '../Course/Course.data'
 import { chapterData as ChainlinkIntroductionChapters } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { chapterData as SolidityIntroductionChapters } from '../Courses/solidityIntroduction/Chapters/Chapters.data'
+import { chapterData as Solidity102 } from '../Courses/solidity102/Chapters/Chapters.data'
 import { chapterData as vrfIntroductionChapters } from '../Courses/vrfIntroduction/Chapters/Chapters.data'
 
 import { ChapterView } from './Chapter.view'
@@ -42,7 +41,7 @@ export type Question = {
 export enum TabType {
   CONTENT = 'Content',
   VIDEO = 'Video',
-  HINTS = 'Hints'
+  HINTS = 'Hints',
 }
 
 export interface IValidator {
@@ -54,13 +53,13 @@ export interface IValidator {
 export interface IValidatorContent {
   pending: {
     [key: string]: string
-  },
+  }
   wrong: {
     [key: string]: string
-  },
+  }
   right: {
     [key: string]: string
-  },
+  }
 }
 
 export interface Data {
@@ -71,7 +70,7 @@ export interface Data {
   video: string | undefined
   hints: string | undefined
   supports: Record<string, string | undefined>
-  questions: Question[],
+  questions: Question[]
   validatorContent: IValidatorContent
 }
 
@@ -96,8 +95,8 @@ export const Chapter = () => {
     validatorContent: {
       pending: {},
       right: {},
-      wrong: {}
-    }
+      wrong: {},
+    },
   })
   const [tab, setTab] = useState<string>(TabType.CONTENT)
   const [percent, setPercent] = useState(0)
@@ -108,13 +107,11 @@ export const Chapter = () => {
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
 
-  
-
   let intervalID: any = useRef(null)
   const partCurrentUrl = pathname.split('/')[1]
   const findLocalCourse = courseData.find((course) => course.path === partCurrentUrl)
 
-  const infoCourses = getCoursesData((user && user.courses) || COURSES);
+  const infoCourses = getCoursesData((user && user.courses) || COURSES)
   const additionalInfo: IAdditionalInfo = infoCourses.courses[findLocalCourse?.name || '']
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -131,6 +128,7 @@ export const Chapter = () => {
     if (user) dispatch(getUser({ username: user.username }))
 
     courseData.forEach((course: CourseData) => {
+      console.log({ courseData })
       const index = course.path!
       chaptersByCourse[index].forEach((chapter: ChapterData) => {
         if (pathname === chapter.pathname)
@@ -206,6 +204,8 @@ export const Chapter = () => {
       getPercent(ChainlinkIntroductionChapters)
     } else if (findLocalCourse && findLocalCourse.name === CourseNameType.SOLIDITY_INTRO) {
       getPercent(SolidityIntroductionChapters)
+    } else if (findLocalCourse && findLocalCourse.name === CourseNameType.SOLIDITY_102) {
+      getPercent(Solidity102)
     } else {
       getPercent(vrfIntroductionChapters)
     }
@@ -221,7 +221,7 @@ export const Chapter = () => {
 
       return {
         ...course,
-        path: findLocalCourse.path
+        path: findLocalCourse.path,
       }
     }
     return course
@@ -235,7 +235,7 @@ export const Chapter = () => {
         return data.video || ''
       case TabType.HINTS:
         return data.hints || ''
-    
+
       default:
         return data.course || ''
     }
@@ -246,7 +246,10 @@ export const Chapter = () => {
   }
 
   const validateCallback = () => {
-    if (stateChapter.nextChapter === `/profile/certificates` || additionalInfo.progress.length === additionalInfo.countChapters - 1) {
+    if (
+      stateChapter.nextChapter === `/profile/certificates` ||
+      additionalInfo.progress.length === additionalInfo.countChapters - 1
+    ) {
       setValidatorState(RIGHT)
       if (user) {
         clearInterval(intervalID.current)
@@ -258,7 +261,7 @@ export const Chapter = () => {
             courseId: course ? course._id : '',
             time: time.value,
             isCompleted: course.progress.length === additionalInfo.countChapters - 1,
-            coursePath: course ? course.path : ''
+            coursePath: course ? course.path : '',
           }),
         )
       }
@@ -275,7 +278,7 @@ export const Chapter = () => {
             if (!(question.proposedResponses && question.proposedResponses.includes(response))) ok = false
           })
           question.proposedResponses.forEach((proposedResponse) => {
-            if (!(question.responses.includes(proposedResponse))) ok = false
+            if (!question.responses.includes(proposedResponse)) ok = false
           })
         }
         if (question.responses.length === 0) ok = true
@@ -292,7 +295,7 @@ export const Chapter = () => {
               courseId: course ? course._id : '',
               time: time.value,
               isCompleted: false,
-              coursePath: course.path
+              coursePath: course.path,
             }),
           )
         } else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))
@@ -321,7 +324,7 @@ export const Chapter = () => {
                   courseId: course ? course._id : '',
                   time: time.value,
                   isCompleted: false,
-                  coursePath: course.path
+                  coursePath: course.path,
                 }),
               )
             } else dispatch(showToaster(SUCCESS, 'Register to save progress', 'and get your completion certificate'))

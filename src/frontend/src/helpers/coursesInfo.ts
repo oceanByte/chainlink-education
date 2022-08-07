@@ -6,9 +6,11 @@ import { Course } from "shared/course";
 import { course as ChainlinkIntroduction } from '../pages/Courses/chainlinkIntroduction'
 import { course as SolidityIntroduction } from '../pages/Courses/solidityIntroduction'
 import { course as vrfIntroduction } from '../pages/Courses/vrfIntroduction'
+import { course as Solidity102 } from '../pages/Courses/solidity102'
 
 import { chapterData as ChainlinkIntroductionChapters } from '../pages/Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { chapterData as SolidityIntroductionChapters } from '../pages/Courses/solidityIntroduction/Chapters/Chapters.data'
+import { chapterData as Solidity102Chapters } from "pages/Courses/solidity102/Chapters/Chapters.data";
 import { chapterData as vrfIntroductionChapters } from '../pages/Courses/vrfIntroduction/Chapters/Chapters.data'
 
 interface ICoursesData {
@@ -31,6 +33,8 @@ export const getCourseChapters = (title: string) => {
     return { chapters: ChainlinkIntroductionChapters, additionalInfo: ChainlinkIntroduction }
   } else if (title === CourseNameType.SOLIDITY_INTRO) {
     return { chapters: SolidityIntroductionChapters, additionalInfo: SolidityIntroduction}
+  } else if (title === CourseNameType.SOLIDITY_102) {
+    return { chapters: Solidity102Chapters, additionalInfo: Solidity102}
   } else if (title === CourseNameType.VRF_V2) {
     return { chapters: vrfIntroductionChapters, additionalInfo: vrfIntroduction}
   }
