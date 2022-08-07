@@ -1,12 +1,10 @@
 export const questions = [
   {
-    question: 'Which of the following isn’t a data type in Solidity??',
+    question: 'How does Ethereum prevent an infite loop?',
     answers: [
-      'uint',
-      'bool',
-      'address',
-      'complex',
+      'By attaching cost to each operation',
+      'Allowing the contract to run only 256 loops'
     ],
-    responses: ['complex'],
+    responses: ['By attaching cost to each operation'],
   },
 ]

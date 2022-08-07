@@ -1,36 +1,68 @@
 #####Chapter 9:
 
-# Reading Array Values
+# Inheritance
 
-<!-- <ContentWrapp>
-  <div class="imgContainer">
-    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
-  </div>
+"Solidity supports multiple inheritance. Contracts can inherit other contract by using the **is** keyword.
 
-  <div class="itemsContainer">
-    <div class="item-text">
-     Connect your artwork to the price of gold or ETH or overall Market Cap. Mention the concept of “Hybrid Smart Contracts”. 
-    </div>
-  </div>
-</ContentWrapp> -->
+Function that is going to be overridden by a child contract must be declared as **virtual**.
 
-Now that we can store multiple related values into a single array our lives organizing our data should be much easier! But how do we access those stored values later? Data stored in arrays is associated with an index which describes the order of the data. Indexing in Solidity starts at 0. So this means the first values assigned to an array has the index of 0, the second value assigned to the array has an index of 1, the third value an index of 2 and so on.
+Function that is going to override a parent function must use the keyword **override**.
 
-You can access the values in an array by calling the array variable and putting the index of the value you want to access within square brackets. For example:
+Order of inheritance is important.
+
+You have to list the parent contracts in the order from “most base-like” to “most derived”."
 
 <Highlight class="language-javascript">
-string[] myBooks = [ “Mastering Ethereum”, “Programming Rust”, “Zombie Survival Guide”]
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+contract A {
+function foo() public pure virtual returns (string memory) {
+return "A";
+}
+}
+
+// Contracts inherit other contracts by using the keyword 'is'.
+contract B is A {
+// Override A.foo()
+function foo() public pure virtual override returns (string memory) {
+return "B";
+}
+}
+
+contract C is A {
+// Override A.foo()
+function foo() public pure virtual override returns (string memory) {
+return "C";
+}
+}
+
+// Contracts can inherit from multiple parent contracts.
+// When a function is called that is defined multiple times in
+// different contracts, parent contracts are searched from
+// right to left, and in depth-first manner.
+
+contract D is B, C {
+// D.foo() returns "C"
+// since C is the right most parent contract with function foo()
+function foo() public pure override(B, C) returns (string memory) {
+return super.foo();
+}
+}
+
+contract E is C, B {
+// E.foo() returns "B"
+// since B is the right most parent contract with function foo()
+function foo() public pure override(C, B) returns (string memory) {
+return super.foo();
+}
+}
+
+// Inheritance must be ordered from “most base-like” to “most derived”.
+// Swapping the order of A and B will throw a compilation error.
+contract F is A, B {
+function foo() public pure override(A, B) returns (string memory) {
+return super.foo();
+}
+}
 </Highlight>
-
-And then
-
-myBooks[0] will access the first value assigned to the myBooks array (since Solidity indexes at 0) which will be the value “Mastering Ethereum”.
-
-As another example I could take a value in an array and also assign it to another variable:
-
-<Highlight class="language-javascript">
-string myFirstBook = myBooks[0];
-</Highlight>
-
-Which will take the value indexed at zero in the “myBooks” array (which is “Mastering Ethereum”) and assign it to the string named “myFirstBook”. This won’t erase it from the myBooks array but make a copy and assign to the new “myFirstBook” variable.
-

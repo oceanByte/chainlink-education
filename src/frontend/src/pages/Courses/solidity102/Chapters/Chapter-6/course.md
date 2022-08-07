@@ -1,45 +1,69 @@
 #####Chapter 6:
 
-# Assigning Variables Values
+# Function Modifiers
 
-<!-- <ContentWrapp>
-  <div class="imgContainer">
-    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
-  </div>
+"Modifiers are code that can be run before and / or after a function call.
 
-  <div class="itemsContainer">
-    <div class="item-text">
-     Now that you understood how to connect the off-chain world you can utilize this knowledge now for your NFT. Imagine a NFT that reacts to the price of Ethereum. It could rain when the price falls and it could be sunny when the price rises.
-    </div>
-  </div>
-</ContentWrapp> -->
-
-In the last activity we created a variable called “myFavoriteNumber” of type uint, but what if we want to actually store a value in that variable? That’s what the equal sign ( = ) “assignment” operator is for. In programming an operator is a symbol that represents an action or process. In the case of the assignment operator whatever is to the left of the equals sign is being assigned the value of whatever is on the right of the equal sign. For instance if we had:
+Modifiers can be used to restrict access, validate inputs, guard against reentrancy hack"
 
 <Highlight class="language-javascript">
-uint myFavNum; 
-myFavNum = 42;
-</Highlight>
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
 
+contract FunctionModifier {
+// We will use these variables to demonstrate how to use
+// modifiers.
+address public owner;
+uint public x = 10;
+bool public locked;
 
-In the first line we are creating the variable “myFavoriteNum” of type uint, and then in the second line we are assigning “myFavoriteNum” the value 42. So my “myFavNum” will stay 42 until we change it again! Also reminder we put a semi-colon at the end of every complete line. Another example:
+constructor() {
+// Set the transaction sender as the owner of the contract.
+owner = msg.sender;
+}
 
-<Highlight class="language-javascript">
-uint myFavNum; 
-myFavNum = 42; 
-myFavNum = 7;
-</Highlight>
+    // Modifier to check that the caller is the owner of
+    // the contract.
 
-In the first line we are creating the variable “myFavoriteNum” of type uint, and then in the second line we are assigning “myFavoriteNum” the value 42. Then in the third line we are now assigning “myFavoriteNum” the value 7 which overwrites the previous value.
+modifier onlyOwner() {
+require(msg.sender == owner, "Not owner");
+// Underscore is a special character only used inside
+// a function modifier and it tells Solidity to
+// execute the rest of the code.
+\_;
+}
 
-You can declare a variable and assign it a value all in one line like this:
+    // Modifiers can take inputs. This modifier checks that the
+    // address passed in is not the zero address.
 
-<Highlight class="language-javascript">
-uint myFavNum = 42;
-</Highlight>
+modifier validAddress(address _addr) {
+require(\_addr != address(0), "Not valid address");
+_;
+}
 
-Finally to assign a value to a variable of type string you must put the value in quotation marks (they can be either double or single quotes). For example:
+function changeOwner(address \_newOwner) public onlyOwner validAddress(\_newOwner) {
+owner = \_newOwner;
+}
 
-<Highlight class="language-javascript">
-string favPhrase = “We live in a society”;
+    // Modifiers can be called before and / or after a function.
+    // This modifier prevents a function from being called while
+    // it is still executing.
+
+modifier noReentrancy() {
+require(!locked, "No reentrancy");
+
+        locked = true;
+        _;
+        locked = false;
+    }
+
+function decrement(uint i) public noReentrancy {
+x -= i;
+
+        if (i > 1) {
+            decrement(i - 1);
+        }
+    }
+
+}
 </Highlight>

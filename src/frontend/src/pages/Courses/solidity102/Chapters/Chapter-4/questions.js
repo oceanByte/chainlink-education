@@ -1,12 +1,21 @@
 export const questions = [
   {
-    question: 'What are the special blockchain "block reward" transactions called?',
+    question: 'What is the result of simple(5)?',
     answers: [
-      'Coinbase',
-      'Bit Reward',
-      'SHA256',
-      'Token Field',
+      'undefined',
+      '0',
+      '1',
+      '2',
     ],
-    responses: ['Coinbase'],
+    responses: ['0'],
   },
+  {
+    question: 'What is the result of ternary(5)?',
+    answers: [
+      'undefined',
+      '1',
+      '2'
+    ],
+    responses: ['0'],
+  }
 ]

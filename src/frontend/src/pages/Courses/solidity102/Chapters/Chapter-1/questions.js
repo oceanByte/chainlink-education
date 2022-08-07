@@ -1,12 +1,11 @@
 export const questions = [
   {
-    question: 'Solidity can be considered what type of programming language?',
+    question: 'How does Etheruem limit the number of computational steps?',
     answers: [
-      'Functional',
-      'Object-Oriented',
-      'Convoluted',
-      'Spicy'
+      'Programs can only run for a limited time',
+      'Each computational step costs gas',
+      'Ethereum prevents infinite loops with an algorithm'
     ],
-    responses: ['Object-Oriented'],
-  },
+    responses: ['Each computational step costs gas'],
+  }
 ]

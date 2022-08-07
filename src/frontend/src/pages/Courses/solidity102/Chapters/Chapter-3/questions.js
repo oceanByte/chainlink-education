@@ -1,12 +1,12 @@
 export const questions = [
   {
-    question: 'An equity trading service provider has a 99% uptime SLA, approximately how many hours per year can their service go down without breaching the SLA?',
+    question: 'What is the result of calling get with a random address when no value was set yet?',
     answers: [
-      '1 hour',
-      '13 hours',
-      '34 hours',
-      '87 hours'
+      'It results in an error',
+      'It returns a random value',
+      'It returns 0',
+
     ],
-    responses: ['87 hours'],
+    responses: ['It returns 0'],
   },
 ]

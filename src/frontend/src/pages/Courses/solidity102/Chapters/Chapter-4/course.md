@@ -1,28 +1,25 @@
 #####Chapter 4:
 
-# Naming a Contract
+# Conditional Statements
 
-<!-- <ContentWrapp>
-  <div class="imgContainer">
-    <img alt="story_image_2_0" src="/images/chapter/man.svg" width="150px" height="150px">
-  </div>
-
-  <div class="itemsContainer">
-    <div class="item-text">
-     There is a better way where you do not need to trust anyone and you can get full control and ownership. Emphasize freedom (sharing, exhibitions and owning). 
-    </div>
-  </div>
-</ContentWrapp> -->
-
-Now we will give our smart contract a name. The classic first programming exercise is called “HelloWorld” but this is Web3 so lets call it “HelloWeb3”. To name a contract, you type the keyword <Highlight class="language-javascript">contract</Highlight> followed by the name. You then put a set of curly braces beside it. Here’s an example: 
+While we are now familiar with the basic data types in Solidity, we still have to learn about conditional statements. Because we will run often into situations where we need to decide based on the value of a variable, we will need to use conditional statements. Solidity offers a number of conditional statements that can be used to decide what to do based on the value of a variable. It is very similar to if statements in other languages like C++.
 
 <Highlight class="language-javascript">
-contract HelloWeb3{
-
+function simple(uint x) public pure returns (uint) {
+  if (x < 10) {
+    return 0;
+  } else if (x < 20) {
+    return 1;
+  } else {
+    return 2;
+  }
 }
-
 </Highlight>
 
-Everything within the curly braces is considered part of the HelloWeb3 smart contract. Try completing the contract on the right with the name “HelloWeb3”.
-
-
+<Highlight class="language-javascript">
+  function ternary(uint _x) public pure returns (uint) {
+        // shorthand way to write if / else statement
+        // the "?" operator is called the ternary operator
+        return _x < 10 ? 1 : 2;
+    }
+</Highlight>

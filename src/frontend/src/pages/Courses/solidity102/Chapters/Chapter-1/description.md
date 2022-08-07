@@ -1,1 +1,1 @@
-Throughout this course, we will learn the basics of Solidity syntax and then apply it to some activities. The best way to learn to program is to program! With that said, let's dive right in!
+thereum is often described as a distributed state machine that is quasi Turing complete. Learn what this means and why gas costs are necessary to protect the system.
