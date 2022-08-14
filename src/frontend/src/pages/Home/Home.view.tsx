@@ -77,7 +77,7 @@ export const HomeView = ({ user }: HomeViewProps) => {
       </div>
       <div className="home-ellipse home-ellipse-1" />
 
-      <div className="home-content courses">
+      <div className="home-content courses" id="get_started">
         <div className="home-content home-courses-content">
           <div className="home-courses-content__header h-font">
             <div className="home-courses-content__header-text" data-aos="fade-up" data-aos-delay="100">
