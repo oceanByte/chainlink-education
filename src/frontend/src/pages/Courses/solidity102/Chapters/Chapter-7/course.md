@@ -1,58 +1,23 @@
 #####Chapter 7:
 
-# Error
+# Events
 
-"An error will undo all changes made to the state during a transaction.
+When learning a new language, we often write a hello world program and log a string to the console. Solidity does not offer a console.log but has events that can be used in a similar fashion. You can use it to emit events that clients can listen to react accordingly. They can also be used as a cheap form of storage as it is less expensive to emit an event than to use the storage location (see chapter 2). But note that events are write-only. EVM does not allow to read events.
 
-You can throw an error by calling **require**, **revert** or **assert**.
-
-- **require** is used to validate inputs and conditions before execution.
-- **revert** is similar to **require**. See the code below for details.
-- **assert** is used to check for code that should never be false. Failing assertion probably means that there is a bug.
-
-Use custom error to save gas."
+Let’s learn how we can use events in Solidity:
 
 <Highlight class="language-javascript">
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
-
-contract Error {
-function testRequire(uint \_i) public pure {
-// Require should be used to validate conditions such as:
-// - inputs
-// - conditions before execution
-// - return values from calls to other functions
-require(\_i > 10, "Input must be greater than 10");
-}
-
-function testRevert(uint \_i) public pure {
-// Revert is useful when the condition to check is complex.
-// This code does the exact same thing as the example above
-if (\_i <= 10) {
-revert("Input must be greater than 10");
-}
-}
-
-    uint public num;
-
-    function testAssert() public view {
-        // Assert should only be used to test for internal errors,
-        // and to check invariants.
-
-        // Here we assert that num is always equal to 0
-        // since it is impossible to update the value of num
-        assert(num == 0);
-    }
-
-    // custom error
-    error InsufficientBalance(uint balance, uint withdrawAmount);
-
-    function testCustomError(uint _withdrawAmount) public view {
-        uint bal = address(this).balance;
-        if (bal < _withdrawAmount) {
-            revert InsufficientBalance({balance: bal, withdrawAmount: _withdrawAmount});
-        }
-    }
-
+contract Event {
+ event Log(address indexed sender, string message);
+ 
+ function foo() public {
+       emit Log(msg.sender, "Hello World!");
+       emit Log(msg.sender, "Another message");
+ }
 }
 </Highlight>
+
+On the top we have defined a name of the Event and defined it’s parameters. You can see here that we have indexed and not index parameters. Indexed parameters are called “topics” and are searchable parameters in events. We will explain why this is useful in a moment.
+
+We can now use the keyword **emit** followed by the event name **Log** to emit an event of the type Log. These events can be read on an explorer like Etherscan. And there you will see that each event has the address of the contract or account the event is emitted from and Topics which is the indexed parameter of the event and the data itself. These are ABI-Encoded or hashed non-indexed parameters of the event. More on ABI in a future course.
+Libraries like ethers.js allow us to listen to these events and react accordingly. The great thing about events is that applications not interested in writing or interacting with the blockchain can still react to events emitted from smart contracts. In other terms, you could consider events a simple way to communicate easy-to-access messages to listeners. You can either listen to them in real-time as they are written to a new block or also retrieve historical events from the past. It makes it easy to create an audit trail this way. You will often see events used to communicate that a new token was minted.

@@ -1,69 +1,26 @@
 #####Chapter 6:
 
-# Function Modifiers
+# Errors
 
-"Modifiers are code that can be run before and / or after a function call.
+In the previous chapter, we learned about function modifiers. We already used the keyword **require** to check for conditions. If a condition is not met, an error is raised. An error will revert all changes made to the state during a transaction. There are three different ways to throw an error: **require**, **revert** and **assert**.
 
-Modifiers can be used to restrict access, validate inputs, guard against reentrancy hack"
+We use require if we want to validate user input and return values from calls to other functions. The syntax asks for a condition and a custom error message as the second argument. If the condition is not met, an error is raised. Otherwise, the next line will be executed.
 
 <Highlight class="language-javascript">
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+require(x <= 42, "x must be smaller or equal to 42.");
+</Highlight>
 
-contract FunctionModifier {
-// We will use these variables to demonstrate how to use
-// modifiers.
-address public owner;
-uint public x = 10;
-bool public locked;
+**Revert** is used in a similar fashion but directly throws an error without checking a condition. It is useful when the condition check is more complex and you do not want to do it in a single line to improve readability or if several conditions have to be met that you want to check one by one. It will return all remaining gas to the caller. You can call it like this:
 
-constructor() {
-// Set the transaction sender as the owner of the contract.
-owner = msg.sender;
+<Highlight class="language-javascript">
+if (x <= 42 && x x > 0) {
+  revert("x must be greater than 0 and smaller or equal to 42");
 }
+</Highlight>
 
-    // Modifier to check that the caller is the owner of
-    // the contract.
+**Assert** is used for internal logic and checks code that should never be false. If an assertion fails, it’s likely that there is a bug in the contract. We can use asserts to ensure that even if there is a bug, we can simply catch it here and make it more difficult to abuse the bug. For example, it is often used to check for overflow/underflow. The following code shows how can ensure that a is always bigger or equal to b so that we do not run into a situation causing an underflow.
 
-modifier onlyOwner() {
-require(msg.sender == owner, "Not owner");
-// Underscore is a special character only used inside
-// a function modifier and it tells Solidity to
-// execute the rest of the code.
-\_;
-}
-
-    // Modifiers can take inputs. This modifier checks that the
-    // address passed in is not the zero address.
-
-modifier validAddress(address _addr) {
-require(\_addr != address(0), "Not valid address");
-_;
-}
-
-function changeOwner(address \_newOwner) public onlyOwner validAddress(\_newOwner) {
-owner = \_newOwner;
-}
-
-    // Modifiers can be called before and / or after a function.
-    // This modifier prevents a function from being called while
-    // it is still executing.
-
-modifier noReentrancy() {
-require(!locked, "No reentrancy");
-
-        locked = true;
-        _;
-        locked = false;
-    }
-
-function decrement(uint i) public noReentrancy {
-x -= i;
-
-        if (i > 1) {
-            decrement(i - 1);
-        }
-    }
-
-}
+<Highlight class="language-javascript">
+uint c = a - b 
+assert(a >= b);
 </Highlight>
