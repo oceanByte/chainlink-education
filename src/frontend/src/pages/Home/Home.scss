@@ -162,7 +162,7 @@
       &-text {
         text-transform: uppercase;
         font-weight: 900;
-        background: linear-gradient(55.74deg, #0EA6E8 1.98%, #0F3BCC 86.84%);
+        background: linear-gradient(55.74deg, #0ea6e8 1.98%, #0f3bcc 86.84%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -215,14 +215,14 @@
       width: 100%;
       color: #000;
       box-sizing: border-box;
-      box-shadow: -20px 20px 60px rgba(100, 101, 121, 0.05), 20px 30px 67px rgba(209, 217, 230, 0.63), -20px -31.3638px 35.026px rgba(255, 255, 255, 0.44708);
+      box-shadow: -20px 20px 60px rgba(100, 101, 121, 0.05), 20px 30px 67px rgba(209, 217, 230, 0.63),
+        -20px -31.3638px 35.026px rgba(255, 255, 255, 0.44708);
       border-radius: 20px;
-      transition: box-shadow ease-in-out .2s;
+      transition: box-shadow ease-in-out 0.2s;
 
       &:hover {
         cursor: pointer;
-        box-shadow: -20px 20px 60px rgba(80, 81, 97, 0.05),
-          20px 30px 67px rgba(185, 191, 202, 0.63),
+        box-shadow: -20px 20px 60px rgba(80, 81, 97, 0.05), 20px 30px 67px rgba(185, 191, 202, 0.63),
           -20px -31.3638px 35.026px rgba(255, 255, 255, 0.44708);
       }
 
@@ -322,7 +322,6 @@
             }
 
             &__chapters {
-              
               .icon {
                 background: url('../../assets/amountChapters.svg') no-repeat;
                 width: 16px;
@@ -388,12 +387,11 @@
                     margin-top: 0;
                   }
                 }
-  
+
                 .useCertificate {
                   display: none;
                 }
               }
-              
             }
 
             @include lg {
@@ -418,13 +416,24 @@
               }
             }
           }
-        }        
+        }
       }
 
       @media (max-width: 1023px) {
         margin-bottom: 20px;
       }
     }
+  }
+}
+
+.highlight {
+  box-shadow: -10px 10px 30px rgba(38, 40, 66, 0.451), 20px 30px 67px rgba(209, 217, 230, 0.63),
+    -20px -31.3638px 35.026px rgba(255, 255, 255, 0.44708) !important;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: -10px 10px 30px rgba(17, 26, 146, 0.456), 20px 30px 67px rgba(185, 191, 202, 0.63),
+      -20px -31.3638px 35.026px rgba(255, 255, 255, 0.44708) !important;
   }
 }
 
