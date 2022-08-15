@@ -9,10 +9,10 @@ export const questions = [
     responses: ['No, they can use any data type'],
   },
   {
-    question: 'Why would you use memory instead of storage',
+    question: 'Why would you use memory instead of storage?',
     answers: [
       'Performing operations on memory is always cheaper than storage',
-      'Loading data from Memory is significantly faster than storage'
+      'Only use memory if you need to store data for a long time',
     ],
     responses: ['Performing operations on memory is always cheaper than storage'],
   },

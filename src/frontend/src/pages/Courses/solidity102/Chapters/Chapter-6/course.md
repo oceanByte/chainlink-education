@@ -13,7 +13,7 @@ require(x <= 42, "x must be smaller or equal to 42.");
 **Revert** is used in a similar fashion but directly throws an error without checking a condition. It is useful when the condition check is more complex and you do not want to do it in a single line to improve readability or if several conditions have to be met that you want to check one by one. It will return all remaining gas to the caller. You can call it like this:
 
 <Highlight class="language-javascript">
-if (x <= 42 && x x > 0) {
+if (x <= 42 && x > 0) {
   revert("x must be greater than 0 and smaller or equal to 42");
 }
 </Highlight>

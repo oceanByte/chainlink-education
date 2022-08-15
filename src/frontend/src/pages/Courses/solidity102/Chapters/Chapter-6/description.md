@@ -1,1 +1,1 @@
-In programming an operator is a symbol that represents an action or process. In the case of the assignment operator whatever is to the left of the equals sign is being assigned the value of whatever is on the right of the equal sign.
+An error will revert all changes made to the state during a transaction. There are three different ways to throw an error.

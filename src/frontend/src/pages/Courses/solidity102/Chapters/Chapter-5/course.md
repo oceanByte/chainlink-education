@@ -17,9 +17,7 @@ contract ContractA {
        require(msg.sender == owner, "Only owner allowed.");
        _;
        require(x < 42);
-   }
- 
-   modifier 
+   } 
  
    function inc(uint value) public onlyOwner{
        x = x + value;
@@ -27,7 +25,7 @@ contract ContractA {
 }
  </Highlight>
  
- Modifiers are defined using the `modifier` keyword followed by a function name. In the body of the function, we can run any Solidity code. Usually, we want to do some checks and if they are not met, we want to revert the transaction. If everything is alright, we can use the special keyword `_` to tell solidity to execute the called function. Once the function has finished, we could execute further code inside the modifier to do further checks before the transaction completes. In this example, if someone calls the inc function, it must be the contract owner and we do not allow x to be greater than 42.
+Modifiers are defined using the **modifier** keyword followed by a function name. In the body of the function, we can run any Solidity code. Usually, we want to do some checks and if they are not met, we want to revert the transaction. If everything is alright, we can use the special keyword **_** to tell solidity to execute the called function. Once the function has finished, we could execute further code inside the modifier to do further checks before the transaction completes. In this example, if someone calls the inc function, it must be the contract owner and we do not allow x to be greater than 42.
 
 The same modifier can be used for other functions by adding it to the header. We can also define multiple modifiers and run them in successive order for the given function.
 

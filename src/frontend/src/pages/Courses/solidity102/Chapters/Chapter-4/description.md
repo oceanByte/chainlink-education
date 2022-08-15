@@ -1,1 +1,1 @@
-Now we will give our smart contract a name. The classic first programming exercise is called “HelloWorld” but this is Web3 so lets call it “HelloWeb3”.
+You will often run into situations where we need to decide the next step based on the value of a variable. And we will get into situations where we need to repeat code. Learn about conditional statements and loops.

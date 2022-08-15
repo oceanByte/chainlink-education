@@ -8,21 +8,21 @@ Solidity supports multiple inheritances we can use to derive from other contract
 
 <Highlight class="language-javascript">
  contract A {
- function foo() public pure virtual returns(string memory) {
-   return "A";
- }
+  function foo() public pure virtual returns(string memory) {
+    return "A";
+  }
 }
  
 contract B is A {
- function foo() public pure override returns(string memory) {
-   return "B";
- }
+  function foo() public pure override returns(string memory) {
+    return "B";
+  }
 }
  
 contract C is A {
- function foo() public pure virtual override returns(string memory) {
-   return "C";
- }
+  function foo() public pure virtual override returns(string memory) {
+    return "C";
+  }
 }
 </Highlight>
 
@@ -32,9 +32,9 @@ Child contracts can inherit from multiple parent contracts. And there might be c
 
 <Highlight class="language-javascript">
 contract D is B, C {
- function foo() public pure override(B, C) returns(string memory) {
-   return super.foo();
- }
+  function foo() public pure override(B, C) returns(string memory) {
+    return super.foo();
+  }
 }
 </Highlight>
 

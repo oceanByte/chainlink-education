@@ -1,1 +1,1 @@
-Now that we can store multiple related values into a single array our lives organizing our data should be much easier! But how do we access those stored values later?
+It is likely that you want to deploy the same contract with different initial values. Until now, you only learned how to set initial values. So you would always need to write a new contract with updated initial values in the Solidity code. This is unpractical. Fortunately, Solidity offers a constructor, a special function executed upon contract creation.

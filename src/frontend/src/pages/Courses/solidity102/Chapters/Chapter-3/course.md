@@ -60,7 +60,7 @@ Retrieving a value works just as easy. We only need to provide the two keys (\_a
 
 <Highlight class="language-javascript">
 function get(address \_address, uint \_index) public view returns (bool) {
-  return nested[\_address][\_index];
+  return nestedMapping[\_address][\_index];
 }
 </Highlight>
 

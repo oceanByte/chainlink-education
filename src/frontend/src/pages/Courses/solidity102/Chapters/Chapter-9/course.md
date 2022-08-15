@@ -29,7 +29,7 @@ contract A is Foo(42) {
 }
  
 contract B is Bar {
-  constructor(uint _amount) Bar(_amount) {}
+  constructor(uint \_amount) Bar(\_amount) {}
 }
 </Highlight>
 

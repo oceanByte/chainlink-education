@@ -1,21 +1,40 @@
 export const questions = [
   {
-    question: 'What is the result of simple(5)?',
+    question: 'What is the result of calling foo(5)?',
     answers: [
       'undefined',
       '0',
       '1',
       '2',
     ],
+    responses: ['1'],
+  },
+  {
+    question: 'What is the result of calling bar(5)?',
+    answers: [
+      'undefined',
+      '0',
+      '1'
+    ],
+    responses: ['1'],
+  },
+  {
+    question: 'What is the result of calling forLoopExample()?',
+    answers: [
+      '0',
+      '4',
+      '6',
+      '8'
+    ],
     responses: ['0'],
   },
   {
-    question: 'What is the result of ternary(5)?',
+    question: 'What is the result of calling whileLoopExample()?',
     answers: [
       'undefined',
-      '1',
-      '2'
+      '3',
+      '4'
     ],
-    responses: ['0'],
+    responses: ['4'],
   }
 ]
