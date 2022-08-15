@@ -51,6 +51,9 @@
     "@types/react-twitter-conversion-tracker": "^1.0.0",
     "@types/styled-components": "^5.1.0",
     "@types/web3": "^1.2.2",
+    "@ukstv/jazzicon-react": "^1.0.0",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
     "aos": "^2.3.4",
     "axios": "^0.21.1",
     "babel-loader": "8.1.0",
@@ -97,15 +100,13 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "reflect-metadata": "^0.1.13",
+    "scroll-into-view": "^1.16.2",
     "source-map-explorer": "^2.4.2",
     "styled-components": "^5.1.1",
     "typescript": "^3.9.5",
     "web3": "^1.7.0",
     "webpack": "4.42.0",
-    "yup": "^0.32.11",
-    "@ukstv/jazzicon-react": "^1.0.0",
-    "@web3-react/core": "^6.1.9",
-    "@web3-react/injected-connector": "^6.0.7"
+    "yup": "^0.32.11"
   },
   "eslintConfig": {
     "extends": "react-app"

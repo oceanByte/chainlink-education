@@ -77,15 +77,13 @@ export const HomeView = ({ user }: HomeViewProps) => {
       </div>
       <div className="home-ellipse home-ellipse-1" />
 
-      <div className="home-content courses" id="get_started">
+      <div className="home-content courses">
         <div className="home-content home-courses-content">
           <div className="home-courses-content__header h-font">
-            <div className="home-courses-content__header-text" data-aos="fade-up" data-aos-delay="100">
-              Get started now
-            </div>
+            <div className="home-courses-content__header-text">Get started now</div>
             <div className="home-courses-content__header__line" />
           </div>
-          <div className="home-courses-content__items" data-aos="fade-up" data-aos-delay="150">
+          <div className="home-courses-content__items" id="get_started">
             <CourseCards courses={user ? user.courses : COURSES} user={user} />
           </div>
         </div>

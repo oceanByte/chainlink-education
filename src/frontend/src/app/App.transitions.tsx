@@ -11,6 +11,12 @@ export const AppTransitions = ({ pageKey, children, reverse }: { pageKey: any; c
   const { pathname } = useLocation()
 
   useEffect(() => {
+    let url = window.location.href.split('/')
+    let target = url[url.length - 1].toLowerCase()
+    if (target === '#get_started') {
+      return
+    }
+
     window.scrollTo(0, 0)
   }, [pathname])
 
