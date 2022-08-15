@@ -2,8 +2,8 @@
  * React Dependency
  * **/
 
- import React from 'react'
- import { Route, Switch } from 'react-router-dom'
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 
 /**
  * Custom Components
@@ -101,7 +101,7 @@ export const AppRoutes = ({ location }: any) => (
     <PrivateRoute path="/user/:username">
       <User />
     </PrivateRoute>
-    
+
     <PrivateRoute path="/certificate/:username">
       <Certificate />
     </PrivateRoute>

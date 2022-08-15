@@ -6,9 +6,10 @@ import AOS from 'aos'
 import { PublicUser } from 'shared/user/PublicUser'
 
 import { CourseCards } from 'app/App.components/CourseCard/CourseCard.controller'
-
+import { AboutChainlink } from 'app/App.components/AboutChainlink/AboutChainlink.controller'
+import { DeFi } from 'app/App.components/DeFi/DeFi.controller'
+import { CourseStatusType } from '../Course/Course.data'
 import 'aos/dist/aos.css'
-
 
 type HomeViewProps = {
   user?: PublicUser
@@ -20,28 +21,34 @@ export const COURSES = [
   {
     title: 'Chainlink 101',
     description: `Chainlink decentralized oracle networks provide tamper-proof inputs, outputs, and computations.`,
-    difficulty: 2,
-    status: 'NEW',
+    difficulty: 1,
+    status: CourseStatusType.NEW,
     progress: [],
   },
   {
     title: 'Solidity Introduction',
-    description: `Solidity is an object-oriented, high-level language for implementing smart contracts. COMING SOON.`,
+    description: `Solidity is an object-oriented, high-level language for implementing smart contracts. Learn about the basics here.`,
+    difficulty: 2,
+    status: CourseStatusType.NEW,
+    progress: [],
+  },
+  {
+    title: 'Solidity 102',
+    description: `Learn more about the EVM, complex data types, flow control, access control, error handling and inheritance.`,
     difficulty: 3,
-    status: 'NEW',
+    status: CourseStatusType.NEW,
     progress: [],
   },
   {
     title: 'VRF v2 Introduction',
     description: `Study how VRF can be used to bring Verfiable Randomness to blockchain.`,
     difficulty: 3,
-    status: 'NEW',
+    status: CourseStatusType.NEW,
     progress: [],
   },
 ]
 
 export const HomeView = ({ user }: HomeViewProps) => {
-
   useEffect(() => {
     AOS.init({
       duration: 700,
@@ -70,7 +77,7 @@ export const HomeView = ({ user }: HomeViewProps) => {
       </div>
       <div className="home-ellipse home-ellipse-1" />
 
-      <div className="home-content courses">
+      <div className="home-content courses" id="get_started">
         <div className="home-content home-courses-content">
           <div className="home-courses-content__header h-font">
             <div className="home-courses-content__header-text" data-aos="fade-up" data-aos-delay="100">
@@ -79,7 +86,7 @@ export const HomeView = ({ user }: HomeViewProps) => {
             <div className="home-courses-content__header__line" />
           </div>
           <div className="home-courses-content__items" data-aos="fade-up" data-aos-delay="150">
-            <CourseCards courses={user? user.courses : COURSES} user={user} />
+            <CourseCards courses={user ? user.courses : COURSES} user={user} />
           </div>
         </div>
       </div>
@@ -143,6 +150,16 @@ export const HomeView = ({ user }: HomeViewProps) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="home-content home-join">
+        <div className="home-join__header h-font">WHAT IS CHAINLINK?</div>
+        <div className="home-join__line" />
+        <AboutChainlink />
+      </div>
+      <div className="home-content home-join">
+        <div className="home-join__header h-font">Build DeFi applications across a multitude of use cases</div>
+        <div className="home-join__line" />
+        <DeFi />
       </div>
       <div className="home-content home-join">
         <div className="home-join__header h-font">BUILD THE FUTURE</div>

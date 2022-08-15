@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-export const FooterView: any = () => (
+export const FooterView: any = ({ hideLinks }: { hideLinks: boolean }) => (
   <div className="footer">
     <div className="footer-menu footer-content">
-      <div className="footer-menu-list p-font">
+      <div className="footer-menu-list p-font" style={{ opacity: hideLinks ? '0' : '1' }}>
         <a
           href="https://chainlink-education-app.herokuapp.com/"
           rel="noopener noreferrer"
@@ -50,7 +50,7 @@ export const FooterView: any = () => (
           target="_blank"
           rel="noopener noreferrer"
           className="footer-menu-list__item mr-0"
-          >
+        >
           Upcoming events
         </a>
       </div>
@@ -63,14 +63,14 @@ export const FooterView: any = () => (
           className="footer-menu-social-media__item item-discord" />
         {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
         <a href="https://t.me/chainlinkofficial"
-         rel="noopener noreferrer"
-         target="_blank"
-         className="footer-menu-social-media__item item-telegram" />
+          rel="noopener noreferrer"
+          target="_blank"
+          className="footer-menu-social-media__item item-telegram" />
         {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
         <a href="https://twitter.com/chainlink"
-         rel="noopener noreferrer"
-         target="_blank"
-         className="footer-menu-social-media__item item-twitter mr-0" />
+          rel="noopener noreferrer"
+          target="_blank"
+          className="footer-menu-social-media__item item-twitter mr-0" />
       </div>
     </div>
     <div className="footer-separator">
@@ -84,7 +84,11 @@ export const FooterView: any = () => (
       />
     </div>
     <div className="footer-credentials footer-content">
-      <div className="footer-credentials__copyright p-font">2022</div>
+      <div className="footer-credentials__copyright p-font">
+        2022
+        <span><b>{` | v${process.env.REACT_APP_VERSION} | `}</b></span>
+        <span><b>Changelog</b></span>
+      </div>
       <div className="footer-credentials-menu p-font">
         <Link to="/terms" className="footer-credentials-menu__item">
           Terms of Use

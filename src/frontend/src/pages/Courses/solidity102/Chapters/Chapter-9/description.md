@@ -1,0 +1,1 @@
+It is likely that you want to deploy the same contract with different initial values. Until now, you only learned how to set initial values. So you would always need to write a new contract with updated initial values in the Solidity code. This is unpractical. Fortunately, Solidity offers a constructor, a special function executed upon contract creation.

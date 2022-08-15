@@ -1,0 +1,1 @@
+As our contracts grow in complexity, we want to split our code further and make it easier to maintain. This helps with isolated testing increasing the security of the individual contracts. But Inheritance can become very complex as it hides dependencies as you can inherit from contracts that inherit from other contracts. So we must take care when using it.
