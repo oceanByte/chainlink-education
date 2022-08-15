@@ -1,7 +1,6 @@
 import * as React from 'react'
 import ReactGA from 'react-ga'
 import { hotjar } from 'react-hotjar';
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 // @ts-ignore
 import TagManager from 'react-gtm-module'
 import { Provider } from 'react-redux'
@@ -38,14 +37,14 @@ TagManager.initialize(tagManagerArgs)
 
 export const Root = () => {
   return (
-    <GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} language="en">
+    <div>
       <GlobalStyle />
       <Provider store={store}>
         <Router>
           <App />
         </Router>
       </Provider>
-    </GoogleReCaptchaProvider>
+      </div>
   )
 }
 

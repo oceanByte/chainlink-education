@@ -1,6 +1,5 @@
 import { recaptchaRequest } from 'app/App.actions'
 import * as React from 'react'
-// import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import { useDispatch, useSelector } from 'react-redux'
 import { SignUpInputs } from 'shared/user/SignUp'
 
