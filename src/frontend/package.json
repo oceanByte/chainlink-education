@@ -78,7 +78,6 @@
     "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "^16.13.1",
     "react-ga": "3.1.2",
-    "react-google-recaptcha-v3": "^1.5.2",
     "react-gtm-module": "^2.0.11",
     "react-helmet": "^6.0.0",
     "react-highlight.js": "^1.0.7",
@@ -100,11 +99,13 @@
     "reflect-metadata": "^0.1.13",
     "source-map-explorer": "^2.4.2",
     "styled-components": "^5.1.1",
-    "ts-jest": "^26.1.0",
     "typescript": "^3.9.5",
     "web3": "^1.7.0",
     "webpack": "4.42.0",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@ukstv/jazzicon-react": "^1.0.0",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -122,6 +123,7 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.47.0"
+    "sass": "^1.47.0",
+    "ts-jest": "^24.0.9"
   }
 }
