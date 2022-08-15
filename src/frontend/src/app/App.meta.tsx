@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet'
 
 export const AppMeta = () => (
   <Helmet>
-    <title>Learn Chainlink Protocol | Chainlink Academy</title>
+    <title>Chainlink Academy</title>
+    <base target='_blank' />
     <meta name="description" content="Learn Chainlink Protocol" />
     <meta property="og:title" content="Learn Chainlink Protocol | ChainlinkAcademy" />
     <meta property="og:url" content="https://Chainlink.academy" />

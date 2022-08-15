@@ -1,0 +1,1 @@
+we will find ourselves in situations where we need to run some checks before we allow the execution of a function. Introducing function modifiers. Modifiers can be run before and/or after function calls. They can be used for example to restrict access or validate input.

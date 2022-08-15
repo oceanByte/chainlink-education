@@ -12,15 +12,22 @@ interface ICourseCard {
 }
 
 export const CourseCards = ({ courses, user }: ICourseCard) => {
-  const infoCourses = getCoursesData(courses || []);
+  const infoCourses = getCoursesData(courses || [])
 
   return (
     <>
-      {courses ? courses.map((course) => (
-        <div key={course.title} className='home-courses-content__item'>
-          <CourseCardView user={user} infoCourses={infoCourses} course={course} />
-        </div>)
-      ) : null}
+      {courses
+        ? courses.map((course) => (
+            <div
+              key={course.title}
+              className={
+                course.title !== 'Solidity 102' ? 'home-courses-content__item' : 'home-courses-content__item highlight'
+              }
+            >
+              <CourseCardView user={user} infoCourses={infoCourses} course={course} />
+            </div>
+          ))
+        : null}
     </>
   )
 }

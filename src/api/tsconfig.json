@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "skipLibCheck": true,
     //"jsx": "react",
     "isolatedModules": true,
@@ -28,6 +32,16 @@
     "rootDir": "src",
     "outDir": "dist"
   },
-  "include": ["src/**/*", "**/*.ts", "**/*.spec.ts", "src/shared/comment"],
-  "exclude": ["node_modules", "./node_modules", "./node_modules/*", "./node_modules/@types/node/index.d.ts"]
+  "include": [
+    "src/**/*",
+    "**/*.ts",
+    "**/*.spec.ts",
+    "src/shared/comment"
+  ],
+  "exclude": [
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*",
+    "./node_modules/@types/node/index.d.ts"
+  ]
 }

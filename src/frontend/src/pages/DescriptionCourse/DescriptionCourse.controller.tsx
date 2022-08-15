@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import { State } from 'reducers'
 
-import { FooterView } from '../../app/App.components/Footer/Footer.view'
+import { Footer } from '../../app/App.components/Footer/Footer.controller'
 import Header from '../../app/App.components/Header/Header.controller'
 import { DescriptionCourseView } from './DescriptionCourse.view'
 
@@ -28,7 +28,7 @@ export const DescriptionCourse = () => {
       <>
         <Header />
         <Error404 />
-        <FooterView />
+        <Footer />
       </>
     )
   }
@@ -40,7 +40,7 @@ export const DescriptionCourse = () => {
         user={user}
         additionalInfo={additionalInfo}
       />
-      <FooterView />
+      <Footer />
     </>
   )
 }

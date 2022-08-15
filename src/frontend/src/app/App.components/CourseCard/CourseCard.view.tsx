@@ -71,33 +71,33 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
             </div>
             <div className='course-additional-info'>
               <div className='course-additional-info__chapters item'>
-                <div className='icon'/><div>{additionalInfo.countChapters} chapters</div>
+                <div className='icon' /><div>{additionalInfo.countChapters} chapters</div>
               </div>
               <div className='course-additional-info__time item'>
-                <div className='icon'/><div>{additionalInfo.amountOfTime}</div>
+                <div className='icon' /><div>{additionalInfo.amountOfTime}</div>
               </div>
             </div>
             <div className="course-description">{course.description}</div>
           </div>
-          
+
           <div className={classnames('course-footer', additionalInfo.percent === 100 && 'completed')}>
             <div className="course-btn-wrapper">
               {!additionalInfo.percent ? <MainButtonView
-                  isPrimary
-                  hasArrowUpRight
-                  text='View Course'
-                  onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
-                  loading={false}
-                  disabled={false}
-                /> : null}
+                isPrimary
+                hasArrowUpRight
+                text='View Course'
+                onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
+                loading={false}
+                disabled={false}
+              /> : null}
               {additionalInfo.percent && additionalInfo.percent !== 100 ? <MainButtonView
-                  isSecondary
-                  hasArrowUpRight
-                  text='Continue'
-                  onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
-                  loading={false}
-                  disabled={false}
-                /> : null}
+                isSecondary
+                hasArrowUpRight
+                text='Continue'
+                onClick={() => history.push(`/description/${additionalInfo.urlCourse}`)}
+                loading={false}
+                disabled={false}
+              /> : null}
               {additionalInfo.percent && additionalInfo.percent === 100 ? (
                 <>
                   <div ref={wrapperRef} className='useCertificate'>
@@ -111,13 +111,13 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
                       disabled={false}
                       className={isShowList ? 'hasArrowUp' : ''}
                     />
-                  <UseCertificate
-                    isSecondary
-                    isShowList={isShowList}
-                    user={user}
-                    additionalInfo={additionalInfo}
-                    nextPath={`/description/${additionalInfo.urlCourse}`}
-                  />
+                    <UseCertificate
+                      isSecondary
+                      isShowList={isShowList}
+                      user={user}
+                      additionalInfo={additionalInfo}
+                      nextPath={`/description/${additionalInfo.urlCourse}`}
+                    />
                   </div>
                   <div className='downloadCertificate'>
                     <MainButtonView
@@ -130,7 +130,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
                       disabled={false}
                     />
                   </div>
-                </>)  : null}
+                </>) : null}
             </div>
             {user && additionalInfo.percent && additionalInfo.percent !== 100 ? (
               <div className="course-footer__progress-bar">
@@ -138,10 +138,10 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
                   <CircularProgressBar
                     strokeWidth="7"
                     sqSize="60"
-                    percentage={additionalInfo.percent}/>
+                    percentage={additionalInfo.percent} />
                 </div>
-                </div>
-            ): null}
+              </div>
+            ) : null}
 
             {user && additionalInfo.percent && additionalInfo.percent === 100 ? (
               <div className='shareCertificate'>
@@ -151,7 +151,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
                   username={user.username}
                 />
               </div>
-            ): null}
+            ) : null}
           </div>
         </div>
       </div>

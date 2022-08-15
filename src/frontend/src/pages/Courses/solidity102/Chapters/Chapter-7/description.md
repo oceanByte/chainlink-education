@@ -1,0 +1,1 @@
+Solidity does not offer a console.log but has events that can be used in a similar fashion. You can use it to emit events that clients can listen to react accordingly. They can also be used as a cheap form of storage as it is less expensive to emit an event than to use the storage location. But note that events are write-only. EVM does not allow to read events.

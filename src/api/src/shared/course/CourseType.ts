@@ -8,6 +8,7 @@ export enum CourseStatusType {
 export enum CourseTitleType {
   CHAINLINK_101 = 'Chainlink 101',
   SOLIDITY_INTRO = 'Solidity Introduction',
+  SOLIDITY_102 = 'Solidity 102',
   VRF_V2 = 'VRF v2 Introduction'
 }
 
@@ -15,14 +16,21 @@ export const COURSES = [
   {
     title: CourseTitleType.CHAINLINK_101,
     description: `Chainlink decentralized oracle networks provide tamper-proof inputs, outputs, and computations`,
-    difficulty: 2,
+    difficulty: 1,
     status: CourseStatusType.NEW
   },
   {
     title: CourseTitleType.SOLIDITY_INTRO,
     description: `Solidity is an object-oriented, high-level language for implementing smart contracts. Learn about the basics here.`,
-    difficulty: 3,
+    difficulty: 2,
     status: CourseStatusType.NEW
+  },
+  {
+    title: CourseTitleType.SOLIDITY_102,
+    description: `Learn more about the EVM, complex data types, flow control, access control, error handling and inheritance.`,
+    difficulty: 3,
+    status: CourseStatusType.NEW,
+    progress: [],
   },
   {
     title: CourseTitleType.VRF_V2,

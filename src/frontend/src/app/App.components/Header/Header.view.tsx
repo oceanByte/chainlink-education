@@ -3,6 +3,8 @@ import * as PropTypes from 'prop-types'
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
+import { Jazzicon } from '@ukstv/jazzicon-react';
+
 import { PublicUser } from 'shared/user/PublicUser'
 import { Option } from '../Select/Select.view'
 
@@ -20,6 +22,7 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
   const [isShowList, setIsShowList] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const history = useHistory();
 
   useEffect(() => {
@@ -48,7 +51,6 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
     return `${usernameArr[0][0].toUpperCase()}`
   }
 
-  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const showMenu = () => {
     setShowUserMenu((prev) => !prev);
@@ -84,12 +86,21 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
     <>
       <div className="header-menu-user">
         <div ref={wrapperRef} className='header-menu-btn' onClick={showMenu}>
-          <div className="header-menu-user__circle">{formatUsername(user?.username || 'U')}</div>
+          {
+            user && user.publicAddress
+              ? (
+                <div className="header-menu-user__icon">
+                  <Jazzicon address={user?.publicAddress} />
+                </div>
+              ) : (
+                <div className="header-menu-user__circle">{formatUsername(user?.username || 'U')}</div>
+              )
+          }
           <div className="header-menu-user__name">
             {user?.username} <span>&#9660;</span>
           </div>
         </div>
-        
+
         <div className={classnames('header-menu-user-menu', showUserMenu && 'show')}>
           <div className="header-menu-user-menu__item">
             <Link to="/profile/progress">Progress</Link>
@@ -142,17 +153,18 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
                 <CoursesListView user={user} pathname={pathname} />
               </div>
             </div>
-            {user? (
+            {user ? (
               <div className="header-menu-list__item">
                 <button className="ml-30 btn" onClick={() => history.push('/profile/progress')}>
                   Your Progress
                 </button>
               </div>
-            ): null}
+            ) : null}
             <div className="header-menu-list__item">
               <button className="ml-30 btn" onClick={() => window.open('https://chain.link/', '_blank')}>
                 Ecosystem
               </button>
+              <span className='arrow-upright' />
             </div>
           </div>
           <div className="header-menu-cred lg">{user ? loggedInHeader : loggedOutHeader}</div>
@@ -184,6 +196,7 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
           <div className="header-list-mobile-border" />
           <div className="header-list-mobile__item">
             <button className="btn">Ecosystem</button>
+            <span className="arrow-upright" />
           </div>
           <div className="header__item-border" />
           <div className="header-list-mobile__item">

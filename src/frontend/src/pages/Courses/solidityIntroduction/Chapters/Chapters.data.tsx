@@ -64,7 +64,7 @@ export const chapterData: ChapterData[] = [
   },
   {
     pathname: `/${course.path}/chapter-10`,
-    name: 'Reading Array Values',
+    name: 'Structs',
     data: chapter10,
   },
   {

@@ -16,6 +16,7 @@
     align-items: center;
     padding-bottom: 200px;
   }
+
   @include sm {
     padding-bottom: 270px;
   }
@@ -36,37 +37,43 @@
       padding: 40px 30px;
       margin-bottom: 20px;
     }
+
     @include sm {
       padding: 40px 15px;
       width: calc(100% - 20px);
     }
+
     @include lg {
       padding: 60px 30px;
       margin-bottom: 100px;
     }
+
     @include xl {
-      padding: 80px 60px; 
+      padding: 80px 60px;
     }
 
     .program-wrapp {
       font-weight: 900;
-      
+
       color: $grayscale1;
-      
+
       @include md {
         margin-top: 40px;
         font-size: 28px;
         line-height: 34px;
       }
+
       @include sm {
         font-size: 22px;
         line-height: 26px;
       }
+
       @include lg {
         margin-top: 40px;
         font-size: 32px;
         line-height: 38px;
       }
+
       @include xl {
         margin-top: 60px;
       }
@@ -77,9 +84,11 @@
       @include md {
         margin-top: 20px;
       }
+
       @include lg {
         margin-top: 20px;
       }
+
       @include xl {
         margin-top: 40px;
       }
@@ -91,7 +100,7 @@
         &-main {
           position: relative;
           cursor: pointer;
-          
+
           .arrow-down {
             width: 24px;
             height: 24px;
@@ -117,6 +126,7 @@
             line-height: 24px;
             color: $secondary1;
           }
+
           &__name {
             font-style: normal;
             font-weight: 900;
@@ -131,7 +141,7 @@
           overflow: hidden;
           transition: max-height .6s ease;
           margin-top: 7px;
-          
+
           p {
             margin: 0;
             padding: 0;
@@ -141,9 +151,28 @@
           }
         }
 
+        &-view__chapter {
+          box-sizing: border-box;
+          background: transparent;
+          outline: none;
+          border: 1px solid $secondary2;
+          border-radius: 3px;
+          margin-top: 5px;
+          float: right;
+          padding: 3px 5px;
+          color: $primary;
+          cursor: pointer;
+
+          &:hover {
+            transition: .2s ease;
+            background: rgb(55, 91, 210, 0.1);
+          }
+        }
+
         &:first-child {
           padding-top: 0;
         }
+
         &:last-child {
           border-bottom: 0;
           padding-bottom: 0;
@@ -184,7 +213,7 @@
       .item {
         background: $grayscale3;
         width: 100%;
-        
+
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -193,12 +222,15 @@
           width: calc(100% - 40px);
           padding: 40px 30px;
         }
+
         @include sm {
           padding: 40px 15px;
         }
+
         @include lg {
-          padding: 10px 8px; 
+          padding: 10px 8px;
         }
+
         @include xl {
           padding: 10px 30px;
         }
@@ -219,20 +251,21 @@
           align-items: center;
           justify-content: space-between;
           font-weight: 450;
-          
+
           color: $secondary1;
 
           @include sm {
             font-size: 16px;
             line-height: 19px;
           }
+
           @include md {
             height: 26px;
             font-size: 16px;
             line-height: 24px;
             padding: 0 5px;
           }
-    
+
           @include lg {
             height: 34px;
             padding: 0 10px;
@@ -241,23 +274,24 @@
           }
         }
 
-    
+
         .icon {
           margin-right: 6px;
         }
 
-        & + .item {
+        &+.item {
           margin-top: 5px;
         }
       }
 
-      &__chapters { 
+      &__chapters {
         .icon {
           background: url('../../assets/amountChapters.svg') no-repeat;
           width: 16px;
           height: 20px;
         }
       }
+
       &__time {
         .icon {
           background: url('../../assets/clock.svg') no-repeat;
@@ -293,7 +327,7 @@
         height: 34px;
         padding: 0 10px;
 
-        & + .item {
+        &+.item {
           margin-left: 10px;
         }
 
@@ -326,7 +360,7 @@
           display: none;
           position: relative;
         }
-        
+
 
         &.center {
           justify-content: center;
@@ -353,7 +387,7 @@
           }
 
           .shareCertificate,
-          .downloadCertificate  {
+          .downloadCertificate {
             display: block;
           }
 
@@ -365,6 +399,7 @@
         @include lg {
           justify-content: space-between;
           padding: 0 8px;
+
           &.completed {
             justify-content: center;
             padding: 0 27px;
@@ -390,7 +425,7 @@
           }
 
           .shareCertificate,
-          .downloadCertificate  {
+          .downloadCertificate {
             display: block;
           }
 
@@ -405,10 +440,8 @@
   @include sm {
     margin-bottom: 60px;
   }
-  
+
   @include md {
     width: calc(100% - 40px);
   }
 }
-
-
