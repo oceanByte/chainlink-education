@@ -6,8 +6,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  background: url("../../assets/profile-page-ellipse.png") no-repeat left 50%;
-  @include fluid-size("background-position-y", 375px, 1600px, 0px, -150px);
+  background: url('../../assets/profile-page-ellipse.png') no-repeat left 50%;
+  @include fluid-size('background-position-y', 375px, 1600px, 0px, -150px);
   background-size: contain;
   padding-bottom: 75px;
 
@@ -30,7 +30,7 @@
 
   &.section-certificate {
     padding: 60px;
-    @include fluid-size("width", 1024px, 1600px, 643px, 840px);
+    @include fluid-size('width', 1024px, 1600px, 643px, 840px);
 
     @include md {
       width: calc(100% - 40px);
@@ -61,13 +61,17 @@
       height: 100%;
       position: relative;
 
-
       &.chainlink-101 {
         background: url('../../assets/chainlink101_certificate.svg') no-repeat center;
         background-size: contain;
       }
 
       &.soliditi-intro {
+        background: url('../../assets/solidityIntroduction_certificate.svg') no-repeat center;
+        background-size: contain;
+      }
+
+      &.solidity-102 {
         background: url('../../assets/solidityIntroduction_certificate.svg') no-repeat center;
         background-size: contain;
       }
@@ -95,21 +99,21 @@
         color: $grayscale2;
 
         @include md {
-          @include fluid-size("right", 768px, 1024px, 50px, 180px);
+          @include fluid-size('right', 768px, 1024px, 50px, 180px);
           bottom: 160px;
           font-size: 20px;
           line-height: 70px;
         }
 
         @include sm {
-          @include fluid-size("right", 375px, 768px, 20px, 220px);
+          @include fluid-size('right', 375px, 768px, 20px, 220px);
           bottom: 55px;
           font-size: 12px;
           line-height: 80px;
         }
 
         @include lg {
-          @include fluid-size("right", 1024px, 1600px, 30px, 120px);
+          @include fluid-size('right', 1024px, 1600px, 30px, 120px);
           bottom: 135px;
           font-size: 20px;
           line-height: 80px;
@@ -131,21 +135,21 @@
         color: $grayscale2;
 
         @include md {
-          @include fluid-size("right", 768px, 1024px, 70px, 200px);
+          @include fluid-size('right', 768px, 1024px, 70px, 200px);
           bottom: 25px;
           font-size: 16px;
           line-height: 74px;
         }
 
         @include sm {
-          @include fluid-size("right", 375px, 768px, 32px, 227px);
+          @include fluid-size('right', 375px, 768px, 32px, 227px);
           bottom: -10px;
           font-size: 8px;
           line-height: 80px;
         }
 
         @include lg {
-          @include fluid-size("right", 1024px, 1600px, 60px, 165px);
+          @include fluid-size('right', 1024px, 1600px, 60px, 165px);
           bottom: 14px;
           font-size: 14px;
           line-height: 78px;
@@ -164,7 +168,7 @@
   &.section-info {
     margin-left: 40px;
 
-    @include fluid-size("width", 1024px, 1600px, 301px, 400px);
+    @include fluid-size('width', 1024px, 1600px, 301px, 400px);
 
     @include md {
       width: calc(100% - 40px);

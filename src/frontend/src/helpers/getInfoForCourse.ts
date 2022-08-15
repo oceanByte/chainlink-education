@@ -6,6 +6,8 @@ export const getPathForCertificate = (title: string) => {
       return '/chainlink101_certificate.jpg'
     case CourseNameType.SOLIDITY_INTRO:
       return '/solidityIntroduction_certificate.jpg'
+      case CourseNameType.SOLIDITY_102:
+        return '/solidity102_certificate.jpg'
     case CourseNameType.VRF_V2:
       return '/vrfV2Introduction_certificate.jpg'
     case CourseNameType.ADVANCED_VRF_V2:
@@ -24,6 +26,8 @@ export const getClassForCourse = (title: string) => {
       return 'chainlink-101'
     case CourseNameType.SOLIDITY_INTRO:
       return 'soliditi-intro'
+    case CourseNameType.SOLIDITY_102:
+      return 'solidity-102'
     case CourseNameType.VRF_V2:
       return 'vrf-v2'
     case CourseNameType.ADVANCED_VRF_V2:

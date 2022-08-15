@@ -1,28 +1,28 @@
 import styled from 'styled-components/macro'
 
-import badgeLargeNoCompleted from '../../../assets/badgeLarge_noCompleted.svg';
-import badgeMediumNoCompleted from '../../../assets/badgeMedium_noCompleted.svg';
-import badgeSmallNoCompleted from '../../../assets/badgeSmall_noCompleted.svg';
+import badgeLargeNoCompleted from '../../../assets/badgeLarge_noCompleted.svg'
+import badgeMediumNoCompleted from '../../../assets/badgeMedium_noCompleted.svg'
+import badgeSmallNoCompleted from '../../../assets/badgeSmall_noCompleted.svg'
 
-import badgeLarge_Chainlink from '../../../assets/badgeLarge_Chainlink.svg';
-import badgeMedium_Chainlink from '../../../assets/badgeMedium_Chainlink.svg';
-import badgeSmall_Chainlink from '../../../assets/badgeSmall_Chainlink.svg';
+import badgeLarge_Chainlink from '../../../assets/badgeLarge_Chainlink.svg'
+import badgeMedium_Chainlink from '../../../assets/badgeMedium_Chainlink.svg'
+import badgeSmall_Chainlink from '../../../assets/badgeSmall_Chainlink.svg'
 
-import badgeLarge_SolidityIntroduction from '../../../assets/badgeLarge_SolidityIntroduction.svg';
-import badgeMedium_SolidityIntroduction from '../../../assets/badgeMedium_SolidityIntroduction.svg';
-import badgeSmall_SolidityIntroduction from '../../../assets/badgeSmall_SolidityIntroduction.svg';
+import badgeLarge_SolidityIntroduction from '../../../assets/badgeLarge_SolidityIntroduction.svg'
+import badgeMedium_SolidityIntroduction from '../../../assets/badgeMedium_SolidityIntroduction.svg'
+import badgeSmall_SolidityIntroduction from '../../../assets/badgeSmall_SolidityIntroduction.svg'
 
-import badgeLarge_VRFv2Introduction from '../../../assets/badgeLarge_VRFv2Introduction.svg';
-import badgeMedium_VRFv2Introduction from '../../../assets/badgeMedium_VRFv2Introduction.svg';
-import badgeSmall_VRFv2Introduction from '../../../assets/badgeSmall_VRFv2Introduction.svg';
+import badgeLarge_VRFv2Introduction from '../../../assets/badgeLarge_VRFv2Introduction.svg'
+import badgeMedium_VRFv2Introduction from '../../../assets/badgeMedium_VRFv2Introduction.svg'
+import badgeSmall_VRFv2Introduction from '../../../assets/badgeSmall_VRFv2Introduction.svg'
 
-import badgeLarge_AdvancedVRFv2Introduction from '../../../assets/badgeLarge_AdvancedVRFv2Introduction.svg';
-import badgeMedium_AdvancedVRFv2Introduction from '../../../assets/badgeMedium_AdvancedVRFv2Introduction.svg';
-import badgeSmall_AdvancedVRFv2Introduction from '../../../assets/badgeSmall_AdvancedVRFv2Introduction.svg';
+import badgeLarge_AdvancedVRFv2Introduction from '../../../assets/badgeLarge_AdvancedVRFv2Introduction.svg'
+import badgeMedium_AdvancedVRFv2Introduction from '../../../assets/badgeMedium_AdvancedVRFv2Introduction.svg'
+import badgeSmall_AdvancedVRFv2Introduction from '../../../assets/badgeSmall_AdvancedVRFv2Introduction.svg'
 
-import badgeLarge_ChainlinkKeepers from '../../../assets/badgeLarge_ChainlinkKeepers.svg';
-import badgeMedium_ChainlinkKeepers from '../../../assets/badgeMedium_ChainlinkKeepers.svg';
-import badgeSmall_ChainlinkKeepers from '../../../assets/badgeSmall_ChainlinkKeepers.svg';
+import badgeLarge_ChainlinkKeepers from '../../../assets/badgeLarge_ChainlinkKeepers.svg'
+import badgeMedium_ChainlinkKeepers from '../../../assets/badgeMedium_ChainlinkKeepers.svg'
+import badgeSmall_ChainlinkKeepers from '../../../assets/badgeSmall_ChainlinkKeepers.svg'
 
 export const BadgeStyled = styled.div<{ percentage?: number }>`
   .large-badge,
@@ -61,11 +61,13 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
 
     &.isCompleted {
       .badge {
-
         &.chainlink-101 {
           background: url(${badgeLarge_Chainlink}) no-repeat center;
         }
         &.soliditi-intro {
+          background: url(${badgeLarge_SolidityIntroduction}) no-repeat center;
+        }
+        &.solidity-102 {
           background: url(${badgeLarge_SolidityIntroduction}) no-repeat center;
         }
         &.vrf-v2 {
@@ -104,6 +106,9 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
         &.soliditi-intro {
           background: url(${badgeMedium_SolidityIntroduction}) no-repeat center;
         }
+        &.solidity-102 {
+          background: url(${badgeLarge_SolidityIntroduction}) no-repeat center;
+        }
         &.vrf-v2 {
           background: url(${badgeMedium_VRFv2Introduction}) no-repeat center;
         }
@@ -134,12 +139,14 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
 
     &.isCompleted {
       .badge {
-
         &.chainlink-101 {
           background: url(${badgeSmall_Chainlink}) no-repeat center;
         }
         &.soliditi-intro {
           background: url(${badgeSmall_SolidityIntroduction}) no-repeat center;
+        }
+        &.solidity-102 {
+          background: url(${badgeLarge_SolidityIntroduction}) no-repeat center;
         }
         &.vrf-v2 {
           background: url(${badgeSmall_VRFv2Introduction}) no-repeat center;
@@ -174,6 +181,9 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
           &.soliditi-intro {
             background: url(${badgeLarge_SolidityIntroduction}) no-repeat center;
           }
+          &.solidity-102 {
+            background: url(${badgeLarge_SolidityIntroduction}) no-repeat center;
+          }
           &.vrf-v2 {
             background: url(${badgeLarge_VRFv2Introduction}) no-repeat center;
           }
@@ -184,7 +194,6 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
             background: url(${badgeLarge_ChainlinkKeepers}) no-repeat center;
           }
         }
-        
       }
     }
   }
@@ -212,6 +221,9 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
           &.soliditi-intro {
             background: url(${badgeMedium_SolidityIntroduction}) no-repeat center;
           }
+          &.solidity-102 {
+            background: url(${badgeLarge_SolidityIntroduction}) no-repeat center;
+          }
           &.vrf-v2 {
             background: url(${badgeMedium_VRFv2Introduction}) no-repeat center;
           }
@@ -222,9 +234,7 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
             background: url(${badgeMedium_ChainlinkKeepers}) no-repeat center;
           }
         }
-        
       }
-
     }
   }
 
@@ -242,12 +252,14 @@ export const BadgeStyled = styled.div<{ percentage?: number }>`
 
       &.isCompleted {
         .badge {
-
           &.chainlink-101 {
             background: url(${badgeSmall_Chainlink}) no-repeat center;
           }
           &.soliditi-intro {
             background: url(${badgeSmall_SolidityIntroduction}) no-repeat center;
+          }
+          &.solidity-102 {
+            background: url(${badgeLarge_SolidityIntroduction}) no-repeat center;
           }
           &.vrf-v2 {
             background: url(${badgeSmall_VRFv2Introduction}) no-repeat center;
