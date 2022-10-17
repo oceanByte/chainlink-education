@@ -13,7 +13,6 @@ interface ICourseCard {
 
 export const CourseCards = ({ courses, user }: ICourseCard) => {
   const infoCourses = getCoursesData(courses || [])
-
   return (
     <>
       {courses
@@ -21,7 +20,9 @@ export const CourseCards = ({ courses, user }: ICourseCard) => {
             <div
               key={course.title}
               className={
-                course.title !== 'Solidity 102' ? 'home-courses-content__item' : 'home-courses-content__item highlight'
+                course.title !== 'VRF v2 Advanced'
+                  ? 'home-courses-content__item'
+                  : 'home-courses-content__item highlight'
               }
             >
               <CourseCardView user={user} infoCourses={infoCourses} course={course} />

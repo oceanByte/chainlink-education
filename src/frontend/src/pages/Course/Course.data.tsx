@@ -2,10 +2,13 @@ import { course as ChainlinkIntroduction } from '../Courses/chainlinkIntroductio
 import { course as SolidityIntroduction } from '../Courses/solidityIntroduction'
 import { course as vrfIntroduction } from '../Courses/vrfIntroduction'
 import { course as Solidity102 } from '../Courses/solidity102'
+import { course as vrf102 } from '../Courses/vrf102'
+
 import { chapterData as ChainlinkIntroductionChapters } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { chapterData as SolidityIntroductionChapters } from '../Courses/solidityIntroduction/Chapters/Chapters.data'
 import { chapterData as Solidity102Chapters } from '../Courses/solidity102/Chapters/Chapters.data'
 import { chapterData as vrfIntroductionChapters } from '../Courses/vrfIntroduction/Chapters/Chapters.data'
+import { chapterData as vrf102Chapters } from '../Courses/vrf102/Chapters/Chapters.data'
 
 import { CourseData } from './Course.controller'
 
@@ -14,7 +17,7 @@ export enum CourseNameType {
   SOLIDITY_INTRO = 'Solidity Introduction',
   SOLIDITY_102 = 'Solidity 102',
   VRF_V2 = 'VRF v2 Introduction',
-  ADVANCED_VRF_V2 = 'Advanced course on VRF v2',
+  ADVANCED_VRF_V2 = 'VRF v2 Advanced',
   CHAINLINK_KEEPERS = 'Chainlink Keepers',
 }
 
@@ -50,6 +53,12 @@ export const courseData: CourseData[] = [
     name: CourseNameType.VRF_V2,
     data: vrfIntroduction,
   },
+  {
+    path: vrf102.path,
+    pathname: `/${vrf102.path}/info`,
+    name: CourseNameType.ADVANCED_VRF_V2,
+    data: vrf102,
+  },
 ]
 
 // chaptersByCourse: Used to render chapter data of each course.
@@ -63,4 +72,5 @@ export const chaptersByCourse: ChapterDataDictionary = {
   solidityIntroduction: SolidityIntroductionChapters,
   solidity102: Solidity102Chapters,
   vrfIntroduction: vrfIntroductionChapters,
+  vrf102: vrf102Chapters,
 }

@@ -22,6 +22,7 @@ import { chapterData as ChainlinkIntroductionChapters } from '../Courses/chainli
 import { chapterData as SolidityIntroductionChapters } from '../Courses/solidityIntroduction/Chapters/Chapters.data'
 import { chapterData as Solidity102 } from '../Courses/solidity102/Chapters/Chapters.data'
 import { chapterData as vrfIntroductionChapters } from '../Courses/vrfIntroduction/Chapters/Chapters.data'
+import { chapterData as vrf102Chapters } from '../Courses/vrf102/Chapters/Chapters.data'
 
 import { ChapterView } from './Chapter.view'
 
@@ -128,7 +129,6 @@ export const Chapter = () => {
     if (user) dispatch(getUser({ username: user.username }))
 
     courseData.forEach((course: CourseData) => {
-      console.log({ courseData })
       const index = course.path!
       chaptersByCourse[index].forEach((chapter: ChapterData) => {
         if (pathname === chapter.pathname)
@@ -206,9 +206,12 @@ export const Chapter = () => {
       getPercent(SolidityIntroductionChapters)
     } else if (findLocalCourse && findLocalCourse.name === CourseNameType.SOLIDITY_102) {
       getPercent(Solidity102)
-    } else {
+    } else if (findLocalCourse && findLocalCourse.name === CourseNameType.VRF_V2) {
       getPercent(vrfIntroductionChapters)
+    } else {
+      getPercent(vrf102Chapters)
     }
+
     // eslint-disable-next-line
   }, [])
 

@@ -7,11 +7,13 @@ import { course as ChainlinkIntroduction } from '../pages/Courses/chainlinkIntro
 import { course as SolidityIntroduction } from '../pages/Courses/solidityIntroduction'
 import { course as vrfIntroduction } from '../pages/Courses/vrfIntroduction'
 import { course as Solidity102 } from '../pages/Courses/solidity102'
+import { course as vrf102} from '../pages/Courses/vrf102'
 
 import { chapterData as ChainlinkIntroductionChapters } from '../pages/Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { chapterData as SolidityIntroductionChapters } from '../pages/Courses/solidityIntroduction/Chapters/Chapters.data'
 import { chapterData as Solidity102Chapters } from "pages/Courses/solidity102/Chapters/Chapters.data";
 import { chapterData as vrfIntroductionChapters } from '../pages/Courses/vrfIntroduction/Chapters/Chapters.data'
+import { chapterData as vrf102Chapters } from '../pages/Courses/vrf102/Chapters/Chapters.data'
 
 interface ICoursesData {
   overallProgress: number,
@@ -37,6 +39,8 @@ export const getCourseChapters = (title: string) => {
     return { chapters: Solidity102Chapters, additionalInfo: Solidity102}
   } else if (title === CourseNameType.VRF_V2) {
     return { chapters: vrfIntroductionChapters, additionalInfo: vrfIntroduction}
+  } else if (title === CourseNameType.ADVANCED_VRF_V2) {
+    return { chapters: vrf102Chapters, additionalInfo: vrf102}
   }
 
   return {
