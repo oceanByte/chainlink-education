@@ -42,6 +42,13 @@ export const COURSES = [
   {
     title: 'VRF v2 Introduction',
     description: `Study how VRF can be used to bring Verfiable Randomness to blockchain.`,
+    difficulty: 2,
+    status: CourseStatusType.NEW,
+    progress: [],
+  },
+  {
+    title: 'VRF v2 Advanced',
+    description: `Explore the technical details and practical usage of VRF v2.`,
     difficulty: 3,
     status: CourseStatusType.NEW,
     progress: [],

@@ -8,6 +8,7 @@ import { course as ChainlinkIntroduction } from '../../../pages/Courses/chainlin
 import { course as SolidityIntroduction } from '../../../pages/Courses/solidityIntroduction'
 import { course as Solidity102 } from '../../../pages/Courses/solidity102'
 import { course as vrfIntroduction } from '../../../pages/Courses/vrfIntroduction'
+import { course as vrf102 } from '../../../pages/Courses/vrf102'
 
 import { PublicUser } from 'shared/user/PublicUser'
 import { CourseData } from 'pages/Course/Course.controller'
@@ -47,9 +48,12 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
     } else if (course.title === CourseNameType.SOLIDITY_102) {
       currentPath = `/${Solidity102.path}/chapter-1`
       coursePath = Solidity102.path
-    } else {
+    } else if (course.title === CourseNameType.VRF_V2) {
       currentPath = `/${vrfIntroduction.path}/chapter-1`
       coursePath = vrfIntroduction.path
+    } else {
+      currentPath = `/${vrf102.path}/chapter-1`
+      coursePath = vrf102.path
     }
 
     return {

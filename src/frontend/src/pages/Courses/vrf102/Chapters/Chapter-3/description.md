@@ -1,0 +1,1 @@
+Blockchains heavily rely on cryptography and randomness for security. The most straightforward example is the creation of key pairs used to do transactions. When you create a new key pair, a random number is needed as the initial input.
