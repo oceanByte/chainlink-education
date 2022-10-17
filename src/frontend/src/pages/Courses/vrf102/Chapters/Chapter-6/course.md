@@ -9,7 +9,7 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     Now that you know about Chainlink VRF v2 it’s time to begin building the raffle contract!
+     Now that you know about Chainlink VRF v2 it’s time to give you some practical advise.
     </div>
   </div>
 </ContentWrapp>
