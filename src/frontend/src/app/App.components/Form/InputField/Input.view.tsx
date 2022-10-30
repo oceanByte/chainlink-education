@@ -14,6 +14,7 @@ type InputViewProps = {
   inputStatus?: 'success' | 'error'
   isDisabled?: boolean | undefined
   errorMessage?: string | false | undefined
+  placeholder?: string
 }
 
 export const InputView = ({
@@ -26,6 +27,7 @@ export const InputView = ({
   inputStatus,
   isDisabled,
   errorMessage,
+  placeholder,
 }: InputViewProps) => {
   return (
     <>
@@ -38,19 +40,11 @@ export const InputView = ({
         name={name}
         autoComplete={name}
         disabled={isDisabled}
-        className={
-          classnames(
-            inputStatus,
-            isDisabled && 'disabled',
-          )
-        }
+        placeholder={placeholder}
+        className={classnames(inputStatus, isDisabled && 'disabled')}
       />
-      
-      {errorMessage ? (
-        <InvalidBox>
-          {errorMessage }
-        </InvalidBox>
-      ) : null}
+
+      {errorMessage ? <InvalidBox>{errorMessage}</InvalidBox> : null}
     </>
   )
 }

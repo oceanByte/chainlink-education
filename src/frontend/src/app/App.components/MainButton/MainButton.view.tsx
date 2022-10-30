@@ -1,7 +1,7 @@
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
 
-import classnames from 'classnames';
+import classnames from 'classnames'
 
 import { ButtonTypes } from '../Button/Button.constants'
 import { ButtonLoadingIcon, ButtonStyled, ButtonText } from './MainButton.style'
@@ -22,6 +22,7 @@ type MainButtonViewProps = {
   hasArrowLeft?: boolean
   hasArrowDown?: boolean
   hasHome?: boolean
+  hasNftRight?: boolean
 }
 
 export const MainButtonView = ({
@@ -39,7 +40,8 @@ export const MainButtonView = ({
   hasArrowRight,
   hasArrowLeft,
   hasArrowDown,
-  hasHome
+  hasHome,
+  hasNftRight,
 }: MainButtonViewProps) => {
   return (
     <ButtonStyled
@@ -53,13 +55,14 @@ export const MainButtonView = ({
         hasArrowLeft && 'hasArrowLeft',
         hasArrowDown && 'hasArrowDown',
         hasHome && 'hasHome',
-        className
+        hasNftRight && 'hasNft',
+        className,
       )}
       onClick={onClick}
       type={type}
       disabled={disabled}
     >
-      {hasArrowLeft ? (<div className='arrow-left' />) : null}
+      {hasArrowLeft ? <div className="arrow-left" /> : null}
       <ButtonText>
         {loading ? (
           <>
@@ -74,10 +77,10 @@ export const MainButtonView = ({
           </>
         )}
       </ButtonText>
-      {hasArrowUpRight ? (<div className='arrow-upright' />) : null}
-      {hasArrowDown ? (<div className='arrow-down' />) : null}
-      {hasArrowRight ? (<div className='arrow-right' />) : null}
-      
+      {hasArrowUpRight ? <div className="arrow-upright" /> : null}
+      {hasArrowDown ? <div className="arrow-down" /> : null}
+      {hasArrowRight ? <div className="arrow-right" /> : null}
+      {hasNftRight ? <div className="nft-right" /> : null}
     </ButtonStyled>
   )
 }

@@ -1,13 +1,14 @@
 .description-page {
   width: 100%;
+
   height: auto;
   font-family: $p-font;
   color: $grayscale1;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  background: url("../../assets/profile-page-ellipse.png") no-repeat left 50%;
-  @include fluid-size("background-position-y", 375px, 1600px, 0px, -150px);
+  background: url('../../assets/profile-page-ellipse.png') no-repeat left 50%;
+  @include fluid-size('background-position-y', 375px, 1600px, 0px, -150px);
   background-size: contain;
   padding-bottom: 75px;
 
@@ -22,6 +23,21 @@
   }
 }
 
+.input-address {
+  input {
+    font-size: 14px !important;
+    width: 350px !important;
+    border-bottom: 1px solid black !important;
+  }
+}
+
+.issueCertificate {
+  margin-top: 20px;
+  button {
+    margin: auto;
+  }
+}
+
 .description-page-section {
   background: $white;
   box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
@@ -30,7 +46,7 @@
 
   &.section-chapters {
     padding: 60px;
-    @include fluid-size("width", 1024px, 1600px, 643px, 840px);
+    @include fluid-size('width', 1024px, 1600px, 643px, 840px);
 
     @include md {
       width: calc(100% - 40px);
@@ -80,7 +96,6 @@
     }
 
     .chapters {
-
       @include md {
         margin-top: 20px;
       }
@@ -109,7 +124,7 @@
             top: 50%;
             right: 0;
             transform: translateY(-50%);
-            transition: all .3s ease-in-out;
+            transition: all 0.3s ease-in-out;
           }
 
           &.open {
@@ -139,7 +154,7 @@
 
         &-description {
           overflow: hidden;
-          transition: max-height .6s ease;
+          transition: max-height 0.6s ease;
           margin-top: 7px;
 
           p {
@@ -164,7 +179,7 @@
           cursor: pointer;
 
           &:hover {
-            transition: .2s ease;
+            transition: 0.2s ease;
             background: rgb(55, 91, 210, 0.1);
           }
         }
@@ -181,10 +196,29 @@
     }
   }
 
+  &.section-survey {
+    margin-top: 5px;
+    text-align: center;
+    box-shadow: none;
+
+    h2 {
+      font-size: 35px;
+    }
+
+    p {
+      font-size: 17px;
+    }
+
+    button {
+      margin: auto;
+      margin-top: 15px;
+    }
+  }
+
   &.section-info {
     margin-left: 40px;
     padding: 30px 0;
-    @include fluid-size("width", 1024px, 1600px, 301px, 400px);
+    @include fluid-size('width', 1024px, 1600px, 301px, 400px);
 
     @include md {
       width: calc(100% - 40px);
@@ -274,12 +308,11 @@
           }
         }
 
-
         .icon {
           margin-right: 6px;
         }
 
-        &+.item {
+        & + .item {
           margin-top: 5px;
         }
       }
@@ -327,7 +360,7 @@
         height: 34px;
         padding: 0 10px;
 
-        &+.item {
+        & + .item {
           margin-left: 10px;
         }
 
@@ -360,7 +393,6 @@
           display: none;
           position: relative;
         }
-
 
         &.center {
           justify-content: center;

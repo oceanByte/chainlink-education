@@ -11,17 +11,18 @@ import {
   secondary3Disabled,
   secondary3Hover,
   textColorBlue,
-  textColorWhite
+  textColorWhite,
 } from '../../../styles'
 
-import arrowUpRightWhite from '../../../assets/arrow-upright-white.svg';
-import arrowUpRightBlue from '../../../assets/arrow-upright-blue.svg';
-import arrowDownBlue from '../../../assets/arrow-down-blue.svg';
-import arrowDownWhite from '../../../assets/arrow-down-white.svg';
-import arrowLeft from '../../../assets/arrow_left.svg';
-import arrowRight from '../../../assets/arrow_right.svg';
-import arrowRightGreen from '../../../assets/arrow_rightGreen.svg';
-import arrowLeftGreen from '../../../assets/arrow_leftGreen.svg';
+import arrowUpRightWhite from '../../../assets/arrow-upright-white.svg'
+import arrowUpRightBlue from '../../../assets/arrow-upright-blue.svg'
+import arrowDownBlue from '../../../assets/arrow-down-blue.svg'
+import arrowDownWhite from '../../../assets/arrow-down-white.svg'
+import arrowLeft from '../../../assets/arrow_left.svg'
+import arrowRight from '../../../assets/arrow_right.svg'
+import arrowRightGreen from '../../../assets/arrow_rightGreen.svg'
+import arrowLeftGreen from '../../../assets/arrow_leftGreen.svg'
+import certificate from '../../../assets/certificate-icon.svg'
 
 export const ButtonStyled = styled.button`
   border: none;
@@ -64,7 +65,6 @@ export const ButtonStyled = styled.button`
     opacity: 0.3;
   }
 
-
   &.isPrimary {
     color: ${textColorWhite};
     background: ${secondary3};
@@ -92,6 +92,19 @@ export const ButtonStyled = styled.button`
           top: 12px;
         }
       }
+
+      .nft-right {
+        height: 32px;
+        width: 32px;
+        top: 15px;
+        position: absolute;
+        right: 13px;
+        background: url(${certificate}) no-repeat;
+
+        @media (max-width: 767px) {
+          top: 12px;
+        }
+      }
     }
 
     &:not(:disabled):hover {
@@ -108,7 +121,7 @@ export const ButtonStyled = styled.button`
     border: 1px solid ${secondary1};
     background: ${backgroundColorLight};
     color: ${textColorBlue};
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     &:not(:disabled):hover {
       border: 1px solid ${primary};
@@ -136,7 +149,7 @@ export const ButtonStyled = styled.button`
         right: 16px;
         transform: translateY(-50%);
         background: url(${arrowDownBlue}) no-repeat;
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
 
         @media screen and (max-width: 576px) {
           width: 18px;
@@ -148,7 +161,7 @@ export const ButtonStyled = styled.button`
       &.hasArrowUp {
         .arrow-down {
           transform: translateY(-50%) rotate(180deg);
-          transition: all .2s ease-in-out;
+          transition: all 0.2s ease-in-out;
 
           @media screen and (max-width: 576px) {
             width: 18px;
@@ -164,20 +177,20 @@ export const ButtonStyled = styled.button`
     border: 1px solid ${grayscale3};
     background: ${backgroundColorLight};
     color: ${textColorBlue};
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     height: 54px;
-    
-    &:not(:disabled):hover{
+
+    &:not(:disabled):hover {
       border: 1px solid ${secondary3};
 
       .arrow-left {
-        transition-delay: .1s;
-        transition: all .2s ease-in-out;
+        transition-delay: 0.1s;
+        transition: all 0.2s ease-in-out;
         background: url(${arrowLeftGreen}) no-repeat;
       }
       .arrow-right {
-        transition-delay: .1s;
-        transition: all .2s ease-in-out;
+        transition-delay: 0.1s;
+        transition: all 0.2s ease-in-out;
         background: url(${arrowRightGreen}) no-repeat;
       }
     }
@@ -192,7 +205,8 @@ export const ButtonStyled = styled.button`
       padding-left: 25px;
     }
 
-    .arrow-left, .arrow-right {
+    .arrow-left,
+    .arrow-right {
       top: 50%;
       transform: translateY(-50%);
     }
