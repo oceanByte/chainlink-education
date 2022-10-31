@@ -16,17 +16,21 @@ import { deleteAccountPending, deleteAccountPermanently } from './resolvers/user
 import { changeEmailPending, changeEmailSuccess } from './resolvers/user/changeEmail/changeEmail'
 import { getCertificate } from './resolvers/page/getCertificate/getCertificate'
 import { changeUsername } from './resolvers/user/changeUsername/changeUsername'
+import { issueCertificate, setAddress } from './resolvers/user/issueCertificate/issueCertificate'
 
 const router = new Router()
 
 router.get('/', async (ctx: Context) => {
-  ctx.body = 'You are not supposed to be here ;)'
+  ctx.body = 'hello :)'
 })
 
 // metamask
 router.get('/users', find)
 router.post('/users', create)
 router.post('/auth', auth)
+
+router.post('/user/change-address', setAddress)
+router.post('/user/issue-certificate', issueCertificate)
 
 router.post('/user/sign-up', signUp)
 router.post('/user/login', login)

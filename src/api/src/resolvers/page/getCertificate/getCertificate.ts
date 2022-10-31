@@ -2,7 +2,6 @@ import { CertificateModel } from './../../../shared/certificate/Certificate';
 import { plainToClass } from 'class-transformer'
 import { validateOrReject } from 'class-validator'
 import { Context, Next } from 'koa'
-import * as randomstring from 'randomstring'
 
 import { firstError } from '../../../helpers/firstError'
 import { ResponseError } from '../../../shared/mongo/ResponseError'
@@ -23,14 +22,12 @@ export const getCertificate = async (ctx: Context, next: Next): Promise<void> =>
     const findCourse = await CourseModel.findOne({ _id: courseId })
 
     if (findCourse && findCourse.status === CourseStatusType.COMPLETED) {
-      const code = randomstring.generate({length: 62, charset: 'hex'});
-
       await CertificateModel.create({
         coursePath,
         username,
         userId: findCourse.userId,
         courseId,
-        code: `0x${code}`
+        code: `` // randomstring.generate({length: 62, charset: 'hex'});
       })
 
       certificate = await CertificateModel.findOne({ username, coursePath }).lean()

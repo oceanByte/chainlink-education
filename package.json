@@ -45,6 +45,7 @@
     ]
   },
   "dependencies": {
-    "classnames": "^2.3.1"
+    "classnames": "^2.3.1",
+    "ethers": "^5.7.2"
   }
 }

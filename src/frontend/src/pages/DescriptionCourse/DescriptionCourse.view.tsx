@@ -21,9 +21,20 @@ import { ShareCertificate } from 'app/App.components/ShareCertificate/ShareCerti
 import { UseCertificate } from 'app/App.components/CourseCard/UseCertificate/UseCertificate.view'
 import { IAdditionalInfo } from 'helpers/coursesInfo'
 
+export interface IChangeAddress {
+  address?: string
+}
+
+export interface ISetCertificate {
+  address?: string
+  coursePath?: string
+}
+
 type DescriptionCourseViewProps = {
   user?: PublicUser
   additionalInfo: IAdditionalInfo
+  changeAddressCallback: ({ address }: IChangeAddress) => void
+  setNftCertificateCallback: ({ coursePath, address }: ISetCertificate) => Promise<boolean>
 }
 
 export const Content = ({ course }: any) => (
@@ -45,38 +56,16 @@ export const Content = ({ course }: any) => (
   />
 )
 
-const user: any = {}
-
-const initialValue = {
-  address: user ? user?.address : '',
-}
-
-const handleSubmit = (values: { address: string }) => {
-  let newValues = {}
-
-  if (values.address !== user?.address) {
-    newValues = {
-      ...newValues,
-      address: values.address,
-    }
-  }
-
-  changeEmailOrUsernameCallback(newValues)
-}
-
-const changeEmailOrUsernameCallback = (values: any): void => {}
-
 interface IChapterItem {
   chapter: ChapterData
   index: number
 }
 
 const ValidationSchema = Yup.object().shape({
-  email: Yup.string().email('Please enter a valid email address').required('This field is required!'),
-  username: Yup.string()
-    .matches(/^[a-zA-Z0-9_]*$/, 'Username can only contain letters, numbers and underscores')
-    .min(2, 'Username must be longer than or equal to 2 characters')
-    .max(50, 'Username must be shorter than or equal to 50 characters')
+  address: Yup.string()
+    .matches(/^0x[a-fA-F0-9]{40}$/, 'Address must be a valid Polygon Mainnet Address')
+    .min(42, 'Address must be equal to 42 characters')
+    .max(42, 'Address must be equal to 42 characters')
     .required('This field is required!'),
 })
 
@@ -113,7 +102,28 @@ const ChapterItem = ({ chapter, index }: IChapterItem) => {
   )
 }
 
-export const DescriptionCourseView = ({ user, additionalInfo }: DescriptionCourseViewProps) => {
+export const DescriptionCourseView = ({
+  user,
+  additionalInfo,
+  changeAddressCallback,
+  setNftCertificateCallback,
+}: DescriptionCourseViewProps) => {
+  const initialValue = {
+    address: user?.publicAddress || '',
+  }
+  const handleSubmit = (values: { address: string }) => {
+    changeAddressCallback(values)
+  }
+
+  const handleDownload = async () => {
+    // issue certificate if it it does not exist yet
+    const hasCertificate = await setNftCertificateCallback({ coursePath: additionalInfo.urlCourse })
+    // go to certificate
+    if (hasCertificate) {
+      history.push(`/${additionalInfo.urlCourse}/certificate/preview`)
+    }
+  }
+
   const wrapperRef = useRef<HTMLDivElement>(null)
   const history = useHistory()
   const [isShowList, setIsShowList] = useState(false)
@@ -170,7 +180,13 @@ export const DescriptionCourseView = ({ user, additionalInfo }: DescriptionCours
               isSecondary
               hasArrowUpRight
               text="Take the survey"
-              onClick={() => history.push(`/${additionalInfo.urlCourse}/certificate/preview`)}
+              onClick={() =>
+                window.open(
+                  'https://docs.google.com/forms/d/e/1FAIpQLSc1LqUMTBJSXgQn_c2qvbiBcjcmNBd0Me6m_MBxRFXz68ba7w/viewform',
+                  '_blank',
+                  'noopener,noreferrer',
+                )
+              }
               loading={false}
               disabled={false}
             />
@@ -241,86 +257,90 @@ export const DescriptionCourseView = ({ user, additionalInfo }: DescriptionCours
                 ) : null}
                 {additionalInfo.percent && additionalInfo.percent === 100 ? (
                   <>
-                    <div ref={wrapperRef} className="useCertificate">
-                      <MainButtonView
-                        isCompleted
-                        isPrimary
-                        hasArrowDown
-                        text="Use certificate"
-                        onClick={showList}
-                        loading={false}
-                        disabled={false}
-                        className={isShowList ? 'hasArrowUp' : ''}
-                      />
-                      <UseCertificate
-                        isSecondary
-                        isShowList={isShowList}
-                        additionalInfo={additionalInfo}
-                        nextPath={`/${additionalInfo.urlCourse}/certificate/preview`}
-                      />
-                    </div>
-                    <div className="profile-page-account-info__username p-font">
+                    {!user.publicAddress ? (
                       <div>
-                        <Formik
-                          enableReinitialize
-                          initialValues={initialValue}
-                          validationSchema={ValidationSchema}
-                          onSubmit={handleSubmit}
-                        >
-                          {({
-                            values,
-                            errors,
-                            touched,
-                            setFieldValue,
-                            handleChange,
-                            handleBlur,
-                            handleSubmit,
-                            isSubmitting,
-                            isValid,
-                          }) => (
-                            <form className="profile-page-account-info__form" onSubmit={handleSubmit}>
-                              <div className="input-address">
-                                <InputField
-                                  label="Please enter your Polygon Address to issue your NFT"
-                                  type="text"
-                                  placeholder="0xb0897686c545045aFc77CF20eC7A532E3120E0F1"
-                                  value={values.address || ''}
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  name="address"
-                                  inputStatus={errors.address && touched.address ? 'error' : undefined}
-                                  errorMessage={errors.address && touched.address && errors.address}
-                                  isDisabled={false}
-                                />
-                              </div>
-                            </form>
-                          )}
-                        </Formik>
+                        <div ref={wrapperRef} className="useCertificate">
+                          <MainButtonView
+                            isCompleted
+                            isPrimary
+                            hasArrowDown
+                            text="Use certificate"
+                            onClick={showList}
+                            loading={false}
+                            disabled={false}
+                            className={isShowList ? 'hasArrowUp' : ''}
+                          />
+                          <UseCertificate
+                            isSecondary
+                            isShowList={isShowList}
+                            additionalInfo={additionalInfo}
+                            nextPath={`/${additionalInfo.urlCourse}/certificate/preview`}
+                          />
+                        </div>
+                        <div className="profile-page-account-info__username p-font">
+                          <div>
+                            <Formik
+                              enableReinitialize
+                              initialValues={initialValue}
+                              validationSchema={ValidationSchema}
+                              onSubmit={handleSubmit}
+                            >
+                              {({
+                                values,
+                                errors,
+                                touched,
+                                setFieldValue,
+                                handleChange,
+                                handleBlur,
+                                handleSubmit,
+                                isSubmitting,
+                                isValid,
+                              }) => (
+                                <form className="profile-page-account-info__form" onSubmit={handleSubmit}>
+                                  <div className="input-address">
+                                    <InputField
+                                      label="Please enter your Polygon Address to issue your NFT"
+                                      type="text"
+                                      placeholder="0xb0897686c545045aFc77CF20eC7A532E3120E0F1"
+                                      value={values.address || ''}
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      name="address"
+                                      inputStatus={errors.address && touched.address ? 'error' : undefined}
+                                      errorMessage={errors.address && touched.address && errors.address}
+                                      isDisabled={false}
+                                    />
+                                  </div>
+                                  <div className="issueCertificate">
+                                    <MainButtonView
+                                      type="submit"
+                                      isCompleted
+                                      isPrimary
+                                      hasNftRight
+                                      text="Issue NFT Certificate"
+                                      loading={false}
+                                      disabled={!isValid || !values.address}
+                                    />
+                                  </div>
+                                </form>
+                              )}
+                            </Formik>
+                          </div>
+                        </div>
                       </div>
-                      <div className="issueCertificate">
+                    ) : (
+                      <div className="downloadCertificate">
                         <MainButtonView
                           isCompleted
                           isPrimary
-                          hasNftRight
-                          text="Issue NFT Certificate"
-                          onClick={() => history.push(`/${additionalInfo.urlCourse}/certificate/preview`)}
+                          hasArrowDown
+                          text="Download certificate"
+                          onClick={handleDownload}
                           loading={false}
                           disabled={false}
                         />
                       </div>
-                    </div>
-
-                    {/* <div className='downloadCertificate'>
-                      <MainButtonView
-                        isCompleted
-                        isPrimary
-                        hasArrowDown
-                        text='Download certificate'
-                        onClick={() => history.push(`/${additionalInfo.urlCourse}/certificate/preview`)}
-                        loading={false}
-                        disabled={false}
-                      />
-                    </div> */}
+                    )}
                   </>
                 ) : null}
               </div>
@@ -333,15 +353,14 @@ export const DescriptionCourseView = ({ user, additionalInfo }: DescriptionCours
                 </div>
               ) : null}
 
-              {additionalInfo.percent && additionalInfo.percent === 100 ? (
-                // <div className="shareCertificate">
-                //   <ShareCertificate
-                //     className="isDescription"
-                //     username={user.username}
-                //     additionalInfo={additionalInfo}
-                //   />
-                // </div>
-                <div></div>
+              {additionalInfo.percent && additionalInfo.percent === 100 && user.publicAddress ? (
+                <div className="shareCertificate">
+                  <ShareCertificate
+                    className="isDescription"
+                    username={user.username}
+                    additionalInfo={additionalInfo}
+                  />
+                </div>
               ) : null}
             </div>
           ) : (

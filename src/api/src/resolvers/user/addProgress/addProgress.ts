@@ -2,8 +2,6 @@ import { plainToClass } from 'class-transformer'
 import { validateOrReject } from 'class-validator'
 import { Context, Next } from 'koa'
 
-import * as randomstring from 'randomstring'
-
 import { firstError } from '../../../helpers/firstError'
 import { toPublicUser } from '../../../helpers/toPublicUser'
 import { CourseModel, Course } from '../../../shared/course/Course'
@@ -45,16 +43,13 @@ export const addProgress = async (ctx: Context, next: Next): Promise<void> => {
       username: user.username,
     }).lean() as Certificate
     
-    const code = randomstring.generate({length: 62, charset: 'hex'});
-
-    if (!certificate) {
-      
+    if (!certificate) {  
       await CertificateModel.create({
         coursePath,
         username: user.username,
         userId: user._id,
         courseId,
-        code: `0x${code}`
+        code: '' // randomstring.generate({length: 62, charset: 'hex'});
       })
     }
   }
@@ -68,7 +63,6 @@ export const addProgress = async (ctx: Context, next: Next): Promise<void> => {
   const updatedCourse: Course = await CourseModel.findOne(
     { _id: courseId },
   ).lean() as Course
-    
   // set referral to completed 
   if (
     updatedCourse.title === CourseTitleType.CHAINLINK_101 &&

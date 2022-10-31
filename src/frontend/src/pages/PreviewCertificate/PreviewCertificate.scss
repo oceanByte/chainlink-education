@@ -137,14 +137,14 @@
         @include md {
           @include fluid-size('right', 768px, 1024px, 70px, 200px);
           bottom: 25px;
-          font-size: 16px;
+          font-size: 15px;
           line-height: 74px;
         }
 
         @include sm {
           @include fluid-size('right', 375px, 768px, 32px, 227px);
           bottom: -10px;
-          font-size: 8px;
+          font-size: 7px;
           line-height: 80px;
         }
 
@@ -157,8 +157,8 @@
 
         @include xl {
           bottom: 22px;
-          right: 79px;
-          font-size: 19px;
+          right: 93px;
+          font-size: 17px;
           line-height: 98px;
         }
       }
