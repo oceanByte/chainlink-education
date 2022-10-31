@@ -1,20 +1,13 @@
 require('dotenv').config();
 import { ethers } from "ethers";
 
-
-import { hash } from 'bcryptjs'
 import { plainToClass } from 'class-transformer'
 import { validateOrReject } from 'class-validator'
 import { Context, Next } from 'koa'
 
 import { firstError } from '../../../helpers/firstError'
-import { Captcha, CaptchaModel } from '../../../shared/captcha/Captcha'
-import { CaptchaFor } from '../../../shared/captcha/CaptchaFor'
-import { ResponseError } from '../../../shared/mongo/ResponseError'
-import { ResetPasswordInputs } from '../../../shared/user/ResetPassword'
 import { IssueCertificateInputs } from "../../../shared/user/issueCertificate";
 import { User, UserModel } from '../../../shared/user/User'
-import { verifyCaptcha } from '../helpers/verifyCaptcha'
 import { rateLimit } from '../../quota/rateLimit/rateLimit'
 import { authenticate } from '../helpers/authenticate'
 
