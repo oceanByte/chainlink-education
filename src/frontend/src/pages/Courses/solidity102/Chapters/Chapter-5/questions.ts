@@ -1,6 +1,6 @@
 export const questions = [
   {
-    question: 'Modifiers are used to modify the behaviour ...',
+    question: 'Function modifiers are used to modify the behaviour ...',
     answers: [
       'of functions',
       'of variables',

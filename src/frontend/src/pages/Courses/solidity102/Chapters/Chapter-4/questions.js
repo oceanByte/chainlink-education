@@ -26,7 +26,7 @@ export const questions = [
       '6',
       '8'
     ],
-    responses: ['0'],
+    responses: ['4'],
   },
   {
     question: 'What is the result of calling whileLoopExample()?',
