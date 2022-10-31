@@ -18,7 +18,6 @@ import { Difficulty } from 'app/App.components/CourseCard/Difficulty/Difficulty.
 import { MainButtonView } from 'app/App.components/MainButton/MainButton.view'
 import { CircularProgressBar } from 'app/App.components/CircleProgressBar/CircleProgressBar.view'
 import { ShareCertificate } from 'app/App.components/ShareCertificate/ShareCertificate.view'
-import { UseCertificate } from 'app/App.components/CourseCard/UseCertificate/UseCertificate.view'
 import { IAdditionalInfo } from 'helpers/coursesInfo'
 
 export interface IChangeAddress {
@@ -259,7 +258,7 @@ export const DescriptionCourseView = ({
                   <>
                     {!user.publicAddress ? (
                       <div>
-                        <div ref={wrapperRef} className="useCertificate">
+                        {/* <div ref={wrapperRef} className="useCertificate">
                           <MainButtonView
                             isCompleted
                             isPrimary
@@ -276,7 +275,7 @@ export const DescriptionCourseView = ({
                             additionalInfo={additionalInfo}
                             nextPath={`/${additionalInfo.urlCourse}/certificate/preview`}
                           />
-                        </div>
+                        </div> */}
                         <div className="profile-page-account-info__username p-font">
                           <div>
                             <Formik
@@ -317,7 +316,7 @@ export const DescriptionCourseView = ({
                                       isCompleted
                                       isPrimary
                                       hasNftRight
-                                      text="Issue NFT Certificate"
+                                      text="Create NFT Certificate"
                                       loading={false}
                                       disabled={!isValid || !values.address}
                                     />
@@ -334,7 +333,7 @@ export const DescriptionCourseView = ({
                           isCompleted
                           isPrimary
                           hasArrowDown
-                          text="Download certificate"
+                          text="Get NFT Certificate"
                           onClick={handleDownload}
                           loading={false}
                           disabled={false}
