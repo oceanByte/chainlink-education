@@ -47,6 +47,7 @@ export const signUp = async (ctx: Context, next: Next): Promise<void> => {
   for (const course of COURSES) {
     await CourseModel.create({
       userId: user._id,
+      subject: course.subject,
       title: course.title,
       description: course.description,
       difficulty: course.difficulty,

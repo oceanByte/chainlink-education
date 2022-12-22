@@ -3,7 +3,7 @@ import { IsEnum, IsMongoId } from 'class-validator'
 import { ObjectId } from 'mongodb'
 
 import { getModel, Property } from '../../helpers/typegoose'
-import { CourseStatusType } from './CourseType'
+import { CourseStatusType, CourseSubjectType } from './CourseType'
 
 type TimeCourse = {
   time: number,
@@ -13,6 +13,10 @@ type TimeCourse = {
 export class Course {
   @IsMongoId()
   readonly _id!: ObjectId
+
+  @Property({ nullable: true })
+  @IsEnum(CourseSubjectType)
+  subject!: string
 
   @Property({ nullable: true })
   title!: string

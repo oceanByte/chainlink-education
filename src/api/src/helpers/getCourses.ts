@@ -4,18 +4,20 @@ import { CertificateModel } from '../shared/certificate/Certificate';
 import { Course, CourseModel } from '../shared/course/Course';
 import { COURSES, CourseStatusType, CourseTitleType } from '../shared/course/CourseType';
 import { User } from '../shared/user/User'
+import { createGroups } from './createGroups';
 
 interface IGetCourses {
   user: User
 }
 
 export const getCourses = async ({ user }: IGetCourses) => {
-  let courses = await CourseModel.find({ userId: user._id }).lean();
+  let courses: Course[] = await CourseModel.find({ userId: user._id }).lean();
 
   if (!courses.length) {
 		for (const course of COURSES) {
 			await CourseModel.create({
 				userId: user._id,
+				subject: course.subject,
 				title: course.title,
 				description: course.description,
 				difficulty: course.difficulty,
@@ -78,5 +80,25 @@ export const getCourses = async ({ user }: IGetCourses) => {
 		courses = await CourseModel.find({ userId: user._id }).lean();
 	}
 
-  return courses;
+	if (courses.length !== COURSES.length) {
+		for (const course of COURSES) {
+
+			const findCourse = courses.find((item) => item.title === course.title);
+	
+			if (!findCourse) {
+				await CourseModel.create({
+					userId: user._id,
+					subject: course.subject,
+					title: course.title,
+					description: course.description,
+					difficulty: course.difficulty,
+					status: course.status
+				} as Course)
+			}
+		}
+	}
+
+  const coursesByGroups = await createGroups({ courses, userId: user._id });
+
+  return coursesByGroups;
 }
