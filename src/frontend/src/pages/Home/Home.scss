@@ -122,10 +122,11 @@
   &-1 {
     background: url('../../assets/Ellipse.png') no-repeat bottom;
     background-size: cover;
-    @include fluid-size('margin-bottom', 375px, 1600px, 80px, 180px);
+    background-color: $grayscale3;
 
     @include sm {
       background: url('../../assets/ellipse-xs.png') no-repeat bottom;
+      background-color: $grayscale3;
       background-size: cover;
     }
   }
@@ -142,6 +143,16 @@
 }
 
 .home-courses {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  background-color: $grayscale3;
+  @include fluid-size('padding-top', 375px, 1600px, 80px, 180px);
+
   &-content {
     @include lg {
       @include fluid-size('margin-bottom', 1024px, 1600px, 100px, 150px);
@@ -181,10 +192,118 @@
       &__line {
         margin-top: 26px;
         width: 100%;
-        border-bottom: 1px solid #d4dbea;
+        border-bottom: 1px solid $grayscale4;
         @include md {
           margin-top: 18px;
         }
+      }
+    }
+
+    &__accordion {
+      margin-top: 60px;
+
+      @include md {
+        margin-top: 60px;
+      }
+
+      @include sm {
+        margin-top: 40px;
+      }
+
+      .panel {
+
+        &:first-child .panel-header {
+          border-top: none;
+        } 
+
+        &-header {
+          padding-top: 30px;
+          padding-bottom: 30px;
+          border-top: 1px solid $grayscale4;
+          cursor: pointer;
+
+          @include sm {
+            padding-top: 20px;
+            padding-bottom: 20px;
+          }
+
+          &__wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 15px;
+            
+            &-title {
+              font-family: $h-font;
+              font-style: normal;
+              font-weight: 900;
+              font-size: 32px;
+              line-height: 120%;
+              color: $grayscale1;
+
+              @include sm {
+                font-size: 20px;
+              }
+            }
+
+            &-number {
+              font-weight: 400;
+              font-family: $p-font;
+              margin-left: 10px;
+            }
+
+            &-arrow {
+              width: 50px;
+              height: 50px;
+              display: block;
+              border-radius: 50%;
+              border: 1px solid $grayscale4;
+              background: url('../../assets/accordion_arrow-down.svg') no-repeat center;
+              transition: all 0.3s ease-in-out;
+
+              &.active {
+                rotate: 180deg;
+              }
+
+              @include sm {
+                width: 40px;
+                height: 40px;
+              }
+            }
+          }
+        }
+
+        &-inner {
+          overflow: hidden;
+          will-change: height;
+          transition: height 0.4s cubic-bezier(0.65, 0.05, 0.36, 1);
+        }
+
+        &-content {
+          opacity: 0;
+          transition: opacity 0.3s linear 0.18s;
+        }
+        &.active {
+          .panel-label:after {
+            top: 0;
+            transform: translateY(-50%);
+            rotate: 180deg;
+          }
+          .panel-content {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    &__wrapper {
+      padding-top: 30px;
+      padding-bottom: 60px;
+
+      @include sm {
+        padding-top: 20px;
+        padding-bottom: 40px;
       }
     }
 
@@ -195,7 +314,7 @@
       justify-content: center;
 
       @include fluid-size('gap', 1024px, 1600px, 30px, 40px);
-      margin-top: 60px;
+      
 
       @include md {
         grid-template-columns: repeat(auto-fit, minmax(240px, auto));
@@ -203,6 +322,39 @@
 
       @include sm {
         grid-template-columns: repeat(1, minmax(240px, auto));
+      }
+    }
+
+    &__show-more {
+      max-width: 126px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      
+      border-bottom: 1px solid $grayscale4;
+      cursor: pointer;
+      margin-top: 40px;
+      padding-bottom: 4px;
+
+      @include sm {
+        margin-top: 10px;
+      }
+
+      &-title {
+        font-family: $p-font;
+        font-style: normal;
+        font-weight: 450;
+        font-size: 18px;
+        line-height: 27px;
+        color: $grayscale1;
+      }
+
+      &-arrow {
+        width: 24px;
+        height: 24px;
+        background: url('../../assets/fi_arrow-up.svg') no-repeat center;
       }
     }
 
@@ -215,16 +367,9 @@
       width: 100%;
       color: #000;
       box-sizing: border-box;
-      box-shadow: -20px 20px 60px rgba(100, 101, 121, 0.05), 20px 30px 67px rgba(209, 217, 230, 0.63),
-        -20px -31.3638px 35.026px rgba(255, 255, 255, 0.44708);
       border-radius: 20px;
+      border: 1px solid $grayscale4;
       transition: box-shadow ease-in-out 0.2s;
-
-      &:hover {
-        cursor: pointer;
-        box-shadow: -20px 20px 60px rgba(80, 81, 97, 0.05), 20px 30px 67px rgba(185, 191, 202, 0.63),
-          -20px -31.3638px 35.026px rgba(255, 255, 255, 0.44708);
-      }
 
       .course-inner {
         width: 100%;
@@ -426,30 +571,22 @@
   }
 }
 
-.highlight {
-  box-shadow: -10px 10px 30px rgba(38, 40, 66, 0.451), 20px 30px 67px rgba(209, 217, 230, 0.63),
-    -20px -31.3638px 35.026px rgba(255, 255, 255, 0.44708) !important;
-
-  &:hover {
-    cursor: pointer;
-    box-shadow: -10px 10px 30px rgba(17, 26, 146, 0.456), 20px 30px 67px rgba(185, 191, 202, 0.63),
-      -20px -31.3638px 35.026px rgba(255, 255, 255, 0.44708) !important;
-  }
-}
-
 .home-num-item {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   @include lg {
     @include fluid-size('margin-bottom', 1024px, 1600px, 100px, 150px);
+    @include fluid-size('margin-top', 375px, 1600px, 80px, 180px);
   }
   @include md {
+    margin-top: 80px;
     margin-bottom: 80px;
   }
   @include sm {
     flex-direction: column;
     align-items: center;
+    margin-top: 60px;
     margin-bottom: 60px;
   }
 

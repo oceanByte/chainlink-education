@@ -5,11 +5,11 @@ import AOS from 'aos'
 
 import { PublicUser } from 'shared/user/PublicUser'
 
-import { CourseCards } from 'app/App.components/CourseCard/CourseCard.controller'
 import { AboutChainlink } from 'app/App.components/AboutChainlink/AboutChainlink.controller'
 import { DeFi } from 'app/App.components/DeFi/DeFi.controller'
-import { CourseStatusType } from '../Course/Course.data'
+import { CourseStatusType, CourseSubjectType } from '../Course/Course.data'
 import 'aos/dist/aos.css'
+import { Accordion } from 'app/App.components/Accordion/Accordion.controller'
 
 type HomeViewProps = {
   user?: PublicUser
@@ -20,6 +20,7 @@ type HomeViewProps = {
 export const COURSES = [
   {
     title: 'Chainlink 101',
+    subject: CourseSubjectType.CHAINLINK,
     description: `Chainlink decentralized oracle networks provide tamper-proof inputs, outputs, and computations.`,
     difficulty: 1,
     status: CourseStatusType.NEW,
@@ -27,6 +28,7 @@ export const COURSES = [
   },
   {
     title: 'Solidity Introduction',
+    subject: CourseSubjectType.SOLIDITY,
     description: `Solidity is an object-oriented, high-level language for implementing smart contracts. Learn about the basics here.`,
     difficulty: 2,
     status: CourseStatusType.NEW,
@@ -34,6 +36,7 @@ export const COURSES = [
   },
   {
     title: 'Solidity 102',
+    subject: CourseSubjectType.SOLIDITY,
     description: `Learn more about the EVM, complex data types, flow control, access control, error handling and inheritance.`,
     difficulty: 3,
     status: CourseStatusType.NEW,
@@ -41,6 +44,7 @@ export const COURSES = [
   },
   {
     title: 'VRF v2 Introduction',
+    subject: CourseSubjectType.VRF_V2,
     description: `Study how VRF can be used to bring Verfiable Randomness to blockchain.`,
     difficulty: 2,
     status: CourseStatusType.NEW,
@@ -48,6 +52,7 @@ export const COURSES = [
   },
   {
     title: 'VRF v2 Advanced',
+    subject: CourseSubjectType.VRF_V2,
     description: `Explore the technical details and practical usage of VRF v2.`,
     difficulty: 3,
     status: CourseStatusType.NEW,
@@ -84,17 +89,19 @@ export const HomeView = ({ user }: HomeViewProps) => {
       </div>
       <div className="home-ellipse home-ellipse-1" />
 
-      <div className="home-content courses">
-        <div className="home-content home-courses-content">
-          <div className="home-courses-content__header h-font">
-            <div className="home-courses-content__header-text">Get started now</div>
-            <div className="home-courses-content__header__line" />
-          </div>
-          <div className="home-courses-content__items" id="get_started">
-            <CourseCards courses={user ? user.courses : COURSES} user={user} />
+      <div className='home-courses'>
+        <div className="home-content">
+          <div className="home-content home-courses-content">
+            <div id="get_started" className="home-courses-content__header h-font">
+              <div className="home-courses-content__header-text">Get started now</div>
+            </div>
+            <div className="home-courses-content__accordion" >
+              <Accordion courses={user ? user.courses : COURSES} user={user} />
+            </div>
           </div>
         </div>
       </div>
+      
 
       <div className="home-content home-num-item">
         <div className="home-num-item__image nft" />

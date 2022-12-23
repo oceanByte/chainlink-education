@@ -28,6 +28,37 @@ export enum CourseStatusType {
   IN_PROGRESS = 'IN PROGRESS',
 }
 
+export enum CourseSubjectType {
+  CHAINLINK = 'Chainlink Introduction',
+  SOLIDITY = 'Solidity',
+  VRF_V2 = 'VRF v2',
+  CHAINLINK_STAKING = 'Chainlink Staking',
+  REAL_USE_CASE_EXAMPLES = 'Real use case example',
+}
+
+export const GROUPS = [
+  {
+    subject: CourseSubjectType.CHAINLINK,
+    courses: [CourseNameType.CHAINLINK_101]
+  },
+  {
+    subject: CourseSubjectType.SOLIDITY,
+    courses: [CourseNameType.SOLIDITY_INTRO, CourseNameType.SOLIDITY_102]
+  },
+  {
+    subject: CourseSubjectType.VRF_V2,
+    courses: [CourseNameType.VRF_V2, CourseNameType.ADVANCED_VRF_V2]
+  },
+  {
+    subject: CourseSubjectType.CHAINLINK_STAKING,
+    courses: []
+  },
+  {
+    subject: CourseSubjectType.REAL_USE_CASE_EXAMPLES,
+    courses: []
+  },
+]
+
 export const courseData: CourseData[] = [
   {
     path: ChainlinkIntroduction.path,

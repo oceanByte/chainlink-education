@@ -65,9 +65,15 @@ export interface IAdditionalInfo {
   progress: any
   status: string
   title: string
+  subject: string
   urlChapter: string
   urlCourse: string
   _id: ObjectId
+}
+
+export interface ICoursesGroups {
+  subject: string
+  courses: Course[]
 }
 
 export const getCoursesData = (courses: Course[]) => {
@@ -111,4 +117,26 @@ export const getCoursesData = (courses: Course[]) => {
   return {
     ...coursesData,
   }
+}
+
+export const createGroupsBySubject = (courses: Course[]) => {
+  const coursesBySubject: ICoursesGroups[] = [];
+
+  courses.forEach((course) => {
+    const { subject } = course;
+
+    const findGroup = coursesBySubject.find((group) => group.subject === subject);
+
+    if (!findGroup) {
+      coursesBySubject.push({
+        subject,
+        courses: [course]
+      })
+      return;
+    }
+
+    findGroup.courses.push(course);
+  });
+
+  return coursesBySubject;
 }
