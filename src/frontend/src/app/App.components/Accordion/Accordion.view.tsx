@@ -7,26 +7,28 @@ import PanelWrapper from './Panel/Panel.controller'
 
 export interface IAccordionView{
   data: {
-    coursesBySubject: ICoursesGroups[],
+    courses: ICoursesGroups[],
     handlerActiveTab: (index: number) => void
     activeTab: number
     user?: PublicUser
+    type: string
   }
 }
 
 export const AccordionView = ({ data }: IAccordionView) => {
 
-  const { coursesBySubject, handlerActiveTab, activeTab, user } = data;
+  const { courses, handlerActiveTab, activeTab, user, type } = data;
 
   return (
     <>
-      {coursesBySubject.map((group, index) => (
+      {courses.map((group, index) => (
         <PanelWrapper key={group.subject} data={{
           group,
           handlerActiveTab,
           activeTab,
           user,
           index,
+          type,
         }} />
       ))}
     </>

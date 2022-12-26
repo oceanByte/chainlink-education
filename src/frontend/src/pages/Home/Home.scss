@@ -209,92 +209,6 @@
       @include sm {
         margin-top: 40px;
       }
-
-      .panel {
-
-        &:first-child .panel-header {
-          border-top: none;
-        } 
-
-        &-header {
-          padding-top: 30px;
-          padding-bottom: 30px;
-          border-top: 1px solid $grayscale4;
-          cursor: pointer;
-
-          @include sm {
-            padding-top: 20px;
-            padding-bottom: 20px;
-          }
-
-          &__wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            gap: 15px;
-            
-            &-title {
-              font-family: $h-font;
-              font-style: normal;
-              font-weight: 900;
-              font-size: 32px;
-              line-height: 120%;
-              color: $grayscale1;
-
-              @include sm {
-                font-size: 20px;
-              }
-            }
-
-            &-number {
-              font-weight: 400;
-              font-family: $p-font;
-              margin-left: 10px;
-            }
-
-            &-arrow {
-              width: 50px;
-              height: 50px;
-              display: block;
-              border-radius: 50%;
-              border: 1px solid $grayscale4;
-              background: url('../../assets/accordion_arrow-down.svg') no-repeat center;
-              transition: all 0.3s ease-in-out;
-
-              &.active {
-                rotate: 180deg;
-              }
-
-              @include sm {
-                width: 40px;
-                height: 40px;
-              }
-            }
-          }
-        }
-
-        &-inner {
-          overflow: hidden;
-          will-change: height;
-          transition: height 0.4s cubic-bezier(0.65, 0.05, 0.36, 1);
-        }
-
-        &-content {
-          opacity: 0;
-          transition: opacity 0.3s linear 0.18s;
-        }
-        &.active {
-          .panel-label:after {
-            top: 0;
-            transform: translateY(-50%);
-            rotate: 180deg;
-          }
-          .panel-content {
-            opacity: 1;
-          }
-        }
-      }
     }
 
     &__wrapper {
@@ -369,7 +283,6 @@
       box-sizing: border-box;
       border-radius: 20px;
       border: 1px solid $grayscale4;
-      transition: box-shadow ease-in-out 0.2s;
 
       .course-inner {
         width: 100%;

@@ -3,6 +3,7 @@ import React from 'react';
 
 import { PublicUser } from '../../../../shared/user/PublicUser'
 import { PanelView } from './Panel.view';
+import { PanelProfileView } from './PanelProfile.view';
 
 interface IPanelWrapper {
   data: {
@@ -11,23 +12,44 @@ interface IPanelWrapper {
     activeTab: number
     user?: PublicUser
     index: number
+    type: string
   }
 }
 
 const PanelWrapper = ({ data }: IPanelWrapper) => {
   const panelInnerRef = React.useRef<any>(null);
   const [coursesLimit, setCoursesLimit] = React.useState(6);
-  const { group, activeTab, index, handlerActiveTab } = data;
-  const { courses, subject } = group;
+  const { group, activeTab, index, handlerActiveTab, type, user } = data;
+  const { courses, subject, overallProgress } = group;
 
   const [state, setState] = React.useState({
     height: 0,
   });
 
-  const isActive = activeTab === index;
-  const innerStyle = {
-    height: `${isActive ? state.height : 0}px`,
+  const [groupState, setGroupState] = React.useState({
+    isOpen: overallProgress > 0,
+  });
+
+  const handlerOpenGroupTab = () => {
+    setGroupState((prev) => ({
+      isOpen: !prev.isOpen,
+    }));
   };
+
+  const getHeightData = (typePanel: string) => {
+    let isActive = typePanel === 'profile'? groupState.isOpen : activeTab === index;
+
+    const innerStyle = {
+      height: `${isActive ? state.height : 0}px`,
+    };
+
+    return {
+      isActive,
+      innerStyle
+    }
+  }
+
+  const { isActive, innerStyle } = getHeightData(type);
 
   const updateHeight = () => {
     if (panelInnerRef.current) {
@@ -61,20 +83,38 @@ const PanelWrapper = ({ data }: IPanelWrapper) => {
     };
   }, []);
 
-  return (
-    <PanelView data={{
-      subject,
-      courses,
-      activeTab,
-      index,
-      handlerActiveTab,
-      isActive,
-      panelInnerRef,
-      innerStyle,
-      coursesLimit,
-      handleClickMore,
-    }} />
-  );
+  switch (type) {
+    case 'profile':
+      return (
+        <PanelProfileView data={{
+          subject,
+          courses,
+          overallProgress,
+          user,
+          isActive,
+          handlerOpenGroupTab,
+          panelInnerRef,
+          innerStyle,
+        }} />
+      );
+  
+    default:
+      return (
+        <PanelView data={{
+          subject,
+          courses,
+          activeTab,
+          user,
+          index,
+          handlerActiveTab,
+          isActive,
+          panelInnerRef,
+          innerStyle,
+          coursesLimit,
+          handleClickMore,
+        }} />
+      );
+  }
 };
 
 

@@ -4,7 +4,7 @@ import { PublicUser } from 'shared/user/PublicUser'
 import { Course } from 'shared/course'
 
 import { OverallProgressView } from './OveralProgress.view'
-import { getCoursesData } from 'helpers/coursesInfo'
+import { createGroupsBySubject, getCoursesData, getProgressGroups } from 'helpers/coursesInfo'
 
 interface ICourseCard {
   courses: Course[] | undefined
@@ -13,6 +13,12 @@ interface ICourseCard {
 
 export const OverallProgress = ({ courses, user }: ICourseCard) => {
   const infoCourses = getCoursesData(courses || []);
+  const groups = createGroupsBySubject(courses || []);
 
-  return (<OverallProgressView user={user} infoCourses={infoCourses} />)
+  const groupsWithProgress = getProgressGroups({
+    groups,
+    infoCourses
+  })
+
+  return (<OverallProgressView user={user} infoCourses={infoCourses} groupsCourses={groupsWithProgress} />)
 }

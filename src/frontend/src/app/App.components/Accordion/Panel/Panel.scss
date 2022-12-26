@@ -1,0 +1,156 @@
+.panel {
+
+  &:first-child .panel-header {
+    border-top: none;
+  } 
+
+  &-header {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-top: 1px solid $grayscale4;
+    cursor: pointer;
+
+    @include sm {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 15px;
+      
+      &-title {
+        font-family: $h-font;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 32px;
+        line-height: 120%;
+        color: $grayscale1;
+
+        @include sm {
+          font-size: 20px;
+        }
+      }
+
+      &-number {
+        font-weight: 400;
+        font-family: $p-font;
+        margin-left: 10px;
+      }
+
+      &-arrow {
+        width: 50px;
+        height: 50px;
+        display: block;
+        border-radius: 50%;
+        border: 1px solid $grayscale4;
+        background: url('../../../../assets/accordion_arrow-down.svg') no-repeat center;
+        transition: all 0.3s ease-in-out;
+
+        &.active {
+          rotate: 180deg;
+        }
+
+        @include sm {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+
+  &-inner {
+    overflow: hidden;
+    will-change: height;
+    transition: height 0.4s cubic-bezier(0.65, 0.05, 0.36, 1);
+  }
+
+  &-content {
+    opacity: 0;
+    transition: opacity 0.3s linear 0.18s;
+  }
+  &.active {
+    .panel-label:after {
+      top: 0;
+      transform: translateY(-50%);
+      rotate: 180deg;
+    }
+    .panel-content {
+      opacity: 1;
+    }
+  }
+
+  &.panel-profile {
+
+    .panel-header {
+      @include sm {
+        padding-top: 10px;
+        padding-bottom: 30px;
+      }
+    }
+
+    .panel-header__wrapper {
+
+      &-block {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+
+        
+        @include md {
+          gap: 40px;
+        }
+
+        @include sm {
+          gap: 20px;
+        }
+      }
+
+      &-progress-bar {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        .circle-wrap {
+          width: 60px;
+          height: 60px;
+          position: relative;
+
+          @include sm {
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+    }
+
+    .sections-content__wrapper {
+      padding-bottom: 60px;
+
+      @include sm {
+        padding-bottom: 40px;
+      }
+
+      .course-footer {
+        &__progress-title {
+          font-family: $h-font;
+          font-style: normal;
+          font-weight: 900;
+          font-size: 18px;
+          line-height: 120%;
+          color: $grayscale1;
+  
+          @include md {
+            font-size: 18px;
+          }
+          @include sm {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}

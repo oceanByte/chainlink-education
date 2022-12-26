@@ -1,10 +1,7 @@
 .profile-page-progress-wrapper {
   width: 100%;
 
-  .top-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .top-inner {
 
     .profile-page-section__header {
 
@@ -35,9 +32,6 @@
       line-height: 27px;
       color: $grayscale2;
       margin-top: 10px;
-      max-width: 500px;
-      width: 100%;
-      padding-right: 20px;
 
       @include sm {
         font-size: 14px;

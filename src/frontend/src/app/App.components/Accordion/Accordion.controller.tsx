@@ -1,22 +1,20 @@
 import React from 'react'
 
 import { PublicUser } from '../../../shared/user/PublicUser'
-import { Course } from '../../../shared/course'
 
 import { AccordionView } from './Accordion.view'
-import { createGroupsBySubject } from 'helpers/coursesInfo'
+import { ICoursesGroups } from 'helpers/coursesInfo'
 
 interface IAccordion {
-  courses: Course[] | undefined
+  courses: ICoursesGroups[]
   user?: PublicUser
+  type: string
 }
 
-export const Accordion = ({ courses, user }: IAccordion) => {
+export const Accordion = ({ courses, user, type }: IAccordion) => {
   const [state, setState] = React.useState({
     activeTab: 0,
   });
-
-  if (!courses) return null;
 
   const handlerActiveTab = (index: number) => {
     setState((prev) => ({
@@ -24,15 +22,14 @@ export const Accordion = ({ courses, user }: IAccordion) => {
     }));
   };
 
-  const coursesBySubject = createGroupsBySubject(courses);
-
   return (
     <AccordionView
       data={{
-        coursesBySubject,
+        courses,
         handlerActiveTab,
         activeTab: state.activeTab,
         user,
+        type,
       }}
     />
   )

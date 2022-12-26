@@ -10,6 +10,7 @@ import { DeFi } from 'app/App.components/DeFi/DeFi.controller'
 import { CourseStatusType, CourseSubjectType } from '../Course/Course.data'
 import 'aos/dist/aos.css'
 import { Accordion } from 'app/App.components/Accordion/Accordion.controller'
+import { createGroupsBySubject } from 'helpers/coursesInfo'
 
 type HomeViewProps = {
   user?: PublicUser
@@ -95,8 +96,8 @@ export const HomeView = ({ user }: HomeViewProps) => {
             <div id="get_started" className="home-courses-content__header h-font">
               <div className="home-courses-content__header-text">Get started now</div>
             </div>
-            <div className="home-courses-content__accordion" >
-              <Accordion courses={user ? user.courses : COURSES} user={user} />
+            <div className="home-courses-content__accordion">
+              <Accordion courses={createGroupsBySubject(user ? user.courses ?? [] : COURSES)} user={user} type="home" />
             </div>
           </div>
         </div>

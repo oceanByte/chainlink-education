@@ -74,6 +74,12 @@ export interface IAdditionalInfo {
 export interface ICoursesGroups {
   subject: string
   courses: Course[]
+  overallProgress: number
+}
+
+export interface IProgressGroups {
+  groups: ICoursesGroups[]
+  infoCourses: ICoursesData
 }
 
 export const getCoursesData = (courses: Course[]) => {
@@ -123,6 +129,7 @@ export const createGroupsBySubject = <T extends { subject: string }>(courses: T[
   const coursesBySubject: Array<{
     subject: string
     courses: T[]
+    overallProgress: number
   }> = [];
 
   courses.forEach((course) => {
@@ -133,7 +140,8 @@ export const createGroupsBySubject = <T extends { subject: string }>(courses: T[
     if (!findGroup) {
       coursesBySubject.push({
         subject,
-        courses: [course]
+        courses: [course],
+        overallProgress: 0,
       })
       return;
     }
@@ -142,4 +150,28 @@ export const createGroupsBySubject = <T extends { subject: string }>(courses: T[
   });
 
   return coursesBySubject;
+}
+
+export const getProgressGroups = ({ groups, infoCourses }: IProgressGroups) => {
+  const groupsWithProgress = groups.map((group) => {
+
+    const { courses } = group;
+ 
+    let numberAllChapters = 0;
+    let numberCompletedChapters = 0;
+
+    courses.forEach((course:Course) => {
+      const currentCourse = infoCourses.courses[course.title];
+
+      numberAllChapters += currentCourse.countChapters;
+      numberCompletedChapters += course.progress.length
+    });
+
+    return {
+      ...group,
+      overallProgress: Math.floor((numberCompletedChapters / numberAllChapters) * 100)
+    }
+  })
+
+  return groupsWithProgress;
 }

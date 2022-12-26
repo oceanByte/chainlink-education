@@ -30,7 +30,7 @@ export const PanelView = ({ data }: IPanelView) => {
   if (!courses?.length) return null;
 
   return (
-    <div className={classNames('panel', { active: isActive })}>
+    <div className={classNames('panel panel-default', { active: isActive })}>
       <div className={classNames('panel-header')} onClick={() => handlerActiveTab(index)}>
         <div className="panel-header__wrapper">
           <div className="panel-header__wrapper-title">
@@ -45,11 +45,7 @@ export const PanelView = ({ data }: IPanelView) => {
       <div
         ref={panelInnerRef}
         style={innerStyle}
-        className={
-          classNames(
-            'panel-inner',
-            )
-          }
+        className={classNames('panel-inner')}
         >
           <CourseCards data={{
             courses,
