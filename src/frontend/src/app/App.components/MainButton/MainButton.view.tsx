@@ -23,6 +23,7 @@ type MainButtonViewProps = {
   hasArrowDown?: boolean
   hasHome?: boolean
   hasNftRight?: boolean
+  noBorder?: boolean
 }
 
 export const MainButtonView = ({
@@ -42,6 +43,7 @@ export const MainButtonView = ({
   hasArrowDown,
   hasHome,
   hasNftRight,
+  noBorder,
 }: MainButtonViewProps) => {
   return (
     <ButtonStyled
@@ -50,6 +52,7 @@ export const MainButtonView = ({
         isPrimary && 'isPrimary',
         isCompleted && 'isCompleted',
         isChapter && 'isChapter',
+        noBorder && 'noBorder',
         hasArrowUpRight && 'hasArrowUpRight',
         hasArrowRight && 'hasArrowRight',
         hasArrowLeft && 'hasArrowLeft',

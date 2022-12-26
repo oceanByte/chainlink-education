@@ -75,6 +75,7 @@ export interface ICoursesGroups {
   subject: string
   courses: Course[]
   overallProgress: number
+  numberCompletedCourses: number
 }
 
 export interface IProgressGroups {
@@ -130,6 +131,7 @@ export const createGroupsBySubject = <T extends { subject: string }>(courses: T[
     subject: string
     courses: T[]
     overallProgress: number
+    numberCompletedCourses: number
   }> = [];
 
   courses.forEach((course) => {
@@ -142,6 +144,7 @@ export const createGroupsBySubject = <T extends { subject: string }>(courses: T[
         subject,
         courses: [course],
         overallProgress: 0,
+        numberCompletedCourses: 0,
       })
       return;
     }
@@ -159,17 +162,23 @@ export const getProgressGroups = ({ groups, infoCourses }: IProgressGroups) => {
  
     let numberAllChapters = 0;
     let numberCompletedChapters = 0;
+    let numberCompletedCourses= 0;
 
     courses.forEach((course:Course) => {
       const currentCourse = infoCourses.courses[course.title];
 
       numberAllChapters += currentCourse.countChapters;
       numberCompletedChapters += course.progress.length
+
+      if (currentCourse.countChapters === course.progress.length) {
+        numberCompletedCourses += 1
+      }
     });
 
     return {
       ...group,
-      overallProgress: Math.floor((numberCompletedChapters / numberAllChapters) * 100)
+      overallProgress: Math.floor((numberCompletedChapters / numberAllChapters) * 100),
+      numberCompletedCourses,
     }
   })
 

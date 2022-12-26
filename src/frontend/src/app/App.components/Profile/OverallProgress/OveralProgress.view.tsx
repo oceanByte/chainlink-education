@@ -3,19 +3,14 @@ import React from 'react'
 import { PublicUser } from 'shared/user/PublicUser'
 
 import { IDataCourses } from '../Certificates/Certificates.view'
-import { Course } from 'shared/course'
 import { Accordion } from 'app/App.components/Accordion/Accordion.controller'
+import { ICoursesGroups } from 'helpers/coursesInfo'
 
-interface IGroupsCourses {
-  overallProgress: number
-  subject: string
-  courses: Course[]
-}
 
 interface ICourseView {
   infoCourses: IDataCourses
   user?: PublicUser
-  groupsCourses: IGroupsCourses[]
+  groupsCourses: ICoursesGroups[]
 }
 
 export const OverallProgressView = ({ infoCourses, user, groupsCourses }: ICourseView) => {
@@ -33,7 +28,7 @@ export const OverallProgressView = ({ infoCourses, user, groupsCourses }: ICours
         <>
           <div className='sections-content__line' />
 
-          <div className="" >
+          <div>
             <Accordion courses={groupsCourses} user={user} type="profile" />
           </div>
         </>

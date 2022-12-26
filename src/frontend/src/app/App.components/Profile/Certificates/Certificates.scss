@@ -63,80 +63,95 @@
     }
   }
 
-  .sections-content__line{
-    width: 100%;
-    border-bottom: 1px solid #D4DBEA;
-    margin: 30px 0;
-  }
+  .sections-content {
+    &__line {
+      width: 100%;
+      border-bottom: 1px solid $grayscale4;
+      margin: 30px 0;
+    }
 
-  .certificates-list {
-    display: grid;
-    grid-auto-rows: minmax(202px, auto);
-    grid-template-columns: repeat(2, minmax(281px, 340px));
-    gap: 30px 40px;
+    &__certificates {
+      margin-top: 60px;
 
-    .certificate-wrapp {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      @include sm {
+        margin-top: 40px;
+      }
 
-      .title {
+      &-title {
         font-style: normal;
         font-weight: 900;
-        font-size: 24px;
-        line-height: 29px;
+        font-size: 32px;
+        line-height: 120%;
         color: $grayscale1;
+
+        @include sm {
+          font-size: 22px;
+        }
       }
 
-      .description {
-        margin-top: 10px;
-        font-style: normal;
-        font-weight: 450;
-        font-size: 18px;
-        line-height: 27px;
-        color: $grayscale2;
+      &-wrapper {
+        margin-top: 30px;
+
+        @include sm {
+          margin-top: 20px;
+        }
       }
 
-      .course-btn-wrapper {
-        margin-top: 10px;
+      &-group {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 0;
+        border-bottom: 1px solid $secondary2;
 
-        @include md {
-          flex-direction: column;
-          align-items: flex-start;
+        @include sm {
+          gap: 10px;
+        }
 
-          .social-networks__wrapp {
-            margin-top: 10px;
+        &-subject {
+          font-style: normal;
+          font-weight: 900;
+          font-size: 24px;
+          line-height: 120%;
+          color: $grayscale1;
+
+          @include sm {
+            font-size: 16px;
           }
         }
 
-        @include lg {
-          flex-direction: column;
-          align-items: flex-start;
+        &-items {
+          .course {
+            &-wrapp {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
 
-          .social-networks__wrapp {
-            margin-top: 10px;
+              @include xs {
+                flex-direction: column;
+                align-items: flex-start;
+              }              
+            }
+
+            &-title {
+              font-style: normal;
+              font-weight: 450;
+              font-size: 18px;
+              line-height: 150%;
+              color: $grayscale2;
+
+              @include sm {
+                font-size: 14px;
+              }
+            }
+
+            &-btn-wrapper {
+              display: flex;
+              align-items: center;
+            }
           }
         }
-
-        @include xl {
-          flex-direction: row;
-          align-items: center;
-
-          .social-networks__wrapp {
-            margin-top: 0;
-          }
-        }
-      } 
-    }
-
-    @include md {
-      grid-template-columns: repeat(2, minmax(190px, auto));
-    }
-    @include sm {
-      grid-template-columns: repeat(1, minmax(auto, 325px));
+      }
     }
   }
 }

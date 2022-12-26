@@ -127,6 +127,16 @@ export const ButtonStyled = styled.button`
       border: 1px solid ${primary};
     }
 
+    &.noBorder {
+      border: none;
+      padding-left: 0;
+      padding-right: 34px;
+
+      &:not(:disabled):hover {
+        border: none;
+      }
+    }
+
     .arrow-upright {
       background: url(${arrowUpRightBlue}) no-repeat;
 
@@ -155,6 +165,17 @@ export const ButtonStyled = styled.button`
           width: 18px;
           height: 18px;
           background-size: contain;
+        }
+      }
+
+      &.noBorder {
+        .arrow-down {
+          right: 5px;
+          @media screen and (max-width: 576px) {
+            width: 24px;
+            height: 24px;
+            background-size: contain;
+          }
         }
       }
 
