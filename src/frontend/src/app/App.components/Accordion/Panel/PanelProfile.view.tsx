@@ -7,6 +7,7 @@ import { Course } from '../../../../shared/course'
 import { CourseProgressCardView } from 'app/App.components/Profile/OverallProgress/CourseProgressCard/CourseProgressCard.view';
 import { getCoursesData } from 'helpers/coursesInfo';
 import { CircularProgressBar } from 'app/App.components/CircleProgressBar/CircleProgressBar.view';
+import { CourseStatusType } from 'pages/Course/Course.data';
 
 interface IPanelProfileView {
   data: {
@@ -26,7 +27,7 @@ interface IPanelProfileView {
 export const PanelProfileView = ({ data }: IPanelProfileView) => {
   const { subject, courses, overallProgress, isActive, handlerOpenGroupTab, panelInnerRef, innerStyle, user } = data;
 
-  if (!courses?.length) return null;
+  if (!courses?.length || overallProgress === 100) return null;
 
   const infoCourses = getCoursesData(courses || []);
 
@@ -61,14 +62,14 @@ export const PanelProfileView = ({ data }: IPanelProfileView) => {
             <div className={
               classNames('sections-content__courses')
               }>
-              {courses.map((course, index) => (
+              {courses.map((course) => course.status !== CourseStatusType.COMPLETED ? (
                 <div
                   key={course.title}
                   className={classNames('panel-content')}
                 >
                   <CourseProgressCardView user={user} infoCourses={infoCourses} course={course} />
                 </div>
-              ))}
+              ): null )}
             </div>
           </div>
       </div>
