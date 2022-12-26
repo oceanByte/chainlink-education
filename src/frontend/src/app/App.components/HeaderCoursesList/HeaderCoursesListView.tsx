@@ -14,6 +14,7 @@ import { PublicUser } from 'shared/user/PublicUser'
 import { CourseData } from 'pages/Course/Course.controller'
 import { ChaptersListView } from '../ChaptersList/ChaptersListView'
 import { Course } from 'shared/course'
+import { createGroupsBySubject } from 'helpers/coursesInfo'
 
 interface IChaptersListView {
   user?: PublicUser
@@ -78,6 +79,8 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
     }))
   }
 
+  const coursesBySubject = user && user.courses !== undefined ? createGroupsBySubject(user.courses): createGroupsBySubject(courseData);
+
   if (!user) {
     return (
       <>
@@ -93,61 +96,77 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
           </div>
         ) : null}
 
-        {!state.isShowList &&
-          courseData.map((course: CourseData) => {
-            const currentPath = `/${course.path}/chapter-1`
-            const { coursePath } = findCurrentCourse({
-              ...course,
-              title: course.name,
-            })
-            const emptyCourse = new Course()
-
-            if (isMobile) {
-              return (
-                <div className="courses-container-mobile" key={course.path}>
-                  <div
-                    className={classnames('header-chapters__item', pathname === currentPath && 'current')}
-                    onClick={() =>
-                      showChaptersList({
-                        currentPath,
-                        coursePath,
-                        course,
-                      })
-                    }
-                  >
-                    <div className="header-chapters__item__name">
-                      <span className="h-font">{course.name}</span>
-                    </div>
-                    <div className="header-chapters__item__status">
-                      <div className={classnames('completion', 'completed')}>{CourseStatusType.NEW}</div>
-                      <div className="arrow-right"></div>
-                    </div>
-                  </div>
+        {!state.isShowList ? (
+          <>
+            {coursesBySubject.map(({ subject, courses }) => (
+              <div key={subject} className='courses-container-items'>
+                <div className='courses-container__header'>
+                  {subject}
                 </div>
-              )
-            }
+                <div className='courses-container__inner'>
+                  {
+                    courses.map((course: CourseData) => {
+                      const currentPath = `/${course.path}/chapter-1`
+                      const { coursePath } = findCurrentCourse({
+                        ...course,
+                        title: course.name,
+                      })
 
-            return (
-              <div className="courses-container" key={course.path}>
-                <Link
-                  to={currentPath}
-                  className={classnames('header-chapters__item', pathname === currentPath && 'current')}
-                  key={course.path}
-                >
-                  <div className="header-chapters__item__name">
-                    <span className="h-font">{course.name}</span>
-                  </div>
-                  <div className="header-chapters__item__status">
-                    <div className={classnames('completion', 'completed')}>{CourseStatusType.NEW}</div>
-                    <div className="arrow-right"></div>
-                  </div>
-                </Link>
-                <div className="chapters-container no-user">
-                  <ChaptersListView user={user} coursePath={coursePath} course={emptyCourse} pathname={pathname} />
+                      const classNameItem = classnames("header-course__item", { "current": pathname === currentPath })
+                      const emptyCourse = new Course()
+
+                      const getItemBody = () => (
+                        <>
+                          <div className="header-course__item-name">
+                            <span className="p-font">{course.name}</span>
+                          </div>
+                          <div className="header-course__item-status">
+                            <div className={classnames('completion', 'completed')}>{CourseStatusType.NEW}</div>
+                            <div className="arrow-right"></div>
+                          </div>
+                        </>
+                      )
+          
+                      if (isMobile) {
+                        return (
+                          <div className="courses-container-mobile" key={course.path}>
+                            <div
+                              className={classNameItem}
+                              onClick={() =>
+                                showChaptersList({
+                                  currentPath,
+                                  coursePath,
+                                  course,
+                                })
+                              }
+                            >
+                              {getItemBody()}
+                            </div>
+                          </div>
+                        )
+                      }
+          
+                      return (
+                        <div className="courses-container" key={course.path}>
+                          <Link
+                            to={currentPath}
+                            className={classNameItem}
+                            key={course.path}
+                          >
+                            {getItemBody()}
+                          </Link>
+                          <div className="chapters-container no-user">
+                            <ChaptersListView user={user} coursePath={coursePath} course={emptyCourse} pathname={pathname} />
+                          </div>
+                        </div>
+                      )
+                    })
+                  }
                 </div>
               </div>
-            )
-          })}
+            ))}
+          </>
+        ): null}
       </>
     )
   }
@@ -168,66 +187,74 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
             </div>
           ) : null}
 
-          {!state.isShowList &&
-            user.courses.map((course: any) => {
-              const { currentPath, coursePath } = findCurrentCourse(course)
-              if (isMobile) {
-                return (
-                  <div className="courses-container-mobile" key={course._id}>
-                    <div
-                      className={classnames('header-chapters__item', pathname === currentPath && 'current')}
-                      onClick={() =>
-                        showChaptersList({
-                          currentPath,
-                          coursePath,
-                          course,
-                        })
-                      }
-                    >
-                      <div className="header-chapters__item__name">
-                        <span className="h-font">{course.title}</span>
-                      </div>
-                      <div className="header-chapters__item__status">
-                        <div className={classnames('completion', 'completed')}>
-                          {course.status === CourseStatusType.COMPLETED
-                            ? CourseStatusType.COMPLETED
-                            : course.status === CourseStatusType.IN_PROGRESS
-                            ? CourseStatusType.IN_PROGRESS
-                            : CourseStatusType.NEW}
-                        </div>
-                        <div className="arrow-right"></div>
-                      </div>
-                    </div>
-                  </div>
-                )
-              }
-
-              return (
-                <div className="courses-container" key={course._id}>
-                  <Link
-                    to={currentPath}
-                    className={classnames('header-chapters__item', pathname === currentPath && 'current')}
-                  >
-                    <div className="header-chapters__item__name">
-                      <span className="h-font">{course.title}</span>
-                    </div>
-                    <div className="header-chapters__item__status">
-                      <div className={classnames('completion', 'completed')}>
-                        {course.status === CourseStatusType.COMPLETED
-                          ? CourseStatusType.COMPLETED
-                          : course.status === CourseStatusType.IN_PROGRESS
-                          ? CourseStatusType.IN_PROGRESS
-                          : CourseStatusType.NEW}
-                      </div>
-                      <div className="arrow-right"></div>
-                    </div>
-                  </Link>
-                  <div className="chapters-container">
-                    <ChaptersListView user={user} coursePath={coursePath} course={course} pathname={pathname} />
-                  </div>
+          {!state.isShowList ? (
+          <>
+            {coursesBySubject.map(({ subject, courses }) => (
+              <div key={subject} className='courses-container-items'>
+                <div className='courses-container__header'>
+                  {subject}
                 </div>
-              )
-            })}
+                <div className='courses-container__inner'>
+                  {
+                    courses.map((course: Course) => {
+                      const { currentPath, coursePath } = findCurrentCourse(course)
+                      const classNameItem = classnames("header-course__item", { "current": pathname === currentPath })
+                      const getItemBody = () => (
+                        <>
+                          <div className="header-course__item-name">
+                            <span className="p-font">{course.title}</span>
+                          </div>
+                          <div className="header-course__item-status">
+                            <div className={classnames('completion', 'completed')}>
+                              {course.status === CourseStatusType.COMPLETED
+                                ? CourseStatusType.COMPLETED
+                                : course.status === CourseStatusType.IN_PROGRESS
+                                ? CourseStatusType.IN_PROGRESS
+                                : CourseStatusType.NEW}
+                            </div>
+                            <div className="arrow-right"></div>
+                          </div>
+                        </>
+                      )
+                      if (isMobile) {
+                        return (
+                          <div className="courses-container-mobile" key={course._id?.toString()}>
+                            <div
+                              className={classNameItem}
+                              onClick={() =>
+                                showChaptersList({
+                                  currentPath,
+                                  coursePath,
+                                  course,
+                                })
+                              }
+                            >
+                              {getItemBody()}
+                            </div>
+                          </div>
+                        )
+                      }
+        
+                      return (
+                        <div className="courses-container" key={course._id?.toString()}>
+                          <Link
+                            to={currentPath}
+                            className={classNameItem}
+                          >
+                            {getItemBody()}
+                          </Link>
+                          <div className="chapters-container">
+                            <ChaptersListView user={user} coursePath={coursePath} course={course} pathname={pathname} />
+                          </div>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
+              </div>
+            ))}
+          </>
+        ): null}
         </>
       ) : null}
     </>

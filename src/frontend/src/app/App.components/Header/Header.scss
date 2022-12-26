@@ -130,10 +130,11 @@ html {
           top: 40px;
           left: -50%;
           transform: translateX(-50%);
-          padding: 20px 0 20px 30px;
+          padding: 30px 0 30px 30px;
           width: 480px;
           display: flex;
           flex-direction: column;
+          gap: 20px;
           box-shadow: 0px 15px 25px rgba(12, 22, 44, 0.1);
           border-radius: 20px;
           margin-top: 30px;
@@ -152,6 +153,34 @@ html {
             visibility: hidden;
             opacity: 0;
           }
+
+          .courses-container {
+            &-items {
+              display: flex;
+              flex-direction: column;
+              padding-right: 30px;
+            }
+            
+
+            &__header {
+              font-family: $p-font;
+              font-style: normal;
+              font-weight: 900;
+              font-size: 15px;
+              line-height: 19px;
+              color: $secondary1;
+              padding-bottom: 10px;
+              border-bottom: 1px solid $grayscale3;
+            }
+
+            &__inner {
+              .header-chapters__item {
+                &__name {
+                  font-weight: 450;
+                }
+              }
+            }
+          }
         }
 
         &:hover {
@@ -163,7 +192,7 @@ html {
           }
 
           .hidden {
-            display: block;
+            display: flex;
           }
         }
       }
@@ -306,10 +335,47 @@ html {
       width: 480px;
       display: flex;
       flex-direction: column;
+      gap: 20px;
       box-shadow: 0px 15px 25px rgba(12, 22, 44, 0.1);
       border-radius: 20px;
       visibility: hidden;
       opacity: 0;
+
+      .courses-container {
+
+        &-items {
+          .header-chapters__item {
+            border-bottom: 1px solid $grayscale3;
+          }
+        }
+        &-items:last-child {
+          .courses-container-mobile:last-child {
+            .header-chapters__item:last-child {
+              border-bottom: none;
+            }
+          }
+          
+        }
+
+        &__header {
+          font-family: $p-font;
+          font-style: normal;
+          font-weight: 900;
+          font-size: 13px;
+          line-height: 16px;
+          color: $secondary1;
+          padding-bottom: 10px;
+          border-bottom: 1px solid $grayscale3;
+        }
+
+        &__inner {
+          .header-chapters__item {
+            &__name {
+              font-weight: 450;
+            }
+          }
+        }
+      }
 
       @include md {
         top: 125px;
@@ -319,7 +385,7 @@ html {
       }
 
       &.show {
-        display: block;
+        display: flex;
         top: 43px;
         left: 10px;
         transform: translateX(-10px);

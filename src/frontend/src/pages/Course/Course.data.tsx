@@ -36,58 +36,41 @@ export enum CourseSubjectType {
   REAL_USE_CASE_EXAMPLES = 'Real use case example',
 }
 
-export const GROUPS = [
-  {
-    subject: CourseSubjectType.CHAINLINK,
-    courses: [CourseNameType.CHAINLINK_101]
-  },
-  {
-    subject: CourseSubjectType.SOLIDITY,
-    courses: [CourseNameType.SOLIDITY_INTRO, CourseNameType.SOLIDITY_102]
-  },
-  {
-    subject: CourseSubjectType.VRF_V2,
-    courses: [CourseNameType.VRF_V2, CourseNameType.ADVANCED_VRF_V2]
-  },
-  {
-    subject: CourseSubjectType.CHAINLINK_STAKING,
-    courses: []
-  },
-  {
-    subject: CourseSubjectType.REAL_USE_CASE_EXAMPLES,
-    courses: []
-  },
-]
 
 export const courseData: CourseData[] = [
   {
     path: ChainlinkIntroduction.path,
     pathname: `/${ChainlinkIntroduction.path}/info`,
     name: CourseNameType.CHAINLINK_101,
+    subject: CourseSubjectType.CHAINLINK,
     data: ChainlinkIntroduction,
   },
   {
     path: SolidityIntroduction.path,
     pathname: `/${SolidityIntroduction.path}/info`,
     name: CourseNameType.SOLIDITY_INTRO,
+    subject: CourseSubjectType.SOLIDITY,
     data: SolidityIntroduction,
   },
   {
     path: Solidity102.path,
     pathname: `/${Solidity102.path}/info`,
     name: CourseNameType.SOLIDITY_102,
+    subject: CourseSubjectType.SOLIDITY,
     data: Solidity102,
   },
   {
     path: vrfIntroduction.path,
     pathname: `/${vrfIntroduction.path}/info`,
     name: CourseNameType.VRF_V2,
+    subject: CourseSubjectType.VRF_V2,
     data: vrfIntroduction,
   },
   {
     path: vrf102.path,
     pathname: `/${vrf102.path}/info`,
     name: CourseNameType.ADVANCED_VRF_V2,
+    subject: CourseSubjectType.VRF_V2,
     data: vrf102,
   },
 ]

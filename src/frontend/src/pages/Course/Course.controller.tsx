@@ -12,6 +12,7 @@ export type CourseData = {
   path: string
   pathname: string
   name: string
+  subject: string
   data: Course
 }
 

@@ -1,6 +1,5 @@
 .courses-container {
   position: relative;
-  padding-right: 20px;
 
   .chapters-container {
     position: absolute;
@@ -71,7 +70,7 @@
   }
 }
 
-.header-chapters {
+.header-course {
   z-index: 15;
   position: absolute;
   background: #fff;
@@ -111,7 +110,7 @@
       border-bottom: none;
     }
 
-    &__name {
+    &-name {
       max-width: 320px;
       width: 100%;
       padding-right: 10px;
@@ -119,23 +118,24 @@
       line-height: 19px;
     }
 
-    &__status {
+    &-status {
       display: flex;
+      gap: 10px;
       align-items: center;
+      
 
       .completion {
         @include fluid-size('font-size', 375px, 1600px, 8px, 11px);
         @include fluid-size('line-height', 375px, 1600px, 10px, 14px);
-        color: #fff;
+        color: $white;
         border-radius: 5px;
-        width: 100px;
-        padding: 5px 10px;
         background: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        text-align: center;
         font-size: 11px;
-        line-height: 14px;
+        padding: 2px 5px;
+        font-style: normal;
+        font-weight: 450;
+        min-width: 90px;
   
         &.completed {
           background: $secondary3;
@@ -151,12 +151,9 @@
       }
 
       .arrow-right {
-        margin-left: 10px;
-        width: 0; 
-        height: 0; 
-        border-top: 8px solid transparent;
-        border-bottom: 8px solid transparent;
-        border-left: 8px solid $primary;
+        width: 20px;
+        height: 20px;
+        background: url(../../../assets/arrow-triangle-right.svg) no-repeat center;
       }
     }
   }

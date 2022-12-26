@@ -119,8 +119,11 @@ export const getCoursesData = (courses: Course[]) => {
   }
 }
 
-export const createGroupsBySubject = (courses: Course[]) => {
-  const coursesBySubject: ICoursesGroups[] = [];
+export const createGroupsBySubject = <T extends { subject: string }>(courses: T[]) => {
+  const coursesBySubject: Array<{
+    subject: string
+    courses: T[]
+  }> = [];
 
   courses.forEach((course) => {
     const { subject } = course;

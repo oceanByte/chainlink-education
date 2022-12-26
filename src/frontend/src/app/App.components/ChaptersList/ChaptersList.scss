@@ -67,13 +67,12 @@
       @include fluid-size('line-height', 375px, 1600px, 10px, 14px);
       color: $white ;
       border-radius: 5px;
-      width: 78px;
+      width: 90px;
       height: 19px;
       background: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 5px;
 
       &.completed {
         background: $secondary3;
