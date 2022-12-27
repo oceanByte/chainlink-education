@@ -225,7 +225,6 @@
       display: grid;
       grid-auto-rows: minmax(412px, auto);
       grid-template-columns: repeat(3, minmax(240px, auto));
-      justify-content: center;
 
       @include fluid-size('gap', 1024px, 1600px, 30px, 40px);
       

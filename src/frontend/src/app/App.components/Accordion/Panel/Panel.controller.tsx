@@ -19,7 +19,7 @@ interface IPanelWrapper {
 const PanelWrapper = ({ data }: IPanelWrapper) => {
   const panelInnerRef = React.useRef<any>(null);
   const [coursesLimit, setCoursesLimit] = React.useState(6);
-  const { group, activeTab, index, handlerActiveTab, type, user } = data;
+  const { group, activeTab, index, type, user } = data;
   const { courses, subject, overallProgress } = group;
 
   const [state, setState] = React.useState({
@@ -27,7 +27,7 @@ const PanelWrapper = ({ data }: IPanelWrapper) => {
   });
 
   const [groupState, setGroupState] = React.useState({
-    isOpen: overallProgress > 0,
+    isOpen: true,
   });
 
   const handlerOpenGroupTab = () => {
@@ -37,7 +37,8 @@ const PanelWrapper = ({ data }: IPanelWrapper) => {
   };
 
   const getHeightData = (typePanel: string) => {
-    let isActive = typePanel === 'profile'? groupState.isOpen : activeTab === index;
+    // let isActive = typePanel === 'profile'? groupState.isOpen : activeTab === index;
+    let isActive = groupState.isOpen;
 
     const innerStyle = {
       height: `${isActive ? state.height : 0}px`,
@@ -106,7 +107,7 @@ const PanelWrapper = ({ data }: IPanelWrapper) => {
           activeTab,
           user,
           index,
-          handlerActiveTab,
+          handlerActiveTab: handlerOpenGroupTab,
           isActive,
           panelInnerRef,
           innerStyle,
