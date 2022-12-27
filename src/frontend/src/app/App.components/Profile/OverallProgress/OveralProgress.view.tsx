@@ -21,14 +21,14 @@ export const OverallProgressView = ({ infoCourses, user, groupsCourses }: ICours
       <div className='top-inner'>
         <div className='profile-page-section__header h-font'>Overall progress</div>
         <div className='profile-page-section__description'>
-          Progress is calculated as the arithmetic mean of all the courses you started.
+          Progress in the subject is calculated as the arithmetic mean of all the courses you started there.
         </div>
       </div>
       {numberCompletedCourses !== numberCourses ? (
         <>
           <div className='sections-content__line' />
 
-          <div>
+          <div className='panel-wrapper'>
             <Accordion courses={groupsCourses} user={user} type="profile" />
           </div>
         </>

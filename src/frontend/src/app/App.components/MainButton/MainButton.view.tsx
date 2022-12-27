@@ -66,7 +66,7 @@ export const MainButtonView = ({
       disabled={disabled}
     >
       {hasArrowLeft ? <div className="arrow-left" /> : null}
-      <ButtonText>
+      <ButtonText className='button-text'>
         {loading ? (
           <>
             Loading

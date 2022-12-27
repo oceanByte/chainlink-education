@@ -135,6 +135,12 @@ export const ButtonStyled = styled.button`
       &:not(:disabled):hover {
         border: none;
       }
+
+      @media (max-width: 767px) {
+        height: 24px;
+        font-size: 14px;
+        line-height: 18px;
+      }
     }
 
     .arrow-upright {
@@ -169,6 +175,11 @@ export const ButtonStyled = styled.button`
       }
 
       &.noBorder {
+        
+        .button-text {
+          line-height: 150%;
+        }
+
         .arrow-down {
           right: 5px;
           @media screen and (max-width: 576px) {

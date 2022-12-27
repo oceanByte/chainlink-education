@@ -46,7 +46,9 @@ export const PanelProfileView = ({ data }: IPanelProfileView) => {
                 <CircularProgressBar
                   strokeWidth="7"
                   sqSize="60"
-                  percentage={overallProgress} />
+                  percentage={overallProgress}
+                  className="overallGroupProgress"
+                />
               </div>
             </div>
             <div className={classNames('panel-header__wrapper-arrow', { active: isActive })} />

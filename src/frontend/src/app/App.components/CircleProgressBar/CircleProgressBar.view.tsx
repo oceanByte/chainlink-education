@@ -7,9 +7,10 @@ interface ICircularProgressBar {
   percentage: number,
   strokeWidth: string,
   isOverallProgress?: boolean,
+  className?: string
 }
 
-export const CircularProgressBar = ({ sqSize, percentage, strokeWidth, isOverallProgress}: ICircularProgressBar) => {
+export const CircularProgressBar = ({ sqSize, percentage, strokeWidth, isOverallProgress, className }: ICircularProgressBar) => {
   const radius = (+sqSize - +strokeWidth) / 2;
   const circumferency = radius * Math.PI * 2;
   const viewBox = `0 0 ${sqSize} ${sqSize}`;
@@ -18,7 +19,7 @@ export const CircularProgressBar = ({ sqSize, percentage, strokeWidth, isOverall
   return (
       <CircleStyled
         viewBox={viewBox}
-        className={classnames(isOverallProgress && 'isOverallProgress')}
+        className={classnames(isOverallProgress && 'isOverallProgress', className)}
         >
           <defs>
             <linearGradient id="GradientColor" gradientTransform="rotate(55.74)">
