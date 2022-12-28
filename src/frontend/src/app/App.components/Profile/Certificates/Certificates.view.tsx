@@ -36,9 +36,14 @@ export const CertificatesView = ({ user, infoCourses, groups }: ICertificatesVie
       <div className='badges-list'>
       {user && user.courses
         ? user.courses.map((course: Course, key: number) => {
+          const currentCourse = courseData.find((c) => c.name === course.title);
           const additionalInfo: IAdditionalInfo = infoCourses.courses[course.title]
           return (
-            <div className="badge-wrapp" key={course.title}>
+            <div
+              className="badge-wrapp"
+              key={course.title}
+              onClick={() => history.push(currentCourse? `/description/${additionalInfo.urlCourse}`: '/')}
+            >
               <BadgeView percentage={additionalInfo.percent} title={course.title} isCompleted={course.status === CourseStatusType.COMPLETED} />
               <div className='title'>{course.title}</div>
             </div>

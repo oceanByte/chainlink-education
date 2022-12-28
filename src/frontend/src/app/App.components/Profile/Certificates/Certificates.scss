@@ -51,6 +51,11 @@
     margin-bottom: 35px;
 
     .badge-wrapp {
+      
+      &:hover {
+        cursor: pointer;
+      }
+
       .title {
         margin-top: 10px;
         font-style: normal;
