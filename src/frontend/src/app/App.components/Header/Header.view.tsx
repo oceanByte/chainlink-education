@@ -23,6 +23,7 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const coursesListRef = useRef<HTMLDivElement>(null);
   const history = useHistory();
 
   useEffect(() => {
@@ -137,6 +138,10 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
   }
   const showListAcademyMobile = () => {
     setIsShowList(!isShowList)
+
+    if (coursesListRef && coursesListRef.current) {
+      coursesListRef.current.scrollTop = 0
+    }
   }
 
   return (
@@ -149,9 +154,12 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
               <button className="btn" onClick={showListAcademy}>
                 Courses <span>&#9660;</span>
               </button>
-              <div className={classnames('courses-list', !isDropdownOpen && 'hidden')}>
-                <CoursesListView user={user} pathname={pathname} />
+              <div className='courses-list__wrapper'>
+                <div className={classnames('courses-list', !isDropdownOpen && 'hidden')}>
+                  <CoursesListView user={user} pathname={pathname} />
+                </div>
               </div>
+              
             </div>
             {user ? (
               <div className="header-menu-list__item">
@@ -183,8 +191,8 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
             <button className="btn" onClick={showListAcademyMobile}>
               Courses <span>&#9660;</span>
             </button>
-            <div className={classnames('courses-list', isShowList && 'show')}>
-              <CoursesListView user={user} pathname={pathname} isMobile />
+            <div ref={coursesListRef} className={classnames('courses-list', isShowList && 'show')}>
+              <CoursesListView user={user} pathname={pathname} isMobile coursesListRef={coursesListRef} />
             </div>
           </div>
           <div className="header__item-border" />

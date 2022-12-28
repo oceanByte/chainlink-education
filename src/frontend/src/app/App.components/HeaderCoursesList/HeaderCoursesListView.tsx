@@ -20,6 +20,7 @@ interface IChaptersListView {
   user?: PublicUser
   pathname: string
   isMobile?: boolean
+  coursesListRef?: any
 }
 
 interface ICoursePath {
@@ -28,7 +29,7 @@ interface ICoursePath {
   course?: any
 }
 
-export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView) => {
+export const CoursesListView = ({ user, pathname, isMobile, coursesListRef }: IChaptersListView) => {
   const [state, setState] = useState({
     coursePath: '',
     currentPath: '',
@@ -79,7 +80,15 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
     }))
   }
 
-  const coursesBySubject = user && user.courses !== undefined ? createGroupsBySubject(user.courses): createGroupsBySubject(courseData);
+  React.useEffect(() => {
+    if (state.isShowList && coursesListRef && coursesListRef.current) {
+      coursesListRef.current.scrollTop = 0;
+    }
+  }, [state.isShowList, coursesListRef])
+
+  const coursesBySubject = user && user.courses !== undefined ?
+    createGroupsBySubject(user.courses) :
+    createGroupsBySubject(courseData);
 
   if (!user) {
     return (
