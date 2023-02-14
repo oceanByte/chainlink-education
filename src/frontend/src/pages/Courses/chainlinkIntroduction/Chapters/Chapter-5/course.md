@@ -9,7 +9,7 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     NFTs are a part of Web3.0 so why not take truly advantage of this new primitive and make your NFT change depending on some conditions on the outside world? We call these changing NFTs <i>Dynamic NFT</i> or <i>dNFTs</i>. But how will you connect your dynamic NFT to outside data?  
+     NFTs are a part of Web 3.0 so why not take truly advantage of this new primitive and make your NFT change depending on some conditions on the outside world? We call these changing NFTs <i>Dynamic NFT</i> or <i>dNFTs</i>. But how will you connect your dynamic NFT to outside data?  
     </div>
   </div>
 </ContentWrapp>
@@ -34,9 +34,9 @@ This means developers can program smart contracts as long as their logic doesn�
   </div>
 </ContentWrapp>
 
-To create functional smart contracts we need a middleware system called an <ColorWord>Oracle</ColorWord>, but how will we make this Oracle? Well, we are trying to get price data into our smart contract for NFT’s. My friend Jim (trust me, he is good!) is an expert in cryptocurrency prices, and he even has a server set up that we can access for price data. Awesome, we'll make Jim our oracle and he will provide price data to our NFT smart contract.
+To create functional smart contracts we need a middleware system called an <ColorWord>Oracle</ColorWord>, but how will we make this Oracle? Well, we are trying to get price data into our smart contract for NFTs. My friend Jim (trust me, he is good!) is an expert in cryptocurrency prices, and he even has a server set up that we can access for price data. Awesome, we'll make Jim our oracle and he will provide price data to our NFT smart contract.
 
-But wait….didn’t all the great properties of smart contracts and blockchains come from their decentralized nature? What if Jim wanted to maliciously send our smart contract bad price data so he could manipulate it in his favor? What if his server goes offline when the NFT needs to update and thus can’t? What if Jim isn’t even malicious but gets hacked by a malicious actor? This single oracle solution isn’t solving much of the oracle problem because it isn’t <i>decentralized</i>, and thus provides a weak link that ruins all of those awesome smart contract properties. You  need to trust that Jim, and my word on Jim, that he is a great person and will act in the best interest of everyone. But what if we had a decentralized middleware solution, one where Jim doesn’t control everything (sorry Jim), so we didn’t have to trust him?
+But wait….didn’t all the great properties of smart contracts and blockchains come from their decentralized nature? What if Jim wanted to maliciously send our smart contract bad price data so he could manipulate it in his favor? What if his server goes offline when the NFT needs to update and thus can’t? What if Jim isn’t even malicious but gets hacked by a malicious actor? This single oracle solution isn’t solving much of the oracle problem because it isn’t <i>decentralized</i>, and thus provides a weak link that ruins all of those awesome smart contract properties. You need to trust that Jim, and my word on Jim, that he is a great person and will act in the best interest of everyone. But what if we had a decentralized middleware solution, one where Jim doesn’t control everything (sorry Jim), so we didn’t have to trust him?
 
 Finally we are here…...enter Chainlink!
 

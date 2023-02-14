@@ -23,6 +23,6 @@ Contracts are agreements that are enforceable in a court of law. You may have si
 <MissionContainer>
   <div className="title">Arbitration Court</div>
     <div className="description">
-    In fact, legal contracts have become so notoriously difficult to enforce more companies have been putting "arbitration" clauses in their contracts. This means a private arbitration court is used to uphold the contract rather than a public judicial court. There has been a lot of controversy surrounding arbitration courts. You can read more about the history of arbitration courts in <a href="https://www.americanbar.org/groups/tort_trial_insurance_practice/publications/the_brief/2018-19/summer/a-brief-history-arbitration/"> this article by the american bar association </a>.
+    In fact, legal contracts have become so notoriously difficult to enforce more companies have been putting "arbitration" clauses in their contracts. This means a private arbitration court is used to uphold the contract rather than a public judicial court. There has been a lot of controversy surrounding arbitration courts. You can read more about the history of arbitration courts in <a href="https://www.americanbar.org/groups/tort_trial_insurance_practice/publications/the_brief/2018-19/summer/a-brief-history-arbitration/"> this article by the American Bar Association </a>.
     </div>
 </MissionContainer>

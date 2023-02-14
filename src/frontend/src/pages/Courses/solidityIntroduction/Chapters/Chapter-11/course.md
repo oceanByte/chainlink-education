@@ -45,7 +45,7 @@ function addNumbers(uint num1, uint num2) public returns (uint)
 Finally we’ll create the function body by typing a pair of curly braces and typing our function logic within them:
 
 <Highlight class="language-javascript">
-function addNumbers(uint num1, uint num2) public returns (int) {
+function addNumbers(uint num1, uint num2) public returns (uint) {
  answer = num1 + num2;
  return answer;
 }

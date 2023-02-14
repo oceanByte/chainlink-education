@@ -18,7 +18,9 @@ It is common in programming to want to store many associated values together. Fo
 
 Just like regular variables arrays can only store one type of data, but can have multiple values of that type stored within it. To declare a variable as an array, we put square brackets next to the type of the variable. For example:
 
-string[]  myBooks;
+<Highlight class="language-javascript">
+string[] myBooks;
+</Highlight>
 
 Creates a variable called “myBooks” which is an array of strings.
 
