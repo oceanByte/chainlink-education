@@ -19,7 +19,7 @@ We’ve gone over storing data as variables, some of the significant fundamental
 You can define a struct by declaring the struct keyword, naming the struct, then putting the structure of the struct within curly braces. For example, we could define a struct called “Car” composed of three fundamental types: a string for the make, a string for the model, and a uint for the VIN. This is how we would define this struct:
 
 <Highlight class="language-javascript">
-Struct car {
+struct car {
   string make,
   string model,
   uint VIN

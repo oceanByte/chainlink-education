@@ -1,9 +1,11 @@
-// Implement the missing function to display the recent comments
+pragma solidity ^0.8.7;
 
-async function setupMemeContracts() { memeList.forEach(meme => { memeContracts.push(await new Contract( window.walletConnection.account(), meme + “.” + nearConfig.contractName, { viewMethods: ['get_meme', ‘get_recent_comments’], changeMethods: [‘set_comment’]})) })
+contract HelloWeb3 {
 
-await Promise.all(memeContracts) }
+    function addNumbers(uint num1, uint num2) public returns (uint) {
 
-const memeContracts = []; setupMemeContracts();
+        answer = num1 + num2;
+        return answer;
+    }
 
-async function getRecentComments(index) { // TODO implement me const recentComments = await memeContracts[index].get_recent_comments(); return recentComments; }
+}
