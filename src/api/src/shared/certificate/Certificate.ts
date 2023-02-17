@@ -12,10 +12,10 @@ export class Certificate {
   username!: string
 
   @Property({ nullable: true })
-  userId!: ObjectId
+  userId!: ObjectId | undefined
 
   @Property({ nullable: true })
-  courseId!: string
+  courseId!: ObjectId | undefined
 
   @Property({ nullable: true })
   code!: string

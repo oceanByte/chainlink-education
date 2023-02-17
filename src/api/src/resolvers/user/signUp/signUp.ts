@@ -42,10 +42,10 @@ export const signUp = async (ctx: Context, next: Next): Promise<void> => {
   } */
   
   const hashedPassword = await hash(password, 12)
-  const user: User = await UserModel.create({ email, username, hashedPassword } as User)
+  const user: User = await UserModel.create<User>({ email, username, hashedPassword } as User)
 
   for (const course of COURSES) {
-    await CourseModel.create({
+    await CourseModel.create<Course>({
       userId: user._id,
       title: course.title,
       description: course.description,

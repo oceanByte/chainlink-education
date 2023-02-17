@@ -51,7 +51,6 @@ export const changeEmailPending = async (ctx: Context, next: Next): Promise<void
 }
 
 export const changeEmailSuccess = async (ctx: Context, next: Next): Promise<void> => {
-
   const { key: token, email } = ctx.request.query
 
   const captcha: Captcha = (await CaptchaModel.findOne({
@@ -68,7 +67,7 @@ export const changeEmailSuccess = async (ctx: Context, next: Next): Promise<void
 
   await UserModel.updateOne(
     { _id: user._id },
-    { $set: { email } },
+    { $set: { email: email as string } },
   ).exec()
 
 

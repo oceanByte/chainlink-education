@@ -43,14 +43,14 @@ export const addProgress = async (ctx: Context, next: Next): Promise<void> => {
       username: user.username,
     }).lean() as Certificate
     
-    if (!certificate) {  
-      await CertificateModel.create({
+    if (!certificate) {
+      await CertificateModel.create<Certificate>({
         coursePath,
         username: user.username,
         userId: user._id,
         courseId,
-        code: '' // randomstring.generate({length: 62, charset: 'hex'});
-      })
+        code: ''
+      });
     }
   }
 

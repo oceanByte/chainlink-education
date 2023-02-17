@@ -14,7 +14,7 @@ export const createCaptcha: CreateCaptcha = async (userId, captchaFor) => {
 
   const captchaPair: CaptchaPair = getRandomCaptchaPair()
 
-  const captcha: Captcha = await CaptchaModel.create({
+  const captcha: Captcha = await CaptchaModel.create<Captcha>({
     userId,
     index: captchaPair.captchaIndex,
     solution: captchaPair.captchaSolution,
