@@ -13,7 +13,7 @@ export enum CourseTitleType {
   VRF_V2_102 = 'VRF v2 Advanced'
 }
 
-export const COURSES = [
+export const COURSES: {title: string, description: string, difficulty: number, status: string}[] = [
   {
     title: CourseTitleType.CHAINLINK_101,
     description: `Chainlink decentralized oracle networks provide tamper-proof inputs, outputs, and computations`,
@@ -31,7 +31,6 @@ export const COURSES = [
     description: `Learn more about the EVM, complex data types, flow control, access control, error handling and inheritance.`,
     difficulty: 3,
     status: CourseStatusType.NEW,
-    progress: [],
   },
   {
     title: CourseTitleType.VRF_V2,
