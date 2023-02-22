@@ -18,7 +18,7 @@ import { getCertificate } from './resolvers/page/getCertificate/getCertificate'
 import { changeUsername } from './resolvers/user/changeUsername/changeUsername'
 import { issueCertificate, setAddress } from './resolvers/user/issueCertificate/issueCertificate'
 import { getAllCourses } from "./resolvers/course/getAllCourses";
-import { getCourseById } from "./resolvers/course/getCourseById";
+import {getCourse} from "./resolvers/course/getCourseById";
 import { getCourseChapter } from "./resolvers/course/getCourseChapter";
 import { validateChapterAnswer } from "./resolvers/course/validateChapterAnswer";
 
@@ -56,10 +56,10 @@ router.post('/page/get-certificate', getCertificate)
 router.post('/page/get-user', getPublicUser)
 router.post('/page/set-name', setName)
 
-router.get('/v1/course', getAllCourses)
-router.get('/v1/course/:courseId', getCourseById)
-router.get('/v1/course/:courseId/:chapterId', getCourseChapter)
+router.get('/v1/course', getAllCourses) // OK
+router.get('/v1/course/:path', getCourse) // OK
+router.get('/v1/course/:path/:chapterPath', getCourseChapter) // OK
 
-router.post('/v1/course/:courseId/:chapterId/validation', validateChapterAnswer)
+router.post('/v1/course/:path/:chapterPath/validation', validateChapterAnswer) // request: {answer: [string]}
 
 export { router }

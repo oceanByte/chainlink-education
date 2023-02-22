@@ -1,36 +1,48 @@
 import {Context, Next} from "koa";
+import {getCourseByPath} from "../../shared/course/courses";
+import {User} from "../../shared/user/User";
+import {authenticate} from "../user/helpers/authenticate";
+import {Course, CourseModel} from "../../shared/course/Course";
+import {ChapterType} from "../../shared/course/courses/course.types";
 
-export const getCourseById = async (ctx: Context, next: Next): Promise<void> => {
+export type CourseList = {
+    title: string
+    description?: string
+
+    amountOfTime: string
+    difficulty: number
+    status: string
+    countChapters: number
+    percent: number
+
+    urlCourse: string
+    urlChapter?: string
+}
+
+export type CourseWithChapters = {
+    descriptionCourse: string,
+    progress: string[],
+    chapters: ChapterType[]
+} & CourseList
+
+export const getCourse = async (ctx: Context, next: Next): Promise<void> => {
     const req = ctx.request as any
-    const courseId = req.params.courseId
+    const coursePath: string = req.params.path
+    let userCourses: Course[] = [];
 
-    const courses = [
-        {
-            id: 1,
-            name: 'Course 1'
-        },
-        {
-            id: 2,
-            name: 'Course 2'
-        },
-        {
-            id: 3,
-            name: 'Course 3'
-        },
-        {
-            id: 4,
-            name: 'Course 4'
-        },
-        {
-            id: 5,
-            name: 'Course 5'
-        }
-    ]
+    try {
+        const user: User = await authenticate(ctx);
 
-    const course = courses.find(course => Number(course.id) === Number(courseId))
-    console.log(course)
+        // Get user courses to match with course list
+        userCourses = await CourseModel.find({userId: user._id});
+    } catch (e) {
+        // token and user is optional, If we don't have a token we can continue without user authentication
+        console.log(`Status: ${e.status}, message: ${e.message}`);
+    }
+    const course = getCourseByPath(coursePath, userCourses);
+
     ctx.status = 200
-    ctx.body = course
+    ctx.body = {course}
 
     await next();
 }

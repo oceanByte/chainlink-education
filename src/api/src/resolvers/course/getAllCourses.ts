@@ -1,30 +1,41 @@
 import {Context, Next} from "koa";
 import {User} from "../../shared/user/User";
 import {authenticate} from "../user/helpers/authenticate";
-import {CourseModel} from "../../shared/course/Course";
+import {Course, CourseModel} from "../../shared/course/Course";
 import {getCourses} from "../../shared/course/courses";
 
 export type CourseList = {
     title: string
-    countChapters: number
-    time: string
-    description: string
+    description?: string
+
+    amountOfTime: string
     difficulty: number
     status: string
+    countChapters: number
     percent: number
+
+    urlCourse: string
+    urlChapter?: string
 }
 
 export const getAllCourses = async (ctx: Context, next: Next): Promise<any> => {
-    const user: User = await authenticate(ctx);
+    let userCourses: Course[] = [];
 
-    // Get user courses to match with course list
-    const userCourses = await CourseModel.find({userId: user._id});
+    try {
+        const user: User = await authenticate(ctx);
+
+        // Get user courses to match with course list
+        userCourses = await CourseModel.find({userId: user._id});
+    }catch (e) {
+        // token and user is optional, If we don't have a token we can continue without user authentication
+        console.log(`Status: ${e.status}, message: ${e.message}`);
+    }
 
     // Get course list by user courses
-    const fileCourses: CourseList[] | void = getCourses(userCourses);
+    const response: CourseList[] | void = getCourses(userCourses);
 
     ctx.status = 200;
-    ctx.body = fileCourses;
+    ctx.body = response;
 
     await next();
 }

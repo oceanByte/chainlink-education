@@ -8,7 +8,7 @@ export const course: CourseType = {
     title: CourseTitleType.CHAINLINK_101,
     path: "chainlinkIntroduction",
     description: data,
-    difficulty: 1,
+    difficulty: 3,
     amountOfTime: '2 hours',
     status: CourseStatusType.NEW
 }
