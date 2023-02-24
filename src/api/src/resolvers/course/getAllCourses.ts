@@ -5,6 +5,8 @@ import {Course, CourseModel} from "../../shared/course/Course";
 import {getCourses} from "../../shared/course/courses";
 
 export type CourseList = {
+    id: string
+
     title: string
     description?: string
 
@@ -32,7 +34,7 @@ export const getAllCourses = async (ctx: Context, next: Next): Promise<any> => {
     }
 
     // Get course list by user courses
-    const response: CourseList[] | void = getCourses(userCourses);
+    const response: CourseList[] = getCourses(userCourses);
 
     ctx.status = 200;
     ctx.body = response;

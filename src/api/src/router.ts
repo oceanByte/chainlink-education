@@ -21,6 +21,7 @@ import { getAllCourses } from "./resolvers/course/getAllCourses";
 import {getCourse} from "./resolvers/course/getCourseById";
 import { getCourseChapter } from "./resolvers/course/getCourseChapter";
 import { validateChapterAnswer } from "./resolvers/course/validateChapterAnswer";
+import {loginUser, findUser, storeUserProgress, getNonce} from "./resolvers/user/metaMask";
 
 const router = new Router()
 
@@ -56,10 +57,20 @@ router.post('/page/get-certificate', getCertificate)
 router.post('/page/get-user', getPublicUser)
 router.post('/page/set-name', setName)
 
-router.get('/v1/course', getAllCourses) // OK
-router.get('/v1/course/:path', getCourse) // OK
-router.get('/v1/course/:path/:chapterPath', getCourseChapter) // OK
+/** NEW FEATURES, SOME ROUTES CAN BE THE COPY OF EXISTED ROUTES **/
 
-router.post('/v1/course/:path/:chapterPath/validation', validateChapterAnswer) // request: {answer: [string]}
+/** COURSE ROUTEs **/
+router.get('/v1/course', getAllCourses) // Course[]: if user logged in returns courses with user progress inside
+router.get('/v1/course/:path', getCourse) // Course: if user logged in returns course with user progress inside
+router.get('/v1/course/:path/:chapterPath', getCourseChapter) // Chapter: Returns course with selected chapter inside and info about progress
+router.post('/v1/course/:path/:chapterPath/validation', validateChapterAnswer) // Boolean: returns true if chapter answer is valid, false otherwise. Request body: {answer: [string]}
+
+/** USER ROUTES **/
+router.post('/v1/users/nonce', getNonce) // => {publicAddress: string} => {nonce: number}: Will find or create User and return only nonce
+router.post('/v1/users/login', loginUser) // => {signature, publicAddress} => {jwt: string, user: User} returns JWT token and current User
+router.post('/v1/users', findUser) // JWT!: Will return User if JWT token is valid
+
+// JWT!: Will store User progress and update course status to COMPLETED if all chapters are done and create a certificate to display image
+router.post('/v1/users/progress', storeUserProgress)
 
 export { router }

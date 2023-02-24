@@ -13,7 +13,7 @@ import {ResponseError} from "../../mongo/ResponseError";
 import {CourseWithChapter} from "../../../resolvers/course/getCourseChapter";
 import {CourseWithChapters} from "../../../resolvers/course/getCourseById";
 
-const courses: CourseChapterType[] = [
+export const courses: CourseChapterType[] = [
     chainlinkIntroduction,
     solidityIntroduction,
     solidity102,
@@ -39,6 +39,7 @@ export const getCourses = (userCourses: Course[] = []): CourseList[] => {
             const courseType = COURSES.find(c => c.title === cc.course.title);
 
             const courseItem: CourseList = {
+                id: '',
                 title: cc.course.title,
                 countChapters: cc.chapters.length,
                 amountOfTime: cc.course.amountOfTime,
@@ -55,6 +56,7 @@ export const getCourses = (userCourses: Course[] = []): CourseList[] => {
 
             const courseProgress = userCourse.progress.length
 
+            courseItem.id = userCourse._id.toString()
             courseItem.status = userCourse.status
             courseItem.percent = (courseProgress / cc.chapters.length) * 100
 
@@ -72,6 +74,7 @@ export const getCourseByPath = (path: string, userCourses: Course[] = []): any =
     const userCourse: Course | undefined = userCourses.find(uc => uc.title === course.course.title)
 
     let item: CourseWithChapters = {
+        id: '',
         title: course.course.title,
         countChapters: course.chapters.length,
         amountOfTime: course.course.amountOfTime,
@@ -91,6 +94,7 @@ export const getCourseByPath = (path: string, userCourses: Course[] = []): any =
 
 
     if (userCourse) {
+        item.id = userCourse._id.toString()
         item.progress = userCourse.progress
         item.status = userCourse.status
 
@@ -115,6 +119,7 @@ export const getCourseWithChapter = (options: CourseWithChapterOptions, userCour
     const userCourse: Course | undefined = userCourses.find(uc => uc.title === course.course.title)
 
     let item: CourseWithChapter = {
+        id: '',
         title: course.course.title,
         countChapters: course.chapters.length,
         amountOfTime: course.course.amountOfTime,
@@ -134,8 +139,9 @@ export const getCourseWithChapter = (options: CourseWithChapterOptions, userCour
     }
 
     if (userCourse) {
-        item.progress = userCourse.progress
-        item.status = userCourse.status
+        item.id = userCourse._id.toString()
+        item.progress = userCourse.progress;
+        item.status = userCourse.status;
 
         const courseProgress = userCourse.progress.length
 

@@ -4,20 +4,7 @@ import {User} from "../../shared/user/User";
 import {authenticate} from "../user/helpers/authenticate";
 import {Course, CourseModel} from "../../shared/course/Course";
 import {ChapterType} from "../../shared/course/courses/course.types";
-
-export type CourseList = {
-    title: string
-    description?: string
-
-    amountOfTime: string
-    difficulty: number
-    status: string
-    countChapters: number
-    percent: number
-
-    urlCourse: string
-    urlChapter?: string
-}
+import {CourseList} from "./getAllCourses";
 
 export type CourseWithChapters = {
     descriptionCourse: string,
