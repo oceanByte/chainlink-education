@@ -13,6 +13,7 @@ import 'aos/dist/aos.css'
 
 type HomeViewProps = {
   user?: PublicUser
+  courses: any
   contactUsCallback: (values: any) => void
 }
 
@@ -55,12 +56,13 @@ export const COURSES = [
   },
 ]
 
-export const HomeView = ({ user }: HomeViewProps) => {
+export const HomeView = ({ user, courses }: HomeViewProps) => {
   useEffect(() => {
     AOS.init({
       duration: 700,
     })
   }, [])
+
 
   return (
     <div className="home">
