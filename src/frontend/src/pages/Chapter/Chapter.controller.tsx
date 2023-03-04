@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom'
 import { State } from 'reducers'
 import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
-import { COURSES } from 'pages/Home/Home.view'
 
 import { getUser } from 'pages/User/User.actions'
 import { addProgress } from './Chapter.actions'
@@ -29,6 +28,7 @@ import { ChapterView } from './Chapter.view'
 export interface ChapterData {
   pathname: string
   name: string
+  description?: string
   data: Data
 }
 
@@ -80,6 +80,7 @@ export const Chapter = () => {
     value: 0,
   })
   const [validatorState, setValidatorState] = useState(PENDING)
+  const courses = useSelector((state: State) => state.courses)
   const [showDiff, setShowDiff] = useState(false)
   const [isAccount, setIsAccount] = useState(false)
   const [isStarted, setIsStarted] = useState(false)
@@ -112,7 +113,7 @@ export const Chapter = () => {
   const partCurrentUrl = pathname.split('/')[1]
   const findLocalCourse = courseData.find((course) => course.path === partCurrentUrl)
 
-  const infoCourses = getCoursesData((user && user.courses) || COURSES)
+  const infoCourses = getCoursesData((user && user.courses) || courses)
   const additionalInfo: IAdditionalInfo = infoCourses.courses[findLocalCourse?.name || '']
 
   /* eslint-disable @typescript-eslint/no-unused-vars */

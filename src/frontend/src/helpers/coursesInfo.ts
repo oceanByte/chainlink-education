@@ -7,7 +7,7 @@ import { course as ChainlinkIntroduction } from '../pages/Courses/chainlinkIntro
 import { course as SolidityIntroduction } from '../pages/Courses/solidityIntroduction'
 import { course as vrfIntroduction } from '../pages/Courses/vrfIntroduction'
 import { course as Solidity102 } from '../pages/Courses/solidity102'
-import { course as vrf102} from '../pages/Courses/vrf102'
+import { course as vrf102 } from '../pages/Courses/vrf102'
 
 import { chapterData as ChainlinkIntroductionChapters } from '../pages/Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { chapterData as SolidityIntroductionChapters } from '../pages/Courses/solidityIntroduction/Chapters/Chapters.data'
@@ -24,7 +24,7 @@ interface ICoursesData {
 
 const getUrl = (progress: number, path: string, countChapter: number) => {
   if (progress === 0 || progress === countChapter) {
-   return `/${path}/chapter-1`
+    return `/${path}/chapter-1`
   }
 
   return `/${path}/chapter-${progress + 1}`
@@ -34,13 +34,13 @@ export const getCourseChapters = (title: string) => {
   if (title === CourseNameType.CHAINLINK_101) {
     return { chapters: ChainlinkIntroductionChapters, additionalInfo: ChainlinkIntroduction }
   } else if (title === CourseNameType.SOLIDITY_INTRO) {
-    return { chapters: SolidityIntroductionChapters, additionalInfo: SolidityIntroduction}
+    return { chapters: SolidityIntroductionChapters, additionalInfo: SolidityIntroduction }
   } else if (title === CourseNameType.SOLIDITY_102) {
-    return { chapters: Solidity102Chapters, additionalInfo: Solidity102}
+    return { chapters: Solidity102Chapters, additionalInfo: Solidity102 }
   } else if (title === CourseNameType.VRF_V2) {
-    return { chapters: vrfIntroductionChapters, additionalInfo: vrfIntroduction}
+    return { chapters: vrfIntroductionChapters, additionalInfo: vrfIntroduction }
   } else if (title === CourseNameType.ADVANCED_VRF_V2) {
-    return { chapters: vrf102Chapters, additionalInfo: vrf102}
+    return { chapters: vrf102Chapters, additionalInfo: vrf102 }
   }
 
   return {
@@ -55,10 +55,9 @@ export const getCourseChapters = (title: string) => {
 
 export interface IAdditionalInfo {
   amountOfTime: string
-  chapterTimes: any
   chapters: any
   countChapters: number
-  description: string
+  description?: string
   descriptionCourse: string
   difficulty: number
   percent: number
@@ -81,10 +80,10 @@ export const getCoursesData = (courses: Course[]) => {
   let numberAllChapters = 0;
   let numberCompletedChapters = 0;
 
-  courses.forEach((course:Course) => {
+  courses.forEach((course: Course) => {
     const title = course.title
-    const courseProgress = course.progress.length
-    
+    const courseProgress = course?.progress?.length ?? 0
+
     const { chapters, additionalInfo } = getCourseChapters(title)
     const urlChapter = getUrl(courseProgress, additionalInfo.path, ChainlinkIntroductionChapters.length)
     coursesData.courses[title] = {
@@ -92,7 +91,7 @@ export const getCoursesData = (courses: Course[]) => {
       percent: Math.floor((courseProgress / chapters.length) * 100),
       countChapters: chapters.length,
       chapters,
-      amountOfTime:  additionalInfo?.amountOfTime,
+      amountOfTime: additionalInfo?.amountOfTime,
       urlChapter,
       urlCourse: additionalInfo.path,
       descriptionCourse: additionalInfo.description

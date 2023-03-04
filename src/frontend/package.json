@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "PORT=3000 NODE_ENV=development REACT_APP_BACKEND_URL=http://localhost:8080 react-scripts -r @cypress/instrument-cra start && \"open http://localhost:3000/\"",
-    "start-windows": "set PORT=3000 && set NODE_ENV=development && set REACT_APP_BACKEND_URL=http://localhost:8080 && react-scripts -r @cypress/instrument-cra start && \"open http://localhost:3000/\"",
+    "start-windows": "set PORT=3000 && set NODE_ENV=development && set REACT_APP_BACKEND_URL=http://localhost:8080&& react-scripts -r @cypress/instrument-cra start && \"open http://localhost:3000/\"",
     "build": "react-scripts build",
     "docker-create": "doctl k8s cluster create --region fra1 --node-pool \"name=chainlink-frontend;size=s-1vcpu-2gb;count=1;auto-scale=true;min-nodes=1;max-nodes=3\" chainlink-frontend --wait && doctl kubernetes cluster kubeconfig save chainlink-frontend",
     "docker-build": "yarn build && docker build -t chainlink-frontend . --no-cache --platform linux/amd64",

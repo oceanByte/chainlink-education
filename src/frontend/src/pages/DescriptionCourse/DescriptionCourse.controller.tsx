@@ -9,24 +9,28 @@ import Header from '../../app/App.components/Header/Header.controller'
 import { DescriptionCourseView } from './DescriptionCourse.view'
 
 import { CourseID } from 'app/App.components/Profile/CourseProgress/CourseProgress.controller'
-import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
-import { courseData } from 'pages/Course/Course.data'
-import { COURSES } from 'pages/Home/Home.view'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 import { Error404 } from 'pages/Error404/Error404.controller'
 
 import { getUser } from '../Profile/Profile.actions'
 
 import { changeAddress, setNftCertificate } from '../Profile/Profile.actions'
+import { getCoursesById } from 'app/App.components/CourseCard/CourseCard.action'
 
 export const DescriptionCourse = () => {
   const { courseId } = useParams<CourseID>()
+  const course: IAdditionalInfo = useSelector((state: State) => state?.courses?.find((i: IAdditionalInfo) => i.urlCourse === courseId) ?? {})
+
   const user = useSelector((state: State) => state.auth.user)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getUser({ username: user ? user.username : '' }))
+    dispatch(getCoursesById(courseId))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+
 
   const changeAddressCallback = async ({ address }: any) => {
     if (address) {
@@ -47,11 +51,7 @@ export const DescriptionCourse = () => {
     return false
   }
 
-  const infoCourses = getCoursesData((user && user.courses) || COURSES)
-  const currentCourse = courseData.find((course) => course.path === courseId)
-  const additionalInfo: IAdditionalInfo = infoCourses.courses[currentCourse?.name || '']
-
-  if (!additionalInfo) {
+  if (!course.urlChapter) {
     return (
       <>
         <Header />
@@ -66,7 +66,7 @@ export const DescriptionCourse = () => {
       <Header />
       <DescriptionCourseView
         user={user}
-        additionalInfo={additionalInfo}
+        additionalInfo={course}
         changeAddressCallback={changeAddressCallback}
         setNftCertificateCallback={setNftCertificateCallback}
       />

@@ -44,4 +44,5 @@ export interface State {
   gdpr: GdprState
   certificate: CertificateState
   courses: any
+
 }

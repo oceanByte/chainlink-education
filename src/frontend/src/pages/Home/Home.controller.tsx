@@ -2,21 +2,17 @@ import React, { useEffect } from 'react'
 import { ContactUsInputs } from '../../shared/user/ContactUs'
 import { HomeView } from './Home.view'
 import { State } from 'reducers'
-import { useDispatch, useSelector } from 'react-redux'
-import { getCoursesTest } from './Home.actions'
+import { useSelector } from 'react-redux'
+import { Course } from 'shared/course'
+
 const scrollIntoView = require('scroll-into-view')
 
 export const Home = () => {
-  const dispatch = useDispatch()
-  const user = useSelector((state: State) => state.auth.user)
-  const courses = useSelector((state: State) => state.courses)
-  const contactUsCallback = async (contactUsInputs: ContactUsInputs) => {
-    // console.log(contactUsInputs);
-  }
 
-  useEffect(() => {
-    dispatch(getCoursesTest())
-  }, [dispatch])
+  const user = useSelector((state: State) => state.auth.user)
+  const courses: Course[] = useSelector((state: State) => state.courses)
+  const contactUsCallback = async (contactUsInputs: ContactUsInputs) => {
+  }
 
   useEffect(() => {
     let url = window.location.href.split('/')
@@ -27,5 +23,5 @@ export const Home = () => {
     }
   }, [])
 
-  return <HomeView contactUsCallback={contactUsCallback} courses={courses?.courses} user={user} />
+  return <HomeView contactUsCallback={contactUsCallback} courses={courses} user={user} />
 }

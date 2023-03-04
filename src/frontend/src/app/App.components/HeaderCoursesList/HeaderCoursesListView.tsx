@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import classnames from 'classnames'
-import { courseData, CourseNameType, CourseStatusType } from '../../../pages/Course/Course.data'
+import { CourseNameType, CourseStatusType } from '../../../pages/Course/Course.data'
 
 import { course as ChainlinkIntroduction } from '../../../pages/Courses/chainlinkIntroduction'
 import { course as SolidityIntroduction } from '../../../pages/Courses/solidityIntroduction'
@@ -11,14 +11,16 @@ import { course as vrfIntroduction } from '../../../pages/Courses/vrfIntroductio
 import { course as vrf102 } from '../../../pages/Courses/vrf102'
 
 import { PublicUser } from 'shared/user/PublicUser'
-import { CourseData } from 'pages/Course/Course.controller'
 import { ChaptersListView } from '../ChaptersList/ChaptersListView'
 import { Course } from 'shared/course'
+import { useSelector } from 'react-redux'
+import { State } from 'reducers'
 
 interface IChaptersListView {
   user?: PublicUser
   pathname: string
   isMobile?: boolean
+
 }
 
 interface ICoursePath {
@@ -28,6 +30,7 @@ interface ICoursePath {
 }
 
 export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView) => {
+  const courses: Course[] = useSelector((state: State) => state.courses)
   const [state, setState] = useState({
     coursePath: '',
     currentPath: '',
@@ -63,6 +66,7 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
   }
 
   const showChaptersList = ({ currentPath, coursePath, course }: ICoursePath) => {
+
     setState(() => ({
       currentPath,
       coursePath,
@@ -94,17 +98,16 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
         ) : null}
 
         {!state.isShowList &&
-          courseData.map((course: CourseData) => {
-            const currentPath = `/${course.path}/chapter-1`
+          courses.map((course: Course) => {
+            const currentPath = `/${course.urlCourse}/chapter-1`
             const { coursePath } = findCurrentCourse({
               ...course,
-              title: course.name,
+              title: course.title,
             })
-            const emptyCourse = new Course()
 
             if (isMobile) {
               return (
-                <div className="courses-container-mobile" key={course.path}>
+                <div className="courses-container-mobile" key={course.urlCourse}>
                   <div
                     className={classnames('header-chapters__item', pathname === currentPath && 'current')}
                     onClick={() =>
@@ -116,7 +119,7 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
                     }
                   >
                     <div className="header-chapters__item__name">
-                      <span className="h-font">{course.name}</span>
+                      <span className="h-font">{course.title}</span>
                     </div>
                     <div className="header-chapters__item__status">
                       <div className={classnames('completion', 'completed')}>{CourseStatusType.NEW}</div>
@@ -128,14 +131,14 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
             }
 
             return (
-              <div className="courses-container" key={course.path}>
+              <div className="courses-container" key={course.urlCourse}>
                 <Link
                   to={currentPath}
                   className={classnames('header-chapters__item', pathname === currentPath && 'current')}
-                  key={course.path}
+                  key={course.urlCourse}
                 >
                   <div className="header-chapters__item__name">
-                    <span className="h-font">{course.name}</span>
+                    <span className="h-font">{course.title}</span>
                   </div>
                   <div className="header-chapters__item__status">
                     <div className={classnames('completion', 'completed')}>{CourseStatusType.NEW}</div>
@@ -143,7 +146,7 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
                   </div>
                 </Link>
                 <div className="chapters-container no-user">
-                  <ChaptersListView user={user} coursePath={coursePath} course={emptyCourse} pathname={pathname} />
+                  <ChaptersListView user={user} coursePath={coursePath} course={course} pathname={pathname} />
                 </div>
               </div>
             )
@@ -192,8 +195,8 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
                           {course.status === CourseStatusType.COMPLETED
                             ? CourseStatusType.COMPLETED
                             : course.status === CourseStatusType.IN_PROGRESS
-                            ? CourseStatusType.IN_PROGRESS
-                            : CourseStatusType.NEW}
+                              ? CourseStatusType.IN_PROGRESS
+                              : CourseStatusType.NEW}
                         </div>
                         <div className="arrow-right"></div>
                       </div>
@@ -216,8 +219,8 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
                         {course.status === CourseStatusType.COMPLETED
                           ? CourseStatusType.COMPLETED
                           : course.status === CourseStatusType.IN_PROGRESS
-                          ? CourseStatusType.IN_PROGRESS
-                          : CourseStatusType.NEW}
+                            ? CourseStatusType.IN_PROGRESS
+                            : CourseStatusType.NEW}
                       </div>
                       <div className="arrow-right"></div>
                     </div>

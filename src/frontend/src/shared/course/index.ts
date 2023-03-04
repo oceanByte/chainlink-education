@@ -1,4 +1,4 @@
-import { IsArray, IsMongoId, Length } from 'class-validator'
+import { IsMongoId, Length, IsArray } from 'class-validator'
 import { ObjectId } from 'mongodb'
 
 export class Course {
@@ -9,9 +9,9 @@ export class Course {
   title!: string
 
   @IsArray()
-  progress!: string[]
+  progress?: string[]
 
-  description!: string
+  description?: string
 
   status!: string
 
@@ -19,4 +19,8 @@ export class Course {
 
   @IsMongoId()
   userId?: ObjectId
+
+  urlCourse!: string
+
+
 }

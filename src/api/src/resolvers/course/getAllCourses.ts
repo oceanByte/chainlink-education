@@ -1,8 +1,9 @@
-import {Context, Next} from "koa";
-import {User} from "../../shared/user/User";
-import {authenticate} from "../user/helpers/authenticate";
-import {Course, CourseModel} from "../../shared/course/Course";
-import {getCourses} from "../../shared/course/courses";
+import { Context, Next } from "koa";
+import { User } from "../../shared/user/User";
+import { authenticate } from "../user/helpers/authenticate";
+import { Course, CourseModel } from "../../shared/course/Course";
+import { getCourses } from "../../shared/course/courses";
+import { ChapterType } from "../../shared/course/courses/course.types";
 
 export type CourseList = {
     id: string
@@ -16,6 +17,8 @@ export type CourseList = {
     countChapters: number
     percent: number
 
+    chapters: Omit<ChapterType, 'data'>[]
+
     urlCourse: string
     urlChapter?: string
 }
@@ -27,8 +30,8 @@ export const getAllCourses = async (ctx: Context, next: Next): Promise<any> => {
         const user: User = await authenticate(ctx);
 
         // Get user courses to match with course list
-        userCourses = await CourseModel.find({userId: user._id});
-    }catch (e) {
+        userCourses = await CourseModel.find({ userId: user._id });
+    } catch (e) {
         // token and user is optional, If we don't have a token we can continue without user authentication
         console.log(`Status: ${e.status}, message: ${e.message}`);
     }
