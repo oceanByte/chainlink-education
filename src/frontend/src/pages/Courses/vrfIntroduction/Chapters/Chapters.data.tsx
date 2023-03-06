@@ -17,67 +17,67 @@ import { data as chapter9 } from './Chapter-9'
 
 export const chapterData: ChapterData[] = [
   {
-    pathname: `/${course.path}/chapter-1`,
+    path: `/${course.path}/chapter-1`,
     name: 'Randomness',
     data: chapter1,
   },
   {
-    pathname: `/${course.path}/chapter-2`,
+    path: `/${course.path}/chapter-2`,
     name: 'Randomness and Blockchains',
     data: chapter2,
   },
   {
-    pathname: `/${course.path}/chapter-3`,
+    path: `/${course.path}/chapter-3`,
     name: 'Chainlink VRF',
     data: chapter3,
   },
   {
-    pathname: `/${course.path}/chapter-4`,
+    path: `/${course.path}/chapter-4`,
     name: 'Architecture of Chainlink VRF',
     data: chapter4,
   },
   {
-    pathname: `/${course.path}/chapter-5`,
+    path: `/${course.path}/chapter-5`,
     name: 'Subscribing to the VRF',
     data: chapter5,
   },
   {
-    pathname: `/${course.path}/chapter-6`,
+    path: `/${course.path}/chapter-6`,
     name: 'Imports',
     data: chapter6,
   },
   {
-    pathname: `/${course.path}/chapter-7`,
+    path: `/${course.path}/chapter-7`,
     name: 'Configuring Subscription Settings',
     data: chapter7,
   },
   {
-    pathname: `/${course.path}/chapter-8`,
+    path: `/${course.path}/chapter-8`,
     name: 'Setting Storage Variables',
     data: chapter8,
   },
   {
-    pathname: `/${course.path}/chapter-9`,
+    path: `/${course.path}/chapter-9`,
     name: 'The Constructor',
     data: chapter9,
   },
   {
-    pathname: `/${course.path}/chapter-10`,
+    path: `/${course.path}/chapter-10`,
     name: 'Requesting Randomness',
     data: chapter10,
   },
   {
-    pathname: `/${course.path}/chapter-11`,
+    path: `/${course.path}/chapter-11`,
     name: 'Recieving Randomness',
     data: chapter11,
   },
   {
-    pathname: `/${course.path}/chapter-12`,
+    path: `/${course.path}/chapter-12`,
     name: 'Subscribing',
     data: chapter12,
   },
   {
-    pathname: `/${course.path}/chapter-13`,
+    path: `/${course.path}/chapter-13`,
     name: 'Conclusion',
     data: chapter13,
   },

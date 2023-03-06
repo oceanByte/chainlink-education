@@ -15,7 +15,7 @@ import { Error404 } from 'pages/Error404/Error404.controller'
 import { getUser } from '../Profile/Profile.actions'
 
 import { changeAddress, setNftCertificate } from '../Profile/Profile.actions'
-import { getCoursesById } from 'app/App.components/CourseCard/CourseCard.action'
+import { getCourseByURL } from 'app/App.components/CourseCard/CourseCard.action'
 
 export const DescriptionCourse = () => {
   const { courseId } = useParams<CourseID>()
@@ -26,10 +26,9 @@ export const DescriptionCourse = () => {
 
   useEffect(() => {
     dispatch(getUser({ username: user ? user.username : '' }))
-    dispatch(getCoursesById(courseId))
+    dispatch(getCourseByURL(courseId))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
 
 
   const changeAddressCallback = async ({ address }: any) => {

@@ -18,67 +18,67 @@ import { data as chapter13 } from './Chapter-13'
 
 export const chapterData: ChapterData[] = [
   {
-    pathname: `/${course.path}/chapter-1`,
+    path: `/${course.path}/chapter-1`,
     name: 'Solidity',
     data: chapter1,
   },
   {
-    pathname: `/${course.path}/chapter-2`,
+    path: `/${course.path}/chapter-2`,
     name: 'EVM Intro',
     data: chapter2,
   },
   {
-    pathname: `/${course.path}/chapter-3`,
+    path: `/${course.path}/chapter-3`,
     name: 'Pragma Solidity',
     data: chapter3,
   },
   {
-    pathname: `/${course.path}/chapter-4`,
+    path: `/${course.path}/chapter-4`,
     name: 'Naming a Contract',
     data: chapter4,
   },
   {
-    pathname: `/${course.path}/chapter-5`,
+    path: `/${course.path}/chapter-5`,
     name: 'Contract State, Variables and Data Types',
     data: chapter5,
   },
   {
-    pathname: `/${course.path}/chapter-6`,
+    path: `/${course.path}/chapter-6`,
     name: 'Assigning Variables Values',
     data: chapter6,
   },
   {
-    pathname: `/${course.path}/chapter-7`,
+    path: `/${course.path}/chapter-7`,
     name: 'Access Modifiers',
     data: chapter7,
   },
   {
-    pathname: `/${course.path}/chapter-8`,
+    path: `/${course.path}/chapter-8`,
     name: 'Creating Arrays',
     data: chapter8,
   },
   {
-    pathname: `/${course.path}/chapter-9`,
+    path: `/${course.path}/chapter-9`,
     name: 'Reading Array Values',
     data: chapter9,
   },
   {
-    pathname: `/${course.path}/chapter-10`,
+    path: `/${course.path}/chapter-10`,
     name: 'Structs',
     data: chapter10,
   },
   {
-    pathname: `/${course.path}/chapter-11`,
+    path: `/${course.path}/chapter-11`,
     name: 'Functions',
     data: chapter11,
   },
   {
-    pathname: `/${course.path}/chapter-12`,
+    path: `/${course.path}/chapter-12`,
     name: 'Operators: Arithmetic and Relational',
     data: chapter12,
   },
   {
-    pathname: `/${course.path}/chapter-13`,
+    path: `/${course.path}/chapter-13`,
     name: 'Conclusion',
     data: chapter13,
   },

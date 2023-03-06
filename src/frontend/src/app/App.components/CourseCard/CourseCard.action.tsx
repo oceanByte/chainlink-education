@@ -4,7 +4,7 @@ export const GET_COURSES_PAGE_REQUEST = ' GET_COURSES_PAGE_REQUEST'
 export const GET_COURSES_PAGE_SUCCESS = 'GET_COURSES_PAGE_SUCCESS'
 export const GET_COURSES_PAGE_FAILURE = 'GET_COURSES_PAGE_FAILURE'
 
-export const getCoursesById = (urlCourse: string) => async (dispatch: any) => {
+export const getCourseByURL = (urlCourse: string) => async (dispatch: any) => {
     dispatch({
         type: GET_COURSES_PAGE_REQUEST,
     });

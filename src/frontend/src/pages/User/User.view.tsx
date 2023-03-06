@@ -51,7 +51,7 @@ export const UserView = ({ loading, user, name, setName, getCertificateCallback 
                     setName(e.target.value)
                   }}
                   value={name}
-                  onBlur={() => {}}
+                  onBlur={() => { }}
                   inputStatus={undefined}
                   errorMessage={undefined}
                 />
@@ -77,10 +77,10 @@ export const UserView = ({ loading, user, name, setName, getCertificateCallback 
       <UserCard>
         <UserProgress>
           {chapterData.map((chapter: ChapterData) => {
-            const done = user.progress && user.progress.indexOf(chapter.pathname) >= 0
+            const done = user.progress && user.progress.indexOf(chapter.path) >= 0
             return (
-              <Link to={chapter.pathname}>
-                <UserChapter key={chapter.pathname} done={done}>
+              <Link to={chapter.path}>
+                <UserChapter key={chapter.path} done={done}>
                   {chapter.name}
                   {done && <img alt="done" src="/icons/check.svg" />}
                 </UserChapter>

@@ -47,8 +47,8 @@ export const ChapterDrawerView = ({
     <DrawerStyled className={`${showingChapters}`}>
       <h1>Chapters</h1>
       {chaptersByCourse[activeCourse.path].map((chapter: ChapterData) => (
-        <DrawerItem key={chapter.pathname} className={pathname === chapter.pathname ? 'current-path' : 'other-path'}>
-          <Link to={chapter.pathname} onClick={() => hideCallback()}>
+        <DrawerItem key={chapter.path} className={pathname === chapter.path ? 'current-path' : 'other-path'}>
+          <Link to={chapter.path} onClick={() => hideCallback()}>
             {chapter.name}
           </Link>
         </DrawerItem>

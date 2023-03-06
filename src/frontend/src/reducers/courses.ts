@@ -23,7 +23,14 @@ export function courses(state = coursesInitialState, action: any): any {
         course.urlCourse === action.payload.urlCourse ? { ...course, ...action.payload } : course)) ?? []
       return newCourses.length ? newCourses : [{ ...action.payload, description: "" }]
     }
+
+    // case GET_CURRENT_CHAPTER_SUCCESS: {
+    //   const chapter = action.payload
+    // }
+
+
     default:
       return state
+
   }
 }

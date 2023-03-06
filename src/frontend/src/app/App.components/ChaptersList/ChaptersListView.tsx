@@ -46,8 +46,8 @@ export const ChaptersListView = ({ coursePath, user, pathname, course }: IChapte
           }
 
           if (user) {
-            done = course.progress ? course.progress.indexOf(chapter.pathname) >= 0 : false
-            nextChapter = course.progress ? checkChapter(course.progress, chapter.pathname) : ''
+            done = course.progress ? course.progress.indexOf(chapter.path) >= 0 : false
+            nextChapter = course.progress ? checkChapter(course.progress, chapter.path) : ''
           }
 
           return (

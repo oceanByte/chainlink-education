@@ -93,7 +93,7 @@ const ChapterItem = ({ chapter, index }: IChapterItem) => {
         className={classnames('chapter-description')}
       >
         <Content course={chapter?.description ?? ""} />
-        <button className="chapter-view__chapter" type="button" onClick={() => history.push(chapter.pathname)}>
+        <button className="chapter-view__chapter" type="button" onClick={() => history.push(chapter.path)}>
           View Chapter
         </button>
       </div>
@@ -127,9 +127,9 @@ export const DescriptionCourseView = ({
   const history = useHistory()
   const [isShowList, setIsShowList] = useState(false)
 
-  const showList = () => {
-    setIsShowList((prev) => !prev)
-  }
+  // const showList = () => {
+  //   setIsShowList((prev) => !prev)
+  // }
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {

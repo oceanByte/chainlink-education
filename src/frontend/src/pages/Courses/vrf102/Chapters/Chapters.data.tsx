@@ -12,42 +12,42 @@ import { data as chapter8 } from './Chapter-8'
 
 export const chapterData: ChapterData[] = [
   {
-    pathname: `/${course.path}/chapter-1`,
+    path: `/${course.path}/chapter-1`,
     name: 'Introduction',
     data: chapter1,
   },
   {
-    pathname: `/${course.path}/chapter-2`,
+    path: `/${course.path}/chapter-2`,
     name: 'Randomness and Deterministic Machines',
     data: chapter2,
   },
   {
-    pathname: `/${course.path}/chapter-3`,
+    path: `/${course.path}/chapter-3`,
     name: 'Randomness and Blockchains',
     data: chapter3,
   },
   {
-    pathname: `/${course.path}/chapter-4`,
+    path: `/${course.path}/chapter-4`,
     name: 'Goldberg’s Verifiable Random Function',
     data: chapter4,
   },
   {
-    pathname: `/${course.path}/chapter-5`,
+    path: `/${course.path}/chapter-5`,
     name: 'Subscription Manager Contract',
     data: chapter5,
   },
   {
-    pathname: `/${course.path}/chapter-6`,
+    path: `/${course.path}/chapter-6`,
     name: 'VRF On-Chain Considerations',
     data: chapter6,
   },
   {
-    pathname: `/${course.path}/chapter-7`,
+    path: `/${course.path}/chapter-7`,
     name: 'VRF Simultaneous Requests',
     data: chapter7,
   },
   {
-    pathname: `/${course.path}/chapter-8`,
+    path: `/${course.path}/chapter-8`,
     name: 'Conclusion',
     data: chapter8,
   },

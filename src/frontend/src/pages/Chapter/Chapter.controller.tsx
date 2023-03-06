@@ -8,15 +8,14 @@ import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
 
 import { getUser } from 'pages/User/User.actions'
-import { addProgress } from './Chapter.actions'
+import { validateAnswer, addProgress, getChapter } from './Chapter.actions'
 import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 
 import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
 
 import { PublicUser } from 'shared/user/PublicUser'
 
-import { CourseData } from '../Course/Course.controller'
-import { chaptersByCourse, courseData, CourseNameType } from '../Course/Course.data'
+import { courseData, CourseNameType } from '../Course/Course.data'
 import { chapterData as ChainlinkIntroductionChapters } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 import { chapterData as SolidityIntroductionChapters } from '../Courses/solidityIntroduction/Chapters/Chapters.data'
 import { chapterData as Solidity102 } from '../Courses/solidity102/Chapters/Chapters.data'
@@ -26,7 +25,7 @@ import { chapterData as vrf102Chapters } from '../Courses/vrf102/Chapters/Chapte
 import { ChapterView } from './Chapter.view'
 
 export interface ChapterData {
-  pathname: string
+  path: string
   name: string
   description?: string
   data: Data
@@ -81,6 +80,7 @@ export const Chapter = () => {
   })
   const [validatorState, setValidatorState] = useState(PENDING)
   const courses = useSelector((state: State) => state.courses)
+  const currentChapter = useSelector((state: State) => state.currentChapter)
   const [showDiff, setShowDiff] = useState(false)
   const [isAccount, setIsAccount] = useState(false)
   const [isStarted, setIsStarted] = useState(false)
@@ -100,6 +100,7 @@ export const Chapter = () => {
       wrong: {},
     },
   })
+
   const [tab, setTab] = useState<string>(TabType.CONTENT)
   const [percent, setPercent] = useState(0)
   const [stateChapter, setStateChapter] = useState({
@@ -128,43 +129,49 @@ export const Chapter = () => {
   }
   useEffect(() => {
     if (user) dispatch(getUser({ username: user.username }))
+    dispatch(getChapter(partCurrentUrl, pathname.split('-')[1]))
 
-    courseData.forEach((course: CourseData) => {
-      const index = course.path!
-      chaptersByCourse[index].forEach((chapter: ChapterData) => {
-        if (pathname === chapter.pathname)
-          setData({
-            course: chapter.data.course,
-            exercise: chapter.data.exercise,
-            solution: chapter.data.solution,
-            supports: chapter.data.supports,
-            description: chapter.data.description,
-            video: chapter.data.video,
-            hints: chapter.data.hints,
-            questions: chapter.data.questions.map((question) => {
-              return { ...question, proposedResponses: [] }
-            }),
-            validatorContent: chapter.data.validatorContent,
-          })
-      })
-    })
+    if (pathname.split('-')[1] === currentChapter.pathname.split('-')[1]) {
+      setData(currentChapter.data)
+    }
+    if (user) dispatch(getUser({ username: user.username }))
+
+    // courseData.forEach((course: CourseData) => {
+    //   const index = course.path!
+    //   chaptersByCourse[index].forEach((chapter: ChapterData) => {
+    //     if (pathname === chapter.pathname)
+    //       setData({
+    //         course: chapter.data.course,
+    //         exercise: chapter.data.exercise,
+    //         solution: chapter.data.solution,
+    //         supports: chapter.data.supports,
+    //         description: chapter.data.description,
+    //         video: chapter.data.video,
+    //         hints: chapter.data.hints,
+    //         questions: chapter.data.questions.map((question) => {
+    //           return { ...question, proposedResponses: [] }
+    //         }),
+    //         validatorContent: chapter.data.validatorContent,
+    //       })
+    //   })
+    // })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname])
+  }, [pathname, currentChapter.pathname])
 
   const getPercent = (chapterData: ChapterData[]) => {
     chapterData.forEach((chapter, i) => {
-      if (pathname === chapter.pathname) {
+      if (pathname === chapter.path) {
         if (i - 1 >= 0) {
           setStateChapter((prev) => ({
             ...prev,
-            previousChapter: chapterData[i - 1].pathname,
+            previousChapter: chapterData[i - 1].path,
           }))
         }
 
         if (i + 1 < chapterData.length) {
           setStateChapter((prev) => ({
             ...prev,
-            nextChapter: chapterData[i + 1].pathname,
+            nextChapter: chapterData[i + 1].path,
           }))
         } else {
           if (user) {
@@ -249,10 +256,11 @@ export const Chapter = () => {
     setTab(() => currentTab)
   }
 
-  const validateCallback = () => {
+
+  const validateCallback = async () => {
     if (
       stateChapter.nextChapter === `/profile/certificates` ||
-      additionalInfo.progress.length === additionalInfo.countChapters - 1
+      additionalInfo.progress?.length === additionalInfo.countChapters - 1
     ) {
       setValidatorState(RIGHT)
       if (user) {
@@ -271,22 +279,13 @@ export const Chapter = () => {
       }
       setIsAccount(true)
       return
+
     }
 
     if (data.questions.length > 0) {
-      let ok = true
-      data.questions.forEach((question) => {
-        if (!question.proposedResponses) ok = false
-        else {
-          question.responses.forEach((response) => {
-            if (!(question.proposedResponses && question.proposedResponses.includes(response))) ok = false
-          })
-          question.proposedResponses.forEach((proposedResponse) => {
-            if (!question.responses.includes(proposedResponse)) ok = false
-          })
-        }
-        if (question.responses.length === 0) ok = true
-      })
+      const validationResponse = await validateAnswer(currentChapter.pathname, data.questions?.[0].proposedResponses ?? [])
+      let ok = validationResponse.answerIs
+
       if (ok) {
         setValidatorState(RIGHT)
         setIsAccount(true)
@@ -352,7 +351,6 @@ export const Chapter = () => {
 
     setData({ ...data, questions: e })
   }
-
   return (
     <>
       {data.course && (
