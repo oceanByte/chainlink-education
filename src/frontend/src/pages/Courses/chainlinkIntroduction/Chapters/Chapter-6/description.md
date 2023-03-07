@@ -1,1 +1,0 @@
-Now that you understood how to connect the off-chain world you can utilize this knowledge now for your NFT. Imagine a NFT that reacts to the price of Ethereum. It could rain when the price falls and it could be sunny when the price rises.

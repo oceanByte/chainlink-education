@@ -4,7 +4,6 @@ import { PublicUser } from 'shared/user/PublicUser'
 import { Course } from 'shared/course'
 
 import { OverallProgressView } from './OveralProgress.view'
-import { getCoursesData } from 'helpers/coursesInfo'
 
 interface ICourseCard {
   courses: Course[] | undefined
@@ -12,7 +11,7 @@ interface ICourseCard {
 }
 
 export const OverallProgress = ({ courses, user }: ICourseCard) => {
-  const infoCourses = getCoursesData(courses || []);
+  const infoCourses = user?.courses ?? courses ?? [] as any
 
   return (<OverallProgressView user={user} infoCourses={infoCourses} />)
 }

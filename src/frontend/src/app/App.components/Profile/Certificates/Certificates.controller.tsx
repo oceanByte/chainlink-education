@@ -1,5 +1,6 @@
-import { getCoursesData } from 'helpers/coursesInfo'
 import * as React from 'react'
+import { useSelector } from 'react-redux'
+import { State } from 'reducers'
 
 import { PublicUser } from 'shared/user/PublicUser'
 import { CertificatesView } from './Certificates.view'
@@ -9,7 +10,7 @@ interface ICertificates {
 }
 
 export const Certificates = ({ user }: ICertificates) => {
-  const infoCourses = getCoursesData(user?.courses || [])
+  const courses = useSelector((state: State) => state.courses)
 
-  return <CertificatesView user={user} infoCourses={infoCourses} />
+  return <CertificatesView user={user} infoCourses={user?.courses ?? courses} />
 }

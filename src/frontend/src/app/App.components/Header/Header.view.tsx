@@ -161,7 +161,7 @@ export const HeaderView = ({ user, removeAuthUserCallback, pathname, activeCours
               </div>
             ) : null}
             <div className="header-menu-list__item">
-              <button className="ml-30 btn" onClick={() => window.open('https://chain.link/', '_blank')}>
+              <button className="ml-30 btn" onClick={() => window.open('https://chain.link', '_blank')}>
                 Ecosystem
               </button>
               <span className='arrow-upright' />

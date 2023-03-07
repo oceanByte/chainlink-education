@@ -11,11 +11,12 @@ import Header from '../../app/App.components/Header/Header.controller'
 import { PreviewCertificateView } from './PreviewCertificate.view'
 
 import { CourseID } from 'app/App.components/Profile/CourseProgress/CourseProgress.controller'
-import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
-import { courseData, CourseStatusType } from 'pages/Course/Course.data'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
+import { CourseStatusType } from 'pages/Course/Course.data'
 import { Error404 } from 'pages/Error404/Error404.controller'
 import { getPathForCertificate } from 'helpers/getInfoForCourse'
 import { getCertificate } from './PreviewCertificate.actions'
+import { Course } from 'shared/course'
 
 
 export const PreviewCertificate = () => {
@@ -27,8 +28,8 @@ export const PreviewCertificate = () => {
   const user = useSelector((state: State) => state.auth.user)
   const certificate = useSelector((state: State) => state.certificate.certificate)
 
-  const infoCourses = getCoursesData((user && user.courses) || courses);
-  const currentCourse = courseData.find((course) => course.path === courseId);
+  const infoCourses = user?.courses ?? courses;
+  const currentCourse = courses.find((course: Course) => course.urlCourse === courseId);
   const additionalInfo: IAdditionalInfo = infoCourses.courses[currentCourse?.name || '']
 
   const downloadCallback = (title: string) => {

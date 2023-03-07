@@ -3,10 +3,12 @@ import { Input } from 'app/App.components/Input/Input.controller'
 import { ChapterData } from 'pages/Chapter/Chapter.controller'
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
+import { State } from 'reducers'
+import { Course } from 'shared/course'
 import { PublicUser } from 'shared/user/PublicUser'
 
-import { chapterData } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
 // prettier-ignore
 import { UserBadge, UserBadgeInput, UserCard, UserChapter, UserProgress, UserStyled, UserTitle, UserTitle2 } from './User.style'
 
@@ -24,6 +26,9 @@ type UserViewProps = {
 }
 
 export const UserView = ({ loading, user, name, setName, getCertificateCallback }: UserViewProps) => {
+  const { courseId } = useParams<any>()
+  const chapters = useSelector((state: State) => state.courses.find((course: Course) => course.urlCourse === courseId))
+
   let badgeUnlocked = false
   let counter = 0
   user.progress?.forEach((chapter) => {
@@ -76,11 +81,11 @@ export const UserView = ({ loading, user, name, setName, getCertificateCallback 
       </UserTitle2>
       <UserCard>
         <UserProgress>
-          {chapterData.map((chapter: ChapterData) => {
-            const done = user.progress && user.progress.indexOf(chapter.path) >= 0
+          {chapters.map((chapter: ChapterData) => {
+            const done = user.progress && user.progress.indexOf(chapter.pathname) >= 0
             return (
-              <Link to={chapter.path}>
-                <UserChapter key={chapter.path} done={done}>
+              <Link to={chapter.pathname}>
+                <UserChapter key={chapter.pathname} done={done}>
                   {chapter.name}
                   {done && <img alt="done" src="/icons/check.svg" />}
                 </UserChapter>

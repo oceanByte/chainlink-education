@@ -93,7 +93,7 @@ const ChapterItem = ({ chapter, index }: IChapterItem) => {
         className={classnames('chapter-description')}
       >
         <Content course={chapter?.description ?? ""} />
-        <button className="chapter-view__chapter" type="button" onClick={() => history.push(chapter.path)}>
+        <button className="chapter-view__chapter" type="button" onClick={() => history.push(chapter.pathname)}>
           View Chapter
         </button>
       </div>

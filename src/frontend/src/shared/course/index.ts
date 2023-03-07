@@ -23,4 +23,5 @@ export class Course {
   urlCourse!: string
 
 
+  chapters!: [{ pathname: string, name: string }]
 }

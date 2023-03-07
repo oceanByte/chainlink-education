@@ -1,1 +1,0 @@
-We can actually give more information to the Solidity compiler on how we want to use our variables (and later functions). We can tell the compiler how we want our variables to be accessed. Many blockchains, such as Ethereum, act as one monolithic computer.

@@ -1,20 +1,15 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import classnames from 'classnames'
-import { CourseNameType, CourseStatusType } from '../../../pages/Course/Course.data'
-
-import { course as ChainlinkIntroduction } from '../../../pages/Courses/chainlinkIntroduction'
-import { course as SolidityIntroduction } from '../../../pages/Courses/solidityIntroduction'
-import { course as Solidity102 } from '../../../pages/Courses/solidity102'
-import { course as vrfIntroduction } from '../../../pages/Courses/vrfIntroduction'
-import { course as vrf102 } from '../../../pages/Courses/vrf102'
+import { CourseStatusType } from '../../../pages/Course/Course.data'
 
 import { PublicUser } from 'shared/user/PublicUser'
 import { ChaptersListView } from '../ChaptersList/ChaptersListView'
 import { Course } from 'shared/course'
 import { useSelector } from 'react-redux'
 import { State } from 'reducers'
+import { CourseID } from '../Profile/CourseProgress/CourseProgress.controller'
 
 interface IChaptersListView {
   user?: PublicUser
@@ -31,39 +26,16 @@ interface ICoursePath {
 
 export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView) => {
   const courses: Course[] = useSelector((state: State) => state.courses)
+  const currentCourse = useSelector((state: State) => state.courses.find((course: Course) => course.urlCourse))
+  console.log(currentCourse, 's')
+  const coursePath = currentCourse?.urlCourse ?? '/'
+  const currentPath = `/${coursePath}/chapter-1`
   const [state, setState] = useState({
     coursePath: '',
     currentPath: '',
     course: new Course(),
     isShowList: false,
   })
-
-  const findCurrentCourse = (course: any): ICoursePath => {
-    let currentPath = `/`
-    let coursePath = `/`
-
-    if (course.title === CourseNameType.CHAINLINK_101) {
-      currentPath = `/${ChainlinkIntroduction.path}/chapter-1`
-      coursePath = ChainlinkIntroduction.path
-    } else if (course.title === CourseNameType.SOLIDITY_INTRO) {
-      currentPath = `/${SolidityIntroduction.path}/chapter-1`
-      coursePath = SolidityIntroduction.path
-    } else if (course.title === CourseNameType.SOLIDITY_102) {
-      currentPath = `/${Solidity102.path}/chapter-1`
-      coursePath = Solidity102.path
-    } else if (course.title === CourseNameType.VRF_V2) {
-      currentPath = `/${vrfIntroduction.path}/chapter-1`
-      coursePath = vrfIntroduction.path
-    } else {
-      currentPath = `/${vrf102.path}/chapter-1`
-      coursePath = vrf102.path
-    }
-
-    return {
-      currentPath,
-      coursePath,
-    }
-  }
 
   const showChaptersList = ({ currentPath, coursePath, course }: ICoursePath) => {
 
@@ -100,10 +72,6 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
         {!state.isShowList &&
           courses.map((course: Course) => {
             const currentPath = `/${course.urlCourse}/chapter-1`
-            const { coursePath } = findCurrentCourse({
-              ...course,
-              title: course.title,
-            })
 
             if (isMobile) {
               return (
@@ -173,7 +141,6 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
 
           {!state.isShowList &&
             user.courses.map((course: any) => {
-              const { currentPath, coursePath } = findCurrentCourse(course)
               if (isMobile) {
                 return (
                   <div className="courses-container-mobile" key={course._id}>

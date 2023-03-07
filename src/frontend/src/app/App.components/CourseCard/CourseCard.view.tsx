@@ -27,7 +27,7 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const history = useHistory();
   const [isShowList, setIsShowList] = useState(false);
-  const additionalInfo: IAdditionalInfo = infoCourses.courses[course.title]
+  const additionalInfo = course as IAdditionalInfo
 
   const showList = () => {
     setIsShowList((prev) => !prev);
