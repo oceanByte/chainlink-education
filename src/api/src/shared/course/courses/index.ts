@@ -88,7 +88,7 @@ export const getCourseByPath = (path: string, userCourses: Course[] = []): any =
         urlChapter: course.chapters[0].pathname,
         chapters: course.chapters.map((ch: ChapterType): any => ({
             name: ch.name,
-            path: ch.pathname,
+            pathname: ch.pathname,
             description: ch.data.description
         })),
     }
