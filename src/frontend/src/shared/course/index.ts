@@ -22,6 +22,7 @@ export class Course {
 
   urlCourse!: string
 
+  percent?: number
 
   chapters!: [{ pathname: string, name: string }]
 }

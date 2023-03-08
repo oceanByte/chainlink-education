@@ -38,7 +38,7 @@ export const CertificatesView = ({ user, infoCourses }: ICertificatesView) => {
       <div className='badges-list'>
         {user && user.courses
           ? user.courses.map((course: Course, key: number) => {
-            const additionalInfo: IAdditionalInfo = infoCourses.courses[course.title]
+            const additionalInfo: IAdditionalInfo = (infoCourses as any).find((i: Course) => i.title === course.title)
             return (
               <div className="badge-wrapp" key={course.title}>
                 <BadgeView percentage={additionalInfo.percent} title={course.title} isCompleted={course.status === CourseStatusType.COMPLETED} />
@@ -53,7 +53,7 @@ export const CertificatesView = ({ user, infoCourses }: ICertificatesView) => {
         {user && user.courses
           ? user.courses.map((course: Course, key: number) => {
             const currentCourse = courses.find((c: Course) => c.title === course.title);
-            const additionalInfo: IAdditionalInfo = infoCourses.courses[currentCourse?.name || '']
+            const additionalInfo: IAdditionalInfo = (infoCourses as any).find((i: Course) => i.title === course.title)
 
             return (
               <React.Fragment key={key}>

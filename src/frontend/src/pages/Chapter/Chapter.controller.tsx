@@ -73,8 +73,7 @@ export const Chapter = () => {
   const [validatorState, setValidatorState] = useState(PENDING)
   const currentChapter = useSelector((state: State) => state.currentChapter)
   const params = useParams<string[]>();
-  const currentCourse = useSelector((state: State) => state.courses.find((course: Course) => course.urlCourse === params[0]))
-  const indexOfCurrentChapter = currentCourse?.chapters?.findIndex((chapter: { pathname: string, name: string }) => chapter.pathname === currentChapter.pathname) ?? 0
+  const plainCurrentCourse = useSelector((state: State) => state.courses.find((course: Course) => course.urlCourse === params[0]))
   const [showDiff, setShowDiff] = useState(false)
   const [isAccount, setIsAccount] = useState(false)
   const [isStarted, setIsStarted] = useState(false)
@@ -98,6 +97,9 @@ export const Chapter = () => {
   const [tab, setTab] = useState<string>(TabType.CONTENT)
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
+  const currentCourse = user ? { ...user.courses?.find((course: any) => course.title === plainCurrentCourse.title), ...plainCurrentCourse } : plainCurrentCourse
+
+  const indexOfCurrentChapter = currentCourse?.chapters?.findIndex((chapter: { pathname: string, name: string }) => chapter.pathname === currentChapter.pathname) ?? 0
 
   let intervalID: any = useRef(null)
   const partCurrentUrl = pathname.split('/')[1]
@@ -137,7 +139,7 @@ export const Chapter = () => {
   }
 
   const getPreviousChapterLink = () => {
-    return indexOfCurrentChapter === 0 ? "/" : currentCourse.chapters[indexOfCurrentChapter - 1].pathname
+    return indexOfCurrentChapter === 0 ? "/" : currentCourse.chapters[indexOfCurrentChapter - 1]?.pathname
   }
 
   const countUp = () => {

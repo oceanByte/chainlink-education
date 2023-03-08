@@ -16,6 +16,8 @@ import { IDataCourses } from '../Profile/Certificates/Certificates.view'
 import { Difficulty } from './Difficulty/Difficulty.view'
 import { UseCertificate } from './UseCertificate/UseCertificate.view'
 import { IAdditionalInfo } from 'helpers/coursesInfo'
+import { useSelector } from 'react-redux'
+import { State } from 'reducers'
 
 interface ICourseView {
   course: Course
@@ -27,7 +29,8 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const history = useHistory();
   const [isShowList, setIsShowList] = useState(false);
-  const additionalInfo = course as IAdditionalInfo
+  const courseInfo = useSelector((state: State) => state.courses.find((i: Course) => i.title === course.title))
+  const additionalInfo = user ? { ...courseInfo, ...user.courses?.find((userCourse: any) => userCourse.title === course.title) } : course as IAdditionalInfo
 
   const showList = () => {
     setIsShowList((prev) => !prev);

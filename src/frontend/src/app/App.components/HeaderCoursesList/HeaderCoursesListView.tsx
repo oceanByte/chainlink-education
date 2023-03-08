@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import classnames from 'classnames'
 import { CourseStatusType } from '../../../pages/Course/Course.data'
@@ -9,7 +9,6 @@ import { ChaptersListView } from '../ChaptersList/ChaptersListView'
 import { Course } from 'shared/course'
 import { useSelector } from 'react-redux'
 import { State } from 'reducers'
-import { CourseID } from '../Profile/CourseProgress/CourseProgress.controller'
 
 interface IChaptersListView {
   user?: PublicUser
@@ -25,9 +24,15 @@ interface ICoursePath {
 }
 
 export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView) => {
-  const courses: Course[] = useSelector((state: State) => state.courses)
-  const currentCourse = useSelector((state: State) => state.courses.find((course: Course) => course.urlCourse))
-  console.log(currentCourse, 's')
+  const plainCourses: Course[] = useSelector((state: State) => state.courses)
+  const currentCoursePath = pathname.split('/')[2]
+  const plainCurrentCourse = useSelector((state: State) => state.courses.find((course: Course) => course.urlCourse === currentCoursePath))
+  const courses = user ? user.courses?.map((i: any) => {
+    const course = plainCourses.find((course: Course) => course.title === i.title)
+    return { ...i, chapters: course?.chapters, urlCourse: course?.urlCourse }
+  }) : plainCourses
+  const currentCourse = user ? user.courses?.find((course: Course) => course.urlCourse === currentCoursePath) : plainCurrentCourse
+
   const coursePath = currentCourse?.urlCourse ?? '/'
   const currentPath = `/${coursePath}/chapter-1`
   const [state, setState] = useState({
@@ -70,7 +75,7 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
         ) : null}
 
         {!state.isShowList &&
-          courses.map((course: Course) => {
+          courses?.map((course: Course) => {
             const currentPath = `/${course.urlCourse}/chapter-1`
 
             if (isMobile) {
@@ -114,7 +119,7 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
                   </div>
                 </Link>
                 <div className="chapters-container no-user">
-                  <ChaptersListView user={user} coursePath={coursePath} course={course} pathname={pathname} />
+                  <ChaptersListView user={user} coursePath={course.urlCourse} course={course} pathname={pathname} />
                 </div>
               </div>
             )
@@ -140,7 +145,7 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
           ) : null}
 
           {!state.isShowList &&
-            user.courses.map((course: any) => {
+            courses?.map((course: any) => {
               if (isMobile) {
                 return (
                   <div className="courses-container-mobile" key={course._id}>
@@ -193,7 +198,7 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
                     </div>
                   </Link>
                   <div className="chapters-container">
-                    <ChaptersListView user={user} coursePath={coursePath} course={course} pathname={pathname} />
+                    <ChaptersListView user={user} coursePath={course.urlCourse} course={course} pathname={pathname} />
                   </div>
                 </div>
               )

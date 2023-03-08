@@ -8,10 +8,11 @@ import { OverallProgressView } from './OveralProgress.view'
 interface ICourseCard {
   courses: Course[] | undefined
   user?: PublicUser
+
 }
 
 export const OverallProgress = ({ courses, user }: ICourseCard) => {
-  const infoCourses = user?.courses ?? courses ?? [] as any
+  const infoCourses = courses ?? [] as any
 
   return (<OverallProgressView user={user} infoCourses={infoCourses} />)
 }
