@@ -14,6 +14,8 @@ import { serviceWorker, ServiceWorkerState } from './serviceWorker'
 import { toaster, ToasterState } from './toaster'
 import { users, UsersState } from './users'
 import { certificate, CertificateState } from './certificate'
+import { courses } from './courses'
+import { currentChapter } from './currentChapter'
 
 export const reducers = (history: any) =>
   combineReducers({
@@ -21,6 +23,8 @@ export const reducers = (history: any) =>
     auth,
     loading,
     users,
+    courses,
+    currentChapter,
     toaster,
     chapterDrawer,
     loginDrawer,
@@ -41,4 +45,6 @@ export interface State {
   serviceWorker: ServiceWorkerState
   gdpr: GdprState
   certificate: CertificateState
+  courses: any
+  currentChapter: any
 }

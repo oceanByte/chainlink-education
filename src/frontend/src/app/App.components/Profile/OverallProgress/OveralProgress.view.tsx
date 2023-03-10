@@ -9,17 +9,22 @@ import { CourseStatusType } from 'pages/Course/Course.data'
 import { MainButtonView } from '../../MainButton/MainButton.view'
 import { CircularProgressBar } from '../../CircleProgressBar/CircleProgressBar.view'
 import { BadgeView } from '../../Badge/Badge.view'
-import { IDataCourses } from '../Certificates/Certificates.view'
 import { Difficulty } from 'app/App.components/CourseCard/Difficulty/Difficulty.view'
-import { IAdditionalInfo } from 'helpers/coursesInfo'
+import { Course } from "shared/course"
+import { useSelector } from 'react-redux'
+import { State } from 'reducers'
 
 interface ICourseView {
-  infoCourses: IDataCourses
+  infoCourses: Course[]
   user?: PublicUser
 }
 
 export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
-  const { overallProgress, numberCompletedCourses, numberCourses } = infoCourses
+
+  const plainCourses = useSelector((state: State) => state.courses)
+  const allChaptersLength = plainCourses.reduce((accum: any, currValue: any) => accum + currValue.chapters.length, 0)
+  const completedChaptersLength = infoCourses.reduce((accum: any, currValue: any) => accum + currValue.progress.length, 0)
+  const overallProgress = completedChaptersLength / allChaptersLength * 100
   const history = useHistory();
   return (
     <div className='profile-page-progress-wrapper'>
@@ -39,12 +44,12 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
           />
         </div>
       </div>
-      {numberCompletedCourses !== numberCourses ? (
+      {completedChaptersLength !== allChaptersLength ? (
         <>
           <div className='sections-content__line' />
           <div className='sections-content__courses'>
             {user && user.courses ? user.courses.map((course) => {
-              const additionalInfo: IAdditionalInfo = infoCourses.courses[course.title]
+              const additionalInfo = { ...course, ...infoCourses.find(i => i.title === course.title) }
               return (
                 <React.Fragment key={course.title}>
                   {course.status !== CourseStatusType.COMPLETED ? (
@@ -55,7 +60,7 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                             <div className='badge-container'>
                               <BadgeView
                                 hasSmallBadge
-                                percentage={additionalInfo.percent}
+                                percentage={additionalInfo?.percent ?? 0}
                                 isCompleted={course.status === CourseStatusType.COMPLETED}
                                 title={course.title}
                               />
@@ -66,10 +71,10 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                               </div>
                               <div className='course-additional-info inside'>
                                 <div className='course-additional-info__chapters item'>
-                                  <div className='icon'/><div>{additionalInfo.countChapters} chapters</div>
+                                  <div className='icon' /><div>{additionalInfo?.countChapters} chapters</div>
                                 </div>
                                 <div className='course-additional-info__time item'>
-                                  <div className='icon'/><div>{additionalInfo.amountOfTime}</div>
+                                  <div className='icon' /><div>{additionalInfo?.amountOfTime}</div>
                                 </div>
                                 <div className='course-additional-info__difficulty'>
                                   <Difficulty difficulty={course.difficulty} />
@@ -79,10 +84,10 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                           </div>
                           <div className='course-additional-info outside'>
                             <div className='course-additional-info__chapters item'>
-                              <div className='icon'/><div>{additionalInfo.countChapters} chapters</div>
+                              <div className='icon' /><div>{additionalInfo.countChapters} chapters</div>
                             </div>
                             <div className='course-additional-info__time item'>
-                              <div className='icon'/><div>{additionalInfo.amountOfTime}</div>
+                              <div className='icon' /><div>{additionalInfo.amountOfTime}</div>
                             </div>
                             <div className='course-additional-info__difficulty'>
                               <Difficulty difficulty={course.difficulty} />
@@ -93,21 +98,23 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                         <div className={classnames('course-footer')}>
                           <div className="course-btn-wrapper">
                             {!additionalInfo.percent ? <MainButtonView
-                                isPrimary
-                                hasArrowUpRight
-                                text='View Course'
-                                onClick={() => history.push(additionalInfo.urlChapter)}
-                                loading={false}
-                                disabled={false}
-                              /> : null}
+                              isPrimary
+                              hasArrowUpRight
+                              text='View Course'
+                              onClick={() =>
+                                history.push(`/${course.progress[0]}`)
+                              }
+                              loading={false}
+                              disabled={false}
+                            /> : null}
                             {additionalInfo.percent && additionalInfo.percent !== 100 ? <MainButtonView
-                                isSecondary
-                                hasArrowUpRight
-                                text='Continue'
-                                onClick={() => history.push(`/profile/progress/${additionalInfo.urlCourse}`)}
-                                loading={false}
-                                disabled={false}
-                              /> : null}
+                              isSecondary
+                              hasArrowUpRight
+                              text='Continue'
+                              onClick={() => history.push(`/profile/progress/${additionalInfo.urlCourse}`)}
+                              loading={false}
+                              disabled={false}
+                            /> : null}
                           </div>
                           {user && additionalInfo.percent && additionalInfo.percent !== 100 ? (
                             <div className="course-footer__progress-bar">
@@ -115,10 +122,10 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                                 <CircularProgressBar
                                   strokeWidth="7"
                                   sqSize="60"
-                                  percentage={additionalInfo.percent}/>
+                                  percentage={additionalInfo.percent} />
                               </div>
-                              </div>
-                          ): null}
+                            </div>
+                          ) : null}
                         </div>
                       </div>
                     </div>

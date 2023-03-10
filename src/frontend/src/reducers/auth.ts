@@ -1,4 +1,5 @@
 import { RESET, RESTORE } from 'app/App.actions'
+import { ADD_PROGRESS_COMMIT } from 'pages/Chapter/Chapter.actions'
 import { DELETE_ACCOUNT_COMMIT } from 'pages/DeleteAccount/DeleteAccount.actions'
 import { FORGOT_PASSWORD_COMMIT } from 'pages/ForgotPassword/ForgotPassword.actions'
 import { LOGIN_COMMIT, LOGIN_ROLLBACK, LOGOUT } from 'pages/Login/Login.actions'
@@ -11,7 +12,7 @@ import { PublicUser } from 'shared/user/PublicUser'
 export interface AuthState {
   jwt?: Jwt
   user?: PublicUser
-  resetPasswordToken?:string
+  resetPasswordToken?: string
 }
 
 const authDefaultState: AuthState = {
@@ -102,12 +103,18 @@ export function auth(state = authDefaultState, action: any): AuthState {
       }
     }
     case SET_ACCOUNT_NAME_ROLLBACK: {
-      if(state.user?.accountName === action.payload.user?.accountName)
+      if (state.user?.accountName === action.payload.user?.accountName)
+        return {
+          ...state,
+          user: action.payload.user,
+        }
+      else return state
+    }
+    case ADD_PROGRESS_COMMIT: {
       return {
         ...state,
-        user: action.payload.user,
+        user: action.payload.user
       }
-      else return state
     }
     default:
       return state

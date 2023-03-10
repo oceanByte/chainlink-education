@@ -1,7 +1,7 @@
-import {CourseList} from "../../../resolvers/course/getAllCourses";
-import {ChapterType, CourseChapterType, QuestionType} from "./course.types";
-import {Course} from "../Course";
-import {COURSES} from "../CourseType";
+import { CourseList } from "../../../resolvers/course/getAllCourses";
+import { ChapterType, CourseChapterType, QuestionType } from "./course.types";
+import { Course } from "../Course";
+import { COURSES } from "../CourseType";
 
 /** Courses **/
 import chainlinkIntroduction from "./chainlinkIntroduction";
@@ -9,9 +9,9 @@ import solidity102 from "./solidity102";
 import solidityIntroduction from "./solidityIntroduction";
 import vrfIntroduction from "./vrfIntroduction";
 import vrf102 from "./vrf102";
-import {ResponseError} from "../../mongo/ResponseError";
-import {CourseWithChapter} from "../../../resolvers/course/getCourseChapter";
-import {CourseWithChapters} from "../../../resolvers/course/getCourseById";
+import { ResponseError } from "../../mongo/ResponseError";
+import { CourseWithChapter } from "../../../resolvers/course/getCourseChapter";
+import { CourseWithChapters } from "../../../resolvers/course/getCourseById";
 
 export const courses: CourseChapterType[] = [
     chainlinkIntroduction,
@@ -39,7 +39,7 @@ export const getCourses = (userCourses: Course[] = []): CourseList[] => {
             const courseType = COURSES.find(c => c.title === cc.course.title);
 
             const courseItem: CourseList = {
-                id: '',
+                id: cc.course.path,
                 title: cc.course.title,
                 countChapters: cc.chapters.length,
                 amountOfTime: cc.course.amountOfTime,
@@ -48,6 +48,7 @@ export const getCourses = (userCourses: Course[] = []): CourseList[] => {
                 status: cc.course.status,
                 percent: 0,
                 urlCourse: cc.course.path,
+                chapters: cc.chapters.map(({ pathname, name }) => ({ pathname, name }))
             }
 
             const userCourse: Course | undefined = userCourses.find(uc => cc.course.title === uc.title);
@@ -87,7 +88,7 @@ export const getCourseByPath = (path: string, userCourses: Course[] = []): any =
         urlChapter: course.chapters[0].pathname,
         chapters: course.chapters.map((ch: ChapterType): any => ({
             name: ch.name,
-            path: ch.pathname,
+            pathname: ch.pathname,
             description: ch.data.description
         })),
     }
@@ -164,6 +165,11 @@ export const validateAnswer = (options: ValidateAnswerOptions): boolean => {
     let answered = true;
 
     chapter.data.questions.forEach(q => {
+        q.responses.forEach(r => {
+            if (!options.answer.includes(r)) {
+                answered = false;
+            }
+        })
         if(q.responses.length !== options.answer.length){
             answered = false;
         } else {
@@ -179,5 +185,5 @@ export const validateAnswer = (options: ValidateAnswerOptions): boolean => {
 }
 
 const mapQuestions = (questions: QuestionType[]): QuestionType[] => {
-    return questions.map((q: QuestionType): QuestionType => ({question: q.question, answers: q.answers} as QuestionType))
+    return questions.map((q: QuestionType): QuestionType => ({ question: q.question, answers: q.answers } as QuestionType))
 }

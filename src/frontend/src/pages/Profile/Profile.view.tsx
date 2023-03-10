@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState,useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { Switch, NavLink, Route } from 'react-router-dom'
 
 import { PublicUser } from 'shared/user/PublicUser'
@@ -9,15 +9,17 @@ import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePa
 import { Certificates } from 'app/App.components/Profile/Certificates/Certificates.controller';
 import { OverallProgress } from 'app/App.components/Profile/OverallProgress/OveralProgress.controller';
 import { AccountInfo } from 'app/App.components/Profile/AccountInfo/AccountInfo.view';
-import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 import { CourseProgress } from 'app/App.components/Profile/CourseProgress/CourseProgress.controller'
 import { Error404 } from 'pages/Error404/Error404.controller'
 import { IChangeUsernameEmail } from './Profile.controller'
+import { useSelector } from 'react-redux'
+import { State } from 'reducers'
 
 type ProfileViewProps = {
   user?: PublicUser,
-  changeEmailOrUsernameCallback: ({email, username}: IChangeUsernameEmail)=> void,
-  deleteAccountCallback: ()=> void
+  changeEmailOrUsernameCallback: ({ email, username }: IChangeUsernameEmail) => void,
+  deleteAccountCallback: () => void
 }
 
 export const ProfileView = ({
@@ -27,8 +29,9 @@ export const ProfileView = ({
 }: ProfileViewProps) => {
   const [isShow, setIsShow] = useState(false);
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
+  const courses = useSelector((state: State) => state.courses)
 
-  const infoCourses = getCoursesData(user?.courses || []);
+  const infoCourses = user?.courses ?? courses;
 
   // const copyToClipboard = () => {
   //   navigator.clipboard.writeText(`https://www.chainlink.education/certificate/${user?.username}`);
@@ -46,9 +49,9 @@ export const ProfileView = ({
           <NavLink
             to={`/profile/progress`}
             className={`profile-page-sections-content__item profile-item-progress`}
-            >
-              <div className='profile-icon' />
-              <div className='profile-text'>Progress</div>
+          >
+            <div className='profile-icon' />
+            <div className='profile-text'>Progress</div>
           </NavLink>
           {user && isShow ? (
             <div className='progress-courses__wrapper'>
@@ -64,9 +67,9 @@ export const ProfileView = ({
                     </NavLink>
                   </div>
                 )
-              }): null}
+              }) : null}
             </div>
-          ) : null }
+          ) : null}
           <div className='profile-page-sections-content__line' />
           <NavLink
             to={`/profile/certificates`}
@@ -96,10 +99,10 @@ export const ProfileView = ({
       <div className={`profile-page-progress profile-page-section profile-page-visible`}>
         <Switch>
           <Route path={`/profile/progress`} exact>
-            <OverallProgress user={user} courses={user?.courses}/>
+            <OverallProgress user={user} courses={user?.courses} />
           </Route>
           <Route path={`/profile/progress/:courseId`} exact>
-            <CourseProgress user={user} courses={user?.courses} showSubList={showSubList}/>
+            <CourseProgress user={user} courses={user?.courses} showSubList={showSubList} />
           </Route>
           <Route path={`/profile/certificates`}>
             <Certificates user={user} />
