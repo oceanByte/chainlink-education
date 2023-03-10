@@ -29,7 +29,7 @@ type CourseWithChapterOptions = {
 type ValidateAnswerOptions = {
     coursePath: string
     chapterPath: string
-    answer: string
+    answer: string[]
 }
 
 export const getCourses = (userCourses: Course[] = []): CourseList[] => {
@@ -164,11 +164,15 @@ export const validateAnswer = (options: ValidateAnswerOptions): boolean => {
     let answered = true;
 
     chapter.data.questions.forEach(q => {
-        q.responses.forEach(r => {
-            if(!options.answer.includes(r)){
-                answered = false;
-            }
-        })
+        if(q.responses.length !== options.answer.length){
+            answered = false;
+        } else {
+            q.responses.forEach(r => {
+                if(!options.answer.includes(r)){
+                    answered = false;
+                }
+            })
+        }
     })
 
     return answered;

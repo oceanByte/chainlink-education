@@ -6,7 +6,7 @@ export const validateChapterAnswer = async (ctx: Context, next: Next): Promise<v
 
     const coursePath: string = req.params.path
     const chapterPath: string = req.params.chapterPath
-    const answer: string = req.body.answer;
+    const answer: string[] = req.body.answer;
 
     const answerIs = validateAnswer({coursePath, chapterPath, answer});
 
