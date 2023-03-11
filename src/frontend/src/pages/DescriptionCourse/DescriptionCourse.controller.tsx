@@ -20,7 +20,6 @@ import { getCourseByURL } from 'app/App.components/CourseCard/CourseCard.action'
 export const DescriptionCourse = () => {
   const { courseId } = useParams<CourseID>()
   const course: IAdditionalInfo = useSelector((state: State) => state?.courses?.find((i: IAdditionalInfo) => i.urlCourse === courseId) ?? {})
-
   const user = useSelector((state: State) => state.auth.user)
   const dispatch = useDispatch()
 

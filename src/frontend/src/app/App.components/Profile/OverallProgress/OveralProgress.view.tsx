@@ -13,6 +13,7 @@ import { Difficulty } from 'app/App.components/CourseCard/Difficulty/Difficulty.
 import { Course } from "shared/course"
 import { useSelector } from 'react-redux'
 import { State } from 'reducers'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 
 interface ICourseView {
   infoCourses: Course[]
@@ -48,8 +49,9 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
         <>
           <div className='sections-content__line' />
           <div className='sections-content__courses'>
-            {user && user.courses ? user.courses.map((course) => {
-              const additionalInfo = { ...course, ...infoCourses.find(i => i.title === course.title) }
+            {user && user.courses ? user.courses.map((course, index) => {
+              // const additionalInfo = { ...course, ...infoCourses.find(i => i.title === course.title), ...plainCourses }
+              const additionalInfo = user ? { ...plainCourses[index], ...user.courses?.find((userCourse: any) => userCourse.title === course.title) } : course as IAdditionalInfo
               return (
                 <React.Fragment key={course.title}>
                   {course.status !== CourseStatusType.COMPLETED ? (
@@ -102,7 +104,8 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                               hasArrowUpRight
                               text='View Course'
                               onClick={() =>
-                                history.push(`/${course.progress[0]}`)
+                                history.push(`${plainCourses[index].chapters[0].pathname}`)
+
                               }
                               loading={false}
                               disabled={false}

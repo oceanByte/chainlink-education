@@ -54,7 +54,6 @@ export const CertificatesView = ({ user, infoCourses }: ICertificatesView) => {
           ? user.courses.map((course: Course, key: number) => {
             const currentCourse = courses.find((c: Course) => c.title === course.title);
             const additionalInfo: IAdditionalInfo = (infoCourses as any).find((i: Course) => i.title === course.title)
-
             return (
               <React.Fragment key={key}>
                 {course.status === CourseStatusType.COMPLETED ? (
@@ -69,7 +68,7 @@ export const CertificatesView = ({ user, infoCourses }: ICertificatesView) => {
                         isSecondary
                         hasArrowDown
                         text='Download certificate'
-                        onClick={() => history.push(currentCourse ? `/description/${additionalInfo.urlCourse}` : '/')}
+                        onClick={() => history.push(`/description/${currentCourse.urlCourse}`)}
                         loading={false}
                         disabled={false}
                       />

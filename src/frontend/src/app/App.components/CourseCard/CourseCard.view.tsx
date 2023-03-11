@@ -31,7 +31,6 @@ export const CourseCardView = ({ infoCourses, course, user }: ICourseView) => {
   const [isShowList, setIsShowList] = useState(false);
   const courseInfo = useSelector((state: State) => state.courses.find((i: Course) => i.title === course.title))
   const additionalInfo = user ? { ...courseInfo, ...user.courses?.find((userCourse: any) => userCourse.title === course.title) } : course as IAdditionalInfo
-
   const showList = () => {
     setIsShowList((prev) => !prev);
   }

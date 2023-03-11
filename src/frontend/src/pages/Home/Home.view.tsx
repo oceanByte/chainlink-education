@@ -11,50 +11,13 @@ import { DeFi } from 'app/App.components/DeFi/DeFi.controller'
 import 'aos/dist/aos.css'
 import { Course } from 'shared/course'
 
+
 type HomeViewProps = {
   user?: PublicUser
   courses: Course[]
   contactUsCallback: (values: any) => void
 }
 
-// from src/api/src/shared/course/CourseType.ts
-// export const COURSES = [
-//   {
-//     title: 'Chainlink 101',
-//     description: `Chainlink decentralized oracle networks provide tamper-proof inputs, outputs, and computations.`,
-//     difficulty: 1,
-//     status: CourseStatusType.NEW,
-//     progress: [],
-//   },
-//   {
-//     title: 'Solidity Introduction',
-//     description: `Solidity is an object-oriented, high-level language for implementing smart contracts. Learn about the basics here.`,
-//     difficulty: 2,
-//     status: CourseStatusType.NEW,
-//     progress: [],
-//   },
-//   {
-//     title: 'Solidity 102',
-//     description: `Learn more about the EVM, complex data types, flow control, access control, error handling and inheritance.`,
-//     difficulty: 3,
-//     status: CourseStatusType.NEW,
-//     progress: [],
-//   },
-//   {
-//     title: 'VRF v2 Introduction',
-//     description: `Study how VRF can be used to bring Verfiable Randomness to blockchain.`,
-//     difficulty: 2,
-//     status: CourseStatusType.NEW,
-//     progress: [],
-//   },
-//   {
-//     title: 'VRF v2 Advanced',
-//     description: `Explore the technical details and practical usage of VRF v2.`,
-//     difficulty: 3,
-//     status: CourseStatusType.NEW,
-//     progress: [],
-//   },
-// ]
 
 export const HomeView = ({ user, courses }: HomeViewProps) => {
   useEffect(() => {

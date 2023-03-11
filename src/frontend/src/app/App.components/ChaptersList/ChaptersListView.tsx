@@ -9,7 +9,7 @@ import { PublicUser } from 'shared/user/PublicUser'
 interface IChaptersListView {
   user?: PublicUser
   pathname: string
-  coursePath: string
+  coursePath: any
   course: Course
 }
 
@@ -60,7 +60,7 @@ export const ChaptersListView = ({ coursePath, user, pathname, course: currentCo
               </div>
             ) : (
               <>
-                {user && nextChapter === currentPath ? (
+                {!done && nextChapter === currentPath ? (
                   <div className="header-chapters__item__completion continue">CONTINUE</div>
                 ) : null}
               </>
