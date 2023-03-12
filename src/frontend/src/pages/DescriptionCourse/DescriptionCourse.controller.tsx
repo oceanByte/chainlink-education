@@ -20,6 +20,7 @@ import { getCourseByURL } from 'app/App.components/CourseCard/CourseCard.action'
 export const DescriptionCourse = () => {
   const { courseId } = useParams<CourseID>()
   const course: IAdditionalInfo = useSelector((state: State) => state?.courses?.find((i: IAdditionalInfo) => i.urlCourse === courseId) ?? {})
+  console.log(course, 'course')
   const user = useSelector((state: State) => state.auth.user)
   const dispatch = useDispatch()
 
@@ -49,15 +50,15 @@ export const DescriptionCourse = () => {
     return false
   }
 
-  if (!course.urlChapter) {
-    return (
-      <>
-        <Header />
-        <Error404 />
-        <Footer />
-      </>
-    )
-  }
+  // if (!course.urlChapter) {
+  //   return (
+  //     <>
+  //       <Header />
+  //       <Error404 />
+  //       <Footer />
+  //     </>
+  //   )
+  // }
 
   return (
     <>
