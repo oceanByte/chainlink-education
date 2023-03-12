@@ -24,13 +24,15 @@ export const PreviewCertificate = () => {
 
   const dispatch = useDispatch()
   const { courseId, username } = useParams<CourseID>();
+
   const isPublicView = !!username
   const user = useSelector((state: State) => state.auth.user)
   const certificate = useSelector((state: State) => state.certificate.certificate)
 
   const infoCourses = user?.courses ?? courses;
   const currentCourse = courses.find((course: Course) => course.urlCourse === courseId);
-  const additionalInfo: IAdditionalInfo = infoCourses.courses[currentCourse?.name || '']
+  const additionalInfo: IAdditionalInfo = (infoCourses as any).find((i: Course) => i.title === currentCourse.title)
+
 
   const downloadCallback = (title: string) => {
     const path = getPathForCertificate(title)
