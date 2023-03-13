@@ -12,6 +12,7 @@ import vrf102 from "./vrf102";
 import { ResponseError } from "../../mongo/ResponseError";
 import { CourseWithChapter } from "../../../resolvers/course/getCourseChapter";
 import { CourseWithChapters } from "../../../resolvers/course/getCourseById";
+import {AnswerInput} from "../../../resolvers/course/validateChapterAnswer";
 
 export const courses: CourseChapterType[] = [
     chainlinkIntroduction,
@@ -29,7 +30,7 @@ type CourseWithChapterOptions = {
 type ValidateAnswerOptions = {
     coursePath: string
     chapterPath: string
-    answer: string[]
+    answer: AnswerInput[]
 }
 
 export const getCourses = (userCourses: Course[] = []): CourseList[] => {
@@ -162,23 +163,21 @@ export const validateAnswer = (options: ValidateAnswerOptions): boolean => {
     const chapter = course.chapters.find((ch: ChapterType) => ch.pathname === `/${options.coursePath}/${options.chapterPath}`)
     if (!chapter) throw new ResponseError(404, 'Chapter not found');
 
+    const data = options.answer;
+
     let answered = true;
 
     chapter.data.questions.forEach(q => {
-        q.responses.forEach(r => {
-            if (!options.answer.includes(r)) {
-                answered = false;
-            }
-        })
-        if(q.responses.length !== options.answer.length){
-            answered = false;
-        } else {
-            q.responses.forEach(r => {
-                if(!options.answer.includes(r)){
-                    answered = false;
-                }
-            })
+        const question = data.find(d => d.question === q.question)
+
+        if(!question) {
+            answered = false
+            return;
         }
+
+        q.responses.forEach(r => {
+            if(!question.answers.includes(r)) answered = false;
+        })
     })
 
     return answered;
