@@ -8,7 +8,7 @@ import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
 
 import { getUser } from 'pages/User/User.actions'
-import { validateAnswer, addProgress, getChapter } from './Chapter.actions'
+import { validateAnswer, addProgress, getChapter, ADD_COURSE_PROGRESS_PERCENT } from './Chapter.actions'
 import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 
 import { PublicUser } from 'shared/user/PublicUser'
@@ -97,8 +97,7 @@ export const Chapter = () => {
   const [tab, setTab] = useState<string>(TabType.CONTENT)
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
-  const currentCourse = user ? { ...user.courses?.find((course: any) => course.title === plainCurrentCourse.title), ...plainCurrentCourse } : plainCurrentCourse
-
+  const currentCourse = user ? { ...user.courses?.find((course: any) => course?.title === plainCurrentCourse?.title), ...plainCurrentCourse } : plainCurrentCourse
   const indexOfCurrentChapter = currentCourse?.chapters?.findIndex((chapter: { pathname: string, name: string }) => chapter.pathname === currentChapter.pathname) ?? 0
 
   let intervalID: any = useRef(null)
@@ -130,7 +129,7 @@ export const Chapter = () => {
   }, [pathname, currentChapter.pathname])
 
   const getNextChapterLink = () => {
-    if (currentCourse.chapters.length - 1 === indexOfCurrentChapter) {
+    if (currentCourse?.chapters?.length - 1 === indexOfCurrentChapter) {
       return user ? `/profile/certificates` : '/sign-up'
 
     } else {
@@ -215,7 +214,10 @@ export const Chapter = () => {
     }
 
     if (data.questions.length > 0) {
-      const validationResponse = await validateAnswer(currentChapter.pathname, data.questions?.[0].proposedResponses ?? [])
+      const validationResponse = await validateAnswer(
+        currentChapter.pathname,
+        data?.questions?.reduce((acc, question) => ([...acc, ...question?.proposedResponses ?? []]), [] as string[]) ?? []
+      )
       let ok = validationResponse.answerIs
 
       if (ok) {
@@ -224,6 +226,7 @@ export const Chapter = () => {
         if (user) {
           clearInterval(intervalID.current)
           const course = findCurrentCourse(user)
+          dispatch({ type: ADD_COURSE_PROGRESS_PERCENT, payload: { urlCourse: course.path, chapterUrl: pathname } })
           dispatch(
             addProgress({
               chapterDone: pathname,

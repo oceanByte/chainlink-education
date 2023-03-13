@@ -10,7 +10,6 @@ import { DescriptionCourseView } from './DescriptionCourse.view'
 
 import { CourseID } from 'app/App.components/Profile/CourseProgress/CourseProgress.controller'
 import { IAdditionalInfo } from 'helpers/coursesInfo'
-import { Error404 } from 'pages/Error404/Error404.controller'
 
 import { getUser } from '../Profile/Profile.actions'
 
@@ -20,7 +19,6 @@ import { getCourseByURL } from 'app/App.components/CourseCard/CourseCard.action'
 export const DescriptionCourse = () => {
   const { courseId } = useParams<CourseID>()
   const course: IAdditionalInfo = useSelector((state: State) => state?.courses?.find((i: IAdditionalInfo) => i.urlCourse === courseId) ?? {})
-
   const user = useSelector((state: State) => state.auth.user)
   const dispatch = useDispatch()
 
@@ -50,15 +48,7 @@ export const DescriptionCourse = () => {
     return false
   }
 
-  if (!course.urlChapter) {
-    return (
-      <>
-        <Header />
-        <Error404 />
-        <Footer />
-      </>
-    )
-  }
+
 
   return (
     <>

@@ -9,7 +9,6 @@ import { UpdatePassword } from '../../app/App.components/UpdatePassword/UpdatePa
 import { Certificates } from 'app/App.components/Profile/Certificates/Certificates.controller';
 import { OverallProgress } from 'app/App.components/Profile/OverallProgress/OveralProgress.controller';
 import { AccountInfo } from 'app/App.components/Profile/AccountInfo/AccountInfo.view';
-import { IAdditionalInfo } from 'helpers/coursesInfo'
 import { CourseProgress } from 'app/App.components/Profile/CourseProgress/CourseProgress.controller'
 import { Error404 } from 'pages/Error404/Error404.controller'
 import { IChangeUsernameEmail } from './Profile.controller'
@@ -31,13 +30,6 @@ export const ProfileView = ({
   const [isConfirmPassVisible, setIsConfirmPassVisible] = useState(true)
   const courses = useSelector((state: State) => state.courses)
 
-  const infoCourses = user?.courses ?? courses;
-
-  // const copyToClipboard = () => {
-  //   navigator.clipboard.writeText(`https://www.chainlink.education/certificate/${user?.username}`);
-  //   dispatch(showToaster(SUCCESS, 'Certificate link copied', 'You can share this link now.'));
-  // }
-
   const showSubList = useCallback((isShow: boolean) => {
     setIsShow(() => isShow)
   }, [])
@@ -55,12 +47,11 @@ export const ProfileView = ({
           </NavLink>
           {user && isShow ? (
             <div className='progress-courses__wrapper'>
-              {user.courses ? user.courses.map((course) => {
-                const additionalInfo: IAdditionalInfo = infoCourses.courses[course.title]
+              {user.courses ? user.courses.map((course, index) => {
                 return (
                   <div className='progress-courses__item' key={course.title}>
                     <NavLink
-                      to={`/profile/progress/${additionalInfo.urlCourse}`}
+                      to={`/profile/progress/${courses[index].urlCourse}`}
                       className={`profile-page-sections-content__item profile-item-progress`}
                     >
                       {course.title}

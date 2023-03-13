@@ -1,7 +1,8 @@
 import { ConnectedRouter } from 'connected-react-router'
 import { getCourses } from 'pages/Home/Home.actions'
 import * as React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { State } from 'reducers'
 
 import { ChapterDrawer, LoginDrawer } from './App.components/Drawer/Drawer.controller'
 import { Gdpr } from './App.components/Gdpr/Gdpr.controller'
@@ -17,10 +18,11 @@ import { AppView } from './App.view'
 
 export const App = () => {
   const dispatch = useDispatch()
+  const user = useSelector((state: State) => state.auth.user)
 
   React.useEffect(() => {
     dispatch(getCourses())
-  }, [dispatch])
+  }, [dispatch, user])
 
   return (
     <ConnectedRouter history={history}>

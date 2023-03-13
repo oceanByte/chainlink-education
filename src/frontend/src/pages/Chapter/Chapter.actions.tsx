@@ -8,11 +8,12 @@ export const GET_CURRENT_CHAPTER_REQUEST = 'GET_CURRENT_CHAPTER_REQUEST'
 export const GET_CURRENT_CHAPTER_SUCCESS = 'GET_CURRENT_CHAPTER_SUCCESS'
 export const GET_CURRENT_CHAPTER_FAILURE = 'GET_CURRENT_CHAPTER_FAILURE'
 export const ADD_ANSWER_REQUEST = 'ADD_ANSWER_REQUEST'
+export const ADD_COURSE_PROGRESS_PERCENT = "ADD_COURSE_PROGRESS_PERCENT"
 
 export const addProgress = ({ chapterDone, courseId, time, isCompleted, coursePath }: AddProgressInputs) => (dispatch: any) => {
   dispatch({
     type: ADD_PROGRESS_REQUEST,
-    payload: {},
+    payload: { chapterDone, coursePath },
     meta: {
       offline: {
         effect: {

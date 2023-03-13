@@ -54,7 +54,6 @@ export const Content = ({ course }: any) => (
     }}
   />
 )
-
 interface IChapterItem {
   chapter: ChapterData
   index: number
@@ -113,7 +112,6 @@ export const DescriptionCourseView = ({
   const handleSubmit = (values: { address: string }) => {
     changeAddressCallback(values)
   }
-
   const handleDownload = async () => {
     // issue certificate if it it does not exist yet
     const hasCertificate = await setNftCertificateCallback({ coursePath: additionalInfo.urlCourse })

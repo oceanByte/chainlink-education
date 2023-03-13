@@ -32,7 +32,6 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
     return { ...i, chapters: course?.chapters, urlCourse: course?.urlCourse }
   }) : plainCourses
   const currentCourse = user ? user.courses?.find((course: Course) => course.urlCourse === currentCoursePath) : plainCurrentCourse
-
   const coursePath = currentCourse?.urlCourse ?? '/'
   const currentPath = `/${coursePath}/chapter-1`
   const [state, setState] = useState({
@@ -176,11 +175,10 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
                   </div>
                 )
               }
-
               return (
                 <div className="courses-container" key={course._id}>
                   <Link
-                    to={currentPath}
+                    to={course.chapters[0]}
                     className={classnames('header-chapters__item', pathname === currentPath && 'current')}
                   >
                     <div className="header-chapters__item__name">
