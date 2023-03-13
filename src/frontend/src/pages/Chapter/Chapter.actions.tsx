@@ -56,7 +56,7 @@ export const getChapter = (urlCourse: string, currentChapter: string) => async (
 }
 
 
-export const validateAnswer = (urlCourse: string, answer: string[]) => {
+export const validateAnswer = (urlCourse: string, answers: { question: string, answers: string[] }[]) => {
   return fetch(`${process.env.REACT_APP_BACKEND_URL}/v1/course${urlCourse}/validation`, {
     method: 'POST',
     headers: {
@@ -64,8 +64,7 @@ export const validateAnswer = (urlCourse: string, answer: string[]) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ answer })
+    body: JSON.stringify({ answer: answers })
   })
     .then(response => response.json())
-
 }
