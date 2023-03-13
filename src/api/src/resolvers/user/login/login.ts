@@ -21,14 +21,14 @@ export const login = async (ctx: Context, next: Next): Promise<void> => {
   await validateOrReject(loginArgs, { forbidUnknownValues: true }).catch(firstError)
   let { usernameOrEmail, password, recaptchaToken } = loginArgs
 
-  usernameOrEmail = usernameOrEmail.toLowerCase()
-
   await verifyRecaptchaToken(recaptchaToken)
 
   let user: User | null = await UserModel.findOne({ email: usernameOrEmail }).lean()
+
   if (!user) {
     user = await UserModel.findOne({ username: usernameOrEmail }).lean()
   }
+
   if (!user) throw new ResponseError(401, 'Wrong username or password')
 
   const courses = await getCourses({ user });
