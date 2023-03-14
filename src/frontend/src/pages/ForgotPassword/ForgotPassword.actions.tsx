@@ -1,4 +1,3 @@
-import { redirect } from 'app/App.actions'
 import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 import { ForgotPasswordInputs } from 'shared/user/ForgotPassword'
@@ -23,7 +22,6 @@ export const forgotPassword = ({ usernameOrEmail, recaptchaToken }: ForgotPasswo
           meta: {
             thunks: [
               showToaster(SUCCESS, 'Check your email', 'for a reset captcha'),
-              redirect('/reset-password?key=$resetPasswordToken'),
             ],
           },
         },

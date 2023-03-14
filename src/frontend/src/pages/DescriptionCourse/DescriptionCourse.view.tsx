@@ -147,7 +147,7 @@ export const DescriptionCourseView = ({
   return (
     <div className="description-page">
       <div className={`description-page-section section-chapters`}>
-        <Content course={additionalInfo.descriptionCourse} />
+        <Content course={additionalInfo.description} />
 
         <div className="program-wrapp">Сourse program</div>
         <div className="chapters">

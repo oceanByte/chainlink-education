@@ -216,8 +216,12 @@ export const Chapter = () => {
     if (data.questions.length > 0) {
       const validationResponse = await validateAnswer(
         currentChapter.pathname,
-        data?.questions?.reduce((acc, question) => ([...acc, ...question?.proposedResponses ?? []]), [] as string[]) ?? []
-      )
+        data?.questions?.map(question => ({
+          question: question?.question ?? '',
+          answers: question?.proposedResponses ?? []
+        })) ?? []
+      );
+
       let ok = validationResponse.answerIs
 
       if (ok) {
