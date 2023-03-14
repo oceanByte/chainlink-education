@@ -22,6 +22,7 @@ import {getCourse} from "./resolvers/course/getCourseById";
 import { getCourseChapter } from "./resolvers/course/getCourseChapter";
 import { validateChapterAnswer } from "./resolvers/course/validateChapterAnswer";
 import {loginUser, findUser, storeUserProgress, getNonce} from "./resolvers/user/metaMask";
+import certificate from "./resolvers/certificate";
 
 const router = new Router()
 
@@ -57,6 +58,9 @@ router.post('/page/get-certificate', getCertificate)
 router.post('/page/get-user', getPublicUser)
 router.post('/page/set-name', setName)
 
+
+
+
 /** NEW FEATURES, SOME ROUTES CAN BE THE COPY OF EXISTED ROUTES **/
 
 /** COURSE ROUTEs **/
@@ -72,5 +76,10 @@ router.post('/v1/users', findUser) // JWT!: Will return User if JWT token is val
 
 // JWT!: Will store User progress and update course status to COMPLETED if all chapters are done and create a certificate to display image
 router.post('/v1/users/progress', storeUserProgress)
+
+/** CERTIFICATE ROUTES **/
+
+// Certificate: if user logged in returns certificate by coursePath
+router.get('/v1/certificate/:coursePath', certificate)
 
 export { router }
