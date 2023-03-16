@@ -57,14 +57,11 @@ export const storeUserProgress = async (ctx: Context, next: Next) => {
         }
     }
 
-
     /** Response data **/
     const userCourses = await CourseModel.find({userId: user._id});
 
-
     const paths = options.chapterPath.split('/');
     const idChapterPath = paths[paths.length - 1]
-    console.log(idChapterPath)
 
     const courseWithChapter = getCourseWithChapter({coursePath: options.coursePath, chapterPath: idChapterPath}, userCourses)
 

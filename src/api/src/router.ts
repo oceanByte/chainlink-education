@@ -23,6 +23,7 @@ import { getCourseChapter } from "./resolvers/course/getCourseChapter";
 import { validateChapterAnswer } from "./resolvers/course/validateChapterAnswer";
 import {loginUser, findUser, storeUserProgress, getNonce} from "./resolvers/user/metaMask";
 import certificate from "./resolvers/certificate";
+import {validateChapterSolution} from "./resolvers/course/validateChapterSolution";
 
 const router = new Router()
 
@@ -58,9 +59,6 @@ router.post('/page/get-certificate', getCertificate)
 router.post('/page/get-user', getPublicUser)
 router.post('/page/set-name', setName)
 
-
-
-
 /** NEW FEATURES, SOME ROUTES CAN BE THE COPY OF EXISTED ROUTES **/
 
 /** COURSE ROUTEs **/
@@ -68,6 +66,7 @@ router.get('/v1/course', getAllCourses) // Course[]: if user logged in returns c
 router.get('/v1/course/:path', getCourse) // Course: if user logged in returns course with user progress inside
 router.get('/v1/course/:path/:chapterPath', getCourseChapter) // Chapter: Returns course with selected chapter inside and info about progress
 router.post('/v1/course/:path/:chapterPath/validation', validateChapterAnswer) // Boolean: returns true if chapter answer is valid, false otherwise. Request body: {answer: [string]}
+router.post('/v1/course/:path/:chapterPath/validation/solution', validateChapterSolution) // Boolean: returns true if chapter solution is valid, false otherwise. Request body: {solution: string}
 
 /** USER ROUTES **/
 router.post('/v1/users/nonce', getNonce) // => {publicAddress: string} => {nonce: number}: Will find or create User and return only nonce
