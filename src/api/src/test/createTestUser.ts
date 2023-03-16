@@ -41,7 +41,7 @@ export const createTestUser: CreateTestUser = async (email, username, password) 
           'mockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockTokenmockToken',
       },
     },
-  } as Context
+  } as Context;
 
   const next: Next = (async () => Promise.resolve()) as Next
 
@@ -49,7 +49,7 @@ export const createTestUser: CreateTestUser = async (email, username, password) 
 
   const user: User = (await UserModel.findOne({ username: username }).lean()) as User
 
-  const jwt: Jwt = signUpContext.body.jwt
+  const jwt: Jwt = (signUpContext as any).body.jwt
 
   return { user, jwt, next }
 }
