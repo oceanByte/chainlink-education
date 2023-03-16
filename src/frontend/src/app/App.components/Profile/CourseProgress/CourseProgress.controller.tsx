@@ -23,7 +23,8 @@ export type CourseID = {
 export const CourseProgress = ({ courses, user, showSubList }: ICourseCard) => {
   const { courseId } = useParams<CourseID>();
   const currentCourse = useSelector((state: State) => state.courses.find((course: Course) => course.urlCourse === courseId))
-  const courseAdditionalInfo = currentCourse
+  const currentUserCourse = user?.courses?.find((course: Course) => course.title === currentCourse?.title)
+  const courseAdditionalInfo = user ? { ...currentCourse, ...currentUserCourse } : currentCourse
 
   useEffect(() => {
     if (courseId) {
