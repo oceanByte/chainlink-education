@@ -475,7 +475,13 @@ const SIGNER_PRIVATE_KEY = process.env.SIGNER_PRIVATE_KEY
 const ethLib = (ethers as any);
 
 const provider: any = `https://polygon-mainnet.infura.io/v3/${INFURA_API_KEY}` || 'https://rpc.gaiaxtestnet.oceanprotocol.com:443'
-const ethersProvider = new ethLib.providers.JsonRpcProvider(provider);
+let ethersProvider: any;
+
+try{
+  ethersProvider = new ethLib.providers.JsonRpcProvider(provider)
+}catch (e) {
+  ethersProvider = null;
+}
 
 async function estimateGas(): Promise<any> {
   let maxFeePerGas = ethLib.BigNumber.from(100000000000) // fallback to 100 gwei
