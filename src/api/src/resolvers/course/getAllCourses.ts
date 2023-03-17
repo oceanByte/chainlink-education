@@ -16,6 +16,7 @@ export type CourseList = {
     status: string
     countChapters: number
     percent: number
+    progress: string[]
 
     chapters: Omit<ChapterType, 'data'>[]
 

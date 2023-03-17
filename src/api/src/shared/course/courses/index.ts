@@ -53,6 +53,7 @@ export const getCourses = (userCourses: Course[] = []): CourseList[] => {
                 difficulty: cc.course.difficulty,
                 description: courseType?.description || '',
                 status: cc.course.status,
+                progress: [],
                 percent: 0,
                 urlCourse: cc.course.path,
                 chapters: cc.chapters.map(({ pathname, name }) => ({ pathname, name }))
@@ -67,6 +68,7 @@ export const getCourses = (userCourses: Course[] = []): CourseList[] => {
             courseItem.id = userCourse._id.toString()
             courseItem.status = userCourse.status
             courseItem.percent = (courseProgress / cc.chapters.length) * 100
+            courseItem.progress = userCourse.progress;
 
             return courseItem
         })
