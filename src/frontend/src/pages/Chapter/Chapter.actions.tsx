@@ -17,7 +17,7 @@ export const addProgress = ({ chapterDone, courseId, time, isCompleted, coursePa
     meta: {
       offline: {
         effect: {
-          url: `${process.env.REACT_APP_BACKEND_URL}/user/add-progress`,
+          url: `${process.env.REACT_APP_BACKEND_URL}/v1/users/progress`,
           method: 'POST',
           headers: { Authorization: `Bearer ${store.getState().auth.jwt}` },
           json: { chapterDone, courseId, time, isCompleted, coursePath },
@@ -65,6 +65,20 @@ export const validateAnswer = (urlCourse: string, answers: { question: string, a
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ answer: answers })
+  })
+    .then(response => response.json())
+}
+
+
+export const validateSolution = (urlCourse: string, solution: string) => {
+  return fetch(`${process.env.REACT_APP_BACKEND_URL}/v1/course${urlCourse}/validation/solution`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${store.getState().auth.jwt}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ solution })
   })
     .then(response => response.json())
 }

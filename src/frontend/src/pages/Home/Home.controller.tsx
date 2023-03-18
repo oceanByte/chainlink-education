@@ -10,9 +10,10 @@ const scrollIntoView = require('scroll-into-view')
 export const Home = () => {
 
   const user = useSelector((state: State) => state.auth.user)
-  const courses: Course[] = useSelector((state: State) => state.courses)
+  const courses: Course[] = useSelector((state: State) => state.courses) ?? []
   const contactUsCallback = async (contactUsInputs: ContactUsInputs) => {
   }
+
 
   useEffect(() => {
     let url = window.location.href.split('/')

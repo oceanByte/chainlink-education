@@ -27,11 +27,12 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
   const plainCourses: Course[] = useSelector((state: State) => state.courses)
   const currentCoursePath = pathname.split('/')[2]
   const plainCurrentCourse = useSelector((state: State) => state.courses.find((course: Course) => course.urlCourse === currentCoursePath))
-  const courses = user ? user.courses?.map((i: any) => {
+  const courses = user ? plainCourses?.map((i: any) => {
     const course = plainCourses.find((course: Course) => course.title === i.title)
     return { ...i, chapters: course?.chapters, urlCourse: course?.urlCourse }
   }) : plainCourses
-  const currentCourse = user ? user.courses?.find((course: Course) => course.urlCourse === currentCoursePath) : plainCurrentCourse
+
+  const currentCourse = user ? plainCourses?.find((course: Course) => course.urlCourse === currentCoursePath) : plainCurrentCourse
   const coursePath = currentCourse?.urlCourse ?? '/'
   const currentPath = `/${coursePath}/chapter-1`
   const [state, setState] = useState({
@@ -129,7 +130,7 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
 
   return (
     <>
-      {user && user.courses ? (
+      {user && plainCourses ? (
         <>
           {state.isShowList ? (
             <div className="courses-container-mobile chapters-list">
@@ -147,7 +148,7 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
             courses?.map((course: any) => {
               if (isMobile) {
                 return (
-                  <div className="courses-container-mobile" key={course._id}>
+                  <div className="courses-container-mobile" key={course.id}>
                     <div
                       className={classnames('header-chapters__item', pathname === currentPath && 'current')}
                       onClick={() =>
@@ -176,7 +177,7 @@ export const CoursesListView = ({ user, pathname, isMobile }: IChaptersListView)
                 )
               }
               return (
-                <div className="courses-container" key={course._id}>
+                <div className="courses-container" key={course.id}>
                   <Link
                     to={course.chapters[0]}
                     className={classnames('header-chapters__item', pathname === currentPath && 'current')}

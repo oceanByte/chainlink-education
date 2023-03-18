@@ -14,7 +14,7 @@ export const getUser = ({ username }: GetPublicUserInputs) => (dispatch: any) =>
     meta: {
       offline: {
         effect: {
-          url: `${process.env.REACT_APP_BACKEND_URL}/page/get-user`,
+          url: `${process.env.REACT_APP_BACKEND_URL}/v1/users`,
           method: 'POST',
           headers: { Authorization: `Bearer ${store.getState().auth.jwt}` },
           json: { username },

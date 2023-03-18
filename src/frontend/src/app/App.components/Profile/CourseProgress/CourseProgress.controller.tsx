@@ -26,6 +26,7 @@ export const CourseProgress = ({ courses, user, showSubList }: ICourseCard) => {
   const currentUserCourse = user?.courses?.find((course: Course) => course.title === currentCourse?.title)
   const courseAdditionalInfo = user ? { ...currentCourse, ...currentUserCourse } : currentCourse
 
+
   useEffect(() => {
     if (courseId) {
       showSubList(true)

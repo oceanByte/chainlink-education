@@ -20,13 +20,13 @@ type HomeViewProps = {
 
 
 export const HomeView = ({ user, courses }: HomeViewProps) => {
+
+
   useEffect(() => {
     AOS.init({
       duration: 700,
     })
   }, [])
-
-
   return (
     <div className="home">
       <div className="home-wrapper intro">
@@ -56,7 +56,7 @@ export const HomeView = ({ user, courses }: HomeViewProps) => {
             <div className="home-courses-content__header__line" />
           </div>
           <div className="home-courses-content__items" id="get_started">
-            <CourseCards courses={user ? user.courses : courses} user={user} />
+            <CourseCards courses={courses} user={user} />
           </div>
         </div>
       </div>

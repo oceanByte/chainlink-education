@@ -11,7 +11,7 @@ interface ICourseCard {
 }
 
 export const CourseCards = ({ courses, user }: ICourseCard) => {
-  const infoCourses = user?.courses ?? courses ?? [] as any
+  const infoCourses = courses ?? [] as any
   return (
     <>
       {courses

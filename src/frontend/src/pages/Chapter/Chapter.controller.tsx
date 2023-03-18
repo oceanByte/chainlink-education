@@ -8,7 +8,7 @@ import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
 
 import { getUser } from 'pages/User/User.actions'
-import { validateAnswer, addProgress, getChapter, ADD_COURSE_PROGRESS_PERCENT } from './Chapter.actions'
+import { validateAnswer, addProgress, getChapter, ADD_COURSE_PROGRESS_PERCENT, validateSolution } from './Chapter.actions'
 import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 
 import { PublicUser } from 'shared/user/PublicUser'
@@ -197,11 +197,10 @@ export const Chapter = () => {
       if (user) {
         clearInterval(intervalID.current)
         const course = findCurrentCourse(user)
-
         dispatch(
           addProgress({
             chapterDone: pathname,
-            courseId: course ? course._id : '',
+            courseId: additionalInfo ? additionalInfo.id : '',
             time: time.value,
             isCompleted: course.progress.length === additionalInfo.countChapters - 1,
             coursePath: course ? course.path : '',
@@ -221,7 +220,6 @@ export const Chapter = () => {
           answers: question?.proposedResponses ?? []
         })) ?? []
       );
-
       let ok = validationResponse.answerIs
 
       if (ok) {
@@ -234,7 +232,7 @@ export const Chapter = () => {
           dispatch(
             addProgress({
               chapterDone: pathname,
-              courseId: course ? course._id : '',
+              courseId: additionalInfo ? additionalInfo.id : '',
               time: time.value,
               isCompleted: false,
               coursePath: course.path,
@@ -249,12 +247,8 @@ export const Chapter = () => {
       } else {
         setShowDiff(true)
         if (data.exercise && data.solution) {
-          if (
-            // @ts-ignore
-            data.exercise.replace(/\s+|\/\/ Type your solution below/g, '') ===
-            // @ts-ignore
-            data.solution.replace(/\s+|\/\/ Type your solution below/g, '')
-          ) {
+          const { answerIs } = await validateSolution(currentChapter.pathname, data.exercise)
+          if (answerIs) {
             setValidatorState(RIGHT)
             setIsAccount(true)
             if (user) {
@@ -263,7 +257,7 @@ export const Chapter = () => {
               dispatch(
                 addProgress({
                   chapterDone: pathname,
-                  courseId: course ? course._id : '',
+                  courseId: additionalInfo ? additionalInfo.id : '',
                   time: time.value,
                   isCompleted: false,
                   coursePath: course.path,

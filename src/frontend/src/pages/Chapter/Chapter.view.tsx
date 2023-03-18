@@ -466,7 +466,7 @@ export const ChapterView = ({
           <div className="chapter-block">
             <div className="step">
               <p className="step-text">
-                {(currentCourse && currentCourse.progress.includes(pathname)) || (user && validatorState === RIGHT)
+                {(currentCourse && currentCourse?.progress?.includes(pathname)) || (user && validatorState === RIGHT)
                   ? 'Chapter completed'
                   : 'Step 1'}
               </p>
