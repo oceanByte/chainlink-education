@@ -103,18 +103,10 @@ export function auth(state = authDefaultState, action: any): AuthState {
       }
     }
     case SET_ACCOUNT_NAME_ROLLBACK: {
-      if (state.user?.accountName === action.payload.user?.accountName)
-        return {
-          ...state,
-          user: action.payload.user,
-        }
-      else return state
+      return state
     }
     case ADD_PROGRESS_COMMIT: {
-      return {
-        ...state,
-        user: action.payload.user
-      }
+      return state
     }
     default:
       return state

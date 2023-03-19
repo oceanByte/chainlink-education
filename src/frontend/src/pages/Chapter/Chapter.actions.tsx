@@ -10,17 +10,23 @@ export const GET_CURRENT_CHAPTER_FAILURE = 'GET_CURRENT_CHAPTER_FAILURE'
 export const ADD_ANSWER_REQUEST = 'ADD_ANSWER_REQUEST'
 export const ADD_COURSE_PROGRESS_PERCENT = "ADD_COURSE_PROGRESS_PERCENT"
 
-export const addProgress = ({ chapterDone, courseId, time, isCompleted, coursePath }: AddProgressInputs) => (dispatch: any) => {
+export const addProgress = (addProgressVariables: AddProgressInputs) => (dispatch: any) => {
+  const { courseId, coursePath, chapterPath, date_of_completion } = addProgressVariables
   dispatch({
     type: ADD_PROGRESS_REQUEST,
-    payload: { chapterDone, coursePath },
+    payload: {
+      coursePath, chapterPath, date_of_completion
+    },
     meta: {
       offline: {
         effect: {
           url: `${process.env.REACT_APP_BACKEND_URL}/v1/users/progress`,
           method: 'POST',
           headers: { Authorization: `Bearer ${store.getState().auth.jwt}` },
-          json: { chapterDone, courseId, time, isCompleted, coursePath },
+          json: {
+            courseId,
+            coursePath, chapterPath, date_of_completion
+          },
         },
         commit: { type: ADD_PROGRESS_COMMIT, meta: {} },
         rollback: { type: ADD_PROGRESS_ROLLBACK, meta: {} },

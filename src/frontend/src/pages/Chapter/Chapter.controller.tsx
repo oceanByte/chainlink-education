@@ -103,7 +103,6 @@ export const Chapter = () => {
   let intervalID: any = useRef(null)
   const partCurrentUrl = pathname.split('/')[1]
 
-
   const additionalInfo = currentCourse
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -186,8 +185,6 @@ export const Chapter = () => {
   const setTabOnPage = (currentTab: string) => {
     setTab(() => currentTab)
   }
-
-
   const validateCallback = async () => {
     if (
       getNextChapterLink() === `/profile/certificates` ||
@@ -199,10 +196,9 @@ export const Chapter = () => {
         const course = findCurrentCourse(user)
         dispatch(
           addProgress({
-            chapterDone: pathname,
+            date_of_completion: time.value,
+            chapterPath: pathname,
             courseId: additionalInfo ? additionalInfo.id : '',
-            time: time.value,
-            isCompleted: course.progress.length === additionalInfo.countChapters - 1,
             coursePath: course ? course.path : '',
           }),
         )
@@ -231,10 +227,9 @@ export const Chapter = () => {
           dispatch({ type: ADD_COURSE_PROGRESS_PERCENT, payload: { urlCourse: course.path, chapterUrl: pathname } })
           dispatch(
             addProgress({
-              chapterDone: pathname,
+              date_of_completion: time.value,
+              chapterPath: pathname,
               courseId: additionalInfo ? additionalInfo.id : '',
-              time: time.value,
-              isCompleted: false,
               coursePath: course.path,
             }),
           )
@@ -256,10 +251,9 @@ export const Chapter = () => {
               const course = findCurrentCourse(user)
               dispatch(
                 addProgress({
-                  chapterDone: pathname,
+                  date_of_completion: time.value,
+                  chapterPath: pathname,
                   courseId: additionalInfo ? additionalInfo.id : '',
-                  time: time.value,
-                  isCompleted: false,
                   coursePath: course.path,
                 }),
               )
