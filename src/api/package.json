@@ -35,7 +35,6 @@
     "dotenv": "^8.2.0",
     "eth-sig-util": "^3.0.1",
     "ethereumjs-util": "^7.1.4",
-    "ethers": "^6.0.4",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.12.0",
     "koa-bodyparser": "^4.3.0",
@@ -43,7 +42,6 @@
     "mongoose": "^5.9.18",
     "randomstring": "^1.2.2",
     "rate-limiter-flexible": "^2.1.6",
-    "raw-loader": "^4.0.2",
     "reflect-metadata": "^0.1.13",
     "speakingurl": "^14.0.1",
     "winston": "^3.2.1"
@@ -72,7 +70,7 @@
     "supertest": "^4.0.2",
     "ts-jest": "^26.1.0",
     "ts-node": "^8.10.2",
-    "typescript": "^4.9.5"
+    "typescript": "^3.9.5"
   },
   "jest": {
     "testEnvironment": "node"
