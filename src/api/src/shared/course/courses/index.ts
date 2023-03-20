@@ -1,7 +1,7 @@
-import { CourseList } from "../../../resolvers/course/getAllCourses";
-import { ChapterType, CourseChapterType, QuestionType } from "./course.types";
-import { Course } from "../Course";
-import { COURSES } from "../CourseType";
+import {CourseList} from "../../../resolvers/course/getAllCourses";
+import {ChapterType, CourseChapterType, QuestionType} from "./course.types";
+import {Course} from "../Course";
+import {COURSES} from "../CourseType";
 
 /** Courses **/
 import chainlinkIntroduction from "./chainlinkIntroduction";
@@ -9,9 +9,9 @@ import solidity102 from "./solidity102";
 import solidityIntroduction from "./solidityIntroduction";
 import vrfIntroduction from "./vrfIntroduction";
 import vrf102 from "./vrf102";
-import { ResponseError } from "../../mongo/ResponseError";
-import { CourseWithChapter } from "../../../resolvers/course/getCourseChapter";
-import { CourseWithChapters } from "../../../resolvers/course/getCourseById";
+import {ResponseError} from "../../mongo/ResponseError";
+import {CourseWithChapter} from "../../../resolvers/course/getCourseChapter";
+import {CourseWithChapters} from "../../../resolvers/course/getCourseById";
 import {AnswerInput} from "../../../resolvers/course/validateChapterAnswer";
 
 export const courses: CourseChapterType[] = [
@@ -56,7 +56,7 @@ export const getCourses = (userCourses: Course[] = []): CourseList[] => {
                 progress: [],
                 percent: 0,
                 urlCourse: cc.course.path,
-                chapters: cc.chapters.map(({ pathname, name }) => ({ pathname, name }))
+                chapters: cc.chapters.map(({pathname, name}) => ({pathname, name}))
             }
 
             const userCourse: Course | undefined = userCourses.find(uc => cc.course.title === uc.title);
@@ -175,16 +175,18 @@ export const validateAnswer = (options: ValidateAnswerOptions): boolean => {
 
     let answered = true;
 
-    chapter.data.questions.forEach(q => {
-        const question = data.find(d => d.question === q.question)
+    chapter.data.questions.forEach(chapterQuestion => {
+        const dataQuestion = data.find(dataQuestion => dataQuestion.question === chapterQuestion.question)
 
-        if(!question) {
+        if (!dataQuestion) {
             answered = false
             return;
         }
 
-        q.responses.forEach(r => {
-            if(!question.answers.includes(r)) answered = false;
+        if(dataQuestion.answers.length !== chapterQuestion.responses.length) answered = false;
+
+        dataQuestion.answers.forEach(r => {
+            if (!chapterQuestion.responses.includes(r)) answered = false;
         })
     })
 
@@ -203,5 +205,8 @@ export const validateSolution = (options: ValidateSolutionOptions): boolean => {
 }
 
 const mapQuestions = (questions: QuestionType[]): QuestionType[] => {
-    return questions.map((q: QuestionType): QuestionType => ({ question: q.question, answers: q.answers } as QuestionType))
+    return questions.map((q: QuestionType): QuestionType => ({
+        question: q.question,
+        answers: q.answers
+    } as QuestionType))
 }
