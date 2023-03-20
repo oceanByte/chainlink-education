@@ -36,8 +36,8 @@ export const CertificatesView = ({ user, infoCourses }: ICertificatesView) => {
           You have opened <span>{infoCourses.numberCompletedCourses}</span> badges out of <span>{infoCourses.numberCourses}</span></div>
       </div>
       <div className='badges-list'>
-        {user && user.courses
-          ? user.courses.map((course: Course, key: number) => {
+        {user && courses
+          ? courses.map((course: Course, key: number) => {
             const additionalInfo: IAdditionalInfo = (infoCourses as any).find((i: Course) => i.title === course.title)
             return (
               <div className="badge-wrapp" key={course.title}>
@@ -50,8 +50,8 @@ export const CertificatesView = ({ user, infoCourses }: ICertificatesView) => {
       </div>
       {infoCourses.numberCompletedCourses ? (<div className='sections-content__line' />) : null}
       <div className='certificates-list'>
-        {user && user.courses
-          ? user.courses.map((course: Course, key: number) => {
+        {user && courses
+          ? courses.map((course: Course, key: number) => {
             const currentCourse = courses.find((c: Course) => c.title === course.title);
             const additionalInfo: IAdditionalInfo = (infoCourses as any).find((i: Course) => i.title === course.title)
             return (

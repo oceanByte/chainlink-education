@@ -8,7 +8,7 @@ import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
 
 import { getUser } from 'pages/User/User.actions'
-import { validateAnswer, addProgress, getChapter, ADD_COURSE_PROGRESS_PERCENT } from './Chapter.actions'
+import { validateAnswer, addProgress, getChapter, ADD_COURSE_PROGRESS_PERCENT, validateSolution } from './Chapter.actions'
 import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 
 import { PublicUser } from 'shared/user/PublicUser'
@@ -103,7 +103,6 @@ export const Chapter = () => {
   let intervalID: any = useRef(null)
   const partCurrentUrl = pathname.split('/')[1]
 
-
   const additionalInfo = currentCourse
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -186,8 +185,6 @@ export const Chapter = () => {
   const setTabOnPage = (currentTab: string) => {
     setTab(() => currentTab)
   }
-
-
   const validateCallback = async () => {
     if (
       getNextChapterLink() === `/profile/certificates` ||
@@ -197,13 +194,11 @@ export const Chapter = () => {
       if (user) {
         clearInterval(intervalID.current)
         const course = findCurrentCourse(user)
-
         dispatch(
           addProgress({
-            chapterDone: pathname,
-            courseId: course ? course._id : '',
-            time: time.value,
-            isCompleted: course.progress.length === additionalInfo.countChapters - 1,
+            date_of_completion: time.value,
+            chapterPath: pathname,
+            courseId: additionalInfo ? additionalInfo.id : '',
             coursePath: course ? course.path : '',
           }),
         )
@@ -221,7 +216,6 @@ export const Chapter = () => {
           answers: question?.proposedResponses ?? []
         })) ?? []
       );
-
       let ok = validationResponse.answerIs
 
       if (ok) {
@@ -233,10 +227,9 @@ export const Chapter = () => {
           dispatch({ type: ADD_COURSE_PROGRESS_PERCENT, payload: { urlCourse: course.path, chapterUrl: pathname } })
           dispatch(
             addProgress({
-              chapterDone: pathname,
-              courseId: course ? course._id : '',
-              time: time.value,
-              isCompleted: false,
+              date_of_completion: time.value,
+              chapterPath: pathname,
+              courseId: additionalInfo ? additionalInfo.id : '',
               coursePath: course.path,
             }),
           )
@@ -249,12 +242,8 @@ export const Chapter = () => {
       } else {
         setShowDiff(true)
         if (data.exercise && data.solution) {
-          if (
-            // @ts-ignore
-            data.exercise.replace(/\s+|\/\/ Type your solution below/g, '') ===
-            // @ts-ignore
-            data.solution.replace(/\s+|\/\/ Type your solution below/g, '')
-          ) {
+          const { answerIs } = await validateSolution(currentChapter.pathname, data.exercise)
+          if (answerIs) {
             setValidatorState(RIGHT)
             setIsAccount(true)
             if (user) {
@@ -262,10 +251,9 @@ export const Chapter = () => {
               const course = findCurrentCourse(user)
               dispatch(
                 addProgress({
-                  chapterDone: pathname,
-                  courseId: course ? course._id : '',
-                  time: time.value,
-                  isCompleted: false,
+                  date_of_completion: time.value,
+                  chapterPath: pathname,
+                  courseId: additionalInfo ? additionalInfo.id : '',
                   coursePath: course.path,
                 }),
               )

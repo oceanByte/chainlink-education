@@ -14,6 +14,7 @@ import { Error404 } from 'pages/Error404/Error404.controller'
 import { IChangeUsernameEmail } from './Profile.controller'
 import { useSelector } from 'react-redux'
 import { State } from 'reducers'
+import { IAdditionalInfo } from 'helpers/coursesInfo'
 
 type ProfileViewProps = {
   user?: PublicUser,
@@ -47,7 +48,7 @@ export const ProfileView = ({
           </NavLink>
           {user && isShow ? (
             <div className='progress-courses__wrapper'>
-              {user.courses ? user.courses.map((course, index) => {
+              {courses ? courses.map((course: IAdditionalInfo, index: number) => {
                 return (
                   <div className='progress-courses__item' key={course.title}>
                     <NavLink
@@ -90,10 +91,10 @@ export const ProfileView = ({
       <div className={`profile-page-progress profile-page-section profile-page-visible`}>
         <Switch>
           <Route path={`/profile/progress`} exact>
-            <OverallProgress user={user} courses={user?.courses} />
+            <OverallProgress user={user} courses={courses} />
           </Route>
           <Route path={`/profile/progress/:courseId`} exact>
-            <CourseProgress user={user} courses={user?.courses} showSubList={showSubList} />
+            <CourseProgress user={user} courses={courses} showSubList={showSubList} />
           </Route>
           <Route path={`/profile/certificates`}>
             <Certificates user={user} />

@@ -11,15 +11,10 @@ const coursesInitialState: any = []
 export function courses(state = coursesInitialState, action: any): any {
   switch (action.type) {
     case GET_COURSES_SUCCESS: {
-      const newCourses = action.payload.map((newCourse: Course) => {
-        const oldCourse = state.find((i: Course) => i.urlCourse === newCourse.urlCourse);
-
-        return oldCourse ? { ...newCourse, ...oldCourse, percent: newCourse.percent } : newCourse
-      })
-
-      return newCourses
+      return action.payload
     }
     case GET_COURSES_PAGE_SUCCESS: {
+
       const newCourses = state?.map((course: Course) => (
         course.urlCourse === action.payload.urlCourse ? { ...course, ...action.payload } : course)) ?? []
       return newCourses.length ? newCourses : [{ ...action.payload, description: "" }]

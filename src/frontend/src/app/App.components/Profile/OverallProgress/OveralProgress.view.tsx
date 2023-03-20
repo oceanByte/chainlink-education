@@ -24,8 +24,9 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
 
   const plainCourses = useSelector((state: State) => state.courses)
   const allChaptersLength = plainCourses.reduce((accum: any, currValue: any) => accum + currValue.chapters.length, 0)
-  const completedChaptersLength = infoCourses.reduce((accum: any, currValue: any) => accum + currValue.progress.length, 0)
+  const completedChaptersLength = plainCourses.reduce((accum: any, currValue: any) => accum + currValue.progress.length, 0)
   const overallProgress = completedChaptersLength / allChaptersLength * 100
+
   const history = useHistory();
   return (
     <div className='profile-page-progress-wrapper'>
@@ -49,9 +50,9 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
         <>
           <div className='sections-content__line' />
           <div className='sections-content__courses'>
-            {user && user.courses ? user.courses.map((course, index) => {
+            {user && plainCourses ? plainCourses.map((course: IAdditionalInfo, index: number) => {
               // const additionalInfo = { ...course, ...infoCourses.find(i => i.title === course.title), ...plainCourses }
-              const additionalInfo = user ? { ...plainCourses[index], ...user.courses?.find((userCourse: any) => userCourse.title === course.title) } : course as IAdditionalInfo
+              // const additionalInfo = user ? { ...plainCourses[index], ...user.courses?.find((userCourse: any) => userCourse.title === course.title) } : course as IAdditionalInfo
               return (
                 <React.Fragment key={course.title}>
                   {course.status !== CourseStatusType.COMPLETED ? (
@@ -62,7 +63,7 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                             <div className='badge-container'>
                               <BadgeView
                                 hasSmallBadge
-                                percentage={additionalInfo?.percent ?? 0}
+                                percentage={course?.percent ?? 0}
                                 isCompleted={course.status === CourseStatusType.COMPLETED}
                                 title={course.title}
                               />
@@ -73,10 +74,10 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                               </div>
                               <div className='course-additional-info inside'>
                                 <div className='course-additional-info__chapters item'>
-                                  <div className='icon' /><div>{additionalInfo?.countChapters} chapters</div>
+                                  <div className='icon' /><div>{course?.countChapters} chapters</div>
                                 </div>
                                 <div className='course-additional-info__time item'>
-                                  <div className='icon' /><div>{additionalInfo?.amountOfTime}</div>
+                                  <div className='icon' /><div>{course?.amountOfTime}</div>
                                 </div>
                                 <div className='course-additional-info__difficulty'>
                                   <Difficulty difficulty={course.difficulty} />
@@ -86,10 +87,10 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                           </div>
                           <div className='course-additional-info outside'>
                             <div className='course-additional-info__chapters item'>
-                              <div className='icon' /><div>{additionalInfo.countChapters} chapters</div>
+                              <div className='icon' /><div>{course.countChapters} chapters</div>
                             </div>
                             <div className='course-additional-info__time item'>
-                              <div className='icon' /><div>{additionalInfo.amountOfTime}</div>
+                              <div className='icon' /><div>{course.amountOfTime}</div>
                             </div>
                             <div className='course-additional-info__difficulty'>
                               <Difficulty difficulty={course.difficulty} />
@@ -99,7 +100,7 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                         </div>
                         <div className={classnames('course-footer')}>
                           <div className="course-btn-wrapper">
-                            {!additionalInfo.percent ? <MainButtonView
+                            {!course.percent ? <MainButtonView
                               isPrimary
                               hasArrowUpRight
                               text='View Course'
@@ -110,22 +111,22 @@ export const OverallProgressView = ({ infoCourses, user }: ICourseView) => {
                               loading={false}
                               disabled={false}
                             /> : null}
-                            {additionalInfo.percent && additionalInfo.percent !== 100 ? <MainButtonView
+                            {course.percent && course.percent !== 100 ? <MainButtonView
                               isSecondary
                               hasArrowUpRight
                               text='Continue'
-                              onClick={() => history.push(`/profile/progress/${additionalInfo.urlCourse}`)}
+                              onClick={() => history.push(`/profile/progress/${course.urlCourse}`)}
                               loading={false}
                               disabled={false}
                             /> : null}
                           </div>
-                          {user && additionalInfo.percent && additionalInfo.percent !== 100 ? (
+                          {user && course.percent && course.percent !== 100 ? (
                             <div className="course-footer__progress-bar">
                               <div className="circle-wrap">
                                 <CircularProgressBar
                                   strokeWidth="7"
                                   sqSize="60"
-                                  percentage={additionalInfo.percent} />
+                                  percentage={course.percent} />
                               </div>
                             </div>
                           ) : null}
