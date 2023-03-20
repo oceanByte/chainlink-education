@@ -3,11 +3,13 @@ import ReactGA from 'react-ga'
 const options = {}
 
 const trackPage = (page: any) => {
-  ReactGA.set({
-    page,
-    ...options,
-  })
-  ReactGA.pageview(page)
+  if (JSON.parse(localStorage.getItem('disable-google-analytics') ?? 'false')) {
+    ReactGA.set({
+      page,
+      ...options,
+    })
+    ReactGA.pageview(page)
+  }
 }
 
 let currentPage = ''
