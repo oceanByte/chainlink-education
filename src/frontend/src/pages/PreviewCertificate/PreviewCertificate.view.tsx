@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import classnames from 'classnames'
 
@@ -22,12 +22,23 @@ export const PreviewCertificateView = ({
   isPublicView
 }: PreviewCertificateViewProps) => {
 
+  const [isLoading, setIsLoading] = useState(false)
+
   return (
     <div className='preview-page'>
       <div className="preview-page-section section-certificate">
         <div className={classnames('certificate-bg', getClassForCourse(additionalInfo.title || ''))}>
-          <div className='user-name'>{certificate?.username}</div>
-          <div className='user-code'>{certificate?.code}</div>
+          {isLoading ? (
+            <>
+              <div className='user-name'>Loading...</div>
+              <div className='user-code'>Loading...</div>
+            </>
+          ) : (
+            <>
+              <div className='user-name'>{certificate?.username}</div>
+              <div className='user-code'>{certificate?.code}</div>
+            </>
+          )}
         </div>
       </div>
       <div className='preview-page-section section-info'>
