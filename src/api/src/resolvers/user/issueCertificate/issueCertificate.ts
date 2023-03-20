@@ -1,5 +1,5 @@
 require('dotenv').config();
-import {ethers} from "ethers";
+import { ethers } from "ethers";
 
 import { plainToClass } from 'class-transformer'
 import { validateOrReject } from 'class-validator'
@@ -471,29 +471,20 @@ const INFURA_API_KEY = process.env.INFURA_API_KEY
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS
 const SIGNER_PRIVATE_KEY = process.env.SIGNER_PRIVATE_KEY
 
-
-const ethLib = (ethers as any);
-
 const provider: any = `https://polygon-mainnet.infura.io/v3/${INFURA_API_KEY}` || 'https://rpc.gaiaxtestnet.oceanprotocol.com:443'
-let ethersProvider: any;
-
-try{
-  ethersProvider = new ethLib.providers.JsonRpcProvider(provider)
-}catch (e) {
-  ethersProvider = null;
-}
+const ethersProvider = new ethers.providers.JsonRpcProvider(provider);
 
 async function estimateGas(): Promise<any> {
-  let maxFeePerGas = ethLib.BigNumber.from(100000000000) // fallback to 100 gwei
+  let maxFeePerGas = ethers.BigNumber.from(100000000000) // fallback to 100 gwei
   // let maxPriorityFeePerGas = ethers.BigNumber.from(1000000000000) // fallback to 100 gwei
   try {
     const { data } = await axios({
       method: 'get',
       url: 'https://gasstation-mainnet.matic.network/v2'
     })
-    maxFeePerGas = ethLib.utils.parseUnits(
-      Math.ceil(data.fast.maxFee) + '',
-      'gwei'
+    maxFeePerGas = ethers.utils.parseUnits(
+        Math.ceil(data.fast.maxFee) + '',
+        'gwei'
     )
     // maxPriorityFeePerGas = ethers.utils.parseUnits(
     //   Math.ceil(data.fast.maxPriorityFee) + '',
@@ -507,8 +498,8 @@ async function estimateGas(): Promise<any> {
 
 
 async function mintCertificate(address: string, certifcateUrl: string): Promise<any> {
-  const wallet = new ethLib.Wallet(SIGNER_PRIVATE_KEY || '', ethersProvider);
-  const contract = new ethLib.Contract(CONTRACT_ADDRESS || '', abi, ethersProvider);
+  const wallet = new ethers.Wallet(SIGNER_PRIVATE_KEY || '', ethersProvider);
+  const contract = new ethers.Contract(CONTRACT_ADDRESS || '', abi, ethersProvider);
   const nftContract = contract.connect(wallet);
 
   const overrides = {
