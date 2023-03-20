@@ -199,7 +199,7 @@ export const validateSolution = (options: ValidateSolutionOptions): boolean => {
     const chapter = course.chapters.find((ch: ChapterType) => ch.pathname === `/${options.coursePath}/${options.chapterPath}`)
     if (!chapter) throw new ResponseError(404, 'Chapter not found');
 
-    return chapter.data.solution?.trim() === options.solution;
+    return chapter.data.solution?.trim() === options.solution.trim();
 }
 
 const mapQuestions = (questions: QuestionType[]): QuestionType[] => {
