@@ -22,6 +22,25 @@
   }
 }
 
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.8) url(../../assets/loader.gif) no-repeat center center ;
+  background-size: 100px;
+  flex-direction: column;
+
+}
+
+.loader-text {
+  position: relative;
+  top: 64px;
+  text-align: center;
+  font-size: 1.2em;
+  color: #444;
+}
+
 .preview-page-section {
   background: $white;
   box-shadow: 0px 4px 15px rgba(12, 22, 44, 0.1);
@@ -245,6 +264,8 @@
         line-height: 33px;
       }
     }
+
+    
 
     .downloadCertificate {
       display: flex;

@@ -1,19 +1,16 @@
-import React, { useState } from 'react'
-
-import classnames from 'classnames'
-
-import { MainButtonView } from 'app/App.components/MainButton/MainButton.view'
-import { getClassForCourse } from 'helpers/getInfoForCourse'
-import { ICertificate } from 'reducers/certificate'
-import { IAdditionalInfo } from 'helpers/coursesInfo'
-
+import React, { useEffect, useState } from 'react';
+import classnames from 'classnames';
+import { MainButtonView } from 'app/App.components/MainButton/MainButton.view';
+import { getClassForCourse } from 'helpers/getInfoForCourse';
+import { ICertificate } from 'reducers/certificate';
+import { IAdditionalInfo } from 'helpers/coursesInfo';
 
 type PreviewCertificateViewProps = {
-  additionalInfo: IAdditionalInfo
-  certificate: ICertificate | undefined
-  downloadCallback: (title: string) => void
-  isPublicView: boolean
-}
+  additionalInfo: IAdditionalInfo;
+  certificate: ICertificate | undefined;
+  downloadCallback: (title: string) => void;
+  isPublicView: boolean;
+};
 
 export const PreviewCertificateView = ({
   additionalInfo,
@@ -22,24 +19,26 @@ export const PreviewCertificateView = ({
   isPublicView
 }: PreviewCertificateViewProps) => {
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (certificate && additionalInfo) {
+      setIsLoading(false);
+    }
+  }, [certificate, additionalInfo]);
 
   return (
     <div className='preview-page'>
       <div className="preview-page-section section-certificate">
-        <div className={classnames('certificate-bg', getClassForCourse(additionalInfo.title || ''))}>
-          {isLoading ? (
-            <>
-              <div className='user-name'>Loading...</div>
-              <div className='user-code'>Loading...</div>
-            </>
-          ) : (
-            <>
-              <div className='user-name'>{certificate?.username}</div>
-              <div className='user-code'>{certificate?.code}</div>
-            </>
-          )}
-        </div>
+
+        {isLoading || !certificate || !additionalInfo ? (
+          <div className='loader'><span className="loader-text">We are issuing your certificate</span></div>
+        ) : (
+          <div className={classnames('certificate-bg', getClassForCourse(additionalInfo.title || ''))}>
+            <div className='user-name'>{certificate.username}</div>
+            <div className='user-code'>{certificate.code}</div>
+          </div>
+        )}
       </div>
       <div className='preview-page-section section-info'>
         <div className='title'>
@@ -57,7 +56,7 @@ export const PreviewCertificateView = ({
               text='Download certificate'
               onClick={() => downloadCallback(additionalInfo.title)}
               loading={false}
-              disabled={false}
+              disabled={isLoading}
             />
           </div>
         ) : null}
