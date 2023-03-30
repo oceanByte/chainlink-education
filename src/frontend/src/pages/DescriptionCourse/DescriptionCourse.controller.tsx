@@ -23,11 +23,12 @@ export const DescriptionCourse = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getUser({ username: user ? user.username : '' }))
-    dispatch(getCourseByURL(courseId))
+    if (user && user.username) {
+      dispatch(getUser({ username: user.username }));
+    }
+    dispatch(getCourseByURL(courseId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
+  }, []);
 
   const changeAddressCallback = async ({ address }: any) => {
     if (address) {
