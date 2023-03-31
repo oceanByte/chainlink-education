@@ -1,6 +1,5 @@
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
-import ReactGA from 'react-ga'
 
 import { Button } from '../Button/Button.controller'
 import { CenterStyled, GdprStyled } from './Gdpr.style'
