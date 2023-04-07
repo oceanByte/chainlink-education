@@ -4,7 +4,7 @@ export const questions = [
     answers: [
       'As often as you want',
       'Once at contract creation before deployment',
-      'Only after deployment using constructor()'
+      'Only after deployment using constructor()',
     ],
     responses: ['Once at contract creation before deployment'],
   },

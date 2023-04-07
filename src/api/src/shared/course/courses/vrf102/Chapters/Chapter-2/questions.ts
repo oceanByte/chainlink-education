@@ -4,7 +4,7 @@ export const questions = [
     answers: [
       'Deterministic',
       'Unable to produce true randomness without external input',
-      'Able to produce true randomness with algorithms'
+      'Able to produce true randomness with algorithms',
     ],
     responses: ['Deterministic', 'Unable to produce true randomness without external input'],
   },

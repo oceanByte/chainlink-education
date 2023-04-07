@@ -2,7 +2,7 @@ import {QuestionType} from "../../../course.types";
 
 export const questions: QuestionType[] = [
   {
-    question: 'How does Etheruem limit the number of computational steps?',
+    question: 'How does Ethereum limit the number of computational steps?',
     answers: [
       'Programs can only run for a limited time',
       'Each computational step costs gas',

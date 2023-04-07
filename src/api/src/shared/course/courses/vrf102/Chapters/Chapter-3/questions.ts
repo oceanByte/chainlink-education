@@ -4,7 +4,7 @@ export const questions = [
     answers: [
       'Because everyone or at least the validator can see the number in the mempool',
       'You cannot add random numbers to a block',
-      'You cannot add a random number to a transaction'
+      'You cannot add a random number to a transaction',
     ],
     responses: ['Because everyone or at least the validator can see the number in the mempool'],
   },

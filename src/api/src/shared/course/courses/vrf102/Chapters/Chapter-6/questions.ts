@@ -4,8 +4,7 @@ export const questions = [
     answers: [
       'Because VRF service could withhold a VRF fulfillment',
       'Because a second call will output the same number',
-      'Because you can only call it once and the second call gets reverted'
-      
+      'Because you can only call it once and the second call gets reverted',
     ],
     responses: ['Because VRF service could withhold a VRF fulfillment'],
   },

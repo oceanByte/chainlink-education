@@ -5,7 +5,7 @@ export const questions = [
       'Add consumers',
       'Add funds to your subscription',
       'Create a subscription with your wallet address',
-      'Initializing the contract object'
+      'Initializing the contract object',
     ],
     responses: ['Add consumers'],
   },

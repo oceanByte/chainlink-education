@@ -11,6 +11,6 @@ export const validatorContent = {
   },
   right: {
     title: 'THIS IS CORRECT',
-    text: 'Go on to the next chapter'
-  }
+    text: 'Go on to the next chapter',
+  },
 }

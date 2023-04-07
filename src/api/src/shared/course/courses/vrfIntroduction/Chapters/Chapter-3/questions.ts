@@ -5,7 +5,7 @@ export const questions = [
       'Very Random Friends',
       'Verifiable Range Function',
       'Verifiable Ransom Function',
-      'Verifiable Random Function'
+      'Verifiable Random Function',
     ],
     responses: ['Verifiable Random Function'],
   },

@@ -14,7 +14,7 @@ export const questions: QuestionType[] = [
     question: 'Why would you use memory instead of storage?',
     answers: [
       'Performing operations on memory is always cheaper than storage',
-      'Only use memory if you need to store data for a long time',
+      'Only use memory if you must store data for a long time',
     ],
     responses: ['Performing operations on memory is always cheaper than storage'],
   },

@@ -5,7 +5,7 @@ export const questions = [
       'The apparent or actual lack of pattern or predictability in events',
       'Impossible',
       'A mathematical formula',
-      'An emotion'
+      'An emotion',
     ],
     responses: ['The apparent or actual lack of pattern or predictability in events'],
   },
