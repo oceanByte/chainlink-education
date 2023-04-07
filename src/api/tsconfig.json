@@ -15,8 +15,8 @@
     "sourceMap": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "strict": true,
-    "alwaysStrict": true,
+    "strict": false,
+    "alwaysStrict": false,
     "removeComments": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
@@ -40,6 +40,7 @@
   ],
   "exclude": [
     "node_modules",
+    "**/*.spec.ts",
     "./node_modules",
     "./node_modules/*",
     "./node_modules/@types/node/index.d.ts"

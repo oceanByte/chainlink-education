@@ -1,12 +1,14 @@
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { State } from 'reducers'
+import { Course } from 'shared/course'
 // import { PublicUser } from 'pages/Course/Course.data'
 import { PublicUser } from 'shared/user/PublicUser'
 
 import { ChapterData } from '../../../pages/Chapter/Chapter.controller'
-import { chaptersByCourse } from '../../../pages/Course/Course.data'
-// PLACEHOLDER.
+
 import { Option } from '../Select/Select.view'
 import { DrawerItem, DrawerMask, DrawerStyled, DrawerStyledLogin } from './Drawer.style'
 
@@ -41,12 +43,13 @@ export const ChapterDrawerView = ({
   pathname,
   activeCourse,
   changeCourseCallback,
-}: ChapterDrawerViewProps) => (
-  <>
+}: ChapterDrawerViewProps) => {
+  const currentCourse = useSelector((state: State) => state.courses.find((course: Course) => course.urlCourse === activeCourse.path))
+  return (<>
     <DrawerMask className={`${showingChapters}`} onClick={() => hideCallback()} />
     <DrawerStyled className={`${showingChapters}`}>
       <h1>Chapters</h1>
-      {chaptersByCourse[activeCourse.path].map((chapter: ChapterData) => (
+      {currentCourse?.chapters?.map((chapter: ChapterData) => (
         <DrawerItem key={chapter.pathname} className={pathname === chapter.pathname ? 'current-path' : 'other-path'}>
           <Link to={chapter.pathname} onClick={() => hideCallback()}>
             {chapter.name}
@@ -55,7 +58,8 @@ export const ChapterDrawerView = ({
       ))}
     </DrawerStyled>
   </>
-)
+  )
+}
 
 export const LoginDrawerView = ({ showingMenu, user, hideCallback, removeAuthUserCallback }: LoginDrawerViewProps) => (
   <>

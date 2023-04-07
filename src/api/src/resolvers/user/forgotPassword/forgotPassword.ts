@@ -6,7 +6,7 @@ import { firstError } from '../../../helpers/firstError'
 import { Captcha } from '../../../shared/captcha/Captcha'
 import { CaptchaFor } from '../../../shared/captcha/CaptchaFor'
 import { ResponseError } from '../../../shared/mongo/ResponseError'
-import { ForgotPasswordInputs, ForgotPasswordOutputs } from '../../../shared/user/ForgotPassword'
+import { ForgotPasswordInputs } from '../../../shared/user/ForgotPassword'
 import { User, UserModel } from '../../../shared/user/User'
 import { createCaptcha } from '../../captcha/helpers/createCaptcha'
 import { sendEmailForgotPassword } from '../helpers/sendEmailForgotPassword'
@@ -22,9 +22,11 @@ export const forgotPassword = async (ctx: Context, next: Next): Promise<void> =>
   await verifyRecaptchaToken(recaptchaToken)
 
   let user: User | null = await UserModel.findOne({ email: usernameOrEmail }).lean()
+
   if (!user) {
     user = await UserModel.findOne({ username: usernameOrEmail }).lean()
   }
+
   if (!user) throw new ResponseError(401, 'Wrong username or password')
 
   await rateLimit(user._id, QuotaType.NEW_CAPTCHA)
@@ -33,10 +35,8 @@ export const forgotPassword = async (ctx: Context, next: Next): Promise<void> =>
 
   await sendEmailForgotPassword(user.email, captcha.solution, captcha.token)
 
-  const response: ForgotPasswordOutputs = { token: captcha.token }
-
   ctx.status = 200
-  ctx.body = response
+  ctx.body = { message: 'Check your email' }
 
   await next()
 }

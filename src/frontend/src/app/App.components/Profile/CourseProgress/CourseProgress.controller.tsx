@@ -5,9 +5,9 @@ import { PublicUser } from 'shared/user/PublicUser'
 import { Course } from 'shared/course'
 
 import { CourseProgressView } from './CourseProgress.view'
-import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
-import { courseData } from 'pages/Course/Course.data'
 import { Error404 } from 'pages/Error404/Error404.controller'
+import { useSelector } from 'react-redux'
+import { State } from 'reducers'
 
 interface ICourseCard {
   courses: Course[] | undefined
@@ -22,10 +22,10 @@ export type CourseID = {
 
 export const CourseProgress = ({ courses, user, showSubList }: ICourseCard) => {
   const { courseId } = useParams<CourseID>();
+  const currentCourse = useSelector((state: State) => state.courses.find((course: Course) => course.urlCourse === courseId))
+  const currentUserCourse = user?.courses?.find((course: Course) => course.title === currentCourse?.title)
+  const courseAdditionalInfo = user ? { ...currentCourse, ...currentUserCourse } : currentCourse
 
-  const infoCourses = getCoursesData(courses || []);
-  const currentCourse = courseData.find((course) => course.path === courseId);
-  const courseAdditionalInfo: IAdditionalInfo = infoCourses.courses[currentCourse?.name || '']
 
   useEffect(() => {
     if (courseId) {

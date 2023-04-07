@@ -1,5 +1,5 @@
 import * as randomstring from 'randomstring'
-import { CertificateModel } from '../shared/certificate/Certificate';
+import {Certificate, CertificateModel} from '../shared/certificate/Certificate';
 
 import { Course, CourseModel } from '../shared/course/Course';
 import { COURSES, CourseStatusType, CourseTitleType } from '../shared/course/CourseType';
@@ -14,7 +14,7 @@ export const getCourses = async ({ user }: IGetCourses) => {
 
   if (!courses.length) {
 		for (const course of COURSES) {
-			await CourseModel.create({
+			await CourseModel.create<Course>({
 				userId: user._id,
 				title: course.title,
 				description: course.description,
@@ -57,11 +57,11 @@ export const getCourses = async ({ user }: IGetCourses) => {
 
 			const code = randomstring.generate({length: 62, charset: 'hex'});
 	
-			await CertificateModel.create({
+			await CertificateModel.create<Certificate>({
 				coursePath: "chainlinkIntroduction",
 				username: user.username,
 				userId: user._id,
-				courseId: findUserCourse?._id,
+				courseId: findUserCourse?._id || '',
 				code: `0x${code}`
 			})
 		}

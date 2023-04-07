@@ -483,8 +483,8 @@ async function estimateGas(): Promise<any> {
       url: 'https://gasstation-mainnet.matic.network/v2'
     })
     maxFeePerGas = ethers.utils.parseUnits(
-      Math.ceil(data.fast.maxFee) + '',
-      'gwei'
+        Math.ceil(data.fast.maxFee) + '',
+        'gwei'
     )
     // maxPriorityFeePerGas = ethers.utils.parseUnits(
     //   Math.ceil(data.fast.maxPriorityFee) + '',

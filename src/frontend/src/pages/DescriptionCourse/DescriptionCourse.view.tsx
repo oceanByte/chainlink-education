@@ -54,12 +54,10 @@ export const Content = ({ course }: any) => (
     }}
   />
 )
-
 interface IChapterItem {
   chapter: ChapterData
   index: number
 }
-
 const ValidationSchema = Yup.object().shape({
   address: Yup.string()
     .matches(/^0x[a-fA-F0-9]{40}$/, 'Address must be a valid Polygon Mainnet Address')
@@ -78,6 +76,7 @@ const ChapterItem = ({ chapter, index }: IChapterItem) => {
     setHeight(() => (isShow ? '0px' : `${content.current?.scrollHeight}px`))
   }
 
+
   return (
     <div className="chapter">
       <div className={classnames('chapter-main', isShow && 'open')} onClick={toggle}>
@@ -92,7 +91,7 @@ const ChapterItem = ({ chapter, index }: IChapterItem) => {
         }}
         className={classnames('chapter-description')}
       >
-        <Content course={chapter.data.description} />
+        <Content course={chapter?.description ?? ""} />
         <button className="chapter-view__chapter" type="button" onClick={() => history.push(chapter.pathname)}>
           View Chapter
         </button>
@@ -110,10 +109,13 @@ export const DescriptionCourseView = ({
   const initialValue = {
     address: user?.publicAddress || '',
   }
+
+
+
+
   const handleSubmit = (values: { address: string }) => {
     changeAddressCallback(values)
   }
-
   const handleDownload = async () => {
     // issue certificate if it it does not exist yet
     const hasCertificate = await setNftCertificateCallback({ coursePath: additionalInfo.urlCourse })
@@ -126,10 +128,32 @@ export const DescriptionCourseView = ({
   const wrapperRef = useRef<HTMLDivElement>(null)
   const history = useHistory()
   const [isShowList, setIsShowList] = useState(false)
+  const coursePath = additionalInfo?.urlCourse ?? '/'
+  const currentPath = `/${coursePath}/chapter-1`
+  // const showList = () => {
+  //   setIsShowList((prev) => !prev)
+  // }
 
-  const showList = () => {
-    setIsShowList((prev) => !prev)
+  const checkChapter = (progress: string[], chapterPathname: string): string => {
+    const sortedArray = progress.sort()
+
+    const lastItem = sortedArray[sortedArray.length - 1]
+    let nextChapterUrl = ''
+
+    if (!lastItem && chapterPathname === `/${coursePath}/chapter-1`) {
+      return chapterPathname
+    }
+
+    if (lastItem) {
+      const template = lastItem.slice(0, lastItem.length - 1)
+      const numberChapter = +lastItem[lastItem.length - 1]
+      nextChapterUrl = `${template}${numberChapter + 1}`
+    }
+
+    return nextChapterUrl
   }
+
+  const nextChapter = additionalInfo.progress ? checkChapter(additionalInfo.progress, additionalInfo.chapters.pathname) : ''
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -149,11 +173,11 @@ export const DescriptionCourseView = ({
   return (
     <div className="description-page">
       <div className={`description-page-section section-chapters`}>
-        <Content course={additionalInfo.descriptionCourse} />
+        <Content course={additionalInfo.description} />
 
         <div className="program-wrapp">Сourse program</div>
         <div className="chapters">
-          {additionalInfo.chapters.map((chapter: ChapterData, index: number) => (
+          {additionalInfo?.chapters.map((chapter: ChapterData, index: number) => (
             <React.Fragment key={index}>
               <ChapterItem chapter={chapter} index={index} />
             </React.Fragment>
@@ -239,7 +263,7 @@ export const DescriptionCourseView = ({
                     isPrimary
                     hasArrowUpRight
                     text="Start Course Now"
-                    onClick={() => history.push(`${additionalInfo.urlChapter}`)}
+                    onClick={() => history.push(`${currentPath}`)}
                     loading={false}
                     disabled={false}
                   />
@@ -249,7 +273,8 @@ export const DescriptionCourseView = ({
                     isPrimary
                     hasArrowUpRight
                     text="Continue Course"
-                    onClick={() => history.push(`${additionalInfo.urlChapter}`)}
+
+                    onClick={() => history.push(`${nextChapter}`)}
                     loading={false}
                     disabled={false}
                   />
@@ -367,7 +392,7 @@ export const DescriptionCourseView = ({
               isPrimary
               hasArrowUpRight
               text="Start Course Now"
-              onClick={() => history.push(`${additionalInfo.urlChapter}`)}
+              onClick={() => history.push(`${currentPath}`)}
               loading={false}
               disabled={false}
             />

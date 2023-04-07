@@ -16,13 +16,13 @@ export const getCertificate = async (ctx: Context, next: Next): Promise<void> =>
   await validateOrReject(getCertificateArgs, { forbidUnknownValues: true }).catch(firstError)
   const { username, coursePath, courseId } = getCertificateArgs
 
-  let certificate: Certificate = await CertificateModel.findOne({ username, coursePath }).lean()
+  let certificate: Certificate | null = await CertificateModel.findOne({ username, coursePath }).lean()
 
   if (!certificate && courseId) {
     const findCourse = await CourseModel.findOne({ _id: courseId })
 
     if (findCourse && findCourse.status === CourseStatusType.COMPLETED) {
-      await CertificateModel.create({
+      await CertificateModel.create<Certificate>({
         coursePath,
         username,
         userId: findCourse.userId,
@@ -39,7 +39,7 @@ export const getCertificate = async (ctx: Context, next: Next): Promise<void> =>
 
   if (!certificate && !courseId) throw new ResponseError(404, 'Certificate not found')
 
-  const response: Certificate = { ...certificate }
+  const response: Certificate = { ...certificate } as Certificate
 
   ctx.status = 200
   ctx.body = response

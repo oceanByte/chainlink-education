@@ -43,7 +43,7 @@ export const create = async (ctx: Context, next: Next): Promise<void> => {
 	const { publicAddress } = ctx.request.body
 
 	const hashedPassword = await hash(publicAddress, 12);
-	const user: User = await UserModel.create({
+	const user: User = await UserModel.create<User>({
 		email: publicAddress + '@metamaskmail.com',
 		username: publicAddress.slice(0, 10),
 		hashedPassword,
@@ -51,7 +51,7 @@ export const create = async (ctx: Context, next: Next): Promise<void> => {
 	} as User)
 
 	for (const course of COURSES) {
-    await CourseModel.create({
+    await CourseModel.create<Course>({
       userId: user._id,
       title: course.title,
       description: course.description,

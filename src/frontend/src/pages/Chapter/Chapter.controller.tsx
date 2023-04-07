@@ -1,34 +1,25 @@
 import * as React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 import { State } from 'reducers'
 import { SUCCESS } from 'app/App.components/Toaster/Toaster.constants'
 import { PENDING, RIGHT, WRONG } from './Chapter.constants'
-import { COURSES } from 'pages/Home/Home.view'
 
 import { getUser } from 'pages/User/User.actions'
-import { addProgress } from './Chapter.actions'
+import { validateAnswer, addProgress, getChapter, ADD_COURSE_PROGRESS_PERCENT, validateSolution } from './Chapter.actions'
 import { showToaster } from 'app/App.components/Toaster/Toaster.actions'
 
-import { getCoursesData, IAdditionalInfo } from 'helpers/coursesInfo'
-
 import { PublicUser } from 'shared/user/PublicUser'
-
-import { CourseData } from '../Course/Course.controller'
-import { chaptersByCourse, courseData, CourseNameType } from '../Course/Course.data'
-import { chapterData as ChainlinkIntroductionChapters } from '../Courses/chainlinkIntroduction/Chapters/Chapters.data'
-import { chapterData as SolidityIntroductionChapters } from '../Courses/solidityIntroduction/Chapters/Chapters.data'
-import { chapterData as Solidity102 } from '../Courses/solidity102/Chapters/Chapters.data'
-import { chapterData as vrfIntroductionChapters } from '../Courses/vrfIntroduction/Chapters/Chapters.data'
-import { chapterData as vrf102Chapters } from '../Courses/vrf102/Chapters/Chapters.data'
+import { Course } from "shared/course"
 
 import { ChapterView } from './Chapter.view'
 
 export interface ChapterData {
   pathname: string
   name: string
+  description?: string
   data: Data
 }
 
@@ -80,6 +71,9 @@ export const Chapter = () => {
     value: 0,
   })
   const [validatorState, setValidatorState] = useState(PENDING)
+  const currentChapter = useSelector((state: State) => state.currentChapter)
+  const params = useParams<string[]>();
+  const plainCurrentCourse = useSelector((state: State) => state.courses.find((course: Course) => course.urlCourse === params[0]))
   const [showDiff, setShowDiff] = useState(false)
   const [isAccount, setIsAccount] = useState(false)
   const [isStarted, setIsStarted] = useState(false)
@@ -99,21 +93,17 @@ export const Chapter = () => {
       wrong: {},
     },
   })
+
   const [tab, setTab] = useState<string>(TabType.CONTENT)
-  const [percent, setPercent] = useState(0)
-  const [stateChapter, setStateChapter] = useState({
-    previousChapter: '/',
-    nextChapter: '/',
-  })
   const dispatch = useDispatch()
   const user = useSelector((state: State) => state.auth.user)
+  const currentCourse = user ? { ...user.courses?.find((course: any) => course?.title === plainCurrentCourse?.title), ...plainCurrentCourse } : plainCurrentCourse
+  const indexOfCurrentChapter = currentCourse?.chapters?.findIndex((chapter: { pathname: string, name: string }) => chapter.pathname === currentChapter.pathname) ?? 0
 
   let intervalID: any = useRef(null)
   const partCurrentUrl = pathname.split('/')[1]
-  const findLocalCourse = courseData.find((course) => course.path === partCurrentUrl)
 
-  const infoCourses = getCoursesData((user && user.courses) || COURSES)
-  const additionalInfo: IAdditionalInfo = infoCourses.courses[findLocalCourse?.name || '']
+  const additionalInfo = currentCourse
 
   /* eslint-disable @typescript-eslint/no-unused-vars */
   let badgeUnlocked = false
@@ -127,63 +117,27 @@ export const Chapter = () => {
   }
   useEffect(() => {
     if (user) dispatch(getUser({ username: user.username }))
+    dispatch(getChapter(partCurrentUrl, pathname.split('-')[1]))
 
-    courseData.forEach((course: CourseData) => {
-      const index = course.path!
-      chaptersByCourse[index].forEach((chapter: ChapterData) => {
-        if (pathname === chapter.pathname)
-          setData({
-            course: chapter.data.course,
-            exercise: chapter.data.exercise,
-            solution: chapter.data.solution,
-            supports: chapter.data.supports,
-            description: chapter.data.description,
-            video: chapter.data.video,
-            hints: chapter.data.hints,
-            questions: chapter.data.questions.map((question) => {
-              return { ...question, proposedResponses: [] }
-            }),
-            validatorContent: chapter.data.validatorContent,
-          })
-      })
-    })
+    if (pathname?.split('-')[1] === currentChapter?.pathname?.split('-')[1]) {
+      setData(currentChapter.data)
+    }
+    if (user) dispatch(getUser({ username: user.username }))
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname])
+  }, [pathname, currentChapter.pathname])
 
-  const getPercent = (chapterData: ChapterData[]) => {
-    chapterData.forEach((chapter, i) => {
-      if (pathname === chapter.pathname) {
-        if (i - 1 >= 0) {
-          setStateChapter((prev) => ({
-            ...prev,
-            previousChapter: chapterData[i - 1].pathname,
-          }))
-        }
+  const getNextChapterLink = () => {
+    if (currentCourse?.chapters?.length - 1 === indexOfCurrentChapter) {
+      return user ? `/profile/certificates` : '/sign-up'
 
-        if (i + 1 < chapterData.length) {
-          setStateChapter((prev) => ({
-            ...prev,
-            nextChapter: chapterData[i + 1].pathname,
-          }))
-        } else {
-          if (user) {
-            setStateChapter((prev) => ({
-              ...prev,
-              nextChapter: `/profile/certificates`,
-            }))
-          } else {
-            setStateChapter((prev) => ({
-              ...prev,
-              nextChapter: '/sign-up',
-            }))
-          }
-        }
+    } else {
+      return currentCourse.chapters[indexOfCurrentChapter + 1].pathname
+    }
+  }
 
-        if (i !== chapterData.length) {
-          setPercent(() => ((i + 1) / chapterData.length) * 100)
-        } else setPercent(() => 100)
-      }
-    })
+  const getPreviousChapterLink = () => {
+    return indexOfCurrentChapter === 0 ? "/" : currentCourse.chapters[indexOfCurrentChapter - 1]?.pathname
   }
 
   const countUp = () => {
@@ -199,32 +153,16 @@ export const Chapter = () => {
     return () => clearInterval(intervalID.current)
   }, [user])
 
-  useEffect(() => {
-    if (findLocalCourse && findLocalCourse.name === CourseNameType.CHAINLINK_101) {
-      getPercent(ChainlinkIntroductionChapters)
-    } else if (findLocalCourse && findLocalCourse.name === CourseNameType.SOLIDITY_INTRO) {
-      getPercent(SolidityIntroductionChapters)
-    } else if (findLocalCourse && findLocalCourse.name === CourseNameType.SOLIDITY_102) {
-      getPercent(Solidity102)
-    } else if (findLocalCourse && findLocalCourse.name === CourseNameType.VRF_V2) {
-      getPercent(vrfIntroductionChapters)
-    } else {
-      getPercent(vrf102Chapters)
-    }
-
-    // eslint-disable-next-line
-  }, [])
-
   const findCurrentCourse = (user: PublicUser) => {
     let course = null
     const { courses } = user
 
-    if (findLocalCourse) {
-      course = courses?.find((course) => course.title === findLocalCourse?.name)
+    if (currentCourse) {
+      course = courses?.find((course) => course.title === currentCourse?.title)
 
       return {
         ...course,
-        path: findLocalCourse.path,
+        path: currentCourse.urlCourse,
       }
     }
     return course
@@ -247,57 +185,51 @@ export const Chapter = () => {
   const setTabOnPage = (currentTab: string) => {
     setTab(() => currentTab)
   }
-
-  const validateCallback = () => {
+  const validateCallback = async () => {
     if (
-      stateChapter.nextChapter === `/profile/certificates` ||
-      additionalInfo.progress.length === additionalInfo.countChapters - 1
+      getNextChapterLink() === `/profile/certificates` ||
+      additionalInfo.progress?.length === additionalInfo.countChapters - 1
     ) {
       setValidatorState(RIGHT)
       if (user) {
         clearInterval(intervalID.current)
         const course = findCurrentCourse(user)
-
         dispatch(
           addProgress({
-            chapterDone: pathname,
-            courseId: course ? course._id : '',
-            time: time.value,
-            isCompleted: course.progress.length === additionalInfo.countChapters - 1,
+            date_of_completion: time.value,
+            chapterPath: pathname,
+            courseId: additionalInfo ? additionalInfo.id : '',
             coursePath: course ? course.path : '',
           }),
         )
       }
       setIsAccount(true)
       return
+
     }
 
     if (data.questions.length > 0) {
-      let ok = true
-      data.questions.forEach((question) => {
-        if (!question.proposedResponses) ok = false
-        else {
-          question.responses.forEach((response) => {
-            if (!(question.proposedResponses && question.proposedResponses.includes(response))) ok = false
-          })
-          question.proposedResponses.forEach((proposedResponse) => {
-            if (!question.responses.includes(proposedResponse)) ok = false
-          })
-        }
-        if (question.responses.length === 0) ok = true
-      })
+      const validationResponse = await validateAnswer(
+        currentChapter.pathname,
+        data?.questions?.map(question => ({
+          question: question?.question ?? '',
+          answers: question?.proposedResponses ?? []
+        })) ?? []
+      );
+      let ok = validationResponse.answerIs
+
       if (ok) {
         setValidatorState(RIGHT)
         setIsAccount(true)
         if (user) {
           clearInterval(intervalID.current)
           const course = findCurrentCourse(user)
+          dispatch({ type: ADD_COURSE_PROGRESS_PERCENT, payload: { urlCourse: course.path, chapterUrl: pathname } })
           dispatch(
             addProgress({
-              chapterDone: pathname,
-              courseId: course ? course._id : '',
-              time: time.value,
-              isCompleted: false,
+              date_of_completion: time.value,
+              chapterPath: pathname,
+              courseId: additionalInfo ? additionalInfo.id : '',
               coursePath: course.path,
             }),
           )
@@ -310,12 +242,8 @@ export const Chapter = () => {
       } else {
         setShowDiff(true)
         if (data.exercise && data.solution) {
-          if (
-            // @ts-ignore
-            data.exercise.replace(/\s+|\/\/ Type your solution below/g, '') ===
-            // @ts-ignore
-            data.solution.replace(/\s+|\/\/ Type your solution below/g, '')
-          ) {
+          const { answerIs } = await validateSolution(currentChapter.pathname, data.exercise)
+          if (answerIs) {
             setValidatorState(RIGHT)
             setIsAccount(true)
             if (user) {
@@ -323,10 +251,9 @@ export const Chapter = () => {
               const course = findCurrentCourse(user)
               dispatch(
                 addProgress({
-                  chapterDone: pathname,
-                  courseId: course ? course._id : '',
-                  time: time.value,
-                  isCompleted: false,
+                  date_of_completion: time.value,
+                  chapterPath: pathname,
+                  courseId: additionalInfo ? additionalInfo.id : '',
                   coursePath: course.path,
                 }),
               )
@@ -351,7 +278,6 @@ export const Chapter = () => {
 
     setData({ ...data, questions: e })
   }
-
   return (
     <>
       {data.course && (
@@ -371,10 +297,10 @@ export const Chapter = () => {
           user={user}
           supports={data.supports}
           questions={data.questions}
-          nextChapter={stateChapter.nextChapter}
-          previousChapter={stateChapter.previousChapter}
+          nextChapter={getNextChapterLink()}
+          previousChapter={getPreviousChapterLink()}
           isStarted={isStarted}
-          percent={percent}
+          percent={currentCourse.percent ?? 0}
           startedHandler={startTaskHandler}
           proposedQuestionAnswerCallback={proposedQuestionAnswerCallback}
           currentCourse={user ? findCurrentCourse(user) : null}

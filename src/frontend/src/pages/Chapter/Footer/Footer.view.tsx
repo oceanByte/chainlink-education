@@ -22,21 +22,21 @@ export const FooterView = ({ nextChapter, previousChapter, percent, additionalIn
       </ProgressBarWrapper>
       <LinkStyled>
         <MainButtonView
-            isChapter
-            hasArrowLeft
-            text={pathname !== `/${additionalInfo.urlCourse}/chapter-1` ? 'Previous Chapter' : 'Home Page'}
-            onClick={() => history.push(previousChapter)}
-            loading={false}
-            disabled={false}
-          />
+          isChapter
+          hasArrowLeft
+          text={pathname !== `/${additionalInfo.urlCourse}/chapter-1` ? 'Previous Chapter' : 'Home Page'}
+          onClick={() => history.push(previousChapter)}
+          loading={false}
+          disabled={false}
+        />
         <MainButtonView
-            isChapter
-            hasArrowRight
-            text={pathname === `/${additionalInfo.urlCourse}/chapter-${additionalInfo.chapters.length}` ? 'Done' : 'Next Chapter'}
-            onClick={() => history.push(nextChapter)}
-            loading={false}
-            disabled={false}
-          />
+          isChapter
+          hasArrowRight
+          text={pathname === `/${additionalInfo.urlCourse}/chapter-${additionalInfo.chapters.length}` ? 'Done' : 'Next Chapter'}
+          onClick={() => history.push(nextChapter)}
+          loading={false}
+          disabled={false}
+        />
       </LinkStyled>
     </FooterStyled>
   )

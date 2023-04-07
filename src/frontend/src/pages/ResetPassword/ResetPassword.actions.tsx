@@ -22,6 +22,7 @@ export const resetPassword = ({ solution, token, newPassword }: ResetPasswordInp
           type: RESET_PASSWORD_COMMIT,
           meta: {
             thunks: [showToaster(SUCCESS, 'Password sucessfully changed', 'You can now login'), redirect('/login')],
+
           },
         },
         rollback: { type: RESET_PASSWORD_ROLLBACK },

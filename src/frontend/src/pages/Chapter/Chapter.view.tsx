@@ -361,31 +361,33 @@ type ChapterViewProps = {
   additionalInfo: IAdditionalInfo
 }
 
-export const ChapterView = ({
-  validatorState,
-  validateCallback,
-  solution,
-  isAccount,
-  closeIsAccountModal,
-  proposedSolution,
-  proposedSolutionCallback,
-  showDiff,
-  course,
-  tab,
-  setTabOnPage,
-  user,
-  supports,
-  questions,
-  validatorContent,
-  isStarted,
-  nextChapter,
-  previousChapter,
-  percent,
-  startedHandler,
-  proposedQuestionAnswerCallback,
-  currentCourse,
-  additionalInfo,
-}: ChapterViewProps) => {
+export const ChapterView = (props: ChapterViewProps) => {
+
+  const {
+    validatorState,
+    validateCallback,
+    solution,
+    // isAccount,
+    closeIsAccountModal,
+    proposedSolution,
+    proposedSolutionCallback,
+    showDiff,
+    course,
+    // tab,
+    // setTabOnPage,
+    user,
+    supports,
+    questions,
+    validatorContent,
+    isStarted,
+    nextChapter,
+    previousChapter,
+    percent,
+    startedHandler,
+    proposedQuestionAnswerCallback,
+    currentCourse,
+    additionalInfo,
+  } = props
   const { pathname } = useLocation()
   const [display, setDisplay] = useState('solution')
   const [editorWidth, setEditorWidth] = useState(0)
@@ -466,7 +468,7 @@ export const ChapterView = ({
           <div className="chapter-block">
             <div className="step">
               <p className="step-text">
-                {(currentCourse && currentCourse.progress.includes(pathname)) || (user && validatorState === RIGHT)
+                {(currentCourse && currentCourse?.progress?.includes(pathname)) || (user && validatorState === RIGHT)
                   ? 'Chapter completed'
                   : 'Step 1'}
               </p>

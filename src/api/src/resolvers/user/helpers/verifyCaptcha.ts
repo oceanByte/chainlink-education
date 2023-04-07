@@ -9,14 +9,14 @@ interface VerifyCaptcha {
 }
 
 export const verifyCaptcha: VerifyCaptcha = async (userId, proposedSolution, captchaFor) => {
-  const captcha: Captcha = (await CaptchaModel.findOne({ userId, captchaFor }).lean()) as Captcha
+  const captcha: Captcha | null = await CaptchaModel.findOne({ userId, captchaFor }).lean()
 
   if (!captcha) throw new ResponseError(400, 'Captcha expired - Please click "Send another email"')
 
   if (captcha.attempts && captcha.attempts >= 3)
     throw new ResponseError(401, 'Maximum attempts reached - Please click "Send another email"')
 
-  if (captcha.solution === proposedSolution) return
+  if (captcha.solution === proposedSolution) return;
 
   await CaptchaModel.updateOne({ _id: captcha._id }, { $inc: { attempts: 1 } }).exec()
 
