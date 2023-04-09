@@ -1,1 +1,1 @@
-Having a basic understanding of what’s going on under the hood in Solidity is important so let’s learn about the EVM!
+Having a basic understanding of what’s happening under the hood in Solidity is essential, so let’s learn about the EVM!
