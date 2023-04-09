@@ -17,7 +17,7 @@
 One of the first things you will write for any Solidity is the pragma statement. The pragma tells the solidity compiler what version of Solidity you are writing. It typically looks something like this:
 
 <Highlight class="language-javascript">
-pragma solidity ^0.8.7;
+pragma Solidity ^0.8.7;
 </Highlight>
 
 This says we are writing our code in Solidity, and the
@@ -32,14 +32,14 @@ followed by
 0.8.7;
 </Highlight>
 
-means that we will not allow the compiler to compile to a version earlier than 0.8.7 and must compile to a version earlier than 0.9.0.
+This means that we will not allow the compiler to compile to a version earlier than 0.8.7 and must compile to a version earlier than 0.9.0.
 
 The semi-colon
 <Highlight class="language-javascript">
 ;
 </Highlight>
 
-means we are finished writing that line. Whenever a line of logic is complete in Solidity, it must be followed with a semi-colon.
+This means we are finished writing that line. Whenever a line of logic is complete in Solidity, it must be followed with a semi-colon.
 
 <!-- <MissionContainer>
   <div className="title">What are the SLAs you have agreed to?</div>

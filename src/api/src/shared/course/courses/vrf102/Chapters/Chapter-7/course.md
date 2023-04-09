@@ -2,7 +2,7 @@
 
 # VRF Simultaneous Requests
 
-As miners/validators decide on the order of randomness requests on-chain, you must be careful that your contracts consider it in their implementation. Let’s assume your contract creates multiple VRF requests in short succession. There is no guarantee that the order of completion and fulfillment will also be in the same order. It’s easy to prevent this issue using the requestID to match randomness requests and fulfillments. But you must be aware that this is a potential issue in the first place. See more details [here](https://docs.chain.link/docs/vrf/v2/best-practices/#processing-simultaneous-vrf-requests).
+As miners/validators decide on the order of randomness requests on-chain, you must be careful that your contracts consider it in their implementation. Let’s assume your contract creates multiple VRF requests in short succession. There is no guarantee that the order of completion and fulfilment will also be in the same order. It’s easy to prevent this issue using the requestID to match randomness requests and fulfillments. But you must be aware that this is a potential issue in the first place. See more details [here](https://docs.chain.link/docs/vrf/v2/best-practices/#processing-simultaneous-vrf-requests).
 
 <Highlight class="language-javascript">
 mapping(uint256 => uint256[]) public s_requestIdToRandomWords;

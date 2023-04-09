@@ -9,9 +9,9 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-    Now, with the power to get a random number into a smart contract you are one step closer to completing that raffle. Keep an eye out for future lessons on building the raffle.
+    Now, with the power to get a random number into a smart contract, you are one step closer to completing that raffle. Keep an eye out for future lessons on building the raffle.
     </div>
   </div>
 </ContentWrapp>
 
-Congrats! You now know how to get a verfiably secure random number for use in a smart contract!
+Congrats! You now know how to get a verifiably secure random number for use in a smart contract!

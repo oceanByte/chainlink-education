@@ -14,9 +14,9 @@
   </div>
 </ContentWrapp> -->
 
-We can actually give more information to the Solidity compiler on how we want to use our variables (and later functions). We can tell the compiler how we want our variables to be accessed. Many blockchains, such as Ethereum, act as one monolithic computer. While Ethereum is a network of computers distributed around the world, when you deploy code to a blockchain like Ethereum, that code can access any other code anyone has deployed to that blockchain. This is like how programs downloaded to your computer can access other programs on your computer. This allows smart contracts to interact in many unique and interesting ways that regular web application back ends may not be able to do so easily. However, this can also open risks of other code using our code in unintended ways.
+We can give more information to the Solidity compiler on how we want to use our variables (and later functions). We can tell the compiler how we want our variables to be accessed. Many blockchains, such as Ethereum, act as one monolithic computer. While Ethereum is a network of computers distributed around the world when you deploy code to a blockchain like Ethereum, that code can access any other code anyone has deployed to that blockchain. This is like how programs downloaded to your computer can access other programs on your computer. This allows smart contracts to interact in unique and exciting ways that regular web application backends may not be able to do so easily. However, this can also open risks of other code using our code in unintended ways.
 
-To help prevent this we can declare “access modifiers” when declaring our variables, which limit what code on the blockchain can access and change those variables. The four types of variable access modifiers are:
+To help prevent this, we can declare “access modifiers” when declaring our variables, limiting what blockchain code can access and changing those variables. The four types of variable access modifiers are:
 
 
 * Public 
@@ -28,13 +28,13 @@ To help prevent this we can declare “access modifiers” when declaring our va
 * External
     * The variable/function can only be accessed/changed from outside code or blockchain wallets
 
-To declare the access modifier of a variable we put it inbetween the function type and name like this:
+To declare the access modifier of a variable, we put it in between the function type and name like this:
 
 <Highlight class="language-javascript">
 uint public myFavNum;
 </Highlight>
 
-If no access modifier is declared then the variable is automatically assigned the private modifier. For example
+If no access modifier is declared, the variable is automatically assigned the private modifier. For example
 
 <Highlight class="language-javascript">
 uint myFavNum;
