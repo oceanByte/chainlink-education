@@ -10,7 +10,8 @@ export enum CourseTitleType {
   SOLIDITY_INTRO = 'Solidity Introduction',
   SOLIDITY_102 = 'Solidity 102',
   VRF_V2 = 'VRF v2 Introduction',
-  VRF_V2_102 = 'VRF v2 Advanced'
+  VRF_V2_102 = 'VRF v2 Advanced',
+  AUTOMATION_INTRO = "Automation Introduction"
 }
 
 export const COURSES: {title: string, description: string, difficulty: number, status: string}[] = [
@@ -41,6 +42,12 @@ export const COURSES: {title: string, description: string, difficulty: number, s
   {
     title: CourseTitleType.VRF_V2_102,
     description: `Explore the technical details and practical usage of VRF v2.`,
+    difficulty: 3,
+    status: CourseStatusType.NEW
+  },
+  {
+    title: CourseTitleType.AUTOMATION_INTRO,
+    description: `Explore the Chainlink Automation.`,
     difficulty: 3,
     status: CourseStatusType.NEW
   }

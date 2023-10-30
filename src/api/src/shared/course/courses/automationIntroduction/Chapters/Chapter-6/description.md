@@ -1,0 +1,1 @@
+Explore security and verifiability in Chainlink Automation, delving into robust measures and principles that ensure the integrity and reliable execution of automated tasks, while navigating through transparency, auditing, and harnessing off-chain computation for optimized performance.

@@ -1,0 +1,1 @@
+Dive into creating and managing automated tasks with Chainlink, translating setup endeavors into actionable skills within automation. This segment guides through formulating a time-based task, deploying a consumer contract, and configuring Chainlink Automation.
