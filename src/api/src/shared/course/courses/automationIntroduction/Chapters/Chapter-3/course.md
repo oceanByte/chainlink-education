@@ -14,7 +14,6 @@
   </div>
 </ContentWrapp>
 
-
 Transitioning to the operational specifics, upkeeps and triggers form the crux of on-chain tasks or jobs. For instance, invoking a smart contract function when a certain set of conditions are met epitomizes a trigger. Currently, Chainlink Automation Network supports <a style=" color:blue" href="https://docs.chain.link/chainlink-automation/overview/getting-started">three trigger types</a>:
 
 Time-based Trigger:
@@ -40,21 +39,3 @@ Procedure: Within the Chainlink Automation app, register a new upkeep but this t
 
 Log Trigger: Increment an on-chain counter utilizing a log as the trigger.
 Procedure: Register a new upkeep, selecting Log Logic Trigger. Input the respective contract addresses and specify the emitted log details to trigger your upkeep. After registration, use the bump function to emit the log and trigger your upkeep, observing the results in the Automation dashboard. Kudos on automating your first log trigger upkeep!
-
-
-
-
-
----
-Digital agreements have been the most common format of agreements in the past decade. From bank agreements to social media to Netflix and crypto exchanges, companies who provide services on the Internet typically use digital agreements to detail the exact conditions of the service to be provided. These are called SLAs or Service Level Agreements.
-
-What makes a digital agreement different from a regular agreement or contractual agreement? Well, they're like standard agreements…but in a digital format. These agreements can be enforced in a court of law under certain circumstances. However, this doesn't often happen due to the costs of going to court coupled with the low value these contracts represent for individual consumers.
-
-Customers also tend to refrain from reading these agreements due to lengthy, complex legalese. Often digital agreements give consumers very little recourse at all! Due to these reasons, the power of digital agreements is heavily skewed towards the institutions who create them rather than being a fair, equitable agreement between institutions and their consumers. A prime example of this is the <a style=" color:blue" href=" https://www.jama.work/blog/on-robinhood-and-availability"> Robinhood Gamestop downtime incident</a>.
-
-<MissionContainer>
-  <div className="title">What are the SLAs you have agreed to?</div>
-    <div className="description">
-    Think about any digital services you subscribe to, for example, video streaming or banking services. Do you know the terms of the SLAs between you and the service provider? If not, take the time and read over one of them.
-    </div>
-</MissionContainer>

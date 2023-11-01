@@ -1,6 +1,6 @@
 #####Chapter 4:
 
-# Practical Exercise: Automating Functions with Chainlink
+# Automating Functions with Chainlink
 
 <ContentWrapp>
   <div class="imgContainer">
