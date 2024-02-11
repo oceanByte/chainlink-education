@@ -16,11 +16,6 @@ export const CourseCards = ({ courses, user }: ICourseCard) => {
     <>
       {courses
         ? courses.map((course) => {
-            // Check if 'isPreview' is true, if so, do not render this course
-            if (course.title === 'Automation Introduction') {
-              return null
-            }
-
             return (
               <div
                 key={course.title}

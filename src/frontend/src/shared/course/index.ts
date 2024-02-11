@@ -25,6 +25,4 @@ export class Course {
   percent?: number
 
   chapters!: [{ pathname: string, name: string }]
-
-  isPreview?: boolean
 }
