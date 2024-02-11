@@ -30,7 +30,7 @@ Within the Chainlink Automation Network, Automation Nodes render services to upk
 Now let’s see how we can use these triggers to automate.
 
 Time-based Trigger: Increment a counter every 5 minutes using our sample contract.
-Procedure: Head to the <a style=" color:blue" href="https://automation.chain.link/">Chainlink Automation app</a> and connect to Arbitrum Goerli via the top dropdown menu. Register a new upkeep, selecting Time-based trigger. Enter the target contract address and specify the contract call details. Define your time schedule, for instance, every 5 minutes, and finalize your upkeep registration. Congratulations on automating your first time-based upkeep!
+Procedure: Head to the <a style=" color:blue" href="https://automation.chain.link/">Chainlink Automation app</a>, connect your wallet and connect to Arbitrum Goerli via the top dropdown menu. Register a new upkeep, selecting Time-based trigger. Enter the target contract address and specify the contract call details. Define your time schedule, for instance, every 5 minutes, and finalize your upkeep registration. Congratulations on automating your first time-based upkeep!
 
 https://automation.chain.link/
 
