@@ -16,7 +16,7 @@ export const CourseCards = ({ courses, user }: ICourseCard) => {
     <>
       {courses
         ? courses.map((course) => {
-            if (course.title === 'Automation Introduction' && window.location.hostname.includes('preview')) {
+            if (course.title === 'Automation Introduction' && !window.location.hostname.includes('preview')) {
               return null
             }
 
