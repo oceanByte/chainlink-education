@@ -16,10 +16,6 @@ export const CourseCards = ({ courses, user }: ICourseCard) => {
     <>
       {courses
         ? courses.map((course) => {
-            if (course.title === 'Automation Introduction' && !window.location.hostname.includes('preview')) {
-              return null
-            }
-
             return (
               <div
                 key={course.title}
@@ -30,7 +26,6 @@ export const CourseCards = ({ courses, user }: ICourseCard) => {
                 }
               >
                 <CourseCardView user={user} infoCourses={infoCourses} course={course} />
-                <h1> {window.location.hostname} </h1>
               </div>
             )
           })
