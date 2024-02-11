@@ -14,7 +14,7 @@ export enum CourseTitleType {
   AUTOMATION_INTRO = "Automation Introduction"
 }
 
-export const COURSES: {title: string, description: string, difficulty: number, status: string}[] = [
+export const COURSES: {title: string, description: string, difficulty: number, status: string, isPreview?: boolean}[] = [
   {
     title: CourseTitleType.CHAINLINK_101,
     description: `Chainlink decentralized oracle networks provide tamper-proof inputs, outputs, and computations`,
@@ -49,7 +49,8 @@ export const COURSES: {title: string, description: string, difficulty: number, s
     title: CourseTitleType.AUTOMATION_INTRO,
     description: `Learn how Chainlink Automation automates blockchain operations`,
     difficulty: 3,
-    status: CourseStatusType.NEW
+    status: CourseStatusType.NEW,
+    isPreview: true
   }
 ]
 

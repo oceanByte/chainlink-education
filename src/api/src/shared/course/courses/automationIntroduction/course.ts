@@ -9,6 +9,7 @@ export const course: CourseType = {
     path: "automationIntro",
     description: data,
     difficulty: 2,
-    amountOfTime: '1 hours',
-    status: CourseStatusType.NEW
+    amountOfTime: '1 hour',
+    status: CourseStatusType.NEW,
+    isPreview: true
 }

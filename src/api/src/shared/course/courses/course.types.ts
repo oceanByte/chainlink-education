@@ -29,6 +29,7 @@ export type CourseType = {
     amountOfTime: string
     difficulty: number
     status: string
+    isPreview?: boolean
 }
 
 export type CourseChapterType = {
