@@ -30,6 +30,7 @@ export const CourseCards = ({ courses, user }: ICourseCard) => {
                 }
               >
                 <CourseCardView user={user} infoCourses={infoCourses} course={course} />
+                <h1> {window.location.hostname} </h1>
               </div>
             )
           })
