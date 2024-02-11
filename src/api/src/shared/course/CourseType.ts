@@ -47,7 +47,7 @@ export const COURSES: {title: string, description: string, difficulty: number, s
   },
   {
     title: CourseTitleType.AUTOMATION_INTRO,
-    description: `Explore the Chainlink Automation.`,
+    description: `Learn how Chainlink Automation automates blockchain operations`,
     difficulty: 3,
     status: CourseStatusType.NEW
   }

@@ -9,7 +9,7 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     As we delve deeper into the realms of Chainlink Automation, understanding its architecture is crucial. This architecture is the backbone that supports the functionality of Chainlink Automation, ensuring its seamless, reliable, and decentralized operation.
+     As we delve deeper into the realms of Chainlink Automation, understanding its architecture is crucial. The architecture is the backbone that supports the functionality of Chainlink Automation, ensuring its seamless, reliable, and decentralized operation.
     </div>
   </div>
 </ContentWrapp>
