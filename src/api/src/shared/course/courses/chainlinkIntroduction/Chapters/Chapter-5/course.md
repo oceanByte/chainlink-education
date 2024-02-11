@@ -9,12 +9,12 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-     NFTs are a part of Web 3.0 so why not take truly advantage of this new primitive and make your NFT change depending on some conditions on the outside world? We call these changing NFTs <i>Dynamic NFT</i> or <i>dNFTs</i>. But how will you connect your dynamic NFT to outside data?  
+     NFTs are a part of Web 3.0, so why not take true advantage of this new primitive and make your NFT change depending on some conditions on the outside world? We call these changing NFTs <i>Dynamic NFT</i> or <i>dNFTs</i>. But how will you connect your dynamic NFT to outside data?  
     </div>
   </div>
 </ContentWrapp>
 
-Blockchains and smart contracts are unaware of any conditions or logic that occur outside of the blockchain itself; they cannot connect to outside resources. This is due to the distributed and deterministic nature of blockchains. All of the distributed nodes (nodes are computers running the blockchain software) in the blockchain must come to a consensus on what the blockchain is and any changes to it. If the blockchain just connected to a data source, the nodes could query the data at different times and get other answers, breaking the ability for the nodes to reach consensus. Even worse, if that data source changed locations or is down, the whole blockchain would break.
+Blockchains and smart contracts are unaware of any conditions or logic that occur outside of the blockchain itself; they cannot connect to outside resources. This is due to the distributed and deterministic nature of blockchains. All of the distributed nodes (nodes are computers running the blockchain software) in the blockchain must come to a consensus on what the blockchain is and any changes to it. If the blockchain just connected to a data source, the nodes could query the data at different times and get other answers, breaking the ability for the nodes to reach a consensus. Even worse, the whole blockchain would break if that data source changed locations or was down.
 
 This means developers can program smart contracts as long as their logic doesn’t require any outside data. This may sound highly limiting, but there is a system in place that sits in between blockchains and the outside world (a concept aptly called “middleware”). This middleware system is called an Oracle. The name <ColorWord>Oracle</ColorWord> comes from the Greek concept of an Oracle since it needs to determine what is <i>true</i> in outside systems.
 
@@ -29,7 +29,7 @@ This means developers can program smart contracts as long as their logic doesn�
 
   <div class="itemsContainer">
     <div class="item-text">
-     So an Oracle is the type of system you want to make a dNFT but it is important that the entire NFT remains decentralized so your art work can truly live on forever. You'll also want the NFT to be have the most accurate up-to-date data.
+     So an Oracle is the type of system you want to make a dNFT, but it is essential that the entire NFT remains decentralized so your artwork can truly live on forever. You'll also want the NFT to have the most accurate, up-to-date data.
     </div>
   </div>
 </ContentWrapp>
@@ -51,14 +51,14 @@ Finally we are here…...enter Chainlink!
 
   <div class="itemsContainer">
     <div class="item-text">
-     Using a Chainlink Decentralized Oracle Network (DON) as the Oracle for your dNFT can give you strong guarantees that your artwork will truly update with the latest, most acurate data and remain decentralized. 
+     Using a Chainlink Decentralized Oracle Network (DON) as the Oracle for your dNFT can give you strong guarantees that your artwork will indeed update with the latest, most accurate data and remain decentralized. 
     </div>
   </div>
 </ContentWrapp>
 
-Smart contracts have special properties and need decentralized oracles to carry out functions. This is where Chainlink comes in. <ColorWord>Chainlink is a platform for creating decentralized oracle networks that provide various smart contract services</ColorWord>. So using Chainlink, we can create a price oracle that isn’t just Jim but Jim and 30 other of the most trusted and expert crypto price data aggregators out there and make them come to an agreement.
+Smart contracts have unique properties and need decentralized oracles to carry out functions. This is where Chainlink comes in. <ColorWord>Chainlink is a platform for creating decentralized oracle networks that provide various smart contract services</ColorWord>. So using Chainlink, we can create a price oracle that isn’t just Jim but Jim and 30 other of the most trusted and expert crypto price data aggregators out there and make them come to an agreement.
 
-Chainlink allows developers to create and customize any type of <ColorWord>Decentralized Oracle Network</ColorWord>, or DONs, a smart contract might need. Developers can choose which nodes are a part of a network, what type of data each node is looking for, how nodes come to an agreement, when nodes should post updates, and any other computation nodes should perform. Finally, with Chainlink, developers can build smart contracts that can interact with the outside world to preserve the decentralized nature of smart contracts.
+Chainlink allows developers to create and customize any type of <ColorWord>Decentralized Oracle Network</ColorWord>, or DONs, a smart contract might need. Developers can choose which nodes are part of a network, what type of data each node is looking for, how nodes come to an agreement, when nodes should post updates, and any other computation nodes should perform. Finally, with Chainlink, developers can build smart contracts that can interact with the outside world to preserve the decentralized nature of smart contracts.
 
 <Spacer>
 
@@ -71,7 +71,7 @@ Chainlink allows developers to create and customize any type of <ColorWord>Decen
 
   <div class="itemsContainer">
     <div class="item-text">
-      Curious how Chainlink works? Read below! With Chainlink, any type of data the exists can be brought on chain, and the conditions on which that data is delivered can be customized! 
+      Curious how Chainlink works? With Chainlink, any type of existing data can be brought on chain, and the conditions on which that data is delivered can be customized! Read below! 
     </div>
   </div>
 </ContentWrapp>
@@ -103,19 +103,19 @@ Chainlink allows developers to build and customize DONs. Chainlink allows DONs t
 <br><br>
 <b>Specifying what data DONs need to provide</b>
 
-Due to the proliferation of Decentralized Finance (DeFi), a popular use case of Chainlink DONs is relating them with price data. However, any type of data that is available in a digital format can be accessed. This includes but is not limited to weather data, YouTube views, sensor data, or even data from other blockchains. For the NFT we’re just going to stick to price data for now, specifically the ETH/USD price, but you can imagine all the possibilities of cool smart contracts we can make with all of the digital data available today!
+Due to the proliferation of Decentralized Finance (DeFi), a popular use case of Chainlink DONs relates them with price data. However, any data that is available in a digital format can be accessed. This includes but is not limited to weather data, YouTube views, sensor data, or even data from other blockchains. For the NFT, we will stick to price data for now, specifically the ETH/USD price. Still, you can imagine all the possibilities of cool smart contracts we can make with all of the digital data available today!
 
 <br>
 <b>When DONS Provide Data</b>
 
-Some applications require a DON that updates the data once a day. Others need updates once every five minutes or only when the data itself changes by a certain amount. The term <ColorWord>heartbeat</ColorWord> is used to describe the max amount of time that can elapse before a DON updates it's data feed The term <ColorWord>deviation threshold</ColorWord> is used to describe how much variation is allowed in the data before it is posted on-chain, regardless of how much time has elasped. For example, if the ETH/USD deviation threshold is set to 1%, then the DON will update the data feed if it senses the price of ETH versus USD fluctuates more than 1%.
+Some applications require a DON that updates the data once a day. Others need updates once every five minutes or only when the data itself changes by a certain amount. The term <ColorWord>heartbeat</ColorWord> describes the maximum amount of time that can elapse before a DON updates its data feed. The term <ColorWord>deviation threshold</ColorWord> describes how much variation is allowed in the data before it is posted on-chain, regardless of how much time has elapsed. For example, if the ETH/USD deviation threshold is set to 1%, then the DON will update the data feed if it senses the price of ETH versus USD fluctuates more than 1%.
 
 <br>
 <b>How DONs Provide Data</b>
 
-Ideally, nodes should retrieve data from multiple sources and <i>aggregate</i>, or combine, the data to return the most accurate price they can. Developers can use external adapters to customize the sources that nodes use to aggregate data. <ColorWord>External adapters</ColorWord> are custom built software packages that can be added to the nodes. These can be built in any programming language and perform any operations developers may find useful. These operations can be as simple as basic arithmetic but can span to being complex machine learning algorithms.
+Ideally, nodes should retrieve data from multiple sources and <i>aggregate</i>, or combine, the data to return the most accurate price possible. Developers can use external adapters to customize the sources that nodes use to aggregate data. <ColorWord>External adapters</ColorWord> are custom-built software packages that can be added to the nodes. These can be built in any programming language and perform any operations developers may find useful. These operations can be as simple as basic arithmetic but can span to being complex machine learning algorithms.
 
 <br>
 <b>How Consensus is Reached Among Nodes</b>
 
-All of the different nodes in the DON have their own version of the price. Using this information, developers customize the aggregation method of Chainlink DONs to determine one value for the true price. This is another level of aggregation beyond the aggregation completed at the individual node level. Having multiple levels of aggregation ensures the highest level of data quality. This <i>aggregation method</i> can consist of any type of operation including median, mean, weighted mean, mode, or other calculations. In our dynamic NFT will make use of a data feed that takes the median of all the node’s price data, since the median is more resistant to outliers than the mean.
+All the different nodes in the DON have their own version of the price. Using this information, developers customize the aggregation method of Chainlink DONs to determine one value for the true price. This is another level of aggregation beyond the aggregation completed at the individual node level. Having multiple levels of aggregation ensures the highest level of data quality. This <i>aggregation method</i> can consist of any operation, including median, mean, weighted mean, mode, or other calculations. In our dynamic, NFT will use a data feed that takes the median of all the node's price data since the median is more resistant to outliers than the mean.

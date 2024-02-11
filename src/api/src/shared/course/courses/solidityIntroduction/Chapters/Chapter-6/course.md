@@ -14,7 +14,7 @@
   </div>
 </ContentWrapp> -->
 
-In the last activity we created a variable called “myFavoriteNumber” of type uint, but what if we want to actually store a value in that variable? That’s what the equal sign ( = ) “assignment” operator is for. In programming an operator is a symbol that represents an action or process. In the case of the assignment operator whatever is to the left of the equals sign is being assigned the value of whatever is on the right of the equal sign. For instance if we had:
+In the last activity, we created a variable called “myFavoriteNumber” of type uint, but what if we want to store a value in that variable? The equal sign ( = ) “assignment” operator is for that. In programming, an operator is a symbol that represents an action or process. In the case of the assignment operator, whatever is to the left of the equal sign is assigned the value of whatever is on the right. For instance, if we had:
 
 <Highlight class="language-javascript">
 uint myFavNum; 
@@ -22,7 +22,7 @@ myFavNum = 42;
 </Highlight>
 
 
-In the first line we are creating the variable “myFavoriteNum” of type uint, and then in the second line we are assigning “myFavoriteNum” the value 42. So my “myFavNum” will stay 42 until we change it again! Also reminder we put a semi-colon at the end of every complete line. Another example:
+In the first line, we create the variable “myFavoriteNum” of type uint, and then in the second line, we assign “myFavoriteNum” the value 42. So my “myFavNum” will stay 42 until we change it again! Also, a reminder we put a semi-colon at the end of every complete line. Another example:
 
 <Highlight class="language-javascript">
 uint myFavNum; 
@@ -30,7 +30,7 @@ myFavNum = 42;
 myFavNum = 7;
 </Highlight>
 
-In the first line we are creating the variable “myFavoriteNum” of type uint, and then in the second line we are assigning “myFavoriteNum” the value 42. Then in the third line we are now assigning “myFavoriteNum” the value 7 which overwrites the previous value.
+In the first line, we create the variable “myFavoriteNum” of type uint, and then in the second line, we assign “myFavoriteNum” the value 42. Then in the third line, we are now assigning “myFavoriteNum” the value 7, which overwrites the previous value.
 
 You can declare a variable and assign it a value all in one line like this:
 
@@ -38,7 +38,7 @@ You can declare a variable and assign it a value all in one line like this:
 uint myFavNum = 42;
 </Highlight>
 
-Finally to assign a value to a variable of type string you must put the value in quotation marks (they can be either double or single quotes). For example:
+Finally, to assign a value to a variable of type string, you must put the value in quotation marks (they can be either double or single quotes). For example:
 
 <Highlight class="language-javascript">
 string favPhrase = “We live in a society”;

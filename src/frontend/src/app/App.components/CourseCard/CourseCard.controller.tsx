@@ -11,22 +11,28 @@ interface ICourseCard {
 }
 
 export const CourseCards = ({ courses, user }: ICourseCard) => {
-  const infoCourses = courses ?? [] as any
+  const infoCourses = courses ?? ([] as any)
   return (
     <>
       {courses
-        ? courses.map((course) => (
-          <div
-            key={course.title}
-            className={
-              course.title !== 'VRF v2 Advanced'
-                ? 'home-courses-content__item'
-                : 'home-courses-content__item highlight'
+        ? courses.map((course) => {
+            if (course.title === 'Automation Introduction' && !window.location.hostname.includes('preview')) {
+              return null
             }
-          >
-            <CourseCardView user={user} infoCourses={infoCourses} course={course} />
-          </div>
-        ))
+
+            return (
+              <div
+                key={course.title}
+                className={
+                  course.title !== 'Automation Introduction'
+                    ? 'home-courses-content__item'
+                    : 'home-courses-content__item highlight'
+                }
+              >
+                <CourseCardView user={user} infoCourses={infoCourses} course={course} />
+              </div>
+            )
+          })
         : null}
     </>
   )

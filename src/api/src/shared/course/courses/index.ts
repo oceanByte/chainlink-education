@@ -9,6 +9,7 @@ import solidity102 from "./solidity102";
 import solidityIntroduction from "./solidityIntroduction";
 import vrfIntroduction from "./vrfIntroduction";
 import vrf102 from "./vrf102";
+import automationIntroduction from "./automationIntroduction";
 import {ResponseError} from "../../mongo/ResponseError";
 import {CourseWithChapter} from "../../../resolvers/course/getCourseChapter";
 import {CourseWithChapters} from "../../../resolvers/course/getCourseById";
@@ -19,7 +20,8 @@ export const courses: CourseChapterType[] = [
     solidityIntroduction,
     solidity102,
     vrfIntroduction,
-    vrf102
+    vrf102,
+    automationIntroduction
 ];
 
 type CourseWithChapterOptions = {

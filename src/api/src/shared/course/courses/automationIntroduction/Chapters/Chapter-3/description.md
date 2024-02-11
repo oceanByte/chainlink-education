@@ -1,0 +1,1 @@
+Dive deeper into the heart of Chainlink Automation by understanding its various trigger mechanisms. This module elucidates how smart contracts can be automated using time-based, custom logic, and log triggers, thereby creating a pathway for seamless interaction with the Chainlink network.

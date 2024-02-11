@@ -5,6 +5,7 @@ export enum CourseNameType {
   VRF_V2 = 'VRF v2 Introduction',
   ADVANCED_VRF_V2 = 'VRF v2 Advanced',
   CHAINLINK_KEEPERS = 'Chainlink Keepers',
+  AUTOMATION_INTRO = 'Chainlink Automation',
 }
 
 export enum CourseStatusType {
@@ -13,7 +14,6 @@ export enum CourseStatusType {
   NEW = 'NEW',
   IN_PROGRESS = 'IN PROGRESS',
 }
-
 
 // chaptersByCourse: Used to render chapter data of each course.
 // the key in chaptersByCourse == the path in courseData

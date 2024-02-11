@@ -35,6 +35,9 @@ export class Course {
 
   @Property({ nullable: true })
   userId!: ObjectId
+
+  @Property({ nullable: true })
+  isPreview?: Boolean
 }
 
 export const CourseModel = getModel(Course, { schemaOptions: { timestamps: true } })

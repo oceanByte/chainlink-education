@@ -14,11 +14,11 @@
   </div>
 </ContentWrapp> -->
 
-In the last chapter we built a function that added two numbers. But within that function, we actually used a + (plus sign) to add the numbers. The plus sign is another operator, just like the equals sign assignment operator, and the logic it runs is intuitively to add numbers! There are actually quite a few pre-build operators in Solidity you can utilize to make programming smart contracts that much easier. Here are some useful operators in the Arithimetic and Relational catagories:
+In the last chapter, we built a function that added two numbers. But within that function, we actually used a + (plus sign) to add the numbers. The plus sign is another operator, just like the equals sign assignment operator, and the logic it runs is intuitively to add numbers! There are actually quite a few pre-build operators in Solidity you can utilize to make programming smart contracts that much easier. Here are some useful operators in the Arithmetic and Relational categories:
 
-**Arithmetic Operators: These operators perfom basics arithmetic operations**
+**Arithmetic Operators: These operators perform basics arithmetic operations**
 
-* Addittion (+): Used to add two Numbers
+* Addition (+): Used to add two Numbers
 * Subtraction (-): Used to subtract two Numbers
 * Multiplication (*): Used to Multiply two Numbers
 * Division (/): Used to divide a number by another number
