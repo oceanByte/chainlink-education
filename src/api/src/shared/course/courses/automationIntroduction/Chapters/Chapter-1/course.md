@@ -9,7 +9,7 @@
 
   <div class="itemsContainer">
     <div class="item-text">
-    Hello learners! Welcome to the introductory module of Chainlink Automation. I am Linky, your digital companion throughout this course. Together, we will delve into the fundamentals of Chainlink Automation, explore its significance, and understand the diverse use cases it addresses within the blockchain ecosystem.
+    Hello learners! Welcome to the introductory module of Chainlink Automation. I am Link, your digital companion throughout this course. Together, we will delve into the fundamentals of Chainlink Automation, explore its significance, and understand the diverse use cases it addresses within the blockchain ecosystem.
     </div>
   </div>
 </ContentWrapp>
